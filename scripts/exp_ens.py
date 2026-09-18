@@ -14,7 +14,6 @@ from src.comp.features import NAMES, stack
 from src.comp.metric import score_bs
 from src.comp.model import train, sample_chip, SEED
 from src.comp.postproc import drop_small
-from scripts.train_unet import UNet
 
 NET = sys.argv[1] if len(sys.argv) > 1 else 'models/exp_bg050.pt'
 PIX = 18000
@@ -31,11 +30,11 @@ for c in fit:
 boost = train(np.concatenate(xs), np.concatenate(ys))
 print(f'бустинг обучен за {time.time()-t0:.0f}с', flush=True)
 
-bundle = torch.load(NET, map_location='cpu', weights_only=False)
-net = UNet(len(NAMES), w=bundle['state']['d1.0.weight'].shape[0])
-net.load_state_dict(bundle['state']); net.to(DEV).eval()
-mean = torch.tensor(bundle['mean'], device=DEV).view(1,-1,1,1)
-std = torch.tensor(bundle['std'], device=DEV).view(1,-1,1,1)
+# через общий загрузчик, а не своей копией: дублирование уже дало ошибку
+from src.comp.unet import load as load_net
+net, mean_np, std_np, DEV = load_net(NET)
+mean = torch.tensor(mean_np, device=DEV).view(1,-1,1,1)
+std = torch.tensor(std_np, device=DEV).view(1,-1,1,1)
 print(f'сеть {NET} загружена', flush=True)
 
 pairs = []
