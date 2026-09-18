@@ -38,6 +38,37 @@ WIDTH = int(os.environ.get("WIDTH", 48))
 TAG = os.environ.get("TAG", "x")
 RUNSEED = int(os.environ.get("SEED", SEED))
 MASKCH = int(os.environ.get("MASKCH", 0))   # канал валидности на входе
+LOSS = os.environ.get("LOSS", "dice")        # dice | lovasz — что добавляется к CE
+
+
+def lovasz_grad(gt_sorted):
+    """Градиент расширения Ловаса для Жаккара (Berman et al., 2018)."""
+    gts = gt_sorted.sum()
+    inter = gts - gt_sorted.cumsum(0)
+    union = gts + (1 - gt_sorted).cumsum(0)
+    jac = 1.0 - inter / union
+    jac[1:] = jac[1:] - jac[:-1]
+    return jac
+
+
+def lovasz_softmax(probas, labels, classes=(1, 2, 3)):
+    """Пул по ВСЕМУ батчу, а не среднее по изображениям: метрика кейса — микро.
+    Классы гари; фон получает свой сигнал через CE."""
+    p = probas.permute(0, 2, 3, 1).reshape(-1, probas.shape[1])
+    y = labels.reshape(-1)
+    losses = []
+    for c in classes:
+        fg = (y == c).float()
+        if fg.sum() == 0:
+            continue
+        errors = (fg - p[:, c]).abs()
+        errors_sorted, perm = torch.sort(errors, 0, descending=True)
+        losses.append(torch.dot(errors_sorted, lovasz_grad(fg[perm])))
+    # и Жаккар по гари целиком — это IoU_burn
+    fg = (y > 0).float(); pb = 1 - p[:, 0]
+    errors_sorted, perm = torch.sort((fg - pb).abs(), 0, descending=True)
+    losses.append(torch.dot(errors_sorted, lovasz_grad(fg[perm])))
+    return torch.stack(losses).mean()
 
 
 def drop_small(pred: np.ndarray, min_px: int) -> np.ndarray:
@@ -107,9 +138,12 @@ def main():
             with torch.amp.autocast(DEV):
                 out = net(x)
                 loss = F.cross_entropy(out, y, weight=weight)
-                p_burn = 1 - out.softmax(1)[:, 0]
-                t_burn = (y > 0).float()
-                loss = loss + 1 - (2 * (p_burn * t_burn).sum() + 1) / (p_burn.sum() + t_burn.sum() + 1)
+                if LOSS == "lovasz":
+                    loss = loss + lovasz_softmax(out.float().softmax(1), y)
+                else:
+                    p_burn = 1 - out.softmax(1)[:, 0]
+                    t_burn = (y > 0).float()
+                    loss = loss + 1 - (2 * (p_burn * t_burn).sum() + 1) / (p_burn.sum() + t_burn.sum() + 1)
             scaler.scale(loss).backward(); scaler.step(opt); scaler.update()
             if sched.last_epoch < steps - 1: sched.step()
 
@@ -130,7 +164,7 @@ def main():
                       f"[{per[1]:.3f} {per[2]:.3f} {per[3]:.3f}]", flush=True)
     torch.save({"state": net.state_dict(), "mean": mean, "std": std, "names": NAMES,
                 "bg_weight": BG, "epochs": EPOCHS, "crop": CROPSZ,
-                "depth": DEPTH, "width": WIDTH, "maskch": MASKCH, "seed": RUNSEED}, f"models/exp_{TAG}.pt")
+                "depth": DEPTH, "width": WIDTH, "maskch": MASKCH, "seed": RUNSEED, "loss": LOSS}, f"models/exp_{TAG}.pt")
 
 
 if __name__ == "__main__":
