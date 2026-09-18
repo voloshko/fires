@@ -39,6 +39,15 @@ TAG = os.environ.get("TAG", "x")
 RUNSEED = int(os.environ.get("SEED", SEED))
 MASKCH = int(os.environ.get("MASKCH", 0))   # канал валидности на входе
 LOSS = os.environ.get("LOSS", "dice")        # dice | lovasz — что добавляется к CE
+BOUNDARY = float(os.environ.get("BOUNDARY", 0))   # >0: вес пикселей у кромки истинной гари (×(1+BOUNDARY))
+
+
+def boundary_weight(y, k=3):
+    """Кромка истинной гари: пиксели, где в окне (2k+1) есть и гарь, и фон.
+    Слабый класс — кольцо на кромке; ошибка «где кончается гарь» — главная."""
+    burn = (y > 0).float().unsqueeze(1)
+    dil = F.max_pool2d(burn, 2*k+1, 1, k); ero = 1 - F.max_pool2d(1 - burn, 2*k+1, 1, k)
+    return 1.0 + BOUNDARY * (dil - ero).squeeze(1)
 
 
 def lovasz_grad(gt_sorted):
@@ -137,7 +146,10 @@ def main():
             opt.zero_grad(set_to_none=True)
             with torch.amp.autocast(DEV):
                 out = net(x)
-                loss = F.cross_entropy(out, y, weight=weight)
+                if BOUNDARY > 0:
+                    loss = (F.cross_entropy(out, y, weight=weight, reduction="none") * boundary_weight(y)).mean()
+                else:
+                    loss = F.cross_entropy(out, y, weight=weight)
                 if LOSS == "lovasz":
                     loss = loss + lovasz_softmax(out.float().softmax(1), y)
                 else:
@@ -164,7 +176,7 @@ def main():
                       f"[{per[1]:.3f} {per[2]:.3f} {per[3]:.3f}]", flush=True)
     torch.save({"state": net.state_dict(), "mean": mean, "std": std, "names": NAMES,
                 "bg_weight": BG, "epochs": EPOCHS, "crop": CROPSZ,
-                "depth": DEPTH, "width": WIDTH, "maskch": MASKCH, "seed": RUNSEED, "loss": LOSS}, f"models/exp_{TAG}.pt")
+                "depth": DEPTH, "width": WIDTH, "maskch": MASKCH, "seed": RUNSEED, "loss": LOSS, "boundary": BOUNDARY}, f"models/exp_{TAG}.pt")
 
 
 if __name__ == "__main__":
