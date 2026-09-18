@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-2",
+  "run_id": "SPEC-2-OFFLINE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T10:53:51Z",
+  "evidence_class": "REPLAY",
+  "status": "PASS",
+  "conclusion": "DETECTION_STORE_AND_OBSERVATION_JOURNAL_VERIFIED_OFFLINE",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "note": "repository is not under git yet; files bound by sha256",
+    "files": [
+      {
+        "path": "src/store.py",
+        "sha256": "2e86b513c5930598d8995c060a20919a4b25ebdd30f8bc751d43b53643e48645"
+      },
+      {
+        "path": "tests/test_store.py",
+        "sha256": "94ed071a7513d4a38aa4db93395d5685dd27d2f57d99e58731a850ca131e8abf"
+      },
+      {
+        "path": "src/firms.py",
+        "sha256": "d59e0309675251f21f55dd7dccc97e71e8da09ebd23710f9a49087dcc6eb1476"
+      },
+      {
+        "path": "tests/fixtures/firms_viirs_nonempty.csv",
+        "sha256": "e52be2d85315141108ac575944bd684a575629180eaa47ab2576be3f7a607ee2"
+      }
+    ]
+  },
+  "commands": [
+    "python3 -m pytest tests/test_store.py -q",
+    "make gate"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "sqlite3 (stdlib)",
+    "pytest"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac01_loading_the_same_fixture_twice_adds_nothing",
+        "test_ac01_overlapping_windows_only_add_the_genuinely_new"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac02_same_point_from_different_sensors_is_kept_twice",
+        "test_ac02_any_key_field_differing_makes_a_new_row[latitude|longitude|acquired_at|sensor]",
+        "test_ac02_non_key_fields_do_not_create_duplicates"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac03_successful_empty_poll_is_recorded",
+        "test_ac03_a_poll_that_never_happened_leaves_no_trace",
+        "test_ac03_failed_poll_is_not_counted_as_an_observation",
+        "test_ac03_empty_poll_and_failed_poll_are_distinguishable",
+        "test_ac03_invalid_status_is_rejected"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac04_three_cases",
+        "test_ac04_observation_outside_the_asked_window_does_not_count",
+        "test_ac04_partially_overlapping_observation_counts"
+      ]
+    },
+    {
+      "id": "AC-05",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac05_updating_a_stored_detection_is_refused",
+        "test_ac05_deleting_a_stored_detection_is_refused",
+        "test_ac05_observations_are_append_only_too",
+        "append-only навязан триггерами SQLite BEFORE UPDATE/DELETE, а не дисциплиной вызовов"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "pytest_summary": "26 passed in 0.10s"
+    }
+  ],
+  "limitations": [
+    "Движок — sqlite3, не PostGIS: поведение под конкурентной записью из нескольких процессов не проверялось.",
+    "Производительность на объёме целого сезона не измерялась; тесты работают на единицах строк.",
+    "Ключ уникальности сравнивает координаты как REAL; детекции, пришедшие с разной точностью округления, дублями не схлопнутся."
+  ],
+  "non_claims": [
+    "Не доказывает корректность данных FIRMS.",
+    "Не доказывает, что ключ уникальности не теряет реальные детекции — это проверено отдельно, см. receipt SPEC-2-LIVE-001.",
+    "Не доказывает поведение при конкурентной записи.",
+    "Не доказывает пригодность схемы для SPEC-4: окно 14 суток на реальных объёмах здесь не проверялось."
+  ]
+}

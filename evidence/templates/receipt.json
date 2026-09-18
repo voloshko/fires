@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "IMPL-000",
+  "run_id": "sha256-of-normalized-receipt-payload",
+  "predecessor_run_id": null,
+  "created_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "evidence_class": "REPLAY",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "SPEC_DEFINED_CONCLUSION",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {"path": "relative/path", "sha256": "64-lowercase-hex"}
+    ],
+    "chain_inputs": [
+      {
+        "chain_id": 999,
+        "from_block": 0,
+        "to_block": 0,
+        "contracts": []
+      }
+    ]
+  },
+  "threshold_manifest": {
+    "frozen_at": "YYYY-MM-DDTHH:MM:SSZ",
+    "sha256": "64-lowercase-hex"
+  },
+  "commands": [],
+  "tools": [],
+  "acceptance": [
+    {"id": "AC-01", "result": "NOT_RUN", "artifacts": []}
+  ],
+  "outputs": [],
+  "limitations": [],
+  "non_claims": []
+}

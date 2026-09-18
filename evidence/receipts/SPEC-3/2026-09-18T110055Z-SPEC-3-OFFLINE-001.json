@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-3",
+  "run_id": "SPEC-3-OFFLINE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T11:00:55Z",
+  "evidence_class": "REPLAY",
+  "status": "PASS",
+  "conclusion": "CONFIDENCE_NORMALIZATION_AND_THRESHOLD_FILTER_VERIFIED_OFFLINE",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "note": "repository is not under git yet; files bound by sha256",
+    "files": [
+      {
+        "path": "src/confidence.py",
+        "sha256": "334e2266ee87833b82114af6792ff9600698087bd32ad6c45b6ac0121c533c38"
+      },
+      {
+        "path": "tests/test_confidence.py",
+        "sha256": "8fa41e78f3bf72c936cb5f1e437584a0120269fcf59f1f674bd312bb7316ba17"
+      },
+      {
+        "path": "config/krasnoyarsk.toml",
+        "sha256": "ef61b710b5ac29e2d743fafc13ca16f81da532c0879aef6a986f86ec866e69af"
+      }
+    ]
+  },
+  "commands": [
+    "python3 -m pytest tests/test_confidence.py -q",
+    "make gate"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "pytest"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac01_viirs_scale_maps_all_three_values[l|n|h|L|H| n ]",
+        "test_ac01_unknown_viirs_value_raises_instead_of_silently_becoming_low[x|medium|''|'  '|1|nominal]",
+        "test_ac01_unknown_sensor_raises",
+        "test_ac01_scale_is_chosen_per_sensor_family"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac02_modis_boundaries_both_sides[0|29|30|79|80|100] — обе стороны каждой границы",
+        "test_ac02_changing_the_boundary_changes_the_verdict",
+        "test_ac02_thresholds_come_from_the_shipped_config",
+        "test_ac02_config_with_custom_boundaries_is_honoured",
+        "test_ac02_out_of_range_or_non_numeric_modis_value_raises[-1|101|abc|''|7.5]",
+        "test_ac02_incoherent_boundaries_are_rejected"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac03_default_filter_drops_low_keeps_nominal_and_high",
+        "test_ac03_disabling_the_filter_returns_everything",
+        "test_ac03_raising_the_threshold_to_high_drops_nominal_too",
+        "test_ac03_filter_works_across_both_scales_at_once",
+        "test_ac03_real_fixture_partitions_as_expected"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac04_rejected_detections_stay_in_the_store",
+        "test_ac04_service_layer_can_retrieve_the_rejected_ones",
+        "фильтрация реализована как представление; хранилище не мутируется вовсе"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "pytest_summary": "36 passed in 0.09s"
+    }
+  ],
+  "limitations": [
+    "Границы MODIS 30/80 — наша интерпретация шкалы NASA 0-100, а не документированное NASA разбиение на классы.",
+    "Тесты проверяют механику отображения шкал, но не качество порога."
+  ],
+  "non_claims": [
+    "НЕ доказывает, что порог low действительно отсекает ложные срабатывания в Красноярском крае: для этого нужна контрольная выборка с ручной разметкой, которой нет.",
+    "Не доказывает корректность границ MODIS 30/80 для сибирских условий.",
+    "Не доказывает достижение целевых 10% ложных срабатываний — см. SPEC-3-LIVE-001."
+  ]
+}

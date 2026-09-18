@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-3",
+  "run_id": "SPEC-3-LIVE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T11:00:55Z",
+  "evidence_class": "LIVE",
+  "status": "PASS",
+  "conclusion": "BOTH_CONFIDENCE_SCALES_PARSE_REAL_DATA_WITH_ZERO_UNKNOWNS",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {
+        "path": "src/confidence.py",
+        "sha256": "334e2266ee87833b82114af6792ff9600698087bd32ad6c45b6ac0121c533c38"
+      },
+      {
+        "path": "tests/test_confidence.py",
+        "sha256": "8fa41e78f3bf72c936cb5f1e437584a0120269fcf59f1f674bd312bb7316ba17"
+      },
+      {
+        "path": "config/krasnoyarsk.toml",
+        "sha256": "ef61b710b5ac29e2d743fafc13ca16f81da532c0879aef6a986f86ec866e69af"
+      }
+    ]
+  },
+  "request": {
+    "region": "Красноярский край",
+    "bbox": "82,51,109,78",
+    "day_range": 2,
+    "observed_at_utc": "2026-09-18T11:00:55Z",
+    "note": "живой ответ FIRMS невоспроизводим задним числом"
+  },
+  "commands": [
+    "интеграционный прогон firms.fetch -> confidence.partition (см. outputs)"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "httpx 0.28.1"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "1872 живых детекции разобраны, нераспознанных значений confidence: 0",
+        "категориальная шкала VIIRS отработала на 1659 точках трёх аппаратов"
+      ]
+    },
+    {
+      "id": "AC-02-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "числовая шкала MODIS отработала на 213 точках",
+        "границы 30/80 реально разделяют данные: low=8, nominal=148, high=57 — ни один класс не вырожден"
+      ]
+    },
+    {
+      "id": "AC-03-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "в основной слой 1823, в служебный 49 (2.6%)"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "total": 1872,
+      "kept": 1823,
+      "rejected": 49,
+      "rejected_pct": 2.6,
+      "unknown_values": 0,
+      "per_source": {
+        "VIIRS_SNPP_NRT": {
+          "total": 588,
+          "low": 14,
+          "nominal": 545,
+          "high": 29,
+          "rejected_pct": 2.4
+        },
+        "VIIRS_NOAA20_NRT": {
+          "total": 544,
+          "low": 10,
+          "nominal": 505,
+          "high": 29,
+          "rejected_pct": 1.8
+        },
+        "VIIRS_NOAA21_NRT": {
+          "total": 527,
+          "low": 17,
+          "nominal": 473,
+          "high": 37,
+          "rejected_pct": 3.2
+        },
+        "MODIS_NRT": {
+          "total": 213,
+          "low": 8,
+          "nominal": 148,
+          "high": 57,
+          "rejected_pct": 3.8
+        }
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": "FIND-01",
+      "severity": "scope",
+      "description": "ТЗ называет confidence=low «основным источником ложных срабатываний VIIRS», что подразумевает существенную долю. На живых данных фильтр отсекает лишь 2.6% детекций. Это не опровергает утверждение (low действительно может быть преимущественно ложным), но означает, что порог confidence сам по себе не способен обеспечить целевые ≤10% ложных срабатываний: основная работа ложится на SPEC-4 (факелы) и SPEC-5 (сельхозпалы).",
+      "consequence": "Критерий приёмки этапа 1 не может опираться на SPEC-3."
+    }
+  ],
+  "limitations": [
+    "Одно окно в 2 суток в середине сентября; сезонная и межгодовая изменчивость не охвачена.",
+    "Отсутствие нераспознанных значений подтверждено на выборке, а не доказано в общем виде.",
+    "Доля отсева измерена, её правильность — нет: какая часть из 49 отсеянных была реальными пожарами, неизвестно."
+  ],
+  "non_claims": [
+    "НЕ доказывает, что отсеянные 49 точек были ложными срабатываниями.",
+    "НЕ доказывает, что оставшиеся 1823 точки — настоящие пожары.",
+    "Не доказывает, что 2.6% — устойчивая величина: в другой сезон доля будет иной.",
+    "Не является измерением доли ложных срабатываний: для него нужна размеченная контрольная выборка."
+  ]
+}

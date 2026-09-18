@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-5",
+  "run_id": "SPEC-5-OFFLINE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T11:08:05Z",
+  "evidence_class": "REPLAY",
+  "status": "PASS",
+  "conclusion": "CROPLAND_MASK_LOGIC_AND_CACHE_VERIFIED_OFFLINE",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "note": "repository is not under git yet; files bound by sha256",
+    "files": [
+      {
+        "path": "src/masks.py",
+        "sha256": "5f26bbfae9ab74d415d17d669801cbba927e5c00479d60730f2184551330c16a"
+      },
+      {
+        "path": "tests/test_cropland.py",
+        "sha256": "5284d366e30dba19291e98c44bc08054b510b01a944cfb22848b9fced87eba39"
+      },
+      {
+        "path": "config/krasnoyarsk.toml",
+        "sha256": "21552e74d15fc74d4bf5af9adab3dc7e27c2dcac16c7cd2f18ce06057a79895b"
+      }
+    ]
+  },
+  "commands": [
+    "python3 -m pytest tests/test_cropland.py -q",
+    "make gate"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "rasterio 1.4.4",
+    "numpy 2.4.6",
+    "pytest"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac01_same_point_flagged_inside_the_window",
+        "test_ac01_same_point_not_flagged_outside_the_window — та же точка, другая дата",
+        "test_ac01_forest_point_inside_the_window_is_not_flagged",
+        "test_ac01_classify_distinguishes_cropland_from_not"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac02_window_comes_from_config",
+        "test_ac02_changing_the_window_changes_the_verdict",
+        "test_ac02_window_boundaries_both_sides[8 границ обоих окон]",
+        "test_ac02_window_spanning_new_year_works",
+        "test_ac02_malformed_window_is_rejected"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac03_second_run_works_with_network_forbidden — offline=True делает сетевой вызов исключением",
+        "test_ac03_missing_tile_offline_raises_instead_of_silently_downloading",
+        "test_ac03_repeated_lookups_do_not_reopen_the_tile — network_calls==0 после 50 обращений"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac04_flagged_detections_stay_in_the_store — count_detections() не меняется",
+        "test_ac04_service_layer_can_retrieve_the_flagged_ones"
+      ]
+    },
+    {
+      "id": "AC-05",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac05_point_outside_coverage_is_unknown_not_not_cropland",
+        "test_ac05_unknown_is_never_flagged_as_agricultural",
+        "test_ac05_three_outcomes_are_distinct"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "pytest_summary": "31 passed, 19 warnings in 0.40s"
+    }
+  ],
+  "limitations": [
+    "Кэш-тайлы в тестах синтетические; реальный WorldCover покрыт отдельными live-тестами.",
+    "Окна палов 04-01/05-31 и 09-01/10-31 — наша оценка, не основанная на агрономических данных по краю."
+  ],
+  "non_claims": [
+    "Не доказывает, что все сельхозпалы отсекаются.",
+    "Не доказывает, что внутри класса 40 не бывает настоящих лесных пожаров.",
+    "Не доказывает корректность календарных окон для Красноярского края.",
+    "Эпохи WorldCover 2020/2021 не отражают изменений землепользования после 2021 г."
+  ]
+}

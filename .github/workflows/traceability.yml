@@ -1,0 +1,38 @@
+name: SDD Traceability Gate
+
+# Fail-closed spec-driven-development gate: untracked specs, ghost entries,
+# dangling depends_on, statuses outside the lifecycle enum, dangling
+# requirement refs, stale specs/index.md counter, `verified` specs without a
+# PASS receipt, and malformed evidence receipts.
+
+on:
+  push:
+    paths:
+      - 'specs/**'
+      - 'requirements/**'
+      - 'traceability.json'
+      - 'evidence/**'
+      - 'scripts/check_traceability.py'
+      - 'scripts/spec_tools.py'
+      - '.github/workflows/traceability.yml'
+  pull_request:
+    paths:
+      - 'specs/**'
+      - 'requirements/**'
+      - 'traceability.json'
+      - 'evidence/**'
+      - 'scripts/check_traceability.py'
+      - 'scripts/spec_tools.py'
+      - '.github/workflows/traceability.yml'
+  workflow_dispatch:
+
+jobs:
+  traceability:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Gate (self-tests + traceability + evidence)
+        run: make gate

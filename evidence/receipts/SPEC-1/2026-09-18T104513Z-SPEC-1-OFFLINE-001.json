@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-1",
+  "run_id": "SPEC-1-OFFLINE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T10:45:13Z",
+  "evidence_class": "REPLAY",
+  "status": "PASS",
+  "conclusion": "FIRMS_INGESTION_LOGIC_VERIFIED_OFFLINE",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "note": "repository is not under git yet; files bound by sha256 instead",
+    "files": [
+      {
+        "path": "src/firms.py",
+        "sha256": "d59e0309675251f21f55dd7dccc97e71e8da09ebd23710f9a49087dcc6eb1476"
+      },
+      {
+        "path": "tests/test_firms.py",
+        "sha256": "855e557a73d9cf6a3f6bececc58b2668415d01637d40bc626150f7ef91b07866"
+      },
+      {
+        "path": "config/krasnoyarsk.toml",
+        "sha256": "960ed486500e464b478323f6f31790e331c4161922845726ecdb241ec313c094"
+      },
+      {
+        "path": "tests/fixtures/firms_viirs_nonempty.csv",
+        "sha256": "e52be2d85315141108ac575944bd684a575629180eaa47ab2576be3f7a607ee2"
+      },
+      {
+        "path": "tests/fixtures/firms_modis_nonempty.csv",
+        "sha256": "4754b0c2c88c7dcd542d5cb2d020bb198f82677e89f5532d7e92ead100e4bf51"
+      },
+      {
+        "path": "tests/fixtures/firms_empty.csv",
+        "sha256": "89fd1c1aa94444f452482e714abcffaa85acd87239b03aef089737faa7ad30c7"
+      },
+      {
+        "path": "tests/fixtures/firms_error.txt",
+        "sha256": "85824bfbcb53d88c4de9f1e292d8ed6c00ef09765f2557ed55eddb51c45b4847"
+      }
+    ]
+  },
+  "commands": [
+    "python3 -m pytest tests/test_firms.py -q",
+    "make gate"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "pytest",
+    "httpx 0.28.1 (MockTransport)"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac01_different_bboxes_produce_different_urls",
+        "test_ac01_shipped_config_is_loadable_and_ordered_west_south_east_north",
+        "test_ac01_malformed_bbox_is_rejected"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac02_day_range_above_limit_is_rejected_before_network",
+        "test_ac02_day_range_within_limit_is_accepted[1|2|5]",
+        "test_ac02_day_range_outside_limit_is_rejected[0|-1|6|10]",
+        "test_ac02_fetch_refuses_bad_day_range_without_calling_client"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac03_landsat_nrt_is_not_an_allowed_source",
+        "test_ac03_requesting_landsat_nrt_is_a_config_error",
+        "test_ac03_shipped_config_does_not_list_landsat"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac04_parses_nonempty_viirs_csv",
+        "test_ac04_parses_nonempty_modis_csv_with_different_brightness_column",
+        "test_ac04_empty_response_is_zero_detections_not_an_error",
+        "test_ac04_error_body_instead_of_csv_raises",
+        "test_ac04_midnight_acq_time_parses"
+      ]
+    },
+    {
+      "id": "AC-05",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac05_one_failing_source_does_not_abort_the_others",
+        "test_ac05_non_csv_body_is_recorded_as_a_failure_not_a_crash"
+      ]
+    },
+    {
+      "id": "AC-06",
+      "result": "PARTIAL",
+      "artifacts": [
+        "test_ac06_empty_map_key_is_refused",
+        "test_ac06_module_has_no_hardcoded_key_default",
+        "test_ac06_redact_removes_the_key_from_any_text",
+        "test_ac06_failure_messages_do_not_leak_the_key",
+        "test_ac06_key_value_is_not_committed_anywhere_in_the_repo = SKIPPED (FIRMS_MAP_KEY not set, nothing to grep for)"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "pytest_summary": "28 passed, 1 skipped in 0.10s"
+    }
+  ],
+  "limitations": [
+    "Все HTTP-ответы подставлены httpx.MockTransport; сеть не использовалась.",
+    "Фикстуры CSV написаны вручную по документированной схеме FIRMS, а не получены от живого API — расхождение схемы этим прогоном не обнаружится.",
+    "AC-06 покрыт частично: grep-проверка пропущена, поскольку FIRMS_MAP_KEY не задан в окружении."
+  ],
+  "non_claims": [
+    "Не доказывает корректность самих детекций NASA.",
+    "Не доказывает полноту покрытия Красноярского края.",
+    "Не доказывает поведение при исчерпании квоты MAP_KEY (5000/10 мин).",
+    "Не доказывает, что живой FIRMS отвечает ожидаемым CSV — см. receipt SPEC-1-LIVE-001.",
+    "Не доказывает, что ключ отсутствует в репозитории: соответствующий тест пропущен."
+  ]
+}

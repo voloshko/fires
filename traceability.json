@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "requirements": {
+    "REQ-001": {
+      "title": "Оперативное обнаружение активных очагов на публичных данных",
+      "file": "requirements/REQ-001.md",
+      "specs": [
+        "SPEC-1",
+        "SPEC-2",
+        "SPEC-3",
+        "SPEC-4",
+        "SPEC-5",
+        "SPEC-6"
+      ]
+    },
+    "REQ-002": {
+      "title": "Картирование гарей и оценка площади поражения",
+      "file": "requirements/REQ-002.md",
+      "specs": [
+        "SPEC-7"
+      ]
+    },
+    "REQ-003": {
+      "title": "Публичный доступ: REST API и веб-карта",
+      "file": "requirements/REQ-003.md",
+      "specs": [
+        "SPEC-8"
+      ]
+    },
+    "REQ-004": {
+      "title": "Доказуемость, прослеживаемость и честность результатов",
+      "file": "requirements/REQ-004.md",
+      "specs": []
+    },
+    "REQ-005": {
+      "title": "Эксплуатационная устойчивость и ограничения внешних источников",
+      "file": "requirements/REQ-005.md",
+      "specs": []
+    }
+  },
+  "legacy_untracked_specs": [],
+  "specs": {
+    "SPEC-1": {
+      "title": "Конфигурация региона и приём FIRMS Area API",
+      "file": "specs/SPEC-1-firms-ingestion.md",
+      "requirement": "REQ-001",
+      "depends_on": [],
+      "status": "implemented"
+    },
+    "SPEC-2": {
+      "title": "Накопительное хранилище детекций и журнал наблюдений",
+      "file": "specs/SPEC-2-detection-store.md",
+      "requirement": "REQ-001",
+      "depends_on": [
+        "SPEC-1"
+      ],
+      "status": "implemented"
+    },
+    "SPEC-3": {
+      "title": "Нормализация confidence и пороговый фильтр",
+      "file": "specs/SPEC-3-confidence-filter.md",
+      "requirement": "REQ-001",
+      "depends_on": [
+        "SPEC-2"
+      ],
+      "status": "implemented"
+    },
+    "SPEC-4": {
+      "title": "Фильтр временной персистентности и слой теплоисточников",
+      "file": "specs/SPEC-4-persistence-filter.md",
+      "requirement": "REQ-001",
+      "depends_on": [
+        "SPEC-2"
+      ],
+      "status": "implemented"
+    },
+    "SPEC-5": {
+      "title": "Маска сельхозземель из ESA WorldCover",
+      "file": "specs/SPEC-5-cropland-mask.md",
+      "requirement": "REQ-001",
+      "depends_on": [
+        "SPEC-2"
+      ],
+      "status": "implemented"
+    },
+    "SPEC-6": {
+      "title": "Кластеризация детекций в события пожаров",
+      "file": "specs/SPEC-6-event-clustering.md",
+      "requirement": "REQ-001",
+      "depends_on": [
+        "SPEC-2",
+        "SPEC-3"
+      ],
+      "status": "planned"
+    },
+    "SPEC-7": {
+      "title": "Подбор пары сцен Sentinel-2 и расчёт dNBR/RBR",
+      "file": "specs/SPEC-7-burn-mapping.md",
+      "requirement": "REQ-002",
+      "depends_on": [
+        "SPEC-6"
+      ],
+      "status": "planned"
+    },
+    "SPEC-8": {
+      "title": "REST API и веб-карта",
+      "file": "specs/SPEC-8-api-and-map.md",
+      "requirement": "REQ-003",
+      "depends_on": [
+        "SPEC-6",
+        "SPEC-7"
+      ],
+      "status": "planned"
+    }
+  }
+}

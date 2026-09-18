@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-4",
+  "run_id": "SPEC-4-SYNTHETIC-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T11:17:22Z",
+  "evidence_class": "SYNTHETIC",
+  "status": "PASS",
+  "conclusion": "PERSISTENCE_FILTER_LOGIC_VERIFIED_ON_GENERATED_SERIES",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "note": "repository is not under git yet; files bound by sha256",
+    "files": [
+      {
+        "path": "src/persistence.py",
+        "sha256": "5bd3f7abf237ca19e54fac981bd99408530079b057aaa7a2a63f80ccc3020858"
+      },
+      {
+        "path": "tests/test_persistence.py",
+        "sha256": "cfefd1c75fe650a35176da1de5fa5592b3f186dd5c7a9c0e8de9d9ca4f230e37"
+      },
+      {
+        "path": "src/firms.py",
+        "sha256": "3e2ccd8be34d09a4d36b01b9139101424a3399889bd6d386438be4ab47dda101"
+      },
+      {
+        "path": "config/krasnoyarsk.toml",
+        "sha256": "63115ce2ab331d821bbae6f50b28c82c300aa28a4ad9c4e2fdf35e12a516d24b"
+      }
+    ]
+  },
+  "commands": [
+    "python3 -m pytest tests/test_persistence.py -q",
+    "make gate"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "pytest"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac01_stationary_source_over_20_days_is_flagged",
+        "test_ac01_source_moving_2km_over_5_days_is_not_flagged — ряд из спеки",
+        "test_ac01_moving_front_alone_yields_no_persistent_source",
+        "test_ac01_stationary_but_too_few_days_is_not_flagged"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac02_config_is_read_from_the_shipped_file",
+        "test_ac02_changing_the_window_changes_the_verdict",
+        "test_ac02_changing_the_radius_changes_the_clustering",
+        "test_ac02_incoherent_config_is_rejected"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac03_short_history_reports_insufficient_not_empty",
+        "test_ac03_insufficient_history_is_distinguishable_from_no_flares",
+        "test_ac03_empty_input_is_insufficient_history",
+        "test_ac03_filter_with_insufficient_history_discards_nothing"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac04_flagged_points_go_to_the_service_layer_not_to_the_bin",
+        "test_ac04_store_is_untouched_by_filtering"
+      ]
+    },
+    {
+      "id": "AC-05",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac05_history_days_is_published_and_accurate",
+        "test_ac05_history_days_reported_even_when_insufficient"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "pytest_summary": "27 passed in 0.14s"
+    }
+  ],
+  "defects_found": [
+    {
+      "id": "DEF-01",
+      "severity": "correctness",
+      "found_by": "собственный тест AC-02 на радиусе",
+      "description": "Шаг сетки по долготе вычислялся от широты КАЖДОЙ детекции. Две точки на одном меридиане получали чуть разный шаг, попадали в колонки, отличающиеся на 2, и не находили друг друга при проверке соседей +-1. Сетка переставала быть сеткой, и кластеры не сливались даже внутри радиуса.",
+      "fix": "Шаг по долготе выводится из НОМЕРА широтной полосы; колонка пересчитывается отдельно для каждой просматриваемой полосы.",
+      "regression_test": "test_clustering_grid_is_consistent_across_latitude_bands, test_clustering_merges_a_pair_just_inside_the_radius_at_any_latitude[51|61|70|77.9]"
+    }
+  ],
+  "limitations": [
+    "Ряды сгенерированы; реальные факелы покрыты SPEC-4-LIVE-001."
+  ],
+  "non_claims": [
+    "SYNTHETIC-receipt НЕ доказывает, что фильтр находит реальные газовые факелы — только логику.",
+    "Не доказывает корректность порогов (14 суток, 500 м, 10 суток, CV 0.6) для Сибири.",
+    "Не доказывает, что помеченные источники действительно промышленные."
+  ]
+}
