@@ -47,8 +47,9 @@ SEVERITY_ORDER = ("unburnt", "low", "moderate_low", "moderate_high", "high")
 
 class BurnStatus(Enum):
     OK = "ok"
-    DEFERRED = "deferred"     # расчёт невозможен сейчас, но станет возможен
-    FAILED = "failed"         # пары нет и не будет
+    UNVALIDATED = "unvalidated"   # посчитано, но не совпало с местом горения
+    DEFERRED = "deferred"         # расчёт невозможен сейчас, но станет возможен
+    FAILED = "failed"             # пары нет и не будет
 
 
 @dataclass(frozen=True)
@@ -86,6 +87,10 @@ class BurnConfig:
     scene_cloud_max: float = 60.0
     min_valid_fraction: float = 0.80
     aoi_pad_m: float = 3000.0
+    max_doy_gap_days: int = 30
+    max_scenes_probed: int = 8
+    min_enrichment: float = 1.5
+    min_detections_for_validation: int = 20
     max_aoi_km: float = 60.0
     thresholds: Thresholds = field(default_factory=Thresholds)
     season: tuple[SeasonBand, ...] = ()
@@ -109,6 +114,11 @@ def load_burn_config(config_path: str | Path) -> BurnConfig:
         scene_cloud_max=float(cfg.get("scene_cloud_max", 60.0)),
         min_valid_fraction=float(cfg.get("min_valid_fraction", 0.80)),
         aoi_pad_m=float(cfg.get("aoi_pad_m", 3000.0)),
+        max_doy_gap_days=int(cfg.get("max_doy_gap_days", 30)),
+        max_scenes_probed=int(cfg.get("max_scenes_probed", 8)),
+        min_enrichment=float(cfg.get("validation", {}).get("min_enrichment", 1.5)),
+        min_detections_for_validation=int(
+            cfg.get("validation", {}).get("min_detections", 20)),
         max_aoi_km=float(cfg.get("max_aoi_km", 60.0)),
         thresholds=Thresholds(
             version=th.get("version", "usgs-baseline-1"),
@@ -169,6 +179,54 @@ def masked_fraction(valid: np.ndarray, requested_pixels: int) -> float:
     return float(1.0 - valid.sum() / requested_pixels)
 
 
+def doy_gap(a: datetime, b: datetime) -> int:
+    """Разрыв между датами по дню года, с учётом перехода через Новый год.
+
+    Именно эта величина, а не разрыв в сутках, определяет фенологическую
+    сопоставимость: 28 июня и 6 сентября разнесены на 70 дней по календарю
+    вегетации, и растительность за это время меняется сама по себе.
+    """
+    d = abs(a.timetuple().tm_yday - b.timetuple().tm_yday)
+    return min(d, 365 - d)
+
+
+def enrichment(classes: np.ndarray, valid: np.ndarray, transform, crs,
+               detections) -> tuple[float | None, int]:
+    """Во сколько раз чаще случайного термоточки попадают в классы гари.
+
+    Доля термоточек, упавших на пиксели класса «гарь», делённая на долю
+    площади, которую эти классы занимают. Корректная карта гари даёт заметно
+    больше единицы: там, где горело, точки и должны быть. Значение около или
+    ниже единицы означает, что посчитанное пятно не совпадает с местом горения,
+    каким бы правдоподобным ни выглядело число гектаров.
+
+    Проверка косвенная: термоточка отмечает место горения в момент пролёта, а
+    не весь периметр гари. Она не заменяет валидацию против MCD64A1 или
+    наземных данных, но ловит грубое расхождение, а такое расхождение и было.
+    """
+    from rasterio.warp import transform as warp_transform
+
+    burned = (classes > 0) & valid
+    area_share = float(burned.sum()) / max(int(valid.sum()), 1)
+    if area_share <= 0:
+        return None, 0
+
+    xs, ys = warp_transform("EPSG:4326", crs,
+                            [d.longitude for d in detections],
+                            [d.latitude for d in detections])
+    inverse = ~transform
+    inside = hits = 0
+    for x, y in zip(xs, ys):
+        col, row = inverse @ (x, y)
+        col, row = int(col), int(row)
+        if 0 <= row < classes.shape[0] and 0 <= col < classes.shape[1] and valid[row, col]:
+            inside += 1
+            hits += bool(burned[row, col])
+    if inside == 0:
+        return None, 0
+    return (hits / inside) / area_share, inside
+
+
 def aoi_extent_km(bbox) -> tuple[float, float]:
     """Размер области в километрах.
 
@@ -214,6 +272,19 @@ class BurnResult:
     scene_after_date: str | None = None
     reason: str | None = None
     retry_after: str | None = None
+    doy_gap_days: int | None = None
+    enrichment: float | None = None
+    detections_checked: int | None = None
+
+    @property
+    def validated(self) -> bool:
+        """Прошёл ли результат перекрёстную проверку (SPEC-9).
+
+        Только статус `ok` означает проверенное число. Всё остальное —
+        `unvalidated`, `deferred`, `failed` — публикуется с этим флагом снятым,
+        и потребитель обязан увидеть разницу.
+        """
+        return self.status is BurnStatus.OK
 
     @property
     def burned_ha(self) -> float:
@@ -275,11 +346,15 @@ class Pair:
 
 def select_pair(pre: list[Candidate], post: list[Candidate], config: BurnConfig,
                 valid_fraction) -> Pair | None:
-    """Выбрать пару «до/после» строго из одного MGRS-тайла (AC-01, AC-02).
+    """Выбрать пару «до/после»: один MGRS-тайл, сопоставимая фенология.
 
-    `valid_fraction(candidate) -> float` читает окно SCL по области пожара.
-    Кандидаты перебираются в порядке возрастания облачности сцены, чтобы не
-    читать заведомо худшие.
+    Ограничение по дню года — добавление SPEC-9. Без него отбор максимизировал
+    чистоту снимков и выбирал пару с разрывом 70 суток по календарю вегетации;
+    сезонное падение NBR по всей площади уходило в классы гари.
+
+    `valid_fraction(candidate) -> float` читает окно SCL по области пожара —
+    это сетевая операция, поэтому кандидаты перебираются в порядке возрастания
+    облачности сцены и не более `max_scenes_probed` на тайл.
     """
     def by_tile(items):
         out: dict[str, list[Candidate]] = {}
@@ -291,7 +366,6 @@ def select_pair(pre: list[Candidate], post: list[Candidate], config: BurnConfig,
         return out
 
     pre_t, post_t = by_tile(pre), by_tile(post)
-    best: Pair | None = None
     cache: dict[str, float] = {}
 
     def frac(c: Candidate) -> float:
@@ -299,22 +373,24 @@ def select_pair(pre: list[Candidate], post: list[Candidate], config: BurnConfig,
             cache[c.item_id] = valid_fraction(c)
         return cache[c.item_id]
 
-    def first_good(items):
-        for c in items:
-            f = frac(c)
-            if f >= config.min_valid_fraction:
-                return c, f
-        return None, 0.0
-
+    best: Pair | None = None
     for tile in sorted(set(pre_t) & set(post_t)):
-        b, bf = first_good(pre_t[tile])
-        if b is None:
-            continue
-        a, af = first_good(post_t[tile])
-        if a is None:
-            continue
-        if best is None or (bf + af) > (best.before_valid + best.after_valid):
-            best = Pair(tile=tile, before=b, after=a, before_valid=bf, after_valid=af)
+        probe = config.max_scenes_probed
+        for after in post_t[tile][:probe]:
+            af = frac(after)
+            if af < config.min_valid_fraction:
+                continue
+            compatible = [c for c in pre_t[tile]
+                          if doy_gap(c.when, after.when) <= config.max_doy_gap_days]
+            for before in compatible[:probe]:
+                bf = frac(before)
+                if bf < config.min_valid_fraction:
+                    continue
+                candidate = Pair(tile=tile, before=before, after=after,
+                                 before_valid=bf, after_valid=af)
+                if best is None or (bf + af) > (best.before_valid + best.after_valid):
+                    best = candidate
+                break          # для этой сцены "после" лучшая совместимая найдена
     return best
 
 
@@ -359,12 +435,15 @@ def _read_window(href: str, bbox):
         b = transform_bounds("EPSG:4326", src.crs, *bbox)
         win = window_from_bounds(*b, transform=src.transform).round_offsets().round_lengths()
         requested = int(round(win.width)) * int(round(win.height))
-        return src.read(1, window=win), src.window_transform(win), requested
+        # CRS возвращается из растра, а не из свойств STAC: расширение projection
+        # переименовало proj:epsg в proj:code, и чтение метаданных молча
+        # переставало находить проекцию (SPEC-9, DEF-01).
+        return src.read(1, window=win), src.window_transform(win), requested, src.crs
 
 
 def compute_pair(item_before, item_after, bbox, config: BurnConfig, event_id: str,
-                 tile: str) -> BurnResult:
-    """Прочитать каналы обеих сцен и посчитать площадь по классам."""
+                 tile: str, detections=()) -> BurnResult:
+    """Прочитать каналы обеих сцен, посчитать площадь и проверить её (SPEC-9)."""
     import planetary_computer as pc
     b_before = {k: _read_window(pc.sign(item_before.assets[k]).href, bbox)
                 for k in (NIR_BAND, SWIR_BAND, "SCL")}
@@ -377,6 +456,7 @@ def compute_pair(item_before, item_after, bbox, config: BurnConfig, event_id: st
                          f"pair must come from one MGRS tile")
     transform = b_before[NIR_BAND][1]
     requested = max(b_before[NIR_BAND][2], b_after[NIR_BAND][2])
+    crs = b_before[NIR_BAND][3]
 
     valid = (valid_mask(b_before["SCL"][0], b_before[NIR_BAND][0], b_before[SWIR_BAND][0])
              & valid_mask(b_after["SCL"][0], b_after[NIR_BAND][0], b_after[SWIR_BAND][0]))
@@ -385,15 +465,41 @@ def compute_pair(item_before, item_after, bbox, config: BurnConfig, event_id: st
     d = np.nan_to_num(nbr_pre - nbr_post, nan=0.0)
     classes = classify(d, config.thresholds)
 
-    return BurnResult(
-        status=BurnStatus.OK, event_id=event_id,
+    gap = doy_gap(
+        datetime.fromisoformat(item_before.properties["datetime"].replace("Z", "+00:00")),
+        datetime.fromisoformat(item_after.properties["datetime"].replace("Z", "+00:00")))
+
+    # Перекрёстная проверка: совпадает ли посчитанное пятно с местом горения.
+    score = checked = None
+    if detections:
+        score, checked = enrichment(classes, valid, transform, crs, detections)
+
+    if checked is not None and checked >= config.min_detections_for_validation:
+        passed = score is not None and score >= config.min_enrichment
+    else:
+        passed = False          # проверить нечем — значит не проверено
+
+    common = dict(
+        event_id=event_id,
         area_ha=area_by_class(classes, valid, transform),
         masked_fraction=masked_fraction(valid, requested),
         thresholds_version=config.thresholds.version,
         mgrs_tile=tile,
         scene_before=item_before.id, scene_after=item_after.id,
         scene_before_date=item_before.properties["datetime"][:10],
-        scene_after_date=item_after.properties["datetime"][:10])
+        scene_after_date=item_after.properties["datetime"][:10],
+        doy_gap_days=gap, enrichment=score, detections_checked=checked)
+
+    if passed:
+        return BurnResult(status=BurnStatus.OK, **common)
+    if checked is None or checked < config.min_detections_for_validation:
+        reason = (f"проверить нечем: в растр попало {checked or 0} термоточек "
+                  f"при минимуме {config.min_detections_for_validation}")
+    else:
+        reason = (f"площадь не совпала с местом горения: обогащение "
+                  f"{score:.2f} при минимуме {config.min_enrichment:.2f} "
+                  f"(проверено {checked} термоточек)")
+    return BurnResult(status=BurnStatus.UNVALIDATED, reason=reason, **common)
 
 
 def run_for_event(event, config: BurnConfig, client=None) -> BurnResult:
@@ -428,7 +534,7 @@ def run_for_event(event, config: BurnConfig, client=None) -> BurnResult:
 
     def valid_fraction(c: Candidate) -> float:
         import planetary_computer as pc
-        scl, _, requested = _read_window(
+        scl, _, requested, _crs = _read_window(
             pc.sign(items[c.item_id].assets["SCL"]).href, bbox)
         if not requested:
             return 0.0
@@ -439,11 +545,14 @@ def run_for_event(event, config: BurnConfig, client=None) -> BurnResult:
     if pair is None:
         return deferred(
             event.id,
-            f"нет пары сцен одного MGRS-тайла с долей валидных пикселей "
-            f">= {config.min_valid_fraction:.0%} (кандидатов до: {len(pre)}, после: {len(post)})",
+            f"нет пары сцен одного MGRS-тайла, фенологически сопоставимой "
+            f"(разрыв по дню года <= {config.max_doy_gap_days} сут) и с долей "
+            f"валидных пикселей >= {config.min_valid_fraction:.0%} "
+            f"(кандидатов до: {len(pre)}, после: {len(post)})",
             None, tv)
     return compute_pair(items[pair.before.item_id], items[pair.after.item_id],
-                        bbox, config, event.id, pair.tile)
+                        bbox, config, event.id, pair.tile,
+                        detections=event.detections)
 
 
 def main(argv=None) -> int:
@@ -494,6 +603,8 @@ def main(argv=None) -> int:
     print(f"\nстатус: {res.status.value}  пороги: {res.thresholds_version}")
     if res.status is not BurnStatus.OK:
         print(f"причина: {res.reason}")
+        if res.enrichment is not None:
+            print(f"обогащение: {res.enrichment:.2f} при минимуме {cfg.min_enrichment}")
         if res.retry_after:
             print(f"повторить после: {res.retry_after}")
         return 0
@@ -502,6 +613,10 @@ def main(argv=None) -> int:
     print(f"сцена до : {res.scene_before_date}  {res.scene_before}")
     print(f"сцена после: {res.scene_after_date}  {res.scene_after}")
     print(f"под маской: {res.masked_fraction:.1%} площади AOI")
+    print(f"разрыв по дню года: {res.doy_gap_days} сут")
+    if res.enrichment is not None:
+        print(f"обогащение по термоточкам: {res.enrichment:.2f} "
+              f"(проверено {res.detections_checked})")
     print("\nплощадь по классам тяжести, га:")
     for k in SEVERITY_ORDER:
         print(f"  {k:15s} {res.area_ha[k]:12.2f}")

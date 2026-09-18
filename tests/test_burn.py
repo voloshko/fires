@@ -26,7 +26,10 @@ T20 = from_origin(500000.0, 6800000.0, 20.0, 20.0)
 
 
 def cfg(**kw) -> BurnConfig:
-    base = dict(scene_cloud_max=60.0, min_valid_fraction=0.80, thresholds=TH)
+    # Даты кандидатов ниже подобраны фенологически сопоставимыми (SPEC-9):
+    # эти тесты проверяют выбор тайла и фильтр облачности, а не сезонность.
+    base = dict(scene_cloud_max=60.0, min_valid_fraction=0.80, thresholds=TH,
+                max_doy_gap_days=30)
     base.update(kw)
     return BurnConfig(**base)
 
@@ -39,14 +42,14 @@ def always_clear(_c):
 
 def test_ac01_pair_is_never_assembled_from_two_different_tiles():
     """Разные тайлы — разные зоны UTM и сетки; вычитание дало бы мусор."""
-    pre = [Candidate("pre-46VEH", "46VEH", datetime(2026, 6, 1, tzinfo=timezone.utc), 5.0)]
+    pre = [Candidate("pre-46VEH", "46VEH", datetime(2026, 7, 20, tzinfo=timezone.utc), 5.0)]
     post = [Candidate("post-47VEH", "47VEH", datetime(2026, 8, 1, tzinfo=timezone.utc), 5.0)]
     assert select_pair(pre, post, cfg(), always_clear) is None
 
 
 def test_ac01_pair_is_assembled_when_a_common_tile_exists():
-    pre = [Candidate("pre-46VEH", "46VEH", datetime(2026, 6, 1, tzinfo=timezone.utc), 5.0),
-           Candidate("pre-47VEH", "47VEH", datetime(2026, 6, 2, tzinfo=timezone.utc), 5.0)]
+    pre = [Candidate("pre-46VEH", "46VEH", datetime(2026, 7, 20, tzinfo=timezone.utc), 5.0),
+           Candidate("pre-47VEH", "47VEH", datetime(2026, 7, 21, tzinfo=timezone.utc), 5.0)]
     post = [Candidate("post-47VEH", "47VEH", datetime(2026, 8, 1, tzinfo=timezone.utc), 5.0)]
     pair = select_pair(pre, post, cfg(), always_clear)
     assert pair is not None and pair.tile == "47VEH"
@@ -54,8 +57,8 @@ def test_ac01_pair_is_assembled_when_a_common_tile_exists():
 
 
 def test_ac01_best_common_tile_wins_when_several_are_available():
-    pre = [Candidate("pre-A", "A", datetime(2026, 6, 1, tzinfo=timezone.utc), 5.0),
-           Candidate("pre-B", "B", datetime(2026, 6, 1, tzinfo=timezone.utc), 5.0)]
+    pre = [Candidate("pre-A", "A", datetime(2026, 7, 20, tzinfo=timezone.utc), 5.0),
+           Candidate("pre-B", "B", datetime(2026, 7, 20, tzinfo=timezone.utc), 5.0)]
     post = [Candidate("post-A", "A", datetime(2026, 8, 1, tzinfo=timezone.utc), 5.0),
             Candidate("post-B", "B", datetime(2026, 8, 1, tzinfo=timezone.utc), 5.0)]
     fracs = {"pre-A": 0.85, "post-A": 0.85, "pre-B": 0.99, "post-B": 0.99}
@@ -67,14 +70,14 @@ def test_ac01_best_common_tile_wins_when_several_are_available():
 
 def test_ac02_cloudy_scene_that_is_clear_over_the_aoi_is_accepted():
     """Ровно тот случай, который ломала формулировка ТЗ (порог 20% по сцене)."""
-    pre = [Candidate("pre", "T", datetime(2026, 6, 1, tzinfo=timezone.utc), 45.0)]
+    pre = [Candidate("pre", "T", datetime(2026, 7, 20, tzinfo=timezone.utc), 45.0)]
     post = [Candidate("post", "T", datetime(2026, 8, 1, tzinfo=timezone.utc), 45.0)]
     pair = select_pair(pre, post, cfg(), lambda c: 0.95)
     assert pair is not None, "сцена 45% облачности, но чистая над AOI, должна приниматься"
 
 
 def test_ac02_clear_scene_that_is_clouded_over_the_aoi_is_rejected():
-    pre = [Candidate("pre", "T", datetime(2026, 6, 1, tzinfo=timezone.utc), 15.0)]
+    pre = [Candidate("pre", "T", datetime(2026, 7, 20, tzinfo=timezone.utc), 15.0)]
     post = [Candidate("post", "T", datetime(2026, 8, 1, tzinfo=timezone.utc), 15.0)]
     pair = select_pair(pre, post, cfg(), lambda c: 0.30)
     assert pair is None, "сцена 15% облачности, но закрытая над AOI, должна отклоняться"
@@ -82,7 +85,7 @@ def test_ac02_clear_scene_that_is_clouded_over_the_aoi_is_rejected():
 
 def test_ac02_scene_above_the_coarse_cloud_threshold_never_reaches_stage_two():
     read = []
-    pre = [Candidate("pre", "T", datetime(2026, 6, 1, tzinfo=timezone.utc), 95.0)]
+    pre = [Candidate("pre", "T", datetime(2026, 7, 20, tzinfo=timezone.utc), 95.0)]
     post = [Candidate("post", "T", datetime(2026, 8, 1, tzinfo=timezone.utc), 5.0)]
 
     def spy(c):
@@ -94,7 +97,7 @@ def test_ac02_scene_above_the_coarse_cloud_threshold_never_reaches_stage_two():
 
 
 def test_ac02_valid_fraction_threshold_comes_from_config():
-    pre = [Candidate("pre", "T", datetime(2026, 6, 1, tzinfo=timezone.utc), 10.0)]
+    pre = [Candidate("pre", "T", datetime(2026, 7, 20, tzinfo=timezone.utc), 10.0)]
     post = [Candidate("post", "T", datetime(2026, 8, 1, tzinfo=timezone.utc), 10.0)]
     assert select_pair(pre, post, cfg(min_valid_fraction=0.80), lambda c: 0.70) is None
     assert select_pair(pre, post, cfg(min_valid_fraction=0.60), lambda c: 0.70) is not None
@@ -102,7 +105,7 @@ def test_ac02_valid_fraction_threshold_comes_from_config():
 
 def test_ac02_scl_is_read_at_most_once_per_scene():
     calls = []
-    pre = [Candidate("pre", "T", datetime(2026, 6, 1, tzinfo=timezone.utc), 10.0)]
+    pre = [Candidate("pre", "T", datetime(2026, 7, 20, tzinfo=timezone.utc), 10.0)]
     post = [Candidate("post", "T", datetime(2026, 8, 1, tzinfo=timezone.utc), 10.0)]
     select_pair(pre, post, cfg(), lambda c: (calls.append(c.item_id), 0.9)[1])
     assert len(calls) == len(set(calls))

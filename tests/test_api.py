@@ -30,6 +30,19 @@ def det(lat=61.0, lon=93.0, when=None, frp=5.0, sensor="VIIRS_SNPP_NRT"):
                            satellite="N", daynight="D")
 
 
+def unvalidated_burn(event_id: str) -> BurnResult:
+    """Площадь посчитана, но не совпала с местом горения (SPEC-9)."""
+    return BurnResult(
+        status=BurnStatus.UNVALIDATED, event_id=event_id,
+        area_ha={"unburnt": 50.0, "low": 400.0, "moderate_low": 300.0,
+                 "moderate_high": 20.0, "high": 0.0},
+        masked_fraction=0.03, thresholds_version="usgs-baseline-1",
+        mgrs_tile="48WXC", scene_before="S2_june", scene_after="S2_sept",
+        scene_before_date="2026-06-28", scene_after_date="2026-09-06",
+        doy_gap_days=70, enrichment=0.25, detections_checked=850,
+        reason="площадь не совпала с местом горения: обогащение 0.25 при минимуме 1.50")
+
+
 def ok_burn(event_id: str) -> BurnResult:
     return BurnResult(
         status=BurnStatus.OK, event_id=event_id,
@@ -37,7 +50,8 @@ def ok_burn(event_id: str) -> BurnResult:
                  "moderate_high": 4.0, "high": 1.0},
         masked_fraction=0.07, thresholds_version="usgs-baseline-1",
         mgrs_tile="46VEH", scene_before="S2_before", scene_after="S2_after",
-        scene_before_date="2026-06-01", scene_after_date="2026-09-01")
+        scene_before_date="2026-08-14", scene_after_date="2026-09-01",
+        doy_gap_days=18, enrichment=3.4, detections_checked=140)
 
 
 @pytest.fixture
@@ -59,7 +73,8 @@ def snap(store):
         flares=[PersistentSource(67.3, 83.2, 12, 145, 0.47, T0, T0 + timedelta(days=12))],
         burns={burned.id: ok_burn(burned.id),
                other.id: deferred(other.id, "полярная ночь", "2027-06-01",
-                                  "usgs-baseline-1")},
+                                  "usgs-baseline-1"),
+               "FIRE-unvalidated0": unvalidated_burn("FIRE-unvalidated0")},
         store=store, sources=["VIIRS_SNPP_NRT", "MODIS_NRT"])
 
 
@@ -74,6 +89,11 @@ def burned_event(snap):
 
 def deferred_event(snap):
     return next(k for k, v in snap.burns.items() if v.status is BurnStatus.DEFERRED)
+
+
+def unvalidated_event(snap):
+    return next(k for k, v in snap.burns.items()
+                if v.status is BurnStatus.UNVALIDATED)
 
 
 # --- AC-01: площадь не отдаётся без контекста ---
@@ -115,18 +135,21 @@ def test_ac01_masked_fraction_outside_zero_one_is_refused():
         BurnPayload(masked_fraction=1.5, **base)
 
 
-def test_ac01_stats_endpoint_also_refuses_to_publish_bare_hectares(client):
+def test_ac01_stats_endpoint_always_reports_its_validation_state(client):
+    """Агрегат тоже не отдаёт гектары без указания, проверены ли они."""
     s = client.get("/api/v1/stats/area").json()
     assert "burned_ha" in s
-    assert s["validated"] is False
-    assert s["validation_note"]
+    assert "validated" in s and isinstance(s["validated"], bool)
+    assert "events_unvalidated" in s
 
 
-def test_ac01_burn_area_is_flagged_unvalidated_while_spec9_is_open(client, snap):
-    """SPEC-7 закрыта как partial: площадь не прошла перекрёстную проверку."""
-    p = client.get(f"/api/v1/burns/{burned_event(snap)}").json()
-    assert p["validated"] is False
-    assert "SPEC-7-LIVE-002" in p["validation_note"]
+def test_ac01_validation_flag_comes_from_the_result_not_from_a_constant(client, snap):
+    """SPEC-9: проверенный результат и непроверенный обязаны различаться в ответе."""
+    good = client.get(f"/api/v1/burns/{burned_event(snap)}").json()
+    bad = client.get(f"/api/v1/burns/{unvalidated_event(snap)}").json()
+    assert good["validated"] is True and good["validation_note"] is None
+    assert bad["validated"] is False and bad["validation_note"]
+    assert bad["enrichment"] == pytest.approx(0.25)
 
 
 # --- AC-02: health различает две величины ---
@@ -291,3 +314,12 @@ def test_map_basemap_needs_no_api_key():
     assert "cartocdn" not in html
     assert "tile.openstreetmap.org" in html
     assert "OpenStreetMap contributors" in html
+
+
+def test_map_shows_the_validation_numbers_next_to_the_hectares():
+    """SPEC-9: обогащение и разрыв по дню года — часть контекста площади,
+    и пользователь обязан видеть их рядом с числом гектаров."""
+    html = (ROOT / "static" / "index.html").read_text(encoding="utf-8")
+    assert "burn.enrichment" in html
+    assert "burn.doy_gap_days" in html
+    assert "detections_checked" in html

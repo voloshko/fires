@@ -101,7 +101,7 @@
       "depends_on": [
         "SPEC-6"
       ],
-      "status": "partial"
+      "status": "implemented"
     },
     "SPEC-8": {
       "title": "REST API и веб-карта",
@@ -120,7 +120,7 @@
       "depends_on": [
         "SPEC-7"
       ],
-      "status": "planned"
+      "status": "implemented"
     }
   }
 }

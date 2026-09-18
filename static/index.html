@@ -189,6 +189,10 @@ async function showEvent(id){
       html+=`<div class="row"><span>под маской</span><span>${(burn.masked_fraction*100).toFixed(1)}%</span></div>
         <div class="row"><span>пороги</span><span>${burn.thresholds_version}</span></div>
         <div class="row"><span>сцены</span><span>${burn.scene_before_date} → ${burn.scene_after_date}</span></div>
+        <div class="row"><span>разрыв по дню года</span><span>${burn.doy_gap_days ?? "—"} сут</span></div>
+        <div class="row"><span>обогащение по термоточкам</span><span>${
+          burn.enrichment == null ? "—" : burn.enrichment.toFixed(2)
+          }${burn.detections_checked ? ` (${burn.detections_checked} точек)` : ""}</span></div>
         <table><tbody>${SEVERITY.map(([k,ru,c])=>
           `<tr><td><i class="sw" style="background:${c}"></i>${ru}</td>
            <td class="num">${(burn.area_ha[k]||0).toFixed(1)}</td></tr>`).join("")}

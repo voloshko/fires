@@ -35,10 +35,12 @@ from src.events import Event, EventStatus
 STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
 # Пока SPEC-9 не закрыта, площади гари непроверены — см. SPEC-7-LIVE-002.
-BURN_VALIDATION_NOTE = (
-    "Площадь не прошла перекрёстную проверку: термоточки попадают на пиксели "
-    "класса «гарь» реже случайного (receipt SPEC-7-LIVE-002, FAIL). Вероятная "
-    "причина — фенологическое рассогласование пары сцен. Закрывается SPEC-9."
+# SPEC-9 ввела перекрёстную проверку: флаг теперь берётся из результата, а не
+# проставляется здесь. Непрошедший результат приходит со статусом `unvalidated`
+# и причиной, и опубликовать его как проверенный нельзя.
+UNVALIDATED_NOTE = (
+    "Площадь не прошла перекрёстную проверку по термоточкам события (SPEC-9). "
+    "Число посчитано, но пятно не совпадает с местом горения."
 )
 
 
@@ -62,6 +64,9 @@ class BurnPayload(BaseModel):
     thresholds_version: str
     validated: bool
     validation_note: str | None = None
+    doy_gap_days: int | None = None
+    enrichment: float | None = None
+    detections_checked: int | None = None
     mgrs_tile: str | None = None
     scene_before: str | None = None
     scene_after: str | None = None
@@ -119,8 +124,10 @@ def burn_payload(result: BurnResult) -> BurnPayload:
         burned_ha=result.burned_ha,
         masked_fraction=result.masked_fraction,
         thresholds_version=result.thresholds_version,
-        validated=False,
-        validation_note=BURN_VALIDATION_NOTE,
+        validated=result.validated,
+        validation_note=None if result.validated else (result.reason or UNVALIDATED_NOTE),
+        doy_gap_days=result.doy_gap_days, enrichment=result.enrichment,
+        detections_checked=result.detections_checked,
         mgrs_tile=result.mgrs_tile,
         scene_before=result.scene_before, scene_after=result.scene_after,
         scene_before_date=result.scene_before_date,
@@ -218,8 +225,11 @@ def create_app(snapshot: Snapshot) -> FastAPI:
     @app.get("/api/v1/stats/area")
     def stats_area():
         totals = {k: 0.0 for k in SEVERITY_ORDER}
-        counted = deferred = 0
+        counted = deferred = unvalidated = 0
         for r in snapshot.burns.values():
+            if r.status is BurnStatus.UNVALIDATED:
+                unvalidated += 1
+                continue
             if r.status is not BurnStatus.OK:
                 deferred += 1
                 continue
@@ -231,7 +241,9 @@ def create_app(snapshot: Snapshot) -> FastAPI:
             "area_ha": {k: round(v, 2) for k, v in totals.items()},
             "burned_ha": round(sum(v for k, v in totals.items() if k != "unburnt"), 2),
             "events_counted": counted, "events_without_result": deferred,
-            "validated": False, "validation_note": BURN_VALIDATION_NOTE,
+            "validated": counted > 0 and unvalidated == 0,
+            "events_unvalidated": unvalidated,
+            "validation_note": None if unvalidated == 0 else UNVALIDATED_NOTE,
         }
 
     @app.get("/api/v1/flares")
@@ -279,7 +291,8 @@ def create_app(snapshot: Snapshot) -> FastAPI:
             events_deferred=sum(1 for r in snapshot.burns.values()
                                 if r.status is BurnStatus.DEFERRED),
             persistent_sources=len(snapshot.flares),
-            burn_results_validated=False)
+            burn_results_validated=bool(snapshot.burns) and all(
+                r.validated for r in snapshot.burns.values()))
 
     @app.get("/")
     def index():
