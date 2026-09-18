@@ -15,3 +15,5 @@
 - **Creating a new REQ:** `python3 scripts/spec_tools.py add-req "Title"` —
   scaffolds `requirements/REQ-NNN.md` from TEMPLATE.md and registers it in
   `traceability.json`.
+
+- **Заголовки на русском требуют явного `--slug`.** `spec_tools.py` вырезает не-ASCII при построении имени файла, и кириллический заголовок даёт бессмысленный слаг из случайных латинских обрывков. Передавайте `--slug` руками.

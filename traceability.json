@@ -37,6 +37,16 @@
       "title": "Эксплуатационная устойчивость и ограничения внешних источников",
       "file": "requirements/REQ-005.md",
       "specs": []
+    },
+    "REQ-006": {
+      "title": "Обучение на исторических данных и сопоставление с baseline",
+      "file": "requirements/REQ-006.md",
+      "specs": [
+        "SPEC-10",
+        "SPEC-11",
+        "SPEC-12",
+        "SPEC-13"
+      ]
     }
   },
   "legacy_untracked_specs": [],
@@ -121,6 +131,41 @@
         "SPEC-7"
       ],
       "status": "implemented"
+    },
+    "SPEC-10": {
+      "title": "Многолетний архив детекций FIRMS по региону",
+      "file": "specs/SPEC-10-firms-archive.md",
+      "requirement": "REQ-006",
+      "depends_on": [],
+      "status": "planned"
+    },
+    "SPEC-11": {
+      "title": "Контрольные продукты гарей MCD64A1 и Fire_CCI как слабые метки",
+      "file": "specs/SPEC-11-weak-labels.md",
+      "requirement": "REQ-006",
+      "depends_on": [
+        "SPEC-10"
+      ],
+      "status": "planned"
+    },
+    "SPEC-12": {
+      "title": "Обучающая выборка пар сцен Sentinel-2 с замороженным разбиением",
+      "file": "specs/SPEC-12-training-dataset.md",
+      "requirement": "REQ-006",
+      "depends_on": [
+        "SPEC-10",
+        "SPEC-11"
+      ],
+      "status": "planned"
+    },
+    "SPEC-13": {
+      "title": "Дообучение сегментации гарей и сравнение с пороговым baseline",
+      "file": "specs/SPEC-13-segmentation-training.md",
+      "requirement": "REQ-006",
+      "depends_on": [
+        "SPEC-12"
+      ],
+      "status": "planned"
     }
   }
 }
