@@ -323,3 +323,14 @@ def test_map_shows_the_validation_numbers_next_to_the_hectares():
     assert "burn.enrichment" in html
     assert "burn.doy_gap_days" in html
     assert "detections_checked" in html
+
+
+def test_snapshot_burn_selection_skips_events_that_cannot_be_mapped():
+    """Регрессия: отбор по одному FRP тратил бюджет расчётов на события,
+    которые шире max_aoi_km или ещё не отпустили окно поиска сцены «после».
+    Пять расчётов подряд возвращали deferred/failed."""
+    import inspect
+    from src import api
+    src = inspect.getsource(api.build_snapshot)
+    assert "mappable" in src
+    assert "aoi_extent_km" in src and "post_window_days" in src

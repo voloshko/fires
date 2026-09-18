@@ -330,8 +330,26 @@ def build_snapshot(config_path: str, days: int = 25, burn_limit: int = 0,
 
     burns: dict = {}
     if burn_limit:
+        from datetime import timedelta
+        from src.burn import aoi_extent_km
         bcfg = load_burn_config(config_path)
-        for e in sorted(events, key=lambda x: -x.total_frp)[:burn_limit]:
+        now = max((d.acquired_at for d in kept), default=None)
+
+        def mappable(e) -> bool:
+            """Есть ли вообще шанс посчитать гарь для этого события.
+
+            Отбор по одному только FRP тратил бюджет расчётов на крупнейшие
+            пожары, которые либо шире max_aoi_km, либо ещё не отпустили окно
+            поиска сцены «после». Пять расчётов подряд возвращали deferred и
+            failed, и карта оставалась без единой площади.
+            """
+            if now is not None and (now - e.last_seen) < timedelta(
+                    days=bcfg.post_window_days[0] + 30):
+                return False
+            return max(aoi_extent_km(e.padded_bbox(bcfg.aoi_pad_m))) <= bcfg.max_aoi_km
+
+        candidates = [e for e in events if mappable(e)] or events
+        for e in sorted(candidates, key=lambda x: -x.total_frp)[:burn_limit]:
             try:
                 burns[e.id] = run_for_event(e, bcfg)
             except Exception as exc:                # сцена недоступна — не падаем
