@@ -22,7 +22,7 @@ import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from scripts.train_unet import (  # noqa: E402
-    BATCH, CROP, SEED, UNet, cache, iou_scores, load_split, normalise,
+    BATCH, CROP, SEED, UNet, cache, gpu_cache, iou_scores, load_split, make_batch, normalise,
 )
 from src.comp.features import NAMES  # noqa: E402
 
@@ -88,21 +88,12 @@ def main():
     rng = np.random.default_rng(SEED)
     t0 = time.time()
 
+    X, Y = gpu_cache(xtr, ytr, mean, std); del xtr
     for epoch in range(1, EPOCHS + 1):
         net.train()
         order = rng.permutation(len(fit))
         for k in range(0, len(order) - BATCH + 1, BATCH):
-            xb, yb = [], []
-            for i in order[k:k + BATCH]:
-                h, w = ytr[i].shape
-                r, c = rng.integers(0, h - CROPSZ + 1), rng.integers(0, w - CROPSZ + 1)
-                patch = xtr[i][:, r:r + CROPSZ, c:c + CROPSZ].astype(np.float32)
-                label_ = ytr[i][r:r + CROPSZ, c:c + CROPSZ]
-                if rng.random() < 0.5: patch, label_ = patch[:, :, ::-1], label_[:, ::-1]
-                if rng.random() < 0.5: patch, label_ = patch[:, ::-1], label_[::-1]
-                xb.append(np.ascontiguousarray(patch)); yb.append(np.ascontiguousarray(label_))
-            x = (torch.from_numpy(np.stack(xb)).to(DEV) - mean_t) / std_t
-            y = torch.from_numpy(np.stack(yb)).to(DEV)
+            x, y = make_batch(X, Y, torch.as_tensor(order[k:k + BATCH], device=DEV), rng, CROPSZ)
             opt.zero_grad(set_to_none=True)
             with torch.amp.autocast(DEV):
                 out = net(x)

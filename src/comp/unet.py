@@ -84,5 +84,5 @@ def predict(model, chip: BsChip, min_blob: int = MIN_BLOB, tta: bool = True) -> 
                 logits = logits + torch.flip(net(torch.flip(batch, dims)).float(), dims)
             logits = logits / 4
         pred = logits.argmax(1)[0].cpu().numpy().astype(np.uint8)
-    pred[~chip.valid()] = 0
+    # Под маской облаков не обнуляем: истина размечена и под ними, см. ensemble.predict.
     return drop_small(pred, min_blob)

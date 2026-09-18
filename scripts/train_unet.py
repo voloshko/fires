@@ -111,6 +111,33 @@ def cache(dataset, chip_ids):
     return xs, ys, ok
 
 
+def gpu_cache(xs, ys, mean, std):
+    """Весь обучающий набор на карте: 144 чипа × 19 × 512² в fp16 — 1.4 ГБ.
+    Иначе GPU простаивает на 32 %: каждый батч пакуется на CPU и едет через PCIe."""
+    x = torch.stack([torch.from_numpy(a) for a in xs]).to(DEV)          # (N, C, H, W) fp16
+    x = ((x.float() - torch.tensor(mean, device=DEV).view(1, -1, 1, 1))
+         / torch.tensor(std, device=DEV).view(1, -1, 1, 1)).half()
+    y = torch.stack([torch.from_numpy(a) for a in ys]).to(DEV)          # (N, H, W) int64
+    return x, y
+
+
+ROT90 = int(os.environ.get("ROT90", 0))
+
+
+def make_batch(x, y, idx, rng, crop):
+    """Вырезка, отражения и (ROT90=1) повороты на карте. При вырезке в полный чип
+    отражения — единственная аугментация: 4 элемента диэдральной группы из 8,
+    повороты дают остальные 4."""
+    h, w = y.shape[1:]
+    r, c = int(rng.integers(0, h - crop + 1)), int(rng.integers(0, w - crop + 1))
+    xb = x[idx, :, r:r + crop, c:c + crop]
+    yb = y[idx, r:r + crop, c:c + crop]
+    if rng.random() < 0.5: xb, yb = xb.flip(3), yb.flip(2)
+    if rng.random() < 0.5: xb, yb = xb.flip(2), yb.flip(1)
+    if ROT90 and rng.random() < 0.5: xb, yb = xb.transpose(2, 3), yb.transpose(1, 2)
+    return xb.float(), yb
+
+
 def normalise(xs):
     """Поканальная стандартизация по обучающей части; параметры сохраняются."""
     flat = np.concatenate([x.reshape(len(NAMES), -1)[:, ::37].astype(np.float32) for x in xs], 1)
@@ -152,22 +179,13 @@ def main():
     rng = np.random.default_rng(SEED)
     best = (-1.0, -1.0)
 
+    X, Y = gpu_cache(xtr, ytr, mean, std); del xtr
     for epoch in range(1, EPOCHS + 1):
         net.train()
         order = rng.permutation(len(fit))
         total = 0.0
         for k in range(0, len(order) - BATCH + 1, BATCH):
-            xb, yb = [], []
-            for i in order[k:k + BATCH]:
-                h, w = ytr[i].shape
-                r, c = rng.integers(0, h - CROP + 1), rng.integers(0, w - CROP + 1)
-                patch = xtr[i][:, r:r + CROP, c:c + CROP].astype(np.float32)
-                label = ytr[i][r:r + CROP, c:c + CROP]
-                if rng.random() < 0.5: patch, label = patch[:, :, ::-1], label[:, ::-1]
-                if rng.random() < 0.5: patch, label = patch[:, ::-1], label[::-1]
-                xb.append(np.ascontiguousarray(patch)); yb.append(np.ascontiguousarray(label))
-            x = (torch.from_numpy(np.stack(xb)).to(DEV) - mean_t) / std_t
-            y = torch.from_numpy(np.stack(yb)).to(DEV)
+            x, y = make_batch(X, Y, torch.as_tensor(order[k:k + BATCH], device=DEV), rng, CROP)
             opt.zero_grad(set_to_none=True)
             with torch.amp.autocast(DEV):
                 out = net(x)

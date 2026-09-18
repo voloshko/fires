@@ -66,7 +66,14 @@ def predict(net_model, boost_model, chip: BsChip,
 
     mixed = net_weight * p_net + (1.0 - net_weight) * p_boost
     pred = mixed.argmax(2).astype(np.uint8)
-    pred[~chip.valid()] = 0
+    # Под маской облаков (SCL) фон НЕ ставится принудительно. Истина размечена и
+    # под облаками — 23 % истинной гари настроечных чипов лежит под маской, — а
+    # маска SCL консервативна: дымка, тень, cirrus. Сеть видит сырые отражения
+    # и контекст пятна и угадывает там лучше, чем гарантированный пропуск:
+    # IoU_burn 0.5961 → 0.7178, mIoU_sev 0.5806 → 0.6737 на 35 чипах вне обучения.
+    # Бустинг под маской слабее сети (0.7103 при смеси), поэтому там — сеть одна.
+    blind = ~chip.valid()
+    pred[blind] = p_net.argmax(2).astype(np.uint8)[blind]
     return drop_small(pred, min_blob)
 
 
