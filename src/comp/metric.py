@@ -1,4 +1,11 @@
-"""Метрика кейса (SPEC-17/18): IoU гари и mIoU по степеням поражения."""
+"""Метрика кейса (SPEC-17/18): IoU гари и mIoU по степеням поражения.
+
+**Усреднение микро, а не макро.** Постановка требует пула по всем пикселям
+выборки, а не среднего из IoU отдельных чипов. Разница не косметическая: чип с
+крошечной гарью в макро-среднем весит столько же, сколько чип, где выгорело
+всё. Сравнивать числа, посчитанные разными способами, нельзя — на этом уже
+получилось разойтись на 0.08 при сравнении бустинга с сетью.
+"""
 
 from __future__ import annotations
 
@@ -19,3 +26,13 @@ def score_bs(truth: np.ndarray, pred: np.ndarray) -> dict:
         "miou_sev": float(np.mean(present)) if present else float("nan"),
         "per_class": per_class,
     }
+
+
+def score_bs_micro(truths, preds) -> dict:
+    """Метрика по пулу пикселей всей выборки — так считает проверяющая система.
+
+    Принимает последовательности масок; формы могут различаться.
+    """
+    truth = np.concatenate([np.asarray(t).reshape(-1) for t in truths])
+    pred = np.concatenate([np.asarray(p).reshape(-1) for p in preds])
+    return score_bs(truth, pred)

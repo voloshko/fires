@@ -52,3 +52,21 @@ def test_порог_включительный(size, survives):
     flat[:size] = 1              # одна строка подряд — связная область
     out = drop_small(mask.reshape(64, 64), min_px=MIN_BLOB)
     assert bool(out.sum() > 0) is survives   # np.bool_ не то же, что bool
+
+
+def test_микро_и_макро_усреднение_дают_разное():
+    """Чип с крошечной гарью в макро-среднем весит столько же, сколько чип, где
+    выгорело всё. Тест закрепляет, что величины разные и путать их нельзя."""
+    from src.comp.metric import score_bs, score_bs_micro
+
+    big_t = np.zeros((10, 10), np.uint8); big_t[:, :] = 1          # вся площадь
+    big_p = np.zeros((10, 10), np.uint8); big_p[:5, :] = 1         # угадали половину
+    small_t = np.zeros((10, 10), np.uint8); small_t[0, 0] = 1      # один пиксель
+    small_p = np.zeros((10, 10), np.uint8); small_p[0, 0] = 1      # угадали точно
+
+    macro = np.mean([score_bs(big_t, big_p)["iou_burn"],
+                     score_bs(small_t, small_p)["iou_burn"]])
+    micro = score_bs_micro([big_t, small_t], [big_p, small_p])["iou_burn"]
+    assert macro == pytest.approx(0.75)      # (0.5 + 1.0) / 2
+    assert micro == pytest.approx(51 / 101)  # пул: 51 совпадение из 101
+    assert abs(macro - micro) > 0.2
