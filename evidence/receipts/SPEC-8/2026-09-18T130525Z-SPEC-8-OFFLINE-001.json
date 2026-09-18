@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-8",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {
+        "path": "src/api.py",
+        "sha256": "4ed9ad92f5864566c32deb7fdc38136873d6a736cf6114190f000e28b8422506"
+      },
+      {
+        "path": "tests/test_api.py",
+        "sha256": "2ade4ff2ff0533840e111e52011f8c9af3b32bef8415652675f5e6f4c04b84d1"
+      },
+      {
+        "path": "static/index.html",
+        "sha256": "db5fad9fa4e5bf3adf5c2c276e7951fdaafa67a10c3e0929515cef003dd86aaa"
+      }
+    ]
+  },
+  "run_id": "SPEC-8-OFFLINE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T13:05:25Z",
+  "evidence_class": "REPLAY",
+  "status": "PASS",
+  "conclusion": "API_CONTRACT_AND_MAP_WIRING_VERIFIED_OFFLINE",
+  "commands": [
+    "python3 -m pytest tests/test_api.py -q",
+    "make gate"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "fastapi 0.119.0",
+    "pydantic 2.12.4",
+    "pytest"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac01_burn_detail_always_carries_the_required_context",
+        "test_ac01_burn_collection_also_carries_the_context",
+        "test_ac01_schema_refuses_a_payload_without_any_context_field[masked_fraction|thresholds_version|status]",
+        "test_ac01_masked_fraction_outside_zero_one_is_refused",
+        "test_ac01_stats_endpoint_also_refuses_to_publish_bare_hectares",
+        "test_ac01_burn_area_is_flagged_unvalidated_while_spec9_is_open",
+        "обязательность полей обеспечена схемой pydantic, а не соглашением вызывающего"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac02_health_separates_successful_poll_from_data_received",
+        "test_ac02_health_lists_every_configured_source",
+        "test_ac02_health_counts_failures_separately_from_observations",
+        "test_ac02_health_reports_validation_state_of_burn_results"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac03_flares_endpoint_exposes_the_service_layer",
+        "test_ac03_flares_are_not_mixed_into_the_hotspots_layer"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac04_deferred_event_reports_a_reason_not_a_zero",
+        "test_ac04_deferred_and_computed_results_are_distinguishable",
+        "test_ac04_deferred_events_are_not_counted_in_aggregate_area",
+        "test_ac04_health_counts_deferred_events"
+      ]
+    },
+    {
+      "id": "AC-05",
+      "result": "PASS",
+      "artifacts": [
+        "test_map_page_renders_both_layers_and_the_report_table",
+        "test_map_basemap_needs_no_api_key",
+        "визуальная проверка — см. SPEC-8-LIVE-001"
+      ]
+    },
+    {
+      "id": "AC-06",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac06_no_endpoint_leaks_the_map_key",
+        "test_ac06_no_endpoint_leaks_earthdata_credentials",
+        "test_ac06_real_environment_secrets_are_absent_from_responses"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "pytest_summary": "29 passed, 1 skipped in 0.44s"
+    }
+  ],
+  "limitations": [
+    "Снимок данных синтетический; живая проверка — SPEC-8-LIVE-001.",
+    "Производительность под нагрузкой не измерялась.",
+    "Снимок собирается на старте и не обновляется, пока сервер работает."
+  ],
+  "non_claims": [
+    "НЕ доказывает корректность самих цифр — это SPEC-6 и SPEC-7.",
+    "Площади гари отдаются с validated=false: SPEC-7 закрыта как partial.",
+    "Не доказывает поведение при конкурентных запросах и под нагрузкой."
+  ]
+}

@@ -111,7 +111,7 @@
         "SPEC-6",
         "SPEC-7"
       ],
-      "status": "planned"
+      "status": "implemented"
     },
     "SPEC-9": {
       "title": "Фенологическое согласование пары сцен и валидация площади гари",

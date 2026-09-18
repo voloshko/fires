@@ -276,3 +276,24 @@ def test_coverage_counts_only_its_own_sensor(store):
     store.record_observation("VIIRS_SNPP_NRT", *window, status="ok",
                              detection_count=1)
     assert store.coverage("VIIRS_SNPP_NRT", *window).detections == 1
+
+
+def test_store_is_readable_from_another_thread():
+    """Регрессия SPEC-8 DEF-01: FastAPI выполняет синхронные обработчики в пуле
+    потоков, и /health читал журнал из рабочего потока. sqlite3 по умолчанию
+    привязывает соединение к создавшему его потоку — сервер падал бы."""
+    import threading
+    with Store(":memory:") as s:
+        s.add_detections(viirs_fixture())
+        result = {}
+
+        def read():
+            try:
+                result["count"] = s.count_detections()
+            except Exception as exc:
+                result["error"] = exc
+
+        t = threading.Thread(target=read)
+        t.start(); t.join()
+        assert "error" not in result, result.get("error")
+        assert result["count"] == 3

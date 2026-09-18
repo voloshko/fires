@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-8",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {
+        "path": "src/api.py",
+        "sha256": "4ed9ad92f5864566c32deb7fdc38136873d6a736cf6114190f000e28b8422506"
+      },
+      {
+        "path": "tests/test_api.py",
+        "sha256": "2ade4ff2ff0533840e111e52011f8c9af3b32bef8415652675f5e6f4c04b84d1"
+      },
+      {
+        "path": "static/index.html",
+        "sha256": "db5fad9fa4e5bf3adf5c2c276e7951fdaafa67a10c3e0929515cef003dd86aaa"
+      }
+    ]
+  },
+  "run_id": "SPEC-8-LIVE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T13:05:25Z",
+  "evidence_class": "LIVE",
+  "status": "PASS",
+  "conclusion": "API_AND_MAP_SERVE_REAL_DATA_AND_REFUSE_TO_PUBLISH_UNCONTEXTUALISED_HECTARES",
+  "request": {
+    "region": "Красноярский край",
+    "days": 25,
+    "burns_computed": 3,
+    "server": "uvicorn 127.0.0.1:8077",
+    "observed_at_utc": "2026-09-18T13:05:25Z"
+  },
+  "commands": [
+    "python3 -m src.api --config config/krasnoyarsk.toml --days 25 --burns 3 --port 8077",
+    "curl -s http://127.0.0.1:8077/api/v1/{health,hotspots,burns,flares,stats/area}",
+    "визуальная проверка карты во встроенном браузере: клик по очагу, карточка события, карточка гари, карточка deferred"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "fastapi 0.119.0",
+    "uvicorn 0.38.0",
+    "Leaflet 1.9.4",
+    "встроенный браузер"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-02-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "все 4 источника: последний успешный опрос 2026-09-18T13:01, последние детекции 07:48 / 08:07 / 08:52 / 09:30 — величины РАЗЛИЧАЮТСЯ на живых данных",
+        "по 5 наблюдений на источник, 0 сбоев"
+      ]
+    },
+    {
+      "id": "AC-03-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "/api/v1/flares отдал 57 персистентных источников"
+      ]
+    },
+    {
+      "id": "AC-04-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "FIRE-3ce352bc7175 отдан со статусом deferred и причиной 'нет пары сцен одного MGRS-тайла с долей валидных пикселей >= 80% (кандидатов до: 66, после: 9)'",
+        "карточка deferred НЕ содержит таблицы гектаров (проверено в DOM)",
+        "stats/area: events_counted=2, events_without_result=1"
+      ]
+    },
+    {
+      "id": "AC-05-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "карта отрисовала 888 очагов, 3 гари, 57 теплоисточников; переключатель трёх слоёв",
+        "клик по очагу открыл карточку: FIRE-c744bfd003df, статус complete, даты горения",
+        "карточка гари FIRE-49e34744a400: под маской 3.3%, пороги usgs-baseline-1, сцены 2026-07-27 -> 2026-09-15, таблица по 5 классам, гарь всего 91820.0 га",
+        "предупреждение 'не проверено' отрисовано рядом с числом гектаров",
+        "панель состояния источников показывает обе величины раздельно",
+        "скриншоты сняты встроенным браузером"
+      ]
+    },
+    {
+      "id": "AC-01-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "/api/v1/stats/area вернул burned_ha=236956.6 вместе с validated=false и причиной",
+        "ни один ответ не содержит гектары без masked_fraction, thresholds_version и status"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "events": 888,
+      "flares": 57,
+      "burns_computed": 3,
+      "burn_ok": 2,
+      "burn_deferred": 1,
+      "stats_area_ha": {
+        "unburnt": 15568.6,
+        "low": 114055.92,
+        "moderate_low": 71270.88,
+        "moderate_high": 51266.2,
+        "high": 363.6
+      },
+      "burned_ha_total": 236956.6,
+      "validated": false,
+      "example_ok": {
+        "event": "FIRE-49e34744a400",
+        "burned_ha": 91819.96,
+        "masked_fraction": 0.0326,
+        "before": "2026-07-27",
+        "after": "2026-09-15"
+      },
+      "health": {
+        "sources": 4,
+        "observations_each": 5,
+        "failures": 0,
+        "last_poll": "2026-09-18T13:01",
+        "last_detections": [
+          "07:48",
+          "08:07",
+          "08:52",
+          "09:30"
+        ]
+      }
+    }
+  ],
+  "defects_found": [
+    {
+      "id": "DEF-01",
+      "severity": "correctness",
+      "found_by": "тесты API через TestClient",
+      "description": "sqlite3 привязывает соединение к создавшему его потоку, а FastAPI выполняет синхронные обработчики в пуле потоков. /api/v1/health читал журнал наблюдений из рабочего потока и падал с ProgrammingError. Дефект проявился бы и на живом сервере, не только в тестах.",
+      "fix": "Store открывает соединение с check_same_thread=False; потолок задокументирован в коде: безопасно, пока запись идёт до начала обслуживания, а обработчики читают",
+      "regression_test": "test_store_is_readable_from_another_thread"
+    },
+    {
+      "id": "DEF-02",
+      "severity": "availability",
+      "found_by": "визуальная проверка карты",
+      "description": "Базовая подложка CARTO стала требовать ключ: тайлы отдавались с надписью API KEY REQUIRED. Публичный сервис не должен зависеть от чужой регистрации.",
+      "fix": "переход на tile.openstreetmap.org без ключа, затемнение CSS-фильтром",
+      "regression_test": "test_map_basemap_needs_no_api_key"
+    }
+  ],
+  "limitations": [
+    "Снимок собирается на старте: /health отражает момент сборки, а не текущую секунду.",
+    "Гари посчитаны для 3 крупнейших событий из 888 — полный пересчёт занял бы часы.",
+    "Нагрузочное тестирование не проводилось; требование НФТ о 2 с при холодном кеше не измерялось."
+  ],
+  "non_claims": [
+    "НЕ доказывает достоверность отдаваемых площадей: 236956 га помечены validated=false, перекрёстная проверка провалена в SPEC-7-LIVE-002.",
+    "НЕ доказывает соответствие требованиям производительности из раздела 12 ТЗ.",
+    "Визуальная проверка карты выполнена автоматизированным браузером и не является проверкой удобства использования человеком.",
+    "Не доказывает работу под конкурентной нагрузкой."
+  ]
+}
