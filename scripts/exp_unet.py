@@ -36,6 +36,8 @@ MIN_BLOB = int(os.environ.get("MIN_BLOB", 200))
 DEPTH = int(os.environ.get("DEPTH", 4))
 WIDTH = int(os.environ.get("WIDTH", 48))
 TAG = os.environ.get("TAG", "x")
+RUNSEED = int(os.environ.get("SEED", SEED))
+MASKCH = int(os.environ.get("MASKCH", 0))   # канал валидности на входе
 
 
 def drop_small(pred: np.ndarray, min_px: int) -> np.ndarray:
@@ -68,16 +70,23 @@ def infer(net, x16, mean_t, std_t, tta: bool) -> np.ndarray:
 
 
 def main():
-    torch.manual_seed(SEED); np.random.seed(SEED)
+    torch.manual_seed(RUNSEED); np.random.seed(RUNSEED)
     d, fit, tune = load_split("data/comp/train/bs", "data/comp/split_bs.json")
     print(f"[{TAG}] вес фона {BG}, эпох {EPOCHS}, вырезка {CROPSZ}, "
           f"глубина {DEPTH}, ширина {WIDTH}, "
           f"обучение {len(fit)}, замер {len(tune)}", flush=True)
-    xtr, ytr, _ = cache(d, fit)
+    xtr, ytr, oktr = cache(d, fit)
     xva, yva, okva = cache(d, tune)
     mean, std = normalise(xtr)
+    if MASKCH:
+        # Сеть не отличает «нет гари» от «облако»: признаки под маской — сырые
+        # отражения через SCL. Канал валидности говорит ей, где она слепа.
+        xtr = [np.concatenate([x, ok[None].astype(np.float16)]) for x, ok in zip(xtr, oktr)]
+        xva = [np.concatenate([x, ok[None].astype(np.float16)]) for x, ok in zip(xva, okva)]
+        mean = np.append(mean, 0.5).astype(np.float32); std = np.append(std, 0.5).astype(np.float32)
+    cin = len(NAMES) + MASKCH
 
-    net = UNet(len(NAMES), w=WIDTH, depth=DEPTH).to(DEV)
+    net = UNet(cin, w=WIDTH, depth=DEPTH).to(DEV)
     opt = torch.optim.AdamW(net.parameters(), lr=3e-4, weight_decay=1e-4)
     steps = EPOCHS * max(1, len(fit) // BATCH)
     sched = torch.optim.lr_scheduler.OneCycleLR(opt, 1e-3, total_steps=steps)
@@ -85,7 +94,7 @@ def main():
     scaler = torch.amp.GradScaler(DEV)
     mean_t = torch.tensor(mean, device=DEV).view(1, -1, 1, 1)
     std_t = torch.tensor(std, device=DEV).view(1, -1, 1, 1)
-    rng = np.random.default_rng(SEED)
+    rng = np.random.default_rng(RUNSEED)
     t0 = time.time()
 
     X, Y = gpu_cache(xtr, ytr, mean, std); del xtr
@@ -109,19 +118,19 @@ def main():
     with torch.no_grad(), torch.amp.autocast(DEV):
         for tta in (False, True):
             raw = [infer(net, x16, mean_t, std_t, tta) for x16 in xva]
-            for min_px in (0, MIN_BLOB):
+            for min_px, zero in ((0, False), (0, True), (MIN_BLOB, False)):
                 tt, pp = [], []
                 for pred, y, ok in zip(raw, yva, okva):
                     p = drop_small(pred, min_px) if min_px else pred.copy()
-                    p[~ok] = 0
+                    if zero: p[~ok] = 0      # старое правило — для сравнения с прежними числами
                     tt.append(y.reshape(-1)); pp.append(p.reshape(-1))
                 burn, miou, per = iou_scores(np.concatenate(tt), np.concatenate(pp))
-                how = ("отражения " if tta else "обычно    ") + (f"фильтр {min_px}" if min_px else "без фильтра")
-                print(f"[{TAG}] {how:26s} IoU_burn {burn:.4f}  mIoU_sev {miou:.4f}  "
+                how = ("отражения " if tta else "обычно    ") + (f"фильтр {min_px}" if min_px else "без фильтра") + (" ноль под маской" if zero else "")
+                print(f"[{TAG}] {how:42s} IoU_burn {burn:.4f}  mIoU_sev {miou:.4f}  "
                       f"[{per[1]:.3f} {per[2]:.3f} {per[3]:.3f}]", flush=True)
     torch.save({"state": net.state_dict(), "mean": mean, "std": std, "names": NAMES,
                 "bg_weight": BG, "epochs": EPOCHS, "crop": CROPSZ,
-                "depth": DEPTH, "width": WIDTH}, f"models/exp_{TAG}.pt")
+                "depth": DEPTH, "width": WIDTH, "maskch": MASKCH, "seed": RUNSEED}, f"models/exp_{TAG}.pt")
 
 
 if __name__ == "__main__":
