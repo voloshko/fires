@@ -21,14 +21,21 @@ import numpy as np
 
 from src.comp.chips import BsChip
 from src.comp.features import NAMES, stack
-from src.comp.postproc import MIN_BLOB, drop_small
+from src.comp.postproc import drop_small
 
 NET_WEIGHT = 0.6
+
+# Фильтр мелких пятен для ансамбля ОТКЛЮЧЁН. Он давал +0.027, пока сеть была
+# мелкой и сорила ложными пятнами; на глубине 6 перестал помогать, на глубине 7
+# в ансамбле мешает: 0.5961/0.5806 без него против 0.5937/0.5776 с ним. Он
+# компенсировал нехватку контекста — когда контекста хватает, он режет
+# настоящие мелкие гари.
+MIN_BLOB_ENSEMBLE = 0
 
 
 def predict(net_model, boost_model, chip: BsChip,
             net_weight: float = NET_WEIGHT,
-            min_blob: int = MIN_BLOB,
+            min_blob: int = MIN_BLOB_ENSEMBLE,
             tta: bool = True) -> np.ndarray:
     """Маска степеней поражения по смеси вероятностей.
 
