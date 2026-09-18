@@ -291,8 +291,12 @@ def create_app(snapshot: Snapshot) -> FastAPI:
             events_deferred=sum(1 for r in snapshot.burns.values()
                                 if r.status is BurnStatus.DEFERRED),
             persistent_sources=len(snapshot.flares),
-            burn_results_validated=bool(snapshot.burns) and all(
-                r.validated for r in snapshot.burns.values()))
+            # Непроверенной является ОПУБЛИКОВАННАЯ площадь, не прошедшая
+            # перекрёстную проверку. Событие в статусе deferred площади не даёт
+            # вовсе, и считать его непроверенным — значит поднимать тревогу
+            # там, где сервис как раз повёл себя честно.
+            burn_results_validated=not any(
+                r.status is BurnStatus.UNVALIDATED for r in snapshot.burns.values()))
 
     @app.get("/")
     def index():

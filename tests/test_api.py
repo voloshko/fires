@@ -334,3 +334,34 @@ def test_snapshot_burn_selection_skips_events_that_cannot_be_mapped():
     src = inspect.getsource(api.build_snapshot)
     assert "mappable" in src
     assert "aoi_extent_km" in src and "post_window_days" in src
+
+
+def test_deferred_event_does_not_raise_the_unvalidated_alarm(store, snap):
+    """Регрессия: health считал непроверенными и deferred-события, и карта
+    показывала пустой баннер «площади не проверены» там, где сервис как раз
+    повёл себя честно. Непроверенной является опубликованная площадь."""
+    snap.burns = {k: v for k, v in snap.burns.items()
+                  if v.status is not BurnStatus.UNVALIDATED}
+    client = TestClient(create_app(snap))
+    assert client.get("/api/v1/health").json()["burn_results_validated"] is True
+    assert client.get("/api/v1/stats/area").json()["validation_note"] is None
+
+
+def test_unvalidated_event_does_raise_the_alarm(client):
+    assert client.get("/api/v1/health").json()["burn_results_validated"] is False
+    assert client.get("/api/v1/stats/area").json()["validation_note"]
+
+
+def test_map_does_not_render_an_empty_validation_banner():
+    html = (ROOT / "static" / "index.html").read_text(encoding="utf-8")
+    assert "!health.burn_results_validated && stats.validation_note" in html
+
+
+def test_map_attribution_has_no_svg_prefix_but_keeps_openstreetmap_credit():
+    """Префикс Leaflet по умолчанию содержит SVG-флаг и заменяется текстом.
+
+    Атрибуция OpenStreetMap при этом обязана остаться: она требуется лицензией
+    ODbL, и снимать её нельзя."""
+    html = (ROOT / "static" / "index.html").read_text(encoding="utf-8")
+    assert "setPrefix" in html
+    assert "OpenStreetMap contributors" in html

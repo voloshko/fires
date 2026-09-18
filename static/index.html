@@ -71,6 +71,10 @@ const SEVERITY = [
   ["high","сильная","#b3221f"],
 ];
 const map = L.map("map",{preferCanvas:true}).setView([62,96],4);
+// Штатный префикс атрибуции Leaflet содержит SVG-флаг. Leaflet позволяет его
+// заменить; ставим текстовую ссылку. Атрибуция OpenStreetMap остаётся — она
+// обязательна по лицензии ODbL и снятию не подлежит.
+map.attributionControl.setPrefix('<a href="https://leafletjs.com" rel="noopener">Leaflet</a>');
 // Базовая подложка без ключа: тайлы CARTO с некоторых пор его требуют, а сервис
 // публичный и не должен зависеть от чужой регистрации (REQ-005). OSM отдаёт
 // светлые тайлы, поэтому затемняются CSS-фильтром на стороне клиента.
@@ -106,9 +110,11 @@ async function load(){
     `теплоисточников ${health.persistent_sources} · ` +
     `обновлено ${health.generated_at.slice(0,16).replace("T"," ")} UTC`;
 
-  if(!health.burn_results_validated){
+  // Предупреждение поднимается только при НЕПРОВЕРЕННОЙ опубликованной площади.
+  // Событие в статусе deferred площади не даёт, и тревожить из-за него нечем.
+  if(!health.burn_results_validated && stats.validation_note){
     const el=document.getElementById("validation"); el.hidden=false;
-    el.innerHTML="<b>Площади гари не проверены.</b> " + (stats.validation_note||"");
+    el.innerHTML="<b>Площади гари не проверены.</b> " + stats.validation_note;
   }
 
   hot.features.forEach(f=>{
