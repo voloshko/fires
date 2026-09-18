@@ -91,7 +91,7 @@
         "SPEC-2",
         "SPEC-3"
       ],
-      "status": "planned"
+      "status": "implemented"
     },
     "SPEC-7": {
       "title": "Подбор пары сцен Sentinel-2 и расчёт dNBR/RBR",

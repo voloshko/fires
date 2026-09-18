@@ -21,7 +21,7 @@ Spec-driven development index. Одна спека = один связный к�
 | SPEC-3 | Нормализация confidence и пороговый фильтр | REQ-001 | SPEC-2 | implemented |
 | SPEC-4 | Фильтр временной персистентности и слой теплоисточников | REQ-001 | SPEC-2 | implemented |
 | SPEC-5 | Маска сельхозземель из ESA WorldCover | REQ-001 | SPEC-2 | implemented |
-| SPEC-6 | Кластеризация детекций в события пожаров | REQ-001 | SPEC-2, SPEC-3 | planned |
+| SPEC-6 | Кластеризация детекций в события пожаров | REQ-001 | SPEC-2, SPEC-3 | implemented |
 | SPEC-7 | Подбор пары сцен Sentinel-2 и расчёт dNBR/RBR | REQ-002 | SPEC-6 | planned |
 | SPEC-8 | REST API и веб-карта | REQ-003 | SPEC-6, SPEC-7 | planned |
 

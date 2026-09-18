@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-6",
+  "run_id": "SPEC-6-OFFLINE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T12:17:00Z",
+  "evidence_class": "REPLAY",
+  "status": "PASS",
+  "conclusion": "EVENT_CLUSTERING_AND_COMPLETION_LOGIC_VERIFIED_OFFLINE",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "note": "git initialised in this change; manifest bound by sha256",
+    "files": [
+      {
+        "path": "src/events.py",
+        "sha256": "b96a183c09e991051415fa3cd32f133aaf473817c3f0d3559906bb2b00b04bf1"
+      },
+      {
+        "path": "tests/test_clustering.py",
+        "sha256": "d8440ec354e6df8e4d805993384d50cb0493f74e2369d5aece2653f631e8521f"
+      },
+      {
+        "path": "config/krasnoyarsk.toml",
+        "sha256": "f31a56cb9eba9a774a65bd65b1926fe1dbc8f0e23bc65e101f456070a0fd0925"
+      }
+    ]
+  },
+  "commands": [
+    "python3 -m pytest tests/test_clustering.py -q",
+    "make gate"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "pytest"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac01_nearby_and_close_in_time_become_one_event",
+        "test_ac01_far_apart_in_space_become_separate_events",
+        "test_ac01_far_apart_in_time_become_separate_events",
+        "test_ac01_thresholds_come_from_config",
+        "test_ac01_changing_the_radius_changes_the_grouping",
+        "test_ac01_changing_the_time_gap_changes_the_grouping",
+        "test_ac01_a_detection_can_merge_two_existing_events",
+        "test_ac01_detections_from_different_sensors_join_the_same_event"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac02_id_survives_three_rounds_of_new_detections — три приёма, id не меняется",
+        "test_ac02_different_events_get_different_ids",
+        "test_ac02_id_is_deterministic_across_runs",
+        "test_ac02_id_looks_like_an_identifier"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac03_seven_days_without_any_polls_does_not_complete_the_event",
+        "test_ac03_seven_days_of_successful_empty_polls_completes_the_event",
+        "test_ac03_failed_polls_do_not_complete_the_event",
+        "test_ac03_event_with_recent_detections_stays_active",
+        "test_ac03_three_statuses_are_distinct",
+        "test_ac03_completion_days_comes_from_config"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac04_event_exposes_bbox_covering_all_its_detections",
+        "test_ac04_bbox_covers_every_detection_of_a_merged_event",
+        "test_ac04_event_exposes_total_and_max_frp",
+        "test_ac04_missing_frp_does_not_break_the_sum",
+        "test_ac04_padded_bbox_is_wider_than_the_raw_one",
+        "test_ac04_single_detection_event_has_degenerate_but_valid_bbox"
+      ]
+    },
+    {
+      "id": "AC-05",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac05_history_is_complete_and_chronological",
+        "test_ac05_first_and_last_seen_match_the_history",
+        "test_ac05_nothing_is_lost_during_a_merge"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "pytest_summary": "28 passed in 0.09s"
+    }
+  ],
+  "limitations": [
+    "Пороги 3000 м / 48 ч / 7 сут — инженерная оценка, не откалиброванная по сибирским пожарам.",
+    "Идентификатор выводится из самой ранней детекции: массовый backfill более ранних данных сменит id события."
+  ],
+  "non_claims": [
+    "НЕ доказывает, что границы кластера соответствуют реальному периметру пожара — облако термоточек периметром не является.",
+    "Не доказывает корректность порогов связывания для сибирских условий.",
+    "Не доказывает, что 606 завершённых событий действительно потухли — доказано лишь, что тишина подтверждена наблюдениями."
+  ]
+}
