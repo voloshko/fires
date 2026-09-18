@@ -147,7 +147,10 @@ def test_ac03_fingerprint_changes_with_the_config():
     import tempfile
     with tempfile.TemporaryDirectory() as d:
         a, b = Path(d) / "a.toml", Path(d) / "b.toml"
-        a.write_text("x = 1"); b.write_text("x = 2")
+        # менять надо секцию, влияющую на производные данные: отпечаток
+        # намеренно не реагирует на всё остальное
+        a.write_text('[region]\nname = "А"\nbbox = [1.0, 2.0, 3.0, 4.0]\n')
+        b.write_text('[region]\nname = "А"\nbbox = [1.0, 2.0, 9.0, 9.0]\n')
         assert cache.config_fingerprint(a) != cache.config_fingerprint(b)
 
 
@@ -241,18 +244,18 @@ def test_detections_outside_any_event_are_kept(built):
     assert restored.store.count_detections() >= in_events
 
 
-def test_older_cache_version_is_readable_with_defaults(built):
-    """Колонки version и fire_type добавлены в SPEC-10. Кеш 2-й версии их не
-    знает, но содержит только оперативные данные, у которых эти поля и так
-    пусты. Отвергать его значило бы заставить пересобирать 13 минут впустую."""
+@pytest.mark.parametrize("version", [2, 3])
+def test_cache_written_before_the_fingerprint_rule_changed_is_refused(built, version):
+    """В 4-й версии изменился СМЫСЛ отпечатка: он считается по секциям, влияющим
+    на производные данные, а не по всему файлу. Отпечатки прежних версий
+    несопоставимы, и принять их молча значило бы принять непроверенный отпечаток."""
     _, root, config = built
     meta_p = root / "snapshot.json"
     meta = json.loads(meta_p.read_text())
-    meta["schema_version"] = 2
+    meta["schema_version"] = version
     meta_p.write_text(json.dumps(meta, ensure_ascii=False))
-    restored = cache.load(root, config)
-    assert restored.events
-    assert all(not d.is_archive for e in restored.events for d in e.detections)
+    with pytest.raises(CacheError, match="читаемы"):
+        cache.load(root, config)
 
 
 def test_unreadable_cache_version_is_still_refused(built):
@@ -281,3 +284,30 @@ def test_archive_markers_survive_the_round_trip(tmp_path, config):
     all_dets = [d for e in restored.events for d in e.detections]
     assert all(d.is_archive for d in all_dets)
     assert 2 in {d.fire_type for d in all_dets}
+
+
+def test_fingerprint_ignores_sections_that_do_not_affect_derived_data(tmp_path):
+    """Регрессия: хеш считался по всему файлу, и добавление секции, которая
+    настраивает лишь сверку с контрольными продуктами, обесценило собранный
+    за 13 минут кеш — хотя ни события, ни площади от неё не зависят."""
+    base = '[region]\nname = "Т"\nbbox = [82.0, 51.0, 109.0, 78.0]\n\n[firms]\nday_range = 2\n'
+    a = tmp_path / "a.toml"; a.write_text(base, encoding="utf-8")
+    b = tmp_path / "b.toml"; b.write_text(base + '\n[labels]\nproduct = "MCD64A1.061"\n', encoding="utf-8")
+    assert cache.config_fingerprint(a) == cache.config_fingerprint(b)
+
+
+def test_fingerprint_still_changes_when_a_threshold_changes(tmp_path):
+    base = '[region]\nname = "Т"\nbbox = [82.0, 51.0, 109.0, 78.0]\n\n[firms]\nday_range = 2\n'
+    a = tmp_path / "a.toml"; a.write_text(base, encoding="utf-8")
+    for section in ('[confidence]\nmin_level = "high"\n', '[persistence]\nwindow_days = 30\n',
+                    '[burn]\nmax_doy_gap_days = 90\n', '[events]\nradius_m = 9000\n'):
+        b = tmp_path / "b.toml"; b.write_text(base + "\n" + section, encoding="utf-8")
+        assert cache.config_fingerprint(a) != cache.config_fingerprint(b), section
+
+
+def test_fingerprint_ignores_comments_and_key_order(tmp_path):
+    a = tmp_path / "a.toml"
+    a.write_text('[region]\nname = "Т"\nbbox = [1.0, 2.0, 3.0, 4.0]\n', encoding="utf-8")
+    b = tmp_path / "b.toml"
+    b.write_text('# пояснение\n[region]\nbbox = [1.0, 2.0, 3.0, 4.0]\nname = "Т"\n', encoding="utf-8")
+    assert cache.config_fingerprint(a) == cache.config_fingerprint(b)

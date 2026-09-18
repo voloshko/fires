@@ -49,6 +49,19 @@
         "SPEC-12",
         "SPEC-13"
       ]
+    },
+    "REQ-007": {
+      "title": "Соревновательный контур: метрика, submission и воспроизводимость",
+      "file": "requirements/REQ-007.md",
+      "specs": [
+        "SPEC-15",
+        "SPEC-16",
+        "SPEC-17",
+        "SPEC-18",
+        "SPEC-19",
+        "SPEC-20",
+        "SPEC-21"
+      ]
     }
   },
   "legacy_untracked_specs": [],
@@ -148,7 +161,7 @@
       "depends_on": [
         "SPEC-10"
       ],
-      "status": "planned"
+      "status": "partial"
     },
     "SPEC-12": {
       "title": "Обучающая выборка пар сцен Sentinel-2 с замороженным разбиением",
@@ -179,6 +192,73 @@
         "SPEC-8"
       ],
       "status": "implemented"
+    },
+    "SPEC-15": {
+      "title": "Чипы соревнования",
+      "file": "specs/SPEC-15-comp-chips.md",
+      "requirement": "REQ-007",
+      "depends_on": [],
+      "status": "planned"
+    },
+    "SPEC-16": {
+      "title": "Кодирование RLE и валидация submission.csv",
+      "file": "specs/SPEC-16-submission-rle.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-15"
+      ],
+      "status": "planned"
+    },
+    "SPEC-17": {
+      "title": "Пороговый baseline детекции активного горения",
+      "file": "specs/SPEC-17-af-baseline.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-15",
+        "SPEC-16"
+      ],
+      "status": "planned"
+    },
+    "SPEC-18": {
+      "title": "Пороговый baseline гарей и степени поражения",
+      "file": "specs/SPEC-18-bs-baseline.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-15",
+        "SPEC-16"
+      ],
+      "status": "planned"
+    },
+    "SPEC-19": {
+      "title": "Обучение сегментационной модели и сравнение с baseline",
+      "file": "specs/SPEC-19-model-training.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-17",
+        "SPEC-18"
+      ],
+      "status": "planned"
+    },
+    "SPEC-20": {
+      "title": "Единая команда инференса и воспроизводимость",
+      "file": "specs/SPEC-20-inference-entrypoint.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-16",
+        "SPEC-17",
+        "SPEC-18"
+      ],
+      "status": "planned"
+    },
+    "SPEC-21": {
+      "title": "Сервис под требования кейса",
+      "file": "specs/SPEC-21-case-service.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-8",
+        "SPEC-18"
+      ],
+      "status": "planned"
     }
   }
 }

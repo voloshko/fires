@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-11",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {
+        "path": "src/labels.py",
+        "sha256": "860205741e269720e3c8b8725b8b226b3fa5f742410f48a11d034f565f8fc3ff"
+      },
+      {
+        "path": "tests/test_weak_labels.py",
+        "sha256": "1c0d72e4e61aba2f5ea813bcca05479e9df151e90f8fbc33b0228d6f194cba96"
+      },
+      {
+        "path": "config/krasnoyarsk.toml",
+        "sha256": "a6bf98f1ad55788c363486cac561ec39215e3dc84b73ac561c17c8180b4c2cc4"
+      }
+    ]
+  },
+  "run_id": "SPEC-11-LIVE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T16:04:14Z",
+  "evidence_class": "LIVE",
+  "status": "PASS",
+  "conclusion": "MCD64A1_COMPARED_VIA_APPEEARS_OUR_AREAS_3_TO_9_TIMES_LARGER",
+  "request": {
+    "product": "MCD64A1.061",
+    "layer": "Burn_Date",
+    "period": "2026-07-30..2026-08-14",
+    "bbox": [
+      106.31,
+      68.19,
+      107.57,
+      68.47
+    ],
+    "observed_at_utc": "2026-09-18T16:04:14Z"
+  },
+  "commands": [
+    "python3 -m src.labels compare --config config/krasnoyarsk.toml --events 6"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "AppEEARS API",
+    "rasterio"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-03-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "FIRE-6e549898df2a: наша 34163 га против 10250 га, отношение 3.33",
+        "FIRE-75b409477bd9: наша 13756 га против 1550 га, отношение 8.87"
+      ]
+    },
+    {
+      "id": "COVERAGE",
+      "result": "PASS",
+      "artifacts": [
+        "Fire_CCI не покрывает 2026: FireCCI51 2001-2020, FireCCIS311 2019-2024, FireCCILT11 1982-2018",
+        "проверка вынесена в код fire_cci_covers, а не в комментарий"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "result": "NOT_RUN",
+      "artifacts": [
+        "нужно 10 событий, доступно 2"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "events": 2,
+      "ratio": {
+        "min": 3.333,
+        "median": 8.875,
+        "max": 8.875,
+        "mean": 6.104,
+        "our_larger": 2,
+        "product_larger": 0
+      }
+    }
+  ],
+  "defects_found": [
+    {
+      "id": "DEF-01",
+      "severity": "correctness",
+      "found_by": "этот прогон, до записи чисел",
+      "description": "AppEEARS кладёт в бандл не только запрошенный слой Burn_Date, но и QA, где значение 3 стоит по всей площади. Слияние через максимум давало 238950 га вместо 11800 — шестикратное завышение.",
+      "fix": "отбор растров строго по имени запрошенного слоя",
+      "regression_test": "test_qa_layer_must_not_be_counted_as_burned_area"
+    },
+    {
+      "id": "DEF-02",
+      "severity": "correctness",
+      "found_by": "первый прогон",
+      "description": "Файлы бандла отдаются 302-редиректом на S3; без follow_redirects HTML-страница сохранялась под именем .tif, и падало это только в rasterio.",
+      "fix": "follow_redirects плюс проверка сигнатуры TIFF при сохранении",
+      "regression_test": "test_downloaded_file_that_is_not_a_tiff_is_refused"
+    }
+  ],
+  "findings": [
+    {
+      "id": "FIND-01",
+      "severity": "architecture",
+      "description": "Зеркало MCD64A1 на Planetary Computer остановилось на августе 2024, хотя каталог заявляет открытый интервал. Продукт при этом актуален: гранулы за июль 2026 выпущены 11.09.2026. Анонимный доступ, на который опиралась спека, для текущих данных отсутствует.",
+      "consequence": "Переход на LP DAAC через AppEEARS; источник сменил класс доступа с анонимного на требующий учётных данных — архитектурный риск по REQ-005."
+    }
+  ],
+  "limitations": [
+    "Два события вместо десяти.",
+    "Продукт за август не выпущен: июльская гранула видит только первые дни пожаров.",
+    "Вклад недооценки MCD64A1 и вклад неполного периода этим прогоном не разделены."
+  ],
+  "non_claims": [
+    "НЕ доказывает, что наша площадь вернее: MCD64A1 не наземная истина.",
+    "НЕ доказывает величину расхождения: период продукта короче периода пожара.",
+    "Сверка с Fire_CCI не выполнена и для 2026 года невыполнима."
+  ]
+}

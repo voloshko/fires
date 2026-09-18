@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-11",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {
+        "path": "src/labels.py",
+        "sha256": "860205741e269720e3c8b8725b8b226b3fa5f742410f48a11d034f565f8fc3ff"
+      },
+      {
+        "path": "tests/test_weak_labels.py",
+        "sha256": "1c0d72e4e61aba2f5ea813bcca05479e9df151e90f8fbc33b0228d6f194cba96"
+      },
+      {
+        "path": "config/krasnoyarsk.toml",
+        "sha256": "a6bf98f1ad55788c363486cac561ec39215e3dc84b73ac561c17c8180b4c2cc4"
+      }
+    ]
+  },
+  "run_id": "SPEC-11-OFFLINE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T16:04:14Z",
+  "evidence_class": "REPLAY",
+  "status": "PASS",
+  "conclusion": "LABEL_COMPARISON_LOGIC_AND_COVERAGE_CHECKS_VERIFIED_OFFLINE",
+  "commands": [
+    "python3 -m pytest tests/test_weak_labels.py -q",
+    "make gate"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "numpy",
+    "rasterio",
+    "pytest",
+    "httpx MockTransport"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01",
+      "result": "PASS",
+      "artifacts": [
+        "отсутствие покрытия отличимо от пустой маски",
+        "read_window возвращает None вне покрытия"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "result": "PASS",
+      "artifacts": [
+        "пиксель продукта 25 га",
+        "малый пожар помечается not_comparable, а не расхождением",
+        "порог из конфигурации"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "result": "PASS",
+      "artifacts": [
+        "отношение по событию",
+        "сводка как распределение, а не одно число"
+      ]
+    },
+    {
+      "id": "AC-05",
+      "result": "PASS",
+      "artifacts": [
+        "продукт-источник назван в каждом сравнении и обязателен по сигнатуре"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "result": "NOT_RUN",
+      "artifacts": [
+        "требуется не менее 10 событий; в кеше два расчёта гари"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "pytest_summary": "43 passed, 1 warning in 0.26s"
+    }
+  ],
+  "limitations": [
+    "Растры синтетические; живой продукт покрыт SPEC-11-LIVE-001."
+  ],
+  "non_claims": [
+    "Ни один продукт не является наземной истиной.",
+    "Совпадение с ним не доказывает правильность нашей площади, расхождение не доказывает ошибку."
+  ]
+}

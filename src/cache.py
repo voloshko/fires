@@ -27,12 +27,12 @@ from pathlib import Path
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-SCHEMA_VERSION = 3
-# Версии, которые умеем читать. Колонки version и fire_type добавлены в 3-й
-# (SPEC-10); во 2-й их нет, и это не ошибка — кеш второй версии содержал только
-# оперативные данные, у которых эти поля и так пусты. Отвергать его означало бы
-# заставить пересобирать 13 минут ради пустых колонок.
-READABLE_VERSIONS = frozenset({2, 3})
+SCHEMA_VERSION = 4
+# Версии, которые умеем читать. В 4-й изменился смысл отпечатка конфигурации
+# (см. config_fingerprint), поэтому отпечатки прежних версий несопоставимы и
+# кеши 2 и 3 не читаются: молча принять их значило бы принять непроверенный
+# отпечаток.
+READABLE_VERSIONS = frozenset({4})
 COMPRESSION = "zstd"
 
 DETECTION_FIELDS = ("sensor", "latitude", "longitude", "acquired_at", "brightness",
@@ -47,9 +47,26 @@ class CacheError(RuntimeError):
     повреждённый кеш в тринадцатиминутную паузу без объяснения."""
 
 
+# Секции конфигурации, влияющие на производные данные. Всё остальное —
+# настройки вывода и внешних сервисов, они на события и площади не влияют.
+DERIVED_SECTIONS = ("region", "firms", "confidence", "persistence",
+                    "events", "burn", "cropland")
+
+
 def config_fingerprint(config_path: str | Path) -> str:
-    """Хеш конфигурации: пороги влияют на каждое производное значение."""
-    return hashlib.sha256(Path(config_path).read_bytes()).hexdigest()[:16]
+    """Отпечаток ТОЛЬКО тех секций конфигурации, что влияют на производные данные.
+
+    Считать хеш по всему файлу оказалось неверно: добавление секции, которая
+    настраивает лишь сверку с контрольными продуктами, обесценило собранный за
+    13 минут кеш, хотя ни события, ни площади от неё не зависят. Отпечаток
+    берётся от канонического представления нужных секций, поэтому комментарии
+    и порядок ключей на него не влияют.
+    """
+    import tomllib
+    data = tomllib.loads(Path(config_path).read_text(encoding="utf-8"))
+    subset = {k: data[k] for k in DERIVED_SECTIONS if k in data}
+    canon = json.dumps(subset, sort_keys=True, ensure_ascii=False, default=str)
+    return hashlib.sha256(canon.encode("utf-8")).hexdigest()[:16]
 
 
 def _paths(root: str | Path):
