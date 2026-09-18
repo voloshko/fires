@@ -25,6 +25,21 @@ def available() -> bool:
     return True
 
 
+def _modernise(state: dict) -> dict:
+    """Приводит веса сетей, сохранённых до параметризации глубины, к нынешним
+    именам. Переобучать их только ради имён — расточительство."""
+    if any(k.startswith("down.") for k in state):
+        return state
+    renames = {"d1": "down.0", "d2": "down.1", "d3": "down.2", "d4": "down.3",
+               "u3": "up.0", "u2": "up.1", "u1": "up.2",
+               "c3": "conv.0", "c2": "conv.1", "c1": "conv.2"}
+    out = {}
+    for key, value in state.items():
+        head, _, rest = key.partition(".")
+        out[f"{renames[head]}.{rest}" if head in renames else key] = value
+    return out
+
+
 def load(path: str | Path):
     """Возвращает (сеть в режиме eval, среднее, разброс, устройство)."""
     import torch
@@ -37,13 +52,13 @@ def load(path: str | Path):
             "набор признаков модели не совпадает с текущим: "
             f"{len(bundle['names'])} против {len(NAMES)}"
         )
-    state = bundle["state"]
+    state = _modernise(bundle["state"])
     # Ширина и глубина читаются из самих весов: файл модели не обязан их нести,
     # а разойтись с кодом они не должны.
     width = state["down.0.0.weight"].shape[0]
     depth = sum(1 for k in state if k.startswith("down.") and k.endswith(".0.weight"))
     net = UNet(len(NAMES), w=width, depth=depth)
-    net.load_state_dict(bundle["state"])
+    net.load_state_dict(state)
     device = "cuda" if torch.cuda.is_available() else "cpu"
     net.to(device).eval()
     return net, bundle["mean"], bundle["std"], device
