@@ -104,3 +104,13 @@ def test_отсутствие_meta_поднимает_ошибку(tmp_path):
     (tmp_path / "bs").mkdir()
     with pytest.raises(FileNotFoundError):
         read_meta(tmp_path / "bs", "bs")
+
+
+def test_label_zero_тень_да_cirrus_нет():
+    """Разметчик обнулял тень (3) и плотное облако (9), но не cirrus (10)."""
+    from src.comp.chips import BsChip
+    pre = np.zeros((10, 2, 3), np.uint16); post = pre.copy()
+    pre[9] = 4; post[9] = np.array([[3, 10, 9], [4, 0, 8]])
+    chip = BsChip("x", pre, post, np.zeros((3, 2, 3)), np.zeros((2, 2, 3)), None)
+    assert chip.label_zero().tolist() == [[True, False, True], [False, True, False]]
+    assert (~chip.valid()).tolist() == [[True, True, True], [False, True, True]]

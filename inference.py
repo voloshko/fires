@@ -29,8 +29,9 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="inference.py")
     parser.add_argument("--data-dir", required=True, help="каталог теста (bs/ и af/)")
     parser.add_argument("--model", default="models/bs_hgb.pkl")
-    parser.add_argument("--unet", default="models/bs_unet.pt",
-                        help="сеть по гари; при её отсутствии работает бустинг")
+    parser.add_argument("--unet", nargs="+", default=["models/bs_unet.pt"],
+                        help="сети по гари (несколько — сидовый ансамбль, вероятности "
+                             "усредняются); при отсутствии всех работает бустинг")
     parser.add_argument("--net-weight", type=float, default=ENSEMBLE_WEIGHT,
                         help="доля сети в ансамбле; 1.0 — только сеть, 0.0 — только бустинг")
     parser.add_argument("--out", default="submission.csv")
@@ -49,17 +50,18 @@ def main(argv: list[str] | None = None) -> int:
         from src.comp import ensemble, unet
 
         net = None
-        if Path(args.unet).exists() and unet.available():
-            net = unet.load(args.unet)
-        elif Path(args.unet).exists():
+        found = [p for p in args.unet if Path(p).exists()]
+        if found and unet.available():
+            net = [unet.load(p) for p in found]
+        elif found:
             print("сеть есть, но torch недоступен — беру бустинг", file=sys.stderr)
 
         model = load_model(args.model) if Path(args.model).exists() else None
 
         if net is not None and model is not None:
-            print(f"гарь: ансамбль {args.unet} и {args.model}, вес сети {args.net_weight}")
+            print(f"гарь: ансамбль {len(net)} сетей {found} и {args.model}, вес сети {args.net_weight}")
         elif net is not None:
-            print(f"гарь: только сеть {args.unet} — бустинга на диске нет", file=sys.stderr)
+            print(f"гарь: только сети {found} — бустинга на диске нет", file=sys.stderr)
         elif model is not None:
             print(f"гарь: только бустинг {args.model} — сети на диске нет", file=sys.stderr)
         else:
@@ -70,7 +72,7 @@ def main(argv: list[str] | None = None) -> int:
             if net is not None and model is not None:
                 mask = ensemble.predict(net, model, chip, args.net_weight)
             elif net is not None:
-                mask = unet.predict(net, chip)
+                mask = unet.predict(net[0], chip)
             elif model is not None:
                 mask = predict_model(model, chip)
             else:

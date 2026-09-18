@@ -47,34 +47,32 @@ def load(path: str | Path):
     from scripts.train_unet import UNet
 
     bundle = torch.load(path, map_location="cpu", weights_only=False)
-    if tuple(bundle["names"]) != tuple(NAMES):
-        raise ValueError(
-            "набор признаков модели не совпадает с текущим: "
-            f"{len(bundle['names'])} против {len(NAMES)}"
-        )
+    names = tuple(bundle["names"])
     state = _modernise(bundle["state"])
     # Ширина и глубина читаются из самих весов: файл модели не обязан их нести,
     # а разойтись с кодом они не должны.
-    width = state["down.0.0.weight"].shape[0]
+    width, cin = state["down.0.0.weight"].shape[:2]
     depth = sum(1 for k in state if k.startswith("down.") and k.endswith(".0.weight"))
-    net = UNet(len(NAMES), w=width, depth=depth)
+    net = UNet(cin, w=width, depth=depth)
     net.load_state_dict(state)
+    # Лишний входной канал сверх признаков — маска валидности (MASKCH=1 в стенде).
+    net.names = names            # сеть считает признаки по СВОЕМУ набору имён
+    net.maskch = cin - len(names)
+    if net.maskch not in (0, 1):
+        raise ValueError(f"у сети {cin} входов при {len(names)} признаках")
     device = "cuda" if torch.cuda.is_available() else "cpu"
     net.to(device).eval()
     return net, bundle["mean"], bundle["std"], device
 
 
-def predict(model, chip: BsChip, min_blob: int = MIN_BLOB, tta: bool = True) -> np.ndarray:
-    """`tta` усредняет ответ по четырём отражениям чипа.
-
-    На четырёхуровневой сети приём давал +0.0002 и был отвергнут; на
-    пятиуровневой даёт +0.006 по IoU_burn. Результат зависит от глубины, поэтому
-    флаг оставлен: переносить его между конфигурациями вслепую нельзя.
-    """
+def probs(model, chip: BsChip, tta: bool = True) -> np.ndarray:
+    """(H, W, 4) вероятностей одной сети, с усреднением по отражениям."""
     import torch
 
     net, mean, std, device = model
-    feats = np.nan_to_num(stack(chip), posinf=0.0, neginf=0.0).astype(np.float32)
+    feats = np.nan_to_num(stack(chip, getattr(net, "names", NAMES)), posinf=0.0, neginf=0.0).astype(np.float32)
+    if getattr(net, "maskch", 0):
+        feats = np.concatenate([feats, chip.valid()[None].astype(np.float32)])
     x = (feats - mean[:, None, None]) / std[:, None, None]
     with torch.no_grad():
         batch = torch.from_numpy(x).unsqueeze(0).to(device)
@@ -83,6 +81,14 @@ def predict(model, chip: BsChip, min_blob: int = MIN_BLOB, tta: bool = True) -> 
             for dims in ([2], [3], [2, 3]):
                 logits = logits + torch.flip(net(torch.flip(batch, dims)).float(), dims)
             logits = logits / 4
-        pred = logits.argmax(1)[0].cpu().numpy().astype(np.uint8)
-    # Под маской облаков не обнуляем: истина размечена и под ними, см. ensemble.predict.
+        return logits.softmax(1)[0].permute(1, 2, 0).cpu().numpy()
+
+
+def predict(model, chip: BsChip, min_blob: int = MIN_BLOB, tta: bool = True) -> np.ndarray:
+    """`tta` усредняет ответ по четырём отражениям чипа: на глубокой сети +0.006.
+
+    Под маской облаков не обнуляем: истина размечена и под ними, см. ensemble.predict.
+    """
+    pred = probs(model, chip, tta).argmax(2).astype(np.uint8)
+    pred[chip.label_zero()] = 0
     return drop_small(pred, min_blob)

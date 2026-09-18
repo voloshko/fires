@@ -22,7 +22,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.comp.chips import BsDataset            # noqa: E402
 from src.comp.features import NAMES, stack      # noqa: E402
 
-SEED = 20260918
+SEED = int(os.environ.get("SEED", 20260918))   # сид прогона: сидовый ансамбль
 # Вырезка 512 — полный чип. Обучение на четверти чипа лишает сеть вида на
 # границы пятна целиком и стоит 0.057 IoU: 0.4786 против 0.5353.
 CROP = int(os.environ.get("CROP", 512))

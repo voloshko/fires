@@ -20,7 +20,8 @@ from pathlib import Path
 import numpy as np
 
 from src.comp.chips import BsChip
-from src.comp.features import NAMES, stack
+from src.comp.features import stack
+from src.comp.model import feature_names
 from src.comp.postproc import drop_small
 
 NET_WEIGHT = 0.6
@@ -39,30 +40,23 @@ def predict(net_model, boost_model, chip: BsChip,
             tta: bool = True) -> np.ndarray:
     """Маска степеней поражения по смеси вероятностей.
 
-    `net_weight=1.0` вырождается в одну сеть, `0.0` — в один бустинг; обе
-    вырожденные точки измерены и хуже смеси.
+    `net_model` — одна сеть или список сетей одной роли (сидовый ансамбль):
+    их вероятности усредняются до смешивания с бустингом. `net_weight=1.0`
+    вырождается в одни сети, `0.0` — в один бустинг; обе вырожденные точки
+    измерены и хуже смеси.
     """
     if not 0.0 <= net_weight <= 1.0:
         raise ValueError(f"вес сети вне [0, 1]: {net_weight}")
 
-    import torch
+    from src.comp import unet
 
-    net, mean, std, device = net_model
-    feats = np.nan_to_num(stack(chip), posinf=0.0, neginf=0.0).astype(np.float32)
+    nets = net_model if isinstance(net_model, (list, tuple)) and not hasattr(net_model[0], "eval") else [net_model]
+    p_net = np.mean([unet.probs(m, chip, tta) for m in nets], axis=0)
 
-    with torch.no_grad():
-        x = (torch.from_numpy(feats).unsqueeze(0).to(device)
-             - torch.as_tensor(mean, device=device).view(1, -1, 1, 1)) \
-            / torch.as_tensor(std, device=device).view(1, -1, 1, 1)
-        logits = net(x).float()
-        if tta:
-            for dims in ([2], [3], [2, 3]):
-                logits = logits + torch.flip(net(torch.flip(x, dims)).float(), dims)
-            logits = logits / 4
-        p_net = logits.softmax(1)[0].permute(1, 2, 0).cpu().numpy()
-
+    names = feature_names(boost_model)
+    feats = np.nan_to_num(stack(chip, names), posinf=0.0, neginf=0.0).astype(np.float32)
     p_boost = boost_model.predict_proba(
-        feats.reshape(len(NAMES), -1).T).reshape(*chip.shape, p_net.shape[2])
+        feats.reshape(len(names), -1).T).reshape(*chip.shape, p_net.shape[2])
 
     mixed = net_weight * p_net + (1.0 - net_weight) * p_boost
     pred = mixed.argmax(2).astype(np.uint8)
@@ -74,6 +68,10 @@ def predict(net_model, boost_model, chip: BsChip,
     # Бустинг под маской слабее сети (0.7103 при смеси), поэтому там — сеть одна.
     blind = ~chip.valid()
     pred[blind] = p_net.argmax(2).astype(np.uint8)[blind]
+    # …кроме классов, под которыми сам разметчик ставил ноль (тень, плотное
+    # облако, нет данных): там истины нет по построению, а предсказанная гарь —
+    # чистый ложный положительный. 0.7178/0.6737 → 0.7337/0.6907.
+    pred[chip.label_zero()] = 0
     return drop_small(pred, min_blob)
 
 

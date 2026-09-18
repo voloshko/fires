@@ -16,7 +16,7 @@ from rasterio.errors import RasterioIOError
 from sklearn.ensemble import HistGradientBoostingClassifier
 
 from .chips import BsChip, BsDataset
-from .features import NAMES, stack
+from .features import NAMES, NAMES_BASE, stack
 from .postproc import MIN_BLOB, drop_small
 
 PIXELS_PER_CHIP = 18000
@@ -88,15 +88,23 @@ def train(x: np.ndarray, y: np.ndarray, seed: int = SEED) -> HistGradientBoostin
 def predict(model, chip: BsChip, min_blob: int = MIN_BLOB) -> np.ndarray:
     """Маска степеней поражения. `min_blob=0` отключает фильтр мелких пятен —
     он нужен при замерах, где сравнивается сырой выход модели."""
-    features = stack(chip).reshape(len(NAMES), -1).T
+    names = feature_names(model)
+    features = stack(chip, names).reshape(len(names), -1).T
     out = model.predict(features).astype(np.uint8).reshape(chip.shape)
     out[~chip.valid()] = 0
     return drop_small(out, min_blob)
 
 
+def feature_names(model) -> tuple[str, ...]:
+    """Набор признаков, на котором модель обучена. Старые pickle'ы без имён —
+    это 19 базовых признаков."""
+    return tuple(getattr(model, "feature_names_", NAMES_BASE))
+
+
 def save(model, path: str | Path) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
+    model.feature_names_ = tuple(NAMES)
     with path.open("wb") as handle:
         pickle.dump(model, handle)
     return path

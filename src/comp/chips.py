@@ -17,6 +17,11 @@ import rasterio
 
 # Классы SCL, непригодные для расчёта индексов (как в src/masks.py).
 SCL_INVALID = (0, 1, 3, 8, 9, 10, 11)
+# Классы SCL, под которыми РАЗМЕТКА гари всегда ноль: нет данных (0), дефект (1),
+# тень облака (3), плотное облако (9), снег (11). На 35 настроечных чипах под
+# тенью 229 тыс. пикселей и ни одного пикселя истинной гари; под cirrus (10) и
+# средним облаком (8) гарь размечена — там предсказывать нужно.
+SCL_LABEL_ZERO = (0, 1, 3, 9, 11)
 
 
 def read_meta(root: Path, kind: str) -> pd.DataFrame:
@@ -38,8 +43,9 @@ class BsChip:
     pre: np.ndarray       # (10, H, W): B2 B3 B4 B5 B6 B7 B8A B11 B12 SCL
     post: np.ndarray      # (10, H, W) либо пусто, если сцены post нет
     aux: np.ndarray       # (3, H, W): dem slope landcover
-    sar: np.ndarray       # (2, H, W): VV VH
+    sar: np.ndarray       # (2, H, W): VV VH, сцена до
     mask: np.ndarray | None   # (H, W) severity 0..3, None в тесте
+    sar_post: np.ndarray | None = None   # (2, H, W): VV VH после; радар видит сквозь облака
 
     @property
     def shape(self) -> tuple[int, int]:
@@ -51,6 +57,13 @@ class BsChip:
         if self.post.size:
             ok &= ~np.isin(self.post[9], SCL_INVALID)
         return ok
+
+    def label_zero(self) -> np.ndarray:
+        """Пиксели, где разметчик ставил ноль независимо от того, что горело."""
+        zero = np.isin(self.pre[9], SCL_LABEL_ZERO)
+        if self.post.size:
+            zero |= np.isin(self.post[9], SCL_LABEL_ZERO)
+        return zero
 
     def nbr(self, stack: np.ndarray) -> np.ndarray:
         """NBR = (B8A - B12) / (B8A + B12). Полосы 20 м, как в SPEC-7."""
@@ -92,18 +105,20 @@ class BsDataset:
         post = _read(post_path) if post_path.exists() else np.empty((0, 0, 0), np.uint16)
         aux = _read(self.root / "aux" / f"{chip_id}_AUX.tif")
         sar = _read(self.root / "sentinel1_pre" / f"{chip_id}_Sentinel-1_pre.tif")
+        sar_post_path = self.root / "sentinel1_post" / f"{chip_id}_Sentinel-1_post.tif"
+        sar_post = _read(sar_post_path) if sar_post_path.exists() else None
         mask_path = self.root / "masks" / f"{chip_id}_MASK.tif"
         mask = _read(mask_path)[0] if mask_path.exists() else None
 
         shape = pre.shape[1:]
-        for name, layer in (("aux", aux), ("sar", sar)):
-            if layer.shape[1:] != shape:
+        for name, layer in (("aux", aux), ("sar", sar), ("sar_post", sar_post)):
+            if layer is not None and layer.shape[1:] != shape:
                 raise ValueError(f"{chip_id}: слой {name} не совмещён с pre {shape}")
         if post.size and post.shape[1:] != shape:
             raise ValueError(f"{chip_id}: post не совмещён с pre {shape}")
         if mask is not None and mask.shape != shape:
             raise ValueError(f"{chip_id}: маска не совмещена с pre {shape}")
-        return BsChip(chip_id, pre, post, aux, sar, mask)
+        return BsChip(chip_id, pre, post, aux, sar, mask, sar_post)
 
 
 def split_by_fire(meta: pd.DataFrame, holdout: float = 0.2, seed: int = 20260918) -> dict:

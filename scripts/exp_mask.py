@@ -16,7 +16,7 @@ from src.comp.model import train, sample_chip, SEED
 from src.comp.unet import load as load_net
 
 NET = sys.argv[1] if len(sys.argv) > 1 else 'models/exp_d7w32.pt'
-CACHE = 'models/tune_proba.npz'
+CACHE = f'models/tune_proba_{len(NAMES)}.npz'
 d = BsDataset('data/comp/train/bs'); s = json.load(open('data/comp/split_bs.json'))
 ids = [c for c in s['train'] if d.has_post(c)]
 rank = sorted(ids, key=lambda c: hashlib.sha256(f'tune:{c}'.encode()).hexdigest())
