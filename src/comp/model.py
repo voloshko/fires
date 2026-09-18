@@ -17,8 +17,9 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 
 from .chips import BsChip, BsDataset
 from .features import NAMES, stack
+from .postproc import MIN_BLOB, drop_small
 
-PIXELS_PER_CHIP = 6000
+PIXELS_PER_CHIP = 18000
 SEED = 20260918
 
 
@@ -27,8 +28,12 @@ def sample_chip(chip: BsChip, rng: np.random.Generator, n: int = PIXELS_PER_CHIP
     features = stack(chip)
     valid = chip.valid()
     labels = chip.mask
-    # Равные доли: перевес фона (50/17/17/17) проверен на отложенной части и
-    # оказался хуже по обеим метрикам (IoU_burn 0.3885, mIoU 0.3754).
+    # Равные доли. Перевес фона проверялся трижды и проигрывал каждый раз:
+    # 40/20/20/20 → 0.5159/0.4683, 55/15/15/15 → 0.5124/0.4584,
+    # 70/10/10/10 (как в данных) → 0.4706/0.4228 против 0.5164/0.4733.
+    # Объём тоже насыщается: 36000 → 0.4974, 72000 → 0.5036, 150000 → 0.5142.
+    # Причина одна и та же — при квоте выше наличия редких классов растёт
+    # только доля фона.
     quota = {cls: n // 4 for cls in (0, 1, 2, 3)}
     picked = []
     for cls in (0, 1, 2, 3):
@@ -80,11 +85,13 @@ def train(x: np.ndarray, y: np.ndarray, seed: int = SEED) -> HistGradientBoostin
     return model
 
 
-def predict(model, chip: BsChip) -> np.ndarray:
+def predict(model, chip: BsChip, min_blob: int = MIN_BLOB) -> np.ndarray:
+    """Маска степеней поражения. `min_blob=0` отключает фильтр мелких пятен —
+    он нужен при замерах, где сравнивается сырой выход модели."""
     features = stack(chip).reshape(len(NAMES), -1).T
     out = model.predict(features).astype(np.uint8).reshape(chip.shape)
     out[~chip.valid()] = 0
-    return out
+    return drop_small(out, min_blob)
 
 
 def save(model, path: str | Path) -> Path:

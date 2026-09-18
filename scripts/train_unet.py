@@ -37,6 +37,7 @@ def _arg(pos, default, cast=int):
 EPOCHS = _arg(1, 60)
 WIDTH = _arg(2, 48)
 TAG = _arg(3, "a", str)
+USE_ALL = TAG.startswith("final")
 BATCH = 8
 DEV = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -66,8 +67,17 @@ class UNet(nn.Module):
         return self.head(x)
 
 
-def load_split(root: str, split_path: str):
+def load_split(root: str, split_path: str, use_all: bool = False):
+    """use_all: обучение на ВСЕХ чипах — режим финальной модели.
+
+    Настроечная часть тогда входит в обучение, и замер на ней перестаёт что-либо
+    означать: лучшая эпоха не выбирается, берётся последняя. Так и должно быть —
+    конфигурация выбрана заранее, а 25 % данных простаивать не должны.
+    """
     d = BsDataset(root)
+    if use_all:
+        every = sorted(c for c in d.chip_ids() if d.has_post(c))
+        return d, every, []
     split = json.load(open(split_path))
     ids = [c for c in split["train"] if d.has_post(c)]
     rank = sorted(ids, key=lambda c: hashlib.sha256(f"tune:{c}".encode()).hexdigest())
@@ -109,7 +119,7 @@ def iou_scores(truth: np.ndarray, pred: np.ndarray):
 
 def main():
     torch.manual_seed(SEED); np.random.seed(SEED)
-    d, fit, tune = load_split("data/comp/train/bs", "data/comp/split_bs.json")
+    d, fit, tune = load_split("data/comp/train/bs", "data/comp/split_bs.json", USE_ALL)
     print(f"эпох {EPOCHS}, ширина {WIDTH}, метка {TAG}"); print(f"устройство {DEV}, обучение {len(fit)} чипов, настроечная часть {len(tune)}", flush=True)
     t0 = time.time()
     xtr, ytr, _ = cache(d, fit)
@@ -157,6 +167,14 @@ def main():
             total += float(loss)
 
         if epoch % 5 and epoch != EPOCHS:
+            continue
+        if not tune:                     # финальный режим: сверять не с чем
+            print(f"эпоха {epoch:3d}  loss {total/max(1,len(order)//BATCH):.4f}", flush=True)
+            if epoch == EPOCHS:
+                torch.save({"state": net.state_dict(), "mean": mean, "std": std,
+                            "names": NAMES, "epochs": EPOCHS, "chips": len(fit)},
+                           f"models/bs_unet_{TAG}.pt")
+                print(f"сохранена последняя эпоха: {len(fit)} чипов, выбор эпохи не производился")
             continue
         net.eval(); tt, pp = [], []
         with torch.no_grad(), torch.amp.autocast(DEV):

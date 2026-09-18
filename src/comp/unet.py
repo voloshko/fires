@@ -14,6 +14,7 @@ import numpy as np
 
 from src.comp.chips import BsChip
 from src.comp.features import NAMES, stack
+from src.comp.postproc import MIN_BLOB, drop_small
 
 
 def available() -> bool:
@@ -44,7 +45,7 @@ def load(path: str | Path):
     return net, bundle["mean"], bundle["std"], device
 
 
-def predict(model, chip: BsChip) -> np.ndarray:
+def predict(model, chip: BsChip, min_blob: int = MIN_BLOB) -> np.ndarray:
     import torch
 
     net, mean, std, device = model
@@ -54,4 +55,4 @@ def predict(model, chip: BsChip) -> np.ndarray:
         out = net(torch.from_numpy(x).unsqueeze(0).to(device))
         pred = out.argmax(1)[0].cpu().numpy().astype(np.uint8)
     pred[~chip.valid()] = 0
-    return pred
+    return drop_small(pred, min_blob)
