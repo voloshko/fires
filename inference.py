@@ -21,6 +21,7 @@ from src.comp.baseline import predict as predict_threshold
 from src.comp.chips import BsDataset
 from src.comp.model import load as load_model
 from src.comp.model import predict as predict_model
+from src.comp.ensemble import NET_WEIGHT as ENSEMBLE_WEIGHT
 from src.comp.submission import BS_CLASSES, rows_for_chip, write
 
 
@@ -30,6 +31,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--model", default="models/bs_hgb.pkl")
     parser.add_argument("--unet", default="models/bs_unet.pt",
                         help="сеть по гари; при её отсутствии работает бустинг")
+    parser.add_argument("--net-weight", type=float, default=ENSEMBLE_WEIGHT,
+                        help="доля сети в ансамбле; 1.0 — только сеть, 0.0 — только бустинг")
     parser.add_argument("--out", default="submission.csv")
     parser.add_argument("--template", help="sample_submission.csv для проверки состава")
     args = parser.parse_args(argv)
@@ -43,26 +46,30 @@ def main(argv: list[str] | None = None) -> int:
         # Приоритет: сеть, затем бустинг, затем порог. О каждом понижении
         # сообщаем в stderr — молча сработавший запасной вариант выглядит как
         # успешный прогон и портит выводы о качестве.
-        from src.comp import unet
+        from src.comp import ensemble, unet
 
         net = None
         if Path(args.unet).exists() and unet.available():
             net = unet.load(args.unet)
-            print(f"гарь: сеть {args.unet}")
         elif Path(args.unet).exists():
             print("сеть есть, но torch недоступен — беру бустинг", file=sys.stderr)
 
-        model = None
-        if net is None:
-            model = load_model(args.model) if Path(args.model).exists() else None
-            if model is None:
-                print("ни сети, ни модели — падаю на пороговый baseline", file=sys.stderr)
-            else:
-                print(f"гарь: бустинг {args.model}")
+        model = load_model(args.model) if Path(args.model).exists() else None
+
+        if net is not None and model is not None:
+            print(f"гарь: ансамбль {args.unet} и {args.model}, вес сети {args.net_weight}")
+        elif net is not None:
+            print(f"гарь: только сеть {args.unet} — бустинга на диске нет", file=sys.stderr)
+        elif model is not None:
+            print(f"гарь: только бустинг {args.model} — сети на диске нет", file=sys.stderr)
+        else:
+            print("ни сети, ни модели — падаю на пороговый baseline", file=sys.stderr)
 
         for chip_id in dataset.chip_ids():
             chip = dataset.load(chip_id)
-            if net is not None:
+            if net is not None and model is not None:
+                mask = ensemble.predict(net, model, chip, args.net_weight)
+            elif net is not None:
                 mask = unet.predict(net, chip)
             elif model is not None:
                 mask = predict_model(model, chip)
