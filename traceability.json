@@ -139,7 +139,7 @@
       "file": "specs/SPEC-10-firms-archive.md",
       "requirement": "REQ-006",
       "depends_on": [],
-      "status": "planned"
+      "status": "partial"
     },
     "SPEC-11": {
       "title": "Контрольные продукты гарей MCD64A1 и Fire_CCI как слабые метки",

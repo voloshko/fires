@@ -25,7 +25,7 @@ Spec-driven development index. Одна спека = один связный к�
 | SPEC-7 | Подбор пары сцен Sentinel-2 и расчёт dNBR/RBR | REQ-002 | SPEC-6 | implemented |
 | SPEC-8 | REST API и веб-карта | REQ-003 | SPEC-6, SPEC-7 | implemented |
 | SPEC-9 | Фенологическое согласование пары сцен и валидация площади гари | REQ-002 | SPEC-7 | implemented |
-| SPEC-10 | Многолетний архив детекций FIRMS по региону | REQ-006 | — | planned |
+| SPEC-10 | Многолетний архив детекций FIRMS по региону | REQ-006 | — | partial |
 | SPEC-11 | Контрольные продукты гарей MCD64A1 и Fire_CCI как слабые метки | REQ-006 | SPEC-10 | planned |
 | SPEC-12 | Обучающая выборка пар сцен с замороженным разбиением | REQ-006 | SPEC-10, SPEC-11 | planned |
 | SPEC-13 | Дообучение сегментации гарей и сравнение с baseline | REQ-006 | SPEC-12 | planned |

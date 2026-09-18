@@ -93,6 +93,17 @@ class Detection:
     sensor: str
     satellite: str
     daynight: str
+    # Версия продукта из CSV: "2.0NRT" у оперативных, "2.0" у Standard Processing.
+    # Продукты различаются геопривязкой, и смешивать их без пометки нельзя (SPEC-10).
+    version: str = ""
+    # Колонка `type` архивных выгрузок: 0 — растительность, 1 — вулкан,
+    # 2 — стационарный наземный источник, 3 — офшор. В NRT-потоке отсутствует.
+    fire_type: int | None = None
+
+    @property
+    def is_archive(self) -> bool:
+        """Standard Processing против NRT. Пустая версия — неизвестно, считаем NRT."""
+        return bool(self.version) and "NRT" not in self.version.upper()
 
 
 @dataclass
@@ -199,8 +210,19 @@ def parse_csv(text: str, sensor: str) -> list[Detection]:
             sensor=sensor,
             satellite=(row.get("satellite") or "").strip(),
             daynight=(row.get("daynight") or "").strip(),
+            version=(row.get("version") or "").strip(),
+            fire_type=_to_int(row.get("type")),
         ))
     return detections
+
+
+def _to_int(value: str | None) -> int | None:
+    if value is None or value.strip() == "":
+        return None
+    try:
+        return int(value)
+    except ValueError:
+        return None
 
 
 def _parse_acq(acq_date: str | None, acq_time: str | None) -> datetime:

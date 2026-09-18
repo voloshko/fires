@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-10",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {
+        "path": "src/archive.py",
+        "sha256": "2374677746792936b00d1e76c166dcb6e0d0c5475dd4a2f7b8141902deb6d95c"
+      },
+      {
+        "path": "tests/test_firms_archive.py",
+        "sha256": "64e78191ae3b7779bfa1e7f3b5808d10b807b47e7a4ee7ded87dbd6a82a6b411"
+      },
+      {
+        "path": "src/firms.py",
+        "sha256": "4126ad20ee2103e62f2835d16d24568f5d17788e255507a525518c86647d6243"
+      },
+      {
+        "path": "src/store.py",
+        "sha256": "64f13922cb5d4a56ee7db7cf9882f66fa7af776f9fc1b7bdf70778f0d6862998"
+      },
+      {
+        "path": "src/cache.py",
+        "sha256": "6c028142b46636c48cf056dfe23bea39425b2105bc7e9c2dd7b00b624ecd7dfc"
+      },
+      {
+        "path": "docs/archive.md",
+        "sha256": "c3b57d26738704bee320507230bb676ce2d0c46f614deb5bc9c00b4cbd092f71"
+      }
+    ]
+  },
+  "run_id": "SPEC-10-OFFLINE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T15:05:04Z",
+  "evidence_class": "REPLAY",
+  "status": "PASS",
+  "conclusion": "ARCHIVE_LOADER_AND_RETENTION_PROBE_VERIFIED_OFFLINE",
+  "commands": [
+    "python3 -m pytest tests/test_firms_archive.py -q",
+    "make gate"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "pytest",
+    "httpx 0.28.1 (MockTransport)"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac01_viirs_export_parses_into_detections",
+        "test_ac01_modis_export_parses_with_its_own_brightness_column",
+        "test_ac01_confidence_scales_still_differ_between_sensors",
+        "test_ac01_zip_bundle_is_unpacked_and_sensors_inferred_per_member",
+        "test_ac01_sensor_is_inferred_from_the_export_name[SV-C2|J1V-C2|J2V-C2|M-C61]",
+        "test_ac01_unknown_export_name_is_refused_not_guessed",
+        "test_ac01_a_file_that_is_not_a_firms_export_is_refused"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac02_reloading_the_same_export_adds_nothing",
+        "test_ac02_archive_and_operational_do_not_duplicate_the_same_detection"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac03_archive_detections_are_marked_as_standard_processing",
+        "test_ac03_operational_detections_are_not_marked_as_archive",
+        "test_ac03_unknown_version_is_treated_as_operational_not_archive",
+        "test_ac03_store_keeps_the_version_and_type_columns",
+        "test_ac03_archive_carries_the_static_land_source_class",
+        "test_ac03_summary_separates_archive_from_operational"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac04_archive_detections_flow_through_the_stage_one_pipeline",
+        "test_ac04_persistence_runs_on_archive_and_finds_nothing_on_sparse_data",
+        "test_ac04_short_export_reports_insufficient_history"
+      ]
+    },
+    {
+      "id": "AC-05",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac05_manual_download_procedure_is_documented",
+        "docs/archive.md описывает ручной шаг с bbox 82,51,109,78 и глубиной по каждому источнику"
+      ]
+    },
+    {
+      "id": "AC-06",
+      "result": "PARTIAL",
+      "artifacts": [
+        "функция summarise() считает состав по годам, сенсорам и типам источника",
+        "test_ac06_summary_reports_counts_by_year_sensor_and_type",
+        "НО на реальной выгрузке не выполнено: скачивание требует подтверждения по почте"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "pytest_summary": "29 passed in 0.11s",
+      "project_total": "351 passed, 3 skipped"
+    }
+  ],
+  "limitations": [
+    "Фикстуры составлены по документированной схеме архива, а не получены выгрузкой.",
+    "Определение сенсора по имени файла опирается на текущее соглашение именования FIRMS."
+  ],
+  "non_claims": [
+    "НЕ доказывает, что реальная выгрузка Archive Download имеет ту же схему, что фикстуры.",
+    "Не доказывает полноту архива FIRMS.",
+    "Не доказывает, что колонка type надёжно размечает факелы — она лишь существует."
+  ]
+}

@@ -239,3 +239,45 @@ def test_detections_outside_any_event_are_kept(built):
     restored = cache.load(root, config)
     in_events = sum(len(e.detections) for e in restored.events)
     assert restored.store.count_detections() >= in_events
+
+
+def test_older_cache_version_is_readable_with_defaults(built):
+    """Колонки version и fire_type добавлены в SPEC-10. Кеш 2-й версии их не
+    знает, но содержит только оперативные данные, у которых эти поля и так
+    пусты. Отвергать его значило бы заставить пересобирать 13 минут впустую."""
+    _, root, config = built
+    meta_p = root / "snapshot.json"
+    meta = json.loads(meta_p.read_text())
+    meta["schema_version"] = 2
+    meta_p.write_text(json.dumps(meta, ensure_ascii=False))
+    restored = cache.load(root, config)
+    assert restored.events
+    assert all(not d.is_archive for e in restored.events for d in e.detections)
+
+
+def test_unreadable_cache_version_is_still_refused(built):
+    _, root, config = built
+    meta_p = root / "snapshot.json"
+    meta = json.loads(meta_p.read_text())
+    meta["schema_version"] = 1
+    meta_p.write_text(json.dumps(meta, ensure_ascii=False))
+    with pytest.raises(CacheError, match="читаемы"):
+        cache.load(root, config)
+
+
+def test_archive_markers_survive_the_round_trip(tmp_path, config):
+    """SPEC-10: пометка Standard Processing и класс источника обязаны пережить кеш."""
+    from src.archive import load_export
+    from src.api import Snapshot
+    from src.events import build_events, EventConfig
+    dets = load_export(ROOT / "tests" / "fixtures" / "fire_archive_SV-C2_krasnoyarsk.csv")
+    store = Store(":memory:"); store.add_detections(dets)
+    snap = Snapshot(region_name="Тест", bbox=(82.0, 51.0, 109.0, 78.0),
+                    events=build_events(dets, EventConfig()), flares=[], burns={},
+                    store=store, sources=["VIIRS_SNPP_NRT"])
+    root = tmp_path / "arch"
+    cache.save(snap, root, config)
+    restored = cache.load(root, config)
+    all_dets = [d for e in restored.events for d in e.detections]
+    assert all(d.is_archive for d in all_dets)
+    assert 2 in {d.fire_type for d in all_dets}

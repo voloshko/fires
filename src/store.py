@@ -124,7 +124,20 @@ class Store:
         self.conn = sqlite3.connect(self.path, check_same_thread=False)
         self.conn.row_factory = sqlite3.Row
         self.conn.executescript(SCHEMA)
+        self._migrate()
         self.conn.commit()
+
+    def _migrate(self) -> None:
+        """Добавить колонки, появившиеся позже схемы базы.
+
+        CREATE TABLE IF NOT EXISTS не трогает существующую таблицу, поэтому
+        база, созданная до SPEC-10, осталась бы без version и fire_type.
+        Триггеры append-only запрещают UPDATE и DELETE, но не ALTER.
+        """
+        have = {r[1] for r in self.conn.execute("PRAGMA table_info(detections)")}
+        for column, decl in (("version", "TEXT"), ("fire_type", "INTEGER")):
+            if column not in have:
+                self.conn.execute(f"ALTER TABLE detections ADD COLUMN {column} {decl}")
 
     def close(self) -> None:
         self.conn.close()
@@ -145,14 +158,16 @@ class Store:
         """
         now = _iso(datetime.now(timezone.utc))
         rows = [(d.sensor, d.latitude, d.longitude, _iso(d.acquired_at),
-                 d.brightness, d.frp, d.confidence, d.satellite, d.daynight, now)
+                 d.brightness, d.frp, d.confidence, d.satellite, d.daynight,
+                 d.version, d.fire_type, now)
                 for d in detections]
         before = self.count_detections()
         with self.conn:
             self.conn.executemany(
                 "INSERT OR IGNORE INTO detections (sensor, latitude, longitude,"
                 " acquired_at, brightness, frp, confidence, satellite, daynight,"
-                " ingested_at) VALUES (?,?,?,?,?,?,?,?,?,?)", rows)
+                " version, fire_type, ingested_at)"
+                " VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", rows)
         return self.count_detections() - before
 
     def record_observation(self, source: str, window_start: datetime,

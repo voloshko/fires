@@ -27,11 +27,17 @@ from pathlib import Path
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
+# Версии, которые умеем читать. Колонки version и fire_type добавлены в 3-й
+# (SPEC-10); во 2-й их нет, и это не ошибка — кеш второй версии содержал только
+# оперативные данные, у которых эти поля и так пусты. Отвергать его означало бы
+# заставить пересобирать 13 минут ради пустых колонок.
+READABLE_VERSIONS = frozenset({2, 3})
 COMPRESSION = "zstd"
 
 DETECTION_FIELDS = ("sensor", "latitude", "longitude", "acquired_at", "brightness",
-                    "frp", "confidence", "satellite", "daynight")
+                    "frp", "confidence", "satellite", "daynight",
+                    "version", "fire_type")
 OBSERVATION_FIELDS = ("source", "requested_at", "window_start", "window_end",
                       "status", "detection_count", "error")
 
@@ -83,6 +89,8 @@ def save(snapshot, root: str | Path, config_path: str | Path) -> dict:
         rows["confidence"].append(d.confidence)
         rows["satellite"].append(d.satellite)
         rows["daynight"].append(d.daynight)
+        rows["version"].append(d.version)
+        rows["fire_type"].append(d.fire_type)
         rows["event_id"].append(event_id)
 
     for e in snapshot.events:
@@ -149,10 +157,10 @@ def load(root: str | Path, config_path: str | Path):
     except json.JSONDecodeError as exc:
         raise CacheError(f"кеш {meta_p} повреждён: {exc}") from None
 
-    if meta.get("schema_version") != SCHEMA_VERSION:
+    if meta.get("schema_version") not in READABLE_VERSIONS:
         raise CacheError(
             f"кеш {meta_p} записан схемой версии {meta.get('schema_version')}, "
-            f"ожидается {SCHEMA_VERSION}; пересоберите кеш")
+            f"читаемы {sorted(READABLE_VERSIONS)}; пересоберите кеш")
     actual = config_fingerprint(config_path)
     if meta.get("config_fingerprint") != actual:
         raise CacheError(
@@ -165,6 +173,10 @@ def load(root: str | Path, config_path: str | Path):
 
     try:
         det = pq.read_table(det_p).to_pydict()
+        # кеш 2-й версии не знает этих колонок: подставляем пустые значения
+        n = len(det["sensor"])
+        det.setdefault("version", [""] * n)
+        det.setdefault("fire_type", [None] * n)
         obs = pq.read_table(obs_p).to_pydict()
     except Exception as exc:
         raise CacheError(f"файлы кеша нечитаемы: {type(exc).__name__}: {exc}") from None
@@ -180,7 +192,8 @@ def load(root: str | Path, config_path: str | Path):
             brightness=det["brightness"][i], frp=det["frp"][i],
             confidence=det["confidence"][i], acquired_at=when,
             sensor=det["sensor"][i], satellite=det["satellite"][i],
-            daynight=det["daynight"][i])
+            daynight=det["daynight"][i], version=det["version"][i] or "",
+            fire_type=det["fire_type"][i])
         detections.append(d)
         if det["event_id"][i]:
             grouped.setdefault(det["event_id"][i], []).append(d)
