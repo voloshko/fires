@@ -1,4 +1,4 @@
-import sys, json, time, numpy as np; sys.path.insert(0,'/Users/mc/projects/fires')
+import sys, json, time, numpy as np; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 from src.comp.af import (AfDataset, build_training_set, train, predict_model,
                          predict_threshold, score_chips, save, f1, features, NAMES)
 t0=time.time()

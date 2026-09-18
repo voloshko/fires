@@ -4,7 +4,7 @@
 настроечной части, оценка больше не нужна, а 25 % данных простаивать не должны.
 Числа для receipt'а берутся из прежнего замера, сделанного до этого шага.
 """
-import sys, time, numpy as np; sys.path.insert(0,'/Users/mc/projects/fires')
+import sys, time, numpy as np; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 from src.comp.chips import BsDataset
 from src.comp.model import build_training_set, train, save
 import rasterio.errors

@@ -7,7 +7,7 @@
 Обучение на 144 чипах, замер на 35 настроечных. Сеть берётся из перебора —
 она обучена на тех же 144.
 """
-import sys, json, hashlib, time, numpy as np; sys.path.insert(0,'/home/mc/fires')
+import sys, json, hashlib, time, numpy as np; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 import torch
 from src.comp.chips import BsDataset
 from src.comp.features import NAMES, stack

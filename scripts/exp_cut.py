@@ -4,7 +4,7 @@
 видела. Прогон на финальной модели, обученной на всех 224, дал бы 0.65 вместо
 0.47 — это внутривыборочное число, и принимать по нему решения нельзя.
 """
-import sys, json, hashlib, time, numpy as np; sys.path.insert(0,'/Users/mc/projects/fires')
+import sys, json, hashlib, time, numpy as np; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 from src.comp.chips import BsDataset
 from src.comp.features import NAMES, stack
 from src.comp.metric import score_bs

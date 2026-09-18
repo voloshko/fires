@@ -1,4 +1,4 @@
-import sys, json, time; sys.path.insert(0,'/Users/mc/projects/fires')
+import sys, json, time; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 import numpy as np
 from src.comp.chips import BsDataset
 from src.comp.model import build_training_set, train, predict, save

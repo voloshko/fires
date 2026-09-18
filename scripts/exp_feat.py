@@ -6,7 +6,7 @@
 усиливающие именно малый сдвиг: RdNBR из литературы (Miller & Thode), окно
 шире прежнего и разброс отражения в коротковолновом канале.
 """
-import sys, json, hashlib, time, numpy as np; sys.path.insert(0,'/Users/mc/projects/fires')
+import sys, json, hashlib, time, numpy as np; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 from scipy.ndimage import uniform_filter
 from sklearn.ensemble import HistGradientBoostingClassifier
 from src.comp.chips import BsDataset

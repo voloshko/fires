@@ -8,7 +8,7 @@
 нормированная на сумму весов. Обучение на 144 чипах, замер на 35 настроечных;
 отложенные 45 не участвуют.
 """
-import sys, json, hashlib, time, numpy as np; sys.path.insert(0,'/home/mc/fires')
+import sys, json, hashlib, time, numpy as np; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 import optuna
 from sklearn.ensemble import HistGradientBoostingClassifier
 from src.comp.chips import BsDataset

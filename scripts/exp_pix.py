@@ -4,7 +4,7 @@
 полку. Обучение на 144 чипах, замер на 35 настроечных, всегда с фильтром
 мелких пятен: без него сравнение неинформативно.
 """
-import sys, json, hashlib, time, numpy as np; sys.path.insert(0,'/home/mc/fires')
+import sys, json, hashlib, time, numpy as np; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 from scipy.ndimage import label
 from src.comp.chips import BsDataset
 from src.comp.metric import score_bs

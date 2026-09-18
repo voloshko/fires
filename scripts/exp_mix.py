@@ -4,7 +4,7 @@
 проигрывал. Теперь, когда установлено, что потеря IoU идёт именно от ложной
 гари на фоне, проверка повторяется на 18000 пикселей и с фильтром.
 """
-import sys, json, hashlib, time, numpy as np; sys.path.insert(0,'/Users/mc/projects/fires')
+import sys, json, hashlib, time, numpy as np; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 from scipy.ndimage import label
 from src.comp.chips import BsDataset
 from src.comp.features import NAMES, stack

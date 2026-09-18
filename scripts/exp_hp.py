@@ -1,5 +1,5 @@
 """Гиперпараметры бустинга (SPEC-19). Обучение на 144, замер на 35."""
-import sys, json, hashlib, time, numpy as np; sys.path.insert(0,'/Users/mc/projects/fires')
+import sys, json, hashlib, time, numpy as np; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 from sklearn.ensemble import HistGradientBoostingClassifier
 from src.comp.chips import BsDataset
 from src.comp.features import NAMES

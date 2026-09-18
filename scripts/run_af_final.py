@@ -5,7 +5,7 @@
 самоподтверждающимся. Отложенная часть больше не нужна: выбор сделан,
 а 40 % данных простаивать не должны.
 """
-import sys, json, time; sys.path.insert(0,'/Users/mc/projects/fires')
+import sys, json, time; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 from src.comp.af import AfDataset, build_training_set, train, save
 
 d = AfDataset('data/comp/train/af')

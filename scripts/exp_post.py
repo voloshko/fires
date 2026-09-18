@@ -4,7 +4,7 @@
 что-нибудь залатывание дыр внутри гари, и стоит ли брать с чипа больше
 пикселей. Обучение на 144 чипах, замер на 35 настроечных.
 """
-import sys, json, hashlib, time, numpy as np; sys.path.insert(0,'/Users/mc/projects/fires')
+import sys, json, hashlib, time, numpy as np; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 from scipy.ndimage import label, binary_fill_holes, binary_closing
 from src.comp.chips import BsDataset
 from src.comp.metric import score_bs

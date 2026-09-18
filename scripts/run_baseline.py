@@ -1,4 +1,4 @@
-import sys, json; sys.path.insert(0,'/Users/mc/projects/fires')
+import sys, json; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 import numpy as np
 from src.comp.chips import BsDataset, split_by_fire, write_split
 from src.comp.baseline import predict

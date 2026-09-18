@@ -7,7 +7,7 @@
 Веса перебираются по сетке с шагом 0.2 — искать точнее бессмысленно, плато
 предыдущего ансамбля было шире этого шага.
 """
-import sys, json, hashlib, time, itertools, numpy as np; sys.path.insert(0,'/home/mc/fires')
+import sys, json, hashlib, time, itertools, numpy as np; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent.parent))
 import torch
 from src.comp.chips import BsDataset
 from src.comp.features import NAMES, stack
