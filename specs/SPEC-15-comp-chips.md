@@ -1,6 +1,6 @@
 # SPEC-15: Чипы соревнования — загрузка, разбор и метаданные
 
-Status: planned
+Status: partial
 
 Requirement: REQ-007
 

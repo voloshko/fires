@@ -1,6 +1,6 @@
 # SPEC-20: Единая команда инференса и воспроизводимость
 
-Status: planned
+Status: partial
 
 Requirement: REQ-007
 

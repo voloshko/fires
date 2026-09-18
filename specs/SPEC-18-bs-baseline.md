@@ -1,6 +1,6 @@
 # SPEC-18: Пороговый baseline гарей и степени поражения
 
-Status: planned
+Status: implemented
 
 Requirement: REQ-007
 

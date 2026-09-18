@@ -1,6 +1,6 @@
 # SPEC-19: Обучение сегментационной модели и сравнение с baseline
 
-Status: planned
+Status: implemented
 
 Requirement: REQ-007
 

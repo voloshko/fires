@@ -1,6 +1,6 @@
 # SPEC-16: Кодирование RLE и валидация submission.csv
 
-Status: planned
+Status: implemented
 
 Requirement: REQ-007
 
