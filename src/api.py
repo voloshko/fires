@@ -23,6 +23,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+import pathlib
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query
@@ -373,13 +374,37 @@ def main(argv=None) -> int:
     ap.add_argument("--burns", type=int, default=0,
                     help="для скольких крупнейших событий считать гарь")
     ap.add_argument("--port", type=int, default=8000)
+    ap.add_argument("--cache", help="каталог кеша снимка (SPEC-14)")
+    ap.add_argument("--rebuild", action="store_true",
+                    help="пересобрать кеш, даже если он есть")
     args = ap.parse_args(argv)
 
-    if not os.environ.get("FIRMS_MAP_KEY"):
-        print("FIRMS_MAP_KEY is not set in the environment", file=sys.stderr)
-        return 2
-    print(f"сборка данных за {args.days} суток…")
-    snap = build_snapshot(args.config, args.days, args.burns)
+    from time import perf_counter
+    from src import cache
+
+    snap = None
+    root = pathlib.Path(args.cache) if args.cache else None
+    if root and not args.rebuild and (root / "snapshot.json").exists():
+        t0 = perf_counter()
+        snap = cache.load(root, args.config)
+        print(f"снимок загружен из кеша за {perf_counter() - t0:.1f} с "
+              f"(собран {snap.generated_at:%Y-%m-%d %H:%M} UTC, сеть не использовалась)")
+
+    if snap is None:
+        if not os.environ.get("FIRMS_MAP_KEY"):
+            print("FIRMS_MAP_KEY is not set in the environment", file=sys.stderr)
+            return 2
+        print(f"сборка данных за {args.days} суток…")
+        t0 = perf_counter()
+        snap = build_snapshot(args.config, args.days, args.burns)
+        print(f"собрано за {perf_counter() - t0:.0f} с")
+        if root:
+            stats = cache.save(snap, root, args.config)
+            print(f"кеш записан в {root}: детекций {stats['detections']}, "
+                  f"{stats['total_bytes']/1e6:.1f} МБ всего "
+                  f"(parquet {stats['detections_bytes']/1e6:.1f} + "
+                  f"{stats['observations_bytes']/1e3:.0f} КБ, "
+                  f"метаданные {stats['snapshot_bytes']/1e6:.2f} МБ)")
     print(f"событий {len(snap.events)}, теплоисточников {len(snap.flares)}, "
           f"расчётов гари {len(snap.burns)}")
     print(f"карта: http://127.0.0.1:{args.port}/")

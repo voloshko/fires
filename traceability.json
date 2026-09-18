@@ -36,7 +36,9 @@
     "REQ-005": {
       "title": "Эксплуатационная устойчивость и ограничения внешних источников",
       "file": "requirements/REQ-005.md",
-      "specs": []
+      "specs": [
+        "SPEC-14"
+      ]
     },
     "REQ-006": {
       "title": "Обучение на исторических данных и сопоставление с baseline",
@@ -166,6 +168,17 @@
         "SPEC-12"
       ],
       "status": "planned"
+    },
+    "SPEC-14": {
+      "title": "Локальный кеш снимка данных для быстрого старта",
+      "file": "specs/SPEC-14-snapshot-cache.md",
+      "requirement": "REQ-005",
+      "depends_on": [
+        "SPEC-2",
+        "SPEC-6",
+        "SPEC-8"
+      ],
+      "status": "implemented"
     }
   }
 }

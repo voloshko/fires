@@ -3,7 +3,7 @@
 Spec-driven development index. Одна спека = один связный кусок работы с
 проверяемыми критериями приёмки. Код не пишется раньше своей спеки.
 
-**Next available number:** SPEC-14
+**Next available number:** SPEC-15
 
 > **Authority note:** статусы в этой таблице — «на глаз» и могут отставать.
 > Источник истины — `traceability.json`; запрашивать через
@@ -29,6 +29,7 @@ Spec-driven development index. Одна спека = один связный к�
 | SPEC-11 | Контрольные продукты гарей MCD64A1 и Fire_CCI как слабые метки | REQ-006 | SPEC-10 | planned |
 | SPEC-12 | Обучающая выборка пар сцен с замороженным разбиением | REQ-006 | SPEC-10, SPEC-11 | planned |
 | SPEC-13 | Дообучение сегментации гарей и сравнение с baseline | REQ-006 | SPEC-12 | planned |
+| SPEC-14 | Локальный кеш снимка данных для быстрого старта | REQ-005 | SPEC-2, SPEC-6, SPEC-8 | implemented |
 
 ## Пилляры
 
