@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import numpy as np
+from scipy.ndimage import uniform_filter
 
 from .chips import BsChip
 
@@ -14,6 +15,7 @@ NAMES = (
     "dnbr", "rbr", "nbr_pre", "nbr_post",
     "ndvi_pre", "ndvi_post", "dndvi",
     "nbr2_post", "b12_post", "b8a_post",
+    "dnbr_win5", "dnbr_win15", "dnbr_std5", "dnbr_chip",
     "landcover", "slope", "dem", "vv", "vh",
 )
 
@@ -38,6 +40,14 @@ def stack(chip: BsChip) -> np.ndarray:
         ndvi_pre, ndvi_post, ndvi_pre - ndvi_post,
         _ratio(post[7], post[8]),          # NBR2: гарь в SWIR
         post[8] / 10000.0, post[6] / 10000.0,
+        # Контекст: гарь — связное пятно, а не россыпь пикселей. На AF-чипах
+        # ровно эта поправка на окно подняла F1 с 0.027 до 0.595.
+        uniform_filter(dnbr, 5, mode="nearest"),
+        uniform_filter(dnbr, 15, mode="nearest"),
+        np.sqrt(np.maximum(uniform_filter(dnbr * dnbr, 5, mode="nearest")
+                           - uniform_filter(dnbr, 5, mode="nearest") ** 2, 0.0)),
+        # Сдвиг всей сцены: у разных пар до/после свой уровень dNBR.
+        np.full_like(dnbr, float(np.median(dnbr[chip.valid()])) if chip.valid().any() else 0.0),
         chip.aux[2].astype(np.float32),    # landcover
         chip.aux[1].astype(np.float32),    # slope
         chip.aux[0].astype(np.float32) / 1000.0,

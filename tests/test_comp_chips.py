@@ -72,3 +72,35 @@ def test_split_requires_fire_ids():
     meta = _meta(n_fires=1, chips_per_fire=1)
     split = split_by_fire(meta)
     assert len(split["val"]) == 1
+
+
+def test_meta_берётся_уровнем_выше_и_фильтруется_по_виду(tmp_path):
+    """В тесте `meta.csv` один на оба модуля и лежит уровнем выше.
+
+    Без отбора по `kind` загрузчик BS увидел бы AF-чипы и потребовал файлы,
+    которых нет, — а обнаружилось бы это только на сборке ответа.
+    """
+    import pandas as pd
+
+    from src.comp.chips import read_meta
+
+    root = tmp_path / "test"
+    (root / "bs").mkdir(parents=True)
+    (root / "af").mkdir()
+    pd.DataFrame({"chip_id": ["BS_te_000001", "AF_te_000001", "AF_te_000002"],
+                  "kind": ["bs", "af", "af"]}).to_csv(root / "meta.csv", index=False)
+
+    assert list(read_meta(root / "bs", "bs").chip_id) == ["BS_te_000001"]
+    assert list(read_meta(root / "af", "af").chip_id) == ["AF_te_000001", "AF_te_000002"]
+
+    # Собственный meta.csv модуля имеет приоритет — так устроено обучение.
+    pd.DataFrame({"chip_id": ["BS_tr_000009"]}).to_csv(root / "bs" / "meta.csv", index=False)
+    assert list(read_meta(root / "bs", "bs").chip_id) == ["BS_tr_000009"]
+
+
+def test_отсутствие_meta_поднимает_ошибку(tmp_path):
+    from src.comp.chips import read_meta
+
+    (tmp_path / "bs").mkdir()
+    with pytest.raises(FileNotFoundError):
+        read_meta(tmp_path / "bs", "bs")

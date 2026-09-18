@@ -20,6 +20,8 @@ import pandas as pd
 import rasterio
 from scipy.ndimage import uniform_filter
 
+from src.comp.chips import read_meta
+
 # ESA WorldCover: 50 — застройка, 80 — вода. Ни там, ни там природного пожара
 # быть не может, а техногенная термоаномалия — может.
 LC_BUILT_UP = 50
@@ -73,7 +75,7 @@ class AfDataset:
 
     def __init__(self, root: str | Path) -> None:
         self.root = Path(root)
-        self.meta = pd.read_csv(self.root / "meta.csv")
+        self.meta = read_meta(self.root, "af")
 
     def __len__(self) -> int:
         return len(self.meta)

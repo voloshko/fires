@@ -19,6 +19,19 @@ import rasterio
 SCL_INVALID = (0, 1, 3, 8, 9, 10, 11)
 
 
+def read_meta(root: Path, kind: str) -> pd.DataFrame:
+    """`meta.csv` лежит либо внутри каталога модуля (обучение), либо один на
+    весь тест уровнем выше. Во втором случае строки отбираются по `kind`."""
+    own = root / "meta.csv"
+    if own.exists():
+        return pd.read_csv(own)
+    shared = root.parent / "meta.csv"
+    if not shared.exists():
+        raise FileNotFoundError(f"не найден meta.csv ни в {root}, ни в {root.parent}")
+    meta = pd.read_csv(shared)
+    return meta[meta["kind"] == kind].reset_index(drop=True)
+
+
 @dataclass(frozen=True)
 class BsChip:
     chip_id: str
@@ -62,7 +75,7 @@ class BsDataset:
 
     def __init__(self, root: str | Path):
         self.root = Path(root)
-        self.meta = pd.read_csv(self.root / "meta.csv")
+        self.meta = read_meta(self.root, "bs")
 
     def __len__(self) -> int:
         return len(self.meta)

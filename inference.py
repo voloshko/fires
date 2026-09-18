@@ -28,6 +28,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="inference.py")
     parser.add_argument("--data-dir", required=True, help="каталог теста (bs/ и af/)")
     parser.add_argument("--model", default="models/bs_hgb.pkl")
+    parser.add_argument("--unet", default="models/bs_unet.pt",
+                        help="сеть по гари; при её отсутствии работает бустинг")
     parser.add_argument("--out", default="submission.csv")
     parser.add_argument("--template", help="sample_submission.csv для проверки состава")
     args = parser.parse_args(argv)
@@ -38,12 +40,34 @@ def main(argv: list[str] | None = None) -> int:
     bs_root = Path(args.data_dir) / "bs"
     if bs_root.exists():
         dataset = BsDataset(bs_root)
-        model = load_model(args.model) if Path(args.model).exists() else None
-        if model is None:
-            print("модели нет — падаю на пороговый baseline", file=sys.stderr)
+        # Приоритет: сеть, затем бустинг, затем порог. О каждом понижении
+        # сообщаем в stderr — молча сработавший запасной вариант выглядит как
+        # успешный прогон и портит выводы о качестве.
+        from src.comp import unet
+
+        net = None
+        if Path(args.unet).exists() and unet.available():
+            net = unet.load(args.unet)
+            print(f"гарь: сеть {args.unet}")
+        elif Path(args.unet).exists():
+            print("сеть есть, но torch недоступен — беру бустинг", file=sys.stderr)
+
+        model = None
+        if net is None:
+            model = load_model(args.model) if Path(args.model).exists() else None
+            if model is None:
+                print("ни сети, ни модели — падаю на пороговый baseline", file=sys.stderr)
+            else:
+                print(f"гарь: бустинг {args.model}")
+
         for chip_id in dataset.chip_ids():
             chip = dataset.load(chip_id)
-            mask = predict_model(model, chip) if model else predict_threshold(chip)
+            if net is not None:
+                mask = unet.predict(net, chip)
+            elif model is not None:
+                mask = predict_model(model, chip)
+            else:
+                mask = predict_threshold(chip)
             rows.extend(rows_for_chip(chip_id, mask, BS_CLASSES))
         print(f"BS: {len(dataset)} чипов")
 
