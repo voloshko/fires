@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-9",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {
+        "path": "src/burn.py",
+        "sha256": "69bd7517d0467dda47f41a45e2e57f076b406da00e9a9b64f125f69f34d195dc"
+      },
+      {
+        "path": "tests/test_phenology.py",
+        "sha256": "638f84b530994c3efa795157c3c97e7e2ad3e60810e966076e7995e488028fdb"
+      },
+      {
+        "path": "src/api.py",
+        "sha256": "3b72ae06a856cd928e4927c3b4ce4df53c6015aa4874ac7cb808bf4748626251"
+      },
+      {
+        "path": "scripts/validate_burn_controls.py",
+        "sha256": "b2c3a146ccd0385f1f0c758ae93579de4a4cd32748389f1738e06ce9c5542765"
+      },
+      {
+        "path": "config/krasnoyarsk.toml",
+        "sha256": "84439e9c64eaa147ad99a49064fc0e9abc7108108393c4f0e8c63c60a9aad720"
+      }
+    ]
+  },
+  "run_id": "SPEC-9-OFFLINE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T13:36:16Z",
+  "evidence_class": "REPLAY",
+  "status": "PASS",
+  "conclusion": "PHENOLOGY_CONSTRAINT_AND_ENRICHMENT_CHECK_VERIFIED_OFFLINE",
+  "commands": [
+    "python3 -m pytest tests/test_phenology.py -q",
+    "make gate"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "numpy 2.4.6",
+    "rasterio 1.4.4",
+    "pytest"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac01_june_september_pair_is_refused — пара, выбранная SPEC-7, отвергается",
+        "test_ac01_august_september_pair_is_accepted",
+        "test_ac01_compatible_pair_wins_over_a_cleaner_incompatible_one — идеально чистая июньская сцена не побеждает пыльную августовскую",
+        "test_ac01_gap_threshold_comes_from_config",
+        "test_ac01_widening_the_gap_admits_the_june_pair",
+        "test_ac01_doy_gap_is_seasonal_not_calendar[5 случаев, включая переход через Новый год и годовщину]",
+        "test_ac01_anniversary_pair_is_phenologically_compatible",
+        "test_ac01_still_refuses_scenes_from_different_tiles — ограничения SPEC-7 сохранены",
+        "test_ac01_still_refuses_scenes_clouded_over_the_aoi",
+        "test_ac01_probing_is_bounded_by_config"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac02_all_detections_inside_the_scar_give_high_enrichment — аналитически 5.0",
+        "test_ac02_detections_spread_uniformly_give_enrichment_of_one",
+        "test_ac02_detections_entirely_outside_the_scar_give_zero",
+        "test_ac02_the_spec7_failure_reproduces_as_low_enrichment",
+        "test_ac02_masked_pixels_are_excluded_from_both_sides",
+        "test_ac02_no_burned_pixels_yields_no_score",
+        "test_ac02_detections_outside_the_raster_are_not_counted",
+        "test_window_read_reports_the_raster_crs",
+        "test_enrichment_accepts_a_crs_object_not_only_a_string"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac03_only_ok_status_counts_as_validated",
+        "test_ac03_unvalidated_is_a_distinct_status",
+        "test_ac03_thresholds_for_validation_come_from_config",
+        "test_ac03_api_reports_validated_from_the_result_not_a_constant",
+        "test_ac01_validation_flag_comes_from_the_result_not_from_a_constant (tests/test_api.py)",
+        "test_map_shows_the_validation_numbers_next_to_the_hectares"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "pytest_summary": "27 passed, 3 warnings in 0.61s",
+      "project_total": "296 passed, 2 skipped"
+    }
+  ],
+  "limitations": [
+    "Обогащение проверено на синтетике, где ответ известен аналитически; реальные пожары — в SPEC-9-LIVE-001.",
+    "Порог 1.5 — инженерная оценка, а не результат калибровки."
+  ],
+  "non_claims": [
+    "НЕ доказывает, что площадь соответствует наземной истине.",
+    "Обогащение по термоточкам — косвенная проверка: термоточка отмечает место горения в момент пролёта, а не периметр гари.",
+    "Не заменяет валидацию против MCD64A1 или Fire_CCI."
+  ]
+}

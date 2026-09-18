@@ -3,7 +3,7 @@
 Spec-driven development index. Одна спека = один связный кусок работы с
 проверяемыми критериями приёмки. Код не пишется раньше своей спеки.
 
-**Next available number:** SPEC-9
+**Next available number:** SPEC-15
 
 > **Authority note:** статусы в этой таблице — «на глаз» и могут отставать.
 > Источник истины — `traceability.json`; запрашивать через
@@ -21,9 +21,15 @@ Spec-driven development index. Одна спека = один связный к�
 | SPEC-3 | Нормализация confidence и пороговый фильтр | REQ-001 | SPEC-2 | implemented |
 | SPEC-4 | Фильтр временной персистентности и слой теплоисточников | REQ-001 | SPEC-2 | implemented |
 | SPEC-5 | Маска сельхозземель из ESA WorldCover | REQ-001 | SPEC-2 | implemented |
-| SPEC-6 | Кластеризация детекций в события пожаров | REQ-001 | SPEC-2, SPEC-3 | planned |
-| SPEC-7 | Подбор пары сцен Sentinel-2 и расчёт dNBR/RBR | REQ-002 | SPEC-6 | planned |
-| SPEC-8 | REST API и веб-карта | REQ-003 | SPEC-6, SPEC-7 | planned |
+| SPEC-6 | Кластеризация детекций в события пожаров | REQ-001 | SPEC-2, SPEC-3 | implemented |
+| SPEC-7 | Подбор пары сцен Sentinel-2 и расчёт dNBR/RBR | REQ-002 | SPEC-6 | implemented |
+| SPEC-8 | REST API и веб-карта | REQ-003 | SPEC-6, SPEC-7 | implemented |
+| SPEC-9 | Фенологическое согласование пары сцен и валидация площади гари | REQ-002 | SPEC-7 | implemented |
+| SPEC-10 | Многолетний архив детекций FIRMS по региону | REQ-006 | — | planned |
+| SPEC-11 | Контрольные продукты гарей MCD64A1 и Fire_CCI как слабые метки | REQ-006 | SPEC-10 | planned |
+| SPEC-12 | Обучающая выборка пар сцен с замороженным разбиением | REQ-006 | SPEC-10, SPEC-11 | planned |
+| SPEC-13 | Дообучение сегментации гарей и сравнение с baseline | REQ-006 | SPEC-12 | planned |
+| SPEC-14 | Локальный кеш снимка данных для быстрого старта | REQ-005 | SPEC-2, SPEC-6, SPEC-8 | implemented |
 
 ## Пилляры
 
@@ -34,6 +40,7 @@ Spec-driven development index. Одна спека = один связный к�
 | REQ-003 | Публичный доступ: REST API и веб-карта |
 | REQ-004 | Доказуемость, прослеживаемость и честность результатов |
 | REQ-005 | Эксплуатационная устойчивость и ограничения внешних источников |
+| REQ-006 | Обучение на исторических данных и сопоставление с baseline |
 
 ## Ещё не заспечено
 
@@ -42,7 +49,6 @@ Spec-driven development index. Одна спека = один связный к�
 
 - Bootstrap-маска факелов из архива FIRMS (нужен NASA Earthdata Login) — снимает
   ограничение SPEC-4 «первые 14 суток фильтр не работает».
-- Валидация площади против MCD64A1 / Fire_CCI (только на пожарах >1000 га).
 - Оркестрация (Airflow), мониторинг квот, отказоустойчивость — REQ-005.
 - Векторизация гарей в полигоны и тайлы TiTiler.
 - ML-трек (дообучение U-Net) — вне критического пути, см. `docs/TZ.md` §7.

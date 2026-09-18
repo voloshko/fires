@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-14",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {
+        "path": "src/cache.py",
+        "sha256": "7eb3f54f7e88f7a151ef7563c645ffcd202dc4ad0ff52b0363d4260674bcc693"
+      },
+      {
+        "path": "tests/test_cache.py",
+        "sha256": "c9998bca3a645a85fdcd67c0d6ca90074cf23bce7fad357cde772b0f3fb3da0b"
+      },
+      {
+        "path": "src/api.py",
+        "sha256": "2166a042756e78a527b6b560d59990afa92711e419a2665fced5e36890224046"
+      },
+      {
+        "path": "Makefile",
+        "sha256": "0beafdc60f395e374117acd864c26b839d908364d51ebbea0e6e3af9f4cb9faa"
+      },
+      {
+        "path": ".gitignore",
+        "sha256": "48c2bbccfc772a63064a1f8c1f7568b2d3f06a08fc1847367d95d2ad2d6a5431"
+      }
+    ]
+  },
+  "run_id": "SPEC-14-LIVE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T14:56:38Z",
+  "evidence_class": "LIVE",
+  "status": "PASS",
+  "conclusion": "PARQUET_ZSTD_CACHE_FITS_GIT_AND_STARTS_83X_FASTER",
+  "request": {
+    "region": "Красноярский край",
+    "history_days": 60,
+    "observed_at_utc": "2026-09-18T14:56:38Z"
+  },
+  "commands": [
+    "make cache",
+    "make serve",
+    "python3 -m src.api --config config/krasnoyarsk.toml --cache data/demo --port 8077"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "pyarrow 22.0.0 (zstd)",
+    "sqlite3"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-06",
+      "result": "PASS",
+      "artifacts": [
+        "detections.parquet 14.46 МБ (933354 детекции)",
+        "observations.parquet 3.0 КБ (48 наблюдений)",
+        "snapshot.json 101 КБ (2562 события, 57 источников, 6 гарей)",
+        "итого 14.57 МБ",
+        "для сравнения: SQLite 268 МБ + JSON со строковыми ключами 53 МБ = 337 МБ",
+        "сжатие в 23 раза, ничего не урезано"
+      ]
+    },
+    {
+      "id": "AC-01-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "старт сервера при удалённом из окружения FIRMS_MAP_KEY: снимок загружен за 8.0 с",
+        "сборка с нуля занимала 778 с — быстрее в 83 раза"
+      ]
+    },
+    {
+      "id": "AC-02-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "после загрузки: 2562 события, 881612 детекций в событиях, 933354 всего в хранилище",
+        "оба проверенных расчёта гари сохранены: 34162.6 га (обогащение 3.15) и 13755.7 га (3.60), validated=True",
+        "/api/v1/stats/area отдаёт 47918.3 га, validated=True"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "sizes_bytes": {
+        "observations.parquet": 3035,
+        "detections.parquet": 14461862,
+        "snapshot.json": 101241
+      },
+      "total_bytes": 14566138,
+      "detections": 933354,
+      "events": 2562,
+      "burns": 6,
+      "flares": 57,
+      "load_seconds": 8.0,
+      "build_seconds": 778,
+      "speedup": 97,
+      "previous_format_bytes": 337000000
+    }
+  ],
+  "findings": [
+    {
+      "id": "FIND-01",
+      "severity": "design",
+      "description": "Первая реализация хранила детекции в SQLite (268 МБ), а принадлежность событиям — списками строковых ключей в JSON (53 МБ). Сработал заложенный в спеку сигнал остановки: в git такое не кладут. Переход на Parquet+zstd с колонкой event_id вместо ключей дал 14.57 МБ.",
+      "consequence": "Кеш коммитится целиком, урезание выборки не потребовалось; функция экспорта усечённого среза удалена как ненужная."
+    }
+  ],
+  "limitations": [
+    "Замеры на одной машине и одном наборе; 8 секунд — это разбор Parquet и вставка 933 тысяч строк в SQLite в памяти.",
+    "Кеш отражает состояние на 2026-09-18 14:34 UTC и с возрастом устаревает.",
+    "Устойчивость формата между версиями pyarrow не проверялась."
+  ],
+  "non_claims": [
+    "Кеш НЕ делает данные свежее: /api/v1/health показывает момент сборки, а не текущий.",
+    "Не доказывает, что сжатие сохранится при другом распределении данных: выигрыш держится на повторяемости имён сенсоров и классов достоверности.",
+    "Не доказывает корректность самих данных — только то, что они переживают запись и чтение."
+  ]
+}

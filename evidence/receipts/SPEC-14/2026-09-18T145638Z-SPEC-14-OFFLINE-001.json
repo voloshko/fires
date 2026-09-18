@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-14",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {
+        "path": "src/cache.py",
+        "sha256": "7eb3f54f7e88f7a151ef7563c645ffcd202dc4ad0ff52b0363d4260674bcc693"
+      },
+      {
+        "path": "tests/test_cache.py",
+        "sha256": "c9998bca3a645a85fdcd67c0d6ca90074cf23bce7fad357cde772b0f3fb3da0b"
+      },
+      {
+        "path": "src/api.py",
+        "sha256": "2166a042756e78a527b6b560d59990afa92711e419a2665fced5e36890224046"
+      },
+      {
+        "path": "Makefile",
+        "sha256": "0beafdc60f395e374117acd864c26b839d908364d51ebbea0e6e3af9f4cb9faa"
+      },
+      {
+        "path": ".gitignore",
+        "sha256": "48c2bbccfc772a63064a1f8c1f7568b2d3f06a08fc1847367d95d2ad2d6a5431"
+      }
+    ]
+  },
+  "run_id": "SPEC-14-OFFLINE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T14:56:38Z",
+  "evidence_class": "REPLAY",
+  "status": "PASS",
+  "conclusion": "SNAPSHOT_CACHE_ROUND_TRIP_AND_REFUSAL_RULES_VERIFIED_OFFLINE",
+  "commands": [
+    "python3 -m pytest tests/test_cache.py -q",
+    "make gate"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "pyarrow 22.0.0",
+    "pytest"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac01_loading_needs_no_network — любой сетевой вызов при загрузке падает"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac02_events_survive_the_round_trip",
+        "test_ac02_detection_history_survives_the_round_trip",
+        "test_ac02_burn_results_survive_including_validation_numbers",
+        "test_ac02_flares_survive_the_round_trip",
+        "test_ac02_api_serves_the_restored_snapshot",
+        "идентификатор события пересчитывается при загрузке и сверяется с записанным"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac03_changed_config_is_refused_not_silently_accepted",
+        "test_ac03_same_config_loads",
+        "test_ac03_fingerprint_changes_with_the_config"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac04_foreign_schema_version_is_refused"
+      ]
+    },
+    {
+      "id": "AC-05",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac05_missing_cache_is_reported_as_missing",
+        "test_ac05_corrupt_cache_is_an_error_not_a_silent_fallback",
+        "test_ac05_missing_parquet_is_reported",
+        "test_ac05_unreadable_parquet_is_reported"
+      ]
+    },
+    {
+      "id": "AC-07",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac07_cache_file_contains_no_secrets",
+        "test_ac07_real_environment_secrets_are_absent_from_the_cache"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "pytest_summary": "18 passed, 1 skipped in 0.76s",
+      "project_total": "319 passed, 3 skipped"
+    }
+  ],
+  "limitations": [
+    "Эквивалентность проверена на трёх детекциях в фикстуре; на реальном объёме — SPEC-14-LIVE-001."
+  ],
+  "non_claims": [
+    "Кеш не делает данные свежее — он замораживает момент сборки.",
+    "Не доказывает устойчивость формата между версиями pyarrow."
+  ]
+}

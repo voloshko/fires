@@ -116,7 +116,7 @@ class PersistenceResult:
         return "ok" if self.enough_history else "insufficient_history"
 
 
-def _meters_between(lat1, lon1, lat2, lon2) -> float:
+def meters_between(lat1, lon1, lat2, lon2) -> float:
     """Равнопромежуточное приближение: на масштабе сотен метров этого достаточно."""
     mid = math.radians((lat1 + lat2) / 2)
     dx = (lon2 - lon1) * EARTH_M_PER_DEG * math.cos(mid)
@@ -155,7 +155,7 @@ def cluster_detections(detections, radius_m: float) -> list[Cluster]:
             col = int(d.longitude // _lon_step(r))
             for dx in (-1, 0, 1):
                 for c in grid.get((r, col + dx), ()):
-                    dist = _meters_between(c.latitude, c.longitude, d.latitude, d.longitude)
+                    dist = meters_between(c.latitude, c.longitude, d.latitude, d.longitude)
                     if dist <= best_dist:
                         best, best_dist = c, dist
         if best is None:
@@ -209,7 +209,7 @@ def partition(detections, result: PersistenceResult,
         return list(detections), []
     normal, persistent = [], []
     for d in detections:
-        near = any(_meters_between(s.latitude, s.longitude, d.latitude, d.longitude)
+        near = any(meters_between(s.latitude, s.longitude, d.latitude, d.longitude)
                    <= config.radius_m for s in result.sources)
         (persistent if near else normal).append(d)
     return normal, persistent

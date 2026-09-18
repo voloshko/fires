@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-6",
+  "run_id": "SPEC-6-LIVE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T12:17:00Z",
+  "evidence_class": "LIVE",
+  "status": "PASS",
+  "conclusion": "EVENTS_BUILT_FROM_REAL_HISTORY_WITH_PLAUSIBLE_SCALE_AND_STATUS_SPLIT",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {
+        "path": "src/events.py",
+        "sha256": "b96a183c09e991051415fa3cd32f133aaf473817c3f0d3559906bb2b00b04bf1"
+      },
+      {
+        "path": "tests/test_clustering.py",
+        "sha256": "d8440ec354e6df8e4d805993384d50cb0493f74e2369d5aece2653f631e8521f"
+      },
+      {
+        "path": "config/krasnoyarsk.toml",
+        "sha256": "f31a56cb9eba9a774a65bd65b1926fe1dbc8f0e23bc65e101f456070a0fd0925"
+      }
+    ]
+  },
+  "request": {
+    "region": "Красноярский край",
+    "bbox": "82,51,109,78",
+    "history_days": 25,
+    "observed_at_utc": "2026-09-18T12:17:00Z",
+    "note": "живой ответ FIRMS невоспроизводим задним числом"
+  },
+  "commands": [
+    "python3 -m src.events list --config config/krasnoyarsk.toml --days 25 --top 10"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "httpx 0.28.1",
+    "sqlite3 (stdlib)"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "61243 детекции -> 53639 после SPEC-3/SPEC-4 -> 888 событий",
+        "протяжённость крупнейших событий 16-40 км, длительность 1.7-18.6 суток"
+      ]
+    },
+    {
+      "id": "AC-03-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "606 complete, 282 active, 0 unconfirmed",
+        "unconfirmed отсутствует ожидаемо: backfill записал наблюдения по каждому окну"
+      ]
+    },
+    {
+      "id": "AC-04-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "суммарный FRP крупнейшего события 79692.3 МВт",
+        "порядок согласуется с данными ТЗ о лиственничных пожарах Сибири (до 260000 МВт)"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "detections_received": 61243,
+      "after_filters": 53639,
+      "events": 888,
+      "status_split": {
+        "complete": 606,
+        "active": 282,
+        "unconfirmed": 0
+      },
+      "top_events": [
+        {
+          "id": "FIRE-3ce352bc7175",
+          "lat": 63.69,
+          "lon": 108.548,
+          "n": 3214,
+          "frp": 79692.3,
+          "days": 4.7,
+          "km": 23.5
+        },
+        {
+          "id": "FIRE-824e9318df8e",
+          "lat": 64.396,
+          "lon": 108.456,
+          "n": 3859,
+          "frp": 64255.3,
+          "days": 3.7,
+          "km": 39.5
+        },
+        {
+          "id": "FIRE-49e34744a400",
+          "lat": 63.267,
+          "lon": 106.913,
+          "n": 3484,
+          "frp": 48017.4,
+          "days": 11.7,
+          "km": 27.2
+        },
+        {
+          "id": "FIRE-494e9a180478",
+          "lat": 60.436,
+          "lon": 96.25,
+          "n": 845,
+          "frp": 21369.1,
+          "days": 18.6,
+          "km": 5.0,
+          "status": "active"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Одно окно 25 суток в сентябре; межсезонная устойчивость порогов не проверена.",
+    "Ветка unconfirmed на живых данных не наблюдалась — покрыта только модульными тестами.",
+    "Число 888 событий ни с чем не сверялось: независимого перечня пожаров края за период нет."
+  ],
+  "non_claims": [
+    "НЕ доказывает, что 888 событий соответствуют 888 реальным пожарам: разбиение зависит от порогов.",
+    "НЕ доказывает, что bbox события равен периметру гари — периметр строится в SPEC-7.",
+    "НЕ доказывает, что завершённые события потухли: доказано лишь наличие подтверждённых наблюдений без детекций.",
+    "Согласие порядка FRP с литературой — правдоподобие, а не валидация."
+  ]
+}

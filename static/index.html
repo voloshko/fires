@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Оперативный мониторинг лесных пожаров</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root{--bg:#12151a;--panel:#1a1f27;--line:#2c333d;--text:#e6e9ee;--muted:#8d97a5;
+        --warn:#f0b429;--warnbg:#3a2f12}
+  *{box-sizing:border-box}
+  body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+       background:var(--bg);color:var(--text);display:flex;height:100vh;overflow:hidden}
+  #map{flex:1;background:#0c0f13}
+  .basemap-dark{filter:invert(1) hue-rotate(180deg) brightness(.72) contrast(.9) saturate(.5)}
+  aside{width:370px;background:var(--panel);border-left:1px solid var(--line);
+        overflow-y:auto;padding:16px}
+  h1{font-size:16px;margin:0 0 4px}
+  h2{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+     margin:20px 0 8px;font-weight:600}
+  .sub{color:var(--muted);font-size:12px;margin-bottom:14px}
+  .warn{background:var(--warnbg);border-left:3px solid var(--warn);padding:9px 11px;
+        font-size:12px;border-radius:3px;margin-bottom:14px}
+  .warn b{color:var(--warn)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  td,th{padding:4px 6px;border-bottom:1px solid var(--line);text-align:left}
+  th{color:var(--muted);font-weight:500}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+  .row{display:flex;justify-content:space-between;gap:10px;padding:3px 0;font-size:13px}
+  .row span:last-child{font-variant-numeric:tabular-nums;color:var(--muted)}
+  button{background:#232a34;color:var(--text);border:1px solid var(--line);
+         border-radius:4px;padding:6px 10px;cursor:pointer;font-size:12px;margin-right:6px}
+  button:hover{background:#2c333d}
+  .empty{color:var(--muted);font-size:12px;font-style:italic}
+  .leaflet-popup-content-wrapper{background:var(--panel);color:var(--text)}
+  .leaflet-popup-tip{background:var(--panel)}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<aside>
+  <h1>Оперативный мониторинг лесных пожаров</h1>
+  <div class="sub" id="region">загрузка…</div>
+
+  <div class="warn" id="validation" hidden></div>
+
+  <h2>Слои</h2>
+  <div id="layers"></div>
+
+  <h2>Площадь гари по классам</h2>
+  <table id="areas"><tbody></tbody></table>
+  <div style="margin-top:10px">
+    <button onclick="exportData('geojson')">GeoJSON</button>
+    <button onclick="exportData('csv')">CSV</button>
+  </div>
+
+  <h2>Выбранное событие</h2>
+  <div id="detail" class="empty">кликните по очагу на карте</div>
+
+  <h2>Состояние источников</h2>
+  <div id="health" class="empty">загрузка…</div>
+</aside>
+<script>
+const SEVERITY = [
+  ["unburnt","не горело","#3f4956"],
+  ["low","слабая","#f3d060"],
+  ["moderate_low","умеренно слабая","#f0a132"],
+  ["moderate_high","умеренно сильная","#e0622b"],
+  ["high","сильная","#b3221f"],
+];
+const map = L.map("map",{preferCanvas:true}).setView([62,96],4);
+// Штатный префикс атрибуции Leaflet содержит SVG-флаг. Leaflet позволяет его
+// заменить; ставим текстовую ссылку. Атрибуция OpenStreetMap остаётся — она
+// обязательна по лицензии ODbL и снятию не подлежит.
+map.attributionControl.setPrefix('<a href="https://leafletjs.com" rel="noopener">Leaflet</a>');
+// Базовая подложка без ключа: тайлы CARTO с некоторых пор его требуют, а сервис
+// публичный и не должен зависеть от чужой регистрации (REQ-005). OSM отдаёт
+// светлые тайлы, поэтому затемняются CSS-фильтром на стороне клиента.
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {attribution:"&copy; OpenStreetMap contributors",maxZoom:19,
+   className:"basemap-dark"}).addTo(map);
+
+const layers = {
+  hotspots: L.layerGroup().addTo(map),
+  burns: L.layerGroup().addTo(map),
+  flares: L.layerGroup(),
+};
+L.control.layers(null,{
+  "Очаги пожаров":layers.hotspots,
+  "Гари":layers.burns,
+  "Теплоисточники (служебный)":layers.flares,
+},{collapsed:false}).addTo(map);
+
+const frpColor = f => f>10000?"#b3221f":f>1000?"#e0622b":f>100?"#f0a132":"#f3d060";
+const frpRadius = f => Math.max(4, Math.min(20, 3+Math.log10(Math.max(f,1))*3.2));
+let statsCache=null, burnsCache=null;
+
+async function j(u){const r=await fetch(u); if(!r.ok) throw new Error(u+" -> "+r.status); return r.json();}
+
+async function load(){
+  const [hot, burns, flares, health, stats] = await Promise.all([
+    j("/api/v1/hotspots"), j("/api/v1/burns"), j("/api/v1/flares"),
+    j("/api/v1/health"), j("/api/v1/stats/area")]);
+  burnsCache = burns; statsCache = stats;
+
+  document.getElementById("region").textContent =
+    `${health.region} · событий ${health.events_total} · ` +
+    `теплоисточников ${health.persistent_sources} · ` +
+    `обновлено ${health.generated_at.slice(0,16).replace("T"," ")} UTC`;
+
+  // Предупреждение поднимается только при НЕПРОВЕРЕННОЙ опубликованной площади.
+  // Событие в статусе deferred площади не даёт, и тревожить из-за него нечем.
+  if(!health.burn_results_validated && stats.validation_note){
+    const el=document.getElementById("validation"); el.hidden=false;
+    el.innerHTML="<b>Площади гари не проверены.</b> " + stats.validation_note;
+  }
+
+  hot.features.forEach(f=>{
+    const [lon,lat]=f.geometry.coordinates, p=f.properties;
+    L.circleMarker([lat,lon],{radius:frpRadius(p.total_frp),color:frpColor(p.total_frp),
+      weight:1,fillOpacity:.55})
+     .on("click",()=>showEvent(p.event_id))
+     .bindTooltip(`${p.event_id}<br>FRP ${p.total_frp} МВт · ${p.detections} детекций`)
+     .addTo(layers.hotspots);
+  });
+
+  burns.features.forEach(f=>{
+    const p=f.properties;
+    const worst=[...SEVERITY].reverse().find(([k])=>(p.area_ha[k]||0)>0);
+    L.polygon(f.geometry.coordinates[0].map(([x,y])=>[y,x]),
+      {color:worst?worst[2]:"#3f4956",weight:1,fillOpacity:.25,dashArray:"4 3"})
+     .on("click",()=>showEvent(p.event_id)).addTo(layers.burns);
+  });
+
+  flares.features.forEach(f=>{
+    const [lon,lat]=f.geometry.coordinates, p=f.properties;
+    L.circleMarker([lat,lon],{radius:5,color:"#6ba3d6",weight:1,fillOpacity:.5})
+     .bindTooltip(`персистентный источник<br>${p.distinct_days} суток, ${p.detections} детекций`)
+     .addTo(layers.flares);
+  });
+
+  renderAreas(stats);
+  renderHealth(health);
+  renderLegend();
+}
+
+function renderLegend(){
+  document.getElementById("layers").innerHTML =
+    `<div class="row"><span>Очаги — цвет и размер по суммарному FRP</span></div>` +
+    SEVERITY.slice(1).map(([k,ru,c])=>
+      `<div class="row"><span><i class="sw" style="background:${c}"></i>${ru}</span></div>`).join("");
+}
+
+function renderAreas(stats){
+  const tb=document.querySelector("#areas tbody");
+  const rows=SEVERITY.map(([k,ru,c])=>
+    `<tr><td><i class="sw" style="background:${c}"></i>${ru}</td>
+         <td class="num">${(stats.area_ha[k]||0).toLocaleString("ru-RU",{maximumFractionDigits:0})}</td></tr>`);
+  rows.push(`<tr><th>Гарь всего, га</th><th class="num">${
+    stats.burned_ha.toLocaleString("ru-RU",{maximumFractionDigits:0})}</th></tr>`);
+  rows.push(`<tr><td colspan="2" style="color:#8d97a5;font-size:12px;border:0">
+    посчитано событий: ${stats.events_counted}, без результата: ${stats.events_without_result}</td></tr>`);
+  tb.innerHTML=rows.join("");
+}
+
+function renderHealth(h){
+  document.getElementById("health").className="";
+  document.getElementById("health").innerHTML = h.sources.map(s=>`
+    <div class="row"><span>${s.source}</span><span>${s.observations} опросов${
+      s.failures?`, ${s.failures} сбоев`:""}</span></div>
+    <div class="row" style="padding-left:12px;font-size:12px">
+      <span style="color:#8d97a5">последний успешный опрос</span>
+      <span>${(s.last_successful_poll||"—").slice(0,16).replace("T"," ")}</span></div>
+    <div class="row" style="padding-left:12px;font-size:12px">
+      <span style="color:#8d97a5">последняя детекция</span>
+      <span>${(s.last_detection_received||"—").slice(0,16).replace("T"," ")}</span></div>`).join("");
+}
+
+async function showEvent(id){
+  const el=document.getElementById("detail"); el.className=""; el.textContent="загрузка…";
+  const ev=await j(`/api/v1/hotspots/${id}`);
+  let burn=null; try{ burn=await j(`/api/v1/burns/${id}`); }catch(e){}
+  let html=`<div class="row"><span>идентификатор</span><span>${ev.event_id}</span></div>
+    <div class="row"><span>статус</span><span>${ev.status}</span></div>
+    <div class="row"><span>горел</span><span>${ev.first_seen.slice(0,10)} … ${ev.last_seen.slice(0,10)}</span></div>
+    <div class="row"><span>суммарный FRP</span><span>${ev.total_frp} МВт</span></div>
+    <div class="row"><span>детекций</span><span>${ev.history.features.length}</span></div>
+    <div class="row"><span>сенсоры</span><span>${ev.sensors.length}</span></div>`;
+  if(burn){
+    html+=`<h2 style="margin-top:14px">Гарь</h2>
+      <div class="row"><span>статус</span><span>${burn.status}</span></div>`;
+    if(burn.status==="ok"){
+      html+=`<div class="row"><span>под маской</span><span>${(burn.masked_fraction*100).toFixed(1)}%</span></div>
+        <div class="row"><span>пороги</span><span>${burn.thresholds_version}</span></div>
+        <div class="row"><span>сцены</span><span>${burn.scene_before_date} → ${burn.scene_after_date}</span></div>
+        <div class="row"><span>разрыв по дню года</span><span>${burn.doy_gap_days ?? "—"} сут</span></div>
+        <div class="row"><span>обогащение по термоточкам</span><span>${
+          burn.enrichment == null ? "—" : burn.enrichment.toFixed(2)
+          }${burn.detections_checked ? ` (${burn.detections_checked} точек)` : ""}</span></div>
+        <table><tbody>${SEVERITY.map(([k,ru,c])=>
+          `<tr><td><i class="sw" style="background:${c}"></i>${ru}</td>
+           <td class="num">${(burn.area_ha[k]||0).toFixed(1)}</td></tr>`).join("")}
+          <tr><th>гарь всего, га</th><th class="num">${burn.burned_ha.toFixed(1)}</th></tr>
+        </tbody></table>`;
+      if(!burn.validated) html+=`<div class="warn" style="margin-top:10px">
+        <b>не проверено</b> ${burn.validation_note}</div>`;
+    } else {
+      html+=`<div class="row"><span>причина</span><span style="max-width:60%;text-align:right">${burn.reason||"—"}</span></div>`;
+      if(burn.retry_after) html+=`<div class="row"><span>повторить после</span><span>${burn.retry_after}</span></div>`;
+    }
+  } else { html+=`<div class="empty" style="margin-top:10px">расчёт гари не выполнялся</div>`; }
+  el.innerHTML=html;
+}
+
+function exportData(kind){
+  if(kind==="geojson"){ download("burns.geojson", JSON.stringify(burnsCache,null,2)); return; }
+  const head="severity_class,area_ha\n";
+  const body=SEVERITY.map(([k])=>`${k},${(statsCache.area_ha[k]||0).toFixed(2)}`).join("\n");
+  download("burn_area.csv", head+body+`\nburned_total,${statsCache.burned_ha.toFixed(2)}\n`);
+}
+function download(name,text){
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([text],{type:"text/plain"}));
+  a.download=name; a.click(); URL.revokeObjectURL(a.href);
+}
+load().catch(e=>{document.getElementById("region").textContent="ошибка загрузки: "+e.message});
+</script>
+</body>
+</html>

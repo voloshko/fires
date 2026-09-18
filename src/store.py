@@ -115,7 +115,13 @@ def _iso(dt: datetime) -> str:
 class Store:
     def __init__(self, path: str | Path = ":memory:"):
         self.path = str(path)
-        self.conn = sqlite3.connect(self.path)
+        # check_same_thread=False: FastAPI выполняет синхронные обработчики в
+        # пуле потоков, и /health читает журнал наблюдений из рабочего потока.
+        # Без этого сервер падал бы с ProgrammingError (SPEC-8, DEF-01).
+        # Потолок: безопасно, пока запись идёт из одного потока до начала
+        # обслуживания запросов, а обработчики только читают. Появится
+        # конкурентная запись — нужен пул соединений или переход на PostGIS.
+        self.conn = sqlite3.connect(self.path, check_same_thread=False)
         self.conn.row_factory = sqlite3.Row
         self.conn.executescript(SCHEMA)
         self.conn.commit()
