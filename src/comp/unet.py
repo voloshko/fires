@@ -64,14 +64,25 @@ def load(path: str | Path):
     return net, bundle["mean"], bundle["std"], device
 
 
-def predict(model, chip: BsChip, min_blob: int = MIN_BLOB) -> np.ndarray:
+def predict(model, chip: BsChip, min_blob: int = MIN_BLOB, tta: bool = True) -> np.ndarray:
+    """`tta` усредняет ответ по четырём отражениям чипа.
+
+    На четырёхуровневой сети приём давал +0.0002 и был отвергнут; на
+    пятиуровневой даёт +0.006 по IoU_burn. Результат зависит от глубины, поэтому
+    флаг оставлен: переносить его между конфигурациями вслепую нельзя.
+    """
     import torch
 
     net, mean, std, device = model
     feats = np.nan_to_num(stack(chip), posinf=0.0, neginf=0.0).astype(np.float32)
     x = (feats - mean[:, None, None]) / std[:, None, None]
     with torch.no_grad():
-        out = net(torch.from_numpy(x).unsqueeze(0).to(device))
-        pred = out.argmax(1)[0].cpu().numpy().astype(np.uint8)
+        batch = torch.from_numpy(x).unsqueeze(0).to(device)
+        logits = net(batch).float()
+        if tta:
+            for dims in ([2], [3], [2, 3]):
+                logits = logits + torch.flip(net(torch.flip(batch, dims)).float(), dims)
+            logits = logits / 4
+        pred = logits.argmax(1)[0].cpu().numpy().astype(np.uint8)
     pred[~chip.valid()] = 0
     return drop_small(pred, min_blob)
