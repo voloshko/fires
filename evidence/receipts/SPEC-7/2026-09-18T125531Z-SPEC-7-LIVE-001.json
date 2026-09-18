@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-7",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {
+        "path": "src/burn.py",
+        "sha256": "86a9bc28d2b3e6b21a23a7053e1cc6cad5af3d7f255c3c7be28adc4d372457b4"
+      },
+      {
+        "path": "tests/test_burn.py",
+        "sha256": "0a6e19fbf79eb88a3cb57b152aee19cf98c241b9fa274b0924d96b572a5e09a1"
+      },
+      {
+        "path": "config/krasnoyarsk.toml",
+        "sha256": "5d43fb239940735af98b28a9ec9832f034ec068aa1b3439171d03437c4d8ccaf"
+      }
+    ]
+  },
+  "run_id": "SPEC-7-LIVE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T12:55:31Z",
+  "evidence_class": "LIVE",
+  "status": "PASS",
+  "conclusion": "PIPELINE_RUNS_END_TO_END_ON_REAL_SCENES_AND_TWO_STAGE_FILTER_PROVES_ITS_WORTH",
+  "request": {
+    "region": "Красноярский край",
+    "stac": "planetarycomputer sentinel-2-l2a",
+    "observed_at_utc": "2026-09-18T12:55:31Z",
+    "note": "каталог меняется; результат невоспроизводим дословно"
+  },
+  "commands": [
+    "python3 -m src.burn run --config config/krasnoyarsk.toml --days 25",
+    "backfill 60 суток -> 2562 события -> 504 с прошедшим окном 'после'"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "rasterio 1.4.4",
+    "pystac-client 0.9.0",
+    "planetary-computer 1.0.0"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-07-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "FIRE-3ce352bc7175 (горел 08-29..09-02): статус deferred — из 55 суток окна 'после' прошло 11",
+        "измерены доли валидных пикселей всех 9 сцен 'после': максимум 60.5% при пороге 80%",
+        "deferred здесь — правильный ответ, а не отказ"
+      ]
+    },
+    {
+      "id": "AC-02-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "сцена S2C_MSIL2A_20260806..T49VCL: eo:cloud_cover = 0.0%, валидных над AOI = 1.5%",
+        "окно 1384x1087 пикселей прочитано верно, но 98.5% там nodata — гранула задевает область краем полосы съёмки",
+        "правило ТЗ 'eo:cloud_cover <= 20%' выбрало бы именно эту сцену"
+      ]
+    },
+    {
+      "id": "AC-01-LIVE",
+      "result": "PASS",
+      "artifacts": [
+        "FIRE-3e785381bdc8: пара найдена в одном тайле 48WXC, до=2026-06-28, после=2026-09-06",
+        "под маской 0.1% области"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "events_60d": 2562,
+      "ready_for_burn_mapping": 504,
+      "deferred_example": {
+        "event": "FIRE-3ce352bc7175",
+        "post_candidates": 9,
+        "best_valid_fraction": 0.605,
+        "threshold": 0.8
+      },
+      "computed_example": {
+        "event": "FIRE-3e785381bdc8",
+        "tile": "48WXC",
+        "before": "2026-06-28",
+        "after": "2026-09-06",
+        "masked_fraction": 0.001,
+        "area_ha": {
+          "unburnt": 18614.44,
+          "low": 7721.0,
+          "moderate_low": 8010.48,
+          "moderate_high": 1977.56,
+          "high": 2.4
+        },
+        "burned_ha": 17711.44
+      }
+    }
+  ],
+  "defects_found": [
+    {
+      "id": "DEF-01",
+      "severity": "correctness",
+      "found_by": "этот прогон",
+      "description": "masked_fraction считалась от ПРОЧИТАННОГО массива. rasterio обрезает окно по границам растра, поэтому сцена, покрывающая часть области, рапортовала '0.0% под маской', и площадь, посчитанная по фрагменту пожара, выглядела полной. Первый прогон дал ровно это: растр 425x936 вместо ~900x900 при masked_fraction=0.0%.",
+      "fix": "знаменатель — запрошенное число пикселей окна, а не прочитанное",
+      "regression_test": "test_masked_fraction_denominator_is_the_requested_aoi_not_what_was_read"
+    },
+    {
+      "id": "DEF-02",
+      "severity": "correctness",
+      "found_by": "первый живой прогон",
+      "description": "Защита размера области сравнивала ГРАДУСЫ. Градус долготы на 64 с.ш. вдвое короче экваториального, поэтому порог был строже на юге и слабее на севере. Реальное событие шириной 27 км отклонялось как слишком большое.",
+      "fix": "порог переведён в километры (max_aoi_km)",
+      "regression_test": "test_aoi_extent_is_measured_in_kilometres_not_degrees"
+    }
+  ],
+  "limitations": [
+    "Проверена работоспособность конвейера, а не достоверность результата.",
+    "Один пожар, один тайл, одна пара сцен."
+  ],
+  "non_claims": [
+    "НЕ доказывает, что 17711 га соответствуют реальной гари — опровергнуто в SPEC-7-LIVE-002.",
+    "Не доказывает применимость порогов USGS к сибирской растительности."
+  ]
+}

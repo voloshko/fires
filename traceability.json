@@ -17,7 +17,8 @@
       "title": "Картирование гарей и оценка площади поражения",
       "file": "requirements/REQ-002.md",
       "specs": [
-        "SPEC-7"
+        "SPEC-7",
+        "SPEC-9"
       ]
     },
     "REQ-003": {
@@ -100,7 +101,7 @@
       "depends_on": [
         "SPEC-6"
       ],
-      "status": "planned"
+      "status": "partial"
     },
     "SPEC-8": {
       "title": "REST API и веб-карта",
@@ -108,6 +109,15 @@
       "requirement": "REQ-003",
       "depends_on": [
         "SPEC-6",
+        "SPEC-7"
+      ],
+      "status": "planned"
+    },
+    "SPEC-9": {
+      "title": "Фенологическое согласование пары сцен и валидация площади гари",
+      "file": "specs/SPEC-9-phenology-matching.md",
+      "requirement": "REQ-002",
+      "depends_on": [
         "SPEC-7"
       ],
       "status": "planned"

@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-7",
+  "source_manifest": {
+    "git_revision": null,
+    "dirty": null,
+    "files": [
+      {
+        "path": "src/burn.py",
+        "sha256": "86a9bc28d2b3e6b21a23a7053e1cc6cad5af3d7f255c3c7be28adc4d372457b4"
+      },
+      {
+        "path": "tests/test_burn.py",
+        "sha256": "0a6e19fbf79eb88a3cb57b152aee19cf98c241b9fa274b0924d96b572a5e09a1"
+      },
+      {
+        "path": "config/krasnoyarsk.toml",
+        "sha256": "5d43fb239940735af98b28a9ec9832f034ec068aa1b3439171d03437c4d8ccaf"
+      }
+    ]
+  },
+  "run_id": "SPEC-7-OFFLINE-001",
+  "predecessor_run_id": null,
+  "created_at": "2026-09-18T12:55:31Z",
+  "evidence_class": "REPLAY",
+  "status": "PASS",
+  "conclusion": "BURN_MAPPING_MECHANICS_VERIFIED_OFFLINE",
+  "commands": [
+    "python3 -m pytest tests/test_burn.py -q",
+    "make gate"
+  ],
+  "tools": [
+    "Python 3.11.5",
+    "numpy 2.4.6",
+    "rasterio 1.4.4",
+    "pytest"
+  ],
+  "acceptance": [
+    {
+      "id": "AC-01",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac01_pair_is_never_assembled_from_two_different_tiles",
+        "test_ac01_pair_is_assembled_when_a_common_tile_exists",
+        "test_ac01_best_common_tile_wins_when_several_are_available"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac02_cloudy_scene_that_is_clear_over_the_aoi_is_accepted (45% облачности принимается)",
+        "test_ac02_clear_scene_that_is_clouded_over_the_aoi_is_rejected (15% отклоняется)",
+        "test_ac02_scene_above_the_coarse_cloud_threshold_never_reaches_stage_two",
+        "test_ac02_valid_fraction_threshold_comes_from_config",
+        "test_ac02_scl_is_read_at_most_once_per_scene"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac03_every_invalid_scl_class_is_excluded[0|1|3|8|9|10|11]",
+        "test_ac03_valid_scl_classes_are_kept[2|4|5|6|7]",
+        "test_ac03_snow_is_excluded_because_it_distorts_nbr"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac04_pixel_area_is_exactly_four_hundredths_of_a_hectare",
+        "test_ac04_area_of_a_known_rectangle_matches_the_analytic_value",
+        "test_ac04_masked_pixels_do_not_contribute_to_area",
+        "test_ac04_pixel_area_follows_the_transform_not_a_constant"
+      ]
+    },
+    {
+      "id": "AC-05",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac05_burn_result_cannot_be_built_without_masked_fraction",
+        "test_ac05_deferred_result_also_carries_masked_fraction",
+        "test_masked_fraction_denominator_is_the_requested_aoi_not_what_was_read",
+        "test_masked_fraction_counts_clouded_pixels_too",
+        "test_masked_fraction_of_an_uncovered_aoi_is_total"
+      ]
+    },
+    {
+      "id": "AC-06",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac06_thresholds_come_from_the_shipped_config",
+        "test_ac06_classification_boundaries_both_sides[11 значений по обе стороны каждой границы]",
+        "test_ac06_changing_the_thresholds_changes_the_classification",
+        "test_ac06_incoherent_thresholds_are_rejected"
+      ]
+    },
+    {
+      "id": "AC-07",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac07_fire_ending_in_november_above_66n_is_deferred",
+        "test_ac07_fire_ending_in_july_above_66n_is_not_deferred",
+        "test_ac07_season_band_depends_on_latitude",
+        "test_ac07_retry_date_is_the_next_season_opening",
+        "test_ac07_deferred_never_reports_zero_hectares_as_a_result"
+      ]
+    },
+    {
+      "id": "AC-08",
+      "result": "PASS",
+      "artifacts": [
+        "test_ac08_zero_in_nir_or_swir_is_nodata_not_a_valid_zero",
+        "test_ac08_nbr_of_a_zero_sum_pixel_is_nan_not_a_number"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "pytest_summary": "59 passed, 2 warnings in 0.29s"
+    }
+  ],
+  "limitations": [
+    "Все растры синтетические; каталог STAC подставной.",
+    "Проверена механика, а не достоверность получаемой площади — см. SPEC-7-LIVE-002."
+  ],
+  "non_claims": [
+    "НЕ доказывает, что вычисленная площадь соответствует реальной гари.",
+    "Не доказывает применимость порогов USGS к сибирской растительности.",
+    "Не доказывает корректность выбора окон pre/post."
+  ]
+}

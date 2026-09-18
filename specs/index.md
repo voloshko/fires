@@ -3,7 +3,7 @@
 Spec-driven development index. Одна спека = один связный кусок работы с
 проверяемыми критериями приёмки. Код не пишется раньше своей спеки.
 
-**Next available number:** SPEC-9
+**Next available number:** SPEC-10
 
 > **Authority note:** статусы в этой таблице — «на глаз» и могут отставать.
 > Источник истины — `traceability.json`; запрашивать через
@@ -22,8 +22,9 @@ Spec-driven development index. Одна спека = один связный к�
 | SPEC-4 | Фильтр временной персистентности и слой теплоисточников | REQ-001 | SPEC-2 | implemented |
 | SPEC-5 | Маска сельхозземель из ESA WorldCover | REQ-001 | SPEC-2 | implemented |
 | SPEC-6 | Кластеризация детекций в события пожаров | REQ-001 | SPEC-2, SPEC-3 | implemented |
-| SPEC-7 | Подбор пары сцен Sentinel-2 и расчёт dNBR/RBR | REQ-002 | SPEC-6 | planned |
+| SPEC-7 | Подбор пары сцен Sentinel-2 и расчёт dNBR/RBR | REQ-002 | SPEC-6 | partial |
 | SPEC-8 | REST API и веб-карта | REQ-003 | SPEC-6, SPEC-7 | planned |
+| SPEC-9 | Фенологическое согласование пары сцен и валидация площади гари | REQ-002 | SPEC-7 | planned |
 
 ## Пилляры
 
