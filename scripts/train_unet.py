@@ -26,6 +26,8 @@ SEED = 20260918
 # Вырезка 512 — полный чип. Обучение на четверти чипа лишает сеть вида на
 # границы пятна целиком и стоит 0.057 IoU: 0.4786 против 0.5353.
 CROP = int(os.environ.get("CROP", 512))
+# Пятый уровень свёртки даёт вдвое больший охват и стоит +0.020 IoU_burn.
+DEPTH = int(os.environ.get("DEPTH", 5))
 
 
 def _arg(pos, default, cast=int):
@@ -132,14 +134,14 @@ def iou_scores(truth: np.ndarray, pred: np.ndarray):
 def main():
     torch.manual_seed(SEED); np.random.seed(SEED)
     d, fit, tune = load_split("data/comp/train/bs", "data/comp/split_bs.json", USE_ALL)
-    print(f"эпох {EPOCHS}, ширина {WIDTH}, метка {TAG}"); print(f"устройство {DEV}, обучение {len(fit)} чипов, настроечная часть {len(tune)}", flush=True)
+    print(f"эпох {EPOCHS}, ширина {WIDTH}, глубина {DEPTH}, вырезка {CROP}, метка {TAG}"); print(f"устройство {DEV}, обучение {len(fit)} чипов, настроечная часть {len(tune)}", flush=True)
     t0 = time.time()
     xtr, ytr, _ = cache(d, fit)
     xva, yva, okva = cache(d, tune)
     mean, std = normalise(xtr)
     print(f"данные в памяти за {time.time()-t0:.0f}с", flush=True)
 
-    net = UNet(len(NAMES), w=WIDTH).to(DEV)
+    net = UNet(len(NAMES), w=WIDTH, depth=DEPTH).to(DEV)
     opt = torch.optim.AdamW(net.parameters(), lr=3e-4, weight_decay=1e-4)
     sched = torch.optim.lr_scheduler.OneCycleLR(opt, 1e-3, total_steps=EPOCHS * max(1, len(fit) // BATCH))
     # Фон подавляется весом: он занимает подавляющую часть пикселей.
@@ -184,7 +186,8 @@ def main():
             print(f"эпоха {epoch:3d}  loss {total/max(1,len(order)//BATCH):.4f}", flush=True)
             if epoch == EPOCHS:
                 torch.save({"state": net.state_dict(), "mean": mean, "std": std,
-                            "names": NAMES, "epochs": EPOCHS, "chips": len(fit)},
+                            "names": NAMES, "epochs": EPOCHS, "chips": len(fit),
+                            "depth": DEPTH, "width": WIDTH, "crop": CROP},
                            f"models/bs_unet_{TAG}.pt")
                 print(f"сохранена последняя эпоха: {len(fit)} чипов, выбор эпохи не производился")
             continue
