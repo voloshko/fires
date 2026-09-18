@@ -33,6 +33,8 @@ BG = float(os.environ.get("BG_WEIGHT", 0.25))
 EPOCHS = int(os.environ.get("EPOCHS", 200))
 CROPSZ = int(os.environ.get("CROP", CROP))
 MIN_BLOB = int(os.environ.get("MIN_BLOB", 200))
+DEPTH = int(os.environ.get("DEPTH", 4))
+WIDTH = int(os.environ.get("WIDTH", 48))
 TAG = os.environ.get("TAG", "x")
 
 
@@ -69,12 +71,13 @@ def main():
     torch.manual_seed(SEED); np.random.seed(SEED)
     d, fit, tune = load_split("data/comp/train/bs", "data/comp/split_bs.json")
     print(f"[{TAG}] вес фона {BG}, эпох {EPOCHS}, вырезка {CROPSZ}, "
+          f"глубина {DEPTH}, ширина {WIDTH}, "
           f"обучение {len(fit)}, замер {len(tune)}", flush=True)
     xtr, ytr, _ = cache(d, fit)
     xva, yva, okva = cache(d, tune)
     mean, std = normalise(xtr)
 
-    net = UNet(len(NAMES), w=48).to(DEV)
+    net = UNet(len(NAMES), w=WIDTH, depth=DEPTH).to(DEV)
     opt = torch.optim.AdamW(net.parameters(), lr=3e-4, weight_decay=1e-4)
     steps = EPOCHS * max(1, len(fit) // BATCH)
     sched = torch.optim.lr_scheduler.OneCycleLR(opt, 1e-3, total_steps=steps)
@@ -126,7 +129,8 @@ def main():
                 print(f"[{TAG}] {how:26s} IoU_burn {burn:.4f}  mIoU_sev {miou:.4f}  "
                       f"[{per[1]:.3f} {per[2]:.3f} {per[3]:.3f}]", flush=True)
     torch.save({"state": net.state_dict(), "mean": mean, "std": std, "names": NAMES,
-                "bg_weight": BG, "epochs": EPOCHS}, f"models/exp_{TAG}.pt")
+                "bg_weight": BG, "epochs": EPOCHS, "crop": CROPSZ,
+                "depth": DEPTH, "width": WIDTH}, f"models/exp_{TAG}.pt")
 
 
 if __name__ == "__main__":

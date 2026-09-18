@@ -37,8 +37,12 @@ def load(path: str | Path):
             "набор признаков модели не совпадает с текущим: "
             f"{len(bundle['names'])} против {len(NAMES)}"
         )
-    width = bundle["state"]["d1.0.weight"].shape[0]
-    net = UNet(len(NAMES), w=width)
+    state = bundle["state"]
+    # Ширина и глубина читаются из самих весов: файл модели не обязан их нести,
+    # а разойтись с кодом они не должны.
+    width = state["down.0.0.weight"].shape[0]
+    depth = sum(1 for k in state if k.startswith("down.") and k.endswith(".0.weight"))
+    net = UNet(len(NAMES), w=width, depth=depth)
     net.load_state_dict(bundle["state"])
     device = "cuda" if torch.cuda.is_available() else "cpu"
     net.to(device).eval()

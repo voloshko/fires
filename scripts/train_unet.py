@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -22,7 +23,9 @@ from src.comp.chips import BsDataset            # noqa: E402
 from src.comp.features import NAMES, stack      # noqa: E402
 
 SEED = 20260918
-CROP = 256
+# Вырезка 512 — полный чип. Обучение на четверти чипа лишает сеть вида на
+# границы пятна целиком и стоит 0.057 IoU: 0.4786 против 0.5353.
+CROP = int(os.environ.get("CROP", 512))
 
 
 def _arg(pos, default, cast=int):
@@ -34,7 +37,7 @@ def _arg(pos, default, cast=int):
         return default
 
 
-EPOCHS = _arg(1, 60)
+EPOCHS = _arg(1, 200)
 WIDTH = _arg(2, 48)
 TAG = _arg(3, "a", str)
 USE_ALL = TAG.startswith("final")
@@ -50,20 +53,29 @@ def block(cin, cout):
 
 
 class UNet(nn.Module):
-    def __init__(self, cin: int, classes: int = 4, w: int = 48):
+    """Глубина 4 или 5 уровней. Пятый даёт вдвое больший охват контекста и имеет
+    смысл только на вырезке 512: на 256 нижний уровень выродится в 8×8."""
+
+    def __init__(self, cin: int, classes: int = 4, w: int = 48, depth: int = 4):
         super().__init__()
-        self.d1, self.d2, self.d3, self.d4 = block(cin, w), block(w, 2*w), block(2*w, 4*w), block(4*w, 8*w)
+        self.depth = depth
+        widths = [w * 2**i for i in range(depth)]
+        self.down = nn.ModuleList([block(cin if i == 0 else widths[i-1], widths[i])
+                                   for i in range(depth)])
         self.pool = nn.MaxPool2d(2)
-        self.u3 = nn.ConvTranspose2d(8*w, 4*w, 2, 2); self.c3 = block(8*w, 4*w)
-        self.u2 = nn.ConvTranspose2d(4*w, 2*w, 2, 2); self.c2 = block(4*w, 2*w)
-        self.u1 = nn.ConvTranspose2d(2*w, w, 2, 2);   self.c1 = block(2*w, w)
+        self.up = nn.ModuleList([nn.ConvTranspose2d(widths[i], widths[i-1], 2, 2)
+                                 for i in range(depth - 1, 0, -1)])
+        self.conv = nn.ModuleList([block(widths[i-1] * 2, widths[i-1])
+                                   for i in range(depth - 1, 0, -1)])
         self.head = nn.Conv2d(w, classes, 1)
 
     def forward(self, x):
-        a = self.d1(x); b = self.d2(self.pool(a)); c = self.d3(self.pool(b)); d = self.d4(self.pool(c))
-        x = self.c3(torch.cat([self.u3(d), c], 1))
-        x = self.c2(torch.cat([self.u2(x), b], 1))
-        x = self.c1(torch.cat([self.u1(x), a], 1))
+        skips = []
+        for i, blk in enumerate(self.down):
+            x = blk(x if i == 0 else self.pool(x))
+            skips.append(x)
+        for k, (up, conv) in enumerate(zip(self.up, self.conv)):
+            x = conv(torch.cat([up(x), skips[-2 - k]], 1))
         return self.head(x)
 
 
