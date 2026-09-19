@@ -139,3 +139,28 @@ tune и holdout не расширяются. CEMS/temporal GPU-эксперим�
 
 Из основной ветки включены закрытия SPEC-25 deferred и SPEC-30/31 rejected.
 В исходном HANDOFF очередь была пуста; отдельная очередь этой кампании активна.
+
+## Siamese numerical failures and current queue
+
+Plain FP16 Siam v1 overflowed: first bad module conv.0.0 at epoch47,
+finite inputs/params, FP32 max 77007.4375 versus FP16 limit65504. Fusion BN
+made the exact failed batch finite (decoder input max3034 ->195.125), but
+normalized FP16 v2 later failed at epoch98. Neither has an accuracy result.
+Both attempts have INSUFFICIENT_EVIDENCE receipts; artifacts are preserved.
+
+Valid Siamese screening now uses BF16 + fusion BN, catalogs
+`bs-siam-<seed>-v3`. Separate `bs-optical-bf16-<seed>-v1` controls use the same
+precision. Existing optical/raw FP16 runs are retained and compared only
+within that precision. External pretraining and transfer use BF16 too.
+Loss/input/logit checks fail immediately; later numerical failures retain
+weights and the failed batch even without per-module debug hooks.
+
+Current main queue: finish both FP16 optical/raw seeds, then two BF16
+optical/Siam pairs. Data queue waits for Siam v3, then runs 5-chip temporal
+pilot and external pretrain/transfer. `fires-hyp-temporal-full-v2` waits for
+both queues and runs 87-chip temporal expansion (SPEC-37), minimum50 enforced.
+Completed source QC is reused on resume. No old NaN artifact is scored.
+
+Completed first FP16 seed: optical W .733105, raw W .717137; one seed is not
+used to close the two-seed contract. The AF candidate and its receipts are
+unaffected by the Siamese failures.
