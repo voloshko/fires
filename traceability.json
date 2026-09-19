@@ -47,7 +47,8 @@
         "SPEC-10",
         "SPEC-11",
         "SPEC-12",
-        "SPEC-13"
+        "SPEC-13",
+        "SPEC-28"
       ]
     },
     "REQ-007": {
@@ -64,7 +65,10 @@
         "SPEC-22",
         "SPEC-23",
         "SPEC-24",
-        "SPEC-25"
+        "SPEC-25",
+        "SPEC-26",
+        "SPEC-27",
+        "SPEC-29"
       ]
     }
   },
@@ -294,6 +298,44 @@
     "SPEC-25": {
       "title": "DOFA с произвольным набором каналов для BS",
       "file": "specs/SPEC-25-dofa-bs.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "planned"
+    },
+    "SPEC-26": {
+      "title": "Оптический ансамбль сетей для BS",
+      "file": "specs/SPEC-26-bs.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "active"
+    },
+    "SPEC-27": {
+      "title": "Свёрточная сеть для детекции активного горения (AF)",
+      "file": "specs/SPEC-27-af.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-17",
+        "SPEC-19"
+      ],
+      "status": "planned"
+    },
+    "SPEC-28": {
+      "title": "Многодатная аугментация обучающих чипов BS из Planetary Computer",
+      "file": "specs/SPEC-28-bs-planetary-computer.md",
+      "requirement": "REQ-006",
+      "depends_on": [
+        "SPEC-7",
+        "SPEC-19"
+      ],
+      "status": "planned"
+    },
+    "SPEC-29": {
+      "title": "Происхождение разметки BS: аудит остатка ложной гари",
+      "file": "specs/SPEC-29-bs.md",
       "requirement": "REQ-007",
       "depends_on": [
         "SPEC-19"
