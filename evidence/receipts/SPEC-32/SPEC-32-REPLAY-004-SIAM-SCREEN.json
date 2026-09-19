@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-32",
+  "run_id": "SPEC-32-REPLAY-004-SIAM-SCREEN",
+  "created_at": "2026-09-19T11:37:28.024934+00:00",
+  "status": "PASS",
+  "conclusion": "Normalized BF16 Siamese passes the frozen two-seed development screen; grouped revalidation is still pending.",
+  "commands": [
+    "python scripts/hypothesis_bs.py train --variant siam --precision bf16 --seed <20260918|20260919> --out research/bs-siam-<seed>-v3",
+    "python scripts/hypothesis_bs.py train --variant optical --precision bf16 --seed <20260918|20260919> --out research/bs-optical-bf16-<seed>-v1",
+    "python scripts/summarize_hypothesis_bs.py --out research/bs-bf16-screening-v1.json"
+  ],
+  "acceptance": {
+    "optical-bf16": {
+      "mean_single_seed_weighted": 0.7385732871755513,
+      "two_seed_ensemble": {
+        "all_pixels": {
+          "iou_burn": 0.7529904656502887,
+          "miou_sev": 0.7194714340882743,
+          "weighted": 0.7375201433908974,
+          "per_class": [
+            0.97098030059994,
+            0.6041435711924071,
+            0.7139275975081935,
+            0.8403431335642223
+          ]
+        },
+        "clear_sky": {
+          "iou_burn": 0.7594342203658782,
+          "miou_sev": 0.7211958346721205,
+          "weighted": 0.7417857346610668,
+          "per_class": [
+            0.9717551405497357,
+            0.599014814789891,
+            0.7107817795393188,
+            0.8537909096871515
+          ]
+        }
+      },
+      "v13_plus_two": {
+        "all_pixels": {
+          "iou_burn": 0.7608744861373292,
+          "miou_sev": 0.725837400468175,
+          "weighted": 0.7447035235207965,
+          "per_class": [
+            0.9719037019956767,
+            0.614610232754329,
+            0.7183752061715895,
+            0.8445267624786065
+          ]
+        },
+        "clear_sky": {
+          "iou_burn": 0.7670886208252603,
+          "miou_sev": 0.7272123251810966,
+          "weighted": 0.7486841766818001,
+          "per_class": [
+            0.9727136183491243,
+            0.6099939643384472,
+            0.7133983520675449,
+            0.8582446591372976
+          ]
+        }
+      }
+    },
+    "siam": {
+      "mean_single_seed_weighted": 0.747932300334436,
+      "two_seed_ensemble": {
+        "all_pixels": {
+          "iou_burn": 0.7638997795823782,
+          "miou_sev": 0.7273363029674496,
+          "weighted": 0.7470243288370264,
+          "per_class": [
+            0.9719741743014733,
+            0.6363469435863078,
+            0.6927835796624869,
+            0.8528783856535541
+          ]
+        },
+        "clear_sky": {
+          "iou_burn": 0.7691092890416964,
+          "miou_sev": 0.7269739936231208,
+          "weighted": 0.7496622296177383,
+          "per_class": [
+            0.9728161118115465,
+            0.6297102183229195,
+            0.6844741029467997,
+            0.8667376595996429
+          ]
+        }
+      },
+      "v13_plus_two": {
+        "all_pixels": {
+          "iou_burn": 0.7760965951983201,
+          "miou_sev": 0.7391757732402376,
+          "weighted": 0.7590562158330513,
+          "per_class": [
+            0.97383850379389,
+            0.6402748498866032,
+            0.7251208977997345,
+            0.8521315720343754
+          ]
+        },
+        "clear_sky": {
+          "iou_burn": 0.7834307000384897,
+          "miou_sev": 0.7417417899042933,
+          "weighted": 0.7641896645919374,
+          "per_class": [
+            0.9748245484058847,
+            0.6400353701457795,
+            0.718538943917455,
+            0.8666510556496452
+          ]
+        }
+      },
+      "paired_control": "optical-bf16",
+      "delta_to_control": 0.009359013158884766,
+      "screening_pass": true
+    }
+  },
+  "limitations": [
+    "Historical 35-chip screening after adaptive hypothesis selection, not independent testing.",
+    "Paired seed effects have opposite signs: +.022620 and -.003902.",
+    "Siam mean gain against FP16 optical is only .004146; frozen matched BF16 control delta is .009359.",
+    "v13-plus-two equal-weight blend W .759056 is exploratory development evidence; final all224 models are not evaluated here.",
+    "BF16 plus fusion BatchNorm recipe differs from failed FP16 attempts; failed runs were not scored."
+  ],
+  "non_claims": [
+    "No confirmed grouped-development gain yet.",
+    "No closed-test accuracy, physical burned area or cross-dataset leaderboard superiority claim."
+  ],
+  "artifacts": {
+    "evidence/experiments/hypotheses-20260919/bs-bf16-screening-v1.json": "aa28118e12e2a39b7554d90b630e1d33ec893dc533ec99179cf825d7a3558c8f",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-optical-bf16-20260919-v1/summary.json": "5c833ba8e205107d74bdc3aa8d980a2786a396ff972c7a2b43f40d53169a3c62",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-optical-bf16-20260919-v1/per_chip.json": "5d8da160bb9dc5b8ab4077493da8930f5cc9f43472b966a77a65f37298e225d6",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-optical-bf16-20260919-v1/manifest.json": "ee4065a6f282c5f8b0fb706f922167cd1cd1b5af30cc634416a87115278db5af",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-optical-bf16-20260919-v1/data_manifest.json": "dcf85b008c02e565e0fcfc23159a2d4a94fb92888ded39522d164a3694a643b1",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-optical-bf16-20260918-v1/summary.json": "0c4c9aa4d19960f21e9ce11e5939c6a0749bfa3b1d94b0dc7a729af71739a0d7",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-optical-bf16-20260918-v1/per_chip.json": "a207d9fae56eab4e5c9fb92ab3002e99b3a8b757651154028853c99f5b47daa9",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-optical-bf16-20260918-v1/manifest.json": "84fac160015fab3a1b70943a7366dd033aca02f0394535719d955f485170622e",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-optical-bf16-20260918-v1/data_manifest.json": "dcf85b008c02e565e0fcfc23159a2d4a94fb92888ded39522d164a3694a643b1",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-siam-20260919-v3/summary.json": "338efc148175ed5880b1b954d6731931139d864e104a5ef652f634cd612fd082",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-siam-20260919-v3/per_chip.json": "853ba92352fd1c59116e18d0b451588415680a339e90411dd1360726e9a5353f",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-siam-20260919-v3/manifest.json": "c9aacb277295b67866798e69b5548db87222337a9257a297459e50b6443a50ea",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-siam-20260919-v3/data_manifest.json": "dcf85b008c02e565e0fcfc23159a2d4a94fb92888ded39522d164a3694a643b1",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-siam-20260918-v3/summary.json": "33ea37e9ff7fa8ec2d35209773bbb71e3cbf66861559b45c820361b67c33bed7",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-siam-20260918-v3/per_chip.json": "05d171e0839d5e9317a0f6ea9854dccfa2e3e2321fbe4190cc511f205ca18764",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-siam-20260918-v3/manifest.json": "6a8cbe2cbbe55946ab48b1fe5eca94f1c031483665909968ebe6e456bb000310",
+    "evidence/experiments/hypotheses-20260919/bs-bf16/bs-siam-20260918-v3/data_manifest.json": "dcf85b008c02e565e0fcfc23159a2d4a94fb92888ded39522d164a3694a643b1"
+  }
+}
