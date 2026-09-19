@@ -1,0 +1,52 @@
+{
+  "optical": {
+    "seed2_minus_seed1": 0.021362077212374708,
+    "largest_leave_one_chip_out_changes": [
+      {
+        "chip": "BS_tr_000108",
+        "change_in_delta_when_removed": -0.013757360077823355
+      },
+      {
+        "chip": "BS_tr_000127",
+        "change_in_delta_when_removed": 0.005137658491049191
+      },
+      {
+        "chip": "BS_tr_000041",
+        "change_in_delta_when_removed": -0.0049338829546863305
+      },
+      {
+        "chip": "BS_tr_000131",
+        "change_in_delta_when_removed": -0.0048216186490003254
+      },
+      {
+        "chip": "BS_tr_000105",
+        "change_in_delta_when_removed": 0.0035774113623099346
+      }
+    ]
+  },
+  "raw": {
+    "seed2_minus_seed1": 0.045441218641244285,
+    "largest_leave_one_chip_out_changes": [
+      {
+        "chip": "BS_tr_000105",
+        "change_in_delta_when_removed": -0.017480694770207972
+      },
+      {
+        "chip": "BS_tr_000127",
+        "change_in_delta_when_removed": -0.015766614050212957
+      },
+      {
+        "chip": "BS_tr_000041",
+        "change_in_delta_when_removed": 0.008632062920649775
+      },
+      {
+        "chip": "BS_tr_000192",
+        "change_in_delta_when_removed": -0.007108939796083069
+      },
+      {
+        "chip": "BS_tr_000182",
+        "change_in_delta_when_removed": -0.006610055095992773
+      }
+    ]
+  }
+}
