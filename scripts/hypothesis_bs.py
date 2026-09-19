@@ -63,6 +63,7 @@ def evaluate(net,mean,std,d,tune,variant,out,boost_dir=None,device='cuda'):
             with torch.autocast(device_type=device,enabled=device=='cuda'):
                 logits=net(x).float()
                 for dims in ([2],[3],[2,3]): logits+=torch.flip(net(torch.flip(x,dims)).float(),dims)
+            if not torch.isfinite(logits).all(): raise FloatingPointError('nonfinite evaluation logits')
             p=(logits/4).softmax(1)[0].permute(1,2,0).cpu().numpy(); pn.append(p.astype(np.float16))
             rec={'chip':c}
             for name,mix in [('network',p)]+([] if pb is None else [('mixed',.6*p+.4*pb[i].astype(np.float32))]):
@@ -118,6 +119,7 @@ def run(args):
     # Normalize chip-wise to avoid an N*C*H*W float32 transient on the GPU.
     X=torch.stack([torch.from_numpy(((a.astype(np.float32)-mean[:,None,None])/std[:,None,None]).astype(np.float16)) for a in xs]).to(device)
     Y=torch.as_tensor(np.stack(ys),device=device); del xs,ys
+    if not torch.isfinite(X).all(): raise FloatingPointError('nonfinite normalized inputs')
     net=make_model(args.variant,args.width,args.depth).to(device)
     if args.encoder:
         if args.variant!='siam': raise ValueError('external encoder requires siam variant')
@@ -129,6 +131,18 @@ def run(args):
     sched=torch.optim.lr_scheduler.OneCycleLR(opt,max_lr=1e-3,total_steps=steps)
     scaler=torch.amp.GradScaler(device,enabled=device=='cuda'); rng=np.random.default_rng(args.seed)
     weights=torch.tensor([.25,1.,1.,1.],device=device); t0=time.time(); losses=[]
+    hooks=[]; numerical_failure={}
+    if args.debug_numerics:
+        def check_output(name):
+            def hook(module,inputs,output):
+                if not torch.isfinite(output).all():
+                    value=float(inputs[0].detach().abs().max())
+                    numerical_failure.update(module=name,type=type(module).__name__,input_dtype=str(inputs[0].dtype),output_dtype=str(output.dtype),input_finite=bool(torch.isfinite(inputs[0]).all()),input_max=value if np.isfinite(value) else str(value),nonfinite_outputs=int((~torch.isfinite(output)).sum()),parameters_finite=all(bool(torch.isfinite(p).all()) for p in module.parameters(recurse=False)))
+                    raise FloatingPointError('nonfinite module output: '+name)
+            return hook
+        for name,module in net.named_modules():
+            if isinstance(module,(torch.nn.Conv2d,torch.nn.ConvTranspose2d,torch.nn.BatchNorm2d)):
+                hooks.append(module.register_forward_hook(check_output(name)))
     for epoch in range(args.epochs):
         net.train(); order=rng.permutation(len(fit)); epoch_losses=[]
         for k in range(0,len(order)-args.batch+1,args.batch):
@@ -138,13 +152,21 @@ def run(args):
                 if int(index) in extra_map and replace_input: batch_ids[bi]=extra_map[int(index)]
             x,y=make_batch(X,Y,torch.as_tensor(batch_ids,device=device),rng,X.shape[-1])
             opt.zero_grad(set_to_none=True)
-            with torch.autocast(device_type=device,enabled=device=='cuda'):
-                logits=net(x); p=1-logits.softmax(1)[:,0]; truth=(y>0).float()
-                loss=F.cross_entropy(logits,y,weight=weights)+1-(2*(p*truth).sum()+1)/(p.sum()+truth.sum()+1)
+            try:
+                with torch.autocast(device_type=device,enabled=device=='cuda'):
+                    logits=net(x); p=1-logits.softmax(1)[:,0]; truth=(y>0).float()
+                    loss=F.cross_entropy(logits,y,weight=weights)+1-(2*(p*truth).sum()+1)/(p.sum()+truth.sum()+1)
+                if not torch.isfinite(loss): raise FloatingPointError('nonfinite training loss')
+            except FloatingPointError:
+                numerical_failure.update(epoch=epoch+1,batch=k//args.batch,batch_indices=[int(i) for i in batch_ids],batch_ids=[fit[int(i)] if int(i)<len(fit) else 'extra' for i in batch_ids],lr=float(opt.param_groups[0]['lr']))
+                write_json(out/'numerical_failure.json',numerical_failure)
+                if args.debug_numerics:
+                    torch.save(dict(state=net.state_dict(),x=x.detach().cpu(),y=y.detach().cpu(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam'),out/'debug_state.pt')
+                raise
             scaler.scale(loss).backward(); scaler.step(opt); scaler.update(); sched.step(); epoch_losses.append(float(loss.detach()))
         losses.append(float(np.mean(epoch_losses)))
         if (epoch+1)%10==0 or args.smoke: print(args.variant,args.seed,'epoch',epoch+1,'loss',losses[-1],'seconds',int(time.time()-t0),flush=True)
-    bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
+    bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
     torch.save(bundle,out/'model.pt'); del X,Y; torch.cuda.empty_cache()
     summary=evaluate(net,mean,std,d,tune,args.variant,out,None if args.smoke else args.boost,device)
     summary.update(seconds=time.time()-t0,loss=losses,gpu_peak_bytes=torch.cuda.max_memory_allocated() if device=='cuda' else 0,screening_only=args.fold is None,smoke=args.smoke)
@@ -152,6 +174,6 @@ def run(args):
 
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--encoder'); p.add_argument('--smoke',action='store_true'); args=p.parse_args()
+    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--encoder'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true'); args=p.parse_args()
     (boost if args.task=='boost' else run)(args)
 if __name__=='__main__': main()

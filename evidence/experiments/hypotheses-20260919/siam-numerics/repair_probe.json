@@ -1,0 +1,9 @@
+{
+  "original_fp16_nonfinite": 30,
+  "original_fp32_finite": true,
+  "original_fp32_absmax": 77007.4375,
+  "fp16_limit": 65504.0,
+  "fixed_fp16_finite": true,
+  "fixed_decoder_input_max": 195.125,
+  "non_claim": "Numerical replay only, no accuracy measurement; real trials restart from scratch."
+}

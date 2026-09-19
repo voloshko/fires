@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-32",
+  "run_id": "SPEC-32-REPLAY-001-NUMERICS",
+  "created_at": "2026-09-19T10:02:57.173743+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Original unnormalized-fusion Siamese prototype overflowed FP16; no valid quality metric. Exact failed-batch replay identifies the cause and verifies normalized-fusion finite output.",
+  "commands": [
+    "ssh k8plus 'cd ~/fires-hypotheses && OMP_NUM_THREADS=2 .venv/bin/python scripts/probe_siam_numerics.py --run research/siam-numerical-debug-v1 --out research/siam-numerics-reproduce.json'"
+  ],
+  "acceptance": {
+    "failure": {
+      "module": "conv.0.0",
+      "type": "Conv2d",
+      "input_dtype": "torch.float16",
+      "output_dtype": "torch.float16",
+      "input_finite": true,
+      "input_max": 3034.0,
+      "nonfinite_outputs": 30,
+      "parameters_finite": true,
+      "epoch": 47,
+      "batch": 3,
+      "batch_ids": [
+        "BS_tr_000080",
+        "BS_tr_000139",
+        "BS_tr_000129",
+        "BS_tr_000125",
+        "BS_tr_000162",
+        "BS_tr_000148",
+        "BS_tr_000036",
+        "BS_tr_000202"
+      ],
+      "lr": 0.0008802103869343931
+    },
+    "repair": {
+      "original_fp16_nonfinite": 30,
+      "original_fp32_finite": true,
+      "original_fp32_absmax": 77007.4375,
+      "fp16_limit": 65504.0,
+      "fixed_fp16_finite": true,
+      "fixed_decoder_input_max": 195.125,
+      "non_claim": "Numerical replay only, no accuracy measurement; real trials restart from scratch."
+    },
+    "artifact_sha256": {
+      "evidence/experiments/hypotheses-20260919/siam-numerics/initial-training.log": "5e8ebbb357d9e90f6c14397366ead13ee55295ca18ff7637bf01ca3f70e5a506",
+      "evidence/experiments/hypotheses-20260919/siam-numerics/manifest.json": "46a1ea685e78c2228526616a597a8f00abd5d4c1d3646b797ddf9579614973e2",
+      "evidence/experiments/hypotheses-20260919/siam-numerics/numerical_failure.json": "83942c5df156f1b8ecf77401e6759e529bc3c82ccf089a9ef7f82db6d63dc46d",
+      "evidence/experiments/hypotheses-20260919/siam-numerics/range_probe.json": "b5c52d720dd701fc80bb7fe345cf2b748ff200a81796fc9da42c33704a8ae31d",
+      "evidence/experiments/hypotheses-20260919/siam-numerics/repair_probe.json": "0ab804b614aa5c93214119dc9519ae994be54812b38f3cfc55c9e69ad5d6117b"
+    }
+  },
+  "limitations": [
+    "Numerical probe retains old learned weights and initializes new fusion BatchNorm; valid trials restart from scratch.",
+    "Debug checkpoint and failed batch remain on k8plus, not committed.",
+    "Original FP16 run was stopped after loss became NaN; training loss is not a quality metric."
+  ],
+  "non_claims": [
+    "Does not reject or accept the Siamese accuracy hypothesis.",
+    "Does not establish held-out quality or hidden-test performance.",
+    "Does not alter previously completed optical/raw measurements."
+  ]
+}

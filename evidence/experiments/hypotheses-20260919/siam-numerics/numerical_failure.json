@@ -1,0 +1,23 @@
+{
+  "module": "conv.0.0",
+  "type": "Conv2d",
+  "input_dtype": "torch.float16",
+  "output_dtype": "torch.float16",
+  "input_finite": true,
+  "input_max": 3034.0,
+  "nonfinite_outputs": 30,
+  "parameters_finite": true,
+  "epoch": 47,
+  "batch": 3,
+  "batch_ids": [
+    "BS_tr_000080",
+    "BS_tr_000139",
+    "BS_tr_000129",
+    "BS_tr_000125",
+    "BS_tr_000162",
+    "BS_tr_000148",
+    "BS_tr_000036",
+    "BS_tr_000202"
+  ],
+  "lr": 0.0008802103869343931
+}

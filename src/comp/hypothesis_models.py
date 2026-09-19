@@ -5,12 +5,15 @@ from scripts.train_unet import UNet, block
 
 
 class SiameseUNet(nn.Module):
-    def __init__(self,width=32,depth=7):
+    def __init__(self,width=32,depth=7,normalize_fusion=True):
         super().__init__()
         widths=[width*2**i for i in range(depth)]
         self.down=nn.ModuleList([block(9 if i==0 else widths[i-1],w) for i,w in enumerate(widths)])
         self.pool=nn.MaxPool2d(2)
-        self.fuse=nn.ModuleList([nn.Conv2d(3*w+(11 if i==0 else 0),w,1) for i,w in enumerate(widths)])
+        self.fuse=nn.ModuleList([
+            nn.Sequential(nn.Conv2d(3*w+(11 if i==0 else 0),w,1),nn.BatchNorm2d(w))
+            if normalize_fusion else nn.Conv2d(3*w+(11 if i==0 else 0),w,1)
+            for i,w in enumerate(widths)])
         self.up=nn.ModuleList([nn.ConvTranspose2d(widths[i],widths[i-1],2,2) for i in range(depth-1,0,-1)])
         self.conv=nn.ModuleList([block(widths[i-1]*2,widths[i-1]) for i in range(depth-1,0,-1)])
         self.head=nn.Conv2d(width,4,1)
@@ -29,8 +32,8 @@ class SiameseUNet(nn.Module):
         return self.head(z)
 
 
-def make_model(variant,width=32,depth=7):
-    if variant=='siam': return SiameseUNet(width,depth)
+def make_model(variant,width=32,depth=7,normalize_fusion=True):
+    if variant=='siam': return SiameseUNet(width,depth,normalize_fusion)
     return UNet(11 if variant=='optical' else 29,classes=4,w=width,depth=depth)
 
 

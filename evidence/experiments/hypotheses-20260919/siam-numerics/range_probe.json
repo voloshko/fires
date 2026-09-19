@@ -1,0 +1,9 @@
+{
+  "input_max": 3034.0,
+  "fp16_nonfinite": 30,
+  "fp32_finite": true,
+  "fp32_absmax": 77007.4375,
+  "half_limit": 65504.0,
+  "up_branch_max": 3034.0,
+  "skip_branch_max": 19.59375
+}

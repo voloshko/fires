@@ -181,3 +181,14 @@ def test_sorted_threshold_counts_equal_direct_counts_at_ties():
     actual=counts_for_thresholds(t,p,grid)
     expected=np.asarray([binary_counts(t,p>=cut) for cut in grid])
     assert np.array_equal(actual,expected)
+
+
+def test_siamese_fusion_is_normalized_before_decoder():
+    import torch
+    from src.comp.hypothesis_models import make_model
+    net=make_model('siam',width=2,depth=3)
+    assert all(isinstance(layer[1],torch.nn.BatchNorm2d) for layer in net.fuse)
+    x=torch.randn(2,29,32,32)*100
+    y=net(x); assert torch.isfinite(y).all()
+    y.square().mean().backward()
+    assert all(torch.isfinite(p.grad).all() for p in net.parameters() if p.grad is not None)

@@ -26,7 +26,9 @@ while systemctl --user is-active --quiet fires-hyp-bs-boost; do sleep 20; done
 [[ -f research/bs-boost-v1/probabilities.npy ]]
 for seed in 20260918 20260919; do
   for variant in optical raw siam; do
-    tag="bs-$variant-$seed-v1"
+    suffix=v1
+    if [[ "$variant" == siam ]]; then suffix=v2; fi
+    tag="bs-$variant-$seed-$suffix"
     run "$tag" .venv/bin/python scripts/hypothesis_bs.py train --variant "$variant" --seed "$seed" --out "research/$tag"
   done
 done
