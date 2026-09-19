@@ -349,7 +349,7 @@
       "depends_on": [
         "SPEC-19"
       ],
-      "status": "partial"
+      "status": "implemented"
     },
     "SPEC-30": {
       "title": "Радиометрическая нормализация сцены «после» к сцене «до» для BS",
