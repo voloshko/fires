@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "smoke": true,
+  "real_patches": 8,
+  "ignored_pixels": 361726,
+  "loss_finite": true,
+  "non_claim": "CPU forward/backward only; not model quality."
+}
