@@ -81,3 +81,22 @@ def test_drop_far_убирает_дальнее_пятно_и_оставляет
     out = drop_far(pred, 125)
     assert out[20, 20] == 2 and out[72, 72] == 1 and out[285, 285] == 0
     assert drop_far(pred, 0) is pred
+
+
+def test_drop_far_якорь_согласия_переключает_главное_пятно():
+    from src.comp.postproc import drop_far
+
+    pred = np.zeros((300, 300), np.uint8)
+    pred[10:110, 10:110] = 2      # ложное большое пятно
+    pred[250:280, 250:280] = 3    # настоящее маленькое
+    anchor = np.zeros_like(pred, bool)
+    anchor[255:275, 255:275] = True
+    plain = drop_far(pred, 50)
+    assert plain[20, 20] == 2 and plain[260, 260] == 0
+    assert np.array_equal(drop_far(pred, 50, anchor=None), plain)
+    consensus = drop_far(pred, 50, anchor)
+    assert consensus[260, 260] == 3 and consensus[20, 20] == 0
+    # якорь мимо всех пятен — прежнее правило
+    empty = np.zeros_like(anchor)
+    empty[150, 150] = True
+    assert np.array_equal(drop_far(pred, 50, empty), plain)

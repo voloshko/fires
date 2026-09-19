@@ -39,7 +39,8 @@ def predict(net_model, boost_model, chip: BsChip,
             min_blob: int = MIN_BLOB_ENSEMBLE,
             tta: bool = True,
             far_px: int = FAR_PX,
-            net_weights=None) -> np.ndarray:
+            net_weights=None,
+            consensus: bool = False) -> np.ndarray:
     """Маска степеней поражения по смеси вероятностей.
 
     `net_model` — одна сеть или список сетей одной роли (сидовый ансамбль):
@@ -56,7 +57,16 @@ def predict(net_model, boost_model, chip: BsChip,
     nets = net_model if isinstance(net_model, (list, tuple)) and not hasattr(net_model[0], "eval") else [net_model]
     if net_weights is not None and len(net_weights) != len(nets):
         raise ValueError(f"весов {len(net_weights)}, сетей {len(nets)}")
-    p_net = np.average([unet.probs(m, chip, tta) for m in nets], axis=0, weights=net_weights)
+    p_each = [unet.probs(m, chip, tta) for m in nets]
+    p_net = np.average(p_each, axis=0, weights=net_weights)
+    # SPEC-39: якорь фильтра чужих пожаров — согласие двух ветвей. Ложные пятна
+    # оптики и сиама не совпадают, настоящий пожар видят обе.
+    anchor = None
+    if consensus:
+        siam = [p for m, p in zip(nets, p_each) if getattr(m, "variant", None) == "siam"]
+        opt = [p for m, p in zip(nets, p_each) if getattr(m, "variant", None) != "siam"]
+        if siam and opt:
+            anchor = (np.mean(opt, 0).argmax(2) > 0) & (np.mean(siam, 0).argmax(2) > 0)
 
     names = feature_names(boost_model)
     feats = np.nan_to_num(stack(chip, names), posinf=0.0, neginf=0.0).astype(np.float32)
@@ -84,7 +94,7 @@ def predict(net_model, boost_model, chip: BsChip,
     # чистый ложный положительный. 0.7178/0.6737 → 0.7337/0.6907.
     pred[chip.label_zero()] = 0
     # Чужие пожары: компоненты дальше FAR_PX от главного пятна. 0.7254 → 0.7428 взв.
-    return drop_far(drop_small(pred, min_blob), far_px)
+    return drop_far(drop_small(pred, min_blob), far_px, anchor)
 
 
 def available(net_path: str | Path, boost_path: str | Path) -> bool:

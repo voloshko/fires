@@ -34,6 +34,8 @@ def main(argv: list[str] | None = None) -> int:
                              "усредняются); при отсутствии всех работает бустинг")
     parser.add_argument("--unet-weights", nargs="+", type=float,
                         help="веса сетей в порядке --unet (по умолчанию равные)")
+    parser.add_argument("--consensus", action="store_true",
+                        help="якорь фильтра чужих пожаров — согласие оптических и сиамских сетей (SPEC-39)")
     parser.add_argument("--net-weight", type=float, default=ENSEMBLE_WEIGHT,
                         help="доля сети в ансамбле; 1.0 — только сеть, 0.0 — только бустинг")
     parser.add_argument("--out", default="submission.csv")
@@ -66,7 +68,7 @@ def main(argv: list[str] | None = None) -> int:
         model = load_model(args.model) if Path(args.model).exists() else None
 
         if net is not None and model is not None:
-            print(f"гарь: ансамбль {len(net)} сетей {found} и {args.model}, вес сети {args.net_weight}, веса сетей {weights or 'равные'}")
+            print(f"гарь: ансамбль {len(net)} сетей {found} и {args.model}, вес сети {args.net_weight}, веса сетей {weights or 'равные'}, согласие {args.consensus}")
         elif net is not None:
             print(f"гарь: только сети {found} — бустинга на диске нет", file=sys.stderr)
         elif model is not None:
@@ -77,7 +79,8 @@ def main(argv: list[str] | None = None) -> int:
         for chip_id in dataset.chip_ids():
             chip = dataset.load(chip_id)
             if net is not None and model is not None:
-                mask = ensemble.predict(net, model, chip, args.net_weight, net_weights=weights)
+                mask = ensemble.predict(net, model, chip, args.net_weight, net_weights=weights,
+                                        consensus=args.consensus)
             elif net is not None:
                 mask = unet.predict(net[0], chip)
             elif model is not None:

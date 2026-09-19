@@ -55,16 +55,26 @@ def drop_small(pred: np.ndarray, min_px: int = MIN_BLOB) -> np.ndarray:
 FAR_PX = 125
 
 
-def drop_far(pred: np.ndarray, far_px: int = FAR_PX) -> np.ndarray:
-    """Убирает связные области гари дальше `far_px` от крупнейшей области."""
+def drop_far(pred: np.ndarray, far_px: int = FAR_PX, anchor: np.ndarray | None = None) -> np.ndarray:
+    """Убирает связные области гари дальше `far_px` от главной области.
+
+    Главная — крупнейшая; с маской `anchor` (SPEC-39: согласие оптики и сиама)
+    — та, что сильнее всего пересекается с `anchor`. Пустое пересечение
+    возвращает прежнее правило: якорь без опоры не лучше размера.
+    """
     if far_px <= 0:
         return pred
     marks, count = label(pred > 0)
     if count < 2:
         return pred
-    sizes = np.bincount(marks.reshape(-1))
+    sizes = np.bincount(marks.reshape(-1), minlength=count + 1)
     sizes[0] = 0
     main = sizes.argmax()
+    if anchor is not None:
+        hits = np.bincount(marks[anchor].reshape(-1), minlength=count + 1)
+        hits[0] = 0
+        if hits.any():
+            main = hits.argmax()
     dist = distance_transform_edt(marks != main)
     far = [k for k in range(1, count + 1) if k != main and dist[marks == k].min() > far_px]
     if not far:

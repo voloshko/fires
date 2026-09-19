@@ -38,18 +38,21 @@ for name, rs in rows.items():
 
 # Пул по всем фолдам (144 чипа) — так считает проверяющая система, а не среднее по фолдам.
 print()
-POOL = {}
+POOL = {}; FOLDS = {}
 for f in range(5):
     dirs = {k: HYP / f'research/bs-confirm-{k}-f{f}-v1' for k in ('boost', 'optical', 'siam')}
     if not all((v / 'probabilities.npy').exists() for v in dirs.values()): continue
     ids = json.load(open(dirs['siam'] / 'data_manifest.json'))['evaluation']; chips = [d.load(c) for c in ids]
     T = np.stack([c.mask for c in chips]); OK = np.stack([c.valid() for c in chips]); ZERO = np.stack([c.label_zero() for c in chips])
     PB, PO, PS = (np.load(dirs[k] / 'probabilities.npy').astype(np.float32) for k in ('boost', 'optical', 'siam'))
-    for name, pn in (('оптика одна (v13)', PO), ('оптика+сиам 50/50', 0.5*PO+0.5*PS), ('оптика 5/7 + сиам 2/7 (v16)', (5*PO+2*PS)/7), ('сиам одна', PS)):
+    AGREE = (PO.argmax(3) > 0) & (PS.argmax(3) > 0)   # SPEC-39: согласие ветвей
+    for name, pn, anch in (('оптика одна (v13)', PO, None), ('оптика+сиам 50/50 (v17)', 0.5*PO+0.5*PS, None), ('v17 + якорь согласия (SPEC-39)', 0.5*PO+0.5*PS, AGREE), ('оптика 5/7 + сиам 2/7 (v16)', (5*PO+2*PS)/7, None), ('сиам одна', PS, None)):
         P = 0.4*PB + 0.6*pn; burn = P.argmax(3) > 0; burn[~OK] = (pn.argmax(3) > 0)[~OK]
-        out = np.where(burn, P[..., 1:].argmax(3) + 1, 0).astype(np.uint8); out[ZERO] = 0; out = np.stack([drop_far(o) for o in out])
+        out = np.where(burn, P[..., 1:].argmax(3) + 1, 0).astype(np.uint8); out[ZERO] = 0
+        out = np.stack([drop_far(o, anchor=None if anch is None else a) for o, a in zip(out, anch if anch is not None else out)])
         e = POOL.setdefault(name, {'T': [], 'O': [], 'OK': []}); e['T'].append(T); e['O'].append(out); e['OK'].append(OK)
-        if f == 4 and name in ('оптика одна (v13)', 'сиам одна'):
+        rf = score_bs_micro(list(T), list(out)); FOLDS.setdefault(name, []).append((0.35*rf['iou_burn']+0.30*rf['miou_sev'])/0.65)
+        if f == 4 and name in ('оптика одна (v13)', 'сиам одна', 'v17 + якорь согласия (SPEC-39)'):
             for c, t, o, ok in zip(ids, T, out, OK):
                 inter = ((t > 0) & (o > 0)).sum(); union = ((t > 0) | (o > 0)).sum()
                 print(f'  фолд 4 {name[:6]} {c} истина {int((t>0).sum()):7d} пред {int((o>0).sum()):7d} пересечение {int(inter):7d} объединение {int(union):7d}')
@@ -57,3 +60,6 @@ for name, e in POOL.items():
     T = np.concatenate([x.reshape(-1) for x in e['T']]); O = np.concatenate([x.reshape(-1) for x in e['O']]); OK = np.concatenate([x.reshape(-1) for x in e['OK']])
     r = score_bs(T, O); t = T > 0; p = O > 0
     print(f'ПУЛ {len(e["T"])} фолдов {name:30s} {r["iou_burn"]:.4f}/{r["miou_sev"]:.4f} взв {(0.35*r["iou_burn"]+0.30*r["miou_sev"])/0.65:.4f} | чистое небо {(t&p&OK).sum()/((t|p)&OK).sum():.4f}')
+base = np.array(FOLDS['оптика+сиам 50/50 (v17)'])
+for name, v in FOLDS.items():
+    print(f'ФОЛДЫ {name:32s} взв {np.round(v,4).tolist()}  Δ к v17 {np.round(np.array(v)-base,4).tolist()}')

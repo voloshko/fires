@@ -77,7 +77,8 @@
         "SPEC-32",
         "SPEC-33",
         "SPEC-36",
-        "SPEC-38"
+        "SPEC-38",
+        "SPEC-39"
       ]
     }
   },
@@ -435,6 +436,16 @@
         "SPEC-26"
       ],
       "status": "implemented"
+    },
+    "SPEC-39": {
+      "title": "Фильтр чужих пожаров по согласию оптики и сиамских сетей",
+      "file": "specs/SPEC-39-consensus-anchor.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19",
+        "SPEC-32"
+      ],
+      "status": "active"
     }
   }
 }
