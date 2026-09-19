@@ -21,3 +21,13 @@
 Оценки — модели, обученные на 144 чипах, замер на 35 вне обучения; финальные
 модели в сабмите обучены на всех 224. Подробности — в receipt'ах и
 [evidence/hypotheses.md](../evidence/hypotheses.md).
+
+## Отдельные кандидаты (не отправлены)
+
+`submission_candidate_af_hard.csv` — SPEC-38-REPLAY-001: BS побайтно из v13,
+AF — финальный HGB на 420 чипах с hard-negative mining, cutoff 0.5.
+На отдельной nested development-оценке SPEC-33 F1 .9279/.9299 против
+парных контролей .9066/.9079; это не оценка на закрытом тесте.
+447 строк, 93 AF-строки изменены, 267 BS-строк сохранены. Штатный validator
+с размерами масок PASS на k8plus и локально. Основной `submission.csv` остаётся
+последней сданной версией, v13. Модель: k8plus `~/fires-hypotheses/research/af-hard-final-v1/model.pkl`.

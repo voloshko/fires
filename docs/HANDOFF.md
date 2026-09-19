@@ -4,6 +4,11 @@
 Читать вместе с [CLAUDE.md](../CLAUDE.md) (дисциплина спек и receipt'ов) и
 [evidence/hypotheses.md](../evidence/hypotheses.md) (журнал ~50 гипотез с числами).
 
+> Дополнение в `codex/fire-model-hypotheses`: новая кампания описана в
+> [HYPOTHESIS_CAMPAIGN.md](HYPOTHESIS_CAMPAIGN.md). SPEC-27 проверена и rejected;
+> SPEC-33 дала AF hard-negative прирост, SPEC-38 подготовила отдельный
+> CSV-кандидат поверх BS v13. Новые BS-гипотезы ещё выполняются.
+
 ## 1. Что делаем
 
 Два модуля одной проверяющей системы: **AF** — активное горение по VIIRS
