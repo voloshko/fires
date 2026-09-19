@@ -1,0 +1,20 @@
+{
+  "repository": "links-ads/wildfires-cems",
+  "revision": "57f87b89ca030eb2f77f023f1aae50a463827534",
+  "license": "cc-by-4.0",
+  "parts": [
+    "data/train/train.tar.0000.gz.part",
+    "data/train/train.tar.0001.gz.part",
+    "data/train/train.tar.0002.gz.part",
+    "data/train/train.tar.0003.gz.part",
+    "data/train/train.tar.0004.gz.part",
+    "data/train/train.tar.0005.gz.part",
+    "data/train/train.tar.0006.gz.part",
+    "data/train/train.tar.0007.gz.part",
+    "data/train/train.tar.0008.gz.part",
+    "data/train/train.tar.0009.gz.part",
+    "data/train/train.tar.0010.gz.part"
+  ],
+  "only_split": "train",
+  "max_events": 30
+}

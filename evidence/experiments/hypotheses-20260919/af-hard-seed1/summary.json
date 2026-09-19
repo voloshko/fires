@@ -1,0 +1,61 @@
+{
+  "random": {
+    "tp": 7099,
+    "fp": 864,
+    "fn": 599,
+    "precision": 0.8914981790782368,
+    "recall": 0.9221875811899195,
+    "f1": 0.9065832322329354
+  },
+  "hard": {
+    "tp": 6991,
+    "fp": 379,
+    "fn": 707,
+    "precision": 0.9485753052917232,
+    "recall": 0.9081579631073006,
+    "f1": 0.9279267321475976
+  },
+  "delta": 0.021343499914662223,
+  "ci95_chip_bootstrap": [
+    0.011857205369133015,
+    0.030497761200345835
+  ],
+  "accepted": true,
+  "seconds": 197.20262837409973,
+  "grid": [
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95,
+    0.955,
+    0.96,
+    0.965,
+    0.97,
+    0.975,
+    0.98,
+    0.985,
+    0.99,
+    0.995,
+    0.999,
+    1.0
+  ],
+  "non_claims": [
+    "Chip folds do not guarantee event independence.",
+    "Not competition hidden-test quality.",
+    "OOF pooled threshold is diagnostic, not nested evaluation."
+  ],
+  "random_optimistic_oof": {
+    "cutoff": 0.995,
+    "f1": 0.9065456405011506
+  },
+  "hard_optimistic_oof": {
+    "cutoff": 0.5,
+    "f1": 0.9295162882527147
+  }
+}

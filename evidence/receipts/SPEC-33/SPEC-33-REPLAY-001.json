@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-33",
+  "run_id": "SPEC-33-REPLAY-001",
+  "created_at": "2026-09-19T08:08:55.306864+00:00",
+  "status": "PASS",
+  "evidence_class": "REPLAY",
+  "conclusion": "Hard-negative AF training passes nested chip-CV acceptance on both seeds; no hidden-test claim.",
+  "commands": [
+    "ssh k8plus 'cd ~/fires-hypotheses && OMP_NUM_THREADS=3 OPENBLAS_NUM_THREADS=3 .venv/bin/python scripts/hypothesis_lab.py af-hard --seed 20260918 --out research/af-hard-reproduce-20260918'",
+    "ssh k8plus 'cd ~/fires-hypotheses && OMP_NUM_THREADS=3 OPENBLAS_NUM_THREADS=3 .venv/bin/python scripts/hypothesis_lab.py af-hard --seed 20260919 --out research/af-hard-reproduce-20260919'",
+    "ssh k8plus 'cd ~/fires-hypotheses && .venv/bin/python scripts/verify_af_hypothesis.py research/af-hard-v2'",
+    "ssh k8plus 'cd ~/fires-hypotheses && .venv/bin/python scripts/verify_af_hypothesis.py research/af-hard-seed2-v1'"
+  ],
+  "acceptance": {
+    "runs": {
+      "af-hard-seed1": {
+        "random": {
+          "tp": 7099,
+          "fp": 864,
+          "fn": 599,
+          "precision": 0.8914981790782368,
+          "recall": 0.9221875811899195,
+          "f1": 0.9065832322329354
+        },
+        "hard": {
+          "tp": 6991,
+          "fp": 379,
+          "fn": 707,
+          "precision": 0.9485753052917232,
+          "recall": 0.9081579631073006,
+          "f1": 0.9279267321475976
+        },
+        "delta": 0.021343499914662223,
+        "ci95_chip_bootstrap": [
+          0.011857205369133015,
+          0.030497761200345835
+        ],
+        "accepted": true,
+        "seconds": 197.20262837409973,
+        "grid": [
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          0.955,
+          0.96,
+          0.965,
+          0.97,
+          0.975,
+          0.98,
+          0.985,
+          0.99,
+          0.995,
+          0.999,
+          1.0
+        ],
+        "non_claims": [
+          "Chip folds do not guarantee event independence.",
+          "Not competition hidden-test quality.",
+          "OOF pooled threshold is diagnostic, not nested evaluation."
+        ],
+        "random_optimistic_oof": {
+          "cutoff": 0.995,
+          "f1": 0.9065456405011506
+        },
+        "hard_optimistic_oof": {
+          "cutoff": 0.5,
+          "f1": 0.9295162882527147
+        }
+      },
+      "af-hard-seed2": {
+        "random": {
+          "tp": 6985,
+          "fp": 705,
+          "fn": 713,
+          "precision": 0.9083224967490247,
+          "recall": 0.9073785398804884,
+          "f1": 0.9078502729399532
+        },
+        "hard": {
+          "tp": 7048,
+          "fp": 413,
+          "fn": 650,
+          "precision": 0.9446454898807131,
+          "recall": 0.9155624837620161,
+          "f1": 0.9298766409393759
+        },
+        "delta": 0.022026367999422702,
+        "ci95_chip_bootstrap": [
+          0.01315721407038493,
+          0.030456149068431426
+        ],
+        "accepted": true,
+        "seconds": 299.65944170951843,
+        "grid": [
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          0.955,
+          0.96,
+          0.965,
+          0.97,
+          0.975,
+          0.98,
+          0.985,
+          0.99,
+          0.995,
+          0.999,
+          1.0
+        ],
+        "non_claims": [
+          "Chip folds do not guarantee event independence.",
+          "Not competition hidden-test quality.",
+          "OOF pooled threshold is diagnostic, not nested evaluation."
+        ],
+        "random_optimistic_oof": {
+          "cutoff": 0.995,
+          "f1": 0.9067007019783024
+        },
+        "hard_optimistic_oof": {
+          "cutoff": 0.5,
+          "f1": 0.9295145503514419
+        }
+      }
+    },
+    "source_hashes_match": true,
+    "replay": "Exact TP/FP/FN match on all 336 chips of both seeds",
+    "artifact_sha256": {
+      "evidence/experiments/hypotheses-20260919/af-hard-seed1/data_manifest.json": "38724fab691146278c59da4601a2dac91063561ee13c711efe4323678513471d",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed1/fold-0.json": "76cae8da6d111175413e17afd8ccfbd34586872ba9aa9b8bdfaa287080f6f7ee",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed1/fold-1.json": "811e44dd8b88f179aaa9c7429ba1ef242d1e926d0fe66222194dcd6caf4a49ca",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed1/fold-2.json": "6a3644cbd3253dead5b23e3dc719cce77e4280baa27fb282fd4330c18d25fe8f",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed1/fold-3.json": "4e0aa8b119c9b02c9a24f598f6d5992bfb45a517ae0b65a421fa56d80744cb11",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed1/fold-4.json": "2306cdb2a59d590fb42df02977c6c75e80b454b04a10db8a709f58cb2096fed7",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed1/manifest.json": "1aa5a34b7454ab5f5ddd00f5b1a4220c017c0b3c6509af10f93a80b5f8017a8b",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed1/replay.json": "1e92ed10a35a4195110e668b2df6c392323f8956f6d51f0c31c15920eef1f57d",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed1/summary.json": "03b555a334b212a1a9412941812f48f12a195d4f84c1ca9be3f275bba802d753",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed2/data_manifest.json": "38724fab691146278c59da4601a2dac91063561ee13c711efe4323678513471d",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed2/fold-0.json": "112c17254a2228b75b02642a7ce82c2093bd001aff77203f5b4b26df700d12e6",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed2/fold-1.json": "9ea62b4b6c9f50672ebea453fcb7ea9de050ed284f27f211340fb9bb9a53cee1",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed2/fold-2.json": "0248e5696d25fc1ba4d1490e2e71d43848f8deddb097e1ac54da011c2ea5512a",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed2/fold-3.json": "50192034900ab60f8b3f87487642b5cf181255e157828e15a7467f61eea070c0",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed2/fold-4.json": "52f83e63ec47896da3ceb648e8cee8c727655709dee60c5a365145074515b039",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed2/manifest.json": "b6c0089eb64fb45de8a0fc1fec14b4fbc3a11e28f058fc7958b941418d09c1c9",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed2/replay-complete.json": "0f162851a66da95f618a46168aaa4c78ec8fdeaa0ae5d1481297412a8af433b1",
+      "evidence/experiments/hypotheses-20260919/af-hard-seed2/summary.json": "2a838d9a455fab3bb7f9a1cf949c45c2b4a2e87e660e61fc093c516a54718c9e"
+    }
+  },
+  "limitations": [
+    "Folds are by chip: missing AF fire_event_id prevents proving event independence. Chip bootstrap may underestimate uncertainty.",
+    "Fit 214-215 plus 54 calibration chips per fold; historical 0.9052 used another protocol. Compare paired controls.",
+    "Actual fixed grid includes 1.0 due to float rounding, never selected; grid not changed after outcomes.",
+    "Original rasters and probabilities remain on k8plus; repository contains hashes, IDs, counts and replay results."
+  ],
+  "non_claims": [
+    "No hidden-test F1 or competition score established.",
+    "No event-independent generalization established.",
+    "No submission v13 change or new final model.",
+    "No test answers from FIRMS/VNP14/MOD14."
+  ]
+}

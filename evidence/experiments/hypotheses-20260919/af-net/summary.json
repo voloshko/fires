@@ -1,0 +1,75 @@
+{
+  "boost": {
+    "tp": 7099,
+    "fp": 864,
+    "fn": 599,
+    "precision": 0.8914981790782368,
+    "recall": 0.9221875811899195,
+    "f1": 0.9065832322329354
+  },
+  "network": {
+    "tp": 6741,
+    "fp": 791,
+    "fn": 957,
+    "precision": 0.8949814126394052,
+    "recall": 0.8756819953234607,
+    "f1": 0.8852265265922521,
+    "delta": -0.02135670564068326,
+    "ci95_chip_bootstrap": [
+      -0.030959436047213792,
+      -0.011043254378511481
+    ],
+    "accepted": false
+  },
+  "mixture": {
+    "tp": 7020,
+    "fp": 902,
+    "fn": 678,
+    "precision": 0.8861398636707902,
+    "recall": 0.911925175370226,
+    "f1": 0.8988476312419974,
+    "delta": -0.007735600990937952,
+    "ci95_chip_bootstrap": [
+      -0.014489022146915423,
+      -0.0015603399000529885
+    ],
+    "accepted": false
+  },
+  "seconds": 313.235454082489,
+  "threshold_grid": [
+    0.01,
+    0.02,
+    0.05,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95,
+    0.955,
+    0.96,
+    0.965,
+    0.97,
+    0.975,
+    0.98,
+    0.985,
+    0.99,
+    0.995,
+    0.999,
+    1.0
+  ],
+  "smoke": false,
+  "non_claims": [
+    "No hidden test evaluation.",
+    "Chip grouping cannot guarantee independent fire events.",
+    "No final420 model or submission produced by this screening run."
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-27",
+  "run_id": "SPEC-27-REPLAY-001",
+  "created_at": "2026-09-19T09:28:27.533054+00:00",
+  "status": "FAIL",
+  "evidence_class": "REPLAY",
+  "conclusion": "AF U-Net and its calibrated mixture fail to improve the paired HGB control; rejected tested recipe.",
+  "commands": [
+    "ssh k8plus 'cd ~/fires-hypotheses && OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 .venv/bin/python scripts/hypothesis_af_net.py --out research/af-net-reproduce'",
+    "ssh k8plus 'cd ~/fires-hypotheses && .venv/bin/python scripts/verify_af_net_hypothesis.py research/af-net-v1'"
+  ],
+  "acceptance": {
+    "summary": {
+      "boost": {
+        "tp": 7099,
+        "fp": 864,
+        "fn": 599,
+        "precision": 0.8914981790782368,
+        "recall": 0.9221875811899195,
+        "f1": 0.9065832322329354
+      },
+      "network": {
+        "tp": 6741,
+        "fp": 791,
+        "fn": 957,
+        "precision": 0.8949814126394052,
+        "recall": 0.8756819953234607,
+        "f1": 0.8852265265922521,
+        "delta": -0.02135670564068326,
+        "ci95_chip_bootstrap": [
+          -0.030959436047213792,
+          -0.011043254378511481
+        ],
+        "accepted": false
+      },
+      "mixture": {
+        "tp": 7020,
+        "fp": 902,
+        "fn": 678,
+        "precision": 0.8861398636707902,
+        "recall": 0.911925175370226,
+        "f1": 0.8988476312419974,
+        "delta": -0.007735600990937952,
+        "ci95_chip_bootstrap": [
+          -0.014489022146915423,
+          -0.0015603399000529885
+        ],
+        "accepted": false
+      },
+      "seconds": 313.235454082489,
+      "threshold_grid": [
+        0.01,
+        0.02,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9,
+        0.95,
+        0.955,
+        0.96,
+        0.965,
+        0.97,
+        0.975,
+        0.98,
+        0.985,
+        0.99,
+        0.995,
+        0.999,
+        1.0
+      ],
+      "smoke": false,
+      "non_claims": [
+        "No hidden test evaluation.",
+        "Chip grouping cannot guarantee independent fire events.",
+        "No final420 model or submission produced by this screening run."
+      ]
+    },
+    "artifacts_sha256": {
+      "evidence/experiments/hypotheses-20260919/af-net/data_manifest.json": "17fc5c1a63fa2342dd055953c7ec5b70015fc3f6584334d112e2ed30f8708ab5",
+      "evidence/experiments/hypotheses-20260919/af-net/diagnostics.json": "151c36f6076a95631fe45c261b8d195290be5d45bf371c984c59a4dac23d38ab",
+      "evidence/experiments/hypotheses-20260919/af-net/fold-0.json": "df3cc40e78d3d56a6e26bc53eeba76fb0444a77f5a343fa812ba7653718f003e",
+      "evidence/experiments/hypotheses-20260919/af-net/fold-1.json": "55db23d7763fb7b35c23264560c1b4bad385b026c02202d4b6dabdadc3e75219",
+      "evidence/experiments/hypotheses-20260919/af-net/fold-2.json": "ac075625475d130ae34c40e302ab4db600815f9fed17f1994de397416bd6a99b",
+      "evidence/experiments/hypotheses-20260919/af-net/fold-3.json": "be2d19c93f2b17ec09b047d5d85592a6ee492f55fcf8f2a8d9ee8b6753f88bd8",
+      "evidence/experiments/hypotheses-20260919/af-net/fold-4.json": "2636f70abb22d32fc969266f589e9e9f63675996f9b23788ed18980916bdc39c",
+      "evidence/experiments/hypotheses-20260919/af-net/manifest.json": "45bbfc6c20c9f3931192fa17499bc661cf31216ed9a03fa3e0cdbf9c81652440",
+      "evidence/experiments/hypotheses-20260919/af-net/summary.json": "3f267cfea36bd4a016d8732a664173e1643d8e08adbc90d363563ec945b50555"
+    },
+    "diagnostics": {
+      "status": "PASS",
+      "chips": 336,
+      "mismatches": [],
+      "optimistic_pooled_oof": {
+        "boost": {
+          "f1": 0.9065456405011506,
+          "weight": 0.0,
+          "cutoff": 0.995
+        },
+        "network": {
+          "f1": 0.8861972925707624,
+          "weight": 1.0,
+          "cutoff": 0.2
+        },
+        "mixture": {
+          "f1": 0.8994378513429107,
+          "weight": 0.3,
+          "cutoff": 0.7
+        }
+      },
+      "non_claims": [
+        "Pooled OOF grid maxima fit the same labels and are not nested evaluation.",
+        "Stored probabilities are float32; decision-boundary rounding can affect replay.",
+        "Does not independently retrain models."
+      ]
+    }
+  },
+  "limitations": [
+    "Data and full probability/weight artifacts reside on k8plus; hashes and scalar evidence are committed.",
+    "AF grouping is by chip, not a proven independent fire event.",
+    "This is self-checked execution evidence; source review is separate from independent retraining.",
+    "Negative result applies to depth5 width16, 100 epochs, CE[1,200]+Dice; does not rule out every neural architecture or loss.",
+    "Optimistic pooled OOF threshold/weight maxima are diagnostics only and remain below the paired control."
+  ],
+  "non_claims": [
+    "No hidden-test quality measured.",
+    "No proof of geographic/event-independent generalization.",
+    "No test answers obtained from FIRMS/VNP14/MOD14.",
+    "No automatic submission to organizers."
+  ]
+}

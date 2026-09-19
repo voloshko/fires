@@ -48,7 +48,10 @@
         "SPEC-11",
         "SPEC-12",
         "SPEC-13",
-        "SPEC-28"
+        "SPEC-28",
+        "SPEC-34",
+        "SPEC-35",
+        "SPEC-37"
       ]
     },
     "REQ-007": {
@@ -70,7 +73,11 @@
         "SPEC-27",
         "SPEC-29",
         "SPEC-30",
-        "SPEC-31"
+        "SPEC-31",
+        "SPEC-32",
+        "SPEC-33",
+        "SPEC-36",
+        "SPEC-38"
       ]
     }
   },
@@ -323,7 +330,7 @@
         "SPEC-17",
         "SPEC-19"
       ],
-      "status": "planned"
+      "status": "rejected"
     },
     "SPEC-28": {
       "title": "Многодатная аугментация обучающих чипов BS из Planetary Computer",
@@ -362,6 +369,72 @@
         "SPEC-26"
       ],
       "status": "rejected"
+    },
+    "SPEC-32": {
+      "title": "Полные спектральные пары и сиамская сеть BS",
+      "file": "specs/SPEC-32-bs-raw-pairs.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "active"
+    },
+    "SPEC-33": {
+      "title": "Трудные отрицательные примеры AF с вложенной оценкой",
+      "file": "specs/SPEC-33-af-hard-negatives.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "implemented"
+    },
+    "SPEC-34": {
+      "title": "Внешние размеченные пожары для предобучения BS",
+      "file": "specs/SPEC-34-bs-external-pretrain.md",
+      "requirement": "REQ-006",
+      "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "active"
+    },
+    "SPEC-35": {
+      "title": "Пилот многодатных пар BS с контролем метки",
+      "file": "specs/SPEC-35-bs-temporal-pilot.md",
+      "requirement": "REQ-006",
+      "depends_on": [
+        "SPEC-28"
+      ],
+      "status": "active"
+    },
+    "SPEC-36": {
+      "title": "Изолированный стенд проверки гипотез и честной оценки",
+      "file": "specs/SPEC-36-hypothesis-evaluation.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "active"
+    },
+    "SPEC-37": {
+      "title": "Масштабированная pre-only аугментация BS",
+      "file": "specs/SPEC-37-bs-pre-only-expansion.md",
+      "requirement": "REQ-006",
+      "depends_on": [
+        "SPEC-35",
+        "SPEC-19"
+      ],
+      "status": "active"
+    },
+    "SPEC-38": {
+      "title": "Финальный AF hard-negative кандидат поверх BS v13",
+      "file": "specs/SPEC-38-af-hard-final-candidate.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-33",
+        "SPEC-20",
+        "SPEC-26"
+      ],
+      "status": "implemented"
     }
   }
 }

@@ -1,0 +1,976 @@
+{
+  "records": [
+    {
+      "image": "research/external-train-v1/samples/EMSR382_AOI01_01_S2L2A.tif",
+      "event": "EMSR382",
+      "accepted": true,
+      "bbox": [
+        -15.74085642161132,
+        27.973893140535285,
+        -15.57489850480451,
+        28.08821970544664
+      ],
+      "dates": [
+        "2019/08/29_11:53:38"
+      ],
+      "grid_20m": [
+        638,
+        819
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR593_AOI01_01_S2L2A.tif",
+      "event": "EMSR593",
+      "accepted": true,
+      "bbox": [
+        24.612596061141602,
+        35.095242770013606,
+        24.679243616163156,
+        35.15735458865175
+      ],
+      "dates": [
+        "2022/07/19_09:20:45"
+      ],
+      "grid_20m": [
+        352,
+        312
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR627_AOI01_01_S2L2A.tif",
+      "event": "EMSR627",
+      "accepted": true,
+      "bbox": [
+        19.343553912734812,
+        47.09287773870897,
+        19.423840491357208,
+        47.147445936000054
+      ],
+      "dates": [
+        "2022/08/27_09:47:43"
+      ],
+      "grid_20m": [
+        310,
+        311
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR592_AOI02_01_S2L2A.tif",
+      "event": "EMSR592",
+      "accepted": true,
+      "bbox": [
+        -1.262595,
+        44.50404870863534,
+        -1.131613581257078,
+        44.60525546888449
+      ],
+      "dates": [
+        "2022/08/01_11:08:57"
+      ],
+      "grid_20m": [
+        574,
+        533
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR592_AOI01_01_S2L2A.tif",
+      "event": "EMSR592",
+      "accepted": true,
+      "bbox": [
+        -0.656848134039975,
+        44.45329736356939,
+        -0.43957293711136,
+        44.59166587419448
+      ],
+      "dates": [
+        "2022/08/01_11:08:53"
+      ],
+      "grid_20m": [
+        795,
+        887
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR390_AOI01_01_S2L2A.tif",
+      "event": "EMSR390",
+      "accepted": true,
+      "bbox": [
+        20.775723624148437,
+        37.65933862645938,
+        20.842044530044074,
+        37.72312412548979
+      ],
+      "dates": [
+        "2019/09/16_09:30:11"
+      ],
+      "grid_20m": [
+        355,
+        294
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR453_AOI01_01_S2L2A.tif",
+      "event": "EMSR453",
+      "accepted": true,
+      "bbox": [
+        8.785600967134968,
+        40.41431600902564,
+        8.908139678797951,
+        40.47671961720912
+      ],
+      "dates": [
+        "2020/08/14_10:29:47"
+      ],
+      "grid_20m": [
+        348,
+        521
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR378_AOI01_01_S2L2A.tif",
+      "event": "EMSR378",
+      "accepted": true,
+      "bbox": [
+        -53.25243908973358,
+        66.95912243712746,
+        -53.087566350732274,
+        67.02522349602059
+      ],
+      "dates": [
+        "2019/08/18_15:34:01"
+      ],
+      "grid_20m": [
+        381,
+        373
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR449_AOI01_01_S2L2A.tif",
+      "event": "EMSR449",
+      "accepted": true,
+      "bbox": [
+        13.31984213000004,
+        42.37019060000006,
+        13.411026585000059,
+        42.45246345000004
+      ],
+      "dates": [
+        "2020/08/13_10:08:59"
+      ],
+      "grid_20m": [
+        465,
+        385
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR515_AOI01_01_S2L2A.tif",
+      "event": "EMSR515",
+      "accepted": true,
+      "bbox": [
+        33.099171745000035,
+        34.82943223400002,
+        33.25116980400003,
+        34.90173484500008
+      ],
+      "dates": [
+        "2021/07/17_08:40:35"
+      ],
+      "grid_20m": [
+        403,
+        696
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR534_AOI01_02_S2L2A.tif",
+      "event": "EMSR534",
+      "accepted": true,
+      "bbox": [
+        15.658897939000042,
+        38.08267078950007,
+        15.833411298666704,
+        38.25393487100007
+      ],
+      "dates": [
+        "2021/09/16_09:50:01"
+      ],
+      "grid_20m": [
+        957,
+        772
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR542_AOI01_01_S2L2A.tif",
+      "event": "EMSR542",
+      "accepted": true,
+      "bbox": [
+        23.976637061392527,
+        37.70382833362759,
+        24.044239888974293,
+        37.76880730717079
+      ],
+      "dates": [
+        "2021/08/23_09:20:06"
+      ],
+      "grid_20m": [
+        371,
+        310
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR638_AOI01_01_S2L2A.tif",
+      "event": "EMSR638",
+      "accepted": true,
+      "bbox": [
+        25.26565222629925,
+        41.19525848147025,
+        25.343673460030704,
+        41.26502411520925
+      ],
+      "dates": [
+        "2022/12/21_09:19:02"
+      ],
+      "grid_20m": [
+        394,
+        335
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR608_AOI01_01_S2L2A.tif",
+      "event": "EMSR608",
+      "accepted": true,
+      "bbox": [
+        21.607352687683285,
+        37.55931412857406,
+        21.67610386638563,
+        37.62188542604473
+      ],
+      "dates": [
+        "2022/07/27_09:30:13"
+      ],
+      "grid_20m": [
+        350,
+        306
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR230_AOI01_01_S2L2A.tif",
+      "event": "EMSR230",
+      "accepted": true,
+      "bbox": [
+        20.92221783032258,
+        47.439466790345634,
+        21.000338939413247,
+        47.491709286687964
+      ],
+      "dates": [
+        "2017/08/15_09:31:03"
+      ],
+      "grid_20m": [
+        291,
+        295
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR541_AOI01_01_S2L2A.tif",
+      "event": "EMSR541",
+      "accepted": true,
+      "bbox": [
+        6.319933214000059,
+        43.22569990000005,
+        6.532959105000032,
+        43.38568093500004
+      ],
+      "dates": [
+        "2021/08/22_10:38:45"
+      ],
+      "grid_20m": [
+        916,
+        892
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR458_AOI01_01_S2L2A.tif",
+      "event": "EMSR458",
+      "accepted": true,
+      "bbox": [
+        -5.779280622763307,
+        40.097669422083804,
+        -5.668690869875426,
+        40.188289249943374
+      ],
+      "dates": [
+        "2020/09/03_11:20:15"
+      ],
+      "grid_20m": [
+        518,
+        487
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR603_AOI01_01_S2L2A.tif",
+      "event": "EMSR603",
+      "accepted": true,
+      "bbox": [
+        -3.908309390999932,
+        41.04083787700006,
+        -3.819962715999964,
+        41.10190423600005
+      ],
+      "dates": [
+        "2022/07/17_11:09:57"
+      ],
+      "grid_20m": [
+        343,
+        375
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR366_AOI01_01_S2L2A.tif",
+      "event": "EMSR366",
+      "accepted": true,
+      "bbox": [
+        11.097908940259652,
+        53.23207071749186,
+        11.191319175159094,
+        53.304819997766835
+      ],
+      "dates": [
+        "2019/07/26_10:26:05"
+      ],
+      "grid_20m": [
+        414,
+        324
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR582_AOI02_01_S2L2A.tif",
+      "event": "EMSR582",
+      "accepted": true,
+      "bbox": [
+        12.871017292000033,
+        52.01584002800007,
+        12.966536463000068,
+        52.06727573000006
+      ],
+      "dates": [
+        "2022/07/12_10:16:31"
+      ],
+      "grid_20m": [
+        296,
+        336
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR582_AOI01_01_S2L2A.tif",
+      "event": "EMSR582",
+      "accepted": true,
+      "bbox": [
+        12.90741143400004,
+        52.24793054600008,
+        13.00649730400005,
+        52.305260245000056
+      ],
+      "dates": [
+        "2022/06/27_10:16:25"
+      ],
+      "grid_20m": [
+        329,
+        348
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR647_AOI07_05_S2L2A.tif",
+      "event": "EMSR647",
+      "accepted": true,
+      "bbox": [
+        -72.31464049638392,
+        -36.38881500254954,
+        -72.14239633284285,
+        -36.236479579989194
+      ],
+      "dates": [
+        "2023/02/17_14:53:02"
+      ],
+      "grid_20m": [
+        868,
+        798
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR647_AOI07_04_S2L2A.tif",
+      "event": "EMSR647",
+      "accepted": true,
+      "bbox": [
+        -72.486884659925,
+        -36.236479579989194,
+        -72.31464049638392,
+        -36.084144157428845
+      ],
+      "dates": [
+        "2023/02/17_14:52:48"
+      ],
+      "grid_20m": [
+        866,
+        798
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR625_AOI02_02_S2L2A.tif",
+      "event": "EMSR625",
+      "accepted": true,
+      "bbox": [
+        -0.20261965613170801,
+        38.7308977369637,
+        -0.07990249915299602,
+        38.85087625388231
+      ],
+      "dates": [
+        "2022/08/18_11:00:26"
+      ],
+      "grid_20m": [
+        683,
+        555
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR625_AOI02_01_S2L2A.tif",
+      "event": "EMSR625",
+      "accepted": true,
+      "bbox": [
+        -0.32533681311042,
+        38.7308977369637,
+        -0.20261965613170801,
+        38.85087625388231
+      ],
+      "dates": [
+        "2022/08/18_11:00:26"
+      ],
+      "grid_20m": [
+        682,
+        553
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR625_AOI01_02_S2L2A.tif",
+      "event": "EMSR625",
+      "accepted": true,
+      "bbox": [
+        -0.814653501132492,
+        39.883170244620615,
+        -0.59883123329559,
+        39.976405464326156
+      ],
+      "dates": [
+        "2022/08/23_11:00:01"
+      ],
+      "grid_20m": [
+        542,
+        936
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR524_AOI01_01_S2L2A.tif",
+      "event": "EMSR524",
+      "accepted": true,
+      "bbox": [
+        24.815073813235422,
+        57.301861120398755,
+        24.91059451266576,
+        57.386944418167424
+      ],
+      "dates": [
+        "2021/09/04_09:54:35"
+      ],
+      "grid_20m": [
+        483,
+        303
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR303_AOI01_01_S2L2A.tif",
+      "event": "EMSR303",
+      "accepted": true,
+      "bbox": [
+        -8.62148232547263,
+        37.19761042331915,
+        -8.484859613527398,
+        37.30710517231698
+      ],
+      "dates": [
+        "2018/08/13_11:30:20"
+      ],
+      "grid_20m": [
+        611,
+        609
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR303_AOI01_03_S2L2A.tif",
+      "event": "EMSR303",
+      "accepted": true,
+      "bbox": [
+        -8.484859613527398,
+        37.19761042331915,
+        -8.348236901582167,
+        37.30710517231698
+      ],
+      "dates": [
+        "2018/08/13_11:30:20"
+      ],
+      "grid_20m": [
+        612,
+        610
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR303_AOI01_04_S2L2A.tif",
+      "event": "EMSR303",
+      "accepted": true,
+      "bbox": [
+        -8.484859613527398,
+        37.30710517231698,
+        -8.348236901582167,
+        37.41659992131481
+      ],
+      "dates": [
+        "2018/08/13_11:30:20"
+      ],
+      "grid_20m": [
+        612,
+        609
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR303_AOI01_02_S2L2A.tif",
+      "event": "EMSR303",
+      "accepted": true,
+      "bbox": [
+        -8.62148232547263,
+        37.30710517231698,
+        -8.484859613527398,
+        37.41659992131481
+      ],
+      "dates": [
+        "2018/08/13_11:30:20"
+      ],
+      "grid_20m": [
+        611,
+        608
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR587_AOI01_01_S2L2A.tif",
+      "event": "EMSR587",
+      "accepted": true,
+      "bbox": [
+        21.51964276800004,
+        37.87036713600003,
+        21.604482377000068,
+        37.95058054900005
+      ],
+      "dates": [
+        "2022/07/12_09:30:06"
+      ],
+      "grid_20m": [
+        448,
+        376
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR523_AOI07_01_S2L2A.tif",
+      "event": "EMSR523",
+      "accepted": true,
+      "bbox": [
+        8.570865999049326,
+        40.54795151701556,
+        8.64785650331614,
+        40.608672329814674
+      ],
+      "dates": [
+        "2021/07/30_10:29:31"
+      ],
+      "grid_20m": [
+        339,
+        328
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR523_AOI02_03_S2L2A.tif",
+      "event": "EMSR523",
+      "accepted": true,
+      "bbox": [
+        8.675125335940402,
+        40.11289091478882,
+        8.880827502412732,
+        40.26511274890855
+      ],
+      "dates": [
+        "2021/07/30_10:29:45"
+      ],
+      "grid_20m": [
+        848,
+        878
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR539_AOI01_01_S2L2A.tif",
+      "event": "EMSR539",
+      "accepted": true,
+      "bbox": [
+        -7.621224694828996,
+        37.17190293368072,
+        -7.516546193930644,
+        37.30956233212239
+      ],
+      "dates": [
+        "2021/08/17_11:30:54"
+      ],
+      "grid_20m": [
+        771,
+        476
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR367_AOI01_01_S2L2A.tif",
+      "event": "EMSR367",
+      "accepted": true,
+      "bbox": [
+        -4.50516446599994,
+        40.240212805000056,
+        -4.380748338999979,
+        40.30886600400004
+      ],
+      "dates": [
+        "2019/07/01_11:20:12"
+      ],
+      "grid_20m": [
+        390,
+        536
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR305_AOI01_01_S2L2A.tif",
+      "event": "EMSR305",
+      "accepted": true,
+      "bbox": [
+        -0.370574588999943,
+        38.930208083000025,
+        -0.23156308199998,
+        39.02126345900007
+      ],
+      "dates": [
+        "2018/08/24_10:50:58"
+      ],
+      "grid_20m": [
+        524,
+        618
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR610_AOI01_01_S2L2A.tif",
+      "event": "EMSR610",
+      "accepted": true,
+      "bbox": [
+        14.230851486000063,
+        50.85373092400005,
+        14.35572389500004,
+        50.91581699500006
+      ],
+      "dates": [
+        "2022/09/05_10:16:49"
+      ],
+      "grid_20m": [
+        350,
+        443
+      ]
+    },
+    {
+      "image": "research/external-train-v1/samples/EMSR447_AOI01_01_S2L2A.tif",
+      "event": "EMSR447",
+      "accepted": true,
+      "bbox": [
+        22.903477028876893,
+        37.78269396445841,
+        23.000082674883927,
+        37.88592940970122
+      ],
+      "dates": [
+        "2020/07/24_09:19:56"
+      ],
+      "grid_20m": [
+        582,
+        438
+      ]
+    }
+  ],
+  "patches": [
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR382_AOI01_01_0_0.npz",
+      "sha256": "3f5efc5b9f146b31103304e94f8f3e5c4d481bb1e910d8f8ef7be04156ce609f",
+      "event": "EMSR382"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR382_AOI01_01_256_0.npz",
+      "sha256": "0ef4436d0bb44afbf9cd44bb23bca1de5ec309b66e21819ef3752cd02bf93402",
+      "event": "EMSR382"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR593_AOI01_01_0_0.npz",
+      "sha256": "c3522731346c7c4b657b7733644ca018267a47eea9cc8bc21e175e0f205e9f9b",
+      "event": "EMSR593"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR627_AOI01_01_0_0.npz",
+      "sha256": "fdb7c770f2613c03f0e2ac483c745bd5540b821a3de93b196fee2d6c00b0f21d",
+      "event": "EMSR627"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR592_AOI02_01_0_0.npz",
+      "sha256": "0f671a2d4b82e377b42c09bd6929c08a359c4136c957c1242cea910e8771f722",
+      "event": "EMSR592"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR592_AOI01_01_0_0.npz",
+      "sha256": "feaf12117b39f347c1623b5b7fabbcae5503b9a4d029256a6ba4696f2e972088",
+      "event": "EMSR592"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR592_AOI01_01_256_0.npz",
+      "sha256": "db95be0ae1d4f3d327e6cc9002eb593a2e8ce3371ee908779bd5f3cd5d3e0e78",
+      "event": "EMSR592"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR592_AOI01_01_0_256.npz",
+      "sha256": "96833fd8793d1f3d399266c90f56618f650b67958efb26c61dd8ea7504498127",
+      "event": "EMSR592"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR390_AOI01_01_0_0.npz",
+      "sha256": "81ad5928562a3969d55ee1943e223ae092f5759ec4d7ad81dbc12dd635a5f0ff",
+      "event": "EMSR390"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR453_AOI01_01_0_0.npz",
+      "sha256": "7060ea022f631d0455842c3604edc391c1cecf116c3e5fb9ea48fce335ce3fc7",
+      "event": "EMSR453"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR378_AOI01_01_0_0.npz",
+      "sha256": "dd14001add10db8aebc44e8d15f2c03fc2956cc2fe2dfc1bb93b1735881a96aa",
+      "event": "EMSR378"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR449_AOI01_01_0_0.npz",
+      "sha256": "42e68dc596598cf0d4d894e2f695f4a111f3ca83948ea4c18213508f6b299ad8",
+      "event": "EMSR449"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR515_AOI01_01_44_0.npz",
+      "sha256": "224e3b07541f3989f72f023db886b044ba402bb1371831fdcbf7f663b0d06adb",
+      "event": "EMSR515"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR534_AOI01_02_0_0.npz",
+      "sha256": "3c44ca3c8768705de892536848b8052e8ce2e2703ffc935cbf13b433beff35ce",
+      "event": "EMSR534"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR534_AOI01_02_256_0.npz",
+      "sha256": "70cca5fae75374593562434129262f63b4b21c748791ee92fe123578a80c46a0",
+      "event": "EMSR534"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR534_AOI01_02_0_256.npz",
+      "sha256": "5ad708acda7afb407a001026605c20a5c0ece7ef5f3bb38cbc5c1c07a0be6e3c",
+      "event": "EMSR534"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR534_AOI01_02_256_256.npz",
+      "sha256": "5ec2095c62b062d8d6ccfadf44bd15932e806e35ece3784810a62a5cf93cb7de",
+      "event": "EMSR534"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR542_AOI01_01_0_0.npz",
+      "sha256": "4b5cb47c38b860d2ea96cce2f04916be566ec5adfbd46ba91e7d015b688c7e3d",
+      "event": "EMSR542"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR638_AOI01_01_0_0.npz",
+      "sha256": "5a1d4fd704bc507f8c887908ce89cdf2cdb039a52d593a99286c4145875d83f8",
+      "event": "EMSR638"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR608_AOI01_01_0_0.npz",
+      "sha256": "b55086e935c6f3208e007763f442207c04fa58a536278a1ecc439567de77c2fe",
+      "event": "EMSR608"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR230_AOI01_01_0_0.npz",
+      "sha256": "90056c3b29638cbe3773b73179545841d27440bc07a39c2dae626eb5861fddb7",
+      "event": "EMSR230"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR541_AOI01_01_0_0.npz",
+      "sha256": "584e64de983381162a15a0bf251864165805c3b78a05eb1da4e77f86809f7864",
+      "event": "EMSR541"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR541_AOI01_01_256_0.npz",
+      "sha256": "9932a69342e6e2027ddbc4fb48c25e8a4c9e43143388e75549f3aa7d36abd50d",
+      "event": "EMSR541"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR541_AOI01_01_0_256.npz",
+      "sha256": "be7e18163fc5653f0d398914d458a78dbf8f202ba4dded6e99a4c6fceca8f6fe",
+      "event": "EMSR541"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR541_AOI01_01_256_256.npz",
+      "sha256": "e702e1f2d991a4ed3a202f28f583dc109dcfdf6e24075bff42efe0b9e190b94c",
+      "event": "EMSR541"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR458_AOI01_01_0_0.npz",
+      "sha256": "6750dddfd32f606febd5086140bc1ceb6dc537e26f42d5532f4d5d15e6789d64",
+      "event": "EMSR458"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR603_AOI01_01_0_0.npz",
+      "sha256": "d7181851c3e34208ad71c348271562a25cd13081bfcb27fccf88d3ad27823c88",
+      "event": "EMSR603"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR366_AOI01_01_0_0.npz",
+      "sha256": "9000b7390027a9428e7049f1993277b1b93e76aa8ea8e699112295468f282caa",
+      "event": "EMSR366"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR582_AOI02_01_0_0.npz",
+      "sha256": "dfb7220bbbc243f80fa65299f4eab7fb7b7457db5b1a2b714eacfbc31ed23d9c",
+      "event": "EMSR582"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR582_AOI01_01_0_0.npz",
+      "sha256": "6fe35b58afe91e2bda5dcb6bc0c239fd4e23bb8a85843cfe60485ccc3166ef33",
+      "event": "EMSR582"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR647_AOI07_05_0_0.npz",
+      "sha256": "2da622a62e61e9ed74e6d472c5109fb1b0583478634df9955d3573bfb9db511e",
+      "event": "EMSR647"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR647_AOI07_05_256_0.npz",
+      "sha256": "47ec9a7ff0772dbefbef6bf6d9aaa2e422f90a701c179e38c0a69271e32e115f",
+      "event": "EMSR647"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR647_AOI07_05_0_256.npz",
+      "sha256": "0b1003bcff3e4948939a80cd8a6840bea059b82a0a88f0cea62959e022f6d5e4",
+      "event": "EMSR647"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR647_AOI07_04_0_0.npz",
+      "sha256": "a731521ccc9c6c16caed83a72319918643de7e62d76f877821e5db5dfb7fe02f",
+      "event": "EMSR647"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR625_AOI02_02_0_0.npz",
+      "sha256": "6a9f85a186785f295a5916e114be5dad40f676e057dad370548834060e0fdf21",
+      "event": "EMSR625"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR625_AOI02_01_0_0.npz",
+      "sha256": "45336cab91e9d364eadf6a21723b3e3ab89f6f535d29847cdfde36bf7693d083",
+      "event": "EMSR625"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR625_AOI01_02_0_0.npz",
+      "sha256": "b24cf5b38f98a41ee54f28b1b6e7f6dd6637f9a81fc94b88c43b655bad8300b9",
+      "event": "EMSR625"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR625_AOI01_02_256_0.npz",
+      "sha256": "ef638833294c2035c3c963b705312a5d08ecd79152f3687b3e7783ffb3644310",
+      "event": "EMSR625"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR524_AOI01_01_0_0.npz",
+      "sha256": "8e25905736a4ba1beff1f189ee50928a8da6dc5bb7643c3426ef7596e691ed59",
+      "event": "EMSR524"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR303_AOI01_01_0_0.npz",
+      "sha256": "ffc5d808e05e37feadcc78a934a8403f961c95e9d7eeda3914bb4406e1bd8d43",
+      "event": "EMSR303"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR303_AOI01_03_0_0.npz",
+      "sha256": "271333e2c06ff124d4d941cd07ed05371a1f17318e1c95cb81ca604397a89443",
+      "event": "EMSR303"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR303_AOI01_04_0_0.npz",
+      "sha256": "123ebf81031cf9e1f41d2cec0297f73f1c466774244308f72c1e08fd1ab1a133",
+      "event": "EMSR303"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR303_AOI01_02_0_0.npz",
+      "sha256": "5c1e5385247edcc2c67a32d22c867cf43227ff7146bde6dd69906b9d4aebaf54",
+      "event": "EMSR303"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR587_AOI01_01_0_0.npz",
+      "sha256": "c2c2802d2a9e4cae712f8f5f15f95760216d7da95f0c9de2f24fc2f1f70577ad",
+      "event": "EMSR587"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR523_AOI07_01_0_0.npz",
+      "sha256": "faf42132482a23c39e8308c1ecf1e2ac82b7ec25054a9b08ab4cf76341c66747",
+      "event": "EMSR523"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR523_AOI02_03_0_0.npz",
+      "sha256": "b4be3ffd4d95f1a0c623b1b273246547815a86fdc24370ba7a52f350f9004254",
+      "event": "EMSR523"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR523_AOI02_03_256_0.npz",
+      "sha256": "4195c03c1b30635ead5659d552ff2dff7f7c881e3d00e723fd0b6395dee9ae77",
+      "event": "EMSR523"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR523_AOI02_03_0_256.npz",
+      "sha256": "913d3611dfc99d37fbafd5b52a59b10c175a3bb5e0dd4e3f9f1b36aeaecbeb5f",
+      "event": "EMSR523"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR539_AOI01_01_0_162.npz",
+      "sha256": "d70d87ad3e700b0c719169ea0a7de913b5523aab2df46ed4f9ae1dbd67156797",
+      "event": "EMSR539"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR367_AOI01_01_24_0.npz",
+      "sha256": "13f8cfd6cf494ce51bf2aeaea075ab9ce3bd2215f300d6e537d8ad192bc437d3",
+      "event": "EMSR367"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR305_AOI01_01_0_0.npz",
+      "sha256": "92a74c452a26b0e3d7e71b6269823f1f95238f6c7e4afdb803c15d1bd411cb2f",
+      "event": "EMSR305"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR610_AOI01_01_0_0.npz",
+      "sha256": "c3c696d6fb779f3489289e85c857718cae39489cdb8e3015ee8a52f9e789c154",
+      "event": "EMSR610"
+    },
+    {
+      "file": "research/external-train-v1/patches-v2/EMSR447_AOI01_01_0_0.npz",
+      "sha256": "a3e53d497109f3abdccc3261a69dbbd7b8388b4e383af40789c18b89fdc50acb",
+      "event": "EMSR447"
+    }
+  ],
+  "events": 30,
+  "minimum_events": 20,
+  "eligible": true
+}

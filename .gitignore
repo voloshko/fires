@@ -12,3 +12,6 @@ data/*
 
 # Рабочее состояние оркестратора: телеметрия сессий, к проекту отношения не имеет.
 .omc/
+
+# Isolated experiment runtime; reviewed receipts live under evidence/.
+research/

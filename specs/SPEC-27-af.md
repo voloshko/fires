@@ -1,6 +1,6 @@
 # SPEC-27: Свёрточная сеть для детекции активного горения (AF)
 
-Status: planned
+Status: rejected
 
 Requirement: REQ-007
 
@@ -57,3 +57,18 @@ opened. The Status line above is flipped ONLY together with writing this
 section, and only by the orchestrating session — never by an implementing
 subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
 -->
+
+## Resolution
+
+Проверенный рецепт отвергнут: U-Net depth5 width16, 100 эпох, batch8,
+13 исходных каналов, CE [1,200] + Dice, пять внешних фолдов по 336 чипам
+и отдельная внутренняя calibration. Парный HGB F1 0.906583; сеть 0.885227
+(delta -0.021357, 95% chip-bootstrap [-0.030959,-0.011043]); смесь 0.898848
+(delta -0.007736, интервал [-0.014489,-0.001560]).
+Даже оптимистические pooled OOF максимумы ниже контроля: сеть 0.886197,
+смесь 0.899438, HGB 0.906546. Пересчёт сохранённых вероятностей совпал
+по всем 336 чипам, без расхождений TP/FP/FN. Receipt SPEC-27-REPLAY-001 FAIL.
+
+Финальная сеть и интеграция не выполнялись: условие принятия не выполнено.
+Это не запрет всех AF-сетей, а отрицательный результат фиксированной
+конфигурации. Между тем SPEC-33 дала более сильный HGB: nested F1 .9279–.9299.
