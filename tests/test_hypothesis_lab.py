@@ -103,3 +103,18 @@ def test_bs_confirmation_excludes_selection_and_keeps_events_whole():
     assert sorted(seen)==sorted(dev)
     m.loc[20,'fire_event_id']='e0'
     with pytest.raises(ValueError): bs_confirmation_split(m,dev,selection,0)
+
+
+def test_manifest_rejects_unfrozen_augmentation(monkeypatch):
+    import argparse
+    from scripts.hypothesis_lab import manifest
+    monkeypatch.setenv('ROT90','1')
+    with pytest.raises(ValueError,match='ROT90'): manifest(argparse.Namespace())
+    monkeypatch.setenv('ROT90','0');monkeypatch.setenv('FEATURES','s1')
+    with pytest.raises(ValueError,match='FEATURES'): manifest(argparse.Namespace())
+
+
+def test_repository_scripts_package_wins():
+    import scripts
+    from pathlib import Path
+    assert Path(scripts.__file__).resolve()==Path(__file__).resolve().parents[1]/'scripts/__init__.py'

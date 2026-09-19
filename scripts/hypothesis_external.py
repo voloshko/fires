@@ -79,7 +79,7 @@ def prepare(args):
     out=Path(args.out); downloaded=json.loads((out/'download.json').read_text()); source=json.loads((out/'source.json').read_text())
     if source['license']!='cc-by-4.0': raise ValueError('license changed')
     d,fit,tune=load_split('data/comp/train/bs','data/comp/split_bs.json'); local=[]
-    for c in fit+tune:
+    for c in d.chip_ids():
         with rasterio.open(f'data/comp/train/bs/sentinel2_pre/{c}_Sentinel-2_pre.tif') as ds: local.append(transform_bounds(ds.crs,'EPSG:4326',*ds.bounds))
     def overlaps(a,b): return a[0]<b[2] and b[0]<a[2] and a[1]<b[3] and b[1]<a[3]
     records=[]; patches=[]; root=out/'patches-v2'; root.mkdir(exist_ok=True); per_event={}
@@ -136,10 +136,17 @@ def pretrain(args):
     from src.comp.hypothesis_models import masked_binary_loss
     out=Path(args.out); prepared=json.loads((out/'prepared-v2.json').read_text())
     if not prepared['eligible']: raise RuntimeError('fewer than 20 eligible events')
+    if not (out/'overlap-all-train.json').exists(): audit_overlap(args)
+    audit=json.loads((out/'overlap-all-train.json').read_text())
+    if audit['status']!='PASS' or audit['prepared_sha256']!=digest(out/'prepared-v2.json'): raise ValueError('external overlap audit missing or stale')
+    for row in audit['local_geometries']:
+        if digest(Path('data/comp/train/bs/sentinel2_pre')/f"{row['chip']}_Sentinel-2_pre.tif")!=row['sha256']: raise ValueError('local geometry source changed')
     result=out/'pretrain'; result.mkdir(exist_ok=True); write_json(result/'manifest.json',manifest(args))
+    write_json(result/'data_manifest.json',dict(prepared_sha256=digest(out/'prepared-v2.json'),overlap_audit_sha256=digest(out/'overlap-all-train.json'),patches=prepared['patches']))
     torch.manual_seed(20260918); torch.set_num_threads(4); rng=np.random.default_rng(20260918)
     xs=[];ys=[]
     for r in prepared['patches']:
+        if digest(r['file'])!=r['sha256']: raise ValueError('external patch hash mismatch')
         z=np.load(r['file']);xs.append(z['image']);ys.append(z['mask'].astype(np.int64))
     flat=np.concatenate([x[:,y!=255][:,::37].astype(np.float32) for x,y in zip(xs,ys)],axis=1); mean=flat.mean(1); std=np.maximum(flat.std(1),1e-3); del flat
     X=torch.stack([torch.from_numpy(((x.astype(np.float32)-mean[:,None,None])/std[:,None,None]).astype(np.float16)) for x in xs]).cuda();Y=torch.as_tensor(np.stack(ys),device='cuda')
@@ -170,6 +177,29 @@ def smoke(args):
     write_json(out/'smoke.json',result); print(json.dumps(result))
 
 
+def audit_overlap(args):
+    import rasterio
+    from rasterio.warp import transform_bounds
+    from src.comp.chips import BsDataset
+    out=Path(args.out); prepared=json.loads((out/'prepared-v2.json').read_text())
+    dataset=BsDataset('data/comp/train/bs'); local=[]
+    for chip in dataset.chip_ids():
+        path=Path('data/comp/train/bs/sentinel2_pre')/f'{chip}_Sentinel-2_pre.tif'
+        with rasterio.open(path) as ds: bbox=transform_bounds(ds.crs,'EPSG:4326',*ds.bounds)
+        local.append(dict(chip=chip,bbox=bbox,sha256=digest(path)))
+    overlaps=[]
+    for record in prepared['records']:
+        if not record['accepted']: continue
+        a=record['bbox']
+        for row in local:
+            b=row['bbox']
+            if a[0]<b[2] and b[0]<a[2] and a[1]<b[3] and b[1]<a[3]: overlaps.append(dict(external=record['image'],local=row['chip']))
+    result=dict(status='FAIL' if overlaps else 'PASS',prepared_sha256=digest(out/'prepared-v2.json'),local_geometries=local,overlaps=overlaps,labels_read=False)
+    write_json(out/'overlap-all-train.json',result)
+    print('overlap audit',result['status'],'local geometries',len(local),'overlaps',len(overlaps))
+    if overlaps: raise ValueError('external/local training geographic overlap')
+
+
 def main():
-    p=argparse.ArgumentParser();p.add_argument('task',choices=['download','prepare','pretrain','smoke']);p.add_argument('--out',default='research/external-train-v1');p.add_argument('--events',type=int,default=30);args=p.parse_args();{'download':download,'prepare':prepare,'pretrain':pretrain,'smoke':smoke}[args.task](args)
+    p=argparse.ArgumentParser();p.add_argument('task',choices=['download','prepare','pretrain','smoke','audit-overlap']);p.add_argument('--out',default='research/external-train-v1');p.add_argument('--events',type=int,default=30);args=p.parse_args();{'download':download,'prepare':prepare,'pretrain':pretrain,'smoke':smoke,'audit-overlap':audit_overlap}[args.task](args)
 if __name__=='__main__':main()
