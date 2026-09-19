@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-35",
+  "run_id": "SPEC-35-REPLAY-001",
+  "created_at": "2026-09-19T11:39:41.187215+00:00",
+  "status": "FAIL",
+  "conclusion": "Five-chip pre-only augmentation fails the frozen two-seed +.005 W screening criterion.",
+  "commands": [
+    "python scripts/hypothesis_bs.py train --variant optical --seed 20260918 --extra research/temporal-pre-v1 --out research/bs-temporal-20260918-v1",
+    "python scripts/hypothesis_bs.py train --variant optical --seed 20260919 --extra research/temporal-pre-v1 --out research/bs-temporal-20260919-v1",
+    "python scripts/summarize_hypothesis_bs.py --out research/bs-temporal-pilot-screening-v1.json"
+  ],
+  "acceptance": {
+    "mean_single_seed_weighted": 0.7382944124596028,
+    "paired_control": "optical",
+    "delta_to_control": -0.005491421053119061,
+    "screening_pass": false,
+    "two_seed_ensemble": {
+      "all_pixels": {
+        "iou_burn": 0.7668615889315048,
+        "miou_sev": 0.731828533218328,
+        "weighted": 0.7506924862946539,
+        "per_class": [
+          0.9727563641994941,
+          0.6216442643854093,
+          0.7283965497758861,
+          0.8454447854936885
+        ]
+      },
+      "clear_sky": {
+        "iou_burn": 0.7758729767048707,
+        "miou_sev": 0.7349301415594031,
+        "weighted": 0.7569762835608086,
+        "per_class": [
+          0.9738479198270588,
+          0.6238236665935031,
+          0.7224583426259279,
+          0.8585084154587782
+        ]
+      }
+    },
+    "v13_plus_two": {
+      "all_pixels": {
+        "iou_burn": 0.763576228951144,
+        "miou_sev": 0.7288953304587196,
+        "weighted": 0.7475696604161787,
+        "per_class": [
+          0.9721002580959592,
+          0.6208061164803806,
+          0.7168511933989848,
+          0.8490286814967936
+        ]
+      },
+      "clear_sky": {
+        "iou_burn": 0.7771076827791271,
+        "miou_sev": 0.7356554323077136,
+        "weighted": 0.7579758748692439,
+        "per_class": [
+          0.973980608996084,
+          0.6271426156727874,
+          0.7165676136201377,
+          0.8632560676302155
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "Only 5 of 8 source-pilot chips passed frozen QC, versus 144 training chips.",
+    "Historical 35-chip selection set; large seed sensitivity.",
+    "Median NBR stability does not establish pixelwise severity invariance.",
+    "SPEC-37 scales the same QC to 87 chips; authorized before this result and evaluated separately."
+  ],
+  "non_claims": [
+    "Does not reject all temporal augmentation methods or SPEC-28 as a whole.",
+    "No hidden-test or physical ground-truth claim.",
+    "No test-scene source retrieval."
+  ],
+  "artifacts": {
+    "evidence/experiments/hypotheses-20260919/bs-temporal-pilot-screening-v1.json": "310e6a6226a0a1c75b277013f7185e12b848f35f0566eaf8e81b88989cf51c06",
+    "evidence/experiments/hypotheses-20260919/bs-temporal-pilot/bs-temporal-20260919-v1/summary.json": "5c2aa42b4673ae02b70e7afe6f5c8542561affcba097d49ecc53726cc0be6f04",
+    "evidence/experiments/hypotheses-20260919/bs-temporal-pilot/bs-temporal-20260919-v1/per_chip.json": "0a7312218329dc82a864a3e4526c2a5abb706a9057e93e2f84dd0f963c868370",
+    "evidence/experiments/hypotheses-20260919/bs-temporal-pilot/bs-temporal-20260919-v1/manifest.json": "181d3c0fc73939073817d4b9c6240fc0b4b194949cef75ea2fd24ab416679915",
+    "evidence/experiments/hypotheses-20260919/bs-temporal-pilot/bs-temporal-20260919-v1/data_manifest.json": "dcf85b008c02e565e0fcfc23159a2d4a94fb92888ded39522d164a3694a643b1",
+    "evidence/experiments/hypotheses-20260919/bs-temporal-pilot/bs-temporal-20260919-v1/extra_manifest.json": "8d0f73fe338f3a908bc5dbae6a7f007973b1f11b716003c7c97e982c595489d6",
+    "evidence/experiments/hypotheses-20260919/bs-temporal-pilot/bs-temporal-20260918-v1/summary.json": "13fcad7d84ae9d11e7d5ba190b0cebde2da2afb04b5095b2c0b9e77d06f9e6b8",
+    "evidence/experiments/hypotheses-20260919/bs-temporal-pilot/bs-temporal-20260918-v1/per_chip.json": "038e0d04825b54caa637554463a18e5776d4938662d673c2a2da202c3f9caa55",
+    "evidence/experiments/hypotheses-20260919/bs-temporal-pilot/bs-temporal-20260918-v1/manifest.json": "1a23e20262d6b1c2a98f9f140ecf2a42935b4dd0b4a9f6ac930c7b3114af5b59",
+    "evidence/experiments/hypotheses-20260919/bs-temporal-pilot/bs-temporal-20260918-v1/data_manifest.json": "dcf85b008c02e565e0fcfc23159a2d4a94fb92888ded39522d164a3694a643b1",
+    "evidence/experiments/hypotheses-20260919/bs-temporal-pilot/bs-temporal-20260918-v1/extra_manifest.json": "8d0f73fe338f3a908bc5dbae6a7f007973b1f11b716003c7c97e982c595489d6"
+  }
+}

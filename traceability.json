@@ -404,7 +404,7 @@
       "depends_on": [
         "SPEC-28"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-36": {
       "title": "Изолированный стенд проверки гипотез и честной оценки",
