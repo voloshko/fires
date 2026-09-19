@@ -110,3 +110,14 @@ def bs_confirmation_split(meta,development,selection,fold,k=5):
     evaluation=sorted(c for c in development if mapping[c] in held)
     fit=sorted(selection+[c for c in development if mapping[c] not in held])
     return fit,evaluation
+
+
+def bs_prediction(network,boost,chip,weight=.6):
+    """Canonical product SCL/severity/far-fire rules for cached probabilities."""
+    from src.comp.postproc import drop_far
+    mixed=network if boost is None else weight*network+(1-weight)*boost
+    pred=mixed.argmax(2).astype(np.uint8)
+    blind=~chip.valid()
+    pred[blind]=np.where(network.argmax(2)>0,mixed[...,1:].argmax(2)+1,0)[blind]
+    pred[chip.label_zero()]=0
+    return drop_far(pred,125)

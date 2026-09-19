@@ -7,8 +7,11 @@ import sys
 import time
 import numpy as np
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from src.comp.hypothesis_lab import GRID,binary_counts,binary_scores,digest,nested_folds,paired_interval,write_json
+from src.comp.hypothesis_lab import GRID as BOOST_GRID,binary_counts,binary_scores,digest,nested_folds,paired_interval,write_json
 from scripts.hypothesis_lab import manifest
+
+# Neural probabilities need not share the HGB calibration scale. Frozen before GPU trials.
+GRID=np.unique(np.r_[[.01,.02,.05,.1,.2,.3,.4],BOOST_GRID])
 
 
 def run(args):
@@ -17,7 +20,7 @@ def run(args):
     from src.comp.af import AfDataset,build_training_set,train,features,THRESHOLDS
     from scripts.train_unet import UNet,make_batch,normalise
     torch.set_num_threads(3)
-    out=Path(args.out); out.mkdir(parents=True,exist_ok=True); write_json(out/'manifest.json',manifest(args))
+    out=Path(args.out); out.mkdir(parents=True,exist_ok=True); run_manifest=manifest(args); run_manifest['threshold_grid']=GRID.tolist(); run_manifest['mixture_grid']=[0.,.3,.4,.5,.6,.7,1.]; write_json(out/'manifest.json',run_manifest)
     d=AfDataset(args.data); sp=json.loads(Path(args.split).read_text()); ids=sorted(sp['train']+sp['val'])
     if set(ids)&set(sp['holdout']): raise ValueError('holdout overlap')
     device='cpu' if args.smoke else 'cuda'
@@ -78,7 +81,7 @@ def run(args):
     summary={name:binary_scores(c) for name,c in counts.items()}
     for name in ('network','mixture'):
         summary[name]['delta']=summary[name]['f1']-summary['boost']['f1']; summary[name]['ci95_chip_bootstrap']=paired_interval(counts['boost'],counts[name]); summary[name]['accepted']=summary[name]['delta']>=.005 and summary[name]['ci95_chip_bootstrap'][0]>0
-    summary.update(seconds=time.time()-started,smoke=args.smoke,non_claims=['No hidden test evaluation.','Chip grouping cannot guarantee independent fire events.','No final420 model or submission produced by this screening run.'])
+    summary.update(seconds=time.time()-started,threshold_grid=GRID.tolist(),smoke=args.smoke,non_claims=['No hidden test evaluation.','Chip grouping cannot guarantee independent fire events.','No final420 model or submission produced by this screening run.'])
     write_json(out/'summary.json',summary); print(json.dumps(summary,indent=2),flush=True)
 
 

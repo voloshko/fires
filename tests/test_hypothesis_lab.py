@@ -127,3 +127,16 @@ def test_bs_scores_match_existing_metric_when_classes_absent():
         expected=score_bs_micro([truth],[pred]); actual=bs_scores(confusion(truth,pred))
         assert actual['iou_burn']==pytest.approx(expected['iou_burn'])
         assert actual['miou_sev']==pytest.approx(expected['miou_sev'])
+
+
+def test_cached_postprocessing_matches_product_rules(monkeypatch):
+    from src.comp.hypothesis_lab import bs_prediction
+    from src.comp.chips import BsChip
+    from src.comp import ensemble,unet
+    rng=np.random.default_rng(5);pn=rng.random((4,4,4));pb=rng.random((4,4,4));pn/=pn.sum(2,keepdims=True);pb/=pb.sum(2,keepdims=True)
+    pre=np.full((10,4,4),1000,np.uint16);pre[9]=4;post=pre.copy();post[9]=np.tile([4,8,9,10],(4,1))
+    chip=BsChip('x',pre,post,np.zeros((3,4,4)),np.zeros((2,4,4)),None)
+    class Boost:
+        def predict_proba(self,x):return pb.reshape(-1,4)
+    monkeypatch.setattr(unet,'probs',lambda *a,**k:pn)
+    assert np.array_equal(bs_prediction(pn,pb,chip),ensemble.predict(object(),Boost(),chip))
