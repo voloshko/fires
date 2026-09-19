@@ -64,3 +64,17 @@ completed that lane with the same read-only scope, independently of the author.
   17 focused tests passed in conda. The v13-reference-v2 artifact was then
   copied from k8plus into this checkout; it reproduces the v1 numbers with
   the additional source binding. No BS GPU quality run preceded these fixes.
+
+## Numerical and candidate follow-ups
+
+- Independent reviewer inspected SPEC-38 candidate byte-preservation boundary,
+  normalized-fusion repair, and v2/v3 queue isolation. CPU/static checks passed.
+- Full normalized FP16 training subsequently failed despite the saved-batch
+  repair. Receipt SPEC-32-REPLAY-002-NUMERICS explicitly supersedes any global
+  stability inference; no accuracy metric was taken from either failed run.
+- BF16 dispatch and matched optical-BF16 controls were independently reviewed
+  through b9d39c6: 21 tests, py_compile, shell syntax, gate PASS; APPROVE in the
+  code lane. This does not predict GPU training outcomes.
+- FP16 probability cache replay for the four completed optical/raw runs differs
+  from the original FP32-probability score by at most 4.46e-6 in W. Thus their
+  observed seed spread is not explained by cache storage quantization.
