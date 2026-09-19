@@ -46,6 +46,7 @@ SUBSETS = {
     "context": ("dnbr_win5", "dnbr_win15", "dnbr_std5", "dnbr_chip", "landcover", "slope", "dem", "vv", "vh"),
 }
 FOLD = int(os.environ.get("FOLD", -1))         # 0..4: убрать каждый пятый чип обучения (перекрёстная проверка, research 2.3)
+RADNORM = int(os.environ.get("RADNORM", 0))   # 1: сцена «после» приведена к «до» (SPEC-30)
 ARCH = os.environ.get("ARCH", "plain")         # plain | psp | ds
 COPYPASTE = float(os.environ.get("COPYPASTE", 0))   # вероятность вклеить гарь соседа по батчу
 BDOU = float(os.environ.get("BDOU", 0))        # >0: вес Boundary DoU по гари
@@ -139,6 +140,9 @@ def main():
     print(f"[{TAG}] вес фона {BG}, эпох {EPOCHS}, вырезка {CROPSZ}, "
           f"глубина {DEPTH}, ширина {WIDTH}, "
           f"обучение {len(fit)}, замер {len(tune)}", flush=True)
+    if RADNORM:
+        from src.comp.features import normalise_post
+        _load = d.load; d.load = lambda c: normalise_post(_load(c))
     xtr, ytr, oktr = cache(d, fit)
     if CHANNELS != "all":
         # Ветви на разных подмножествах каналов ошибаются по-разному —
@@ -253,7 +257,7 @@ def main():
                       f"[{per[1]:.3f} {per[2]:.3f} {per[3]:.3f}]", flush=True)
     torch.save({"state": net.state_dict(), "mean": mean, "std": std, "names": USED,
                 "bg_weight": BG, "epochs": EPOCHS, "crop": CROPSZ,
-                "depth": DEPTH, "width": WIDTH, "maskch": MASKCH, "seed": RUNSEED, "loss": LOSS, "boundary": BOUNDARY, "ignore_zero": IGNORE_ZERO, "jitter": JITTER, "arch": ARCH, "copypaste": COPYPASTE, "bdou": BDOU}, f"models/exp_{TAG}.pt")
+                "depth": DEPTH, "width": WIDTH, "maskch": MASKCH, "seed": RUNSEED, "loss": LOSS, "boundary": BOUNDARY, "ignore_zero": IGNORE_ZERO, "jitter": JITTER, "arch": ARCH, "copypaste": COPYPASTE, "bdou": BDOU, "radnorm": RADNORM}, f"models/exp_{TAG}.pt")
 
 
 if __name__ == "__main__":

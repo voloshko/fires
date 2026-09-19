@@ -25,10 +25,15 @@ def probs(path):
     bundle = torch.load(path, map_location='cpu', weights_only=False)
     maskch = bundle.get('maskch', 0)
     names = tuple(bundle['names']); keep = [NAMES.index(n) for n in names]   # сеть на подмножестве каналов
+    if bundle.get('radnorm', 0):
+        from src.comp.features import normalise_post
+        feats_use = [np.nan_to_num(stack(normalise_post(c)), posinf=0, neginf=0).astype(np.float32) for c in chips]
+    else:
+        feats_use = feats
     mean = torch.tensor(mean_np, device=DEV).view(1,-1,1,1); std = torch.tensor(std_np, device=DEV).view(1,-1,1,1)
     out = []
     with torch.no_grad():
-        for f, ok in zip(feats, OK):
+        for f, ok in zip(feats_use, OK):
             f = f[keep]
             x = np.concatenate([f, ok[None].astype(np.float32)]) if maskch else f
             x = (torch.from_numpy(x).unsqueeze(0).to(DEV) - mean) / std

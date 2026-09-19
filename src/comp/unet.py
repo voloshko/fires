@@ -66,6 +66,7 @@ def load(path: str | Path):
         net.load_state_dict(state)
     # Лишний входной канал сверх признаков — маска валидности (MASKCH=1 в стенде).
     net.names = names            # сеть считает признаки по СВОЕМУ набору имён
+    net.radnorm = int(bundle.get("radnorm", 0))
     net.maskch = cin - len(names)
     if net.maskch not in (0, 1):
         raise ValueError(f"у сети {cin} входов при {len(names)} признаках")
@@ -79,6 +80,9 @@ def probs(model, chip: BsChip, tta: bool = True) -> np.ndarray:
     import torch
 
     net, mean, std, device = model
+    if getattr(net, "radnorm", 0):
+        from src.comp.features import normalise_post
+        chip = normalise_post(chip)
     feats = np.nan_to_num(stack(chip, getattr(net, "names", NAMES)), posinf=0.0, neginf=0.0).astype(np.float32)
     if getattr(net, "maskch", 0):
         feats = np.concatenate([feats, chip.valid()[None].astype(np.float32)])

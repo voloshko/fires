@@ -68,7 +68,9 @@
         "SPEC-25",
         "SPEC-26",
         "SPEC-27",
-        "SPEC-29"
+        "SPEC-29",
+        "SPEC-30",
+        "SPEC-31"
       ]
     }
   },
@@ -341,6 +343,25 @@
         "SPEC-19"
       ],
       "status": "planned"
+    },
+    "SPEC-30": {
+      "title": "Радиометрическая нормализация сцены «после» к сцене «до» для BS",
+      "file": "specs/SPEC-30-bs.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19",
+        "SPEC-26"
+      ],
+      "status": "active"
+    },
+    "SPEC-31": {
+      "title": "Длинное обучение оптических сетей с дрожанием",
+      "file": "specs/SPEC-31-long-optical-jitter.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-26"
+      ],
+      "status": "active"
     }
   }
 }

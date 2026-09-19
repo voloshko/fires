@@ -28,6 +28,26 @@ NAMES_S1 = NAMES_BASE + ("vv_post", "vh_post", "dvv", "dvh")
 NAMES = NAMES_S1 if os.environ.get("FEATURES", "base") == "s1" else NAMES_BASE
 
 
+def normalise_post(chip: BsChip, dnbr_tol: float = 0.05) -> BsChip:
+    """Полосы «после» линейно приводятся к «до» по устойчивым пикселям
+    (|dNBR| < dnbr_tol, обе сцены валидны): убирает разницу освещения и дымки
+    между датами до расчёта индексов (SPEC-30). SCL не трогается. Без сцены
+    «после» или без устойчивых пикселей чип возвращается как есть."""
+    if not chip.post.size:
+        return chip
+    pre, post = chip.pre.astype(np.float32), chip.post.astype(np.float32)
+    dnbr = _ratio(pre[6], pre[8]) - _ratio(post[6], post[8])
+    stable = chip.valid() & (np.abs(dnbr) < dnbr_tol)
+    if stable.sum() < 500:
+        return chip
+    out = post.copy()
+    for b in range(9):
+        a, c = np.polyfit(post[b][stable], pre[b][stable], 1)
+        out[b] = a * post[b] + c
+    from dataclasses import replace
+    return replace(chip, post=np.clip(out, 0, 65535).astype(chip.post.dtype))
+
+
 def _ratio(a: np.ndarray, b: np.ndarray) -> np.ndarray:
     total = a + b
     return np.divide(a - b, total, out=np.zeros_like(total), where=total != 0)
