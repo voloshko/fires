@@ -164,3 +164,29 @@ Completed source QC is reused on resume. No old NaN artifact is scored.
 Completed first FP16 seed: optical W .733105, raw W .717137; one seed is not
 used to close the two-seed contract. The AF candidate and its receipts are
 unaffected by the Siamese failures.
+
+
+## Synchronization with v15 and SPEC-29
+
+Main through 3891f29 is merged into this worktree. Our SPEC-38 candidate was
+adopted as v14, then superseded by v15; it must not replace the current CSV.
+v15 AF F1 .9515 uses pooled OOF threshold selection on 336 chips. It is not
+a nested evaluation and there is no measured constant correction to .9515.
+Our original .9279/.9299 nested results retain their original protocol.
+Remote running experiments keep their frozen sources; merging local main
+does not silently change AF exclusion behavior in those experiments.
+
+SPEC-29 reports 95% of 1734 FIRMS points inside annotated burn and 30.3% of
+GT burn farther than 1 km from a detection. Lack of detections near false
+predictions supports the false-positive interpretation but cannot prove
+absence of a fire or annotation completeness. It supplies no validated
+input-only filtering rule; no FIRMS test retrieval is introduced.
+
+Both raw-band seeds are complete: mean W .739857 versus optical .743786
+(delta -.003929), failing the frozen +.005 screen. Raw FAIL receipt is
+SPEC-32-REPLAY-003-RAW. BF16 Siam mean .747932 versus matched optical
+.738573 (+.009359), passing screening only. Its paired seed effects have
+opposite signs; against FP16 optical the gain is only .004146.
+Five grouped development folds are queued with new seeds 20260920–20260924,
+matched BF16 controls and refitted HGB. This is development revalidation,
+not independent confirmation after adaptive hypothesis selection.

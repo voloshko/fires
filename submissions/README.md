@@ -32,4 +32,4 @@ AF — финальный HGB на 420 чипах с hard-negative mining, cutof
 парных контролей .9066/.9079; это не оценка на закрытом тесте.
 447 строк, 93 AF-строки изменены, 267 BS-строк сохранены. Штатный validator
 с размерами масок PASS на k8plus и локально. Основной `submission.csv` остаётся
-последней сданной версией, v13. Модель: k8plus `~/fires-hypotheses/research/af-hard-final-v1/model.pkl`.
+последней сданной версией, v15. Этот кандидат заменён v15 и сохраняется как исторический артефакт. Модель: k8plus `~/fires-hypotheses/research/af-hard-final-v1/model.pkl`.
