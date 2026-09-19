@@ -38,11 +38,13 @@ def predict(net_model, boost_model, chip: BsChip,
             net_weight: float = NET_WEIGHT,
             min_blob: int = MIN_BLOB_ENSEMBLE,
             tta: bool = True,
-            far_px: int = FAR_PX) -> np.ndarray:
+            far_px: int = FAR_PX,
+            net_weights=None) -> np.ndarray:
     """Маска степеней поражения по смеси вероятностей.
 
     `net_model` — одна сеть или список сетей одной роли (сидовый ансамбль):
-    их вероятности усредняются до смешивания с бустингом. `net_weight=1.0`
+    их вероятности усредняются (взвешенно, если дан `net_weights` той же длины)
+    до смешивания с бустингом. `net_weight=1.0`
     вырождается в одни сети, `0.0` — в один бустинг; обе вырожденные точки
     измерены и хуже смеси.
     """
@@ -52,7 +54,9 @@ def predict(net_model, boost_model, chip: BsChip,
     from src.comp import unet
 
     nets = net_model if isinstance(net_model, (list, tuple)) and not hasattr(net_model[0], "eval") else [net_model]
-    p_net = np.mean([unet.probs(m, chip, tta) for m in nets], axis=0)
+    if net_weights is not None and len(net_weights) != len(nets):
+        raise ValueError(f"весов {len(net_weights)}, сетей {len(nets)}")
+    p_net = np.average([unet.probs(m, chip, tta) for m in nets], axis=0, weights=net_weights)
 
     names = feature_names(boost_model)
     feats = np.nan_to_num(stack(chip, names), posinf=0.0, neginf=0.0).astype(np.float32)

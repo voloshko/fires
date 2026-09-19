@@ -32,6 +32,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--unet", nargs="+", default=["models/bs_unet.pt"],
                         help="сети по гари (несколько — сидовый ансамбль, вероятности "
                              "усредняются); при отсутствии всех работает бустинг")
+    parser.add_argument("--unet-weights", nargs="+", type=float,
+                        help="веса сетей в порядке --unet (по умолчанию равные)")
     parser.add_argument("--net-weight", type=float, default=ENSEMBLE_WEIGHT,
                         help="доля сети в ансамбле; 1.0 — только сеть, 0.0 — только бустинг")
     parser.add_argument("--out", default="submission.csv")
@@ -51,6 +53,11 @@ def main(argv: list[str] | None = None) -> int:
 
         net = None
         found = [p for p in args.unet if Path(p).exists()]
+        weights = None
+        if args.unet_weights:
+            if len(args.unet_weights) != len(args.unet):
+                parser.error("--unet-weights должен совпадать по длине с --unet")
+            weights = [w for p, w in zip(args.unet, args.unet_weights) if Path(p).exists()]
         if found and unet.available():
             net = [unet.load(p) for p in found]
         elif found:
@@ -59,7 +66,7 @@ def main(argv: list[str] | None = None) -> int:
         model = load_model(args.model) if Path(args.model).exists() else None
 
         if net is not None and model is not None:
-            print(f"гарь: ансамбль {len(net)} сетей {found} и {args.model}, вес сети {args.net_weight}")
+            print(f"гарь: ансамбль {len(net)} сетей {found} и {args.model}, вес сети {args.net_weight}, веса сетей {weights or 'равные'}")
         elif net is not None:
             print(f"гарь: только сети {found} — бустинга на диске нет", file=sys.stderr)
         elif model is not None:
@@ -70,7 +77,7 @@ def main(argv: list[str] | None = None) -> int:
         for chip_id in dataset.chip_ids():
             chip = dataset.load(chip_id)
             if net is not None and model is not None:
-                mask = ensemble.predict(net, model, chip, args.net_weight)
+                mask = ensemble.predict(net, model, chip, args.net_weight, net_weights=weights)
             elif net is not None:
                 mask = unet.predict(net[0], chip)
             elif model is not None:
