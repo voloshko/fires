@@ -24,7 +24,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from scripts.train_unet import (  # noqa: E402
     BATCH, CROP, SEED, UNet, cache, gpu_cache, iou_scores, load_split, make_batch, normalise,
 )
-from src.comp.features import NAMES  # noqa: E402
+from src.comp.features import NAMES, stack  # noqa: E402
 
 import torch.nn.functional as F  # noqa: E402
 
@@ -40,6 +40,7 @@ RUNSEED = int(os.environ.get("SEED", SEED))
 MASKCH = int(os.environ.get("MASKCH", 0))   # канал валидности на входе
 LOSS = os.environ.get("LOSS", "dice")        # dice | lovasz — что добавляется к CE
 PSEUDO = float(os.environ.get("PSEUDO", 0))   # >0: тестовые чипы с псевдоразметкой; порог уверенности пикселя
+FINAL = int(os.environ.get("FINAL", 0))       # 1: обучение на ВСЕХ чипах, без замера, сохранение как финальной
 BOUNDARY = float(os.environ.get("BOUNDARY", 0))   # >0: вес пикселей у кромки истинной гари (×(1+BOUNDARY))
 
 
@@ -112,7 +113,7 @@ def infer(net, x16, mean_t, std_t, tta: bool) -> np.ndarray:
 
 def main():
     torch.manual_seed(RUNSEED); np.random.seed(RUNSEED)
-    d, fit, tune = load_split("data/comp/train/bs", "data/comp/split_bs.json")
+    d, fit, tune = load_split("data/comp/train/bs", "data/comp/split_bs.json", use_all=bool(FINAL))
     print(f"[{TAG}] вес фона {BG}, эпох {EPOCHS}, вырезка {CROPSZ}, "
           f"глубина {DEPTH}, ширина {WIDTH}, "
           f"обучение {len(fit)}, замер {len(tune)}", flush=True)
@@ -175,6 +176,11 @@ def main():
 
     net.eval()
     print(f"[{TAG}] обучено за {time.time()-t0:.0f}с", flush=True)
+    if FINAL:
+        torch.save({"state": net.state_dict(), "mean": mean, "std": std, "names": NAMES, "epochs": EPOCHS,
+                    "chips": len(fit), "depth": DEPTH, "width": WIDTH, "crop": CROPSZ, "loss": LOSS,
+                    "boundary": BOUNDARY, "seed": RUNSEED}, f"models/bs_unet_{TAG}.pt")
+        print(f"[{TAG}] финальная: {len(fit)} чипов, сохранена последняя эпоха → models/bs_unet_{TAG}.pt"); return
     with torch.no_grad(), torch.amp.autocast(DEV):
         for tta in (False, True):
             raw = [infer(net, x16, mean_t, std_t, tta) for x16 in xva]
