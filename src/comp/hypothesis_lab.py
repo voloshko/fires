@@ -121,3 +121,15 @@ def bs_prediction(network,boost,chip,weight=.6):
     pred[blind]=np.where(network.argmax(2)>0,mixed[...,1:].argmax(2)+1,0)[blind]
     pred[chip.label_zero()]=0
     return drop_far(pred,125)
+
+
+def verify_bs_probability_cache(root,fit,evaluation):
+    """Bind a boost cache to exact splits and source pixels before scoring."""
+    root=Path(root); manifest=json.loads((root/'data_manifest.json').read_text())
+    if manifest['fit']!=fit or manifest['evaluation']!=evaluation or set(fit)&set(evaluation):
+        raise ValueError('boost cache split mismatch')
+    if not manifest['files']: raise ValueError('boost cache has no source hashes')
+    for filename,expected in manifest['files'].items():
+        if digest(filename)!=expected: raise ValueError('boost cache source changed')
+    path=root/'probabilities.npy'
+    return {str(path):digest(path),str(root/'data_manifest.json'):digest(root/'data_manifest.json')}

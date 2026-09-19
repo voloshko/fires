@@ -140,3 +140,16 @@ def test_cached_postprocessing_matches_product_rules(monkeypatch):
         def predict_proba(self,x):return pb.reshape(-1,4)
     monkeypatch.setattr(unet,'probs',lambda *a,**k:pn)
     assert np.array_equal(bs_prediction(pn,pb,chip),ensemble.predict(object(),Boost(),chip))
+
+
+def test_boost_cache_binding_rejects_wrong_split_and_changed_pixels(tmp_path):
+    import json
+    from src.comp.hypothesis_lab import verify_bs_probability_cache,digest
+    source=tmp_path/'pixels';source.write_bytes(b'original')
+    m={'fit':['a'],'evaluation':['b'],'files':{str(source):digest(source)}}
+    (tmp_path/'data_manifest.json').write_text(json.dumps(m));np.save(tmp_path/'probabilities.npy',np.zeros((1,2,2,4)))
+    hashes=verify_bs_probability_cache(tmp_path,['a'],['b'])
+    assert str(tmp_path/'probabilities.npy') in hashes
+    with pytest.raises(ValueError,match='split'):verify_bs_probability_cache(tmp_path,['b'],['a'])
+    source.write_bytes(b'changed')
+    with pytest.raises(ValueError,match='source'):verify_bs_probability_cache(tmp_path,['a'],['b'])

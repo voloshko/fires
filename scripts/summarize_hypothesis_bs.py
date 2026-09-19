@@ -5,15 +5,16 @@ from pathlib import Path
 import sys
 import numpy as np
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from src.comp.hypothesis_lab import bs_prediction,bs_scores,confusion,digest,write_json
+from src.comp.hypothesis_lab import bs_prediction,bs_scores,confusion,digest,write_json,verify_bs_probability_cache
 
 
 def main():
     from scripts.train_unet import load_split
     p=argparse.ArgumentParser();p.add_argument('--root',default='research');p.add_argument('--out',required=True);args=p.parse_args();root=Path(args.root)
     d,fit,tune=load_split('data/comp/train/bs','data/comp/split_bs.json'); chips=[d.load(c) for c in tune]
+    hashes=verify_bs_probability_cache(root/'bs-boost-v1',fit,tune)
     pb=np.load(root/'bs-boost-v1/probabilities.npy').astype(np.float32)
-    tags=['d7opt','d7opt_s1','d7opt_s2','d7optjit','d7optjit_s1']; reference=[]; hashes={}
+    tags=['d7opt','d7opt_s1','d7opt_s2','d7optjit','d7optjit_s1']; reference=[]
     for tag in tags:
         path=Path('baseline_models')/f'exp_{tag}.tune.npy'
         reference.append(np.load(path).astype(np.float32));hashes[str(path)]=digest(path)
