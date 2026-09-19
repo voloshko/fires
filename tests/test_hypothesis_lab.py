@@ -163,3 +163,21 @@ def test_sentinel_baseline_offset_is_metadata_driven_and_preserves_scl():
     assert np.array_equal(harmonize_s2_dn(a,['B12','SCL'],'02.14'),a)
     assert a[0,0,2]==1500
     with pytest.raises(ValueError):harmonize_s2_dn(a,['B12','SCL'],None)
+
+
+def test_candidate_keeps_bs_bytes_and_requires_all_af_rows(tmp_path):
+    from scripts.build_af_hard_candidate import replace_af_rows
+    base=tmp_path/'base.csv';base.write_bytes(b'chip_id,class_id,rle\nBS_x,1,"1 2"\r\nAF_x,1,\nBS_x,2,\n')
+    out=tmp_path/'out.csv';r=replace_af_rows(base,{'AF_x':'3 1'},out)
+    assert b'BS_x,1,"1 2"\r\n' in out.read_bytes()
+    assert r['bs_bytes_preserved'] and r['changed_af_rows']==1
+    with pytest.raises(ValueError,match='missing'):replace_af_rows(base,{'AF_missing':''},tmp_path/'bad.csv')
+    assert not (tmp_path/'bad.csv').exists()
+
+
+def test_sorted_threshold_counts_equal_direct_counts_at_ties():
+    from scripts.verify_af_net_hypothesis import counts_for_thresholds
+    t=np.array([1,0,1,0,1],bool);p=np.array([.5,.5,.1,1.,0.]);grid=np.array([0.,.1,.5,1.])
+    actual=counts_for_thresholds(t,p,grid)
+    expected=np.asarray([binary_counts(t,p>=cut) for cut in grid])
+    assert np.array_equal(actual,expected)

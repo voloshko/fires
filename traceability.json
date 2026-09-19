@@ -76,7 +76,8 @@
         "SPEC-31",
         "SPEC-32",
         "SPEC-33",
-        "SPEC-36"
+        "SPEC-36",
+        "SPEC-38"
       ]
     }
   },
@@ -421,6 +422,17 @@
       "depends_on": [
         "SPEC-35",
         "SPEC-19"
+      ],
+      "status": "active"
+    },
+    "SPEC-38": {
+      "title": "Финальный AF hard-negative кандидат поверх BS v13",
+      "file": "specs/SPEC-38-af-hard-final-candidate.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-33",
+        "SPEC-20",
+        "SPEC-26"
       ],
       "status": "active"
     }
