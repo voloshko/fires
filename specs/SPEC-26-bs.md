@@ -1,6 +1,6 @@
 # SPEC-26: Оптический ансамбль сетей для BS
 
-Status: active
+Status: implemented
 
 Requirement: REQ-007
 
@@ -47,6 +47,19 @@ SPEC-19-LIVE-011); разброс между прогонами одной ко�
 - `python scripts/exp_seeds.py models/exp_d7opt.pt models/exp_d7opt_s1.pt models/exp_d7opt_s2.pt models/exp_d7optjit.pt models/exp_d7optjit_s1.pt` на k8plus воспроизводит строку «накоплено 5».
 - `python inference.py --data-dir data/comp/test --out /tmp/s.csv --template data/comp/test/sample_submission.csv --unet models/bs_unet_final_opt*.pt` — код возврата 0.
 - Чего не докажет: перенос на закрытую выборку.
+
+## Resolution
+
+**Принято и отправлено (v13, receipt SPEC-19-LIVE-013).** Оптическая пятёрка
+(3 сида + 2 с дрожанием) против девятки на 19 каналах: без фильтра чужих
+пожаров 0.7287 против 0.7229 взв. (+0.006, порог 0.005 пройден); с фильтром
+0.7604 / 0.7255 против 0.7609 / 0.7216 (+0.002 взв.) — прибавка по степени,
+площадь без изменений; по чистому небу 0.7742 против 0.7712. Смесь пятёрки с
+девяткой хуже пятёрки (0.7271). Финальные пять сетей обучены на 224
+(`models/bs_unet_final_opt_*.pt`), состав повторяет измеренный, отбора членов
+не было. Оговорка: прибавка на грани разброса сида; версия оправдана тем, что
+пять сетей на 11 каналах не хуже одиннадцати на 19 и вдвое дешевле на
+инференсе.
 
 <!--
 ## Resolution (added when work lands — do not fill in advance)
