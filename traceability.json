@@ -271,7 +271,7 @@
       "depends_on": [
         "SPEC-19"
       ],
-      "status": "planned"
+      "status": "active"
     },
     "SPEC-23": {
       "title": "Дообучение Prithvi-EO-2.0 на степени поражения BS",
@@ -280,7 +280,7 @@
       "depends_on": [
         "SPEC-19"
       ],
-      "status": "planned"
+      "status": "active"
     },
     "SPEC-24": {
       "title": "Трансформеры SegFormer и SegNext для BS",
