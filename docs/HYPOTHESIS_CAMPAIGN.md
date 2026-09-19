@@ -2,7 +2,7 @@
 
 Рабочая ветка `codex/fire-model-hypotheses`, база `cea06ed`. Все новые модели и
 данные изолированы от `~/fires` в `k8plus:~/fires-hypotheses`. Исходный train
-подключён ссылкой; test не подключён. Собственная .venv использует существующие
+подключён ссылкой; test позже подключён только для финального AF-кандидата SPEC-38. Собственная .venv использует существующие
 пакеты через .pth, дополнительные зависимости установлены только в неё.
 
 ## Замороженные контракты
@@ -45,7 +45,7 @@ SPEC-35: 5/8 дополнительных pre прошли фиксирован�
 ## Запуск и состояние
 
 ```sh
-ssh k8plus 'systemctl --user status fires-hyp-gpu-queue fires-hyp-data-queue --no-pager'
+ssh k8plus 'systemctl --user status fires-hyp-data-queue-v2 fires-hyp-temporal-full-v2 fires-hyp-siam-confirm --no-pager'
 ssh k8plus 'tail -30 ~/fires-hypotheses/logs/af-hard-v2.log'
 ssh k8plus 'tail -30 ~/fires-hypotheses/logs/gpu-queue.log'
 ```
@@ -190,3 +190,16 @@ opposite signs; against FP16 optical the gain is only .004146.
 Five grouped development folds are queued with new seeds 20260920–20260924,
 matched BF16 controls and refitted HGB. This is development revalidation,
 not independent confirmation after adaptive hypothesis selection.
+
+
+## Completed temporal pilot and merged-source validation
+
+SPEC-35 rejected: five-chip temporal pilot mean W .738294 versus .743786,
+delta -.005491. The 87-chip SPEC-37 experiment remains separate and queued.
+Siam v13-plus-two fixed blend scores W .759056 on the historical selection
+set; it is not a validated product gain.
+
+Merged source snapshot dcb1e32 passed 463 tests, 6 existing live checks
+skipped (missing credentials/WorldCover cache). It was tested in the separate
+remote directory ~/fires-hypotheses-qa-dcb1e32 using the isolated dependency
+environment, without changing sources of running training jobs.
