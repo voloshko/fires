@@ -83,9 +83,12 @@ def confusion(truth,prediction,classes=4,valid=None):
 def bs_scores(cm):
     cm=np.asarray(cm); tp=cm[1:,1:].sum(); fp=cm[0,1:].sum(); fn=cm[1:,0].sum()
     den=cm.sum(0)+cm.sum(1)-np.diag(cm)
-    iou=np.divide(np.diag(cm),den,out=np.zeros(len(cm),float),where=den>0)
-    burn=float(tp/max(1,tp+fp+fn)); sev=float(iou[1:].mean())
-    return dict(iou_burn=burn,miou_sev=sev,weighted=(.35*burn+.30*sev)/.65,per_class=iou.tolist())
+    iou=[float(cm[i,i]/den[i]) if den[i]>0 else None for i in range(len(cm))]
+    burn=float(tp/(tp+fp+fn)) if tp+fp+fn else None
+    present=[v for v in iou[1:] if v is not None]
+    sev=float(np.mean(present)) if present else None
+    weighted=(.35*burn+.30*sev)/.65 if burn is not None and sev is not None else None
+    return dict(iou_burn=burn,miou_sev=sev,weighted=weighted,per_class=iou)
 
 
 def write_json(path,payload):

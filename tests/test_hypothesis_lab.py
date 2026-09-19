@@ -36,7 +36,7 @@ def test_bs_confusion_micro_and_missing_classes():
     assert s['iou_burn']==.5
     assert s['miou_sev']==.5
     assert s['weighted']==pytest.approx(.5)
-    assert bs_scores(np.zeros((4,4),int))['weighted']==0
+    assert bs_scores(np.zeros((4,4),int))['weighted'] is None
 
 
 def test_raw_bands_exclude_scl_and_preserve_dates():
@@ -118,3 +118,12 @@ def test_repository_scripts_package_wins():
     import scripts
     from pathlib import Path
     assert Path(scripts.__file__).resolve()==Path(__file__).resolve().parents[1]/'scripts/__init__.py'
+
+
+def test_bs_scores_match_existing_metric_when_classes_absent():
+    from src.comp.metric import score_bs_micro
+    for truth,pred in [([0,1,1],[0,1,1]),([1,2,2],[1,1,2]),([0,0,0],[1,0,0])]:
+        truth,pred=np.asarray(truth),np.asarray(pred)
+        expected=score_bs_micro([truth],[pred]); actual=bs_scores(confusion(truth,pred))
+        assert actual['iou_burn']==pytest.approx(expected['iou_burn'])
+        assert actual['miou_sev']==pytest.approx(expected['miou_sev'])
