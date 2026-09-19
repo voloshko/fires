@@ -76,3 +76,14 @@ def test_manifest_excludes_argparse_callback(tmp_path):
     m=manifest(argparse.Namespace(task='af-hard',func=lambda x:x))
     assert m['config']=={'task':'af-hard'}
     json.dumps(m)
+
+
+def test_external_padding_never_contributes_to_loss_or_gradient():
+    import torch
+    from src.comp.hypothesis_models import masked_binary_loss
+    y=torch.tensor([[[0,1],[255,255]]]); a=torch.randn(1,2,2,2,requires_grad=True)
+    loss=masked_binary_loss(a,y); loss.backward()
+    assert torch.equal(a.grad[:,:,1,:],torch.zeros_like(a.grad[:,:,1,:]))
+    b=a.detach().clone(); b[:,:,1,:]=100*torch.randn_like(b[:,:,1,:])
+    assert torch.allclose(loss,masked_binary_loss(b,y))
+    with pytest.raises(ValueError): masked_binary_loss(a,torch.full_like(y,255))

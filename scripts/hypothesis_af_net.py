@@ -25,7 +25,7 @@ def run(args):
     # Cache only development chips; no holdout/test labels read.
     raw={}; truth={}; eligible={}; hashes={}
     for c in ids:
-        ch=d.load(c); raw[c]=np.nan_to_num(np.concatenate([ch.viirs,ch.aux]),posinf=0,neginf=0).astype(np.float16); truth[c]=ch.mask.astype(np.int64)
+        ch=d.load(c); raw[c]=np.nan_to_num(np.concatenate([ch.viirs,ch.aux]),posinf=0,neginf=0).astype(np.float32); truth[c]=ch.mask.astype(np.int64)
         eligible[c]=ch.valid()&~np.isin(ch.aux[0],THRESHOLDS['exclude_landcover'])
         hashes[c]={str(p):digest(p) for folder in ('viirs','aux','masks') for p in (Path(args.data)/folder).glob(c+'_*.tif')}
     write_json(out/'data_manifest.json',dict(files=hashes,split_sha256=digest(args.split)))

@@ -18,6 +18,7 @@ printf 'GPU ready at %s\n' "$(date --iso-8601=seconds)"
 run() {
   local tag="$1"; shift
   if [[ -f "research/$tag/summary.json" ]]; then return; fi
+  .venv/bin/python scripts/wait_hypothesis_gpu.py
   "$@" > "logs/$tag.log" 2>&1
 }
 run af-net-v1 .venv/bin/python scripts/hypothesis_af_net.py --out research/af-net-v1

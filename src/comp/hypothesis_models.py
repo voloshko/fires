@@ -32,3 +32,13 @@ class SiameseUNet(nn.Module):
 def make_model(variant,width=32,depth=7):
     if variant=='siam': return SiameseUNet(width,depth)
     return UNet(11 if variant=='optical' else 29,classes=4,w=width,depth=depth)
+
+
+def masked_binary_loss(logits,target):
+    """Ignore padded pixels in BOTH loss terms (external CEMS source geometry)."""
+    import torch.nn.functional as F
+    known=target!=255
+    if not known.any(): raise ValueError('empty supervision')
+    p=logits.float().softmax(1)[:,1]*known
+    t=(target==1).float()
+    return F.cross_entropy(logits,target,ignore_index=255)+1-(2*(p*t).sum()+1)/(p.sum()+t.sum()+1)

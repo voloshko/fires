@@ -133,6 +133,7 @@ def pretrain(args):
     import torch.nn.functional as F
     from scripts.train_unet import UNet,normalise,make_batch
     from scripts.hypothesis_lab import manifest
+    from src.comp.hypothesis_models import masked_binary_loss
     out=Path(args.out); prepared=json.loads((out/'prepared-v2.json').read_text())
     if not prepared['eligible']: raise RuntimeError('fewer than 20 eligible events')
     result=out/'pretrain'; result.mkdir(exist_ok=True); write_json(result/'manifest.json',manifest(args))
@@ -148,7 +149,7 @@ def pretrain(args):
         for i in range(0,len(order)-7,8):
             x,y=make_batch(X,Y,torch.as_tensor(order[i:i+8],device='cuda'),rng,512); opt.zero_grad(set_to_none=True)
             with torch.autocast('cuda'):
-                logits=net(x); p=logits.float().softmax(1)[:,1]; t=(y==1).float(); p=p*(y!=255); loss=F.cross_entropy(logits,y,ignore_index=255)+1-(2*(p*t).sum()+1)/(p.sum()+t.sum()+1)
+                logits=net(x); loss=masked_binary_loss(logits,y)
             scaler.scale(loss).backward();scaler.step(opt);scaler.update();sched.step();batch_losses.append(float(loss.detach()))
         losses.append(float(np.mean(batch_losses)));print('pretrain',ep+1,losses[-1],flush=True)
     torch.save(dict(encoder=net.down.state_dict(),mean=mean,std=std,events=prepared['events']),result/'encoder.pt');write_json(result/'summary.json',dict(loss=losses,events=prepared['events'],patches=len(xs),non_claims=['Training loss is not a held-out accuracy measurement.']))

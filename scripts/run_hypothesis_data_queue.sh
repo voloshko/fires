@@ -8,7 +8,7 @@ fi
 while systemctl --user is-active --quiet fires-hyp-gpu-queue; do sleep 30; done
 # A failed upstream run is not evidence that the GPU is available to this stage.
 [[ -f research/bs-siam-20260919-v1/summary.json ]]
-run() { local tag="$1"; shift; "$@" > "logs/$tag.log" 2>&1; }
+run() { local tag="$1"; shift; .venv/bin/python scripts/wait_hypothesis_gpu.py; "$@" > "logs/$tag.log" 2>&1; }
 if .venv/bin/python -c 'import json; assert json.load(open("research/temporal-pre-v1/result.json"))["accepted"] >= 4'; then
   for seed in 20260918 20260919; do
     tag="bs-temporal-$seed-v1"
