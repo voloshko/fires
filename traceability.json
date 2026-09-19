@@ -304,7 +304,7 @@
       "depends_on": [
         "SPEC-19"
       ],
-      "status": "planned"
+      "status": "deferred"
     },
     "SPEC-26": {
       "title": "Оптический ансамбль сетей для BS",
