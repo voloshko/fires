@@ -34,6 +34,12 @@ NET_WEIGHT = 0.6
 MIN_BLOB_ENSEMBLE = 0
 
 
+def is_siam(model) -> bool:
+    """`unet.load` отдаёт кортеж (сеть, mean, std, device); метка `variant` — на сети."""
+    net = model[0] if isinstance(model, tuple) else model
+    return getattr(net, "variant", None) == "siam"
+
+
 def predict(net_model, boost_model, chip: BsChip,
             net_weight: float = NET_WEIGHT,
             min_blob: int = MIN_BLOB_ENSEMBLE,
@@ -63,8 +69,8 @@ def predict(net_model, boost_model, chip: BsChip,
     # оптики и сиама не совпадают, настоящий пожар видят обе.
     anchor = None
     if consensus:
-        siam = [p for m, p in zip(nets, p_each) if getattr(m, "variant", None) == "siam"]
-        opt = [p for m, p in zip(nets, p_each) if getattr(m, "variant", None) != "siam"]
+        siam = [p for m, p in zip(nets, p_each) if is_siam(m)]
+        opt = [p for m, p in zip(nets, p_each) if not is_siam(m)]
         if siam and opt:
             anchor = (np.mean(opt, 0).argmax(2) > 0) & (np.mean(siam, 0).argmax(2) > 0)
 

@@ -13,3 +13,13 @@ def test_length_mismatch_rejected():
 
     with pytest.raises(ValueError, match="весов"):
         ensemble.predict([object(), object()], None, None, net_weights=[1.0])
+
+
+def test_is_siam_видит_метку_внутри_кортежа_load():
+    from types import SimpleNamespace
+    from src.comp.ensemble import is_siam
+
+    siam = SimpleNamespace(variant="siam")
+    plain = SimpleNamespace()
+    assert is_siam((siam, None, None, "cpu")) and is_siam(siam)
+    assert not is_siam((plain, None, None, "cpu")) and not is_siam(plain)
