@@ -207,11 +207,13 @@ def train(x: np.ndarray, y: np.ndarray, seed: int = SEED):
 
 
 def predict_model(model, chip: AfChip, cutoff: float = 0.5) -> np.ndarray:
+    """Без исключения застройки и воды: разметка ставит огонь и там (318 пикселей
+    на 336 обучающих чипах, все были пропущены). Исключение — априор порогового
+    baseline, не разметки: с ним OOF F1 0.9339, без него 0.9515 при обучении на
+    всех валидных пикселях (`scripts/exp_af_incl.py`)."""
     feats = features(chip).reshape(len(NAMES), -1).T
     proba = model.predict_proba(feats)[:, 1].reshape(chip.shape)
-    hot = proba >= cutoff
-    hot &= ~np.isin(chip.aux[0], THRESHOLDS["exclude_landcover"])
-    return (hot & chip.valid()).astype(np.uint8)
+    return ((proba >= cutoff) & chip.valid()).astype(np.uint8)
 
 
 def save(model, path: str | Path, cutoff: float = 0.5) -> None:

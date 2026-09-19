@@ -25,7 +25,7 @@ from scripts.hypothesis_lab import af_cache, af_set
 cache, _ = af_cache('data/comp/train/af', Path('models/af_cache'), ids)
 x, y = af_set(cache, ids, 20260918); base = train(x, y, 20260918)
 x, y = af_set(cache, ids, 20260918, base); model = train(x, y, 20260918)
-cutoff = 0.5
+cutoff = 0.45   # лучшая OOF-граница без исключения покрова на выходе (exp_af_incl.py)
 print(f'все чипы: {len(ids)}, пикселей {x.shape}, горящих {int(y.sum())}; жёсткие отрицательные по базовой модели')
 save(model, 'models/af_hgb.pkl', cutoff=cutoff)
 print(f'обучено за {time.time()-t0:.0f}с, граница {cutoff} перенесена без пересмотра')
