@@ -1,6 +1,6 @@
 # Handoff: соревновательный контур КосмоХакатона (AF + BS)
 
-Дата: 2026-09-19, обновлено после v15 и аудита разметки. Ветка `main`, зеркала `origin` (GitHub) и `gitverse`.
+Дата: 2026-09-19, обновлено после v16 (сиамские сети) и аудита разметки. Ветка `main`, зеркала `origin` (GitHub) и `gitverse`.
 Читать вместе с [CLAUDE.md](../CLAUDE.md) (дисциплина спек и receipt'ов) и
 [evidence/hypotheses.md](../evidence/hypotheses.md) (журнал ~50 гипотез с числами).
 
@@ -104,9 +104,12 @@ AF (F1): жёсткие отрицательные в выборке **+0.021** 
 | SPEC-31 | rejected | 400 эпох хуже 200 на 0.03 |
 
 Очередь на k8plus пуста: весь список ресёрча и SPEC-22…31 измерены. Последний
-сабмит — **v15** (`submissions/submission_v15-LIVE-015-af-builtup.csv`):
-BS байт-в-байт из v13, AF от `models/af_hgb.pkl` (sha256 96a6532b…), receipt
-SPEC-19-LIVE-015.
+сабмит — **v16** (`submissions/submission_v16-LIVE-016-siam7.csv`, md5 6bf4b497…):
+BS — семь сетей (пять оптических v13 + `models/bs_unet_final_siam_s51/52.pt`,
+обучены `hypothesis_bs.py train --final --variant siam --precision bf16`) и бустинг;
+AF байт-в-байт из v15 (`models/af_hgb.pkl`, sha256 96a6532b…). Receipt
+SPEC-19-LIVE-016. Открытый вопрос: групповая ревалидация соседа (`bs-confirm-*`)
+покажет, сколько из +0.015 взв. настоящее — на её результат смотреть первым делом.
 Результаты последних пар — в `~/fires/logs/hyp_results*.txt`.
 
 ## 5. Как запускать
