@@ -7,7 +7,7 @@ if [[ -f research/external-train-v1/download.json && ! -f research/external-trai
 fi
 while systemctl --user is-active --quiet fires-hyp-gpu-queue; do sleep 30; done
 # A failed upstream run is not evidence that the GPU is available to this stage.
-[[ -f research/bs-siam-20260919-v2/summary.json ]]
+[[ -f research/bs-siam-20260919-v3/summary.json ]]
 run() { local tag="$1"; shift; .venv/bin/python scripts/wait_hypothesis_gpu.py; "$@" > "logs/$tag.log" 2>&1; }
 if .venv/bin/python -c 'import json; assert json.load(open("research/temporal-pre-v1/result.json"))["accepted"] >= 4'; then
   for seed in 20260918 20260919; do
@@ -19,7 +19,7 @@ if .venv/bin/python -c 'import json; assert json.load(open("research/external-tr
   run external-pretrain .venv/bin/python scripts/hypothesis_external.py pretrain
   for seed in 20260918 20260919; do
     tag="bs-external-$seed-v1"
-    run "$tag" .venv/bin/python scripts/hypothesis_bs.py train --variant siam --seed "$seed" --encoder research/external-train-v1/pretrain/encoder.pt --out "research/$tag"
+    run "$tag" .venv/bin/python scripts/hypothesis_bs.py train --variant siam --precision bf16 --seed "$seed" --encoder research/external-train-v1/pretrain/encoder.pt --out "research/$tag"
   done
 fi
 printf 'Data hypothesis queue complete at %s\n' "$(date --iso-8601=seconds)"

@@ -42,7 +42,7 @@ def boost(args):
     np.save(out/'probabilities.npy',np.stack(probabilities)); print('boost ready',len(fit),len(tune),flush=True)
 
 
-def evaluate(net,mean,std,d,tune,variant,out,boost_dir=None,device='cuda'):
+def evaluate(net,mean,std,d,tune,variant,out,boost_dir=None,device='cuda',precision='fp16'):
     import torch
     from src.comp.postproc import drop_far
     pb=None
@@ -60,7 +60,7 @@ def evaluate(net,mean,std,d,tune,variant,out,boost_dir=None,device='cuda'):
         for i,c in enumerate(tune):
             chip=d.load(c); f=np.nan_to_num(bs_inputs(chip,variant),posinf=0,neginf=0)
             x=(torch.from_numpy(f)[None].to(device)-mean_t)/std_t
-            with torch.autocast(device_type=device,enabled=device=='cuda'):
+            with torch.autocast(device_type=device,enabled=device=='cuda' and precision!='fp32',dtype=torch.bfloat16 if precision=='bf16' else torch.float16):
                 logits=net(x).float()
                 for dims in ([2],[3],[2,3]): logits+=torch.flip(net(torch.flip(x,dims)).float(),dims)
             if not torch.isfinite(logits).all(): raise FloatingPointError('nonfinite evaluation logits')
@@ -91,6 +91,7 @@ def run(args):
         if bm['fit']!=fit or bm['evaluation']!=tune: raise ValueError('boost training/evaluation split mismatch')
     torch.set_num_threads(4); torch.manual_seed(args.seed); np.random.seed(args.seed)
     device='cpu' if args.smoke else ('cuda' if torch.cuda.is_available() else 'cpu')
+    if args.precision=='bf16' and device=='cuda' and not torch.cuda.is_bf16_supported(): raise RuntimeError('BF16 unsupported')
     if device=='cpu' and not args.smoke: raise RuntimeError('GPU required for full experiment')
     if args.smoke: fit,tune=fit[:8],tune[:2]
     xs=[]; ys=[]
@@ -129,7 +130,7 @@ def run(args):
     opt=torch.optim.AdamW(net.parameters(),lr=3e-4,weight_decay=1e-4)
     steps=args.epochs*(len(fit)//args.batch)
     sched=torch.optim.lr_scheduler.OneCycleLR(opt,max_lr=1e-3,total_steps=steps)
-    scaler=torch.amp.GradScaler(device,enabled=device=='cuda'); rng=np.random.default_rng(args.seed)
+    scaler=torch.amp.GradScaler(device,enabled=device=='cuda' and args.precision=='fp16'); rng=np.random.default_rng(args.seed)
     weights=torch.tensor([.25,1.,1.,1.],device=device); t0=time.time(); losses=[]
     hooks=[]; numerical_failure={}
     if args.debug_numerics:
@@ -153,27 +154,27 @@ def run(args):
             x,y=make_batch(X,Y,torch.as_tensor(batch_ids,device=device),rng,X.shape[-1])
             opt.zero_grad(set_to_none=True)
             try:
-                with torch.autocast(device_type=device,enabled=device=='cuda'):
+                with torch.autocast(device_type=device,enabled=device=='cuda' and args.precision!='fp32',dtype=torch.bfloat16 if args.precision=='bf16' else torch.float16):
                     logits=net(x); p=1-logits.softmax(1)[:,0]; truth=(y>0).float()
                     loss=F.cross_entropy(logits,y,weight=weights)+1-(2*(p*truth).sum()+1)/(p.sum()+truth.sum()+1)
                 if not torch.isfinite(loss): raise FloatingPointError('nonfinite training loss')
             except FloatingPointError:
                 numerical_failure.update(epoch=epoch+1,batch=k//args.batch,batch_indices=[int(i) for i in batch_ids],batch_ids=[fit[int(i)] if int(i)<len(fit) else 'extra' for i in batch_ids],lr=float(opt.param_groups[0]['lr']))
                 write_json(out/'numerical_failure.json',numerical_failure)
-                if args.debug_numerics:
-                    torch.save(dict(state=net.state_dict(),x=x.detach().cpu(),y=y.detach().cpu(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam'),out/'debug_state.pt')
+                # Retain the failed batch without requiring expensive module hooks.
+                torch.save(dict(state=net.state_dict(),x=x.detach().cpu(),y=y.detach().cpu(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',precision=args.precision),out/'debug_state.pt')
                 raise
             scaler.scale(loss).backward(); scaler.step(opt); scaler.update(); sched.step(); epoch_losses.append(float(loss.detach()))
         losses.append(float(np.mean(epoch_losses)))
         if (epoch+1)%10==0 or args.smoke: print(args.variant,args.seed,'epoch',epoch+1,'loss',losses[-1],'seconds',int(time.time()-t0),flush=True)
-    bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
+    bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',precision=args.precision,mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
     torch.save(bundle,out/'model.pt'); del X,Y; torch.cuda.empty_cache()
-    summary=evaluate(net,mean,std,d,tune,args.variant,out,None if args.smoke else args.boost,device)
+    summary=evaluate(net,mean,std,d,tune,args.variant,out,None if args.smoke else args.boost,device,args.precision)
     summary.update(seconds=time.time()-t0,loss=losses,gpu_peak_bytes=torch.cuda.max_memory_allocated() if device=='cuda' else 0,screening_only=args.fold is None,smoke=args.smoke)
     write_json(out/'summary.json',summary); print(json.dumps({k:v for k,v in summary.items() if k!='loss'},indent=2),flush=True)
 
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--encoder'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true'); args=p.parse_args()
+    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--encoder'); p.add_argument('--precision',choices=['fp16','bf16','fp32'],default='fp16'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true'); args=p.parse_args()
     (boost if args.task=='boost' else run)(args)
 if __name__=='__main__': main()

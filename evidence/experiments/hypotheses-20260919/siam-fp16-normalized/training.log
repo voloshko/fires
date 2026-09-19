@@ -1,0 +1,20 @@
+siam 20260918 epoch 10 loss 1.8869722419314914 seconds 39
+siam 20260918 epoch 20 loss 1.4875228073861864 seconds 79
+siam 20260918 epoch 30 loss 1.012109163734648 seconds 119
+siam 20260918 epoch 40 loss 0.7406496968534257 seconds 159
+siam 20260918 epoch 50 loss 0.6669505404101478 seconds 199
+siam 20260918 epoch 60 loss 0.6324305832386017 seconds 239
+siam 20260918 epoch 70 loss 0.5408221781253815 seconds 279
+siam 20260918 epoch 80 loss 0.5623360408676995 seconds 319
+siam 20260918 epoch 90 loss 0.4880653652879927 seconds 369
+Traceback (most recent call last):
+  File "/home/mc/fires-hypotheses/scripts/hypothesis_bs.py", line 179, in <module>
+    if __name__=='__main__': main()
+                             ~~~~^^
+  File "/home/mc/fires-hypotheses/scripts/hypothesis_bs.py", line 178, in main
+    (boost if args.task=='boost' else run)(args)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/mc/fires-hypotheses/scripts/hypothesis_bs.py", line 159, in run
+    if not torch.isfinite(loss): raise FloatingPointError('nonfinite training loss')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FloatingPointError: nonfinite training loss

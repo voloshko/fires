@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-32",
+  "run_id": "SPEC-32-REPLAY-002-NUMERICS",
+  "created_at": "2026-09-19T10:17:35.922112+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "predecessor_run_id": "SPEC-32-REPLAY-001-NUMERICS",
+  "conclusion": "Fusion normalization fixed the first replayed batch but did not make full FP16 training stable; stopped at epoch98 without a quality result. BF16 trials require same-precision optical controls.",
+  "commands": [
+    "ssh k8plus 'cd ~/fires-hypotheses && OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 .venv/bin/python scripts/hypothesis_bs.py train --variant siam --precision fp16 --seed 20260918 --out research/siam-fp16-normalized-reproduce'"
+  ],
+  "acceptance": {
+    "failure": {
+      "epoch": 98,
+      "batch": 10,
+      "batch_indices": [
+        143,
+        135,
+        125,
+        113,
+        76,
+        60,
+        11,
+        27
+      ],
+      "batch_ids": [
+        "BS_tr_000222",
+        "BS_tr_000210",
+        "BS_tr_000196",
+        "BS_tr_000179",
+        "BS_tr_000126",
+        "BS_tr_000091",
+        "BS_tr_000015",
+        "BS_tr_000038"
+      ],
+      "lr": 0.0008322433602942223
+    },
+    "artifact_sha256": {
+      "evidence/experiments/hypotheses-20260919/siam-fp16-normalized/training.log": "a75c0c22f0512c1a13e933feb47de2c4f8b971086fc50d6e03d575116c2ce509",
+      "evidence/experiments/hypotheses-20260919/siam-fp16-normalized/manifest.json": "53e3ed5d8fdbdc7e0d9f48e7829e7fc63e238084cf30bfef2914ac7ab91c20b9",
+      "evidence/experiments/hypotheses-20260919/siam-fp16-normalized/numerical_failure.json": "7870219b50eb1fecae112c9ee27dcef727b3859131a5a77f8f8dc59f6986e605"
+    }
+  },
+  "limitations": [
+    "Second failure was caught by scalar-loss failfast, not per-module hooks; exact failing module is not identified.",
+    "First-batch normalization repair did not establish global training stability."
+  ],
+  "non_claims": [
+    "No Siamese quality measurement from this run.",
+    "No rejection or acceptance of the accuracy hypothesis.",
+    "No change to completed optical/raw FP16 measurements."
+  ]
+}

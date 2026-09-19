@@ -27,8 +27,8 @@ def main():
             out=bs_prediction(pred,boost,c);matrices.append(confusion(c.mask,out));clear.append(confusion(c.mask,out,valid=c.valid()))
         return dict(all_pixels=bs_scores(np.sum(matrices,axis=0)),clear_sky=bs_scores(np.sum(clear,axis=0)),per_chip=[m.tolist() for m in matrices])
     results={'v13_reference':score(reference)}
-    for variant in ('optical','raw','siam','temporal','temporal-full','external'):
-        suffix='v2' if variant=='siam' else 'v1'
+    for variant in ('optical','optical-bf16','raw','siam','temporal','temporal-full','external'):
+        suffix='v3' if variant=='siam' else 'v1'
         runs=[root/f'bs-{variant}-{s}-{suffix}' for s in (20260918,20260919)]
         if not all((r/'summary.json').exists() for r in runs):continue
         probs=[];singles=[]
@@ -42,7 +42,7 @@ def main():
     if 'optical' in results:
         for variant in ('raw','siam','temporal','temporal-full','external'):
             if variant in results:
-                control='siam' if variant=='external' else 'optical'
+                control='siam' if variant=='external' else ('optical-bf16' if variant=='siam' else 'optical')
                 delta=results[variant]['mean_single_seed_weighted']-results[control]['mean_single_seed_weighted']
                 results[variant].update(paired_control=control,delta_to_control=delta,screening_pass=delta>=.005)
     write_json(args.out,dict(results=results,probability_sha256=hashes,fit=fit,evaluation=tune,non_claims=['Historical 35-chip development screening, not an independent test.','v13 caches are historical 144-chip analogs, not scores of final224 deployed weights.','Fixed equal-weight seven-model reference blend; no weight search.']))

@@ -141,7 +141,7 @@ def pretrain(args):
     if audit['status']!='PASS' or audit['prepared_sha256']!=digest(out/'prepared-v2.json'): raise ValueError('external overlap audit missing or stale')
     for row in audit['local_geometries']:
         if digest(Path('data/comp/train/bs/sentinel2_pre')/f"{row['chip']}_Sentinel-2_pre.tif")!=row['sha256']: raise ValueError('local geometry source changed')
-    result=out/'pretrain'; result.mkdir(exist_ok=True); write_json(result/'manifest.json',manifest(args))
+    result=out/'pretrain'; result.mkdir(exist_ok=True); run_manifest=manifest(args); run_manifest['precision']='bf16'; write_json(result/'manifest.json',run_manifest)
     write_json(result/'data_manifest.json',dict(prepared_sha256=digest(out/'prepared-v2.json'),overlap_audit_sha256=digest(out/'overlap-all-train.json'),patches=prepared['patches']))
     torch.manual_seed(20260918); torch.set_num_threads(4); rng=np.random.default_rng(20260918)
     xs=[];ys=[]
@@ -150,13 +150,14 @@ def pretrain(args):
         z=np.load(r['file']);xs.append(z['image']);ys.append(z['mask'].astype(np.int64))
     flat=np.concatenate([x[:,y!=255][:,::37].astype(np.float32) for x,y in zip(xs,ys)],axis=1); mean=flat.mean(1); std=np.maximum(flat.std(1),1e-3); del flat
     X=torch.stack([torch.from_numpy(((x.astype(np.float32)-mean[:,None,None])/std[:,None,None]).astype(np.float16)) for x in xs]).cuda();Y=torch.as_tensor(np.stack(ys),device='cuda')
-    net=UNet(9,2,w=32,depth=7).cuda(); opt=torch.optim.AdamW(net.parameters(),lr=3e-4,weight_decay=1e-4); sched=torch.optim.lr_scheduler.OneCycleLR(opt,1e-3,total_steps=50*(len(xs)//8)); scaler=torch.amp.GradScaler('cuda'); losses=[]
+    net=UNet(9,2,w=32,depth=7).cuda(); opt=torch.optim.AdamW(net.parameters(),lr=3e-4,weight_decay=1e-4); sched=torch.optim.lr_scheduler.OneCycleLR(opt,1e-3,total_steps=50*(len(xs)//8)); scaler=torch.amp.GradScaler('cuda',enabled=False); losses=[]
     for ep in range(50):
         net.train(); order=rng.permutation(len(xs)); batch_losses=[]
         for i in range(0,len(order)-7,8):
             x,y=make_batch(X,Y,torch.as_tensor(order[i:i+8],device='cuda'),rng,512); opt.zero_grad(set_to_none=True)
-            with torch.autocast('cuda'):
+            with torch.autocast('cuda',dtype=torch.bfloat16):
                 logits=net(x); loss=masked_binary_loss(logits,y)
+            if not torch.isfinite(loss): raise FloatingPointError('external pretrain loss nonfinite')
             scaler.scale(loss).backward();scaler.step(opt);scaler.update();sched.step();batch_losses.append(float(loss.detach()))
         losses.append(float(np.mean(batch_losses)));print('pretrain',ep+1,losses[-1],flush=True)
     torch.save(dict(encoder=net.down.state_dict(),mean=mean,std=std,events=prepared['events']),result/'encoder.pt');write_json(result/'summary.json',dict(loss=losses,events=prepared['events'],patches=len(xs),non_claims=['Training loss is not a held-out accuracy measurement.']))

@@ -25,11 +25,16 @@ run af-net-v1 .venv/bin/python scripts/hypothesis_af_net.py --out research/af-ne
 while systemctl --user is-active --quiet fires-hyp-bs-boost; do sleep 20; done
 [[ -f research/bs-boost-v1/probabilities.npy ]]
 for seed in 20260918 20260919; do
-  for variant in optical raw siam; do
-    suffix=v1
-    if [[ "$variant" == siam ]]; then suffix=v2; fi
-    tag="bs-$variant-$seed-$suffix"
+  for variant in optical raw; do
+    tag="bs-$variant-$seed-v1"
     run "$tag" .venv/bin/python scripts/hypothesis_bs.py train --variant "$variant" --seed "$seed" --out "research/$tag"
   done
+done
+# Separate same-precision controls for the range-stable Siamese recipe.
+for seed in 20260918 20260919; do
+  tag="bs-optical-bf16-$seed-v1"
+  run "$tag" .venv/bin/python scripts/hypothesis_bs.py train --variant optical --precision bf16 --seed "$seed" --out "research/$tag"
+  tag="bs-siam-$seed-v3"
+  run "$tag" .venv/bin/python scripts/hypothesis_bs.py train --variant siam --precision bf16 --seed "$seed" --out "research/$tag"
 done
 printf 'Queue complete at %s\n' "$(date --iso-8601=seconds)"
