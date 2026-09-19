@@ -13,6 +13,7 @@ from src.comp.postproc import drop_far
 
 DEV = 'cuda'; SEED = int(os.environ.get('SEED', 20260918)); EPOCHS = int(os.environ.get('EPOCHS', 30)); TAG = os.environ.get('TAG', 'prithvi')
 LR_ENC = float(os.environ.get('LR_ENC', 5e-5)); LR_DEC = 1e-3; BATCH = 2; BANDS = (0, 1, 2, 6, 7, 8)
+FREEZE = int(os.environ.get('FREEZE', 0))   # 1: кодировщик заморожен — учится только декодер (проба представления)
 torch.manual_seed(SEED); rng = np.random.default_rng(SEED)
 d = BsDataset('data/comp/train/bs'); s = json.load(open('data/comp/split_bs.json')); ids = [c for c in s['train'] if d.has_post(c)]
 rank = sorted(ids, key=lambda c: hashlib.sha256(f'tune:{c}'.encode()).hexdigest()); tune, fit = sorted(rank[:35]), sorted(rank[35:])
@@ -44,12 +45,15 @@ class Net(nn.Module):
         return self.head(torch.cat([h, sk], 1))
 
 net = Net().to(DEV)
-opt = torch.optim.AdamW([{'params': net.enc.parameters(), 'lr': LR_ENC}, {'params': [p for n, p in net.named_parameters() if not n.startswith('enc.')], 'lr': LR_DEC}], weight_decay=1e-4)
+if FREEZE:
+    for p_ in net.enc.parameters(): p_.requires_grad_(False)
+    net.enc.eval()
+opt = torch.optim.AdamW([{'params': [p_ for p_ in net.enc.parameters() if p_.requires_grad] or [torch.zeros(1, device=DEV, requires_grad=True)], 'lr': LR_ENC}, {'params': [p for n, p in net.named_parameters() if not n.startswith('enc.')], 'lr': LR_DEC}], weight_decay=1e-4)
 steps = EPOCHS * (len(fit) // BATCH); sched = torch.optim.lr_scheduler.OneCycleLR(opt, [LR_ENC, LR_DEC], total_steps=steps)
 weight = torch.tensor([0.25, 1, 1, 1.], device=DEV); scaler = torch.amp.GradScaler(DEV)
 t0 = time.time()
 for ep in range(1, EPOCHS + 1):
-    net.train(); order = rng.permutation(len(fit)); tot = 0
+    net.train(); (net.enc.eval() if FREEZE else None); order = rng.permutation(len(fit)); tot = 0
     for k in range(0, len(order) - BATCH + 1, BATCH):
         idx = torch.as_tensor(order[k:k + BATCH], device=DEV); x, y = X[idx].float(), Y[idx]
         if rng.random() < 0.5: x, y = x.flip(4), y.flip(2)
