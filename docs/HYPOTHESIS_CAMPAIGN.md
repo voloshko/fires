@@ -203,3 +203,14 @@ Merged source snapshot dcb1e32 passed 463 tests, 6 existing live checks
 skipped (missing credentials/WorldCover cache). It was tested in the separate
 remote directory ~/fires-hypotheses-qa-dcb1e32 using the isolated dependency
 environment, without changing sources of running training jobs.
+
+
+## Deadline CPU probes
+
+SPEC-39 rejected: fixed trimmed mean of five BS members W .743715 versus
+.744276 (delta -.000561, CI95 [-.002696,.001710]). Five of six half-sample
+comparisons negative. No weights trained or product changes.
+
+SPEC-40 rejected: fixed AF edge expansion (keep p>=.45, add p>=.35 next
+to a valid p>=.75 in 3x3) F1 .951565 versus .951532. Adds25 TP and27 FP,
+delta+.000033, CI95 [-.001117,.001119], inconsistent halves. v15 unchanged.
