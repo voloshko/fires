@@ -133,3 +133,15 @@ def verify_bs_probability_cache(root,fit,evaluation):
         if digest(filename)!=expected: raise ValueError('boost cache source changed')
     path=root/'probabilities.npy'
     return {str(path):digest(path),str(root/'data_manifest.json'):digest(root/'data_manifest.json')}
+
+
+def harmonize_s2_dn(values,bands,processing_baseline):
+    """ESA PB >=04.00 adds 1000 DN; convert to harmonized DN, never fit a scene."""
+    if processing_baseline is None: raise ValueError('missing processing baseline')
+    baseline=float(processing_baseline)
+    if not np.isfinite(baseline) or baseline<0: raise ValueError('invalid processing baseline')
+    out=np.asarray(values,dtype=np.float32).copy()
+    if baseline>=4:
+        for i,band in enumerate(bands):
+            if band!='SCL': out[i]=np.maximum(out[i]-1000,0)
+    return out

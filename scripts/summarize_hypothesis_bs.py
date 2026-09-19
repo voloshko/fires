@@ -27,7 +27,7 @@ def main():
             out=bs_prediction(pred,boost,c);matrices.append(confusion(c.mask,out));clear.append(confusion(c.mask,out,valid=c.valid()))
         return dict(all_pixels=bs_scores(np.sum(matrices,axis=0)),clear_sky=bs_scores(np.sum(clear,axis=0)),per_chip=[m.tolist() for m in matrices])
     results={'v13_reference':score(reference)}
-    for variant in ('optical','raw','siam','temporal','external'):
+    for variant in ('optical','raw','siam','temporal','temporal-full','external'):
         runs=[root/f'bs-{variant}-{s}-v1' for s in (20260918,20260919)]
         if not all((r/'summary.json').exists() for r in runs):continue
         probs=[];singles=[]
@@ -39,7 +39,7 @@ def main():
         paired=np.mean(probs,axis=0)
         results[variant]=dict(mean_single_seed_weighted=float(np.mean(singles)),two_seed_ensemble=score(paired),v13_plus_two=score((5*reference+2*paired)/7))
     if 'optical' in results:
-        for variant in ('raw','siam','temporal','external'):
+        for variant in ('raw','siam','temporal','temporal-full','external'):
             if variant in results:
                 control='siam' if variant=='external' else 'optical'
                 delta=results[variant]['mean_single_seed_weighted']-results[control]['mean_single_seed_weighted']

@@ -70,7 +70,7 @@ def temporal(args):
     from scripts.train_unet import load_split
     out=Path(args.out); out.mkdir(parents=True,exist_ok=True); write_json(out/'manifest.json',manifest(args))
     d,fit,tune=load_split(args.data,args.split); meta=d.meta.set_index('chip_id'); rows=[]
-    for c in fit[:8]:
+    for c in fit[:args.limit]:
         row=meta.loc[c]; path=Path(args.data)/'sentinel2_pre'/f'{c}_Sentinel-2_pre.tif'
         with rasterio.open(path) as ds:
             bbox=transform_bounds(ds.crs,'EPSG:4326',*ds.bounds)
@@ -83,7 +83,7 @@ def temporal(args):
                 items=[]
                 for f in data['features']:
                     prop=f['properties']; item=dict(id=f['id'],datetime=prop['datetime'],mgrs=prop.get('s2:mgrs_tile'),cloud=prop.get('eo:cloud_cover'))
-                    if item['mgrs'] is None: item['mgrs']=f['id'].split('_')[1] if '_' in f['id'] else None
+                    if item['mgrs'] is None: item['mgrs']=f['id'].split('_')[4].removeprefix('T') if len(f['id'].split('_'))>4 else None
                     items.append(item)
                 record['items'][kind]=items
                 record[kind+'_query']=query
@@ -93,5 +93,5 @@ def temporal(args):
 
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('task',choices=['external','temporal']); p.add_argument('--out',required=True); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); args=p.parse_args(); (external if args.task=='external' else temporal)(args)
+    p=argparse.ArgumentParser(); p.add_argument('task',choices=['external','temporal']); p.add_argument('--out',required=True); p.add_argument('--limit',type=int,default=8); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); args=p.parse_args(); (external if args.task=='external' else temporal)(args)
 if __name__=='__main__': main()

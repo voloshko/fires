@@ -50,7 +50,8 @@
         "SPEC-13",
         "SPEC-28",
         "SPEC-34",
-        "SPEC-35"
+        "SPEC-35",
+        "SPEC-37"
       ]
     },
     "REQ-007": {
@@ -409,6 +410,16 @@
       "file": "specs/SPEC-36-hypothesis-evaluation.md",
       "requirement": "REQ-007",
       "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "active"
+    },
+    "SPEC-37": {
+      "title": "Масштабированная pre-only аугментация BS",
+      "file": "specs/SPEC-37-bs-pre-only-expansion.md",
+      "requirement": "REQ-006",
+      "depends_on": [
+        "SPEC-35",
         "SPEC-19"
       ],
       "status": "active"

@@ -106,7 +106,7 @@ def run(args):
         from dataclasses import replace
         extra_root=Path(args.extra); qc=json.loads((extra_root/'result.json').read_text())
         accepted={r['chip']:r for r in qc['records'] if r['accepted']}
-        if len(accepted)<4: raise ValueError('fewer than four accepted temporal chips')
+        if len(accepted)<args.min_extra: raise ValueError('insufficient accepted temporal chips for this experiment')
         if args.fold is None and not set(accepted)<=set(fit): raise ValueError('extra scenes outside fit')
         for i,c in enumerate(fit):
             if c in accepted:
@@ -152,6 +152,6 @@ def run(args):
 
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--encoder'); p.add_argument('--smoke',action='store_true'); args=p.parse_args()
+    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--encoder'); p.add_argument('--smoke',action='store_true'); args=p.parse_args()
     (boost if args.task=='boost' else run)(args)
 if __name__=='__main__': main()

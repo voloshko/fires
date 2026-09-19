@@ -153,3 +153,13 @@ def test_boost_cache_binding_rejects_wrong_split_and_changed_pixels(tmp_path):
     with pytest.raises(ValueError,match='split'):verify_bs_probability_cache(tmp_path,['b'],['a'])
     source.write_bytes(b'changed')
     with pytest.raises(ValueError,match='source'):verify_bs_probability_cache(tmp_path,['a'],['b'])
+
+
+def test_sentinel_baseline_offset_is_metadata_driven_and_preserves_scl():
+    from src.comp.hypothesis_lab import harmonize_s2_dn
+    a=np.array([[[0,500,1500]],[[4,8,9]]],np.uint16)
+    new=harmonize_s2_dn(a,['B12','SCL'],'05.10')
+    assert np.array_equal(new,np.array([[[0,0,500]],[[4,8,9]]]))
+    assert np.array_equal(harmonize_s2_dn(a,['B12','SCL'],'02.14'),a)
+    assert a[0,0,2]==1500
+    with pytest.raises(ValueError):harmonize_s2_dn(a,['B12','SCL'],None)
