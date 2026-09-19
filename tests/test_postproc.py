@@ -70,3 +70,14 @@ def test_микро_и_макро_усреднение_дают_разное():
     assert macro == pytest.approx(0.75)      # (0.5 + 1.0) / 2
     assert micro == pytest.approx(51 / 101)  # пул: 51 совпадение из 101
     assert abs(macro - micro) > 0.2
+
+
+def test_drop_far_убирает_дальнее_пятно_и_оставляет_ближнее():
+    from src.comp.postproc import drop_far
+    pred = np.zeros((300, 300), np.uint8)
+    pred[10:60, 10:60] = 2          # главное пятно
+    pred[70:75, 70:75] = 1          # рядом (≈14 пикс.) — остаётся
+    pred[280:290, 280:290] = 3      # далеко (>125) — чужой пожар
+    out = drop_far(pred, 125)
+    assert out[20, 20] == 2 and out[72, 72] == 1 and out[285, 285] == 0
+    assert drop_far(pred, 0) is pred

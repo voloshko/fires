@@ -17,7 +17,7 @@
 from __future__ import annotations
 
 import numpy as np
-from scipy.ndimage import label
+from scipy.ndimage import distance_transform_edt, label
 
 # Оптимум широкий: 50…200 пикселей дают одно и то же с точностью до третьего
 # знака, после 400 фильтр начинает выедать настоящие мелкие гари.
@@ -42,4 +42,33 @@ def drop_small(pred: np.ndarray, min_px: int = MIN_BLOB) -> np.ndarray:
         return pred
     out = pred.copy()
     out[np.isin(marks, small)] = 0
+    return out
+
+
+# Расстояние до главного пятна, дальше которого предсказанная гарь — чужой пожар.
+# Разметка — периметр ОДНОГО события; чип нарезан вокруг него. На 35 настроечных
+# чипах компоненты дальше 200 пикс. от крупнейшего пятна — истина на 1.5 %,
+# 100–200 — на 44 %, ближе 100 — на 70–85 %. Порог 125 подобран честно: на шести
+# половинах 17/18 выбирался один и тот же, прибавка +0.009…+0.028 взвешенно.
+# Размерный фильтр (100/200 пикс.) отвергнут: он резал настоящие мелкие очаги
+# рядом с пожаром; этот их не трогает.
+FAR_PX = 125
+
+
+def drop_far(pred: np.ndarray, far_px: int = FAR_PX) -> np.ndarray:
+    """Убирает связные области гари дальше `far_px` от крупнейшей области."""
+    if far_px <= 0:
+        return pred
+    marks, count = label(pred > 0)
+    if count < 2:
+        return pred
+    sizes = np.bincount(marks.reshape(-1))
+    sizes[0] = 0
+    main = sizes.argmax()
+    dist = distance_transform_edt(marks != main)
+    far = [k for k in range(1, count + 1) if k != main and dist[marks == k].min() > far_px]
+    if not far:
+        return pred
+    out = pred.copy()
+    out[np.isin(marks, far)] = 0
     return out

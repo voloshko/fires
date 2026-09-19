@@ -22,7 +22,7 @@ import numpy as np
 from src.comp.chips import BsChip
 from src.comp.features import stack
 from src.comp.model import feature_names
-from src.comp.postproc import drop_small
+from src.comp.postproc import FAR_PX, drop_far, drop_small
 
 NET_WEIGHT = 0.6
 
@@ -37,7 +37,8 @@ MIN_BLOB_ENSEMBLE = 0
 def predict(net_model, boost_model, chip: BsChip,
             net_weight: float = NET_WEIGHT,
             min_blob: int = MIN_BLOB_ENSEMBLE,
-            tta: bool = True) -> np.ndarray:
+            tta: bool = True,
+            far_px: int = FAR_PX) -> np.ndarray:
     """Маска степеней поражения по смеси вероятностей.
 
     `net_model` — одна сеть или список сетей одной роли (сидовый ансамбль):
@@ -78,7 +79,8 @@ def predict(net_model, boost_model, chip: BsChip,
     # облако, нет данных): там истины нет по построению, а предсказанная гарь —
     # чистый ложный положительный. 0.7178/0.6737 → 0.7337/0.6907.
     pred[chip.label_zero()] = 0
-    return drop_small(pred, min_blob)
+    # Чужие пожары: компоненты дальше FAR_PX от главного пятна. 0.7254 → 0.7428 взв.
+    return drop_far(drop_small(pred, min_blob), far_px)
 
 
 def available(net_path: str | Path, boost_path: str | Path) -> bool:
