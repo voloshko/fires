@@ -104,7 +104,7 @@ AF (F1): жёсткие отрицательные в выборке **+0.021** 
 | SPEC-31 | rejected | 400 эпох хуже 200 на 0.03 |
 
 Очередь на k8plus пуста: весь список ресёрча и SPEC-22…31 измерены. Последний
-сабмит — **v17** (`submissions/submission_v17-LIVE-017-siam50.csv`, md5 428ed929…):
+сабмит — **v18** (`submissions/submission_v18-LIVE-018-consensus.csv`, md5 9aa9e569…), это v17 + `--consensus` (SPEC-39, 5 тестовых чипов изменены). v17 (md5 428ed929…):
 BS — семь сетей (пять оптических v13 с весом 0.1 + `models/bs_unet_final_siam_s51/52.pt`
 с весом 0.25, `inference.py --unet-weights`) и бустинг; AF байт-в-байт из v15
 (`models/af_hgb.pkl`, sha256 96a6532b…). Receipt SPEC-19-LIVE-017.
