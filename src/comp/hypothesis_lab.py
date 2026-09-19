@@ -1,0 +1,94 @@
+"""Isolated experiment primitives (SPEC-32/33/36); no competition test access."""
+from __future__ import annotations
+import hashlib
+import json
+from pathlib import Path
+import numpy as np
+
+OPTICAL = ('dnbr','rbr','nbr_pre','nbr_post','ndvi_pre','ndvi_post','dndvi','nbr2_post','b12_post','b8a_post','landcover')
+GRID = np.unique(np.round(np.r_[np.arange(.5,.95,.05), np.arange(.95,1,.005), .999], 6))
+
+
+def digest(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for block in iter(lambda: f.read(2**20), b''): h.update(block)
+    return h.hexdigest()
+
+
+def rank_ids(ids, salt):
+    return sorted(ids, key=lambda c: hashlib.sha256(f'{salt}:{c}'.encode()).hexdigest())
+
+
+def nested_folds(ids, k=5):
+    """Match legacy outer AF folds; calibration is internal to outer fit."""
+    ids = sorted(ids)
+    if len(set(ids)) != len(ids) or len(ids) < k*2: raise ValueError('nonunique or insufficient IDs')
+    for j in range(k):
+        test = ids[j::k]
+        dev = rank_ids([c for i,c in enumerate(ids) if i%k != j], f'lab-cal:{j}')
+        n = max(1, round(.2*len(dev)))
+        cal, fit = dev[:n], dev[n:]
+        assert not (set(fit)&set(cal) or set(fit)&set(test) or set(cal)&set(test))
+        yield sorted(fit), sorted(cal), test
+
+
+def choose_background(background, rng, scores=None, budget=1500):
+    background = np.asarray(background)
+    if len(background) <= budget: return background.copy()
+    if scores is None: return rng.choice(background, budget, replace=False)
+    n = budget//2
+    hard = background[np.argsort(scores[background], kind='stable')[-n:]]
+    rest = np.setdiff1d(background, hard, assume_unique=True)
+    return np.r_[hard, rng.choice(rest,budget-n,replace=False)]
+
+
+def binary_counts(truth, prediction):
+    truth, prediction = np.asarray(truth,dtype=bool), np.asarray(prediction,dtype=bool)
+    return np.array([np.count_nonzero(truth&prediction),np.count_nonzero(~truth&prediction),np.count_nonzero(truth&~prediction)],dtype=np.int64)
+
+
+def binary_scores(counts):
+    tp,fp,fn = np.asarray(counts).sum(axis=0) if np.asarray(counts).ndim > 1 else counts
+    return dict(tp=int(tp),fp=int(fp),fn=int(fn),precision=float(tp/max(1,tp+fp)),recall=float(tp/max(1,tp+fn)),f1=float(2*tp/max(1,2*tp+fp+fn)))
+
+
+def paired_interval(a,b,seed=20260918,n=2000):
+    a,b=np.asarray(a),np.asarray(b)
+    if a.shape != b.shape or a.ndim != 2 or a.shape[1] != 3: raise ValueError('expected matching chip TP FP FN')
+    rng=np.random.default_rng(seed); delta=[]
+    for _ in range(n):
+        ix=rng.integers(len(a),size=len(a))
+        delta.append(binary_scores(b[ix])['f1']-binary_scores(a[ix])['f1'])
+    return list(map(float,np.quantile(delta,[.025,.975])))
+
+
+def bs_inputs(chip, variant):
+    from src.comp.features import stack
+    optical=stack(chip,OPTICAL)
+    if variant=='optical': return optical
+    if not chip.post.size: raise ValueError('paired experiment requires post scene')
+    raw=np.concatenate([chip.pre[:9],chip.post[:9]]).astype(np.float32)/10000
+    if variant in ('raw','siam'): return np.concatenate([raw,optical])
+    raise ValueError(variant)
+
+
+def confusion(truth,prediction,classes=4,valid=None):
+    t,p=np.asarray(truth).ravel(),np.asarray(prediction).ravel()
+    if valid is not None: t,p=t[np.asarray(valid).ravel()],p[np.asarray(valid).ravel()]
+    if np.any((t<0)|(t>=classes)|(p<0)|(p>=classes)): raise ValueError('invalid class')
+    return np.bincount(t*classes+p,minlength=classes**2).reshape(classes,classes)
+
+
+def bs_scores(cm):
+    cm=np.asarray(cm); tp=cm[1:,1:].sum(); fp=cm[0,1:].sum(); fn=cm[1:,0].sum()
+    den=cm.sum(0)+cm.sum(1)-np.diag(cm)
+    iou=np.divide(np.diag(cm),den,out=np.zeros(len(cm),float),where=den>0)
+    burn=float(tp/max(1,tp+fp+fn)); sev=float(iou[1:].mean())
+    return dict(iou_burn=burn,miou_sev=sev,weighted=(.35*burn+.30*sev)/.65,per_class=iou.tolist())
+
+
+def write_json(path,payload):
+    path=Path(path); path.parent.mkdir(parents=True,exist_ok=True)
+    if path.exists(): raise FileExistsError(path)
+    path.write_text(json.dumps(payload,indent=2,ensure_ascii=False,allow_nan=False)+'\n')
