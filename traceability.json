@@ -384,7 +384,7 @@
       "depends_on": [
         "SPEC-19"
       ],
-      "status": "active"
+      "status": "implemented"
     },
     "SPEC-34": {
       "title": "Внешние размеченные пожары для предобучения BS",

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "chips": 336,
+  "totals": {
+    "random": [
+      7099,
+      864,
+      599
+    ],
+    "hard": [
+      6991,
+      379,
+      707
+    ]
+  },
+  "non_claim": "Replays stored probabilities; does not independently retrain models."
+}
