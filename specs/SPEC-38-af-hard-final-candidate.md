@@ -1,6 +1,6 @@
 # SPEC-38: Финальный AF hard-negative кандидат поверх BS v13
 
-Status: active
+Status: implemented
 
 Requirement: REQ-007
 
@@ -37,3 +37,14 @@ SPEC-33 прошла замороженный критерий на двух с�
 - `python -m pytest tests/test_hypothesis_lab.py -q`; `make gate`.
 - Receipt SPEC-38 с командами, хешами, validator status, числом изменённых
   AF-строк и проверкой сохранности BS. Не доказывает прирост на закрытом тесте.
+
+## Resolution
+
+Финальный HGB обучен на 420 чипах, seed 20260918, cutoff .5; штатная
+загрузка проверена. Кандидат `submissions/submission_candidate_af_hard.csv`
+содержит 447 строк: 180 AF и 267 BS. Изменены 93 AF-строки, BS сохранены
+побайтно. Полный validator с формами и проверкой пересечений классов PASS.
+Предсказания: 48 пустых AF-чипов, 3874 пикселя огня; это не метрики качества.
+SHA256 CSV c6c5ca1dd5e65665efdc2776a472a50a7e34f43bba982cf71f087df3140c6dd7.
+Receipt SPEC-38-REPLAY-001. Модель и CSV на k8plus; локальная копия модели
+в research/af-hard-final-v1/model.pkl (не коммитится). Отправка не выполнялась.

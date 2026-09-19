@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "chips": 336,
+  "mismatches": [],
+  "optimistic_pooled_oof": {
+    "boost": {
+      "f1": 0.9065456405011506,
+      "weight": 0.0,
+      "cutoff": 0.995
+    },
+    "network": {
+      "f1": 0.8861972925707624,
+      "weight": 1.0,
+      "cutoff": 0.2
+    },
+    "mixture": {
+      "f1": 0.8994378513429107,
+      "weight": 0.3,
+      "cutoff": 0.7
+    }
+  },
+  "non_claims": [
+    "Pooled OOF grid maxima fit the same labels and are not nested evaluation.",
+    "Stored probabilities are float32; decision-boundary rounding can affect replay.",
+    "Does not independently retrain models."
+  ]
+}
