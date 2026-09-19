@@ -13,7 +13,8 @@ from scripts.hypothesis_lab import manifest
 
 def data_split(args):
     from scripts.train_unet import load_split
-    d,fit,tune=load_split(args.data,args.split)
+    # --final: все 224 чипа, настроечной части нет, замер не производится (SPEC-32 → сабмит).
+    d,fit,tune=load_split(args.data,args.split,use_all=getattr(args,'final',False))
     if args.fold is not None:
         from src.comp.hypothesis_lab import bs_confirmation_split
         fit,tune=bs_confirmation_split(d.meta,fit,tune,args.fold)
@@ -86,6 +87,7 @@ def run(args):
     out=Path(args.out); out.mkdir(parents=True,exist_ok=True)
     write_json(out/'manifest.json',manifest(args)); d,fit,tune=data_split(args)
     write_json(out/'data_manifest.json',data_manifest(args,fit,tune))
+    if getattr(args,'final',False): args.boost=None
     if not args.smoke and args.boost:
         bm=json.loads((Path(args.boost)/'data_manifest.json').read_text())
         if bm['fit']!=fit or bm['evaluation']!=tune: raise ValueError('boost training/evaluation split mismatch')
@@ -169,12 +171,13 @@ def run(args):
         if (epoch+1)%10==0 or args.smoke: print(args.variant,args.seed,'epoch',epoch+1,'loss',losses[-1],'seconds',int(time.time()-t0),flush=True)
     bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',precision=args.precision,mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
     torch.save(bundle,out/'model.pt'); del X,Y; torch.cuda.empty_cache()
+    if getattr(args,'final',False):
+        write_json(out/'summary.json',dict(final=True,chips=len(fit),seconds=time.time()-t0,loss=losses,quality_evaluated=False)); print('final saved',len(fit),flush=True); return
     summary=evaluate(net,mean,std,d,tune,args.variant,out,None if args.smoke else args.boost,device,args.precision)
     summary.update(seconds=time.time()-t0,loss=losses,gpu_peak_bytes=torch.cuda.max_memory_allocated() if device=='cuda' else 0,screening_only=args.fold is None,smoke=args.smoke)
     write_json(out/'summary.json',summary); print(json.dumps({k:v for k,v in summary.items() if k!='loss'},indent=2),flush=True)
 
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--encoder'); p.add_argument('--precision',choices=['fp16','bf16','fp32'],default='fp16'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true'); args=p.parse_args()
-    (boost if args.task=='boost' else run)(args)
+    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--encoder'); p.add_argument('--precision',choices=['fp16','bf16','fp32'],default='fp16'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true');     (boost if args.task=='boost' else run)(args)
 if __name__=='__main__': main()

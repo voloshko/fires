@@ -30,3 +30,19 @@ def test_новые_имена_не_трогаются():
 def test_число_ключей_сохраняется():
     old = {f"d{i}.0.weight": i for i in range(1, 5)}
     assert len(_modernise(old)) == len(old), "переименование не должно терять веса"
+
+
+def test_сиамский_бандл_грузится_и_даёт_вероятности(tmp_path):
+    """Бандл SPEC-32 (variant=siam) грузится через unet.load, probs даёт (H, W, 4)."""
+    import numpy as np, torch
+    from src.comp.hypothesis_models import make_model
+    from src.comp import unet
+    from src.comp.chips import BsChip
+    net = make_model("siam", 4, 3)
+    torch.save({"state": net.state_dict(), "variant": "siam", "width": 4, "depth": 3, "fusion_norm": True,
+                "mean": np.zeros(29, np.float32), "std": np.ones(29, np.float32)}, tmp_path / "siam.pt")
+    model = unet.load(tmp_path / "siam.pt")
+    pre = np.full((10, 32, 32), 1000, np.uint16); pre[9] = 4
+    chip = BsChip("x", pre, pre.copy(), np.zeros((3, 32, 32)), np.zeros((2, 32, 32)), None)
+    p = unet.probs(model, chip, tta=False)
+    assert p.shape == (32, 32, 4) and np.allclose(p.sum(2), 1, atol=1e-4)

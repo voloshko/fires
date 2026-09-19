@@ -47,6 +47,16 @@ def load(path: str | Path):
     from scripts.train_unet import build
 
     bundle = torch.load(path, map_location="cpu", weights_only=False)
+    if bundle.get("variant") == "siam":
+        # Сиамская сеть соседа (SPEC-32): две ветви «до/после» по 9 сырым полосам +
+        # 11 оптических признаков; вход строит hypothesis_lab.bs_inputs.
+        from src.comp.hypothesis_models import make_model
+        net = make_model("siam", bundle["width"], bundle["depth"], bundle.get("fusion_norm", True))
+        net.load_state_dict(bundle["state"])
+        net.variant, net.names, net.maskch, net.radnorm = "siam", (), 0, 0
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        net.to(device).eval()
+        return net, np.asarray(bundle["mean"], np.float32), np.asarray(bundle["std"], np.float32), device
     names = tuple(bundle["names"])
     state = _modernise(bundle["state"])
     # Ширина и глубина читаются из самих весов: файл модели не обязан их нести,
@@ -80,6 +90,18 @@ def probs(model, chip: BsChip, tta: bool = True) -> np.ndarray:
     import torch
 
     net, mean, std, device = model
+    if getattr(net, "variant", "") == "siam":
+        from src.comp.hypothesis_lab import bs_inputs
+        feats = np.nan_to_num(bs_inputs(chip, "siam"), posinf=0.0, neginf=0.0).astype(np.float32)
+        x = (feats - mean[:, None, None]) / std[:, None, None]
+        with torch.no_grad():
+            batch = torch.from_numpy(x).unsqueeze(0).to(device)
+            logits = net(batch).float()
+            if tta:
+                for dims in ([2], [3], [2, 3]):
+                    logits = logits + torch.flip(net(torch.flip(batch, dims)).float(), dims)
+                logits = logits / 4
+            return logits.softmax(1)[0].permute(1, 2, 0).cpu().numpy()
     if getattr(net, "radnorm", 0):
         from src.comp.features import normalise_post
         chip = normalise_post(chip)
