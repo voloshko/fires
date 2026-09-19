@@ -155,6 +155,21 @@ def pretrain(args):
     torch.save(dict(encoder=net.down.state_dict(),mean=mean,std=std,events=prepared['events']),result/'encoder.pt');write_json(result/'summary.json',dict(loss=losses,events=prepared['events'],patches=len(xs),non_claims=['Training loss is not a held-out accuracy measurement.']))
 
 
+def smoke(args):
+    import torch
+    from scripts.train_unet import UNet
+    from src.comp.hypothesis_models import masked_binary_loss
+    torch.set_num_threads(2)
+    out=Path(args.out); prepared=json.loads((out/'prepared-v2.json').read_text())
+    arrays=[np.load(r['file']) for r in prepared['patches'][:8]]
+    x=torch.as_tensor(np.stack([z['image'].astype(np.float32) for z in arrays]))
+    y=torch.as_tensor(np.stack([z['mask'].astype(np.int64) for z in arrays]))
+    net=UNet(9,2,w=2,depth=3); loss=masked_binary_loss(net(x),y); loss.backward()
+    assert torch.isfinite(loss) and all(torch.isfinite(p.grad).all() for p in net.parameters() if p.grad is not None)
+    result=dict(status='PASS',smoke=True,real_patches=len(arrays),ignored_pixels=int((y==255).sum()),loss_finite=True,non_claim='CPU forward/backward only; not model quality.')
+    write_json(out/'smoke.json',result); print(json.dumps(result))
+
+
 def main():
-    p=argparse.ArgumentParser();p.add_argument('task',choices=['download','prepare','pretrain']);p.add_argument('--out',default='research/external-train-v1');p.add_argument('--events',type=int,default=30);args=p.parse_args();{'download':download,'prepare':prepare,'pretrain':pretrain}[args.task](args)
+    p=argparse.ArgumentParser();p.add_argument('task',choices=['download','prepare','pretrain','smoke']);p.add_argument('--out',default='research/external-train-v1');p.add_argument('--events',type=int,default=30);args=p.parse_args();{'download':download,'prepare':prepare,'pretrain':pretrain,'smoke':smoke}[args.task](args)
 if __name__=='__main__':main()
