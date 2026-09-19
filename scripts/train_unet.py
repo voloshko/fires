@@ -81,6 +81,61 @@ class UNet(nn.Module):
         return self.head(x)
 
 
+class PSPUNet(UNet):
+    """Пирамида объединения (1, 2, 3, 6 + глобальная ветвь) на узком месте вместо
+    ещё одного уровня понижения: охват растёт без потери разрешения (research 1.2)."""
+
+    def __init__(self, cin, classes=4, w=48, depth=4, bins=(1, 2, 3, 6)):
+        super().__init__(cin, classes, w, depth)
+        deep = w * 2 ** (depth - 1)
+        self.bins = bins
+        self.psp = nn.ModuleList([nn.Sequential(nn.Conv2d(deep, deep // 4, 1, bias=False),
+                                                nn.BatchNorm2d(deep // 4), nn.ReLU(inplace=True)) for _ in bins])
+        self.psp_out = block(deep + len(bins) * (deep // 4), deep)
+
+    def forward(self, x):
+        skips = []
+        for i, blk in enumerate(self.down):
+            x = blk(x if i == 0 else self.pool(x))
+            skips.append(x)
+        h, w_ = x.shape[2:]
+        pyr = [x] + [F.interpolate(m(F.adaptive_avg_pool2d(x, b)), size=(h, w_), mode="bilinear", align_corners=False)
+                     for b, m in zip(self.bins, self.psp)]
+        x = self.psp_out(torch.cat(pyr, 1))
+        for k, (up, conv) in enumerate(zip(self.up, self.conv)):
+            x = conv(torch.cat([up(x), skips[-2 - k]], 1))
+        return self.head(x)
+
+
+class DSUNet(UNet):
+    """Глубокий надзор: вспомогательные головы на двух предпоследних уровнях
+    декодера (research 1.3). В режиме eval возвращает только основной выход."""
+
+    def __init__(self, cin, classes=4, w=48, depth=4):
+        super().__init__(cin, classes, w, depth)
+        self.aux = nn.ModuleList([nn.Conv2d(w * 2, classes, 1), nn.Conv2d(w * 4, classes, 1)])
+
+    def forward(self, x):
+        skips = []
+        for i, blk in enumerate(self.down):
+            x = blk(x if i == 0 else self.pool(x))
+            skips.append(x)
+        outs = []
+        n = len(self.up)
+        for k, (up, conv) in enumerate(zip(self.up, self.conv)):
+            x = conv(torch.cat([up(x), skips[-2 - k]], 1))
+            if self.training and k == n - 3: outs.append(self.aux[1](x))
+            if self.training and k == n - 2: outs.append(self.aux[0](x))
+        main = self.head(x)
+        if self.training:
+            return main, [F.interpolate(o, size=main.shape[2:], mode="bilinear", align_corners=False) for o in outs]
+        return main
+
+
+def build(cin, w, depth, kind="plain"):
+    return {"plain": UNet, "psp": PSPUNet, "ds": DSUNet}[kind](cin, w=w, depth=depth)
+
+
 def load_split(root: str, split_path: str, use_all: bool = False):
     """use_all: обучение на ВСЕХ чипах — режим финальной модели.
 
@@ -140,7 +195,7 @@ def make_batch(x, y, idx, rng, crop):
 
 def normalise(xs):
     """Поканальная стандартизация по обучающей части; параметры сохраняются."""
-    flat = np.concatenate([x.reshape(len(NAMES), -1)[:, ::37].astype(np.float32) for x in xs], 1)
+    flat = np.concatenate([x.reshape(x.shape[0], -1)[:, ::37].astype(np.float32) for x in xs], 1)
     mean = flat.mean(1).astype(np.float32)
     std = np.maximum(flat.std(1), 1e-3).astype(np.float32)
     return mean, std

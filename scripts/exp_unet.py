@@ -22,7 +22,7 @@ import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from scripts.train_unet import (  # noqa: E402
-    BATCH, CROP, SEED, UNet, cache, gpu_cache, iou_scores, load_split, make_batch, normalise,
+    BATCH, CROP, SEED, UNet, build, cache, gpu_cache, iou_scores, load_split, make_batch, normalise,
 )
 from src.comp.features import NAMES, stack  # noqa: E402
 
@@ -40,6 +40,24 @@ RUNSEED = int(os.environ.get("SEED", SEED))
 MASKCH = int(os.environ.get("MASKCH", 0))   # канал валидности на входе
 LOSS = os.environ.get("LOSS", "dice")        # dice | lovasz — что добавляется к CE
 PSEUDO = float(os.environ.get("PSEUDO", 0))   # >0: тестовые чипы с псевдоразметкой; порог уверенности пикселя
+CHANNELS = os.environ.get("CHANNELS", "all")   # all | optical | context — подмножество каналов для разнообразия ансамбля
+SUBSETS = {
+    "optical": ("dnbr", "rbr", "nbr_pre", "nbr_post", "ndvi_pre", "ndvi_post", "dndvi", "nbr2_post", "b12_post", "b8a_post", "landcover"),
+    "context": ("dnbr_win5", "dnbr_win15", "dnbr_std5", "dnbr_chip", "landcover", "slope", "dem", "vv", "vh"),
+}
+ARCH = os.environ.get("ARCH", "plain")         # plain | psp | ds
+COPYPASTE = float(os.environ.get("COPYPASTE", 0))   # вероятность вклеить гарь соседа по батчу
+BDOU = float(os.environ.get("BDOU", 0))        # >0: вес Boundary DoU по гари
+JITTER = float(os.environ.get("JITTER", 0))
+
+
+def boundary_dou(p_burn, t_burn):
+    """Boundary DoU (Sun et al., 2023) по гари, пул по батчу: (|G∪P|−|G∩P|)/(|G∪P|−α|G∩P|),
+    α = 1 − 2·|кромка G|/|G|, обрезано в [0, 0.8]; чем тоньше объект, тем ближе к обычному IoU."""
+    inter = (p_burn * t_burn).sum(); union = p_burn.sum() + t_burn.sum() - inter
+    edge = (F.max_pool2d(t_burn.unsqueeze(1), 3, 1, 1) - (1 - F.max_pool2d(1 - t_burn.unsqueeze(1), 3, 1, 1))).sum()
+    alpha = torch.clamp(1 - 2 * edge / (t_burn.sum() + 1), 0, 0.8)
+    return (union - inter) / (union - alpha * inter + 1)   # >0: спектральное дрожание признаков — имитация разных условий съёмки
 IGNORE_ZERO = int(os.environ.get("IGNORE_ZERO", 0))   # 1: пиксели тени/плотного облака (label_zero) не участвуют в потере
 FINAL = int(os.environ.get("FINAL", 0))       # 1: обучение на ВСЕХ чипах, без замера, сохранение как финальной
 BOUNDARY = float(os.environ.get("BOUNDARY", 0))   # >0: вес пикселей у кромки истинной гари (×(1+BOUNDARY))
@@ -119,6 +137,11 @@ def main():
           f"глубина {DEPTH}, ширина {WIDTH}, "
           f"обучение {len(fit)}, замер {len(tune)}", flush=True)
     xtr, ytr, oktr = cache(d, fit)
+    if CHANNELS != "all":
+        # Ветви на разных подмножествах каналов ошибаются по-разному —
+        # источник разнообразия для ансамбля (research-findings, стадия 4).
+        keep = [NAMES.index(n) for n in SUBSETS[CHANNELS]]
+        xtr = [x[keep] for x in xtr]
     if IGNORE_ZERO:
         # Под тенью разметка — ноль по построению, а спектр — тёмный, как у гари.
         # Учить сеть «тёмное под тенью = фон» — учить путать тень с гарью наоборот.
@@ -137,6 +160,9 @@ def main():
             fit.append(c)
         print(f"[{TAG}] псевдоразметка: +{len(fit)-n0} тестовых чипов, порог уверенности {PSEUDO}", flush=True)
     xva, yva, okva = cache(d, tune)
+    if CHANNELS != "all":
+        xva = [x[keep] for x in xva]
+    USED = tuple(SUBSETS[CHANNELS]) if CHANNELS != "all" else NAMES
     mean, std = normalise(xtr)
     if MASKCH:
         # Сеть не отличает «нет гари» от «облако»: признаки под маской — сырые
@@ -144,9 +170,9 @@ def main():
         xtr = [np.concatenate([x, ok[None].astype(np.float16)]) for x, ok in zip(xtr, oktr)]
         xva = [np.concatenate([x, ok[None].astype(np.float16)]) for x, ok in zip(xva, okva)]
         mean = np.append(mean, 0.5).astype(np.float32); std = np.append(std, 0.5).astype(np.float32)
-    cin = len(NAMES) + MASKCH
+    cin = len(USED) + MASKCH
 
-    net = UNet(cin, w=WIDTH, depth=DEPTH).to(DEV)
+    net = build(cin, WIDTH, DEPTH, ARCH).to(DEV)
     opt = torch.optim.AdamW(net.parameters(), lr=3e-4, weight_decay=1e-4)
     steps = EPOCHS * max(1, len(fit) // BATCH)
     sched = torch.optim.lr_scheduler.OneCycleLR(opt, 1e-3, total_steps=steps)
@@ -163,14 +189,36 @@ def main():
         order = rng.permutation(len(fit))
         for k in range(0, len(order) - BATCH + 1, BATCH):
             x, y = make_batch(X, Y, torch.as_tensor(order[k:k + BATCH], device=DEV), rng, CROPSZ)
+            if COPYPASTE > 0:
+                # Копирование-вставка гари соседа по батчу: новые кромки и фон под
+                # ту же разметку (research 2.1). Без сглаживания швов — сначала грубо.
+                for i in range(x.shape[0]):
+                    if rng.random() < COPYPASTE:
+                        j = int(rng.integers(0, x.shape[0]))
+                        if j != i:
+                            m = y[j] > 0
+                            x[i][:, m] = x[j][:, m]; y[i][m] = y[j][m]
+            if JITTER > 0:
+                # То же место в другой день: сдвиг и масштаб на канал и на чип,
+                # в стандартизованной шкале; категориальный landcover не трогаем.
+                g = 1 + JITTER * torch.randn(x.shape[0], x.shape[1], 1, 1, device=DEV)
+                b = JITTER * torch.randn(x.shape[0], x.shape[1], 1, 1, device=DEV)
+                lc = USED.index("landcover"); g[:, lc] = 1; b[:, lc] = 0
+                x = x * g + b
             opt.zero_grad(set_to_none=True)
             with torch.amp.autocast(DEV):
                 out = net(x)
+                aux_outs = []
+                if isinstance(out, tuple): out, aux_outs = out
                 known = y != 255
                 if BOUNDARY > 0:
                     loss = (F.cross_entropy(out, y, weight=weight, reduction="none", ignore_index=255) * boundary_weight(y.clamp(max=3))).sum() / known.sum()
                 else:
                     loss = F.cross_entropy(out, y, weight=weight, ignore_index=255)
+                for a in aux_outs:   # глубокий надзор, вес 0.4 (research 1.3)
+                    loss = loss + 0.4 * F.cross_entropy(a, y, weight=weight, ignore_index=255)
+                if BDOU > 0:
+                    loss = loss + BDOU * boundary_dou((1 - out.float().softmax(1)[:, 0]) * known, ((y > 0) & known).float())
                 if LOSS == "lovasz":
                     loss = loss + lovasz_softmax(out.float().softmax(1), y)
                 else:
@@ -183,7 +231,7 @@ def main():
     net.eval()
     print(f"[{TAG}] обучено за {time.time()-t0:.0f}с", flush=True)
     if FINAL:
-        torch.save({"state": net.state_dict(), "mean": mean, "std": std, "names": NAMES, "epochs": EPOCHS,
+        torch.save({"state": net.state_dict(), "mean": mean, "std": std, "names": USED, "epochs": EPOCHS,
                     "chips": len(fit), "depth": DEPTH, "width": WIDTH, "crop": CROPSZ, "loss": LOSS,
                     "boundary": BOUNDARY, "seed": RUNSEED}, f"models/bs_unet_{TAG}.pt")
         print(f"[{TAG}] финальная: {len(fit)} чипов, сохранена последняя эпоха → models/bs_unet_{TAG}.pt"); return
@@ -200,9 +248,9 @@ def main():
                 how = ("отражения " if tta else "обычно    ") + (f"фильтр {min_px}" if min_px else "без фильтра") + (" ноль под маской" if zero else "")
                 print(f"[{TAG}] {how:42s} IoU_burn {burn:.4f}  mIoU_sev {miou:.4f}  "
                       f"[{per[1]:.3f} {per[2]:.3f} {per[3]:.3f}]", flush=True)
-    torch.save({"state": net.state_dict(), "mean": mean, "std": std, "names": NAMES,
+    torch.save({"state": net.state_dict(), "mean": mean, "std": std, "names": USED,
                 "bg_weight": BG, "epochs": EPOCHS, "crop": CROPSZ,
-                "depth": DEPTH, "width": WIDTH, "maskch": MASKCH, "seed": RUNSEED, "loss": LOSS, "boundary": BOUNDARY, "ignore_zero": IGNORE_ZERO}, f"models/exp_{TAG}.pt")
+                "depth": DEPTH, "width": WIDTH, "maskch": MASKCH, "seed": RUNSEED, "loss": LOSS, "boundary": BOUNDARY, "ignore_zero": IGNORE_ZERO, "jitter": JITTER, "arch": ARCH, "copypaste": COPYPASTE, "bdou": BDOU}, f"models/exp_{TAG}.pt")
 
 
 if __name__ == "__main__":

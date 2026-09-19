@@ -44,7 +44,7 @@ def load(path: str | Path):
     """Возвращает (сеть в режиме eval, среднее, разброс, устройство)."""
     import torch
 
-    from scripts.train_unet import UNet
+    from scripts.train_unet import build
 
     bundle = torch.load(path, map_location="cpu", weights_only=False)
     names = tuple(bundle["names"])
@@ -53,7 +53,8 @@ def load(path: str | Path):
     # а разойтись с кодом они не должны.
     width, cin = state["down.0.0.weight"].shape[:2]
     depth = sum(1 for k in state if k.startswith("down.") and k.endswith(".0.weight"))
-    net = UNet(cin, w=width, depth=depth)
+    kind = "psp" if any(k.startswith("psp") for k in state) else "ds" if any(k.startswith("aux.") for k in state) else "plain"
+    net = build(cin, width, depth, kind)
     net.load_state_dict(state)
     # Лишний входной канал сверх признаков — маска валидности (MASKCH=1 в стенде).
     net.names = names            # сеть считает признаки по СВОЕМУ набору имён
