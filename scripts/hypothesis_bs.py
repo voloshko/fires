@@ -13,7 +13,11 @@ from scripts.hypothesis_lab import manifest
 
 def data_split(args):
     from scripts.train_unet import load_split
-    return load_split(args.data,args.split)
+    d,fit,tune=load_split(args.data,args.split)
+    if args.fold is not None:
+        from src.comp.hypothesis_lab import bs_confirmation_split
+        fit,tune=bs_confirmation_split(d.meta,fit,tune,args.fold)
+    return d,fit,tune
 
 
 def data_manifest(args,fit,tune):
@@ -21,7 +25,7 @@ def data_manifest(args,fit,tune):
     for folder in ('sentinel2_pre','sentinel2_post','aux','sentinel1_pre','masks'):
         for c in fit+tune:
             for p in sorted((root/folder).glob(c+'_*.tif')): hashes[str(p)]=digest(p)
-    return dict(fit=fit,evaluation=tune,files=hashes,split_sha256=digest(args.split))
+    return dict(fit=fit,evaluation=tune,files=hashes,split_sha256=digest(args.split),meta_sha256=digest(root/'meta.csv'))
 
 
 def boost(args):
@@ -81,6 +85,9 @@ def run(args):
     out=Path(args.out); out.mkdir(parents=True,exist_ok=True)
     write_json(out/'manifest.json',manifest(args)); d,fit,tune=data_split(args)
     write_json(out/'data_manifest.json',data_manifest(args,fit,tune))
+    if not args.smoke and args.boost:
+        bm=json.loads((Path(args.boost)/'data_manifest.json').read_text())
+        if bm['fit']!=fit or bm['evaluation']!=tune: raise ValueError('boost training/evaluation split mismatch')
     torch.set_num_threads(4); torch.manual_seed(args.seed); np.random.seed(args.seed)
     device='cpu' if args.smoke else ('cuda' if torch.cuda.is_available() else 'cpu')
     if device=='cpu' and not args.smoke: raise RuntimeError('GPU required for full experiment')
@@ -100,7 +107,7 @@ def run(args):
         extra_root=Path(args.extra); qc=json.loads((extra_root/'result.json').read_text())
         accepted={r['chip']:r for r in qc['records'] if r['accepted']}
         if len(accepted)<4: raise ValueError('fewer than four accepted temporal chips')
-        if not set(accepted)<=set(fit): raise ValueError('extra scenes outside fit')
+        if args.fold is None and not set(accepted)<=set(fit): raise ValueError('extra scenes outside fit')
         for i,c in enumerate(fit):
             if c in accepted:
                 path=extra_root/f'{c}.npz'
@@ -140,11 +147,11 @@ def run(args):
     bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
     torch.save(bundle,out/'model.pt'); del X,Y; torch.cuda.empty_cache()
     summary=evaluate(net,mean,std,d,tune,args.variant,out,None if args.smoke else args.boost,device)
-    summary.update(seconds=time.time()-t0,loss=losses,gpu_peak_bytes=torch.cuda.max_memory_allocated() if device=='cuda' else 0,screening_only=True,smoke=args.smoke)
+    summary.update(seconds=time.time()-t0,loss=losses,gpu_peak_bytes=torch.cuda.max_memory_allocated() if device=='cuda' else 0,screening_only=args.fold is None,smoke=args.smoke)
     write_json(out/'summary.json',summary); print(json.dumps({k:v for k,v in summary.items() if k!='loss'},indent=2),flush=True)
 
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--extra'); p.add_argument('--encoder'); p.add_argument('--smoke',action='store_true'); args=p.parse_args()
+    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--encoder'); p.add_argument('--smoke',action='store_true'); args=p.parse_args()
     (boost if args.task=='boost' else run)(args)
 if __name__=='__main__': main()

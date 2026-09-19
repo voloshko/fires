@@ -92,3 +92,18 @@ def write_json(path,payload):
     path=Path(path); path.parent.mkdir(parents=True,exist_ok=True)
     if path.exists(): raise FileExistsError(path)
     path.write_text(json.dumps(payload,indent=2,ensure_ascii=False,allow_nan=False)+'\n')
+
+
+def bs_confirmation_split(meta,development,selection,fold,k=5):
+    """Confirm on original 144 fit chips; the known 35 selection chips never score."""
+    if fold not in range(k): raise ValueError('invalid fold')
+    mapping=meta.set_index('chip_id')['fire_event_id'].to_dict()
+    used=development+selection
+    if len(set(used))!=len(used): raise ValueError('duplicate chip')
+    if any(c not in mapping or str(mapping[c]).lower() in ('','nan','none') for c in used): raise ValueError('missing event identity')
+    groups={mapping[c] for c in development}; selected={mapping[c] for c in selection}
+    if groups&selected: raise ValueError('selection/development event overlap')
+    held=set(rank_ids(groups,'bs-confirm')[fold::k])
+    evaluation=sorted(c for c in development if mapping[c] in held)
+    fit=sorted(selection+[c for c in development if mapping[c] not in held])
+    return fit,evaluation

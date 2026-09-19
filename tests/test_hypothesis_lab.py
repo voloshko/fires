@@ -87,3 +87,19 @@ def test_external_padding_never_contributes_to_loss_or_gradient():
     b=a.detach().clone(); b[:,:,1,:]=100*torch.randn_like(b[:,:,1,:])
     assert torch.allclose(loss,masked_binary_loss(b,y))
     with pytest.raises(ValueError): masked_binary_loss(a,torch.full_like(y,255))
+
+
+def test_bs_confirmation_excludes_selection_and_keeps_events_whole():
+    import pandas as pd
+    from src.comp.hypothesis_lab import bs_confirmation_split
+    dev=[f'd{i}' for i in range(20)]; selection=['s0','s1']
+    m=pd.DataFrame({'chip_id':dev+selection,'fire_event_id':[f'e{i//2}' for i in range(20)]+['s0','s1']})
+    mapping=m.set_index('chip_id').fire_event_id.to_dict(); seen=[]
+    for fold in range(5):
+        fit,test=bs_confirmation_split(m,dev,selection,fold)
+        assert set(selection)<=set(fit) and not(set(selection)&set(test))
+        assert not({mapping[c] for c in fit}&{mapping[c] for c in test})
+        seen+=test
+    assert sorted(seen)==sorted(dev)
+    m.loc[20,'fire_event_id']='e0'
+    with pytest.raises(ValueError): bs_confirmation_split(m,dev,selection,0)
