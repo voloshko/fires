@@ -1,0 +1,19 @@
+{
+  "chip": "BS_tr_000122",
+  "checks": [
+    {
+      "item": "S2B_MSIL2A_20230721T080609_R078_T38UMU_20241021T213144",
+      "baseline": "05.10",
+      "median_difference": 1006.0,
+      "rmse_raw": 0.10062103184704811,
+      "rmse_harmonized": 0.0014346175109496559
+    },
+    {
+      "item": "S2B_MSIL2A_20230721T080609_R078_T38UMU_20230721T142903",
+      "baseline": "05.09",
+      "median_difference": 1006.0,
+      "rmse_raw": 0.100758105819205,
+      "rmse_harmonized": 0.001569075920884629
+    }
+  ]
+}
