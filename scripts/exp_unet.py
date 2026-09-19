@@ -45,6 +45,7 @@ SUBSETS = {
     "optical": ("dnbr", "rbr", "nbr_pre", "nbr_post", "ndvi_pre", "ndvi_post", "dndvi", "nbr2_post", "b12_post", "b8a_post", "landcover"),
     "context": ("dnbr_win5", "dnbr_win15", "dnbr_std5", "dnbr_chip", "landcover", "slope", "dem", "vv", "vh"),
 }
+FOLD = int(os.environ.get("FOLD", -1))         # 0..4: убрать каждый пятый чип обучения (перекрёстная проверка, research 2.3)
 ARCH = os.environ.get("ARCH", "plain")         # plain | psp | ds
 COPYPASTE = float(os.environ.get("COPYPASTE", 0))   # вероятность вклеить гарь соседа по батчу
 BDOU = float(os.environ.get("BDOU", 0))        # >0: вес Boundary DoU по гари
@@ -133,6 +134,8 @@ def infer(net, x16, mean_t, std_t, tta: bool) -> np.ndarray:
 def main():
     torch.manual_seed(RUNSEED); np.random.seed(RUNSEED)
     d, fit, tune = load_split("data/comp/train/bs", "data/comp/split_bs.json", use_all=bool(FINAL))
+    if FOLD >= 0:
+        fit = [c for i, c in enumerate(fit) if i % 5 != FOLD]
     print(f"[{TAG}] вес фона {BG}, эпох {EPOCHS}, вырезка {CROPSZ}, "
           f"глубина {DEPTH}, ширина {WIDTH}, "
           f"обучение {len(fit)}, замер {len(tune)}", flush=True)
