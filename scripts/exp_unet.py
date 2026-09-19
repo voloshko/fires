@@ -39,6 +39,7 @@ TAG = os.environ.get("TAG", "x")
 RUNSEED = int(os.environ.get("SEED", SEED))
 MASKCH = int(os.environ.get("MASKCH", 0))   # канал валидности на входе
 LOSS = os.environ.get("LOSS", "dice")        # dice | lovasz — что добавляется к CE
+PSEUDO = float(os.environ.get("PSEUDO", 0))   # >0: тестовые чипы с псевдоразметкой; порог уверенности пикселя
 BOUNDARY = float(os.environ.get("BOUNDARY", 0))   # >0: вес пикселей у кромки истинной гари (×(1+BOUNDARY))
 
 
@@ -116,6 +117,18 @@ def main():
           f"глубина {DEPTH}, ширина {WIDTH}, "
           f"обучение {len(fit)}, замер {len(tune)}", flush=True)
     xtr, ytr, oktr = cache(d, fit)
+    if PSEUDO > 0:
+        # Псевдоразметка от моделей на 144 чипах (exp_pseudo.py). Неуверенные
+        # пиксели (< PSEUDO) получают метку 255 и в потере не участвуют.
+        from src.comp.chips import BsDataset as _D
+        td = _D("data/comp/test/bs"); n0 = len(fit)
+        for c in td.chip_ids():
+            ch = td.load(c); y = np.load(f"data/comp/pseudo/{c}.npy").astype(np.int64)
+            conf = np.load(f"data/comp/pseudo/{c}_conf.npy").astype(np.float32)
+            y[conf < PSEUDO] = 255
+            xtr.append(np.nan_to_num(stack(ch), posinf=0, neginf=0).astype(np.float16)); ytr.append(y); oktr.append(ch.valid())
+            fit.append(c)
+        print(f"[{TAG}] псевдоразметка: +{len(fit)-n0} тестовых чипов, порог уверенности {PSEUDO}", flush=True)
     xva, yva, okva = cache(d, tune)
     mean, std = normalise(xtr)
     if MASKCH:
@@ -146,15 +159,16 @@ def main():
             opt.zero_grad(set_to_none=True)
             with torch.amp.autocast(DEV):
                 out = net(x)
+                known = y != 255
                 if BOUNDARY > 0:
-                    loss = (F.cross_entropy(out, y, weight=weight, reduction="none") * boundary_weight(y)).mean()
+                    loss = (F.cross_entropy(out, y, weight=weight, reduction="none", ignore_index=255) * boundary_weight(y.clamp(max=3))).sum() / known.sum()
                 else:
-                    loss = F.cross_entropy(out, y, weight=weight)
+                    loss = F.cross_entropy(out, y, weight=weight, ignore_index=255)
                 if LOSS == "lovasz":
                     loss = loss + lovasz_softmax(out.float().softmax(1), y)
                 else:
-                    p_burn = 1 - out.softmax(1)[:, 0]
-                    t_burn = (y > 0).float()
+                    p_burn = (1 - out.softmax(1)[:, 0]) * known
+                    t_burn = ((y > 0) & known).float()
                     loss = loss + 1 - (2 * (p_burn * t_burn).sum() + 1) / (p_burn.sum() + t_burn.sum() + 1)
             scaler.scale(loss).backward(); scaler.step(opt); scaler.update()
             if sched.last_epoch < steps - 1: sched.step()
