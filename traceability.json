@@ -368,7 +368,7 @@
       "depends_on": [
         "SPEC-26"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-32": {
       "title": "Полные спектральные пары и сиамская сеть BS",
