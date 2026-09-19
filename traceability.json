@@ -280,7 +280,7 @@
       "depends_on": [
         "SPEC-19"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-24": {
       "title": "Трансформеры SegFormer и SegNext для BS",
