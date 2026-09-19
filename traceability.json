@@ -282,7 +282,7 @@
       "depends_on": [
         "SPEC-19"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-23": {
       "title": "Дообучение Prithvi-EO-2.0 на степени поражения BS",
@@ -318,7 +318,7 @@
       "depends_on": [
         "SPEC-19"
       ],
-      "status": "active"
+      "status": "implemented"
     },
     "SPEC-27": {
       "title": "Свёрточная сеть для детекции активного горения (AF)",
