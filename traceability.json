@@ -397,7 +397,7 @@
       "depends_on": [
         "SPEC-19"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-35": {
       "title": "Пилот многодатных пар BS с контролем метки",
@@ -425,7 +425,7 @@
         "SPEC-35",
         "SPEC-19"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-38": {
       "title": "Финальный AF hard-negative кандидат поверх BS v13",

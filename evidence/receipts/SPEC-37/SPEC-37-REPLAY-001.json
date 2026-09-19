@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-37",
+  "run_id": "SPEC-37-REPLAY-001",
+  "created_at": "2026-09-19T13:14:02.171138+00:00",
+  "status": "FAIL",
+  "conclusion": "temporal-full fails the frozen two-seed +.005 W improvement criterion.",
+  "commands": [
+    "cd /home/mc/fires-hypotheses && OMP_NUM_THREADS=4 .venv/bin/python scripts/hypothesis_bs.py train --variant optical --extra research/temporal-full-pre-v2 --min-extra 50 --seed 20260918 --out research/bs-temporal-full-replay-20260918",
+    "cd /home/mc/fires-hypotheses && OMP_NUM_THREADS=4 .venv/bin/python scripts/hypothesis_bs.py train --variant optical --extra research/temporal-full-pre-v2 --min-extra 50 --seed 20260919 --out research/bs-temporal-full-replay-20260919",
+    "cd /home/mc/fires-hypotheses && CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 .venv/bin/python scripts/summarize_hypothesis_bs.py --out research/bs-completed-screening-replay.json"
+  ],
+  "acceptance": {
+    "mean_single_seed_weighted": 0.743726331365816,
+    "two_seed_ensemble": {
+      "all_pixels": {
+        "iou_burn": 0.7712047058536476,
+        "miou_sev": 0.7350490744988115,
+        "weighted": 0.7545174913821847,
+        "per_class": [
+          0.9732608579162054,
+          0.610436463670337,
+          0.7306156991679336,
+          0.8640950606581639
+        ]
+      },
+      "clear_sky": {
+        "iou_burn": 0.7905304317126622,
+        "miou_sev": 0.7468432710454281,
+        "weighted": 0.7703671267893235,
+        "per_class": [
+          0.9759111215972741,
+          0.6188593313321602,
+          0.7391153495701913,
+          0.8825551322339331
+        ]
+      }
+    },
+    "v13_plus_two": {
+      "all_pixels": {
+        "iou_burn": 0.7633985821094147,
+        "miou_sev": 0.728122521321939,
+        "weighted": 0.7471173232844259,
+        "per_class": [
+          0.9721205992804794,
+          0.6176777755441258,
+          0.7170818593009392,
+          0.8496079291207522
+        ]
+      },
+      "clear_sky": {
+        "iou_burn": 0.778437833939579,
+        "miou_sev": 0.736208084582672,
+        "weighted": 0.7589471803902371,
+        "per_class": [
+          0.9742137915887195,
+          0.6251867581551062,
+          0.7190213453006014,
+          0.864416150292308
+        ]
+      }
+    },
+    "paired_control": "optical",
+    "delta_to_control": -5.9502146905865416e-05,
+    "screening_pass": false
+  },
+  "artifact_sha256": {
+    "evidence/experiments/hypotheses-20260919/bs-completed-screening-v1.json": "8ec065bebc8b037f15d1d59ee3ddf2f44f0ce77812f17fe54285f010cf7df07e",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-temporal-full-20260918-v1/summary.json": "3bb24ec12f3678dbd11035c652817706b42b56206c89ddc7033e02dfa7caa254",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-temporal-full-20260918-v1/per_chip.json": "d6cf4c4d19cce4e40c0f471ca61a40ac83a083c3f595207fb4a8789c54487845",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-temporal-full-20260918-v1/manifest.json": "acd20d0df7f90b57865144faa12647a444816abdb1e99b76db859bf3b4cc2d5a",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-temporal-full-20260918-v1/data_manifest.json": "dcf85b008c02e565e0fcfc23159a2d4a94fb92888ded39522d164a3694a643b1",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-temporal-full-20260918-v1/extra_manifest.json": "c8025af0f6a84643a7c0502e067204fcba62b607b5ba2de5515cf996c560adc1",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-temporal-full-20260919-v1/summary.json": "854aa13319185c08479a6ad322b52b7bd82d3a3d6d1165bdf34969cae03c6b96",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-temporal-full-20260919-v1/per_chip.json": "f517e8025df00633b7e58d4e9821940eaea656fe19fe5d6de3bb1b57adfb2a9d",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-temporal-full-20260919-v1/manifest.json": "8be3047e34ec9813ab98e99c94f46c3f34a5036ded34ce2eafe31850aaceaedb",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-temporal-full-20260919-v1/data_manifest.json": "dcf85b008c02e565e0fcfc23159a2d4a94fb92888ded39522d164a3694a643b1",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-temporal-full-20260919-v1/extra_manifest.json": "c8025af0f6a84643a7c0502e067204fcba62b607b5ba2de5515cf996c560adc1"
+  },
+  "limitations": [
+    "Historical 35-chip development screening, not independent testing.",
+    "Two seeds do not characterize all training uncertainty.",
+    "Fixed v13-plus-two blend is exploratory, not a replacement for the frozen mean-single-model criterion.",
+    "87 of 144 fit chips passed source QC; median NBR stability is not pixelwise severity invariance."
+  ],
+  "non_claims": [
+    "No change to product inference or submitted v15.",
+    "Does not rule out all external pretraining or temporal augmentation recipes.",
+    "No hidden-test, physical-area or cross-dataset leaderboard claim."
+  ]
+}

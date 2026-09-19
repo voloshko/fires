@@ -214,3 +214,14 @@ comparisons negative. No weights trained or product changes.
 SPEC-40 rejected: fixed AF edge expansion (keep p>=.45, add p>=.35 next
 to a valid p>=.75 in 3x3) F1 .951565 versus .951532. Adds25 TP and27 FP,
 delta+.000033, CI95 [-.001117,.001119], inconsistent halves. v15 unchanged.
+
+
+## Completed full screening
+
+SPEC-34 rejected: external CEMS pretraining mean W .738687 versus matched
+Siam .747932, delta -.009246. SPEC-37 rejected: 87-chip pre-only temporal
+augmentation mean W .743726 versus optical .743786, delta -.0000595.
+Both two-seed contracts completed; FAIL receipts and raw manifests retained.
+No new candidate from either experiment. SPEC-32/36 remain active solely
+for the queued five-fold Siam development revalidation, which awaits GPU.
+The latest submitted v15 remains unchanged.
