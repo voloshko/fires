@@ -52,3 +52,15 @@ Implementation APPROVE + architecture WATCH => overall COMMENT.
 No merge-ready or independent-test superiority claim is made.
 The configured architect profile was unavailable; a separate available agent
 completed that lane with the same read-only scope, independently of the author.
+
+## Subsequent narrow rechecks
+
+- `5750852`: absent BS severity classes now follow canonical `score_bs_micro`;
+  undefined values serialize as null. Independent reviewer approved; 15 tests.
+- `3dabeb3`: frozen v13 reference and AF neural threshold grid reviewed. One
+  medium finding: summarizer must bind the boost cache rather than trust shape.
+- `df4dfb2`: exact boost splits/source hashes verified before scoring; boost
+  probability and manifest hashes included. Independent reviewer approved;
+  17 focused tests passed in conda. The v13-reference-v2 artifact was then
+  copied from k8plus into this checkout; it reproduces the v1 numbers with
+  the additional source binding. No BS GPU quality run preceded these fixes.
