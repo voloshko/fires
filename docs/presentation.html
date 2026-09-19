@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Оперативный мониторинг лесных пожаров</title>
+<link rel="stylesheet" href="presentation.css">
+</head>
+<body>
+
+<!-- 1 — обложка -->
+<section class="slide" id="s1" style="justify-content:center">
+  <div style="position:absolute;right:-120px;top:-180px;width:640px;height:640px;border-radius:50%;background:#241a15"></div>
+  <div style="position:absolute;right:-40px;bottom:-140px;width:420px;height:420px;border-radius:50%;background:#1d1a20"></div>
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:26px;max-width:1080px">
+    <div class="kicker">КРАСНОЯРСКИЙ КРАЙ И СИБИРЬ</div>
+    <h1 style="font-size:60px;line-height:1.08">Оперативный мониторинг<br>лесных пожаров</h1>
+    <p class="lede" style="font-size:21px;max-width:900px">Поиск очагов по тепловым каналам и картирование гарей по снимкам Sentinel-2. Только публичные данные — без закрытых ведомственных систем.</p>
+    <div class="row" style="gap:20px;margin-top:10px">
+      <div style="background:var(--amber);color:#12151A;font-family:var(--mono);font-size:18px;font-weight:700;padding:14px 26px;border-radius:9px">github.com/voloshko/fires</div>
+      <span class="sub" style="font-size:16px">открытый исходный код</span>
+    </div>
+  </div>
+  <div class="foot" style="position:absolute;left:72px;bottom:56px">Данные на 18 сентября 2026 · 60 суток наблюдений</div>
+</section>
+
+<!-- 2 — две задачи -->
+<section class="slide" id="s2">
+  <h1>Две задачи, одна цепочка</h1>
+  <div class="grid g2 grow" style="margin-top:8px">
+    <div class="card" style="gap:14px">
+      <div class="kicker" style="font-size:13px">ЭТАП 1</div>
+      <h3 style="font-size:28px;color:var(--text)">Где горит</h3>
+      <p>Тепловые точки со спутников, очищенные от ложных срабатываний: газовых факелов, сельхозпалов, промышленных источников.</p>
+    </div>
+    <div class="card" style="gap:14px">
+      <div class="kicker teal" style="font-size:13px">ЭТАП 2</div>
+      <h3 style="font-size:28px;color:var(--text)">Сколько сгорело</h3>
+      <p>Снимки до и после пожара, индекс гари dNBR, площадь в гектарах с разбивкой по степени поражения леса.</p>
+    </div>
+  </div>
+  <div class="card accent" style="margin-top:4px">
+    <div class="row"><span class="dot amber"></span><p style="font-size:17px">Результат — веб-карта и REST API: очаг можно найти, открыть его карточку и получить площадь гари с указанием, насколько этому числу можно верить.</p></div>
+  </div>
+  <div class="foot">Техническое задание · docs/TZ.md</div>
+</section>
+
+<!-- 3 — источники -->
+<section class="slide" id="s3">
+  <h1>Всё на публичных данных</h1>
+  <table class="grow">
+    <tr><th style="width:26%">Источник</th><th style="width:52%">Что даёт</th><th>Доступ</th></tr>
+    <tr><td class="k">NASA FIRMS</td><td>очаги: MODIS и три аппарата VIIRS</td><td style="color:var(--amber)">бесплатный ключ</td></tr>
+    <tr><td class="k">Sentinel-2 L2A</td><td>снимки для расчёта гари</td><td style="color:var(--teal)">анонимно</td></tr>
+    <tr><td class="k">ESA WorldCover</td><td>маска сельхозземель, 10 м</td><td style="color:var(--teal)">анонимно</td></tr>
+    <tr><td class="k">MODIS MCD64A1</td><td>контрольные площади гарей</td><td style="color:var(--teal)">анонимно</td></tr>
+    <tr><td class="k">Landsat Collection 2</td><td>ретроспектива с 1982 года</td><td style="color:var(--teal)">анонимно</td></tr>
+  </table>
+  <div class="card accent" style="margin-top:6px">
+    <div class="row"><span class="dot amber"></span><p style="font-size:17px">Четыре источника из пяти берутся через один каталог Microsoft Planetary Computer без регистрации. Закрытые системы — ИСДМ-Рослесхоз и ВЕГА-Science — не используются: доступ к ним через ЕСИА.</p></div>
+  </div>
+  <div class="foot">Все эндпоинты проверены обращением 18.09.2026 · протокол в docs/TZ.md, раздел 14</div>
+</section>
+
+<!-- 4 — конвейер -->
+<section class="slide" id="s4">
+  <h1>Путь от точки до гектаров</h1>
+  <div class="grid g4 grow">
+    <div class="card"><h3>Приём FIRMS</h3><p class="sub">4 источника каждые 3 часа</p></div>
+    <div class="card"><h3>Фильтры</h3><p class="sub">шкалы, факелы, сельхозпалы</p></div>
+    <div class="card"><h3>События</h3><p class="sub">кластеры с историей</p></div>
+    <div class="card"><h3>Гарь</h3><p class="sub">dNBR и площадь в га</p></div>
+  </div>
+  <div class="grid g2 grow" style="margin-top:4px">
+    <div class="card accent">
+      <div class="row"><span class="dot amber"></span><h3 class="amber">Хранилище только на добавление</h3></div>
+      <p>Правка и удаление истории запрещены на уровне базы. Фильтр ничего не выбрасывает — он переносит точки в служебный слой, и их всегда можно посмотреть.</p>
+    </div>
+    <div class="card accent">
+      <div class="row"><span class="dot amber"></span><h3 class="amber">Журнал наблюдений</h3></div>
+      <p>Записывается каждый опрос, включая пустые. Без этого «детекций нет» неотличимо от «спутник не пролетал», и пожар можно объявить потухшим из-за облачности.</p>
+    </div>
+  </div>
+  <div class="foot">SPEC-1 … SPEC-9 · 425 тестов</div>
+</section>
+
+<!-- 5 — карта -->
+<section class="slide" id="s5" style="padding:0">
+  <div class="bleed"><img src="deck_map.png" alt=""></div>
+  <div class="scrim"></div>
+  <div class="over" style="padding:60px 72px 56px">
+    <h1 style="max-width:620px">2562 события<br>за 60 суток</h1>
+    <p class="lede" style="max-width:600px">Размер и цвет круга — суммарная мощность излучения очага. Крупнейший комплекс в Эвенкии дал 310 818 мегаватт за две недели горения.</p>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px">
+      <div class="row"><span class="dot orange"></span><span class="lbl">933 354 детекции</span></div>
+      <div class="row"><span class="dot amber"></span><span class="lbl">57 теплоисточников отсеяно</span></div>
+      <div class="row"><span class="dot teal"></span><span class="lbl">2 гари посчитано и проверено</span></div>
+    </div>
+    <div class="foot">Реальный снимок карты сервиса · 20.07–18.09.2026</div>
+  </div>
+</section>
+
+<!-- 6 — воронка -->
+<section class="slide" id="s6">
+  <h1>Миллион точек становится тысячами пожаров</h1>
+  <div class="grid g3 grow" style="margin-top:8px">
+    <div class="card"><div class="num">933 354</div><div class="lbl">детекции от спутников</div><div class="sub">сырой поток за 60 суток</div></div>
+    <div class="card"><div class="num amber">881 612</div><div class="lbl">прошли фильтры</div><div class="sub">отсев по достоверности и персистентности</div></div>
+    <div class="card"><div class="num orange">2562</div><div class="lbl">события пожаров</div><div class="sub">606 завершённых, 282 активных</div></div>
+  </div>
+  <div class="card bad" style="margin-top:4px">
+    <div class="row"><span class="dot red"></span><h3 style="color:var(--red)">Что мы измерили, а не предположили</h3></div>
+    <p>Техзадание называло низкую достоверность «основным источником ложных срабатываний». На живых данных этот фильтр отсекает всего <b>2.6 процента</b>. Значит, на нём одном целевые показатели не построить — основную работу делают фильтры факелов и сельхозпалов.</p>
+  </div>
+  <div class="foot">SPEC-3, SPEC-6 · измерено на 1872 детекциях</div>
+</section>
+
+<!-- 7 — факелы -->
+<section class="slide" id="s7">
+  <h1>Газовый факел горит неделями. Пожар движется</h1>
+  <p class="lede">Факелы нефтегазовых районов Сибири горят при температуре около 1800 кельвинов — вдвое горячее биомассы — и штатными алгоритмами отсеиваются плохо. Признак, доступный без сырой радиометрии: неподвижность и стабильность мощности.</p>
+  <div class="grid g2 grow" style="margin-top:4px">
+    <div class="card">
+      <div class="kicker amber" style="font-size:12px">СЛУЖЕБНЫЙ СЛОЙ</div>
+      <div class="row" style="gap:40px;margin-top:6px">
+        <div><div class="num amber sm">77.5%</div><div class="sub">ночных наблюдений</div></div>
+        <div><div class="num amber sm">47 МВт</div><div class="sub">максимальная мощность</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="kicker teal" style="font-size:12px">ОСНОВНОЙ СЛОЙ</div>
+      <div class="row" style="gap:40px;margin-top:6px">
+        <div><div class="num sm">50.9%</div><div class="sub">ночных наблюдений</div></div>
+        <div><div class="num sm">2682 МВт</div><div class="sub">максимальная мощность</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card good" style="margin-top:4px">
+    <div class="row"><span class="dot"></span><p style="font-size:17px">Максимум мощности в служебном слое в <b>57 раз ниже</b>. Крупные пожарные комплексы туда не попали — фильтр не съедает настоящие пожары.</p></div>
+  </div>
+  <div class="foot">SPEC-4 · 57 источников найдено на 61 243 детекциях</div>
+</section>
+
+<!-- 8 — гарь -->
+<section class="slide dark" id="s8">
+  <h1>Гарь: снимок до, снимок после, разница</h1>
+  <p class="lede">Индекс гари считается по ближнему и коротковолновому инфракрасным каналам. Разница между снимками до и после пожара даёт степень поражения; площадь каждого класса суммируется в гектарах.</p>
+  <div class="grid g4 grow" style="margin-top:6px">
+    <div class="card"><div class="dot"></div><h3>Один тайл</h3><p>Пара сцен строго из одной зоны проекции. Иначе сетки не совпадут и вычитание даст мусор.</p></div>
+    <div class="card"><div class="dot"></div><h3>Облачность по месту</h3><p>Не по всей сцене 110 километров, а по самой области пожара: нужно 80 процентов чистых пикселей.</p></div>
+    <div class="card"><div class="dot"></div><h3>Полярная ночь</h3><p>Севернее 66 градусов зимой оптики нет вовсе. Сервис отвечает «отложено» с датой, а не нулём гектаров.</p></div>
+    <div class="card"><div class="dot"></div><h3>Доля под маской</h3><p>Площадь без неё не публикуется: гектары по области, наполовину закрытой облаком, выглядят так же честно.</p></div>
+  </div>
+  <div class="foot">SPEC-7 · пороги USGS, версия сохраняется вместе с результатом</div>
+</section>
+
+<!-- 9 — провал -->
+<section class="slide warm" id="s9">
+  <div class="kicker red">ПЕРВАЯ ПОПЫТКА</div>
+  <h1>Конвейер выдал 17 711 гектаров.<br>Число оказалось ложным</h1>
+  <p class="lede">Мы проверили результат об источник, который его и породил: попадают ли термоточки пожара на пиксели, помеченные гарью. Корректная карта даёт попадание заметно чаще случайного.</p>
+  <table class="grow" style="margin-top:4px">
+    <tr><th style="width:34%">Класс поражения</th><th>Доля площади</th><th>Доля точек</th><th>Совпадение</th></tr>
+    <tr><td class="k">не горело</td><td class="dim">59.7%</td><td class="dim">94.0%</td><td class="n" style="color:var(--amber)">1.58</td></tr>
+    <tr><td class="k">слабое</td><td class="dim">16.3%</td><td class="dim">4.1%</td><td class="n" style="color:var(--red)">0.25</td></tr>
+    <tr><td class="k">умеренно слабое</td><td class="dim">20.5%</td><td class="dim">1.9%</td><td class="n" style="color:var(--red)">0.09</td></tr>
+    <tr><td class="k">умеренно сильное</td><td class="dim">3.5%</td><td class="dim">0.0%</td><td class="n" style="color:var(--red)">0.00</td></tr>
+  </table>
+  <div class="card bad" style="margin-top:2px;border-color:#3A1E1E">
+    <div class="row"><span class="dot red"></span><p style="font-size:17px"><b>Термоточки попадали на «гарь» реже случайного,</b> а 94 процента из них лежали там, где «не горело». Причина — сцены июня и сентября: сезонное увядание растительности конвейер принял за пожар.</p></div>
+  </div>
+  <div class="foot">Receipt SPEC-7-LIVE-002, статус FAIL · опубликован, а не переписан</div>
+</section>
+
+<!-- 10 — исправление -->
+<section class="slide" id="s10">
+  <div class="kicker teal">ИСПРАВЛЕНИЕ</div>
+  <h1>Сцены должны быть сняты в одну фазу сезона</h1>
+  <div class="grid g2 grow" style="margin-top:4px">
+    <div class="card">
+      <div class="kicker" style="font-size:12px;color:var(--muted);letter-spacing:1.5px">РАЗРЫВ ПО ДНЮ ГОДА</div>
+      <div class="row" style="gap:44px;margin-top:8px">
+        <div><div class="num red sm">70 суток</div><div class="sub">было: июнь против сентября</div></div>
+        <div><div class="num sm">28–30 суток</div><div class="sub">стало: ограничение в конвейере</div></div>
+      </div>
+    </div>
+    <div class="card" style="padding-top:20px">
+      <div class="kicker" style="font-size:12px;color:var(--muted);letter-spacing:1.5px">ТРИ КОНТРОЛЬНЫХ ПОЖАРА</div>
+      <table style="font-size:15px">
+        <tr><th style="padding-bottom:8px">Широта</th><th style="padding-bottom:8px">Совпадение</th><th style="padding-bottom:8px">Площадь гари</th></tr>
+        <tr><td class="k" style="padding:7px 14px 7px 0">59.3 северной</td><td class="hi" style="font-size:16px;padding:7px 14px 7px 0">11.64</td><td style="padding:7px 0">73.5 га</td></tr>
+        <tr><td class="k" style="padding:7px 14px 7px 0">65.7 северной</td><td class="hi" style="font-size:16px;padding:7px 14px 7px 0">3.02</td><td style="padding:7px 0">11 858 га</td></tr>
+        <tr><td class="k" style="padding:7px 14px 7px 0;border:0">68.8 северной</td><td class="hi" style="font-size:16px;padding:7px 14px 7px 0;border:0">2.74</td><td style="padding:7px 0;border:0">7 823 га</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="card good" style="margin-top:4px">
+    <div class="row"><span class="dot"></span><p style="font-size:17px">Было 0.25 — реже случайного. Стало от 2.7 до 11.6 раз чаще. А тот самый пожар с 17 711 гектарами теперь честно отвечает «пары сцен нет, посчитать не могу».</p></div>
+  </div>
+  <div class="foot">SPEC-9 · результат ниже порога получает статус «не проверено» и не публикуется как факт</div>
+</section>
+
+<!-- 11 — интерфейс -->
+<section class="slide" id="s11" style="padding:0">
+  <div class="bleed"><img src="deck_ui.png" alt=""></div>
+  <div class="scrim"></div>
+  <div class="over" style="padding:60px 72px 56px">
+    <h1 style="max-width:640px">Тонкий клиент: вся арифметика на сервере</h1>
+    <p class="lede" style="max-width:620px">Три слоя, панель отчёта по классам поражения, экспорт в GeoJSON и CSV, состояние каждого источника данных.</p>
+    <div class="card" style="max-width:640px;margin-top:6px;background:rgba(26,31,39,.9)">
+      <div class="row"><span class="dot"></span><p style="font-size:16px">Панель различает время последнего успешного опроса и время последней детекции — это разные величины.</p></div>
+    </div>
+    <div class="foot">Восемь эндпоинтов REST API · старт из кеша за 8 секунд без ключей</div>
+  </div>
+</section>
+
+<!-- 12 — дисциплина -->
+<section class="slide" id="s12">
+  <h1>Каждое число тянет за собой доказательство</h1>
+  <p class="lede">Область позволяет соврать незаметно: площадь гари посчитается всегда, доля ложных срабатываний получится любым числом, а сверить с землёй нечем. Поэтому код не пишется раньше своей спецификации, а каждый прогон оставляет запись на диске.</p>
+  <div class="grid g3 grow" style="margin-top:6px">
+    <div class="card"><div class="num">29</div><div class="lbl">спецификаций</div><div class="sub">у каждой критерии приёмки с командами</div></div>
+    <div class="card"><div class="num">444</div><div class="lbl">теста</div><div class="sub">каждый назван по критерию, который проверяет</div></div>
+    <div class="card"><div class="num">41</div><div class="lbl">запись о прогонах</div><div class="sub">включая один со статусом «провал»</div></div>
+  </div>
+  <div class="card accent" style="margin-top:4px">
+    <div class="row"><span class="dot amber"></span><h3 class="amber">Правила, которые проверяет автоматика</h3></div>
+    <p>Статус «проверено» невозможно проставить без записи об успешном прогоне на диске. Каждая запись обязана содержать список того, что она <em>не</em> доказывает. Порог не двигают после того, как увидели результат.</p>
+  </div>
+  <div class="foot">Дисциплина перенесена из соседних проектов · gate запускается в CI</div>
+</section>
+
+<!-- 13 — ответ соревнования -->
+<section class="slide dark" id="s13">
+  <h1>Ответ соревнования — строка CSV, а не карта</h1>
+  <p class="lede">Проверяющая система читает один файл. Маска каждого чипа сжимается в серии «начальный пиксель — длина», по строке на класс. Эта часть закрывалась первой, до всякой модели: решение без валидного файла получает ноль за метрику, а решение со слабым сабмитом — нет.</p>
+  <div class="grow" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:4px">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="code">
+        <div class="c1">chip_id,class_id,rle</div>
+        <div class="c2">BS_pub_000004,2,"7 3 143 5 280 2"</div>
+        <div class="c1" style="font-family:var(--sans);font-size:14px;margin-top:8px">нумерация с единицы · серии по возрастанию · смежные слиты</div>
+      </div>
+      <div class="card accent" style="flex:1">
+        <div class="row"><span class="dot orange"></span><h3 class="orange">Модуль инференса не имеет доступа к сети</h3></div>
+        <p>Применение готовых продуктов обнаружения пожаров — основание для снятия с конкурса. Запрет обеспечен устройством модуля: он читает только каталог чипов и модель с диска.</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card" style="padding:18px 22px"><div class="row" style="gap:18px"><span class="num amber sm" style="min-width:76px">447</span><span><span class="lbl">строк без заголовка</span><br><span class="sub">по одной на чип активного горения, по три на чип гари</span></span></div></div>
+      <div class="card" style="padding:18px 22px"><div class="row" style="gap:18px"><span class="num amber sm" style="min-width:76px">5</span><span><span class="lbl">видов подделок отвергаются</span><br><span class="sub">лишняя пара, недостающая, пересечение классов, выход за край, пустая ячейка</span></span></div></div>
+      <div class="card" style="padding:18px 22px"><div class="row" style="gap:18px"><span class="num amber sm" style="min-width:76px">≠0</span><span><span class="lbl">код возврата при нарушении</span><br><span class="sub">молча собранный неверный файл — худший исход</span></span></div></div>
+    </div>
+  </div>
+  <div class="foot">SPEC-16 · валидатор запускается отдельной командой и падает с ненулевым кодом</div>
+</section>
+
+<!-- 14 — обучение против порога -->
+<section class="slide" id="s14">
+  <h1>Порог — точка отсчёта, а не соперник</h1>
+  <p class="lede">Пороговый вариант публиковался до первого запуска обучения, чтобы сравнение нельзя было построить задним числом. Активное горение — градиентный бустинг по признакам пикселя; гарь — ансамбль из девяти свёрточных сетей глубины 7 и бустинга, с правилами, вычитанными из разметки.</p>
+  <table class="grow" style="margin-top:4px">
+    <tr><th style="width:32%">Что измеряем</th><th style="width:14%">Порог</th><th style="width:14%">Финал</th><th>Комментарий</th></tr>
+    <tr><td class="k">Активное горение, F1</td><td class="dim">0.599</td><td class="hi">0.905</td><td class="sub">out-of-fold на 336 чипах; граница 0.985 вместо 0.95, стоявшей в последней точке сетки</td></tr>
+    <tr><td class="k">Площадь гари, IoU</td><td class="dim">0.390</td><td class="hi">0.761</td><td class="sub">+95 %; треть прибавки — правило «гарь под облаками»</td></tr>
+    <tr><td class="k">Степень поражения, mIoU</td><td class="dim">0.155</td><td class="hi">0.722</td><td class="sub">рост в 4.7 раза; слабый класс 0.31 → 0.60</td></tr>
+  </table>
+  <p class="sub" style="font-size:15px;line-height:1.5;margin-top:2px">Метрика микро-усредняется по пулу пикселей, как считает проверяющая система. Шкала степеней из учебника выведена для хвойного леса — в степи она распознаёт класс впятеро хуже обученной модели.</p>
+  <div class="card bad" style="margin-top:2px">
+    <div class="row"><span class="dot red"></span><p style="font-size:16px"><b>Числа получены моделями на 144 чипах и измерены на 35, не участвовавших в обучении; оценкой на закрытой выборке они не являются.</b> Финальные модели обучены на всех 224 чипах. Каждое правило проверено на половинах настроечных чипов: подобрано на одной — измерено на другой.</p></div>
+  </div>
+  <div class="foot">SPEC-17, SPEC-18, SPEC-19 · receipt SPEC-19-LIVE-011 · 224 чипа гари, 420 чипов активного горения</div>
+</section>
+
+<!-- 14b — график гипотез -->
+<section class="slide dark" id="s14b">
+  <h1>Как росла точность: 47 гипотез, 14 принято</h1>
+  <div class="grow" style="margin-top:-6px"><svg viewBox="0 0 1456 690" width="1456" height="690" xmlns="http://www.w3.org/2000/svg" font-family="Calibri,Arial,sans-serif">
+<line x1="70" y1="541" x2="1416" y2="541" stroke="#2C333D"/><text x="58" y="546" fill="#8D97A5" font-size="15" text-anchor="end">0.4</text>
+<line x1="70" y1="444" x2="1416" y2="444" stroke="#2C333D"/><text x="58" y="449" fill="#8D97A5" font-size="15" text-anchor="end">0.5</text>
+<line x1="70" y1="347" x2="1416" y2="347" stroke="#2C333D"/><text x="58" y="352" fill="#8D97A5" font-size="15" text-anchor="end">0.6</text>
+<line x1="70" y1="250" x2="1416" y2="250" stroke="#2C333D"/><text x="58" y="255" fill="#8D97A5" font-size="15" text-anchor="end">0.7</text>
+<line x1="70" y1="153" x2="1416" y2="153" stroke="#2C333D"/><text x="58" y="158" fill="#8D97A5" font-size="15" text-anchor="end">0.8</text>
+<line x1="70" y1="55" x2="1416" y2="55" stroke="#2C333D"/><text x="58" y="60" fill="#8D97A5" font-size="15" text-anchor="end">0.9</text>
+<text x="18" y="308" fill="#8D97A5" font-size="14" transform="rotate(-90 18 308)" text-anchor="middle">IoU площади гари</text>
+<line x1="70" y1="230" x2="1416" y2="230" stroke="#8D97A5" stroke-width="2" stroke-dasharray="10 8" opacity=".9"/>
+<text x="78" y="223" fill="#8D97A5" font-size="15" font-weight="700">DeepLabV3+ · CEMS-Wildfire — 0.720</text>
+<line x1="70" y1="185" x2="1416" y2="185" stroke="#8D97A5" stroke-width="2" stroke-dasharray="10 8" opacity=".9"/>
+<text x="78" y="204" fill="#8D97A5" font-size="15" font-weight="700">SegNext · CEMS-Wildfire — 0.767</text>
+<line x1="70" y1="173" x2="1416" y2="173" stroke="#F0A132" stroke-width="2" stroke-dasharray="10 8" opacity=".9"/>
+<text x="78" y="166" fill="#F0A132" font-size="15" font-weight="700">U-Net + MiT-B0 · CEMS-Wildfire, лучший — 0.779</text>
+<line x1="70" y1="80" x2="1416" y2="80" stroke="#B3221F" stroke-width="2" stroke-dasharray="10 8" opacity=".9"/>
+<text x="78" y="73" fill="#B3221F" font-size="15" font-weight="700">Prithvi-EO-2.0 · HLS Burn Scars, США, 30 м — 0.875</text>
+<path d="M 70 551 L 160 551 L 160 503 L 251 503 L 251 473 L 341 473 L 341 447 L 431 447 L 431 410 L 522 410 L 522 390 L 612 390 L 612 365 L 702 365 L 702 360 L 793 360 L 793 351 L 937 351 L 937 232 L 1055 232 L 1055 217 L 1163 217 L 1163 214 L 1271 214 L 1271 209 L 1389 209 L 1389 191 " fill="none" stroke="#5BC8AF" stroke-width="3"/>
+<circle cx="70" cy="551" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="70" y="522" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.390</text>
+<text x="70" y="537" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Пороги USGS</text>
+<circle cx="160" cy="503" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="160" y="525" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Бустинг,</text>
+<text x="160" y="540" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">15 признаков</text>
+<text x="160" y="556" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.440</text>
+<circle cx="251" cy="473" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="251" y="429" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.470</text>
+<text x="251" y="444" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Контекстные</text>
+<text x="251" y="459" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">окна</text>
+<circle cx="341" cy="447" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="341" y="469" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Фильтр</text>
+<text x="341" y="485" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">мелких пятен</text>
+<text x="341" y="500" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.497</text>
+<circle cx="431" cy="410" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="431" y="366" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.535</text>
+<text x="431" y="381" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Сеть,</text>
+<text x="431" y="396" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">вырезка 512</text>
+<circle cx="522" cy="390" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="522" y="412" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Глубина 5</text>
+<text x="522" y="427" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.556</text>
+<circle cx="612" cy="365" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="612" y="336" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.582</text>
+<text x="612" y="351" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Глубина 6</text>
+<circle cx="702" cy="360" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="572" y="382" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Глубина 7</text>
+<text x="702" y="397" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.587</text>
+<circle cx="793" cy="351" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="793" y="373" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Ансамбль</text>
+<text x="793" y="388" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">с бустингом</text>
+<text x="793" y="404" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.596</text>
+<circle cx="937" cy="232" r="9" fill="#F0A132" stroke="#12151A" stroke-width="2"/>
+<text x="937" y="186" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.718</text>
+<text x="937" y="201" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">Гарь под</text>
+<text x="937" y="218" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">облаками</text>
+<circle cx="1055" cy="217" r="9" fill="#F0A132" stroke="#12151A" stroke-width="2"/>
+<text x="1055" y="273" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">Классы SCL</text>
+<text x="1055" y="290" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.734</text>
+<circle cx="1163" cy="214" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="1163" y="155" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.737</text>
+<text x="1163" y="170" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Пять сидов</text>
+<circle cx="1271" cy="209" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="1271" y="293" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Девять сетей</text>
+<text x="1271" y="309" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.742</text>
+<circle cx="1389" cy="191" r="9" fill="#F0A132" stroke="#12151A" stroke-width="2"/>
+<text x="1389" y="145" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.761</text>
+<text x="1389" y="160" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">Чужие</text>
+<text x="1389" y="177" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">пожары</text>
+<text x="70" y="620" fill="#6A7179" font-size="13" font-weight="700">ОТВЕРГНУТО, В ПРЕДЕЛАХ ШУМА ИЛИ ХУЖЕ:</text>
+<circle cx="223" cy="642" r="4" fill="#6A7179"/>
+<circle cx="234" cy="642" r="4" fill="#6A7179"/>
+<circle cx="245" cy="642" r="4" fill="#6A7179"/>
+<circle cx="256" cy="642" r="4" fill="#6A7179"/>
+<circle cx="267" cy="642" r="4" fill="#6A7179"/>
+<circle cx="278" cy="642" r="4" fill="#6A7179"/>
+<text x="251" y="664" fill="#8D97A5" font-size="12.5" text-anchor="middle">RdNBR · разброс SWIR · порог · дыры · перевес фона · Optuna</text>
+<circle cx="545" cy="642" r="4" fill="#6A7179"/>
+<circle cx="556" cy="642" r="4" fill="#6A7179"/>
+<circle cx="567" cy="642" r="4" fill="#6A7179"/>
+<circle cx="578" cy="642" r="4" fill="#6A7179"/>
+<circle cx="589" cy="642" r="4" fill="#6A7179"/>
+<circle cx="600" cy="642" r="4" fill="#6A7179"/>
+<text x="702" y="664" fill="#8D97A5" font-size="12.5" text-anchor="middle">ширина · rot90 · Lovász · радар · канал маски · псевдоразметка</text>
+<circle cx="1190" cy="642" r="4" fill="#6A7179"/>
+<circle cx="1201" cy="642" r="4" fill="#6A7179"/>
+<circle cx="1212" cy="642" r="4" fill="#6A7179"/>
+<circle cx="1223" cy="642" r="4" fill="#6A7179"/>
+<circle cx="1234" cy="642" r="4" fill="#6A7179"/>
+<circle cx="1245" cy="642" r="4" fill="#6A7179"/>
+<text x="1416" y="664" fill="#8D97A5" font-size="12.5" text-anchor="end">стекинг · Prithvi · пирамида · глубокий надзор · Boundary DoU · копи-паст · отбор членов</text>
+
+</svg></div>
+  <div class="foot">Хронология принятых гипотез слева направо · 35 настроечных чипов вне обучения, микро-усреднение · пунктир — опубликованные IoU конкурентов на их наборах · оранжевые точки — правила, вычитанные из разметки: 0.14 из 0.37 прибавки</div>
+</section>
+
+<!-- 14c — гипотезы: что дало -->
+<section class="slide" id="s14c">
+  <h1>Что двигало метрику — и что нет</h1>
+  <div class="grid g2 grow" style="margin-top:6px">
+    <div class="card good" style="gap:12px">
+      <div class="row"><span class="dot"></span><h3>Принято · прибавка по IoU гари</h3></div>
+      <table style="font-size:15.5px">
+        <tr><td class="k">Гарь под облаками не обнуляется</td><td class="hi">+0.122</td></tr>
+        <tr><td class="k">Полный чип 512 вместо четверти</td><td class="hi">+0.057</td></tr>
+        <tr><td class="k">Контекстные окна dNBR</td><td class="hi">+0.030</td></tr>
+        <tr><td class="k">Глубина сети 4 → 6</td><td class="hi">+0.046</td></tr>
+        <tr><td class="k">Фильтр чужих пожаров (дальше 125 пикс.)</td><td class="hi">+0.019</td></tr>
+        <tr><td class="k">Ноль только под тенью и плотным облаком</td><td class="hi">+0.016</td></tr>
+        <tr><td class="k">Ансамбль: сеть + бустинг, сиды, потери</td><td class="hi">+0.015</td></tr>
+        <tr><td class="k">AF: граница out-of-fold 0.95 → 0.985</td><td class="hi">+0.008 F1</td></tr>
+      </table>
+    </div>
+    <div class="card bad" style="gap:12px">
+      <div class="row"><span class="dot red"></span><h3 style="color:var(--red)">Отвергнуто · всё в пределах шума 0.004 или хуже</h3></div>
+      <p><b>Признаки:</b> RdNBR, разброс SWIR, окно 31, радар «после» — и в бустинге, и в сети, канал маски.</p>
+      <p><b>Обучение:</b> ширина сети, повороты, Lovász, граничный вес, Boundary DoU, глубокий надзор, пирамида, копирование-вставка, псевдоразметка, тень вне потери.</p>
+      <p><b>Решающие правила:</b> пороги по вероятности, расширение кромки, латание дыр, размерный и относительный фильтры пятен, медиана, калибровка классов, стекинг, жадный отбор членов.</p>
+      <p><b>Предобученные:</b> Prithvi-EO-2.0 (303 M) — 0.61 в трёх режимах: запомнил 144 чипа.</p>
+    </div>
+  </div>
+  <div class="card accent" style="margin-top:4px">
+    <div class="row"><span class="dot amber"></span><p style="font-size:16px"><b>Закономерность:</b> помогло всё, что расширяло обзор или читало разметку; не помогло ничто, что уточняло пиксель или усложняло модель. Две ошибки измерения — макро против микро (0.08) и подбор порога внутри выборки (+0.14 мнимых) — пойманы и записаны.</p></div>
+  </div>
+  <div class="foot">evidence/hypotheses.md · каждая строка с числами, чтобы не проверять повторно</div>
+</section>
+
+<!-- 14d — конкуренты -->
+<section class="slide" id="s14d">
+  <h1>Где это среди мировых моделей</h1>
+  <p class="lede">Сравнение приблизительное — наборы данных разные. Но по площади гари мы на уровне лучшего опубликованного результата главного европейского бенчмарка Sentinel-2 при вдвое меньшей выборке, а по степени поражения — выше полевых точностей классических индексов.</p>
+  <table class="grow" style="margin-top:4px">
+    <tr><th style="width:38%">Работа</th><th style="width:30%">Данные</th><th style="width:12%">IoU гари</th><th>Примечание</th></tr>
+    <tr><td class="k">Prithvi-EO-2.0-300M, дообученный</td><td class="sub">HLS Burn Scars: 804 сцены, 30 м, запад США</td><td class="n">0.875</td><td class="sub">крупные лесные пожары, вчетверо больше сцен</td></tr>
+    <tr><td class="k">U-Net + MiT-B0 (ImageNet)</td><td class="sub">CEMS-Wildfire: 500+ сцен Sentinel-2, Европа</td><td class="n">0.779</td><td class="sub">лучший результат бенчмарка</td></tr>
+    <tr><td class="k">SegNext</td><td class="sub">CEMS-Wildfire</td><td class="n">0.767</td><td class="sub">трансформер уступил U-Net</td></tr>
+    <tr><td class="k" style="color:var(--teal)"><b>Наш ансамбль</b></td><td class="sub">224 чипа, 20 м, степь Нижнего Поволжья</td><td class="hi">0.761</td><td class="sub">включая пиксели под облаками, которые бенчмарки исключают</td></tr>
+    <tr><td class="k">DeepLabV3+</td><td class="sub">CEMS-Wildfire</td><td class="n">≈0.72</td><td class="sub"></td></tr>
+  </table>
+  <div class="grid g2" style="margin-top:2px">
+    <div class="card"><div class="row"><span class="dot amber"></span><h3 class="amber">Степень поражения: mIoU 0.722</h3></div><p>Полевые проверки dNBR/RdNBR по CBI дают 59–73 % точности (каппа 0.36–0.72); mIoU строже точности. Единственная работа с 0.85 — на другом наборе.</p></div>
+    <div class="card"><div class="row"><span class="dot"></span><h3>Что взяли у лучших</h3></div><p>Рецепт CEMS — U-Net с ImageNet-кодировщиком — в стенде (SPEC-22). Prithvi проверен и отвергнут (SPEC-23). Своё: правила по разметке, которых нет ни у кого из них.</p></div>
+  </div>
+  <div class="foot">Источники: CEMS-Wildfire benchmark 2025 · IEEE SegNext/SegFormer · Prithvi-EO-2.0 (NASA/IBM) · RSE, MDPI Remote Sensing по полевой валидации</div>
+</section>
+
+<!-- 15 — ограничения -->
+<section class="slide" id="s15">
+  <h1>Чего сервис пока не доказывает</h1>
+  <div class="grid g3 grow" style="margin-top:8px">
+    <div class="card"><div class="dot red"></div><h3 style="color:var(--red)">Площадь не сверена с землёй</h3><p>Проверка по термоточкам ловит грубое расхождение, но саму площадь не измеряет. Сверка с контрольными продуктами запланирована и не выполнена.</p></div>
+    <div class="card"><div class="dot red"></div><h3 style="color:var(--red)">Пороги не откалиброваны</h3><p>Шкала степени поражения получена на другой растительности. Для лиственничных и тёмнохвойных лесов Сибири она не валидирована.</p></div>
+    <div class="card"><div class="dot red"></div><h3 style="color:var(--red)">Обучение живёт отдельно</h3><p>Сам сервис пороговый: ни одна из 34 констант не подобрана по данным. Модели работают на чипах соревнования и в веб-сервис не встроены.</p></div>
+  </div>
+  <div class="card accent" style="margin-top:4px">
+    <div class="row"><span class="dot amber"></span><h3 class="amber">Что дальше</h3></div>
+    <p>Свёрточная сеть для активного горения (SPEC-27) — компонента весит 0.35 балла и почти не тронута. Многодатная аугментация обучающих чипов из Planetary Computer под ту же разметку (SPEC-28). Аудит происхождения разметки по FIRMS на обучающих чипах (SPEC-29). Отрицательный исход засчитывается как результат.</p>
+  </div>
+  <div class="foot">Ограничения записаны в 41 файле доказательств, а не вынесены за скобки</div>
+</section>
+
+<!-- 16 — ссылки -->
+<section class="slide" id="s16" style="justify-content:center">
+  <div style="display:flex;flex-direction:column;gap:28px;max-width:1100px">
+    <h1 style="font-size:54px">Исходный код открыт</h1>
+    <div style="background:var(--amber);color:#12151A;font-family:var(--mono);font-size:22px;font-weight:700;padding:18px 34px;border-radius:10px;align-self:flex-start">github.com/voloshko/fires</div>
+    <p class="lede" style="font-size:19px">спецификации, тесты, доказательства прогонов и кеш данных — всё в репозитории</p>
+    <div class="grid g3" style="margin-top:12px">
+      <div class="card"><div style="font-family:var(--mono);font-size:22px;color:var(--teal);font-weight:700">make serve</div><div class="sub">карта за 8 секунд, ключи не нужны</div></div>
+      <div class="card"><div style="font-family:var(--mono);font-size:22px;color:var(--teal);font-weight:700">make gate</div><div class="sub">проверка прослеживаемости и доказательств</div></div>
+      <div class="card"><div style="font-family:var(--mono);font-size:22px;color:var(--teal);font-weight:700">data/demo</div><div class="sub">933 354 детекции в 14 мегабайтах</div></div>
+    </div>
+  </div>
+  <div class="foot" style="position:absolute;left:72px;bottom:56px">Красноярский край · 20.07–18.09.2026 · лицензии данных указаны в репозитории</div>
+</section>
+
+</body>
+</html>
