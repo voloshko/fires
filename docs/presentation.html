@@ -257,23 +257,23 @@
 <!-- 14 — обучение против порога -->
 <section class="slide" id="s14">
   <h1>Порог — точка отсчёта, а не соперник</h1>
-  <p class="lede">Пороговый вариант публиковался до первого запуска обучения, чтобы сравнение нельзя было построить задним числом. Активное горение — градиентный бустинг по признакам пикселя с жёсткими отрицательными; гарь — ансамбль из пяти оптических свёрточных сетей и бустинга, с правилами, вычитанными из разметки.</p>
+  <p class="lede">Пороговый вариант публиковался до первого запуска обучения, чтобы сравнение нельзя было построить задним числом. Активное горение — градиентный бустинг по признакам пикселя с жёсткими отрицательными; гарь — пять оптических свёрточных сетей, две сиамские сети на парах «до/после» и бустинг, с правилами, вычитанными из разметки.</p>
   <table class="grow" style="margin-top:4px">
     <tr><th style="width:32%">Что измеряем</th><th style="width:14%">Порог</th><th style="width:14%">Финал</th><th>Комментарий</th></tr>
     <tr><td class="k">Активное горение, F1</td><td class="dim">0.599</td><td class="hi">0.952</td><td class="sub">out-of-fold на 336 чипах; жёсткие отрицательные + огонь в застройке и на воде, который мы исключали</td></tr>
-    <tr><td class="k">Площадь гари, IoU</td><td class="dim">0.390</td><td class="hi">0.761</td><td class="sub">+95 %; треть прибавки — правило «гарь под облаками»</td></tr>
-    <tr><td class="k">Степень поражения, mIoU</td><td class="dim">0.155</td><td class="hi">0.722</td><td class="sub">рост в 4.7 раза; слабый класс 0.31 → 0.60</td></tr>
+    <tr><td class="k">Площадь гари, IoU</td><td class="dim">0.390</td><td class="hi">0.776</td><td class="sub">×2; треть прибавки — правило «гарь под облаками», последние +0.016 — сиамская сеть</td></tr>
+    <tr><td class="k">Степень поражения, mIoU</td><td class="dim">0.155</td><td class="hi">0.739</td><td class="sub">рост в 4.8 раза; слабый класс 0.31 → 0.64</td></tr>
   </table>
   <p class="sub" style="font-size:15px;line-height:1.5;margin-top:2px">Метрика микро-усредняется по пулу пикселей, как считает проверяющая система. Шкала степеней из учебника выведена для хвойного леса — в степи она распознаёт класс впятеро хуже обученной модели.</p>
   <div class="card bad" style="margin-top:2px">
     <div class="row"><span class="dot red"></span><p style="font-size:16px"><b>Числа получены моделями на 144 чипах и измерены на 35, не участвовавших в обучении; оценкой на закрытой выборке они не являются.</b> Финальные модели обучены на всех 224 чипах. Каждое правило проверено на половинах настроечных чипов: подобрано на одной — измерено на другой.</p></div>
   </div>
-  <div class="foot">SPEC-17…19, 26, 33, 38 · receipt SPEC-19-LIVE-015 · 224 чипа гари, 420 чипов активного горения</div>
+  <div class="foot">SPEC-17…19, 26, 32, 33, 38 · receipts SPEC-19-LIVE-015/016 · 224 чипа гари, 420 чипов активного горения</div>
 </section>
 
 <!-- 14b — график гипотез -->
 <section class="slide dark" id="s14b">
-  <h1>Как росла точность: 60 гипотез, 17 принято</h1>
+  <h1>Как росла точность: 61 гипотеза, 18 принято</h1>
   <div class="grow" style="margin-top:-6px"><svg viewBox="0 0 1456 690" width="1456" height="690" xmlns="http://www.w3.org/2000/svg" font-family="Calibri,Arial,sans-serif">
 <line x1="70" y1="541" x2="1416" y2="541" stroke="#2C333D"/><text x="58" y="546" fill="#8D97A5" font-size="15" text-anchor="end">0.4</text>
 <line x1="70" y1="444" x2="1416" y2="444" stroke="#2C333D"/><text x="58" y="449" fill="#8D97A5" font-size="15" text-anchor="end">0.5</text>
@@ -285,86 +285,89 @@
 <line x1="70" y1="230" x2="1416" y2="230" stroke="#8D97A5" stroke-width="2" stroke-dasharray="10 8" opacity=".9"/>
 <text x="78" y="223" fill="#8D97A5" font-size="15" font-weight="700">DeepLabV3+ · CEMS-Wildfire — 0.720</text>
 <line x1="70" y1="185" x2="1416" y2="185" stroke="#8D97A5" stroke-width="2" stroke-dasharray="10 8" opacity=".9"/>
-<text x="78" y="204" fill="#8D97A5" font-size="15" font-weight="700">SegNext · CEMS-Wildfire — 0.767</text>
+<text x="78" y="211" fill="#8D97A5" font-size="15" font-weight="700">SegNext · CEMS-Wildfire — 0.767</text>
 <line x1="70" y1="173" x2="1416" y2="173" stroke="#F0A132" stroke-width="2" stroke-dasharray="10 8" opacity=".9"/>
 <text x="78" y="166" fill="#F0A132" font-size="15" font-weight="700">U-Net + MiT-B0 · CEMS-Wildfire, лучший — 0.779</text>
 <line x1="70" y1="80" x2="1416" y2="80" stroke="#B3221F" stroke-width="2" stroke-dasharray="10 8" opacity=".9"/>
 <text x="78" y="73" fill="#B3221F" font-size="15" font-weight="700">Prithvi-EO-2.0 · HLS Burn Scars, США, 30 м — 0.875</text>
-<path d="M 70 551 L 160 551 L 160 503 L 251 503 L 251 473 L 341 473 L 341 447 L 431 447 L 431 410 L 522 410 L 522 390 L 612 390 L 612 365 L 702 365 L 702 360 L 793 360 L 793 351 L 937 351 L 937 232 L 1055 232 L 1055 217 L 1163 217 L 1163 214 L 1271 214 L 1271 209 L 1389 209 L 1389 191 " fill="none" stroke="#5BC8AF" stroke-width="3"/>
+<path d="M 70 551 L 153 551 L 153 503 L 235 503 L 235 473 L 318 473 L 318 447 L 400 447 L 400 410 L 483 410 L 483 390 L 565 390 L 565 365 L 648 365 L 648 360 L 731 360 L 731 351 L 863 351 L 863 232 L 970 232 L 970 217 L 1069 217 L 1069 214 L 1168 214 L 1168 209 L 1276 209 L 1276 191 L 1391 191 L 1391 176 " fill="none" stroke="#5BC8AF" stroke-width="3"/>
 <circle cx="70" cy="551" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
 <text x="70" y="522" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.390</text>
 <text x="70" y="537" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Пороги USGS</text>
-<circle cx="160" cy="503" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
-<text x="160" y="525" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Бустинг,</text>
-<text x="160" y="540" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">15 признаков</text>
-<text x="160" y="556" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.440</text>
-<circle cx="251" cy="473" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
-<text x="251" y="429" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.470</text>
-<text x="251" y="444" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Контекстные</text>
-<text x="251" y="459" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">окна</text>
-<circle cx="341" cy="447" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
-<text x="341" y="469" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Фильтр</text>
-<text x="341" y="485" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">мелких пятен</text>
-<text x="341" y="500" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.497</text>
-<circle cx="431" cy="410" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
-<text x="431" y="366" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.535</text>
-<text x="431" y="381" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Сеть,</text>
-<text x="431" y="396" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">вырезка 512</text>
-<circle cx="522" cy="390" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
-<text x="522" y="412" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Глубина 5</text>
-<text x="522" y="427" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.556</text>
-<circle cx="612" cy="365" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
-<text x="612" y="336" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.582</text>
-<text x="612" y="351" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Глубина 6</text>
-<circle cx="702" cy="360" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
-<text x="572" y="382" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Глубина 7</text>
-<text x="702" y="397" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.587</text>
-<circle cx="793" cy="351" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
-<text x="793" y="373" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Ансамбль</text>
-<text x="793" y="388" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">с бустингом</text>
-<text x="793" y="404" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.596</text>
-<circle cx="937" cy="232" r="9" fill="#F0A132" stroke="#12151A" stroke-width="2"/>
-<text x="937" y="186" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.718</text>
-<text x="937" y="201" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">Гарь под</text>
-<text x="937" y="218" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">облаками</text>
-<circle cx="1055" cy="217" r="9" fill="#F0A132" stroke="#12151A" stroke-width="2"/>
-<text x="1055" y="273" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">Классы SCL</text>
-<text x="1055" y="290" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.734</text>
-<circle cx="1163" cy="214" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
-<text x="1163" y="155" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.737</text>
-<text x="1163" y="170" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Пять сидов</text>
-<circle cx="1271" cy="209" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
-<text x="1271" y="293" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Девять сетей</text>
-<text x="1271" y="309" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.742</text>
-<circle cx="1389" cy="191" r="9" fill="#F0A132" stroke="#12151A" stroke-width="2"/>
-<text x="1389" y="145" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.761</text>
-<text x="1389" y="160" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">Чужие</text>
-<text x="1389" y="177" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">пожары</text>
+<circle cx="153" cy="503" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="153" y="525" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Бустинг,</text>
+<text x="153" y="540" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">15 признаков</text>
+<text x="153" y="556" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.440</text>
+<circle cx="235" cy="473" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="235" y="429" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.470</text>
+<text x="235" y="444" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Контекстные</text>
+<text x="235" y="459" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">окна</text>
+<circle cx="318" cy="447" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="318" y="469" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Фильтр</text>
+<text x="318" y="485" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">мелких пятен</text>
+<text x="318" y="500" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.497</text>
+<circle cx="400" cy="410" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="400" y="366" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.535</text>
+<text x="400" y="381" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Сеть,</text>
+<text x="400" y="396" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">вырезка 512</text>
+<circle cx="483" cy="390" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="483" y="412" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Глубина 5</text>
+<text x="483" y="427" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.556</text>
+<circle cx="565" cy="365" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="565" y="336" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.582</text>
+<text x="565" y="351" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Глубина 6</text>
+<circle cx="648" cy="360" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="648" y="382" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Глубина 7</text>
+<text x="648" y="397" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.587</text>
+<circle cx="731" cy="351" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="731" y="373" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Ансамбль</text>
+<text x="731" y="388" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">с бустингом</text>
+<text x="731" y="404" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.596</text>
+<circle cx="863" cy="232" r="9" fill="#F0A132" stroke="#12151A" stroke-width="2"/>
+<text x="863" y="186" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.718</text>
+<text x="863" y="201" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">Гарь под</text>
+<text x="863" y="218" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">облаками</text>
+<circle cx="970" cy="217" r="9" fill="#F0A132" stroke="#12151A" stroke-width="2"/>
+<text x="970" y="273" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">Классы SCL</text>
+<text x="970" y="290" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.734</text>
+<circle cx="1069" cy="214" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="1069" y="155" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.737</text>
+<text x="1069" y="170" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Пять сидов</text>
+<circle cx="1168" cy="209" r="6" fill="#5BC8AF" stroke="#12151A" stroke-width="2"/>
+<text x="1168" y="293" fill="#BFC7D2" font-size="13.5" font-weight="400" text-anchor="middle">Девять сетей</text>
+<text x="1168" y="309" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.742</text>
+<circle cx="1276" cy="191" r="9" fill="#F0A132" stroke="#12151A" stroke-width="2"/>
+<text x="1276" y="145" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.761</text>
+<text x="1276" y="160" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">Чужие</text>
+<text x="1276" y="177" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">пожары</text>
+<circle cx="1391" cy="176" r="9" fill="#E0622B" stroke="#12151A" stroke-width="2"/>
+<text x="1391" y="198" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">Сиамская</text>
+<text x="1391" y="215" fill="#E6E9EE" font-size="15" font-weight="700" text-anchor="middle">сеть</text>
+<text x="1391" y="232" fill="#8D97A5" font-size="13" text-anchor="middle" font-family="Courier New,monospace">0.776</text>
 <text x="70" y="620" fill="#6A7179" font-size="13" font-weight="700">ОТВЕРГНУТО, В ПРЕДЕЛАХ ШУМА ИЛИ ХУЖЕ:</text>
-<circle cx="223" cy="642" r="4" fill="#6A7179"/>
-<circle cx="234" cy="642" r="4" fill="#6A7179"/>
-<circle cx="245" cy="642" r="4" fill="#6A7179"/>
-<circle cx="256" cy="642" r="4" fill="#6A7179"/>
-<circle cx="267" cy="642" r="4" fill="#6A7179"/>
-<circle cx="278" cy="642" r="4" fill="#6A7179"/>
-<text x="251" y="664" fill="#8D97A5" font-size="12.5" text-anchor="middle">RdNBR · разброс SWIR · порог · дыры · перевес фона · Optuna</text>
-<circle cx="545" cy="642" r="4" fill="#6A7179"/>
-<circle cx="556" cy="642" r="4" fill="#6A7179"/>
-<circle cx="567" cy="642" r="4" fill="#6A7179"/>
-<circle cx="578" cy="642" r="4" fill="#6A7179"/>
-<circle cx="589" cy="642" r="4" fill="#6A7179"/>
-<circle cx="600" cy="642" r="4" fill="#6A7179"/>
-<text x="702" y="664" fill="#8D97A5" font-size="12.5" text-anchor="middle">ширина · rot90 · Lovász · радар · канал маски · псевдоразметка</text>
-<circle cx="1190" cy="642" r="4" fill="#6A7179"/>
-<circle cx="1201" cy="642" r="4" fill="#6A7179"/>
-<circle cx="1212" cy="642" r="4" fill="#6A7179"/>
-<circle cx="1223" cy="642" r="4" fill="#6A7179"/>
-<circle cx="1234" cy="642" r="4" fill="#6A7179"/>
-<circle cx="1245" cy="642" r="4" fill="#6A7179"/>
-<text x="1416" y="664" fill="#8D97A5" font-size="12.5" text-anchor="end">стекинг · Prithvi · пирамида · глубокий надзор · Boundary DoU · копи-паст · отбор членов</text>
-
+<circle cx="208" cy="642" r="4" fill="#6A7179"/>
+<circle cx="219" cy="642" r="4" fill="#6A7179"/>
+<circle cx="230" cy="642" r="4" fill="#6A7179"/>
+<circle cx="241" cy="642" r="4" fill="#6A7179"/>
+<circle cx="252" cy="642" r="4" fill="#6A7179"/>
+<circle cx="263" cy="642" r="4" fill="#6A7179"/>
+<text x="235" y="664" fill="#8D97A5" font-size="12.5" text-anchor="middle">RdNBR · разброс SWIR · порог · дыры · перевес фона · Optuna</text>
+<circle cx="699" cy="642" r="4" fill="#6A7179"/>
+<circle cx="710" cy="642" r="4" fill="#6A7179"/>
+<circle cx="721" cy="642" r="4" fill="#6A7179"/>
+<circle cx="732" cy="642" r="4" fill="#6A7179"/>
+<circle cx="743" cy="642" r="4" fill="#6A7179"/>
+<circle cx="754" cy="642" r="4" fill="#6A7179"/>
+<text x="727" y="664" fill="#8D97A5" font-size="12.5" text-anchor="middle">ширина · rot90 · Lovász · радар · канал маски · псевдоразметка</text>
+<circle cx="1091" cy="642" r="4" fill="#6A7179"/>
+<circle cx="1102" cy="642" r="4" fill="#6A7179"/>
+<circle cx="1113" cy="642" r="4" fill="#6A7179"/>
+<circle cx="1124" cy="642" r="4" fill="#6A7179"/>
+<circle cx="1135" cy="642" r="4" fill="#6A7179"/>
+<circle cx="1146" cy="642" r="4" fill="#6A7179"/>
+<text x="1416" y="664" fill="#8D97A5" font-size="12.5" text-anchor="end">стекинг · Prithvi · пирамида · глубокий надзор · Boundary DoU · копи-паст · нормализация · 400 эпох</text>
 </svg></div>
-  <div class="foot">Хронология принятых гипотез слева направо · 35 настроечных чипов вне обучения, микро-усреднение · пунктир — опубликованные IoU конкурентов на их наборах · оранжевые точки — правила, вычитанные из разметки: 0.14 из 0.37 прибавки</div>
+  <div class="foot">Хронология принятых гипотез слева направо · 35 настроечных чипов вне обучения, микро-усреднение · пунктир — опубликованные IoU конкурентов на их наборах · оранжевые точки — правила, вычитанные из разметки: 0.14 из 0.39 прибавки · красная — сиамская сеть соседнего агента (кандидат v16)</div>
 </section>
 
 <!-- 14c — гипотезы: что дало -->
@@ -381,6 +384,7 @@
         <tr><td class="k">Фильтр чужих пожаров (дальше 125 пикс.)</td><td class="hi">+0.019</td></tr>
         <tr><td class="k">Ноль только под тенью и плотным облаком</td><td class="hi">+0.016</td></tr>
         <tr><td class="k">Ансамбль: сеть + бустинг, сиды, потери</td><td class="hi">+0.015</td></tr>
+        <tr><td class="k">Сиамская сеть на парах «до/после» в ансамбль (сосед)</td><td class="hi">+0.016</td></tr>
         <tr><td class="k">AF: жёсткие отрицательные в выборке</td><td class="hi">+0.021 F1</td></tr>
         <tr><td class="k">AF: огонь в застройке и на воде не исключается</td><td class="hi">+0.018 F1</td></tr>
       </table>
@@ -403,19 +407,20 @@
 <!-- 14d — конкуренты -->
 <section class="slide" id="s14d">
   <h1>Где это среди мировых моделей</h1>
-  <p class="lede">Сравнение приблизительное — наборы данных разные. Но по площади гари, измеренной одной линейкой (чистое небо), мы обошли SegNext и на 0.005 отстаём от лучшего результата европейского бенчмарка Sentinel-2 при вдвое меньшей выборке; по степени поражения — выше полевых точностей классических индексов.</p>
+  <p class="lede">Сравнение приблизительное — наборы данных разные. Но по площади гари, измеренной одной линейкой (чистое небо), ансамбль с сиамскими сетями даёт 0.783 — <b>выше лучшего опубликованного результата европейского бенчмарка Sentinel-2 (0.779)</b> при вдвое меньшей выборке. Это второе место после Prithvi на американских данных; по степени поражения — выше полевых точностей классических индексов.</p>
   <table class="grow" style="margin-top:4px">
     <tr><th style="width:38%">Работа</th><th style="width:30%">Данные</th><th style="width:12%">IoU гари</th><th>Примечание</th></tr>
     <tr><td class="k">Prithvi-EO-2.0-300M, дообученный</td><td class="sub">HLS Burn Scars: 804 сцены, 30 м, запад США</td><td class="n">0.875</td><td class="sub">крупные лесные пожары, вчетверо больше сцен</td></tr>
-    <tr><td class="k">U-Net + MiT-B0 (ImageNet)</td><td class="sub">CEMS-Wildfire: 500+ сцен Sentinel-2, Европа</td><td class="n">0.779</td><td class="sub">лучший результат бенчмарка</td></tr>
-    <tr><td class="k" style="color:var(--teal)"><b>Наш ансамбль, чистое небо</b></td><td class="sub">224 чипа, 20 м, степь Нижнего Поволжья</td><td class="hi">0.774</td><td class="sub">та же линейка, что у бенчмарков: облака исключены</td></tr>
+    <tr><td class="k" style="color:var(--teal)"><b>Наш ансамбль + сиамские сети, чистое небо</b></td><td class="sub">224 чипа, 20 м, степь Нижнего Поволжья</td><td class="hi">0.783</td><td class="sub">кандидат v16: ревалидация на пяти фолдах идёт</td></tr>
+    <tr><td class="k">U-Net + MiT-B0 (ImageNet)</td><td class="sub">CEMS-Wildfire: 500+ сцен Sentinel-2, Европа</td><td class="n">0.779</td><td class="sub">лучший опубликованный результат бенчмарка</td></tr>
+    <tr><td class="k" style="color:var(--teal)">Наш ансамбль без сиамских, чистое небо</td><td class="sub">то же (v13–v15)</td><td class="hi">0.774</td><td class="sub">та же линейка, что у бенчмарков: облака исключены</td></tr>
     <tr><td class="k">SegNext</td><td class="sub">CEMS-Wildfire</td><td class="n">0.767</td><td class="sub">трансформер уступил U-Net</td></tr>
-    <tr><td class="k" style="color:var(--teal)">Наш ансамбль, все пиксели</td><td class="sub">метрика кейса: пиксели под облаками считаются</td><td class="hi">0.760</td><td class="sub"></td></tr>
+    <tr><td class="k" style="color:var(--teal)">Наш ансамбль + сиамские, все пиксели</td><td class="sub">метрика кейса: пиксели под облаками считаются</td><td class="hi">0.776</td><td class="sub">бенчмарки под облаками не меряют</td></tr>
     <tr><td class="k">DeepLabV3+</td><td class="sub">CEMS-Wildfire</td><td class="n">≈0.72</td><td class="sub"></td></tr>
   </table>
   <div class="grid g2" style="margin-top:2px">
-    <div class="card"><div class="row"><span class="dot amber"></span><h3 class="amber">Степень поражения: mIoU 0.726</h3></div><p>Полевые проверки dNBR/RdNBR по CBI дают 59–73 % точности (каппа 0.36–0.72); mIoU строже точности. Единственная работа с 0.85 — на другом наборе.</p></div>
-    <div class="card"><div class="row"><span class="dot"></span><h3>Что взяли у лучших</h3></div><p>Рецепт CEMS (U-Net с ImageNet-кодировщиком) и Prithvi-EO-2.0 проверены и отвергнуты: на 144 чипах степи оба проигрывают сети с нуля. Своё: правила по разметке, которых нет ни у кого из них.</p></div>
+    <div class="card"><div class="row"><span class="dot amber"></span><h3 class="amber">Степень поражения: mIoU 0.739</h3></div><p>Полевые проверки dNBR/RdNBR по CBI дают 59–73 % точности (каппа 0.36–0.72); mIoU строже точности. Единственная работа с 0.85 — на другом наборе.</p></div>
+    <div class="card"><div class="row"><span class="dot"></span><h3>Что взяли у лучших и чего нет у них</h3></div><p>Рецепт CEMS (ImageNet-кодировщик) и Prithvi-EO-2.0 проверены и отвергнуты: на 144 чипах степи оба проигрывают сети с нуля. Своё: сиамская сеть на сырых парах «до/после» и правила по разметке. Оговорка: 35 чипов замера — те же, на которых отбирался кандидат.</p></div>
   </div>
   <div class="foot">Источники: CEMS-Wildfire benchmark 2025 · IEEE SegNext/SegFormer · Prithvi-EO-2.0 (NASA/IBM) · RSE, MDPI Remote Sensing по полевой валидации</div>
 </section>
