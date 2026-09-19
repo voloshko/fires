@@ -51,11 +51,19 @@ def load(path: str | Path):
     state = _modernise(bundle["state"])
     # Ширина и глубина читаются из самих весов: файл модели не обязан их нести,
     # а разойтись с кодом они не должны.
-    width, cin = state["down.0.0.weight"].shape[:2]
-    depth = sum(1 for k in state if k.startswith("down.") and k.endswith(".0.weight"))
-    kind = "psp" if any(k.startswith("psp") for k in state) else "ds" if any(k.startswith("aux.") for k in state) else "plain"
-    net = build(cin, width, depth, kind)
-    net.load_state_dict(state)
+    if str(bundle.get("arch", "")).startswith("smp:"):
+        # Кодировщик из segmentation_models_pytorch: веса ImageNet при сборке
+        # не качаются — сразу грузится сохранённое состояние.
+        import segmentation_models_pytorch as smp
+        cin = len(names) + int(bundle.get("maskch", 0))
+        net = smp.Unet(bundle["arch"][4:], encoder_weights=None, in_channels=cin, classes=4)
+        net.load_state_dict(state)
+    else:
+        width, cin = state["down.0.0.weight"].shape[:2]
+        depth = sum(1 for k in state if k.startswith("down.") and k.endswith(".0.weight"))
+        kind = "psp" if any(k.startswith("psp") for k in state) else "ds" if any(k.startswith("aux.") for k in state) else "plain"
+        net = build(cin, width, depth, kind)
+        net.load_state_dict(state)
     # Лишний входной канал сверх признаков — маска валидности (MASKCH=1 в стенде).
     net.names = names            # сеть считает признаки по СВОЕМУ набору имён
     net.maskch = cin - len(names)

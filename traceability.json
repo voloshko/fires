@@ -60,7 +60,11 @@
         "SPEC-18",
         "SPEC-19",
         "SPEC-20",
-        "SPEC-21"
+        "SPEC-21",
+        "SPEC-22",
+        "SPEC-23",
+        "SPEC-24",
+        "SPEC-25"
       ]
     }
   },
@@ -257,6 +261,42 @@
       "depends_on": [
         "SPEC-8",
         "SPEC-18"
+      ],
+      "status": "planned"
+    },
+    "SPEC-22": {
+      "title": "Предобученные на ImageNet кодировщики в U-Net для BS",
+      "file": "specs/SPEC-22-imagenet-u-net-bs.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "planned"
+    },
+    "SPEC-23": {
+      "title": "Дообучение Prithvi-EO-2.0 на степени поражения BS",
+      "file": "specs/SPEC-23-prithvi-eo-2-0-bs.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "planned"
+    },
+    "SPEC-24": {
+      "title": "Трансформеры SegFormer и SegNext для BS",
+      "file": "specs/SPEC-24-segformer-segnext-bs.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "planned"
+    },
+    "SPEC-25": {
+      "title": "DOFA с произвольным набором каналов для BS",
+      "file": "specs/SPEC-25-dofa-bs.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19"
       ],
       "status": "planned"
     }

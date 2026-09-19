@@ -133,6 +133,13 @@ class DSUNet(UNet):
 
 
 def build(cin, w, depth, kind="plain"):
+    """kind: plain | psp | ds | smp:<encoder> — последний берёт U-Net с кодировщиком
+    из segmentation_models_pytorch, предобученным на ImageNet (первая свёртка
+    расширяется на cin каналов усреднением весов). Так собран лучший результат
+    на CEMS-Wildfire (U-Net + MiT-B0, IoU 0.779)."""
+    if kind.startswith("smp:"):
+        import segmentation_models_pytorch as smp
+        return smp.Unet(kind[4:], encoder_weights="imagenet", in_channels=cin, classes=4)
     return {"plain": UNet, "psp": PSPUNet, "ds": DSUNet}[kind](cin, w=w, depth=depth)
 
 
