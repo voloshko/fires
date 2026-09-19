@@ -78,19 +78,19 @@ SPEC-28 (многодатность), SPEC-30 (нормализация сцен
 
 | спека | статус | суть |
 |---|---|---|
-| SPEC-22 | active | ImageNet-кодировщики: первая пара хуже; ждёт MiT-B0 на 19 и ResNet34 → закрыть |
-| SPEC-24, 25 | planned | SegFormer/SegNext, DOFA — низкое ожидание; DOFA — `deferred`, если 22 отвергнута |
-| SPEC-26 | active | оптическая пятёрка: +0.006 взв. без фильтра; финальные сети обучены → **v13** |
+| SPEC-22 | rejected | четыре ImageNet-кодировщика хуже сети с нуля (0.67–0.71 против 0.724) |
+| SPEC-24 | planned | SegFormer/SegNext — низкое ожидание |
+| SPEC-25 | deferred | DOFA — по условию спеки после провала 22 и 23 |
+| SPEC-26 | implemented | оптическая пятёрка → **v13** (LIVE-013) |
 | SPEC-27 | planned | **сеть для AF** — самый недооценённый рычаг итогового балла |
 | SPEC-28 | planned | доп. сцены S2 из Planetary Computer для обучающих чипов |
 | SPEC-29 | planned | аудит происхождения разметки по FIRMS на обучающих чипах |
-| SPEC-30 | active | нормализация post→pre, код и тест готовы, пара в очереди |
-| SPEC-31 | active | 400 эпох оптики с дрожанием, пара в очереди |
+| SPEC-30 | rejected | нормализация post→pre обваливает степень (0.56) |
+| SPEC-31 | rejected | 400 эпох хуже 200 на 0.03 |
 
-Очередь на k8plus (systemd, см. §5): `fo5` (последняя финальная оптическая)
-→ v13 на CPU → `smp3/smp4` → фолды `f0…f4` → `rn1/rn2` (SPEC-30) →
-`long1/long2` (SPEC-31). Результаты пишутся в `~/fires/logs/hyp_results2.txt`
-и `hyp_results3.txt`.
+Очередь на k8plus пуста: весь список ресёрча и SPEC-22…31 измерены. Последний
+сабмит — **v13** (`submissions/submission_v13-LIVE-013-optical5.csv`).
+Результаты последних пар — в `~/fires/logs/hyp_results*.txt`.
 
 ## 5. Как запускать
 
@@ -147,10 +147,7 @@ CUDA_VISIBLE_DEVICES= .venv/bin/python scripts/exp_seeds.py models/exp_a.pt mode
 
 ## 7. Что делать дальше (рекомендация)
 
-1. Дождаться очереди, записать результаты в журнал, закрыть SPEC-22/26/30/31
-   Resolution'ами; если SPEC-30 или 31 дали ≥ +0.005 — переобучить финальные
-   оптические сети с флагом и собрать v14.
-2. **SPEC-27 (AF-сеть)** — единственный крупный рычаг итогового балла.
-3. SPEC-28 (многодатность) — законный путь обогнать 0.779 по чистому небу.
-4. Презентация: `docs/presentation.html` → `scratchpad/deck2/shoot.py` (Playwright,
+1. **SPEC-27 (AF-сеть)** — единственный крупный рычаг итогового балла.
+2. SPEC-28 (многодатность) — законный путь обогнать 0.779 по чистому небу.
+3. Презентация: `docs/presentation.html` → `scratchpad/deck2/shoot.py` (Playwright,
    channel=chrome, сервер `python -m http.server`) → `topptx.js` → `docs/presentation.pptx`.

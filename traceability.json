@@ -361,7 +361,7 @@
       "depends_on": [
         "SPEC-26"
       ],
-      "status": "active"
+      "status": "rejected"
     }
   }
 }
