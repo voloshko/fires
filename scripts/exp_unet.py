@@ -40,6 +40,7 @@ RUNSEED = int(os.environ.get("SEED", SEED))
 MASKCH = int(os.environ.get("MASKCH", 0))   # канал валидности на входе
 LOSS = os.environ.get("LOSS", "dice")        # dice | lovasz — что добавляется к CE
 PSEUDO = float(os.environ.get("PSEUDO", 0))   # >0: тестовые чипы с псевдоразметкой; порог уверенности пикселя
+IGNORE_ZERO = int(os.environ.get("IGNORE_ZERO", 0))   # 1: пиксели тени/плотного облака (label_zero) не участвуют в потере
 FINAL = int(os.environ.get("FINAL", 0))       # 1: обучение на ВСЕХ чипах, без замера, сохранение как финальной
 BOUNDARY = float(os.environ.get("BOUNDARY", 0))   # >0: вес пикселей у кромки истинной гари (×(1+BOUNDARY))
 
@@ -118,6 +119,11 @@ def main():
           f"глубина {DEPTH}, ширина {WIDTH}, "
           f"обучение {len(fit)}, замер {len(tune)}", flush=True)
     xtr, ytr, oktr = cache(d, fit)
+    if IGNORE_ZERO:
+        # Под тенью разметка — ноль по построению, а спектр — тёмный, как у гари.
+        # Учить сеть «тёмное под тенью = фон» — учить путать тень с гарью наоборот.
+        for i, c in enumerate(fit):
+            ytr[i] = ytr[i].copy(); ytr[i][d.load(c).label_zero()] = 255
     if PSEUDO > 0:
         # Псевдоразметка от моделей на 144 чипах (exp_pseudo.py). Неуверенные
         # пиксели (< PSEUDO) получают метку 255 и в потере не участвуют.
@@ -196,7 +202,7 @@ def main():
                       f"[{per[1]:.3f} {per[2]:.3f} {per[3]:.3f}]", flush=True)
     torch.save({"state": net.state_dict(), "mean": mean, "std": std, "names": NAMES,
                 "bg_weight": BG, "epochs": EPOCHS, "crop": CROPSZ,
-                "depth": DEPTH, "width": WIDTH, "maskch": MASKCH, "seed": RUNSEED, "loss": LOSS, "boundary": BOUNDARY}, f"models/exp_{TAG}.pt")
+                "depth": DEPTH, "width": WIDTH, "maskch": MASKCH, "seed": RUNSEED, "loss": LOSS, "boundary": BOUNDARY, "ignore_zero": IGNORE_ZERO}, f"models/exp_{TAG}.pt")
 
 
 if __name__ == "__main__":
