@@ -16,9 +16,10 @@ print('порядок чипов совпадает с нашим:', his_ids[:35
 OPT = [np.load(f'models/exp_{t}.tune.npy').astype(np.float32) for t in ('d7opt','d7opt_s1','d7opt_s2','d7optjit','d7optjit_s1')]
 SIAM = [np.load(HYP / f'research/{r}/probabilities.npy').astype(np.float32) for r in ('bs-siam-20260918-v3','bs-siam-20260919-v3')]
 t = T > 0
-def measure(pn, name):
+def measure(pn, name, anchor=None):
     P = 0.4*PB + 0.6*pn; burn = P.argmax(3) > 0; burn[~OK] = (pn.argmax(3) > 0)[~OK]
-    out = np.where(burn, P[..., 1:].argmax(3) + 1, 0).astype(np.uint8); out[ZERO] = 0; out = np.stack([drop_far(o) for o in out])
+    out = np.where(burn, P[..., 1:].argmax(3) + 1, 0).astype(np.uint8); out[ZERO] = 0
+    out = np.stack([drop_far(o, anchor=None if anchor is None else a) for o, a in zip(out, anchor if anchor is not None else out)])
     r = score_bs_micro(list(T), list(out)); p = out > 0
     clear = (t & p & OK).sum() / ((t | p) & OK).sum()
     print(f'{name:36s} все: {r["iou_burn"]:.4f}/{r["miou_sev"]:.4f} взв {(0.35*r["iou_burn"]+0.30*r["miou_sev"])/0.65:.4f} | чистое небо IoU {clear:.4f}')
@@ -28,3 +29,7 @@ measure(np.mean(OPT + SIAM, 0), 'пятёрка + две сиамские, ра�
 measure(0.5*np.mean(OPT, 0) + 0.5*np.mean(SIAM, 0), 'пятёрка и сиамские 50/50')
 for w in (0.3, 0.4):
     measure((1-w)*np.mean(OPT, 0) + w*np.mean(SIAM, 0), f'пятёрка {1-w:.1f} + сиамские {w:.1f}')
+
+# SPEC-39: якорь фильтра — согласие ветвей
+AGREE = (np.mean(OPT, 0).argmax(3) > 0) & (np.mean(SIAM, 0).argmax(3) > 0)
+measure(0.5*np.mean(OPT, 0) + 0.5*np.mean(SIAM, 0), 'v17 + якорь согласия (v18)', AGREE)
