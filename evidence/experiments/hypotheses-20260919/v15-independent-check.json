@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "faults": [],
+  "rows": 447,
+  "chips": 269,
+  "bs_rows": 267,
+  "bs_bytes_equal_v13": true,
+  "root_submission_equal": true,
+  "csv_sha256": "9c4e24a91eace2aa38c6df06c41ef16bb47bf16a6c3f64c559db4c0cbdf9bc41",
+  "model_sha256": "96a6532b25c7b9edc530411e99a8770a2dcb8d1803c5399f6441fc94ef2aa703"
+}
