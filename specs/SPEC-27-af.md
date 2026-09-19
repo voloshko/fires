@@ -1,6 +1,6 @@
 # SPEC-27: Свёрточная сеть для детекции активного горения (AF)
 
-Status: planned
+Status: active
 
 Requirement: REQ-007
 

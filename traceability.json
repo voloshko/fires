@@ -48,7 +48,9 @@
         "SPEC-11",
         "SPEC-12",
         "SPEC-13",
-        "SPEC-28"
+        "SPEC-28",
+        "SPEC-34",
+        "SPEC-35"
       ]
     },
     "REQ-007": {
@@ -70,7 +72,10 @@
         "SPEC-27",
         "SPEC-29",
         "SPEC-30",
-        "SPEC-31"
+        "SPEC-31",
+        "SPEC-32",
+        "SPEC-33",
+        "SPEC-36"
       ]
     }
   },
@@ -323,7 +328,7 @@
         "SPEC-17",
         "SPEC-19"
       ],
-      "status": "planned"
+      "status": "active"
     },
     "SPEC-28": {
       "title": "Многодатная аугментация обучающих чипов BS из Planetary Computer",
@@ -360,6 +365,51 @@
       "requirement": "REQ-007",
       "depends_on": [
         "SPEC-26"
+      ],
+      "status": "active"
+    },
+    "SPEC-32": {
+      "title": "Полные спектральные пары и сиамская сеть BS",
+      "file": "specs/SPEC-32-bs-raw-pairs.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "active"
+    },
+    "SPEC-33": {
+      "title": "Трудные отрицательные примеры AF с вложенной оценкой",
+      "file": "specs/SPEC-33-af-hard-negatives.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "active"
+    },
+    "SPEC-34": {
+      "title": "Внешние размеченные пожары для предобучения BS",
+      "file": "specs/SPEC-34-bs-external-pretrain.md",
+      "requirement": "REQ-006",
+      "depends_on": [
+        "SPEC-19"
+      ],
+      "status": "active"
+    },
+    "SPEC-35": {
+      "title": "Пилот многодатных пар BS с контролем метки",
+      "file": "specs/SPEC-35-bs-temporal-pilot.md",
+      "requirement": "REQ-006",
+      "depends_on": [
+        "SPEC-28"
+      ],
+      "status": "active"
+    },
+    "SPEC-36": {
+      "title": "Изолированный стенд проверки гипотез и честной оценки",
+      "file": "specs/SPEC-36-hypothesis-evaluation.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19"
       ],
       "status": "active"
     }
