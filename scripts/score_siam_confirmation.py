@@ -12,7 +12,7 @@ def main():
     from scripts.train_unet import load_split
     p=argparse.ArgumentParser();p.add_argument('--root',default='research');p.add_argument('--out',required=True);args=p.parse_args();root=Path(args.root)
     d,development,selection=load_split('data/comp/train/bs','data/comp/split_bs.json');mapping=d.meta.set_index('chip_id').fire_event_id.to_dict()
-    counts={'optical':{},'siam':{}};folds=[];hashes={};reference_sources=None
+    counts={'optical':{},'siam':{}};folds=[];hashes={};reference_sources=None;reference_software=None
     relevant=['scripts/hypothesis_bs.py','scripts/train_unet.py','src/comp/hypothesis_models.py','src/comp/features.py','src/comp/postproc.py','src/comp/hypothesis_lab.py']
     for fold in range(5):
         fit,evaluation=bs_confirmation_split(d.meta,development,selection,fold);row={'fold':fold,'evaluation':evaluation}
@@ -20,6 +20,9 @@ def main():
             run=root/f'bs-confirm-{variant}-f{fold}-v1'
             m=json.loads((run/'manifest.json').read_text());dm=json.loads((run/'data_manifest.json').read_text());summary=json.loads((run/'summary.json').read_text())
             cfg=m['config']
+            if any(cfg.get(k)!=v for k,v in dict(epochs=200,width=32,depth=7,batch=8).items()) or cfg.get('extra') or cfg.get('encoder'): raise ValueError('confirmation training recipe drift')
+            if reference_software is None: reference_software=m['software']
+            if m['software']!=reference_software: raise ValueError('confirmation software changed')
             if cfg['seed']!=20260920+fold or cfg['fold']!=fold or cfg['precision']!='bf16' or cfg['variant']!=variant or summary['smoke']:raise ValueError('confirmation configuration drift')
             if dm['fit']!=fit or dm['evaluation']!=evaluation:raise ValueError('confirmation split drift')
             sources={k:m['source_sha256'][k] for k in relevant}
