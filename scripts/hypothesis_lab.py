@@ -19,8 +19,9 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def manifest(args):
     # Frozen pilot behavior: imported helpers also read these at module import.
-    if os.environ.get('ROT90','0')!='0' or os.environ.get('FEATURES','base')!='base':
-        raise ValueError('frozen pilots require ROT90=0 and FEATURES=base')
+    # SPEC-47 допускает набор 'swir'; выбранный набор пишется в manifest['environment'].
+    if os.environ.get('ROT90','0')!='0' or os.environ.get('FEATURES','base') not in ('base','swir'):
+        raise ValueError('frozen pilots require ROT90=0 and FEATURES in (base, swir)')
     env_keys=('ROT90','FEATURES','CROP','DEPTH','WIDTH','SEED','EPOCHS','CUDA_VISIBLE_DEVICES','OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','PYTORCH_CUDA_ALLOC_CONF','CUDA_LAUNCH_BLOCKING')
     environment={key:os.environ.get(key) for key in env_keys}
     versions={}
