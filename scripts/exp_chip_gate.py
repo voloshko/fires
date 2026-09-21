@@ -44,7 +44,7 @@ def pooled(rows, choice): return w(score_bs(np.concatenate([r['truth'].reshape(-
 def snap(v): return GRID[np.abs(GRID[None] - np.asarray(v)[:, None]).argmin(1)]
 folds = [table(*load_fold(f)) for f in range(5)]; allrows = sum(folds, [])
 print('распределение лучшей доли сиама по 144 чипам:', {float(s): int(sum(r['best'] == s for r in allrows)) for s in GRID})
-fixed = pooled(allrows, [0.5] * len(allrows)); oracle = pooled(allrows, [r['best'] for r in allrows))
+fixed = pooled(allrows, [0.5] * len(allrows)); oracle = pooled(allrows, [r['best'] for r in allrows])
 print(f'фолды: фикс. 0.5 (v21) {fixed:.4f} | оракул по чипу {oracle:.4f} (+{oracle-fixed:.4f}) — потолок любого гейта')
 gate_choice, per_fold = [], []
 for f in range(5):
