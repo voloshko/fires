@@ -6,6 +6,9 @@ from pathlib import Path
 import numpy as np
 
 OPTICAL = ('dnbr','rbr','nbr_pre','nbr_post','ndvi_pre','ndvi_post','dndvi','nbr2_post','b12_post','b8a_post','landcover')
+import os as _os
+if _os.environ.get('FEATURES') == 'swir':   # SPEC-47: SWIR-индексы в оптическом наборе
+    OPTICAL = OPTICAL + ('mirbi_pre', 'mirbi_post', 'dmirbi', 'nbr2_pre', 'dnbr2', 'b11_post')
 GRID = np.unique(np.round(np.r_[np.arange(.5,.95,.05), np.arange(.95,1,.005), .999], 6))
 
 

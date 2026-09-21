@@ -83,7 +83,8 @@
         "SPEC-41",
         "SPEC-42",
         "SPEC-43",
-        "SPEC-44"
+        "SPEC-44",
+        "SPEC-47"
       ]
     }
   },
@@ -519,6 +520,16 @@
         "SPEC-19"
       ],
       "status": "rejected"
+    },
+    "SPEC-47": {
+      "title": "SWIR-индексы MIRBI и dNBR2 как входные каналы",
+      "file": "specs/SPEC-47-swir-indices.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19",
+        "SPEC-43"
+      ],
+      "status": "active"
     }
   }
 }
