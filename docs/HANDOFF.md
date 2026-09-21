@@ -104,7 +104,7 @@ AF (F1): жёсткие отрицательные в выборке **+0.021** 
 | SPEC-31 | rejected | 400 эпох хуже 200 на 0.03 |
 
 Очередь на k8plus пуста: весь список ресёрча и SPEC-22…31 измерены. Последний
-сабмит — **v19** (`submissions/submission_v19-LIVE-019-siam4.csv`, md5 c5fae788…): v18 + сиамские сиды 53/54 (`models/bs_unet_final_siam_s51…54.pt`, веса 0.125), receipt SPEC-19-LIVE-019 — мотив дисперсия, прибавка на границе шума. v18 (md5 9aa9e569…) — v17 + `--consensus` (SPEC-39). v17 (md5 428ed929…):
+сабмит — **v20** (`submissions/submission_v20-LIVE-020-oversample.csv`, md5 1661e323…): сиамская ветвь = `models/bs_unet_final_siam_over_s55/56.pt` (SPEC-43, `--oversample-faint 0.17 3`, веса 0.25), обычные сиамские 51–54 не используются; receipt SPEC-19-LIVE-020, +0.006 парно на обеих шкалах. v19 (md5 c5fae788…): четыре обычных сиамских сида по 0.125, LIVE-019. v18 (md5 9aa9e569…) — v17 + `--consensus` (SPEC-39). v17 (md5 428ed929…):
 BS — семь сетей (пять оптических v13 с весом 0.1 + `models/bs_unet_final_siam_s51/52.pt`
 с весом 0.25, `inference.py --unet-weights`) и бустинг; AF байт-в-байт из v15
 (`models/af_hgb.pkl`, sha256 96a6532b…). Receipt SPEC-19-LIVE-017.
