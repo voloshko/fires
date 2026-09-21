@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-34",
+  "run_id": "SPEC-34-REPLAY-001",
+  "created_at": "2026-09-19T13:14:02.167027+00:00",
+  "status": "FAIL",
+  "conclusion": "external fails the frozen two-seed +.005 W improvement criterion.",
+  "commands": [
+    "cd /home/mc/fires-hypotheses && OMP_NUM_THREADS=4 .venv/bin/python scripts/hypothesis_bs.py train --variant siam --precision bf16 --encoder research/external-train-v1/pretrain/encoder.pt --seed 20260918 --out research/bs-external-replay-20260918",
+    "cd /home/mc/fires-hypotheses && OMP_NUM_THREADS=4 .venv/bin/python scripts/hypothesis_bs.py train --variant siam --precision bf16 --encoder research/external-train-v1/pretrain/encoder.pt --seed 20260919 --out research/bs-external-replay-20260919",
+    "cd /home/mc/fires-hypotheses && CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 .venv/bin/python scripts/summarize_hypothesis_bs.py --out research/bs-completed-screening-replay.json"
+  ],
+  "acceptance": {
+    "mean_single_seed_weighted": 0.7386865121851037,
+    "two_seed_ensemble": {
+      "all_pixels": {
+        "iou_burn": 0.7694120330283599,
+        "miou_sev": 0.7309658673513976,
+        "weighted": 0.7516676488697618,
+        "per_class": [
+          0.9728395120429117,
+          0.6452311831054357,
+          0.6951443661716024,
+          0.8525220527771549
+        ]
+      },
+      "clear_sky": {
+        "iou_burn": 0.7763532464258327,
+        "miou_sev": 0.7329722571934183,
+        "weighted": 0.7563312513954875,
+        "per_class": [
+          0.9739137040506325,
+          0.6499424700022154,
+          0.6800661199763594,
+          0.86890818160168
+        ]
+      }
+    },
+    "v13_plus_two": {
+      "all_pixels": {
+        "iou_burn": 0.7706317152324599,
+        "miou_sev": 0.7351074090113826,
+        "weighted": 0.7542358815919626,
+        "per_class": [
+          0.972839882366458,
+          0.6373386109685316,
+          0.7167013001566425,
+          0.8512823159089736
+        ]
+      },
+      "clear_sky": {
+        "iou_burn": 0.7805497464317457,
+        "miou_sev": 0.7394015254043492,
+        "weighted": 0.7615582598037165,
+        "per_class": [
+          0.9742620361622554,
+          0.6393020724289395,
+          0.7134232277620662,
+          0.8654792760220417
+        ]
+      }
+    },
+    "paired_control": "siam",
+    "delta_to_control": -0.009245788149332301,
+    "screening_pass": false
+  },
+  "artifact_sha256": {
+    "evidence/experiments/hypotheses-20260919/bs-completed-screening-v1.json": "8ec065bebc8b037f15d1d59ee3ddf2f44f0ce77812f17fe54285f010cf7df07e",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/external-pretrain/summary.json": "37b593ea14d2e6921a6fa2b27942c6146e52ef85f53cb8326b43f816a29825d1",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/external-pretrain/manifest.json": "4bf701788ea238d35f2da16cdd75ced1ee6d349b01797b020467990313f6ebba",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/external-pretrain/data_manifest.json": "267366916444624d4236f5b70c19cca13a5928fbfe8ecaa2a48910d049e57710",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-external-20260918-v1/summary.json": "26a9c1d41e583ad7580cee100de5e35aedb843ea10cba0632d9e02a0208ac999",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-external-20260918-v1/per_chip.json": "1a04f22da25bdbedbdbd7e98b75e5b0adfec89f7cca69b1c705b45a29affcf8e",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-external-20260918-v1/manifest.json": "86a90e9f433705295ed86b288d5b7f8641e48694b243a698176d9114d1c7d233",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-external-20260918-v1/encoder_manifest.json": "cc18d41f2755d85981bd54ac4757b4da4dbede0f97aca05f269348d8599783c6",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-external-20260918-v1/data_manifest.json": "dcf85b008c02e565e0fcfc23159a2d4a94fb92888ded39522d164a3694a643b1",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-external-20260919-v1/summary.json": "ec1619abe0c3960797294584f7bbecf1918e8c49712dc217fcd67befd1aff882",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-external-20260919-v1/per_chip.json": "76a7e10b3d7f97c83d3744c8737ab7794b409b34beed95028228732153da2147",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-external-20260919-v1/manifest.json": "edc2ef7552ee0bd3fe1d539f3ecf71e0f0fffddcb5ed2fae220bdba6fad50112",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-external-20260919-v1/encoder_manifest.json": "cc18d41f2755d85981bd54ac4757b4da4dbede0f97aca05f269348d8599783c6",
+    "evidence/experiments/hypotheses-20260919/bs-final-screening/bs-external-20260919-v1/data_manifest.json": "dcf85b008c02e565e0fcfc23159a2d4a94fb92888ded39522d164a3694a643b1"
+  },
+  "limitations": [
+    "Historical 35-chip development screening, not independent testing.",
+    "Two seeds do not characterize all training uncertainty.",
+    "Fixed v13-plus-two blend is exploratory, not a replacement for the frozen mean-single-model criterion.",
+    "53 padded external patches from 30 provider activation IDs; padding still affects activations and BatchNorm."
+  ],
+  "non_claims": [
+    "No change to product inference or submitted v15.",
+    "Does not rule out all external pretraining or temporal augmentation recipes.",
+    "No hidden-test, physical-area or cross-dataset leaderboard claim."
+  ]
+}

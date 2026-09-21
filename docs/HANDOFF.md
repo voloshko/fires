@@ -4,10 +4,10 @@
 Читать вместе с [CLAUDE.md](../CLAUDE.md) (дисциплина спек и receipt'ов) и
 [evidence/hypotheses.md](../evidence/hypotheses.md) (журнал ~50 гипотез с числами).
 
-> Дополнение в `codex/fire-model-hypotheses`: новая кампания описана в
-> [HYPOTHESIS_CAMPAIGN.md](HYPOTHESIS_CAMPAIGN.md). SPEC-27 проверена и rejected;
-> SPEC-33 дала AF hard-negative прирост, SPEC-38 подготовила отдельный
-> CSV-кандидат поверх BS v13, уже заменённый сданной v15. Новые BS-гипотезы ещё выполняются.
+> Ветка соседа `codex/fire-model-hypotheses` влита целиком (2026-09-21): кампания в
+> [HYPOTHESIS_CAMPAIGN.md](HYPOTHESIS_CAMPAIGN.md). SPEC-27, 34, 35, 37 — rejected; SPEC-33/38
+> дали AF hard negatives (v14); его SPEC-39/40 перенумерованы в **SPEC-45/46** (наши 39/40 —
+> якорь согласия и порог), оба rejected. У соседа открытых очередей нет; GPU целиком наша.
 
 ## 1. Что делаем
 

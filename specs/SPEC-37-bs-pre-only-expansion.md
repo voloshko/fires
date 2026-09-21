@@ -1,6 +1,6 @@
 # SPEC-37: Масштабированная pre-only аугментация BS
 
-Status: active
+Status: rejected
 
 Requirement: REQ-006
 
@@ -54,3 +54,11 @@ https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/S2L2A.html.
 - `python -m pytest tests/test_hypothesis_lab.py -q`; `make gate`.
 - Не доказывает пер-пиксельную неизменность severity при другой pre, физическую
   площадь, перенос на закрытый тест или преимущество на чужом бенчмарке.
+
+
+## Resolution
+
+87/144 чипов прошли фиксированный source QC. Два сида W .735904/.751549,
+среднее .743726 против optical .743786, delta -.0000595. Порог +.005
+не пройден; SPEC-37-REPLAY-001 FAIL. Расширение pre-only в проверенном
+режиме не даёт устойчивой прибавки; продукт и v15 не менялись.
