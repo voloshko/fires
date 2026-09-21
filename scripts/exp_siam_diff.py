@@ -18,7 +18,7 @@ for f in range(5):
     ids = json.load(open(base['siam'] / 'data_manifest.json'))['evaluation']; chips = [d.load(c) for c in ids]; T = np.stack([c.mask for c in chips])
     PB = np.load(OWN / f'bs-confirm-boost-f{f}-swir-v1/probabilities.npy').astype(np.float32); PO = np.load(base['optical'] / 'probabilities.npy').astype(np.float32)
     variants = [('v21: сиам передискр. (over)', np.load(OWN / f'bs-confirm-siam-f{f}-over-v1/probabilities.npy').astype(np.float32))]
-    for tag, name in (('diff', 'сиам diff-фьюжн (SPEC-51.1)'), ('2st', 'сиам двухэтапная потеря (SPEC-51.2)')):
+    for tag, name in (('diff', 'сиам diff-фьюжн (SPEC-51.1)'), ('2st', 'сиам двухэтапная потеря (SPEC-51.2)'), ('soft', 'сиам мягкие метки у кромки (SPEC-52)')):
         q = OWN / f'bs-confirm-siam-f{f}-{tag}-v1/probabilities.npy'
         if q.exists(): variants.append((name, np.load(q).astype(np.float32)))
     for name, ps in variants:

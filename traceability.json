@@ -88,7 +88,9 @@
         "SPEC-48",
         "SPEC-49",
         "SPEC-50",
-        "SPEC-51"
+        "SPEC-51",
+        "SPEC-52",
+        "SPEC-53"
       ]
     }
   },
@@ -571,6 +573,24 @@
         "SPEC-47"
       ],
       "status": "rejected"
+    },
+    "SPEC-52": {
+      "title": "Мягкие метки у кромки гари",
+      "file": "specs/SPEC-52-soft-edge.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-43"
+      ],
+      "status": "active"
+    },
+    "SPEC-53": {
+      "title": "Почиповый гейт смеси оптика/сиам",
+      "file": "specs/SPEC-53-chip-gate.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-50"
+      ],
+      "status": "active"
     }
   }
 }

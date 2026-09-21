@@ -180,6 +180,8 @@ def run(args):
                     logits=net(x); p=1-logits.softmax(1)[:,0]; truth=(y>0).float()
                     if getattr(args,'two_stage',False):
                         from src.comp.hypothesis_models import two_stage_loss; loss=two_stage_loss(logits,y)
+                    elif getattr(args,'soft_edge',0):
+                        from src.comp.hypothesis_models import soft_edge_loss; loss=soft_edge_loss(logits,y,args.soft_edge,weights)
                     else: loss=F.cross_entropy(logits,y,weight=weights)+1-(2*(p*truth).sum()+1)/(p.sum()+truth.sum()+1)
                 if not torch.isfinite(loss): raise FloatingPointError('nonfinite training loss')
             except FloatingPointError:
@@ -191,7 +193,7 @@ def run(args):
             scaler.scale(loss).backward(); scaler.step(opt); scaler.update(); sched.step(); epoch_losses.append(float(loss.detach()))
         losses.append(float(np.mean(epoch_losses)))
         if (epoch+1)%10==0 or args.smoke: print(args.variant,args.seed,'epoch',epoch+1,'loss',losses[-1],'seconds',int(time.time()-t0),flush=True)
-    bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',fusion=getattr(args,'fusion','full'),two_stage=getattr(args,'two_stage',False),precision=args.precision,mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
+    bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',fusion=getattr(args,'fusion','full'),two_stage=getattr(args,'two_stage',False),soft_edge=getattr(args,'soft_edge',0),precision=args.precision,mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
     torch.save(bundle,out/'model.pt'); del X,Y; torch.cuda.empty_cache()
     if getattr(args,'final',False):
         write_json(out/'summary.json',dict(final=True,chips=len(fit),seconds=time.time()-t0,loss=losses,quality_evaluated=False)); print('final saved',len(fit),flush=True); return
@@ -201,6 +203,6 @@ def run(args):
 
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--oversample-faint',nargs=2,type=float,help='SPEC-43: порог dNBR и кратность показа бледных чипов'); p.add_argument('--fusion',choices=['full','diff'],default='full',help='SPEC-51: фьюжн сиама'); p.add_argument('--two-stage',action='store_true',help='SPEC-51: двухэтапная потеря'); p.add_argument('--fade',nargs=2,type=float,help='SPEC-41: диапазон α выцветания сцены после'); p.add_argument('--encoder'); p.add_argument('--precision',choices=['fp16','bf16','fp32'],default='fp16'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true'); p.add_argument('--final',action='store_true',help='обучение на всех чипах без замера'); args=p.parse_args()
+    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--oversample-faint',nargs=2,type=float,help='SPEC-43: порог dNBR и кратность показа бледных чипов'); p.add_argument('--soft-edge',type=int,default=0,help='SPEC-52: окно мягких меток у кромки (0 — выкл.)'); p.add_argument('--fusion',choices=['full','diff'],default='full',help='SPEC-51: фьюжн сиама'); p.add_argument('--two-stage',action='store_true',help='SPEC-51: двухэтапная потеря'); p.add_argument('--fade',nargs=2,type=float,help='SPEC-41: диапазон α выцветания сцены после'); p.add_argument('--encoder'); p.add_argument('--precision',choices=['fp16','bf16','fp32'],default='fp16'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true'); p.add_argument('--final',action='store_true',help='обучение на всех чипах без замера'); args=p.parse_args()
     (boost if args.task=='boost' else run)(args)
 if __name__=='__main__': main()

@@ -64,3 +64,21 @@ def two_stage_loss(logits,y,weights=None):
     if truth.any():
         sev=logits[:,1:].permute(0,2,3,1)[y>0]; loss=loss+F.cross_entropy(sev,(y[y>0]-1))
     return loss
+
+
+def soft_edge_targets(y,k=3,classes=4):
+    """SPEC-52: мягкие метки у кромки — one-hot, усреднённый окном k×k. Вдали от
+    границ классов совпадает с one-hot; в кольце шириной k//2 по обе стороны
+    кромки масса делится между соседними классами пропорционально их доле в окне."""
+    import torch.nn.functional as F
+    onehot=F.one_hot(y.clamp(0,classes-1),classes).permute(0,3,1,2).float()
+    return F.avg_pool2d(onehot,k,stride=1,padding=k//2,count_include_pad=False)
+
+
+def soft_edge_loss(logits,y,k=3,weights=None):
+    """CE по мягким меткам (вес класса — по жёсткой метке пикселя) + dice гарь/фон, как в базовой потере."""
+    soft=soft_edge_targets(y,k,logits.shape[1]); logp=logits.float().log_softmax(1)
+    ce=-(soft*logp).sum(1)
+    if weights is not None: ce=ce*weights[y]
+    p=1-logp[:,0].exp(); truth=(y>0).float()
+    return ce.mean()+1-(2*(p*truth).sum()+1)/(p.sum()+truth.sum()+1)

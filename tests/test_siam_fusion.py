@@ -23,3 +23,15 @@ def test_two_stage_loss_prefers_correct_prediction():
 def test_two_stage_loss_without_burn_pixels():
     y = torch.zeros((1, 2, 2), dtype=torch.long)
     assert torch.isfinite(two_stage_loss(torch.randn(1, 4, 2, 2), y))
+
+
+def test_soft_edge_targets_onehot_away_from_edges_and_split_at_edge():
+    from src.comp.hypothesis_models import soft_edge_targets, soft_edge_loss
+    y = torch.zeros((1, 8, 8), dtype=torch.long); y[0, :, 4:] = 2
+    soft = soft_edge_targets(y, 3)
+    assert torch.allclose(soft.sum(1), torch.ones(1, 8, 8))
+    assert soft[0, 0, 2, 1] == 1.0 and soft[0, 2, 2, 6] == 1.0          # вдали от кромки — one-hot
+    assert abs(soft[0, 0, 2, 3] - 2 / 3) < 1e-6 and abs(soft[0, 2, 2, 3] - 1 / 3) < 1e-6   # у кромки — доли
+    good = torch.full((1, 4, 8, 8), -3.0); good[0, 0, :, :4] = 3.0; good[0, 2, :, 4:] = 3.0
+    w = torch.tensor([.25, 1., 1., 1.])
+    assert soft_edge_loss(good, y, 3, w) < soft_edge_loss(-good, y, 3, w)
