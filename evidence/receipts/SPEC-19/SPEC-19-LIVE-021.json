@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-19",
+  "run_id": "SPEC-19-LIVE-021",
+  "created_at": "2026-09-21T14:50:00+03:00",
+  "status": "PASS",
+  "conclusion": "Сабмит v21: рецепт v20, но бустинг по пикселю переобучен с шестью SWIR-признаками (SPEC-47 ступень 1: mirbi_pre, mirbi_post, dmirbi, nbr2_pre, dnbr2, b11_post; 25 признаков вместо 19, все 224 чипа, sha256 01235f2f6a8a9c70…). Основание — ручной разбор десяти потерянных пожаров: по dMIRBI все отделяются от фона, а B11 среди наших признаков не было. Парно на двух шкалах: бустинг один 0.4727 → 0.5055 (фолды) и 0.4652 → 0.4824 (35 чипов); рецепт — групповые фолды 0.7205 → 0.7286 (+0.0081; по фолдам 0.000 / +0.021 / +0.006 / +0.010 / +0.001), чистое небо 0.750 → 0.764; 35 чипов 0.7631 → 0.7685 (+0.0054), чистое небо 0.792 → 0.800. Минимакс по шкалам выполнен. AF байт-в-байт из v15; на тесте изменены 87 чипов из 89.",
+  "commands": [
+    "FEATURES=swir python scripts/hypothesis_bs.py boost --fold f --out research/bs-confirm-boost-f{f}-swir-v1; python scripts/exp_swir.py",
+    "FEATURES=swir python scripts/hypothesis_bs.py boost --out research/bs-boost-swir-screen-v1; python scripts/exp_swir35.py",
+    "FEATURES=swir python scripts/run_bs_final.py",
+    "CUDA_VISIBLE_DEVICES= python inference.py --data-dir data/comp/test --out submission_v21.csv --template data/comp/test/sample_submission.csv --unet models/bs_unet_final_opt_s1.pt models/bs_unet_final_opt_s2.pt models/bs_unet_final_opt_s3.pt models/bs_unet_final_opt_jit1.pt models/bs_unet_final_opt_jit2.pt models/bs_unet_final_siam_over_s55.pt models/bs_unet_final_siam_over_s56.pt --unet-weights 0.1 0.1 0.1 0.1 0.1 0.25 0.25 --consensus"
+  ],
+  "acceptance": {
+    "усреднение": "микро, по пулу пикселей",
+    "бустинг_один": {"фолды": [0.4727, 0.5055], "35_чипов": [0.4652, 0.4824]},
+    "рецепт_групповые_фолды_пул_144": {"v20": 0.7205, "v21": 0.7286, "по_фолдам_дельта": [-0.0003, 0.0211, 0.0062, 0.01, 0.0014], "чистое_небо": [0.7501, 0.764], "потеряно": [14, 14]},
+    "рецепт_35_чипов": {"v20": 0.7631, "v21": 0.7685, "чистое_небо": [0.7916, 0.8]},
+    "признаки": {"было": 19, "стало": 25, "новые": ["mirbi_pre", "mirbi_post", "dmirbi", "nbr2_pre", "dnbr2", "b11_post"]},
+    "финальный_бустинг": {"чипов": 224, "пикселей": 2858884, "секунд": 80, "sha256": "01235f2f6a8a9c70…", "старый_сохранён": "models/bs_hgb_base19.pkl"},
+    "submission": {"строк": 447, "валидатор_код_возврата": 0, "версия": "submissions/submission_v21-LIVE-021-swir-boost.csv", "md5": "96cd776c59944438210b7b6dd1ccca94", "af_строк_идентично_v15": "180/180", "bs_чипов_изменено_к_v20": 87, "инференс_cpu_сек": 1457}
+  },
+  "limitations": [
+    "Потерянных целиком пожаров по-прежнему 14 из 144: бустинг с весом 0.4 не перевешивает слепые сети; лечение сетей — ступень 2 SPEC-47 (оптика с SWIR), ещё не измерена.",
+    "Набор из шести признаков взят целиком, по отдельности вклад не измерен.",
+    "Инференс на тестовых чипах использует только их собственные каналы; внешних данных нет."
+  ],
+  "non_claims": [
+    "Не доказывает результат на закрытой выборке организаторов.",
+    "Не утверждает, что бледные гари решены.",
+    "AF без изменений и оценок не добавляет.",
+    "Ни один ответ не получен из FIRMS, VNP14 или MOD14."
+  ]
+}
