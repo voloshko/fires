@@ -92,7 +92,8 @@
         "SPEC-52",
         "SPEC-53",
         "SPEC-54",
-        "SPEC-55"
+        "SPEC-55",
+        "SPEC-56"
       ]
     },
     "REQ-008": {
@@ -614,6 +615,15 @@
         "SPEC-54"
       ],
       "status": "planned"
+    },
+    "SPEC-56": {
+      "title": "Гейт по чипу, вторая попытка: карта разногласия, новизна входа, качество пары",
+      "file": "specs/SPEC-56-chip-gate-2.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-53"
+      ],
+      "status": "active"
     }
   }
 }
