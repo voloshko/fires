@@ -90,8 +90,15 @@
         "SPEC-50",
         "SPEC-51",
         "SPEC-52",
-        "SPEC-53"
+        "SPEC-53",
+        "SPEC-54",
+        "SPEC-55"
       ]
+    },
+    "REQ-008": {
+      "title": "Мультибиомная модель гари: степь, лес, горы",
+      "file": "requirements/REQ-008.md",
+      "specs": []
     }
   },
   "legacy_untracked_specs": [],
@@ -591,6 +598,22 @@
         "SPEC-50"
       ],
       "status": "rejected"
+    },
+    "SPEC-54": {
+      "title": "Нулевой выстрел Prithvi-EO BurnScars на степных чипах",
+      "file": "specs/SPEC-54-prithvi-zero-shot.md",
+      "requirement": "REQ-008",
+      "depends_on": [],
+      "status": "planned"
+    },
+    "SPEC-55": {
+      "title": "Стенд трёх биомов: степь, лес, горы",
+      "file": "specs/SPEC-55-biome-bench.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-54"
+      ],
+      "status": "planned"
     }
   }
 }
