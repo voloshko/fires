@@ -16,8 +16,10 @@ print('порядок чипов совпадает с нашим:', his_ids[:35
 OPT = [np.load(f'models/exp_{t}.tune.npy').astype(np.float32) for t in ('d7opt','d7opt_s1','d7opt_s2','d7optjit','d7optjit_s1')]
 SIAM = [np.load(HYP / f'research/{r}/probabilities.npy').astype(np.float32) for r in ('bs-siam-20260918-v3','bs-siam-20260919-v3')]
 t = T > 0
-def measure(pn, name, anchor=None):
-    P = 0.4*PB + 0.6*pn; burn = P.argmax(3) > 0; burn[~OK] = (pn.argmax(3) > 0)[~OK]
+def measure(pn, name, anchor=None, th=None):
+    P = 0.4*PB + 0.6*pn
+    if th is None: burn = P.argmax(3) > 0; burn[~OK] = (pn.argmax(3) > 0)[~OK]
+    else: burn = (1 - P[..., 0]) > th; burn[~OK] = ((1 - pn[..., 0]) > th)[~OK]
     out = np.where(burn, P[..., 1:].argmax(3) + 1, 0).astype(np.uint8); out[ZERO] = 0
     out = np.stack([drop_far(o, anchor=None if anchor is None else a) for o, a in zip(out, anchor if anchor is not None else out)])
     r = score_bs_micro(list(T), list(out)); p = out > 0
@@ -33,3 +35,5 @@ for w in (0.3, 0.4):
 # SPEC-39: якорь фильтра — согласие ветвей
 AGREE = (np.mean(OPT, 0).argmax(3) > 0) & (np.mean(SIAM, 0).argmax(3) > 0)
 measure(0.5*np.mean(OPT, 0) + 0.5*np.mean(SIAM, 0), 'v17 + якорь согласия (v18)', AGREE)
+for th in (0.5, 0.44, 0.4, 0.38):
+    measure(0.5*np.mean(OPT, 0) + 0.5*np.mean(SIAM, 0), f'v19-рецепт, порог гари {th} (SPEC-40)', AGREE, th)

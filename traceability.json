@@ -78,7 +78,8 @@
         "SPEC-33",
         "SPEC-36",
         "SPEC-38",
-        "SPEC-39"
+        "SPEC-39",
+        "SPEC-40"
       ]
     }
   },
@@ -446,6 +447,16 @@
         "SPEC-32"
       ],
       "status": "partial"
+    },
+    "SPEC-40": {
+      "title": "Порог вероятности гари 0.4 вместо argmax",
+      "file": "specs/SPEC-40-burn-threshold.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19",
+        "SPEC-39"
+      ],
+      "status": "rejected"
     }
   }
 }
