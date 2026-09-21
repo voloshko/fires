@@ -5,18 +5,18 @@ from scripts.train_unet import UNet, block
 
 
 class SiameseUNet(nn.Module):
-    def __init__(self,width=32,depth=7,normalize_fusion=True,fusion='full'):
+    def __init__(self,width=32,depth=7,normalize_fusion=True,fusion='full',aux_channels=11):
         super().__init__()
         # SPEC-51: fusion='diff' — в декодер идёт только разность b−a (FC-Siam-diff),
         # без внешнего вида каждой даты по отдельности; 'full' — [a, b, b−a], как раньше.
         if fusion not in ('full','diff'): raise ValueError(fusion)
-        self.fusion=fusion; k=3 if fusion=='full' else 1
+        self.fusion=fusion; k=3 if fusion=='full' else 1; self.aux_channels=aux_channels
         widths=[width*2**i for i in range(depth)]
         self.down=nn.ModuleList([block(9 if i==0 else widths[i-1],w) for i,w in enumerate(widths)])
         self.pool=nn.MaxPool2d(2)
         self.fuse=nn.ModuleList([
-            nn.Sequential(nn.Conv2d(k*w+(11 if i==0 else 0),w,1),nn.BatchNorm2d(w))
-            if normalize_fusion else nn.Conv2d(k*w+(11 if i==0 else 0),w,1)
+            nn.Sequential(nn.Conv2d(k*w+(aux_channels if i==0 else 0),w,1),nn.BatchNorm2d(w))
+            if normalize_fusion else nn.Conv2d(k*w+(aux_channels if i==0 else 0),w,1)
             for i,w in enumerate(widths)])
         self.up=nn.ModuleList([nn.ConvTranspose2d(widths[i],widths[i-1],2,2) for i in range(depth-1,0,-1)])
         self.conv=nn.ModuleList([block(widths[i-1]*2,widths[i-1]) for i in range(depth-1,0,-1)])
@@ -37,7 +37,8 @@ class SiameseUNet(nn.Module):
 
 
 def make_model(variant,width=32,depth=7,normalize_fusion=True,in_channels=None,fusion='full'):
-    if variant=='siam': return SiameseUNet(width,depth,normalize_fusion,fusion)
+    # SPEC-57: у сиама первые 18 каналов — пары полос, остальное — вспомогательные (11 оптических + хуки).
+    if variant=='siam': return SiameseUNet(width,depth,normalize_fusion,fusion,aux_channels=(in_channels-18) if in_channels else 11)
     # SPEC-47: число каналов берётся из данных (FEATURES=swir даёт 17 вместо 11).
     return UNet(in_channels or (11 if variant=='optical' else 29),classes=4,w=width,depth=depth)
 

@@ -79,6 +79,11 @@ def extra_channels(chip, optical):
     if d:
         m=np.load(f"{d}/{chip.chip_id}.npy").astype(np.float32)
         parts.append(np.transpose(m,(2,0,1)) if m.ndim==3 and m.shape[-1]<=8 else m)
+    if os.environ.get('SAR_GATE')=='1':
+        # SPEC-57: радар «после» и его изменение только ПОД маской облаков (SCL любой даты);
+        # на чистом небе канал равен нулю — оптика там сильнее, а радар размывал бы её.
+        gate=(~chip.valid()).astype(np.float32)
+        parts.append(stack(chip,('vv_post','vh_post','dvv','dvh'))*gate[None])
     if os.environ.get('LOCAL_Z')=='1':
         for a in stack(chip,('dnbr','dmirbi')):
             mu=uniform_filter(a,31,mode='nearest'); sd=np.sqrt(np.maximum(uniform_filter(a*a,31,mode='nearest')-mu*mu,0))
@@ -89,7 +94,7 @@ def extra_channels(chip, optical):
 def bs_inputs(chip, variant):
     from src.comp.features import stack
     optical=stack(chip,OPTICAL)
-    if variant=='optical': optical=extra_channels(chip,optical)
+    optical=extra_channels(chip,optical)
     if variant=='optical': return optical
     if not chip.post.size: raise ValueError('paired experiment requires post scene')
     raw=np.concatenate([chip.pre[:9],chip.post[:9]]).astype(np.float32)/10000

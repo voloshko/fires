@@ -93,7 +93,8 @@
         "SPEC-53",
         "SPEC-54",
         "SPEC-55",
-        "SPEC-56"
+        "SPEC-56",
+        "SPEC-57"
       ]
     },
     "REQ-008": {
@@ -624,6 +625,16 @@
         "SPEC-53"
       ],
       "status": "rejected"
+    },
+    "SPEC-57": {
+      "title": "Радар под маской облаков как гейтированный вход сиама",
+      "file": "specs/SPEC-57-sar-gate.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-43",
+        "SPEC-47"
+      ],
+      "status": "active"
     }
   }
 }

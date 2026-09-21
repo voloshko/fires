@@ -143,7 +143,7 @@ def run(args):
     X=torch.stack([torch.from_numpy(((a.astype(np.float32)-mean[:,None,None])/std[:,None,None]).astype(np.float16)) for a in xs]).to(device)
     Y=torch.as_tensor(np.stack(ys),device=device); del xs,ys
     if not torch.isfinite(X).all(): raise FloatingPointError('nonfinite normalized inputs')
-    net=make_model(args.variant,args.width,args.depth,in_channels=None if args.variant=='siam' else int(X.shape[1]),fusion=getattr(args,'fusion','full')).to(device)
+    net=make_model(args.variant,args.width,args.depth,in_channels=int(X.shape[1]),fusion=getattr(args,'fusion','full')).to(device)
     if args.encoder:
         if args.variant!='siam': raise ValueError('external encoder requires siam variant')
         encoder=torch.load(args.encoder,map_location=device,weights_only=False)
@@ -193,7 +193,7 @@ def run(args):
             scaler.scale(loss).backward(); scaler.step(opt); scaler.update(); sched.step(); epoch_losses.append(float(loss.detach()))
         losses.append(float(np.mean(epoch_losses)))
         if (epoch+1)%10==0 or args.smoke: print(args.variant,args.seed,'epoch',epoch+1,'loss',losses[-1],'seconds',int(time.time()-t0),flush=True)
-    bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',fusion=getattr(args,'fusion','full'),two_stage=getattr(args,'two_stage',False),soft_edge=getattr(args,'soft_edge',0),precision=args.precision,mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
+    bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',fusion=getattr(args,'fusion','full'),two_stage=getattr(args,'two_stage',False),soft_edge=getattr(args,'soft_edge',0),in_channels=int(X.shape[1]),precision=args.precision,mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
     torch.save(bundle,out/'model.pt'); del X,Y; torch.cuda.empty_cache()
     if getattr(args,'final',False):
         write_json(out/'summary.json',dict(final=True,chips=len(fit),seconds=time.time()-t0,loss=losses,quality_evaluated=False)); print('final saved',len(fit),flush=True); return
