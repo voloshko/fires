@@ -81,7 +81,8 @@
         "SPEC-39",
         "SPEC-40",
         "SPEC-41",
-        "SPEC-42"
+        "SPEC-42",
+        "SPEC-43"
       ]
     }
   },
@@ -479,6 +480,17 @@
         "SPEC-40"
       ],
       "status": "rejected"
+    },
+    "SPEC-43": {
+      "title": "Передискретизация бледных гарей при обучении сиамской сети",
+      "file": "specs/SPEC-43-faint-oversample.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-32",
+        "SPEC-41",
+        "SPEC-42"
+      ],
+      "status": "active"
     }
   }
 }
