@@ -51,7 +51,7 @@ def load(path: str | Path):
         # Сиамская сеть соседа (SPEC-32): две ветви «до/после» по 9 сырым полосам +
         # 11 оптических признаков; вход строит hypothesis_lab.bs_inputs.
         from src.comp.hypothesis_models import make_model
-        net = make_model("siam", bundle["width"], bundle["depth"], bundle.get("fusion_norm", True))
+        net = make_model("siam", bundle["width"], bundle["depth"], bundle.get("fusion_norm", True), fusion=bundle.get("fusion", "full"))
         net.load_state_dict(bundle["state"])
         net.variant, net.names, net.maskch, net.radnorm = "siam", (), 0, 0
         device = "cuda" if torch.cuda.is_available() else "cpu"

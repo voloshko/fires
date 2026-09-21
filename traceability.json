@@ -86,7 +86,9 @@
         "SPEC-44",
         "SPEC-47",
         "SPEC-48",
-        "SPEC-49"
+        "SPEC-49",
+        "SPEC-50",
+        "SPEC-51"
       ]
     }
   },
@@ -550,6 +552,25 @@
         "SPEC-47"
       ],
       "status": "rejected"
+    },
+    "SPEC-50": {
+      "title": "Перенастройка весов смеси после SWIR-бустинга",
+      "file": "specs/SPEC-50-mix-weights.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-47"
+      ],
+      "status": "active"
+    },
+    "SPEC-51": {
+      "title": "Сиамская ветвь: разностная фьюжн и двухэтапная потеря",
+      "file": "specs/SPEC-51-siam-diff.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-43",
+        "SPEC-47"
+      ],
+      "status": "active"
     }
   }
 }
