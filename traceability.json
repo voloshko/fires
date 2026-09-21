@@ -560,7 +560,7 @@
       "depends_on": [
         "SPEC-47"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-51": {
       "title": "Сиамская ветвь: разностная фьюжн и двухэтапная потеря",
