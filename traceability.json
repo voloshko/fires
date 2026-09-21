@@ -623,7 +623,7 @@
       "depends_on": [
         "SPEC-53"
       ],
-      "status": "active"
+      "status": "rejected"
     }
   }
 }
