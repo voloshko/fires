@@ -82,7 +82,7 @@ def extra_channels(chip, optical):
     if os.environ.get('LOCAL_Z')=='1':
         for a in stack(chip,('dnbr','dmirbi')):
             mu=uniform_filter(a,31,mode='nearest'); sd=np.sqrt(np.maximum(uniform_filter(a*a,31,mode='nearest')-mu*mu,0))
-            parts.append((a-mu)/(sd+1e-3))
+            parts.append(((a-mu)/(sd+1e-3))[None])
     return optical if len(parts)==1 else np.concatenate(parts).astype(np.float32)
 
 
