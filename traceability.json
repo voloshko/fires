@@ -590,7 +590,7 @@
       "depends_on": [
         "SPEC-43"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-53": {
       "title": "Почиповый гейт смеси оптика/сиам",

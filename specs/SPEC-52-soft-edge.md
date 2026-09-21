@@ -1,6 +1,6 @@
 # SPEC-52: Мягкие метки у кромки гари
 
-Status: active
+Status: rejected
 
 Requirement: REQ-007
 
@@ -33,13 +33,23 @@ dice прежний. Флаг `--soft-edge 3`, сиам с передискре�
 
 - `python -m pytest -q tests/test_siam_fusion.py`; на k8plus `.venv/bin/python scripts/exp_siam_diff.py`.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+**Отклонено по предзаявленному критерию.** Пять групповых фолдов парно к
+передискретизованному сиду, рецепт v21, `exp_siam_diff.py`:
+
+| сиам | сеть одна | пул 5 ф | чистое небо | под маской | потеряно | по фолдам Δ |
+|---|---|---|---|---|---|---|
+| v21: передискр. (over) | 0.6721 | **0.7286** | 0.7640 | 0.6292 | 14 | — |
+| мягкие метки у кромки 3×3 | 0.6677 | 0.7253 (−0.0033) | 0.7650 | 0.6096 | 18 | +0.013 / −0.001 / −0.016 / −0.006 / −0.005 |
+
+Первый фолд обманул (+0.013; он же был лучшим по ECE и double-fault в
+диагностике), остальные четыре в минусе. Чистое небо не изменилось (+0.001),
+провал целиком под маской (0.629 → 0.610) и в потерянных пожарах (14 → 18):
+размытая метка у кромки сделала сеть осторожнее именно там, где сигнал слаб.
+Это согласуется с дилатацией и порогом у кромки (бриф №2): разметчик ставит
+резкую границу, и любое смягчение со стороны модели платит пропусками.
+
+Блок 4 брифа №2 (кромка) закрыт полностью: дилатация, порог у кромки,
+граничные потери, мягкие метки — четыре отказа. Флаг `--soft-edge` остаётся с
+тестом, по умолчанию выключен. Не делалось: скрининг 35 чипов, финальные сети.
