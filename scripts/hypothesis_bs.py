@@ -143,7 +143,7 @@ def run(args):
     X=torch.stack([torch.from_numpy(((a.astype(np.float32)-mean[:,None,None])/std[:,None,None]).astype(np.float16)) for a in xs]).to(device)
     Y=torch.as_tensor(np.stack(ys),device=device); del xs,ys
     if not torch.isfinite(X).all(): raise FloatingPointError('nonfinite normalized inputs')
-    net=make_model(args.variant,args.width,args.depth).to(device)
+    net=make_model(args.variant,args.width,args.depth,in_channels=None if args.variant=='siam' else int(X.shape[1])).to(device)
     if args.encoder:
         if args.variant!='siam': raise ValueError('external encoder requires siam variant')
         encoder=torch.load(args.encoder,map_location=device,weights_only=False)

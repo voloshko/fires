@@ -32,9 +32,10 @@ class SiameseUNet(nn.Module):
         return self.head(z)
 
 
-def make_model(variant,width=32,depth=7,normalize_fusion=True):
+def make_model(variant,width=32,depth=7,normalize_fusion=True,in_channels=None):
     if variant=='siam': return SiameseUNet(width,depth,normalize_fusion)
-    return UNet(11 if variant=='optical' else 29,classes=4,w=width,depth=depth)
+    # SPEC-47: число каналов берётся из данных (FEATURES=swir даёт 17 вместо 11).
+    return UNet(in_channels or (11 if variant=='optical' else 29),classes=4,w=width,depth=depth)
 
 
 def masked_binary_loss(logits,target):
