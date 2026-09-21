@@ -39,3 +39,10 @@ def test_siam_принимает_вспомогательные_каналы():
     from src.comp.hypothesis_models import make_model
     net = make_model("siam", 8, 3, in_channels=18 + 11 + 4)
     assert net(torch.randn(1, 33, 32, 32)).shape == (1, 4, 32, 32)
+
+
+def test_sar_gate_явным_флагом_без_переменной(monkeypatch):
+    monkeypatch.delenv("SAR_GATE", raising=False)
+    from src.comp.hypothesis_lab import bs_inputs, OPTICAL
+    assert bs_inputs(_chip(), "siam", sar_gate=True).shape[0] == 18 + len(OPTICAL) + 4
+    assert bs_inputs(_chip(), "siam", sar_gate=False).shape[0] == 18 + len(OPTICAL)

@@ -66,7 +66,7 @@ def paired_interval(a,b,seed=20260918,n=2000):
     return list(map(float,np.quantile(delta,[.025,.975])))
 
 
-def extra_channels(chip, optical):
+def extra_channels(chip, optical, sar_gate=None):
     """SPEC-48/49: дополнительные входные каналы по переменным окружения.
     EXTRA_CHANNELS_DIR — каталог карт {chip_id}.npy (H, W, C), например вероятности
     бустинга (auto-context); LOCAL_Z=1 — локальная z-оценка dNBR и dMIRBI в окне 31.
@@ -79,7 +79,7 @@ def extra_channels(chip, optical):
     if d:
         m=np.load(f"{d}/{chip.chip_id}.npy").astype(np.float32)
         parts.append(np.transpose(m,(2,0,1)) if m.ndim==3 and m.shape[-1]<=8 else m)
-    if os.environ.get('SAR_GATE')=='1':
+    if (os.environ.get('SAR_GATE')=='1') if sar_gate is None else sar_gate:
         # SPEC-57: радар «после» и его изменение только ПОД маской облаков (SCL любой даты);
         # на чистом небе канал равен нулю — оптика там сильнее, а радар размывал бы её.
         gate=(~chip.valid()).astype(np.float32)
@@ -91,10 +91,11 @@ def extra_channels(chip, optical):
     return optical if len(parts)==1 else np.concatenate(parts).astype(np.float32)
 
 
-def bs_inputs(chip, variant):
+def bs_inputs(chip, variant, sar_gate=None):
+    """sar_gate=None — по переменной окружения (обучение); True/False — явно (продукт, из бандла модели)."""
     from src.comp.features import stack
     optical=stack(chip,OPTICAL)
-    optical=extra_channels(chip,optical)
+    optical=extra_channels(chip,optical,sar_gate)
     if variant=='optical': return optical
     if not chip.post.size: raise ValueError('paired experiment requires post scene')
     raw=np.concatenate([chip.pre[:9],chip.post[:9]]).astype(np.float32)/10000
