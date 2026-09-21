@@ -1,6 +1,7 @@
 """Paired BS screening, fixed split/steps/postprocessing (SPEC-32/36)."""
 from __future__ import annotations
 import argparse
+import os
 import json
 import sys
 import time
@@ -193,7 +194,7 @@ def run(args):
             scaler.scale(loss).backward(); scaler.step(opt); scaler.update(); sched.step(); epoch_losses.append(float(loss.detach()))
         losses.append(float(np.mean(epoch_losses)))
         if (epoch+1)%10==0 or args.smoke: print(args.variant,args.seed,'epoch',epoch+1,'loss',losses[-1],'seconds',int(time.time()-t0),flush=True)
-    bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',fusion=getattr(args,'fusion','full'),two_stage=getattr(args,'two_stage',False),soft_edge=getattr(args,'soft_edge',0),in_channels=int(X.shape[1]),precision=args.precision,mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
+    bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',fusion=getattr(args,'fusion','full'),two_stage=getattr(args,'two_stage',False),soft_edge=getattr(args,'soft_edge',0),in_channels=int(X.shape[1]),sar_gate=os.environ.get('SAR_GATE')=='1',precision=args.precision,mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
     torch.save(bundle,out/'model.pt'); del X,Y; torch.cuda.empty_cache()
     if getattr(args,'final',False):
         write_json(out/'summary.json',dict(final=True,chips=len(fit),seconds=time.time()-t0,loss=losses,quality_evaluated=False)); print('final saved',len(fit),flush=True); return

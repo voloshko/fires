@@ -54,6 +54,8 @@ def load(path: str | Path):
         net = make_model("siam", bundle["width"], bundle["depth"], bundle.get("fusion_norm", True), fusion=bundle.get("fusion", "full"), in_channels=bundle.get("in_channels"))
         net.load_state_dict(bundle["state"])
         net.variant, net.names, net.maskch, net.radnorm = "siam", (), 0, 0
+        # SPEC-57: радар под маской — по флагу бандла; у старых бандлов флага нет, но нет и лишних каналов.
+        net.sar_gate = bool(bundle.get("sar_gate", int(bundle.get("in_channels") or 29) > 29))
         device = "cuda" if torch.cuda.is_available() else "cpu"
         net.to(device).eval()
         return net, np.asarray(bundle["mean"], np.float32), np.asarray(bundle["std"], np.float32), device
@@ -92,7 +94,7 @@ def probs(model, chip: BsChip, tta: bool = True) -> np.ndarray:
     net, mean, std, device = model
     if getattr(net, "variant", "") == "siam":
         from src.comp.hypothesis_lab import bs_inputs
-        feats = np.nan_to_num(bs_inputs(chip, "siam"), posinf=0.0, neginf=0.0).astype(np.float32)
+        feats = np.nan_to_num(bs_inputs(chip, "siam", sar_gate=getattr(net, "sar_gate", False)), posinf=0.0, neginf=0.0).astype(np.float32)
         x = (feats - mean[:, None, None]) / std[:, None, None]
         with torch.no_grad():
             batch = torch.from_numpy(x).unsqueeze(0).to(device)
