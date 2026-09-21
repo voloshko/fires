@@ -500,7 +500,7 @@
       "depends_on": [
         "SPEC-43"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-45": {
       "title": "Устойчивое усреднение готовой BS-пятёрки",
