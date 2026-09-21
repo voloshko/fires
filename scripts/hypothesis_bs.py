@@ -96,6 +96,16 @@ def run(args):
     if args.precision=='bf16' and device=='cuda' and not torch.cuda.is_bf16_supported(): raise RuntimeError('BF16 unsupported')
     if device=='cpu' and not args.smoke: raise RuntimeError('GPU required for full experiment')
     if args.smoke: fit,tune=fit[:8],tune[:2]
+    if args.oversample_faint:
+        # SPEC-43: бледные гари (медианный dNBR истины < thr) входят в эпоху k раз.
+        thr,k=args.oversample_faint[0],int(args.oversample_faint[1]); faint=[]
+        for c in fit:
+            ch=d.load(c); t=ch.mask>0
+            if not t.any() or not ch.post.size: continue
+            pre,post=ch.pre.astype(np.float32),ch.post.astype(np.float32); nbr=lambda a:(a[6]-a[8])/(a[6]+a[8]+1e-6)
+            if float(np.median((nbr(pre)-nbr(post))[t]))<thr: faint.append(c)
+        fit=list(fit)+faint*(k-1); write_json(out/'oversample_manifest.json',dict(thr=thr,k=k,faint=faint,fit_size=len(fit)))
+        print('oversample faint',len(faint),'chips ->',len(fit),flush=True)
     xs=[]; ys=[]
     for c in fit:
         ch=d.load(c); xs.append(np.nan_to_num(bs_inputs(ch,args.variant),posinf=0,neginf=0).astype(np.float16)); ys.append(ch.mask.astype(np.int64))
@@ -189,6 +199,6 @@ def run(args):
 
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--fade',nargs=2,type=float,help='SPEC-41: диапазон α выцветания сцены после'); p.add_argument('--encoder'); p.add_argument('--precision',choices=['fp16','bf16','fp32'],default='fp16'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true'); p.add_argument('--final',action='store_true',help='обучение на всех чипах без замера'); args=p.parse_args()
+    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--oversample-faint',nargs=2,type=float,help='SPEC-43: порог dNBR и кратность показа бледных чипов'); p.add_argument('--fade',nargs=2,type=float,help='SPEC-41: диапазон α выцветания сцены после'); p.add_argument('--encoder'); p.add_argument('--precision',choices=['fp16','bf16','fp32'],default='fp16'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true'); p.add_argument('--final',action='store_true',help='обучение на всех чипах без замера'); args=p.parse_args()
     (boost if args.task=='boost' else run)(args)
 if __name__=='__main__': main()
