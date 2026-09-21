@@ -84,7 +84,9 @@
         "SPEC-42",
         "SPEC-43",
         "SPEC-44",
-        "SPEC-47"
+        "SPEC-47",
+        "SPEC-48",
+        "SPEC-49"
       ]
     }
   },
@@ -530,6 +532,24 @@
         "SPEC-43"
       ],
       "status": "partial"
+    },
+    "SPEC-48": {
+      "title": "Карта бустинга как входной канал оптической сети",
+      "file": "specs/SPEC-48-boost-channel.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-47"
+      ],
+      "status": "active"
+    },
+    "SPEC-49": {
+      "title": "Локальный контраст индексов как входные каналы",
+      "file": "specs/SPEC-49-local-contrast.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-47"
+      ],
+      "status": "active"
     }
   }
 }

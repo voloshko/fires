@@ -66,9 +66,30 @@ def paired_interval(a,b,seed=20260918,n=2000):
     return list(map(float,np.quantile(delta,[.025,.975])))
 
 
+def extra_channels(chip, optical):
+    """SPEC-48/49: дополнительные входные каналы по переменным окружения.
+    EXTRA_CHANNELS_DIR — каталог карт {chip_id}.npy (H, W, C), например вероятности
+    бустинга (auto-context); LOCAL_Z=1 — локальная z-оценка dNBR и dMIRBI в окне 31.
+    Без переменных возвращает вход как есть."""
+    import os
+    from scipy.ndimage import uniform_filter
+    from src.comp.features import stack
+    parts=[optical]
+    d=os.environ.get('EXTRA_CHANNELS_DIR')
+    if d:
+        m=np.load(f"{d}/{chip.chip_id}.npy").astype(np.float32)
+        parts.append(np.transpose(m,(2,0,1)) if m.ndim==3 and m.shape[-1]<=8 else m)
+    if os.environ.get('LOCAL_Z')=='1':
+        for a in stack(chip,('dnbr','dmirbi')):
+            mu=uniform_filter(a,31,mode='nearest'); sd=np.sqrt(np.maximum(uniform_filter(a*a,31,mode='nearest')-mu*mu,0))
+            parts.append((a-mu)/(sd+1e-3))
+    return optical if len(parts)==1 else np.concatenate(parts).astype(np.float32)
+
+
 def bs_inputs(chip, variant):
     from src.comp.features import stack
     optical=stack(chip,OPTICAL)
+    if variant=='optical': optical=extra_channels(chip,optical)
     if variant=='optical': return optical
     if not chip.post.size: raise ValueError('paired experiment requires post scene')
     raw=np.concatenate([chip.pre[:9],chip.post[:9]]).astype(np.float32)/10000
