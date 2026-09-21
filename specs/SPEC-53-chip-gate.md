@@ -1,6 +1,6 @@
 # SPEC-53: Почиповый гейт смеси оптика/сиам
 
-Status: active
+Status: rejected
 
 Requirement: REQ-007
 
@@ -33,13 +33,27 @@ Depends on: SPEC-50
 
 - На k8plus: `CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 .venv/bin/python scripts/exp_chip_gate.py`; PASS — строка «КРИТЕРИЙ SPEC-53: ПРОЙДЕН».
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+**Отклонено по предзаявленному критерию.** `exp_chip_gate.py`, CPU по кэшам:
+
+| | 144 чипа, 5 групповых фолдов | 35 чипов |
+|---|---|---|
+| фикс. доля сиама 0.5 (v21) | 0.7286 | 0.7685 |
+| гейт (LOFO / обучен на 144) | 0.7289 (+0.0003; по фолдам +0.0006 / +0.0018 / +0.0019 / −0.0038 / +0.0006) | 0.7680 (−0.0004) |
+| **оракул** — лучшая доля на каждом чипе по истине | **0.7483 (+0.0197)** | 0.7747 (+0.0062) |
+
+Гейт не отличим от нуля на обеих шкалах, хотя потолок есть: оракул даёт +0.020
+на фолдах. Лучшие доли по чипам **поляризованы** — 31 чип хочет 0.3 (верить
+оптике), 74 хотят 0.7 (верить сиаму), середина редка. Гейт же выбирал в основном
+0.5–0.6 (125 из 144): восемь признаков чипа (чистое небо, площади, согласие,
+уверенности, медианный dNBR) не несут сигнала о том, какой член на этом чипе
+прав. Это и есть ответ на вопрос брифа №2 о стекинге по чипу: **потолок
++0.02 реален, но по признакам входа он не достижим** — нужно знать что-то,
+чего в чипе без метки нет.
+
+Не делалось: другие модели гейта (логистическая, kNN) — при отсутствии сигнала
+в признаках смена модели не поможет; признаки от самого бустинга по классам —
+частично уже есть (уверенность). Код продукта не менялся, v22 не собран.
+Полезная побочка для брифа №3: оракул показывает, что разногласие оптики и сиама
+стоит +0.02, и это самый большой известный резерв смеси.

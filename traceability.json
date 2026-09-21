@@ -590,7 +590,7 @@
       "depends_on": [
         "SPEC-50"
       ],
-      "status": "active"
+      "status": "rejected"
     }
   }
 }
