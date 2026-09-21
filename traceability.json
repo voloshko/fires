@@ -79,7 +79,8 @@
         "SPEC-36",
         "SPEC-38",
         "SPEC-39",
-        "SPEC-40"
+        "SPEC-40",
+        "SPEC-41"
       ]
     }
   },
@@ -457,6 +458,16 @@
         "SPEC-39"
       ],
       "status": "rejected"
+    },
+    "SPEC-41": {
+      "title": "Аугментация выцветания гари для сиамской сети",
+      "file": "specs/SPEC-41-fade-augmentation.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-32",
+        "SPEC-40"
+      ],
+      "status": "active"
     }
   }
 }

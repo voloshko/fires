@@ -119,6 +119,16 @@ def run(args):
                 ch=replace(d.load(c),pre=np.load(path)['pre']); extra_map[i]=len(xs)
                 xs.append(np.nan_to_num(bs_inputs(ch,args.variant),posinf=0,neginf=0).astype(np.float16)); ys.append(ch.mask.astype(np.int64))
         write_json(out/'extra_manifest.json',qc)
+    if args.fade:
+        # SPEC-41: выцветание — сцена «после» сдвинута к «до», SCL и метка прежние.
+        from dataclasses import replace
+        frng=np.random.default_rng(args.seed+1); alphas={}
+        for i,c in enumerate(fit):
+            ch=d.load(c); a=float(frng.uniform(args.fade[0],args.fade[1])); alphas[c]=a
+            post=ch.post.copy(); post[:9]=ch.pre[:9]+a*(ch.post[:9]-ch.pre[:9])
+            ch=replace(ch,post=post); extra_map[i]=len(xs)
+            xs.append(np.nan_to_num(bs_inputs(ch,args.variant),posinf=0,neginf=0).astype(np.float16)); ys.append(ch.mask.astype(np.int64))
+        write_json(out/'fade_manifest.json',dict(range=args.fade,alphas=alphas))
     # Normalize chip-wise to avoid an N*C*H*W float32 transient on the GPU.
     X=torch.stack([torch.from_numpy(((a.astype(np.float32)-mean[:,None,None])/std[:,None,None]).astype(np.float16)) for a in xs]).to(device)
     Y=torch.as_tensor(np.stack(ys),device=device); del xs,ys
@@ -179,6 +189,6 @@ def run(args):
 
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--encoder'); p.add_argument('--precision',choices=['fp16','bf16','fp32'],default='fp16'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true'); p.add_argument('--final',action='store_true',help='обучение на всех чипах без замера'); args=p.parse_args()
+    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--fade',nargs=2,type=float,help='SPEC-41: диапазон α выцветания сцены после'); p.add_argument('--encoder'); p.add_argument('--precision',choices=['fp16','bf16','fp32'],default='fp16'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true'); p.add_argument('--final',action='store_true',help='обучение на всех чипах без замера'); args=p.parse_args()
     (boost if args.task=='boost' else run)(args)
 if __name__=='__main__': main()
