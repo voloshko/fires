@@ -1,6 +1,6 @@
 # SPEC-49: Локальный контраст индексов как входные каналы
 
-Status: active
+Status: rejected
 
 Requirement: REQ-007
 
@@ -28,13 +28,25 @@ z-оценку dNBR и dMIRBI в окне 31×31: (x − mean₃₁)/(std₃₁ 
 
 - `python -m pytest -q tests`; `python scripts/exp_boost_channel.py` на k8plus.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+**Отклонено по предзаявленному сигналу остановки** (пул не выше базы на 0.004).
+Пять групповых фолдов парно к оптике соседа, `exp_boost_channel.py`, взвешенно по
+пулу 144 чипов, рецепт v21 (бустинг SWIR 0.4 + сети 0.6, сиам передискр. ×2):
+
+| рецепт | сеть одна | пул | чистое небо | потеряно |
+|---|---|---|---|---|
+| v21: оптика база | 0.6180 | **0.7286** | 0.7640 | 14 |
+| оптика + локальный контраст (z₃₁ dNBR, dMIRBI) | 0.6403 | 0.7199 (−0.0087) | 0.7516 | 14 |
+
+По фолдам: +0.0022 / −0.0021 / +0.0065 / +0.0080 / **−0.0471**. Сама сеть стала
+лучше на +0.022 (как и в SPEC-47/48: любой новый канал поднимает одиночную
+оптику), но в смеси четыре фолда дают шум в пределах ±0.008, а пятый проваливает
+пул. Обучение на фолде 4 не расходилось (loss 0.375 против 0.366 у базы), то есть
+это не срыв, а свойство фолда: локальный контраст на его пожарах указывает не на
+гарь. Что именно там — не разбиралось; гипотеза закрыта, а не отложена, потому
+что даже без фолда 4 прибавка ≤ +0.004 и в шуме сида (±0.02 на фолд).
+
+Не делалось: скрининг на 35 чипах (критерий фолдов не пройден, вторая шкала не
+нужна), финальные сети, v22. Код хука `LOCAL_Z` остаётся с тестом
+(`tests/test_extra_channels.py`), по умолчанию выключен, продукт не менялся.

@@ -1,6 +1,6 @@
 # SPEC-48: Карта бустинга как входной канал оптической сети
 
-Status: active
+Status: rejected
 
 Requirement: REQ-007
 
@@ -40,13 +40,31 @@ out-of-fold внутри обучающей части (3 внутренних �
 
 - `python -m pytest -q tests`; `python scripts/exp_boost_channel.py` на k8plus.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+**Отклонено по предзаявленному сигналу остановки** (пул не выше v21 на 0.004 и
+потерянных не меньше). Пять групповых фолдов парно к оптике соседа,
+`exp_boost_channel.py`, взвешенно по пулу 144 чипов, рецепт v21:
+
+| рецепт | сеть одна | пул | чистое небо | потеряно |
+|---|---|---|---|---|
+| v21: оптика база (11 каналов) | 0.6180 | **0.7286** | 0.7640 | 14 |
+| оптика + 4 карты бустинга OOF (15 каналов) | **0.6599** | 0.7218 (−0.0068) | 0.7495 | 15 |
+
+По фолдам: −0.0063 / **−0.032** / +0.0071 / +0.0063 / +0.0001. Сеть одна стала
+заметно сильнее (+0.042) — она научилась воспроизводить бустинг, — но именно
+поэтому в смеси 0.4·бустинг + 0.6·сети исчезла независимость членов: ансамбль
+двух похожих голосов хуже ансамбля двух разных. Потерянные пожары не вернулись
+(15 против 14): сеть скопировала карту бустинга на явных гарях и не поверила ей
+на бледных, где сама ничего не видит.
+
+Утечки не было: карты для обучающих чипов фолда считались out-of-fold тремя
+внутренними групповыми фолдами (`boost_oof.py`, хеши в манифестах), для
+оценочных — бустингом на всей обучающей части. Не делалось: скрининг на 35 чипах,
+финальные сети, изменение `inference.py`, v22. Хук `EXTRA_CHANNELS_DIR` остаётся
+с тестом, по умолчанию выключен, продукт не менялся.
+
+Вывод для дальнейшего поиска: обе ступени «дать сети то, что видит бустинг»
+(SWIR-каналы — SPEC-47, карта бустинга — SPEC-48, локальный контраст — SPEC-49)
+поднимают одиночную сеть и не поднимают смесь. Резерв прибавки лежит не во входах
+оптической сети, а в самой смеси и в сиамской ветви.

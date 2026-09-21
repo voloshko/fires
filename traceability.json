@@ -540,7 +540,7 @@
       "depends_on": [
         "SPEC-47"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-49": {
       "title": "Локальный контраст индексов как входные каналы",
@@ -549,7 +549,7 @@
       "depends_on": [
         "SPEC-47"
       ],
-      "status": "active"
+      "status": "rejected"
     }
   }
 }
