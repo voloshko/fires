@@ -82,7 +82,8 @@
         "SPEC-40",
         "SPEC-41",
         "SPEC-42",
-        "SPEC-43"
+        "SPEC-43",
+        "SPEC-44"
       ]
     }
   },
@@ -491,6 +492,15 @@
         "SPEC-42"
       ],
       "status": "implemented"
+    },
+    "SPEC-44": {
+      "title": "Передискретизация бледных гарей для оптической ветви",
+      "file": "specs/SPEC-44-faint-oversample-optical.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-43"
+      ],
+      "status": "active"
     }
   }
 }
