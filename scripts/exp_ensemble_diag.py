@@ -19,7 +19,7 @@ MEMBERS = {'бустинг SWIR': ('own', 'bs-confirm-boost-f{f}-swir-v1'), 'о�
            'сиам база s2': ('own', 'bs-confirm-siam-f{f}-s2-v1'),
            'оптика +SWIR (47, откл.)': ('own', 'bs-confirm-optical-f{f}-swir-v1'), 'оптика +карта буст. (48, откл.)': ('own', 'bs-confirm-optical-f{f}-bch-v1'),
            'оптика +лок.контраст (49, откл.)': ('own', 'bs-confirm-optical-f{f}-lz-v1'), 'сиам diff (51.1, откл.)': ('own', 'bs-confirm-siam-f{f}-diff-v1'),
-           'сиам 2-этап (51.2, откл.)': ('own', 'bs-confirm-siam-f{f}-2st-v1'), 'сиам мягкая кромка (52)': ('own', 'bs-confirm-siam-f{f}-soft-v1')}
+           'сиам 2-этап (51.2, откл.)': ('own', 'bs-confirm-siam-f{f}-2st-v1'), 'сиам мягкая кромка (52, откл.)': ('own', 'bs-confirm-siam-f{f}-soft-v1'), 'сиам + радар под маской (57)': ('own', 'bs-confirm-siam-f{f}-sar-v1')}
 stats = {k: dict(ece=[], sharp=[], err=[], acc=[]) for k in MEMBERS}; errs = {k: [] for k in MEMBERS}; truths = []; oks = []
 for f in range(5):
     ids = json.load(open(HYP / f'research/bs-confirm-siam-f{f}-v1/data_manifest.json'))['evaluation']; chips = [d.load(c) for c in ids]
