@@ -80,7 +80,8 @@
         "SPEC-38",
         "SPEC-39",
         "SPEC-40",
-        "SPEC-41"
+        "SPEC-41",
+        "SPEC-42"
       ]
     }
   },
@@ -465,6 +466,16 @@
       "requirement": "REQ-007",
       "depends_on": [
         "SPEC-32",
+        "SPEC-40"
+      ],
+      "status": "rejected"
+    },
+    "SPEC-42": {
+      "title": "Переопределение фона уверенным бустингом по пикселю",
+      "file": "specs/SPEC-42-boost-override.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-19",
         "SPEC-40"
       ],
       "status": "rejected"
