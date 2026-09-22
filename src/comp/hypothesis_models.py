@@ -83,3 +83,22 @@ def soft_edge_loss(logits,y,k=3,weights=None):
     if weights is not None: ce=ce*weights[y]
     p=1-logp[:,0].exp(); truth=(y>0).float()
     return ce.mean()+1-(2*(p*truth).sum()+1)/(p.sum()+truth.sum()+1)
+
+
+def blob_loss(logits,y,pad=6,min_area=1):
+    """SPEC-61: потеря по компонентам (Kofler et al. blob loss, упрощённо): для каждой связной
+    компоненты истинной гари — soft dice гарь/фон в её bbox, расширенном на pad; среднее по
+    компонентам. Пропущенное маленькое пятно даёт такой же градиент, как большое."""
+    import numpy as np
+    from scipy.ndimage import label, find_objects
+    p=1-logits.float().softmax(1)[:,0]; yn=(y>0).cpu().numpy(); H,W=yn.shape[1:]; losses=[]
+    for b in range(len(yn)):
+        lab,n=label(yn[b])
+        for i,sl in enumerate(find_objects(lab),1):
+            if sl is None: continue
+            comp=(lab==i)
+            if comp.sum()<min_area: continue
+            y0,y1=max(sl[0].start-pad,0),min(sl[0].stop+pad,H); x0,x1=max(sl[1].start-pad,0),min(sl[1].stop+pad,W)
+            pb=p[b,y0:y1,x0:x1]; tb=torch.from_numpy(comp[y0:y1,x0:x1]).to(p.device).float()
+            losses.append(1-(2*(pb*tb).sum()+1)/(pb.sum()+tb.sum()+1))
+    return torch.stack(losses).mean() if losses else p.sum()*0

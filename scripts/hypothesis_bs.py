@@ -116,6 +116,22 @@ def run(args):
         for b in range(9):
             flat=np.concatenate([a[[b,b+9]].reshape(2,-1)[:,::37].astype(np.float32).ravel() for a in xs])
             mean[b]=mean[b+9]=flat.mean(); std[b]=std[b+9]=max(flat.std(),1e-3)
+    if getattr(args,'no_index_norm',False) and args.variant=='siam':
+        # SPEC-61a: индексы-отношения уже сопоставимы между сценами; нормализация по чипу гасит слабый контраст малых пятен.
+        mean[18:28]=0.0; std[18:28]=1.0
+    faint_centers=[]
+    if getattr(args,'faint_crops',0):
+        # SPEC-61c: центры связных компонент истинной гари с медианным dNBR < 0.17 в обучающих чипах.
+        from scipy.ndimage import label as _label, center_of_mass
+        for i,c in enumerate(fit):
+            ch=d.load(c); t=ch.mask>0
+            if not t.any() or not ch.post.size: continue
+            dn=ch.dnbr(); lab,n=_label(t)
+            for j in range(1,n+1):
+                comp=lab==j
+                if comp.sum()>=20 and float(np.median(dn[comp]))<0.17:
+                    cy,cx=center_of_mass(comp); faint_centers.append((i,int(cy),int(cx)))
+        print('faint crop centers',len(faint_centers),flush=True)
     extra_map={}
     if args.extra:
         from dataclasses import replace
@@ -184,6 +200,20 @@ def run(args):
                     elif getattr(args,'soft_edge',0):
                         from src.comp.hypothesis_models import soft_edge_loss; loss=soft_edge_loss(logits,y,args.soft_edge,weights)
                     else: loss=F.cross_entropy(logits,y,weight=weights)+1-(2*(p*truth).sum()+1)/(p.sum()+truth.sum()+1)
+                    if getattr(args,'blob_loss',0):
+                        from src.comp.hypothesis_models import blob_loss; loss=loss+args.blob_loss*blob_loss(logits,y)
+                    if faint_centers:
+                        # SPEC-61c: дополнительная половина батча — вырезки вокруг бледных пятен обучающих чипов.
+                        s_=args.faint_crops; H_=X.shape[-1]; sel=[faint_centers[int(k_)] for k_ in rng.integers(0,len(faint_centers),max(args.batch//2,1))]
+                        xs_,ys_=[],[]
+                        for (ii,cy,cx) in sel:
+                            y0=int(np.clip(cy-s_//2,0,H_-s_)); x0=int(np.clip(cx-s_//2,0,H_-s_)); xs_.append(X[ii,:,y0:y0+s_,x0:x0+s_]); ys_.append(Y[ii,y0:y0+s_,x0:x0+s_])
+                        x2=torch.stack(xs_).float(); y2=torch.stack(ys_)
+                        if rng.random()<0.5: x2,y2=x2.flip(3),y2.flip(2)
+                        if rng.random()<0.5: x2,y2=x2.flip(2),y2.flip(1)
+                        l2=net(x2); p2=1-l2.softmax(1)[:,0]; t2=(y2>0).float()
+                        loss=loss+F.cross_entropy(l2,y2,weight=weights)+1-(2*(p2*t2).sum()+1)/(p2.sum()+t2.sum()+1)
+                        if getattr(args,'blob_loss',0): loss=loss+args.blob_loss*blob_loss(l2,y2)
                 if not torch.isfinite(loss): raise FloatingPointError('nonfinite training loss')
             except FloatingPointError:
                 numerical_failure.update(epoch=epoch+1,batch=k//args.batch,batch_indices=[int(i) for i in batch_ids],batch_ids=[fit[int(i)] if int(i)<len(fit) else 'extra' for i in batch_ids],lr=float(opt.param_groups[0]['lr']))
@@ -194,7 +224,7 @@ def run(args):
             scaler.scale(loss).backward(); scaler.step(opt); scaler.update(); sched.step(); epoch_losses.append(float(loss.detach()))
         losses.append(float(np.mean(epoch_losses)))
         if (epoch+1)%10==0 or args.smoke: print(args.variant,args.seed,'epoch',epoch+1,'loss',losses[-1],'seconds',int(time.time()-t0),flush=True)
-    bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',fusion=getattr(args,'fusion','full'),two_stage=getattr(args,'two_stage',False),soft_edge=getattr(args,'soft_edge',0),in_channels=int(X.shape[1]),sar_gate=os.environ.get('SAR_GATE')=='1',precision=args.precision,mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
+    bundle=dict(state=net.state_dict(),variant=args.variant,width=args.width,depth=args.depth,fusion_norm=args.variant=='siam',fusion=getattr(args,'fusion','full'),two_stage=getattr(args,'two_stage',False),soft_edge=getattr(args,'soft_edge',0),in_channels=int(X.shape[1]),sar_gate=os.environ.get('SAR_GATE')=='1',no_index_norm=getattr(args,'no_index_norm',False),blob_loss=getattr(args,'blob_loss',0),faint_crops=getattr(args,'faint_crops',0),precision=args.precision,mean=mean,std=std,seed=args.seed,epochs=args.epochs,fit=fit)
     torch.save(bundle,out/'model.pt'); del X,Y; torch.cuda.empty_cache()
     if getattr(args,'final',False):
         write_json(out/'summary.json',dict(final=True,chips=len(fit),seconds=time.time()-t0,loss=losses,quality_evaluated=False)); print('final saved',len(fit),flush=True); return
@@ -204,6 +234,6 @@ def run(args):
 
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--oversample-faint',nargs=2,type=float,help='SPEC-43: порог dNBR и кратность показа бледных чипов'); p.add_argument('--soft-edge',type=int,default=0,help='SPEC-52: окно мягких меток у кромки (0 — выкл.)'); p.add_argument('--fusion',choices=['full','diff'],default='full',help='SPEC-51: фьюжн сиама'); p.add_argument('--two-stage',action='store_true',help='SPEC-51: двухэтапная потеря'); p.add_argument('--fade',nargs=2,type=float,help='SPEC-41: диапазон α выцветания сцены после'); p.add_argument('--encoder'); p.add_argument('--precision',choices=['fp16','bf16','fp32'],default='fp16'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true'); p.add_argument('--final',action='store_true',help='обучение на всех чипах без замера'); args=p.parse_args()
+    p=argparse.ArgumentParser(); p.add_argument('task',choices=['boost','train']); p.add_argument('--data',default='data/comp/train/bs'); p.add_argument('--split',default='data/comp/split_bs.json'); p.add_argument('--out',required=True); p.add_argument('--variant',choices=['optical','raw','siam'],default='optical'); p.add_argument('--seed',type=int,default=20260918); p.add_argument('--epochs',type=int,default=200); p.add_argument('--width',type=int,default=32); p.add_argument('--depth',type=int,default=7); p.add_argument('--batch',type=int,default=8); p.add_argument('--boost',default='research/bs-boost-v1'); p.add_argument('--min-extra',type=int,default=4); p.add_argument('--fold',type=int); p.add_argument('--extra'); p.add_argument('--oversample-faint',nargs=2,type=float,help='SPEC-43: порог dNBR и кратность показа бледных чипов'); p.add_argument('--no-index-norm',action='store_true',help='SPEC-61: индексы (каналы 18..27 сиама) без нормализации по чипу'); p.add_argument('--blob-loss',type=float,default=0.0,help='SPEC-61: вес потери по компонентам'); p.add_argument('--faint-crops',type=int,default=0,help='SPEC-61: размер вырезок вокруг бледных пятен (0 — выкл.)'); p.add_argument('--soft-edge',type=int,default=0,help='SPEC-52: окно мягких меток у кромки (0 — выкл.)'); p.add_argument('--fusion',choices=['full','diff'],default='full',help='SPEC-51: фьюжн сиама'); p.add_argument('--two-stage',action='store_true',help='SPEC-51: двухэтапная потеря'); p.add_argument('--fade',nargs=2,type=float,help='SPEC-41: диапазон α выцветания сцены после'); p.add_argument('--encoder'); p.add_argument('--precision',choices=['fp16','bf16','fp32'],default='fp16'); p.add_argument('--debug-numerics',action='store_true'); p.add_argument('--smoke',action='store_true'); p.add_argument('--final',action='store_true',help='обучение на всех чипах без замера'); args=p.parse_args()
     (boost if args.task=='boost' else run)(args)
 if __name__=='__main__': main()

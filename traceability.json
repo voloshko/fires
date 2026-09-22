@@ -96,7 +96,9 @@
         "SPEC-56",
         "SPEC-57",
         "SPEC-58",
-        "SPEC-59"
+        "SPEC-59",
+        "SPEC-60",
+        "SPEC-61"
       ]
     },
     "REQ-008": {
@@ -657,6 +659,26 @@
         "SPEC-58"
       ],
       "status": "rejected"
+    },
+    "SPEC-60": {
+      "title": "Объектные признаки пятна не из спектра: геометрия поля, текстура, радар по пятну, дата",
+      "file": "specs/SPEC-60-object-features.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-58",
+        "SPEC-59"
+      ],
+      "status": "active"
+    },
+    "SPEC-61": {
+      "title": "Сиам для малых отдельных пятен: индексы без нормализации, blob loss, вырезки вокруг пятен",
+      "file": "specs/SPEC-61-siam-small-blobs.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-57",
+        "SPEC-58"
+      ],
+      "status": "active"
     }
   }
 }
