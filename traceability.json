@@ -627,7 +627,7 @@
       "depends_on": [
         "SPEC-54"
       ],
-      "status": "planned"
+      "status": "partial"
     },
     "SPEC-56": {
       "title": "Гейт по чипу, вторая попытка: карта разногласия, новизна входа, качество пары",
@@ -733,7 +733,7 @@
       "depends_on": [
         "SPEC-55"
       ],
-      "status": "active"
+      "status": "implemented"
     },
     "SPEC-67": {
       "title": "Устойчивость v22: четыре сида радарного сиама",

@@ -1,6 +1,6 @@
 # SPEC-55: Стенд трёх биомов: степь, лес, горы
 
-Status: planned
+Status: partial
 
 Requirement: REQ-008
 
@@ -24,13 +24,14 @@ Scars, тестовый сплит 264 сцены, IoU гари. Горы: FLOGA
 
 - Прогон стенда на v21-рецепте (степь) и на Prithvi (все три) даёт первую строку таблицы; числа — в receipt SPEC-55.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+Partial. Две строки стенда из трёх сняты в SPEC-66 (лес — HLS Burn Scars val 264,
+степь — 144 чипа по групповым фолдам, IoU гари + потеряно пожаров); таблица —
+в SPEC-66 и REQ-008. **Вырезано**: (1) горы — FLOGA не загружена, лицензия и
+пары до/после не проверены; (2) единый скрипт `scripts/biome_bench.py` и манифест
+`research/biome-bench-v1/` не написаны — числа собраны из `summary.json` прогонов
+`scripts/biome_train.py` и `research/prithvi-zero-v1`; (3) receipt не выпущен.
+Причина: после отказа от чужих весов (SPEC-54/64/65) стенду нужны были только лес
+и степь, чтобы ответить на вопрос о конфликте биомов; горы — отдельная спека, если
+REQ-008 пойдёт дальше.

@@ -1,6 +1,6 @@
 # SPEC-66: Лес своим путём: наш U-Net на HLS Burn Scars и перенос лес ↔ степь
 
-Status: active
+Status: implemented
 
 Requirement: REQ-008
 
@@ -39,13 +39,35 @@ REQ-008 после снятия ставки на чужие веса (SPEC-54/6
 
 - На k8plus: очередь `/tmp/queue_biome.sh`; сводка `python3 -c` по summary.json.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+Все 11 прогонов прошли (k8plus, очередь `/tmp/queue_biome.sh`, 2026-09-22 18:08–21:50).
+IoU гари на валидных пикселях; степь — среднее по пяти групповым фолдам
+(лесная модель — все 144 чипа, она их не видела).
+
+| обучение → замер | лес (val 264) | степь 20 м | степь 30 м | потеряно пожаров |
+|---|---|---|---|---|
+| лес (HLS 540) | **0.839** | 0.285 | 0.232 | 80 / 144 |
+| степь | 0.502 | **0.402** | 0.362 | 52 / 144 |
+| оба | 0.815 | 0.400 | 0.368 | 65 / 144 |
+
+По фолдам степь «оба − степь»: −0.024, +0.007, −0.036, +0.041, +0.002 (шум фолда ±0.03).
+
+Ответы на три вопроса Summary:
+
+1. **Рецепт на их данных работает**: 0.839 на лесе — внутри опубликованного
+   диапазона (U-Net PANGAEA ~0.85, Prithvi ~0.87), без чужих весов.
+2. **Перенос плохой в обе стороны**: лес → степь 0.285 (как нулевой Prithvi, 0.22),
+   степь → лес 0.50. Разрыв — в данных, не в архитектуре; пересчёт к 30 м переносу
+   не помогает (0.232 < 0.285).
+3. **Сигнал остановки REQ-008 по IoU не сработал**: общая модель на степи −0.002
+   к своей (порог −0.01), лес −0.024 к лесной. Но **пожаров она теряет больше —
+   65 против 52**: общий кодировщик размывает мелкие степные пятна. Сигнал
+   сформулирован по IoU, поэтому формально не сработал; потеря пожаров — отдельный
+   факт, который обязан учитывать следующий шаг.
+
+Оговорка: степь здесь — одна дата и 6 полос (0.40), а не наш рецепт (пара дат,
+индексы, радар; 0.68+). Стенд меряет перенос, а не лучшее, что мы умеем на степи.
+
+Не сделано: горы (FLOGA) не загружены; общий скрипт стенда `biome_bench.py`
+(SPEC-55) не написан — замер шёл по `summary.json` каждого прогона.
