@@ -94,7 +94,8 @@
         "SPEC-54",
         "SPEC-55",
         "SPEC-56",
-        "SPEC-57"
+        "SPEC-57",
+        "SPEC-58"
       ]
     },
     "REQ-008": {
@@ -635,6 +636,16 @@
         "SPEC-47"
       ],
       "status": "partial"
+    },
+    "SPEC-58": {
+      "title": "Фильтр компонент бледной гари: принять или отбросить пятно, которое видит только бустинг",
+      "file": "specs/SPEC-58-component-filter.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-42",
+        "SPEC-47"
+      ],
+      "status": "active"
     }
   }
 }
