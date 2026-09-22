@@ -1,6 +1,6 @@
 # SPEC-61: Сиам для малых отдельных пятен: индексы без нормализации, blob loss, вырезки вокруг пятен
 
-Status: active
+Status: rejected
 
 Requirement: REQ-007
 
@@ -43,13 +43,29 @@ Depends on: SPEC-57, SPEC-58
 
 - `python -m pytest -q tests/test_siam_fusion.py`; smoke `--smoke` на CPU; на k8plus `.venv/bin/python scripts/exp_siam_diff.py`.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+**Отклонено по предзаявленным критериям — все три шага.** Пять групповых фолдов
+парно к сиаму v22 (`…-sar-v1`), `exp_siam_diff.py`:
+
+| сиам | сеть одна | пул 5 ф | чистое небо | под маской | потеряно | к v22 по фолдам |
+|---|---|---|---|---|---|---|
+| v22 (радар под маской) | 0.6921 | **0.7335** | 0.7687 | 0.6356 | 12 | — |
+| 61a индексы без нормализации | 0.6705 | 0.7166 (−0.0169) | 0.7571 | 0.5871 | 18 | −0.016 / −0.033 / −0.015 / −0.003 / −0.011 |
+| 61b blob loss 1:1 | 0.6760 | 0.7297 (−0.0038) | 0.7637 | 0.6350 | 16 | −0.017 / −0.009 / +0.006 / +0.014 / −0.009 |
+| 61c вырезки 256 вокруг бледных пятен | 0.6733 | 0.7267 (−0.0068) | 0.7582 | 0.6380 | 14 | −0.013 / −0.013 / +0.010 / −0.009 / −0.006 |
+
+Все три приёма ухудшили одиночную сеть (0.692 → 0.671–0.676) и смесь. 61a —
+нормализация индексов по чипу не гасила сигнал, а держала сеть в рабочем
+диапазоне (под маской 0.636 → 0.587). 61b и 61c — направленное усиление
+градиента на малых пятнах (потеря по компонентам, вырезки вокруг них) не
+вернуло потерянные пожары (16 и 14 против 12) и добавило ложной площади на
+чистом небе (0.769 → 0.764 / 0.758). Это шестая и седьмая правки сиама на
+тех же входах, отвергнутые смесью; принята только та, что дала *другую*
+информацию (радар).
+
+Не делалось: 61d (deep supervision, upsample ×2, мелкая ветвь) — при провале
+трёх более дешёвых шагов на том же механизме ожидание от четвёртого ниже шума;
+комбинации шагов; замер p сиама на 497 компонентах (без прибавки в смеси он
+не меняет решения). Флаги `--no-index-norm`, `--blob-loss`, `--faint-crops`
+остаются в `hypothesis_bs.py` выключенными. Код продукта не менялся.
