@@ -98,7 +98,9 @@
         "SPEC-58",
         "SPEC-59",
         "SPEC-60",
-        "SPEC-61"
+        "SPEC-61",
+        "SPEC-62",
+        "SPEC-63"
       ]
     },
     "REQ-008": {
@@ -677,6 +679,26 @@
       "depends_on": [
         "SPEC-57",
         "SPEC-58"
+      ],
+      "status": "active"
+    },
+    "SPEC-62": {
+      "title": "Правило по пятну: принять пятно бустинга по отклику сиама",
+      "file": "specs/SPEC-62-blob-siam-rule.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-58",
+        "SPEC-59"
+      ],
+      "status": "active"
+    },
+    "SPEC-63": {
+      "title": "Правило по пикселю: гарь при согласии двух слабых сигналов — бустинга и сиама",
+      "file": "specs/SPEC-63-two-signal-pixel.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-42",
+        "SPEC-62"
       ],
       "status": "active"
     }
