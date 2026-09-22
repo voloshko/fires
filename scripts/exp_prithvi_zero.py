@@ -34,7 +34,7 @@ t0 = time.time(); ids_all, T, OK, E = [], [], [], {'оптика v21': [], 'си
 for f in range(5):
     ids = json.load(open(HYP / f'research/bs-confirm-siam-f{f}-v1/data_manifest.json'))['evaluation']; ids_all += ids
     PO = np.load(HYP / f'research/bs-confirm-optical-f{f}-v1/probabilities.npy'); PS = np.load(OWN / f'bs-confirm-siam-f{f}-sar-v1/probabilities.npy'); PB = np.load(OWN / f'bs-confirm-boost-f{f}-swir-v1/probabilities.npy')
-    fi, fu = {'A': [0, 0], 'B': [0, 0]}
+    fi = {'A': [0, 0], 'B': [0, 0]}
     for i, c in enumerate(ids):
         chip = d.load(c); t = chip.mask > 0; ok = chip.valid(); T.append(t); OK.append(ok)
         E['оптика v21'].append((PO[i].astype(np.float32).argmax(2) > 0) != t); E['сиам v22'].append((PS[i].astype(np.float32).argmax(2) > 0) != t); E['бустинг SWIR'].append((PB[i].astype(np.float32).argmax(2) > 0) != t)
@@ -46,7 +46,6 @@ json.dump(dict(ids=ids_all, bands=BANDS, variants={'A': '20 м, 512', 'B': '30 �
 for v in ('A', 'B'): np.save(OUT / f'probabilities_{v}.npy', np.stack(P[v]))
 print(f'\nPrithvi-EO-2.0 BurnScars, нулевой выстрел, 144 чипа, сцена «после», {int(time.time()-t0)} с')
 for name in ('оптика v21', 'сиам v22', 'бустинг SWIR', 'A', 'B'):
-    pred_ok = [(~e) == t for e, t in zip(E[name], T)]   # восстановление предсказания: pred = t xor e
     preds = [np.logical_xor(t, e) for t, e in zip(T, E[name])]
     num = sum((t & p & ok).sum() for t, p, ok in zip(T, preds, OK)); den = sum(((t | p) & ok).sum() for t, p, ok in zip(T, preds, OK))
     lost = sum(iou(t, p) < 0.3 for t, p in zip(T, preds)); err = np.mean([e[ok].mean() for e, ok in zip(E[name], OK) if ok.sum() >= 100])

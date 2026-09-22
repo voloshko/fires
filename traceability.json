@@ -612,7 +612,7 @@
       "file": "specs/SPEC-54-prithvi-zero-shot.md",
       "requirement": "REQ-008",
       "depends_on": [],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-55": {
       "title": "Стенд трёх биомов: степь, лес, горы",
