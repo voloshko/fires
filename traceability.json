@@ -95,7 +95,8 @@
         "SPEC-55",
         "SPEC-56",
         "SPEC-57",
-        "SPEC-58"
+        "SPEC-58",
+        "SPEC-59"
       ]
     },
     "REQ-008": {
@@ -644,6 +645,16 @@
       "depends_on": [
         "SPEC-42",
         "SPEC-47"
+      ],
+      "status": "rejected"
+    },
+    "SPEC-59": {
+      "title": "Условное расширение гари: ядро смеси, рост по бустингу",
+      "file": "specs/SPEC-59-region-grow.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-40",
+        "SPEC-58"
       ],
       "status": "rejected"
     }
