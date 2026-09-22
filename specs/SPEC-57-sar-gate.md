@@ -1,6 +1,6 @@
 # SPEC-57: Радар под маской облаков как гейтированный вход сиама
 
-Status: active
+Status: partial
 
 Requirement: REQ-007
 
@@ -39,13 +39,34 @@ Depends on: SPEC-43, SPEC-47
 
 - `python -m pytest -q tests/test_extra_channels.py tests/test_siam_fusion.py`; на k8plus `.venv/bin/python scripts/exp_siam_diff.py`.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+**Partial: фолды пройдены полностью, скрининг на 35 чипах — нет; сабмит v22 собран
+по решению пользователя с записанным промахом** (прецедент SPEC-39 / v18).
+
+| | 144 групповых чипа (парно, `exp_siam_diff.py`) | 35 случайных чипов (`exp_siam_var35.py sar`) |
+|---|---|---|
+| взвешенно | 0.7286 → **0.7335** (+0.0049; +0.019 / −0.002 / +0.007 / −0.011 / +0.013) | 0.7685 → 0.7673 (**−0.0012**) |
+| под маской облаков | 0.629 → **0.636** | 0.737 → **0.724** |
+| чистое небо | 0.764 → 0.769 | 0.800 → 0.803 |
+| потеряно пожаров | 14 → **12** | 3 → 3 |
+| сеть одна | 0.672 → 0.692 | 0.709 → 0.713 |
+
+Все четыре предзаявленных условия на фолдах выполнены (пул > +0.004, под маской
+выше базы, чистое небо не ниже, первый фолд без срыва). На 35 чипах промах
+−0.0012 — в пределах шума сида, но **знак эффекта под маской противоположный**:
+на незнакомых пожарах радар под облаком помогает, на знакомых — мешает. Это тот
+же рисунок расхождения шкал, что у SPEC-40 и SPEC-50, и правило минимакса
+формально не пройдено; поэтому не `implemented`.
+
+Диагностика разнообразия (`exp_ensemble_diag.py`): double-fault с бустингом
+1.66 % (как у удержанных 1.62–1.69 %), с оптикой 1.86 % против 1.91 % у сиама v21,
+ECE 0.027 против 0.031 — голос отличается умеренно, не копия; это первый принятый
+член после четырёх отказов оси «сильнее на тех же входах», и он принёс *другую*
+информацию, как предсказывали findings-3.
+
+Сделано: хук `SAR_GATE`, вспомогательные каналы сиама из данных, флаг `sar_gate`
+в бандле и загрузчике (продукт строит вход по модели, не по окружению), финальные
+сети `bs_unet_final_siam_sar_s55/56.pt` (224 чипа), v22 (md5 23a0fd89…, receipt
+SPEC-19-LIVE-022). Не сделано: второй сид на 35 чипах (пользователь выбрал сборку);
+обучаемый гейт по SCL; радар в оптическую сеть.

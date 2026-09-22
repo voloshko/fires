@@ -19,6 +19,6 @@ def measure(ps, name):
     out = np.stack([drop_far(o, anchor=a) for o, a in zip(out, (OPT.argmax(3) > 0) & (ps.argmax(3) > 0))])
     r = score_bs_micro(list(T), list(out)); p = out > 0; ra = score_bs_micro(list(T), list(np.where(ps.argmax(3) > 0, ps[..., 1:].argmax(3) + 1, 0)))
     w = lambda r: (0.35 * r['iou_burn'] + 0.30 * r['miou_sev']) / 0.65
-    print(f'{name:40s} сеть одна {w(ra):.4f} | рецепт {r["iou_burn"]:.4f}/{r["miou_sev"]:.4f} взв {w(r):.4f} | чистое небо {(t&p&OK).sum()/((t|p)&OK).sum():.4f}')
+    print(f'{name:40s} сеть одна {w(ra):.4f} | рецепт {r["iou_burn"]:.4f}/{r["miou_sev"]:.4f} взв {w(r):.4f} | чистое небо {(t&p&OK).sum()/((t|p)&OK).sum():.4f} | под маской {(t&p&~OK).sum()/max(((t|p)&~OK).sum(),1):.4f} ({(~OK).mean():.1%} пикс.) | потеряно {sum(((tt>0)&(o>0)).sum()/max(((tt>0)|(o>0)).sum(),1)<0.3 for tt,o in zip(T,out))}')
 measure(OVR, 'v21: передискр. сид 20260918')
 measure(S2, f'{VAR}, сид 20260918')
