@@ -101,14 +101,17 @@
         "SPEC-61",
         "SPEC-62",
         "SPEC-63",
-        "SPEC-65"
+        "SPEC-65",
+        "SPEC-67",
+        "SPEC-68"
       ]
     },
     "REQ-008": {
       "title": "Мультибиомная модель гари: степь, лес, горы",
       "file": "requirements/REQ-008.md",
       "specs": [
-        "SPEC-64"
+        "SPEC-64",
+        "SPEC-66"
       ]
     }
   },
@@ -722,6 +725,33 @@
         "SPEC-64"
       ],
       "status": "rejected"
+    },
+    "SPEC-66": {
+      "title": "Лес своим путём: наш U-Net на HLS Burn Scars и перенос лес ↔ степь",
+      "file": "specs/SPEC-66-forest-own-way.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-55"
+      ],
+      "status": "active"
+    },
+    "SPEC-67": {
+      "title": "Устойчивость v22: четыре сида радарного сиама",
+      "file": "specs/SPEC-67-sar-four-seeds.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-57"
+      ],
+      "status": "active"
+    },
+    "SPEC-68": {
+      "title": "AF: разбор чипов с концентрацией ошибок и явные признаки I3/I4, глинт",
+      "file": "specs/SPEC-68-af-badchips.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-38"
+      ],
+      "status": "active"
     }
   }
 }
