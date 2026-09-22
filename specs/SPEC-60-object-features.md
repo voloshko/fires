@@ -1,6 +1,6 @@
 # SPEC-60: Объектные признаки пятна не из спектра: геометрия поля, текстура, радар по пятну, дата
 
-Status: active
+Status: rejected
 
 Requirement: REQ-007
 
@@ -36,13 +36,31 @@ GLCM (заменена локальной неоднородностью) и б�
 
 - На k8plus: `CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 .venv/bin/python scripts/exp_object_features.py`.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+**Отклонено по предзаявленному сигналу остановки.** `exp_object_features.py`,
+3937 компонент, 497 истинных, оракул +0.0312 (потеряно 12 → 6). AUC признаков:
+
+| признак | AUC | истинные | ложные |
+|---|---|---|---|
+| p сиама | **0.714** | 0.036 | 0.002 |
+| VH/VV «после» по пятну | 0.605 | 1.70 | 1.60 |
+| граница пятна на границе поля (Sobel NDVI «до») | 0.580 | 0.37 | **0.52** |
+| log площадь / заполнение bbox / dMIRBI-контраст | 0.555 / 0.552 / 0.555 | | |
+| ΔVV, ΔVH, Δ(VH/VV) пятно − кольцо | 0.53 / 0.52 / 0.50 | | |
+| std и локальная неоднородность dNBR внутри | 0.51 / 0.50 | | |
+| день года / разнесение дат | 0.50 / 0.53 | 237 / 15 | 237 / 15 |
+
+Направление у геометрии верное — граница ложных пятен чаще совпадает с
+границами полей (0.52 против 0.37), как и предсказывал ресёч, — но величина
+ничтожна. Текстура внутри пятна не отличает гарь от убранного поля вовсе
+(0.50–0.51). Радар по пятну — единственный не из спектра признак чуть выше 0.6,
+и он один. Сборные модели: набор D (не из спектра) AUC 0.58, E (+ p сиама)
+0.65–0.68, F (всё) 0.64–0.67; все шесть пар набор × модель дают 0.000 ± 0.001 на
+фолдах и 0 на 35 чипах при пороге, выбранном по фолдам 0–2; потерянных 12 → 12.
+
+Объектная ось закрыта тремя спеками: спектр (SPEC-58), связность (SPEC-59),
+геометрия/текстура/радар/дата (SPEC-60). Ни один признак пятна, кроме отклика
+сиама, не несёт сигнала; значит, и резерв +0.031 доступен только через сам сиам
+(SPEC-61). Не делалось: настоящий GLCM (локальная неоднородность — его прокси;
+при AUC 0.50 разница методов ничего не изменит), внешние слои границ полей.
