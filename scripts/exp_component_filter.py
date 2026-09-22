@@ -7,6 +7,7 @@ from pathlib import Path
 from scipy.ndimage import label, binary_dilation, binary_erosion
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import roc_auc_score
 from sklearn.pipeline import make_pipeline
 from src.comp.chips import BsDataset
 from src.comp.features import stack
@@ -42,6 +43,7 @@ def components(chip, pb, po, ps, out):
              dndre[m].mean() - dndre[ring].mean(), pburn_b[m].mean(), pburn_s[m].mean()]
         res.append(dict(x=x, mask=m, pos=T[m].mean() > 0.5, truth_frac=T[m].mean(), sev=np.where(m, pb[..., 1:].argmax(2) + 1, 0).astype(np.uint8)))
     return res
+NOBAL = False
 FEATS = {'A: dMIRBI-контраст, dNDVI-контраст, log площадь': [2, 3, 0], 'B: A + dNDRE-контраст': [2, 3, 4, 0], 'C: B + p бустинга, p сиама': [2, 3, 4, 0, 5, 6]}
 def load_fold(f):
     ids = json.load(open(HYP / f'research/bs-confirm-siam-f{f}-v1/data_manifest.json'))['evaluation']
@@ -76,7 +78,7 @@ print(f'35 чипов: рецепт {b35:.4f}, потеряно {l35} | орак
 def fit(rows_list, idx):
     X = [k['x'] for rows in rows_list for r in rows for k in r['comps']]; y = [k['pos'] for rows in rows_list for r in rows for k in r['comps']]
     if sum(y) < 3: return None
-    return make_pipeline(StandardScaler(), LogisticRegression(C=0.3, class_weight='balanced', max_iter=1000)).fit(np.array(X)[:, idx], y)
+    return make_pipeline(StandardScaler(), LogisticRegression(C=0.3, class_weight=(None if NOBAL else 'balanced'), max_iter=1000)).fit(np.array(X)[:, idx], y)
 for name, idx in FEATS.items():
     pf = []; C = np.zeros((4, 4), int); lost = 0
     for f in range(5):
@@ -90,3 +92,31 @@ for name, idx in FEATS.items():
             C += conf(r['T'], o); t = r['T'] > 0; p = o > 0; lost += (((t & p).sum() / max((t | p).sum(), 1)) < 0.3)
     m = fit(folds, idx); g35, l35g = apply(r35, lambda r, k, m=m: bool(m.predict(np.array(k['x'])[idx][None])[0]))
     print(f'{name:48s} фолды {metric(C)-base:+.4f} (по фолдам {np.round(pf,4).tolist()}), потеряно {lost} | 35 чипов {g35-b35:+.4f}, потеряно {l35g}')
+
+# --- Ступень 2 (предзаявлена до запуска, после провала ступени 1): без balanced-весов; порог принятия τ
+# выбирается по пулу фолдов 0–2, проверяется на фолдах 3–4 и на 35 чипах. Печатается AUC признаков (LOFO).
+NOBAL = True
+print('\nСтупень 2: порог по фолдам 0–2, проверка 3–4 и 35 чипов')
+TAUS = np.arange(0.5, 0.96, 0.05)
+for name, idx in FEATS.items():
+    # AUC по LOFO-предсказаниям
+    ys, ps = [], []
+    for f in range(5):
+        m = fit([folds[g] for g in range(5) if g != f], idx)
+        for r in folds[f]:
+            for k in r['comps']: ys.append(k['pos']); ps.append(m.predict_proba(np.array(k['x'])[idx][None])[0, 1])
+    auc = roc_auc_score(ys, ps)
+    def run(fold_ids, tau):
+        C = np.zeros((4, 4), int); lost = 0; Cb = np.zeros((4, 4), int)
+        for f in fold_ids:
+            m = fit([folds[g] for g in range(5) if g != f], idx)
+            for r in folds[f]:
+                o = r['out'].copy()
+                for k in r['comps']:
+                    if m.predict_proba(np.array(k['x'])[idx][None])[0, 1] > tau: o = np.where(k['mask'], k['sev'], o)
+                C += conf(r['T'], o); Cb += conf(r['T'], r['out']); t = r['T'] > 0; p = o > 0; lost += (((t & p).sum() / max((t | p).sum(), 1)) < 0.3)
+        return metric(C) - metric(Cb), lost
+    sel = {tau: run([0, 1, 2], tau)[0] for tau in TAUS}; tau = max(sel, key=sel.get)
+    chk, lost_chk = run([3, 4], tau); allf, lost_all = run([0, 1, 2, 3, 4], tau)
+    m = fit(folds, idx); g35, l35g = apply(r35, lambda r, k, m=m, tau=tau: m.predict_proba(np.array(k['x'])[idx][None])[0, 1] > tau)
+    print(f'{name:48s} AUC {auc:.3f} | τ={tau:.2f}: выбор ф0–2 {sel[tau]:+.4f}, проверка ф3–4 {chk:+.4f}, пул 5 ф {allf:+.4f}, потеряно {lost_all} | 35 чипов {g35-b35:+.4f}, потеряно {l35g}')
