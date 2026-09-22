@@ -111,7 +111,8 @@
       "file": "requirements/REQ-008.md",
       "specs": [
         "SPEC-64",
-        "SPEC-66"
+        "SPEC-66",
+        "SPEC-69"
       ]
     }
   },
@@ -752,6 +753,15 @@
         "SPEC-38"
       ],
       "status": "rejected"
+    },
+    "SPEC-69": {
+      "title": "Обогнать Prithvi на лесе: наш U-Net на HLS Burn Scars",
+      "file": "specs/SPEC-69-prithvi-u-net-hls-burn-scars.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-66"
+      ],
+      "status": "active"
     }
   }
 }

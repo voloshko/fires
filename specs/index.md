@@ -3,7 +3,7 @@
 Spec-driven development index. Одна спека = один связный кусок работы с
 проверяемыми критериями приёмки. Код не пишется раньше своей спеки.
 
-**Next available number:** SPEC-69
+**Next available number:** SPEC-70
 
 > **Authority note:** статусы в этой таблице — «на глаз» и могут отставать.
 > Источник истины — `traceability.json`; запрашивать через
