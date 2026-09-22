@@ -126,3 +126,37 @@ X = np.array([k['x'] for k in allc]); y = np.array([k['pos'] for k in allc])
 print('\nмедианы признаков: истинные | ложные | AUC признака')
 for j, n in enumerate(NAMES): print(f'  {n:18s} {np.median(X[y, j]):+.4f} | {np.median(X[~y, j]):+.4f} | {roc_auc_score(y, X[:, j]):.3f}')
 tf = np.array([k['truth_frac'] for k in allc]); print(f'доля истины в компонентах: медиана {np.median(tf):.2f}; > 0.5 у {(tf > 0.5).mean():.1%}; в 12 потерянных пожарах компонент бустинга — см. оракул (потеряно 6)')
+# --- диагностика для брифа №4: землепользование, принадлежность к потерянным пожарам, распределение отклика сиама
+from collections import Counter
+rows_all = sum(folds, []); lc_true, lc_false, in_lost, in_found, area_lost, area_found = Counter(), Counter(), 0, 0, 0, 0
+ps_true = []; ndvi_pre_true, ndvi_pre_false = [], []
+for f in range(5):
+    ids, PB, PO, PS = load_fold(f)
+    for i, (c, r) in enumerate(zip(ids, folds[f])):
+        chip = d.load(c); lc = chip.aux[2]; t = r['T'] > 0; p = r['out'] > 0; lost = ((t & p).sum() / max((t | p).sum(), 1)) < 0.3
+        pre = chip.pre.astype(np.float32); ndvi = _r(pre[6], pre[2])
+        for k in r['comps']:
+            m = k['mask']; mode = Counter(lc[m].astype(int).tolist()).most_common(1)[0][0]
+            if k['pos']:
+                lc_true[mode] += 1; ps_true.append(k['x'][6]); ndvi_pre_true.append(float(ndvi[m].mean()))
+                if lost: in_lost += 1; area_lost += m.sum()
+                else: in_found += 1; area_found += m.sum()
+            else: lc_false[mode] += 1; ndvi_pre_false.append(float(ndvi[m].mean()))
+print('\nбриф №4:')
+print('  землепользование истинных компонент (код: n):', dict(lc_true.most_common(6)))
+print('  землепользование ложных компонент  (код: n):', dict(lc_false.most_common(6)))
+print(f'  истинные компоненты: в потерянных пожарах {in_lost} (площадь {area_lost/1000:.0f} тыс. пикс.), у краёв найденных {in_found} (площадь {area_found/1000:.0f} тыс. пикс.)')
+ps_true = np.array(ps_true); print(f'  p сиама на истинных компонентах: медиана {np.median(ps_true):.3f}, > 0.1 у {(ps_true>0.1).mean():.0%}, > 0.3 у {(ps_true>0.3).mean():.0%}, < 0.01 у {(ps_true<0.01).mean():.0%}')
+print(f'  NDVI «до» на компонентах: истинные медиана {np.median(ndvi_pre_true):.3f}, ложные {np.median(ndvi_pre_false):.3f}')
+# оракул раздельно: только компоненты потерянных пожаров / только у краёв найденных
+def apply_sel(rows_f, want_lost):
+    C = np.zeros((4, 4), int); Cb = np.zeros((4, 4), int)
+    for rows in rows_f:
+        for r in rows:
+            t = r['T'] > 0; p = r['out'] > 0; lost = ((t & p).sum() / max((t | p).sum(), 1)) < 0.3; o = r['out'].copy()
+            if lost == want_lost:
+                for k in r['comps']:
+                    if k['pos']: o = np.where(k['mask'], k['sev'], o)
+            C += conf(r['T'], o); Cb += conf(r['T'], r['out'])
+    return metric(C) - metric(Cb)
+print(f'  оракул только по потерянным пожарам: {apply_sel(folds, True):+.4f}; только по краям найденных: {apply_sel(folds, False):+.4f}')
