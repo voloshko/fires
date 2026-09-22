@@ -106,7 +106,9 @@
     "REQ-008": {
       "title": "Мультибиомная модель гари: степь, лес, горы",
       "file": "requirements/REQ-008.md",
-      "specs": []
+      "specs": [
+        "SPEC-64"
+      ]
     }
   },
   "legacy_untracked_specs": [],
@@ -701,6 +703,15 @@
         "SPEC-62"
       ],
       "status": "rejected"
+    },
+    "SPEC-64": {
+      "title": "Дообучение кодировщика Prithvi-EO-2.0 на степных чипах как член смеси",
+      "file": "specs/SPEC-64-prithvi-finetune.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-54"
+      ],
+      "status": "active"
     }
   }
 }
