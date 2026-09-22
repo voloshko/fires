@@ -751,7 +751,7 @@
       "depends_on": [
         "SPEC-38"
       ],
-      "status": "active"
+      "status": "rejected"
     }
   }
 }

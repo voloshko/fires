@@ -1,6 +1,6 @@
 # SPEC-68: AF: разбор чипов с концентрацией ошибок и явные признаки I3/I4, глинт
 
-Status: active
+Status: rejected
 
 Requirement: REQ-007
 
@@ -28,13 +28,28 @@ FP на пустых чипах. Без мишени спека закрывае
 
 - На k8plus: `CUDA_VISIBLE_DEVICES= .venv/bin/python scripts/exp_af_badchips.py`.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+**Ступень 1 выполнена, мишени для ступени 2 нет — спека закрывается диагнозом.**
+`exp_af_badchips.py`, OOF 5 × 336 чипов базовым рецептом (`build_training_set` +
+`train`, порог 0.985): TP 7467, FP 1145, FN 231, F1 0.916 (продуктовый рецепт с
+жёсткими отрицательными — 0.952; здесь важна структура ошибок, не уровень).
+
+- **Ложные не сконцентрированы**: топ-5 чипов держат 14 % FP, топ-10 — 23 %,
+  топ-20 — 38 %. Худший чип — 50 FP (ночь, пашня и лес).
+- **Глинта нет**: пикселей с I1 > 0.3 и I1 > I2 среди FP 0.0 % (и среди TP 0.0 %).
+- **Факелов нет**: I3/I4 у FP и TP совпадают (медиана 0.491 × 10⁻³ у обоих);
+  SWIR-пик отсутствует. FP отличаются только тем, что **холоднее** — I4 329 K
+  против 339 K, I4−I5 30 K против 38 K — это краевые пиксели очагов и слабые
+  аномалии, не другой класс объектов.
+- **Край полосы**: зениты плохих чипов 5–68°, без концентрации у края.
+- **Пропуски — ночь**: 40 % FN на 31 % ночных чипов (FP ночью, наоборот, 19 %);
+  FN горячее по I3 (0.196 против 0.167) и холоднее по I4−I5 (25 K против 38 K) —
+  ночные слабые очаги на пороге детекции. Ночь как признак уже проверялась
+  (шум), раздельная ночная граница — тоже.
+
+Ни одно из предзаявленных условий ступени 2 (≥ 15 % FP под глинт/факел или
+край полосы) не выполнено: явные признаки I3/I4 и глинт-флаг чинить нечего.
+Остаток ошибок AF — физический порог слабых и краевых очагов, равномерно
+размазанный по чипам. Резерв AF в скоре ≤ 0.001 подтверждён как недостижимый
+признаками одной даты. Код продукта не менялся.
