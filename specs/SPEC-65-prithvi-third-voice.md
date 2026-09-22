@@ -1,6 +1,6 @@
 # SPEC-65: Prithvi как третий голос смеси: критерий по смеси, проверка вслепую на фолдах 2–4
 
-Status: active
+Status: rejected
 
 Requirement: REQ-007
 
@@ -38,13 +38,30 @@ SPEC-64 остановлена по правилу «сеть одна ниже 
 
 - На k8plus: `CUDA_VISIBLE_DEVICES= .venv/bin/python scripts/exp_prithvi_member.py --select 0,1 --check 2,3,4`.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+**Отклонено по предзаявленному критерию: слепая проверка провалена.**
+`exp_prithvi_member.py --select 0,1 --check 2,3,4`, пять фолдов (`prithvi_finetune.py`,
+по 10 мин на фолд):
+
+| | пул 5 ф | Δ к v22 по фолдам 0 / 1 / 2 / 3 / 4 | выбор ф0–1 | слепая проверка ф2–4 | потеряно |
+|---|---|---|---|---|---|
+| v22 | 0.7335 | — | — | — | 12 |
+| R1 вместо оптики | 0.6704 (−0.063) | −0.024 / −0.056 / −0.013 / −0.100 / −0.109 | −0.040 | −0.074 | 19 |
+| R2 третий поровну | 0.7052 (−0.028) | +0.006 / −0.043 / −0.007 / −0.053 / −0.035 | −0.018 | −0.032 | 16 |
+| **R3 третий 0.25** (выбран) | 0.7226 (**−0.011**) | +0.009 / −0.021 / **+0.002 / −0.024 / −0.014** | −0.006 | **−0.012** | 13 |
+
+Prithvi один по пяти фолдам — 0.347 (IoU гари 0.405, mIoU 0.278). Разнообразие
+по пяти фолдам тоже оказалось хуже, чем по одному: double-fault с оптикой
+**2.08 %** (по фолду 0 было 1.27 %; между оптикой и сиамом 1.86 %), с сиамом
+1.78 %, Q 0.78. Фолд 0 — самый лёгкий — снова обманул, как в SPEC-52 и SPEC-61:
+там член выглядел «другим», на остальных четырёх он повторяет ошибки наших
+сетей и добавляет свои. Слепая проверка это и показала: два из трёх фолдов ниже
+−0.01, среднее −0.012.
+
+Итог REQ-008 по этой ветке: ни готовые веса (SPEC-54), ни дообученный кодировщик
+Prithvi (SPEC-64/65) на степи не дают члена, полезного смеси. Ставка на
+американскую модель закрыта полностью; путь к мультибиомной модели — свои
+архитектуры плюс лесные данные (SPEC-55). Не делалось: две даты кадрами,
+замораживание кодировщика, другие веса — после провала слепой проверки любое
+из этого было бы подгонкой. Артефакты `research/bs-confirm-prithvi-f{0..4}-v1`.

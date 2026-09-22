@@ -721,7 +721,7 @@
       "depends_on": [
         "SPEC-64"
       ],
-      "status": "active"
+      "status": "rejected"
     }
   }
 }
