@@ -1,6 +1,6 @@
 # SPEC-64: Дообучение кодировщика Prithvi-EO-2.0 на степных чипах как член смеси
 
-Status: active
+Status: rejected
 
 Requirement: REQ-008
 
@@ -46,13 +46,22 @@ R1 вместо оптики, R2 третьим поровну, R3 третьи�
 
 - На k8plus: очередь `/tmp/queue_prithvi.sh`; `.venv/bin/python scripts/exp_prithvi_member.py`.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+**Отклонено по предзаявленному сигналу остановки; решение пользователя — стоп по
+правилу.** Фолд 0 (`prithvi_finetune.py`, 60 эпох, 569 с): Prithvi один — взв.
+**0.388** (IoU гари 0.466, mIoU степеней 0.296) против порога 0.588 (оптика соседа
+0.618 − 0.03). Первое из двух условий «или» сработало с большим запасом: сеть
+слаба в одиночку, особенно по степени.
+
+Второе условие сработало в противоположную сторону и стало главной находкой:
+double-fault с оптикой **1.27 %**, с сиамом 0.92 %, с бустингом 0.74 % — ниже,
+чем между нашими собственными членами (оптика–сиам 1.19 %); Q 0.72 / 0.75 / 0.20.
+В смеси на фолде 0: вместо оптики −0.0235, третьим поровну +0.0061, третьим с
+весом 0.25 **+0.0094** (потеряно 4 → 3) — больше, чем радар дал на том же фолде.
+
+Правило мерило члена в одиночку и не предусматривало «слабый, но
+некоррелированный». Порог не двигается: спека закрывается, а гипотеза «Prithvi
+как третий голос» открывается заново отдельной спекой SPEC-65 с критерием по
+смеси и слепой проверкой на невиданных фолдах 2–4. Фолд 1 доучился в той же
+очереди; его числа — в SPEC-65. Артефакты `research/bs-confirm-prithvi-f{0,1}-v1`.

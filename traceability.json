@@ -100,7 +100,8 @@
         "SPEC-60",
         "SPEC-61",
         "SPEC-62",
-        "SPEC-63"
+        "SPEC-63",
+        "SPEC-65"
       ]
     },
     "REQ-008": {
@@ -710,6 +711,15 @@
       "requirement": "REQ-008",
       "depends_on": [
         "SPEC-54"
+      ],
+      "status": "rejected"
+    },
+    "SPEC-65": {
+      "title": "Prithvi как третий голос смеси: критерий по смеси, проверка вслепую на фолдах 2–4",
+      "file": "specs/SPEC-65-prithvi-third-voice.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-64"
       ],
       "status": "active"
     }
