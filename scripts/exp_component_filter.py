@@ -120,3 +120,9 @@ for name, idx in FEATS.items():
     chk, lost_chk = run([3, 4], tau); allf, lost_all = run([0, 1, 2, 3, 4], tau)
     m = fit(folds, idx); g35, l35g = apply(r35, lambda r, k, m=m, tau=tau: m.predict_proba(np.array(k['x'])[idx][None])[0, 1] > tau)
     print(f'{name:48s} AUC {auc:.3f} | τ={tau:.2f}: выбор ф0–2 {sel[tau]:+.4f}, проверка ф3–4 {chk:+.4f}, пул 5 ф {allf:+.4f}, потеряно {lost_all} | 35 чипов {g35-b35:+.4f}, потеряно {l35g}')
+# --- контроль признаков: медианы по классам (истинные / ложные компоненты), чтобы AUC ≈ 0.5 не оказался ошибкой расчёта
+NAMES = ['log площадь', 'компактность', 'dMIRBI-контраст', 'dNDVI-контраст', 'dNDRE-контраст', 'p бустинга', 'p сиама']
+X = np.array([k['x'] for k in allc]); y = np.array([k['pos'] for k in allc])
+print('\nмедианы признаков: истинные | ложные | AUC признака')
+for j, n in enumerate(NAMES): print(f'  {n:18s} {np.median(X[y, j]):+.4f} | {np.median(X[~y, j]):+.4f} | {roc_auc_score(y, X[:, j]):.3f}')
+tf = np.array([k['truth_frac'] for k in allc]); print(f'доля истины в компонентах: медиана {np.median(tf):.2f}; > 0.5 у {(tf > 0.5).mean():.1%}; в 12 потерянных пожарах компонент бустинга — см. оракул (потеряно 6)')
