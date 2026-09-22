@@ -1,6 +1,6 @@
 # SPEC-62: Правило по пятну: принять пятно бустинга по отклику сиама
 
-Status: active
+Status: rejected
 
 Requirement: REQ-007
 
@@ -30,13 +30,17 @@ Depends on: SPEC-58, SPEC-59
 
 - На k8plus: `CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=6 .venv/bin/python scripts/exp_two_signals.py`.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+**Отклонено по предзаявленному критерию.** `exp_two_signals.py`, v22-аналог
+(потеряно 12 на фолдах, 3 на 35 чипах). Вся сетка s × τ отрицательна на
+фолдах 0–2: от −0.026 (s = 0.05) до −0.009 (s ≥ 0.3); лучшее s = 0.5, τ = 0.5 —
+выбор −0.0094, проверка −0.0127, пул **−0.0108** (по фолдам −0.019 / −0.004 /
+−0.008 / −0.001 / −0.022), потеряно 12 → 9; 35 чипов **−0.0142**.
+
+AUC 0.71 у отклика сиама означает ранжирование, а не рабочую точку: даже при
+s = 0.5 среди принятых пятен ложных по площади больше, чем истинных, — ложных
+пятен в семь раз больше, и хвост их распределения по p сиама перекрывает
+истинные. Потерянные пожары возвращаются (12 → 9), но ценой ложной площади на
+остальных 132 — тот же счёт, что у SPEC-42 и SPEC-44. Правило на одном признаке
+пятна невозможно даже при лучшем из найденных признаков. Код продукта не менялся.

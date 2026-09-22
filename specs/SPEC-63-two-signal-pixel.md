@@ -1,6 +1,6 @@
 # SPEC-63: Правило по пикселю: гарь при согласии двух слабых сигналов — бустинга и сиама
 
-Status: active
+Status: rejected
 
 Requirement: REQ-007
 
@@ -30,13 +30,16 @@ argmax смеси; фильтр чужих пожаров прежний.
 
 - Тот же запуск, что SPEC-62.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+**Отклонено по предзаявленному критерию.** `exp_two_signals.py`. Сетка τb × τs:
+при τs ≤ 0.3 везде −0.004…−0.006, при τs ≥ 0.4 около нуля; лучшее τb = 0.5,
+τs = 0.5 — выбор +0.0006, проверка +0.0006, пул **+0.0006**, потеряно 12 → 12;
+35 чипов −0.0004.
+
+Механика «два согласных слабых голоса тонут в одном молчащем» существует, но
+пикселей, где бустинг > 0.5 и сиам > 0.5 при argmax смеси «фон», почти нет:
+при этих порогах смесь и так даёт гарь (0.4·0.5 + 0.6·0.5·0.5 = 0.35 против
+фона ≤ 0.65 — на грани), а при более низком τs добавляется ложная площадь. Порог
+согласия двух ветвей не открывает ничего, чего не открывал бы порог смеси
+(SPEC-40). Код продукта не менялся.

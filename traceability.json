@@ -690,7 +690,7 @@
         "SPEC-58",
         "SPEC-59"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-63": {
       "title": "Правило по пикселю: гарь при согласии двух слабых сигналов — бустинга и сиама",
@@ -700,7 +700,7 @@
         "SPEC-42",
         "SPEC-62"
       ],
-      "status": "active"
+      "status": "rejected"
     }
   }
 }
