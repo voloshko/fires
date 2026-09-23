@@ -763,7 +763,7 @@
       "depends_on": [
         "SPEC-66"
       ],
-      "status": "active"
+      "status": "partial"
     },
     "SPEC-70": {
       "title": "Радарный сиам с поворотами и разбросом каналов (рецепт C1 леса на степи)",
@@ -782,7 +782,7 @@
       "depends_on": [
         "SPEC-69"
       ],
-      "status": "active"
+      "status": "implemented"
     }
   }
 }
