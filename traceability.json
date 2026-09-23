@@ -118,7 +118,9 @@
         "SPEC-72",
         "SPEC-73",
         "SPEC-74",
-        "SPEC-75"
+        "SPEC-75",
+        "SPEC-76",
+        "SPEC-77"
       ]
     }
   },
@@ -826,6 +828,25 @@
         "SPEC-74"
       ],
       "status": "implemented"
+    },
+    "SPEC-76": {
+      "title": "Маска воды для гарей в горах",
+      "file": "specs/SPEC-76-water-mask.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-73"
+      ],
+      "status": "active"
+    },
+    "SPEC-77": {
+      "title": "Поправка на освещённость склона (C-коррекция по DEM и углам солнца)",
+      "file": "specs/SPEC-77-slope-illumination.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-73",
+        "SPEC-76"
+      ],
+      "status": "active"
     }
   }
 }

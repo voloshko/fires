@@ -5,14 +5,15 @@ from pathlib import Path
 import numpy as np
 
 
-def load_dir(d):
+def load_dir(d, manifest='manifest.json', layers=('slope',)):
     import rasterio
-    d = Path(d); man = json.load(open(d / 'manifest.json'))['windows']; X, Y, V, extra = [], [], [], {}
+    d = Path(d); man = json.load(open(d / manifest))['windows']; X, Y, V, extra = [], [], [], {}
     for w in man:
         img = rasterio.open(d / f"{w['name']}_merged.tif").read().astype(np.float32); m = rasterio.open(d / f"{w['name']}.mask.tif").read()[0]
         v = (img != -9999).all(0) & (m >= 0); img[:, ~v] = 0; X.append(img); Y.append(m == 1); V.append(v)
-        s = d / f"{w['name']}.slope.tif"
-        if s.exists(): extra.setdefault('slope', []).append(rasterio.open(s).read()[0])
+        for k in layers:
+            s = d / f"{w['name']}.{k}.tif"
+            if s.exists(): extra.setdefault(k, []).append(rasterio.open(s).read()[0])
     return man, np.stack(X), np.stack(Y), np.stack(V), {k: np.stack(v) for k, v in extra.items()}
 
 
