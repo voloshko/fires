@@ -1,6 +1,6 @@
 # SPEC-67: Устойчивость v22: четыре сида радарного сиама
 
-Status: active
+Status: rejected
 
 Requirement: REQ-007
 
@@ -28,13 +28,24 @@ v22 держится на двух сидах радарного сиама (55/
 
 - На k8plus после очереди: `.venv/bin/python scripts/exp_sar_seeds.py`.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+Rejected по заранее записанному критерию (`exp_sar_seeds.py`, 2026-09-23):
+
+| замер | один сид (v22) | 2 сида | 3 сида | 4 сида | порог |
+|---|---|---|---|---|---|
+| фолды, пул 5 ф. | 0.7335 | 0.7329 | **0.7315** | — | ≥ 0.7355 |
+| 35 чипов, взвешенный BS | — | 0.7659 | — | **0.7775** | ≥ 0.7703 |
+
+Потеряно на фолдах: 12 / 12 / 13. На 35 чипах под маской: два сида 0.7309,
+четыре 0.7659 (v21 0.7541).
+
+Первая половина критерия не пройдена (−0.0020 к одному сиду вместо +0.002),
+вторая пройдена с запасом. **v23 не собирается, продукт остаётся v22.**
+
+Диагноз разброса: одиночный сид v22 на фолдах был удачным. Три сида дают
+0.7315, это +0.0029 к v21 (0.7286), а не +0.0049. Минус v22 на 35 чипах
+(−0.0064 на двух сидах) оказался шумом сида: четыре сида дают +0.0052 к v21.
+При усреднении сидов радар под маской положителен на **обоих** масштабах, так что
+решение о v22 по минимаксу устойчиво. Сами по себе дополнительные сиды фолдов
+не улучшают. Финальные сети 57/58 лежат в `models/`, в продукт не входят.

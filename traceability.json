@@ -743,7 +743,7 @@
       "depends_on": [
         "SPEC-57"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-68": {
       "title": "AF: разбор чипов с концентрацией ошибок и явные признаки I3/I4, глинт",
