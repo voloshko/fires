@@ -17,3 +17,10 @@ def test_augment_keeps_alignment():
 def test_tta8_identity_for_equivariant_net():
     net = lambda x: x[:, :2] * 2
     x = torch.randn(1, 3, 8, 8); assert torch.allclose(tta8(net, x), x[:, :2] * 2, atol=1e-6)
+
+def test_scorer_iou_and_compare():
+    from src.comp.hls_eval import Scorer
+    Y = np.zeros((4, 8, 8), bool); Y[:, :4] = True; V = np.ones_like(Y)
+    s = Scorer(Y, V, n_boot=50); perfect, half = s.stats(Y.astype(np.float32), 0.5), s.stats((Y & (np.arange(8) < 2)[None, None]).astype(np.float32), 0.5)
+    assert s.iou(perfect) == 1.0 and abs(s.iou(half) - 0.25) < 1e-9   # 4 строки × 2 столбца из 4 × 8
+    assert s.compare(perfect, half)[3] == 'ЛУЧШЕ'

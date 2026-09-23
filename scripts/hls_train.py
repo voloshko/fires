@@ -8,7 +8,7 @@ from scripts.train_unet import UNet
 from src.comp.hls import tile_holdout, augment, tta8
 CONFIGS = {'C0': dict(w=32, epochs=60, rot=False, gain=0.0), 'C1': dict(w=32, epochs=120, rot=True, gain=0.1), 'C2': dict(w=48, epochs=100, rot=True, gain=0.1)}
 p = argparse.ArgumentParser(); p.add_argument('--fit', choices=['inner', 'all'], required=True); p.add_argument('--config', choices=list(CONFIGS), required=True)
-p.add_argument('--seed', type=int, default=1); p.add_argument('--batch', type=int, default=8); p.add_argument('--out', required=True); p.add_argument('--smoke', action='store_true')
+p.add_argument('--seed', type=int, default=1); p.add_argument('--batch', type=int, default=8); p.add_argument('--out', required=True); p.add_argument('--smoke', action='store_true'); p.add_argument('--extra', action='append', default=[], help='SPEC-75: каталоги доп. сцен (*_merged.tif + .mask.tif)')
 a = p.parse_args(); c = CONFIGS[a.config]; torch.manual_seed(a.seed); rng = np.random.default_rng(a.seed); out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
 HLS = Path('external/hls_burn_scars')
 def hls_list(split): return sorted(glob.glob(str(HLS / split / '*_merged.tif')))
@@ -23,6 +23,7 @@ tr = hls_list('training')
 if a.fit == 'inner':
     hold = tile_holdout([Path(f).name for f in tr]); fit = [f for f, h in zip(tr, hold) if not h]; ev = [f for f, h in zip(tr, hold) if h]
 else: fit, ev = tr, hls_list('validation')
+for e in a.extra: fit = fit + sorted(glob.glob(str(Path(e) / '*_merged.tif')))
 epochs = c['epochs']
 if a.smoke: fit, ev, epochs = fit[:8], ev[:2], 1
 X, Y, V = hls_load(fit)

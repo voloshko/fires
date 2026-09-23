@@ -11,7 +11,8 @@ from shapely.geometry import box, mapping
 from shapely.ops import unary_union
 
 N, SIZE = int(__import__("os").environ.get("FRESH_N", 300)), 512   # FRESH_N — только для пробы
-OUT = Path('external/hls_fresh'); OUT.mkdir(parents=True, exist_ok=True)
+# SPEC-74: второй набор — FRESH_OUT, FRESH_SKIP
+OUT = Path(__import__('os').environ.get('FRESH_OUT', 'external/hls_fresh')); OUT.mkdir(parents=True, exist_ok=True)
 BANDS = ['B02', 'B03', 'B04', 'B8A', 'B11', 'B12']
 
 # 1. Рамки сцен HLS Burn Scars (training + validation) в градусах.
@@ -27,6 +28,7 @@ b = g.to_crs(5070).bounds; g = g[((b.maxx - b.minx) <= 14000) & ((b.maxy - b.min
 n_size = len(g); g = g[~g.intersects(foot)]
 g = g.assign(h=g.event_id.map(lambda e: hashlib.sha256(f'fresh:{e}'.encode()).hexdigest())).sort_values('h')
 print(f'пожаров после фильтров: {n_size} по размеру, {len(g)} без пересечения с HLS Burn Scars', flush=True)
+SKIP = int(__import__('os').environ.get('FRESH_SKIP', 0)); g = g.iloc[SKIP:]; print('пропущено первых', SKIP, flush=True)
 
 cat = pystac_client.Client.open('https://planetarycomputer.microsoft.com/api/stac/v1', modifier=planetary_computer.sign_inplace)
 
@@ -77,6 +79,6 @@ with ThreadPoolExecutor(8) as ex:
 keep = {r['name'] for r in done}
 for f in OUT.glob('fresh_*'):   # лишние окна последнего батча сверх N
     if f.name.replace('_merged.tif', '').replace('.mask.tif', '') not in keep: f.unlink()
-json.dump(dict(spec='SPEC-72', source='MTBS mtbs_perims_DD + Planetary Computer hls2-s30', eligible=len(g), tried=tried,
+json.dump(dict(spec='SPEC-72' if SKIP == 0 else 'SPEC-74', skip=SKIP, source='MTBS mtbs_perims_DD + Planetary Computer hls2-s30', eligible=len(g), tried=tried,
                windows=done), open(OUT / 'manifest.json', 'w'), ensure_ascii=False, indent=1)
 print('готово:', len(done), 'окон', flush=True)

@@ -115,7 +115,10 @@
         "SPEC-66",
         "SPEC-69",
         "SPEC-71",
-        "SPEC-72"
+        "SPEC-72",
+        "SPEC-73",
+        "SPEC-74",
+        "SPEC-75"
       ]
     }
   },
@@ -794,6 +797,35 @@
         "SPEC-71"
       ],
       "status": "implemented"
+    },
+    "SPEC-73": {
+      "title": "Горы: FLOGA как третий биом стенда",
+      "file": "specs/SPEC-73-floga.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-55",
+        "SPEC-69"
+      ],
+      "status": "active"
+    },
+    "SPEC-74": {
+      "title": "Второй свежий набор: веса смеси на первом, проверка на втором",
+      "file": "specs/SPEC-74-fresh-2-mix.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-72"
+      ],
+      "status": "active"
+    },
+    "SPEC-75": {
+      "title": "Разнообразие против предобучения: C1 на HLS + свежем наборе против Prithvi",
+      "file": "specs/SPEC-75-diversity-vs-pretraining.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-72",
+        "SPEC-74"
+      ],
+      "status": "active"
     }
   }
 }
