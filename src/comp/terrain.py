@@ -7,6 +7,11 @@ def water(fmask):
     return (fmask != 255) & (((fmask >> 5) & 1) == 1)
 
 
+def water_ndwi(fmask, green, nir):
+    """SPEC-78: вода = бит 5 Fmask и NDWI > 0 (McFeeters): тёмная гарь склонов, помеченная Fmask водой, остаётся сушей."""
+    return water(fmask) & ((green - nir) / (green + nir + 1e-6) > 0)
+
+
 def slope_deg(dem, res=30.0):
     gy, gx = np.gradient(dem, res); return np.degrees(np.arctan(np.hypot(gx, gy)))
 

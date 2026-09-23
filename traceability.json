@@ -120,7 +120,8 @@
         "SPEC-74",
         "SPEC-75",
         "SPEC-76",
-        "SPEC-77"
+        "SPEC-77",
+        "SPEC-78"
       ]
     }
   },
@@ -847,6 +848,16 @@
         "SPEC-76"
       ],
       "status": "implemented"
+    },
+    "SPEC-78": {
+      "title": "Маска воды Fmask и NDWI: вода, которая не съедает гарь",
+      "file": "specs/SPEC-78-water-ndwi.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-76",
+        "SPEC-77"
+      ],
+      "status": "active"
     }
   }
 }

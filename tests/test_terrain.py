@@ -19,3 +19,8 @@ def test_c_correction_flattens_shading():
     ok = np.ones_like(ci, bool); sl = np.full_like(ci, 20.0)
     Y, used = c_correct(X, ci, 40.0, ok, sl)
     assert used == [0, 1] and Y[0].std() < 0.1 * X[0].std()
+
+def test_water_ndwi_keeps_dark_burn():
+    from src.comp.terrain import water_ndwi
+    f = np.array([32, 32, 0]); g = np.array([0.05, 0.03, 0.05]); n = np.array([0.02, 0.06, 0.02])   # вода, тёмная гарь под «водой», суша
+    assert water_ndwi(f, g, n).tolist() == [True, False, False]
