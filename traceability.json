@@ -114,7 +114,8 @@
         "SPEC-64",
         "SPEC-66",
         "SPEC-69",
-        "SPEC-71"
+        "SPEC-71",
+        "SPEC-72"
       ]
     }
   },
@@ -783,6 +784,16 @@
         "SPEC-69"
       ],
       "status": "implemented"
+    },
+    "SPEC-72": {
+      "title": "Свежий лесной тест: MTBS 2022+ на HLS v2, смесь нашей модели и Prithvi",
+      "file": "specs/SPEC-72-mtbs-2022-hls-v2-prithvi.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-69",
+        "SPEC-71"
+      ],
+      "status": "active"
     }
   }
 }

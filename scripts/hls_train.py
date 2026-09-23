@@ -42,6 +42,7 @@ for ep in range(epochs):
         loss.backward(); opt.step(); sched.step(); el.append(float(loss))
     losses.append(float(np.mean(el)))
     if (ep + 1) % 10 == 0 or a.smoke: print(a.config, a.fit, a.seed, 'epoch', ep + 1, 'loss', round(losses[-1], 4), 'seconds', int(time.time() - t0), flush=True)
+torch.save(dict(state=net.state_dict(), mean=mean, std=std, config=a.config, seed=a.seed, fit=a.fit, **c), out / 'model.pt')  # SPEC-72: веса для свежего теста
 del Xt, Yt; torch.cuda.empty_cache(); net.eval()
 Xe, Ye, Ve = hls_load(ev); P = []
 with torch.no_grad(), torch.autocast('cuda', dtype=torch.bfloat16):
