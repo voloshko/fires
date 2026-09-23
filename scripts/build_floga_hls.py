@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np, pandas as pd, geopandas as gpd, rasterio, planetary_computer, pystac_client
 from rasterio.features import rasterize
 from rasterio.warp import reproject, Resampling, transform_bounds
-from rasterio.windows import Window
+from rasterio.windows import Window, from_bounds
 from shapely.geometry import mapping
 
 SIZE = 512; OUT = Path('external/floga_hls'); OUT.mkdir(parents=True, exist_ok=True)
@@ -36,8 +36,10 @@ def slope_for(crs, tr):
     dem = np.full((SIZE, SIZE), np.nan, np.float32)
     for it in cat.search(collections=['cop-dem-glo-30'], bbox=[lon0, lat0, lon1, lat1]).items():
         with rasterio.open(it.assets['data'].href) as s:
-            part = np.full((SIZE, SIZE), np.nan, np.float32)
-            reproject(rasterio.band(s, 1), part, dst_transform=tr, dst_crs=crs, resampling=Resampling.bilinear, dst_nodata=np.nan)
+            part = np.full((SIZE, SIZE), np.nan, np.float32); pad = 0.01   # читаем только окно DEM вокруг снимка, не тайл целиком
+            win = from_bounds(lon0 - pad, lat0 - pad, lon1 + pad, lat1 + pad, s.transform).round_offsets().round_lengths()
+            arr = s.read(1, window=win, boundless=True, fill_value=np.nan).astype(np.float32)
+            reproject(arr, part, src_transform=s.window_transform(win), src_crs=s.crs, dst_transform=tr, dst_crs=crs, resampling=Resampling.bilinear, src_nodata=np.nan, dst_nodata=np.nan)
             dem = np.where(np.isnan(dem), part, dem)
     gy, gx = np.gradient(dem, 30.0); return np.degrees(np.arctan(np.hypot(gx, gy))).astype(np.float32)
 
@@ -80,7 +82,7 @@ def build(rec):
 
 ev = ev.rename(columns={'End date': 'End_date', 'Start date': 'Start_date'})
 done = []
-with ThreadPoolExecutor(8) as ex:
+with ThreadPoolExecutor(4) as ex:
     for i, r in enumerate(ex.map(build, ev.itertuples())):
         if r: done.append(r)
         if i % 50 == 0: print(f'просмотрено {i + 1}, годных {len(done)}', flush=True)

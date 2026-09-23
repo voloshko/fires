@@ -8,7 +8,7 @@ for try in 1 2 3; do
     flock 9
     until [ $(nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits) -ge $need ]; do sleep 60; done
     systemctl --user reset-failed $unit 2>/dev/null
-    systemd-run --user --quiet --unit=$unit -p MemoryMax=26G -p StandardOutput=file:$log -p StandardError=inherit -p WorkingDirectory=$HOME/fires -E PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True "${envs[@]}" "$@"
+    systemd-run --user --quiet --slice=fires.slice --unit=$unit -p MemoryMax=26G -p StandardOutput=file:$log -p StandardError=inherit -p WorkingDirectory=$HOME/fires -E PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True "${envs[@]}" "$@"
     sleep 180
   ) 9>/tmp/gpu_start.lock
   while systemctl --user is-active -q $unit; do sleep 30; done
