@@ -41,7 +41,16 @@ def enrich(w):
     with rasterio.open(f'{base}.dem.tif', 'w', dtype='float32', nodata=np.nan, **prof) as o: o.write(dem[None])
 
 
-with ThreadPoolExecutor(4) as ex: list(ex.map(enrich, man['windows']))
+def enrich_retry(w):
+    import time
+    for k in range(3):   # сетевые сбои (DNS хранилища DEM) — повтор; отсутствие файла после трёх попыток роняет прогон
+        try: return enrich(w)
+        except Exception as e:
+            print(w['name'], 'попытка', k + 1, e, flush=True); time.sleep(30)
+    raise RuntimeError(f"слои не дописаны: {w['name']}")
+
+
+with ThreadPoolExecutor(4) as ex: list(ex.map(enrich_retry, man['windows']))
 print('слои дописаны:', len(man['windows']), 'окон', flush=True)
 if MOUNT:
     keep = []
