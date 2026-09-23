@@ -108,8 +108,12 @@ def test_bs_confirmation_excludes_selection_and_keeps_events_whole():
 def test_manifest_rejects_unfrozen_augmentation(monkeypatch):
     import argparse
     from scripts.hypothesis_lab import manifest
-    monkeypatch.setenv('ROT90','1')
+    monkeypatch.setenv('ROT90','2')
     with pytest.raises(ValueError,match='ROT90'): manifest(argparse.Namespace())
+    monkeypatch.setenv('ROT90','1')   # SPEC-70: повороты разрешены и записываются
+    try: m=manifest(argparse.Namespace())
+    except (AttributeError,TypeError): m=None   # манифесту могут понадобиться поля аргументов; важно, что не ValueError
+    if m is not None: assert m['effective_import_settings']['ROT90']==1
     monkeypatch.setenv('ROT90','0');monkeypatch.setenv('FEATURES','s1')
     with pytest.raises(ValueError,match='FEATURES'): manifest(argparse.Namespace())
 

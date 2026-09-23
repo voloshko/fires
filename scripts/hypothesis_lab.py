@@ -19,16 +19,16 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def manifest(args):
     # Frozen pilot behavior: imported helpers also read these at module import.
-    # SPEC-47 допускает набор 'swir'; выбранный набор пишется в manifest['environment'].
-    if os.environ.get('ROT90','0')!='0' or os.environ.get('FEATURES','base') not in ('base','swir'):
-        raise ValueError('frozen pilots require ROT90=0 and FEATURES in (base, swir)')
+    # SPEC-47 допускает набор 'swir', SPEC-70 — ROT90=1; значения пишутся в manifest['environment'].
+    if os.environ.get('ROT90','0') not in ('0','1') or os.environ.get('FEATURES','base') not in ('base','swir'):
+        raise ValueError('frozen pilots require ROT90 in (0, 1) and FEATURES in (base, swir)')
     env_keys=('ROT90','FEATURES','EXTRA_CHANNELS_DIR','LOCAL_Z','CROP','DEPTH','WIDTH','SEED','EPOCHS','CUDA_VISIBLE_DEVICES','OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','PYTORCH_CUDA_ALLOC_CONF','CUDA_LAUNCH_BLOCKING')
     environment={key:os.environ.get(key) for key in env_keys}
     versions={}
     for package in ('numpy','scipy','scikit-learn','torch','rasterio','pandas','planetary-computer'):
         try: versions[package]=importlib.metadata.version(package)
         except importlib.metadata.PackageNotFoundError: versions[package]='unavailable'
-    return dict(environment=environment,effective_import_settings=dict(ROT90=0,FEATURES="base"),software=versions,created_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),command=sys.argv,
+    return dict(environment=environment,effective_import_settings=dict(ROT90=int(os.environ.get("ROT90","0")),FEATURES=os.environ.get("FEATURES","base")),software=versions,created_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),command=sys.argv,
                 python=platform.python_version(),numpy=np.__version__,config={k:v for k,v in vars(args).items() if not callable(v)},
                 git_revision=subprocess.run(['git','rev-parse','HEAD'],cwd=ROOT,capture_output=True,text=True).stdout.strip() or ((ROOT/'.source-revision').read_text().strip() if (ROOT/'.source-revision').exists() else 'unknown'),
                 source_sha256={str(p.relative_to(ROOT)):digest(p) for directory in ('src','scripts') for p in sorted((ROOT/directory).rglob('*.py'))})

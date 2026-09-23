@@ -103,7 +103,8 @@
         "SPEC-63",
         "SPEC-65",
         "SPEC-67",
-        "SPEC-68"
+        "SPEC-68",
+        "SPEC-70"
       ]
     },
     "REQ-008": {
@@ -112,7 +113,8 @@
       "specs": [
         "SPEC-64",
         "SPEC-66",
-        "SPEC-69"
+        "SPEC-69",
+        "SPEC-71"
       ]
     }
   },
@@ -760,6 +762,25 @@
       "requirement": "REQ-008",
       "depends_on": [
         "SPEC-66"
+      ],
+      "status": "active"
+    },
+    "SPEC-70": {
+      "title": "Радарный сиам с поворотами и разбросом каналов (рецепт C1 леса на степи)",
+      "file": "specs/SPEC-70-c1.md",
+      "requirement": "REQ-007",
+      "depends_on": [
+        "SPEC-67",
+        "SPEC-69"
+      ],
+      "status": "active"
+    },
+    "SPEC-71": {
+      "title": "Честный Prithvi на лесе и разбор, где он нас бьёт",
+      "file": "specs/SPEC-71-prithvi.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-69"
       ],
       "status": "active"
     }

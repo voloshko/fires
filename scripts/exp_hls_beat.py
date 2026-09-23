@@ -24,7 +24,7 @@ else:
     names = json.load(open(R / 'biome-hls-f0/data_manifest.json'))['hls_val']; Y, V = labels(names, 'validation')
     for s in SEEDS: assert json.load(open(R / f'hls-beat-final-s{s}/data_manifest.json'))['evaluation'] == names
     Ps = [np.load(R / f'hls-beat-final-s{s}/probabilities.npy').astype(np.float32) for s in SEEDS]
-    E = np.mean(Ps, 0); pr = np.load(R / 'prithvi-hls-val-v1/probabilities.npy').astype(np.float32)
+    E = np.mean(Ps, 0); np.save(R / 'hls-beat-final-ensemble.npy', E.astype(np.float16)); pr = np.load(R / 'prithvi-hls-val-v1/probabilities.npy').astype(np.float32)
     def row(name, P, t):
         B = (P >= t) & V; T = Y & V; tp = (B & T).sum(); fp = (B & ~T).sum(); fn = (~B & T).sum(); tn = (~B & ~Y & V).sum()
         ib = tp / (tp + fp + fn); ino = tn / (tn + fp + fn)
