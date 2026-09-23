@@ -836,7 +836,7 @@
       "depends_on": [
         "SPEC-73"
       ],
-      "status": "active"
+      "status": "implemented"
     },
     "SPEC-77": {
       "title": "Поправка на освещённость склона (C-коррекция по DEM и углам солнца)",
@@ -846,7 +846,7 @@
         "SPEC-73",
         "SPEC-76"
       ],
-      "status": "active"
+      "status": "implemented"
     }
   }
 }
