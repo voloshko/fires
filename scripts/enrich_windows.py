@@ -11,8 +11,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.comp.terrain import slope_deg
 
 D = Path(sys.argv[1]); MOUNT = '--mount' in sys.argv
+MF = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--manifest=')), 'manifest.json')   # SPEC-79: только проверочная половина
 cat = pystac_client.Client.open('https://planetarycomputer.microsoft.com/api/stac/v1', modifier=planetary_computer.sign_inplace)
-man = json.load(open(D / 'manifest.json'))
+man = json.load(open(D / MF))
 
 
 def dem_for(crs, tr, shape):

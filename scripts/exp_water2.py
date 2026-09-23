@@ -5,11 +5,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.comp.hls_eval import load_dir, c1_probs, prithvi_probs, Scorer
 from src.comp.terrain import water, water_ndwi, cos_incidence, c_correct, slope_deg
-R = Path('research'); S = (1, 2, 3, 4, 5); cache = R / 'fresh4-mount-v1'
-man, X, Y, V, L = load_dir('external/hls_fresh4', 'manifest_mount.json', layers=('fmask', 'sza', 'saa', 'dem'))
+R = Path('research'); S = (1, 2, 3, 4, 5)
+# SPEC-79 переиспользует замер: exp_water2.py <каталог> <манифест> <кэш>; по умолчанию — горный набор-4 SPEC-78
+D, MF, cache = (sys.argv[1], sys.argv[2], Path(sys.argv[3])) if len(sys.argv) > 3 else ('external/hls_fresh4', 'manifest_mount.json', R / 'fresh4-mount-v1')
+man, X, Y, V, L = load_dir(D, MF, layers=('fmask', 'sza', 'saa', 'dem'))
 WF = np.stack([water(f) for f in L['fmask']]); WN = np.stack([water_ndwi(f, x[1], x[3]) for f, x in zip(L['fmask'], X)])
 SL = np.stack([slope_deg(z.astype(np.float64)) for z in L['dem']]).astype(np.float32)
-states = sorted({w['event_id'][:2] for w in man})
+states = sorted({w.get('country') or w['event_id'][:2] for w in man})
 print(f'окон {len(Y)} | штаты {states} | доля гари {(Y & V).sum() / V.sum():.4f} | вода Fmask {WF[V].mean():.3f}, Fmask и NDWI {WN[V].mean():.3f} | гарь под Fmask-водой {int((WF & Y).sum())}, под новой {int((WN & Y).sum())}')
 XC = X.copy()
 for i in range(len(X)):

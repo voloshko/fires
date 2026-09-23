@@ -121,7 +121,9 @@
         "SPEC-75",
         "SPEC-76",
         "SPEC-77",
-        "SPEC-78"
+        "SPEC-78",
+        "SPEC-79",
+        "SPEC-80"
       ]
     }
   },
@@ -856,6 +858,26 @@
       "depends_on": [
         "SPEC-76",
         "SPEC-77"
+      ],
+      "status": "implemented"
+    },
+    "SPEC-79": {
+      "title": "Средиземноморский набор: контуры Copernicus EMS 2023+ на HLS v2",
+      "file": "specs/SPEC-79-ems-mediterranean.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-73",
+        "SPEC-78"
+      ],
+      "status": "active"
+    },
+    "SPEC-80": {
+      "title": "Карта реального кипрского пожара рецептом для гор",
+      "file": "specs/SPEC-80-cyprus-fire-map.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-78",
+        "SPEC-79"
       ],
       "status": "implemented"
     }
