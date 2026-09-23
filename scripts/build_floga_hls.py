@@ -20,8 +20,12 @@ for y in (2020, 2021):
     g = gpd.read_file(f'external/floga_ann/fb_{y}.shp')
     g = g.dissolve(by='ID', aggfunc='first').reset_index(); g['year'] = y; ev.append(g)
 ev = pd.concat(ev, ignore_index=True); ev = gpd.GeoDataFrame(ev, crs=4326)
-N = int(__import__('os').environ.get('FLOGA_N', 0))   # только для пробы
+import os
+N = int(os.environ.get('FLOGA_N', 0))   # только для пробы
 if N: ev = ev.iloc[:N]
+# ponytail: память течёт внутри одного процесса (дважды OOM), поэтому события идут пачками FLOGA_RANGE=a:b в отдельных
+# процессах, каждое окно пишет свой .json, а FLOGA_ASSEMBLE=1 собирает общий манифест. Утечку не искали.
+RNG = os.environ.get('FLOGA_RANGE'); ASSEMBLE = os.environ.get('FLOGA_ASSEMBLE') == '1'
 print('событий', len(ev), flush=True)
 
 def window_for(src, geom_proj):
@@ -81,11 +85,14 @@ def build(rec):
                 sha256_merged=h(OUT / f'{name}_merged.tif'), sha256_mask=h(OUT / f'{name}.mask.tif'))
 
 ev = ev.rename(columns={'End date': 'End_date', 'Start date': 'Start_date'})
-done = []
+if ASSEMBLE:
+    done = [json.load(open(f)) for f in sorted(OUT.glob('floga_*.json'))]
+    json.dump(dict(spec='SPEC-73', source='FLOGA-annotations polygons/v2 (MIT) + Planetary Computer hls2-s30, cop-dem-glo-30', events=len(ev), windows=done),
+              open(OUT / 'manifest.json', 'w'), ensure_ascii=False, indent=1)
+    print('готово:', len(done), 'окон из', len(ev), 'событий', flush=True); raise SystemExit
+a, b = (int(x) for x in RNG.split(':')) if RNG else (0, len(ev))
+part = ev.iloc[a:b]
 with ThreadPoolExecutor(4) as ex:
-    for i, r in enumerate(ex.map(build, ev.itertuples())):
-        if r: done.append(r)
-        if i % 50 == 0: print(f'просмотрено {i + 1}, годных {len(done)}', flush=True)
-json.dump(dict(spec='SPEC-73', source='FLOGA-annotations polygons/v2 (MIT) + Planetary Computer hls2-s30, cop-dem-glo-30', events=len(ev), windows=done),
-          open(OUT / 'manifest.json', 'w'), ensure_ascii=False, indent=1)
-print('готово:', len(done), 'окон из', len(ev), 'событий', flush=True)
+    for r in ex.map(build, part.itertuples()):
+        if r: json.dump(r, open(OUT / f"{r['name']}.json", 'w'), ensure_ascii=False)
+print(f'события {a}:{b} готовы', flush=True)

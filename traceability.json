@@ -815,7 +815,7 @@
       "depends_on": [
         "SPEC-72"
       ],
-      "status": "active"
+      "status": "implemented"
     },
     "SPEC-75": {
       "title": "Разнообразие против предобучения: C1 на HLS + свежем наборе против Prithvi",
@@ -825,7 +825,7 @@
         "SPEC-72",
         "SPEC-74"
       ],
-      "status": "active"
+      "status": "implemented"
     }
   }
 }
