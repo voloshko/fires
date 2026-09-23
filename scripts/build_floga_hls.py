@@ -9,7 +9,7 @@ import numpy as np, pandas as pd, geopandas as gpd, rasterio, planetary_computer
 from rasterio.features import rasterize
 from rasterio.warp import reproject, Resampling, transform_bounds
 from rasterio.windows import Window, from_bounds
-from shapely.geometry import mapping
+from shapely.geometry import box, mapping
 
 SIZE = 512; OUT = Path('external/floga_hls'); OUT.mkdir(parents=True, exist_ok=True)
 BANDS = ['B02', 'B03', 'B04', 'B8A', 'B11', 'B12']
@@ -27,6 +27,9 @@ if N: ev = ev.iloc[:N]
 # процессах, каждое окно пишет свой .json, а FLOGA_ASSEMBLE=1 собирает общий манифест. Утечку не искали.
 RNG = os.environ.get('FLOGA_RANGE'); ASSEMBLE = os.environ.get('FLOGA_ASSEMBLE') == '1'
 print('событий', len(ev), flush=True)
+
+def _bounds(tr):
+    top, left = tr.f, tr.c; return left, top + tr.e * SIZE, left + tr.a * SIZE, top   # (minx, miny, maxx, maxy) окна
 
 def window_for(src, geom_proj):
     c = geom_proj.centroid; row, col = src.index(c.x, c.y)
@@ -69,7 +72,8 @@ def build(rec):
     X = np.stack(X); nod = (X == -9999).any(0) | bad; X = np.where(nod[None], -9999, X * 0.0001).astype(np.float32)
     m = rasterize([(gp, 1)], out_shape=(SIZE, SIZE), transform=tr, fill=0, dtype='int16')
     others = ev[(ev.year == rec.year) & (ev.ID != rec.ID)].to_crs(crs)
-    others = [g for g in others.geometry if g.intersects(gpd.GeoSeries([gp]).buffer(SIZE * 30).iloc[0])]
+    wbox = box(*_bounds(tr))
+    others = [g for g in others.geometry if g.intersects(wbox)]   # рамка окна вместо буфера на 15 км: буфер сложного контура съедал 12 ГБ
     if others:
         o = rasterize([(g, 1) for g in others], out_shape=(SIZE, SIZE), transform=tr, fill=0, dtype='uint8').astype(bool); m[o & (m == 0)] = -1
     m[nod] = -1
