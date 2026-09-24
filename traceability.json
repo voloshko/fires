@@ -123,7 +123,8 @@
         "SPEC-77",
         "SPEC-78",
         "SPEC-79",
-        "SPEC-80"
+        "SPEC-80",
+        "SPEC-81"
       ]
     }
   },
@@ -880,6 +881,16 @@
         "SPEC-79"
       ],
       "status": "implemented"
+    },
+    "SPEC-81": {
+      "title": "Средиземноморская модель: C1-F + резерв EMS",
+      "file": "specs/SPEC-81-mediterranean-model.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-75",
+        "SPEC-79"
+      ],
+      "status": "active"
     }
   }
 }
