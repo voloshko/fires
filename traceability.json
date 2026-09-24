@@ -124,7 +124,8 @@
         "SPEC-78",
         "SPEC-79",
         "SPEC-80",
-        "SPEC-81"
+        "SPEC-81",
+        "SPEC-82"
       ]
     }
   },
@@ -891,6 +892,15 @@
         "SPEC-79"
       ],
       "status": "rejected"
+    },
+    "SPEC-82": {
+      "title": "Смешанный средиземноморский резерв: EMS + половина FLOGA",
+      "file": "specs/SPEC-82-mixed-mediterranean.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-81"
+      ],
+      "status": "active"
     }
   }
 }
