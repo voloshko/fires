@@ -14,7 +14,8 @@ from src.burn import masked_fraction
 from src.comp.hls_eval import c1_probs
 from src.comp.terrain import water_ndwi
 
-OUT = Path('research/cyprus-fire-v1'); OUT.mkdir(parents=True, exist_ok=True); S = (1, 2, 3, 4, 5)
+# SPEC-80: MODEL=c1f (исходная карта, v1) или c1mm (рецепт для гор после SPEC-82, v2)
+MODEL = os.environ.get('MODEL', 'c1f'); OUT = Path(f"research/cyprus-fire-{'v1' if MODEL == 'c1f' else 'v2-' + MODEL}"); OUT.mkdir(parents=True, exist_ok=True); S = (1, 2, 3, 4, 5)
 KEY = os.environ.get('FIRMS_MAP_KEY', '')
 if not KEY: sys.exit('FIRMS_MAP_KEY не задан в окружении')
 CYPRUS = firms.Region(name='Cyprus', bbox=(32.2, 34.5, 34.7, 35.8)); SRC = ['VIIRS_SNPP_SP', 'VIIRS_NOAA20_SP']
@@ -63,7 +64,7 @@ Xp, fmp, vp, tr, crs = read(post); H, W = vp.shape
 # 3. Модель: окна 512 × 512 по AOI, ансамбль C1-F, маска «Fmask и NDWI».
 ph, pw = -H % 512, -W % 512; Xpad = np.pad(Xp, ((0, 0), (0, ph), (0, pw)), mode='reflect')
 tiles = [Xpad[:, i:i + 512, j:j + 512] for i in range(0, H + ph, 512) for j in range(0, W + pw, 512)]
-P = c1_probs(np.stack(tiles), [Path(f'research/hls-c1f-final-s{s}') for s in S], OUT / 'c1f_tiles.npy'); full = np.zeros(Xpad.shape[1:], np.float32); k = 0
+P = c1_probs(np.stack(tiles), [Path(f'research/hls-{MODEL}-final-s{s}') for s in S], OUT / f'{MODEL}_tiles.npy'); full = np.zeros(Xpad.shape[1:], np.float32); k = 0
 for i in range(0, H + ph, 512):
     for j in range(0, W + pw, 512): full[i:i + 512, j:j + 512] = P[k]; k += 1
 prob = full[:H, :W]; wat = water_ndwi(fmp, Xp[1], Xp[3]); burn = (prob >= 0.5) & vp & ~wat
@@ -76,7 +77,7 @@ else: dnbr, vpair, burn_d = None, None, None
 
 px_ha = abs(tr.a * tr.e) / 1e4
 summary = dict(event=dict(detections=len(D), first=str(t0), last=str(t1), aoi_lonlat=aoi, sources=SRC), post=post.id, pre=pre.id if pre else None,
-               model=dict(recipe='C1-F (5 сидов, 8 преобразований) + маска «Fmask и NDWI», порог 0.5', area_ha=round(float(burn.sum()) * px_ha, 1),
+               model=dict(recipe=f'{MODEL.upper()} (5 сидов, 8 преобразований) + маска «Fmask и NDWI», порог 0.5', area_ha=round(float(burn.sum()) * px_ha, 1),
                           masked_fraction=round(masked_fraction(vp, vp.size), 4)),
                dnbr=None if pre is None else dict(rule='dNBR > 0.1', area_ha=round(float(burn_d.sum()) * px_ha, 1), masked_fraction=round(masked_fraction(vpair, vpair.size), 4),
                                                   agreement_iou=round(float((burn & burn_d).sum() / max((burn | burn_d).sum(), 1)), 4)),
@@ -89,7 +90,7 @@ if pre is not None:
 import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
 rgb = np.clip(np.stack([Xp[5], Xp[3], Xp[2]], -1) / np.percentile(Xp[[5, 3, 2]][:, vp], 98), 0, 1)
 fig, ax = plt.subplots(1, 2 if pre is not None else 1, figsize=(14 if pre is not None else 7, 7), squeeze=False)
-ax[0, 0].imshow(rgb); ax[0, 0].contour(burn, levels=[0.5], colors='yellow', linewidths=0.8); ax[0, 0].set_title(f'модель C1-F: {summary["model"]["area_ha"]} га')
+ax[0, 0].imshow(rgb); ax[0, 0].contour(burn, levels=[0.5], colors='yellow', linewidths=0.8); ax[0, 0].set_title(f'модель {MODEL.upper()}: {summary["model"]["area_ha"]} га')
 if pre is not None:
     ax[0, 1].imshow(np.where(vpair, dnbr, np.nan), cmap='inferno', vmin=0, vmax=0.8); ax[0, 1].contour(burn, levels=[0.5], colors='cyan', linewidths=0.6)
     ax[0, 1].set_title(f'dNBR (> 0.1: {summary["dnbr"]["area_ha"]} га), контур — модель')
