@@ -106,12 +106,14 @@ prob = full[:H, :W]; wat = water_ndwi(fmp, Xp[1], Xp[3]); burn = (prob >= 0.5) &
 if pre is not None:
     Xb, _, vb, trb, crsb = read(pre); assert vb.shape == vp.shape and trb == tr, 'снимки до и после на разной сетке'
     nbr = lambda X: (X[3] - X[5]) / (X[3] + X[5] + 1e-6); dnbr = nbr(Xb) - nbr(Xp); vpair = vp & vb; burn_d = (dnbr > 0.1) & vpair & ~wat
+    sev = np.where(burn & vpair, np.digitize(dnbr, [0.27, 0.66]) + 1, 0).astype(np.uint8)   # SPEC-89: гибрид — граница модели, градация dNBR
 else: dnbr, vpair, burn_d = None, None, None
 
 px_ha = abs(tr.a * tr.e) / 1e4
 summary = dict(event=dict(detections=len(D), first=str(t0), last=str(t1), aoi_lonlat=aoi, sources=SRC), post=post.id, pre=pre.id if pre else None,
                model=dict(recipe=f'{MODEL.upper()} (5 сидов, 8 преобразований) + маска «Fmask и NDWI», порог 0.5', area_ha=round(float(burn.sum()) * px_ha, 1),
                           masked_fraction=round(masked_fraction(vp, vp.size), 4)),
+               severity=None if pre is None else dict(rule='SPEC-89: граница модели, dNBR < 0.27 / 0.27–0.66 / > 0.66', area_ha={k: round(float((sev == i).sum()) * abs(tr.a * tr.e) / 1e4, 1) for i, k in ((1, 'слабо'), (2, 'умеренно'), (3, 'сильно'))}),
                dnbr=None if pre is None else dict(rule='dNBR > 0.1', area_ha=round(float(burn_d.sum()) * px_ha, 1), masked_fraction=round(masked_fraction(vpair, vpair.size), 4),
                                                   agreement_iou=round(float((burn & burn_d).sum() / max((burn | burn_d).sum(), 1)), 4)),
                pixel_ha=px_ha, grid=dict(crs=str(crs), height=H, width=W))
@@ -129,6 +131,7 @@ with rasterio.open(OUT / 'burn_prob.tif', 'w', dtype='float32', **prof) as o: o.
 with rasterio.open(OUT / 'burn_model.tif', 'w', dtype='uint8', nodata=255, **prof) as o: o.write(np.where(vp, burn, 255).astype(np.uint8)[None])
 if pre is not None:
     with rasterio.open(OUT / 'dnbr.tif', 'w', dtype='float32', nodata=np.nan, **prof) as o: o.write(np.where(vpair, dnbr, np.nan).astype(np.float32)[None])
+    with rasterio.open(OUT / 'severity.tif', 'w', dtype='uint8', nodata=255, **prof) as o: o.write(np.where(vpair, sev, 255).astype(np.uint8)[None])
 import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
 rgb = np.clip(np.stack([Xp[5], Xp[3], Xp[2]], -1) / np.percentile(Xp[[5, 3, 2]][:, vp], 98), 0, 1)
 fig, ax = plt.subplots(1, 2 if pre is not None else 1, figsize=(14 if pre is not None else 7, 7), squeeze=False)

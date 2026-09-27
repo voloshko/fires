@@ -974,7 +974,7 @@
       "depends_on": [
         "SPEC-86"
       ],
-      "status": "active"
+      "status": "implemented"
     }
   }
 }
