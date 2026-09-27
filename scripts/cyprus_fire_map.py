@@ -15,7 +15,7 @@ from src.comp.hls_eval import c1_probs
 from src.comp.terrain import water_ndwi
 
 # SPEC-80: MODEL=c1f (исходная карта, v1) или c1mm (рецепт для гор после SPEC-82, v2)
-MODEL = os.environ.get('MODEL', 'c1f'); OUT = Path(f"research/cyprus-fire-{'v1' if MODEL == 'c1f' else 'v2-' + MODEL}"); OUT.mkdir(parents=True, exist_ok=True); S = (1, 2, 3, 4, 5)
+MODEL = os.environ.get('MODEL', 'c1f'); OUT = Path(f"research/cyprus-fire-{'v1' if MODEL == 'c1f' else 'v2-' + MODEL}" + (f"-r{os.environ['EVENT_RANK']}" if os.environ.get('EVENT_RANK', '0') != '0' else '')); OUT.mkdir(parents=True, exist_ok=True); S = (1, 2, 3, 4, 5)
 KEY = os.environ.get('FIRMS_MAP_KEY', '')
 if not KEY: sys.exit('FIRMS_MAP_KEY не задан в окружении')
 CYPRUS = firms.Region(name='Cyprus', bbox=(32.2, 34.5, 34.7, 35.8)); SRC = ['VIIRS_SNPP_SP', 'VIIRS_NOAA20_SP']
@@ -27,7 +27,8 @@ while d <= datetime(2025, 9, 30):
     r = firms.fetch(CYPRUS, SRC, 5, KEY, date=d.strftime('%Y-%m-%d')); dets += r.detections; fails.update(r.failures); d += timedelta(days=5)
 dets = list({(x.sensor, x.latitude, x.longitude, x.acquired_at): x for x in dets}.values())
 print('детекций', len(dets), '| сбои источников', {k: v[:80] for k, v in fails.items()}, flush=True)
-ev = max(build_events(dets, EventConfig()), key=lambda e: len(e.detections)); D = ev.detections
+RANK = int(os.environ.get('EVENT_RANK', 0))   # SPEC-84: 0 — крупнейшее событие, 1 — второе и т. д.
+ev = sorted(build_events(dets, EventConfig()), key=lambda e: len(e.detections), reverse=True)[RANK]; D = ev.detections
 t0, t1 = min(x.acquired_at for x in D), max(x.acquired_at for x in D)
 lat = [x.latitude for x in D]; lon = [x.longitude for x in D]
 aoi = (min(lon) - 0.022, min(lat) - 0.018, max(lon) + 0.022, max(lat) + 0.018)   # ≈ 2 км
@@ -82,6 +83,14 @@ summary = dict(event=dict(detections=len(D), first=str(t0), last=str(t1), aoi_lo
                dnbr=None if pre is None else dict(rule='dNBR > 0.1', area_ha=round(float(burn_d.sum()) * px_ha, 1), masked_fraction=round(masked_fraction(vpair, vpair.size), 4),
                                                   agreement_iou=round(float((burn & burn_d).sum() / max((burn | burn_d).sum(), 1)), 4)),
                pixel_ha=px_ha, grid=dict(crs=str(crs), height=H, width=W))
+# SPEC-84: сверка с EFFIS — площадь по атрибутам в центроиде детекций и IoU с контуром в нашей зоне
+from src.comp.effis import effis_mask, effis_info
+try:
+    info = effis_info(float(np.mean(lon)), float(np.mean(lat)), t0.year); E = effis_mask(crs, tr, (H, W), t0.year)
+    summary['effis'] = dict(info=info, area_ha_official=float(info['Total burnt area (ha)']) if info and info.get('Total burnt area (ha)') else None,
+                            area_ha_in_aoi=round(float(E.sum()) * px_ha, 1), touches_aoi_edge=bool(E[0].any() or E[-1].any() or E[:, 0].any() or E[:, -1].any()),
+                            iou_model=round(float((E & burn & vp).sum() / max(((E | burn) & vp).sum(), 1)), 4))
+except Exception as e: summary['effis'] = dict(error=repr(e)[:200])
 prof = dict(driver='GTiff', height=H, width=W, crs=crs, transform=tr, compress='deflate', count=1)
 with rasterio.open(OUT / 'burn_prob.tif', 'w', dtype='float32', **prof) as o: o.write(prob[None])
 with rasterio.open(OUT / 'burn_model.tif', 'w', dtype='uint8', nodata=255, **prof) as o: o.write(np.where(vp, burn, 255).astype(np.uint8)[None])

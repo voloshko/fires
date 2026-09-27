@@ -126,7 +126,8 @@
         "SPEC-80",
         "SPEC-81",
         "SPEC-82",
-        "SPEC-83"
+        "SPEC-83",
+        "SPEC-84"
       ]
     }
   },
@@ -906,6 +907,16 @@
     "SPEC-83": {
       "title": "Скорость: Sentinel-2 L2A вместо HLS и задержка карты против EMS",
       "file": "specs/SPEC-83-speed-s2-latency.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-80",
+        "SPEC-82"
+      ],
+      "status": "active"
+    },
+    "SPEC-84": {
+      "title": "Сверка с EFFIS: мы и EFFIS против экспертной разметки, площади по Кипру",
+      "file": "specs/SPEC-84-effis-check.md",
       "requirement": "REQ-008",
       "depends_on": [
         "SPEC-80",
