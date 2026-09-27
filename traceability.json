@@ -915,7 +915,7 @@
         "SPEC-80",
         "SPEC-82"
       ],
-      "status": "active"
+      "status": "implemented"
     },
     "SPEC-84": {
       "title": "Сверка с EFFIS: мы и EFFIS против экспертной разметки, площади по Кипру",
