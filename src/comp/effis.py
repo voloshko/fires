@@ -30,10 +30,21 @@ def effis_info(lon, lat, year, d=0.01):
 
 
 def effis_mask_retry(crs, transform, shape, year, tries=8):
-    """Сервер EFFIS иногда обрывает ответ (IncompleteRead) независимо от размера — повтор с паузой; после 4 неудач шаг 20 м."""
+    """Сервер EFFIS обрывает ответ (IncompleteRead) на части запросов: сначала повтор, потом другие шаги,
+    потом четыре четверти окна по отдельности. Каждая ступень — та же геометрия, меняется только растровый запрос."""
     import time
-    for k in range(tries):
-        try: return effis_mask(crs, transform, shape, year, step=10.0 if k < 4 else 20.0)
-        except Exception as e:
-            last = e; time.sleep(5 * (k + 1))
-    raise RuntimeError(f'EFFIS не ответил после {tries} попыток: {last!r}'[:300])
+    from rasterio.transform import Affine
+    last = None
+    for step in (10.0, 20.0, 15.0, 25.0, 12.0):
+        for k in range(2):
+            try: return effis_mask(crs, transform, shape, year, step=step)
+            except Exception as e: last = e; time.sleep(3 * (k + 1))
+    h, w = shape; h2, w2 = h // 2, w // 2; out = np.zeros(shape, bool)
+    for r0, r1 in ((0, h2), (h2, h)):
+        for c0, c1 in ((0, w2), (w2, w)):
+            t = transform * Affine.translation(c0, r0)
+            for k in range(4):
+                try: out[r0:r1, c0:c1] = effis_mask(crs, t, (r1 - r0, c1 - c0), year, step=10.0); break
+                except Exception as e: last = e; time.sleep(5 * (k + 1))
+            else: raise RuntimeError(f'EFFIS не ответил даже по четвертям: {last!r}'[:300])
+    return out
