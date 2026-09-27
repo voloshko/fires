@@ -194,3 +194,11 @@ MCD64A1 (IoU 0.25) или локальным покрытием FIRMS (30 % га
    диагностика; модельные оси закрыты, не открывать заново без новых данных.
 3. Презентация: `docs/presentation.html` → `scratchpad/deck2/shoot.py` (Playwright,
    channel=chrome, сервер `python -m http.server`) → `topptx.js` → `docs/presentation.pptx`.
+
+### Очистка k8plus (2026-09-27, с разрешения владельца)
+Удалено ~51 ГБ, свободно 8.8 → 60 ГБ. Только артефакты закрытых спек; числа остались в
+receipts и `evidence/hypotheses.md`: `research/bs-confirm-siam-f?-{soft,sar40,sar50,rot,nin,diff,crop,blob,2st,fade}-v1`,
+`bs-confirm-prithvi-f?-v1`, `bs-confirm-optical-f?-{lz,bch}-v1`, скрининги rot / sar 20260920–21 / 2st,
+`bs-siam-final-sar-s57/58`, `hls-c1m-final-s*`, `hls-beat-final-s*`, `hls-beat-C?-inner`, `smoke6?`,
+`biome-*`, `prithvi-zero-v1`; `models/bs_unet_final_siam_sar_s57/58.pt`, `models/exp_prithvi*.pt`;
+`external/ems/zips` (окна собраны), архив контуров MTBS. Продукт v22 и C1-MM не затронуты.
