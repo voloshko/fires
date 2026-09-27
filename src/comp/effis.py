@@ -27,3 +27,13 @@ def effis_info(lon, lat, year, d=0.01):
                                       BBOX=f'{lon - d},{lat - d},{lon + d},{lat + d}', WIDTH=101, HEIGHT=101, X=50, Y=50, INFO_FORMAT='text/html', FEATURE_COUNT=1, STYLES=''), timeout=60)
     cells = re.findall(r'<td>([^<]*)</td>\s*<td>([^<]*)</td>', r.text)
     return {k.strip(): v.strip() for k, v in cells} or None
+
+
+def effis_mask_retry(crs, transform, shape, year, tries=8):
+    """Сервер EFFIS иногда обрывает ответ (IncompleteRead) независимо от размера — повтор с паузой; после 4 неудач шаг 20 м."""
+    import time
+    for k in range(tries):
+        try: return effis_mask(crs, transform, shape, year, step=10.0 if k < 4 else 20.0)
+        except Exception as e:
+            last = e; time.sleep(5 * (k + 1))
+    raise RuntimeError(f'EFFIS не ответил после {tries} попыток: {last!r}'[:300])

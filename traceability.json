@@ -127,7 +127,8 @@
         "SPEC-81",
         "SPEC-82",
         "SPEC-83",
-        "SPEC-84"
+        "SPEC-84",
+        "SPEC-85"
       ]
     }
   },
@@ -921,6 +922,16 @@
       "depends_on": [
         "SPEC-80",
         "SPEC-82"
+      ],
+      "status": "active"
+    },
+    "SPEC-85": {
+      "title": "Сквозь дым и облака: радар Sentinel-1 под маской в горах",
+      "file": "specs/SPEC-85-sar-mountains.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-82",
+        "SPEC-83"
       ],
       "status": "active"
     }

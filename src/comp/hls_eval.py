@@ -26,7 +26,7 @@ def c1_probs(X, model_dirs, cache):
     dev = 'cuda' if torch.cuda.is_available() else 'cpu'; acc = np.zeros((len(X),) + X.shape[2:], np.float32)
     for md in model_dirs:
         b = torch.load(Path(md) / 'model.pt', map_location='cpu', weights_only=False)
-        net = UNet(6, classes=2, w=b['w'], depth=7); net.load_state_dict(b['state']); net = net.to(dev).eval(); mean, std = b['mean'], b['std']
+        net = UNet(b.get('cin', 6), classes=2, w=b['w'], depth=7); net.load_state_dict(b['state']); net = net.to(dev).eval(); mean, std = b['mean'], b['std']
         with torch.no_grad(), torch.autocast(dev, dtype=torch.bfloat16, enabled=dev == 'cuda'):
             for i, x in enumerate(X):
                 xt = torch.from_numpy(((x - mean[:, None, None]) / std[:, None, None]).astype(np.float32))[None].to(dev)

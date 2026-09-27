@@ -84,7 +84,7 @@ summary = dict(event=dict(detections=len(D), first=str(t0), last=str(t1), aoi_lo
                                                   agreement_iou=round(float((burn & burn_d).sum() / max((burn | burn_d).sum(), 1)), 4)),
                pixel_ha=px_ha, grid=dict(crs=str(crs), height=H, width=W))
 # SPEC-84: сверка с EFFIS — площадь по атрибутам в центроиде детекций и IoU с контуром в нашей зоне
-from src.comp.effis import effis_mask, effis_info
+from src.comp.effis import effis_mask_retry as effis_mask, effis_info
 try:
     info = effis_info(float(np.mean(lon)), float(np.mean(lat)), t0.year); E = effis_mask(crs, tr, (H, W), t0.year)
     summary['effis'] = dict(info=info, area_ha_official=float(info['Total burnt area (ha)']) if info and info.get('Total burnt area (ha)') else None,
