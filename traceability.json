@@ -924,7 +924,7 @@
         "SPEC-80",
         "SPEC-82"
       ],
-      "status": "active"
+      "status": "implemented"
     },
     "SPEC-85": {
       "title": "Сквозь дым и облака: радар Sentinel-1 под маской в горах",
