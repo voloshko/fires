@@ -15,7 +15,8 @@ from src.comp.hls_eval import c1_probs
 from src.comp.terrain import water_ndwi
 
 # SPEC-80: MODEL=c1f (исходная карта, v1) или c1mm (рецепт для гор после SPEC-82, v2)
-MODEL = os.environ.get('MODEL', 'c1f'); OUT = Path(f"research/cyprus-fire-{'v1' if MODEL == 'c1f' else 'v2-' + MODEL}" + (f"-r{os.environ['EVENT_RANK']}" if os.environ.get('EVENT_RANK', '0') != '0' else '')); OUT.mkdir(parents=True, exist_ok=True); S = (1, 2, 3, 4, 5)
+MODEL = os.environ.get('MODEL', 'c1f'); SOURCE = os.environ.get('SOURCE', 'hls')   # SPEC-83: SOURCE=s2 — Sentinel-2 L2A из Earth Search
+OUT = Path(f"research/cyprus-fire-{'v1' if MODEL == 'c1f' else ('v3-s2-' if SOURCE == 's2' else 'v2-') + MODEL}" + (f"-r{os.environ['EVENT_RANK']}" if os.environ.get('EVENT_RANK', '0') != '0' else '')); OUT.mkdir(parents=True, exist_ok=True); S = (1, 2, 3, 4, 5)
 KEY = os.environ.get('FIRMS_MAP_KEY', '')
 if not KEY: sys.exit('FIRMS_MAP_KEY не задан в окружении')
 CYPRUS = firms.Region(name='Cyprus', bbox=(32.2, 34.5, 34.7, 35.8)); SRC = ['VIIRS_SNPP_SP', 'VIIRS_NOAA20_SP']
@@ -47,11 +48,41 @@ def pick(a, b, tile=None, last=False):
     for it in its:
         if bad_of(it) < 0.10: return it
     return None
-post = pick(t1 + timedelta(days=3), t1 + timedelta(days=60)); assert post, 'нет чистого снимка после'
-pre = pick(t0 - timedelta(days=60), t0 - timedelta(days=1), tile=post.id.split('.')[2], last=True)
-print('после', post.id, '| до', pre.id if pre else 'нет', flush=True)
+if SOURCE == 's2':
+    import time as _t
+    from rasterio.vrt import WarpedVRT
+    from rasterio.warp import Resampling
+    from rasterio.transform import from_origin
+    ES = pystac_client.Client.open('https://earth-search.aws.element84.com/v1'); S2B = ['blue', 'green', 'red', 'nir08', 'swir16', 'swir22']
+    def grid(it):
+        from pyproj import CRS
+        c = CRS.from_user_input(it.properties.get('proj:code') or f"EPSG:{it.properties['proj:epsg']}"); x0, y0, x1, y1 = transform_bounds(4326, c, *aoi)
+        x0, y1 = np.floor(x0 / 30) * 30, np.ceil(y1 / 30) * 30; return c, from_origin(x0, y1, 30, 30), (int(np.ceil((y1 - y0) / 30)), int(np.ceil((x1 - x0) / 30)))
+    def vrt(href, c, tr, sh, rs, nod):
+        with rasterio.open(href) as s, WarpedVRT(s, crs=c, transform=tr, width=sh[1], height=sh[0], resampling=rs, src_nodata=0, nodata=nod) as v: return v.read(1)
+    def scl_of(it):
+        c, tr, sh = grid(it); return vrt(it.assets['scl'].href, c, tr, sh, Resampling.nearest, 0)
+    def bad_of(it):
+        return float(np.isin(scl_of(it), [0, 1, 3, 8, 9, 10]).mean())
+    def pick(a, b, tile=None, last=False):
+        its = [i for i in ES.search(collections=['sentinel-2-c1-l2a'], bbox=list(aoi), datetime=f'{a:%Y-%m-%dT00:00:00Z}/{b:%Y-%m-%dT23:59:59Z}').items() if tile is None or i.properties.get('grid:code') == tile]
+        for i in sorted(its, key=lambda i: i.properties['datetime'], reverse=last):
+            if bad_of(i) < 0.10: return i
+        return None
+    def read(it):
+        c, tr, sh = grid(it); X = np.stack([vrt(it.assets[b].href, c, tr, sh, Resampling.average, np.nan).astype(np.float32) for b in S2B]); scl = scl_of(it)
+        bad = ~np.isfinite(X).all(0) | np.isin(scl, [0, 1, 3, 8, 9, 10]); fm = np.where(scl == 6, 32, 0).astype(np.uint8)   # вода SCL 6 → бит 5, как у Fmask
+        return np.where(bad[None], 0, np.nan_to_num(X) * 0.0001 - 0.1).astype(np.float32), fm, ~bad, tr, c
+    post = pick(t1 + timedelta(days=3), t1 + timedelta(days=60)); assert post, 'нет чистого снимка после'
+    pre = pick(t0 - timedelta(days=60), t0 - timedelta(days=1), tile=post.properties.get('grid:code'), last=True)
+    print('после', post.id, '| до', pre.id if pre else 'нет', flush=True)
+    T_START = _t.time()
+else:
+    post = pick(t1 + timedelta(days=3), t1 + timedelta(days=60)); assert post, 'нет чистого снимка после'
+    pre = pick(t0 - timedelta(days=60), t0 - timedelta(days=1), tile=post.id.split('.')[2], last=True)
+    print('после', post.id, '| до', pre.id if pre else 'нет', flush=True)
 
-def read(it):
+def read_hls(it):
     with rasterio.open(it.assets['Fmask'].href) as s:
         w = from_bounds(*transform_bounds(4326, s.crs, *aoi), transform=s.transform).round_offsets().round_lengths()
         fm = s.read(1, window=w, boundless=True, fill_value=255); tr, crs = s.window_transform(w), s.crs
@@ -60,6 +91,7 @@ def read(it):
         with rasterio.open(it.assets[b].href) as s: X.append(s.read(1, window=w, boundless=True, fill_value=-9999).astype(np.float32))
     X = np.stack(X); bad = (X == -9999).any(0) | (fm == 255) | ((fm >> 1) & 1).astype(bool) | ((fm >> 3) & 1).astype(bool)
     return np.where(bad[None], 0, X * 0.0001).astype(np.float32), fm, ~bad, tr, crs
+read = read if SOURCE == 's2' else read_hls
 Xp, fmp, vp, tr, crs = read(post); H, W = vp.shape
 
 # 3. Модель: окна 512 × 512 по AOI, ансамбль C1-F, маска «Fmask и NDWI».
@@ -91,6 +123,7 @@ try:
                             area_ha_in_aoi=round(float(E.sum()) * px_ha, 1), touches_aoi_edge=bool(E[0].any() or E[-1].any() or E[:, 0].any() or E[:, -1].any()),
                             iou_model=round(float((E & burn & vp).sum() / max(((E | burn) & vp).sum(), 1)), 4))
 except Exception as e: summary['effis'] = dict(error=repr(e)[:200])
+if SOURCE == 's2': summary['source'] = 'Sentinel-2 L2A, Earth Search'; summary['compute_seconds'] = round(_t.time() - T_START, 1)
 prof = dict(driver='GTiff', height=H, width=W, crs=crs, transform=tr, compress='deflate', count=1)
 with rasterio.open(OUT / 'burn_prob.tif', 'w', dtype='float32', **prof) as o: o.write(prob[None])
 with rasterio.open(OUT / 'burn_model.tif', 'w', dtype='uint8', nodata=255, **prof) as o: o.write(np.where(vp, burn, 255).astype(np.uint8)[None])

@@ -25,7 +25,7 @@ def effis_info(lon, lat, year, d=0.01):
     """Атрибуты пожара EFFIS в точке: даты, страна, место, площадь, га (HTML GetFeatureInfo)."""
     r = requests.get(WMS, params=dict(SERVICE='WMS', VERSION='1.1.1', REQUEST='GetFeatureInfo', LAYERS=f'modis.ba.{year}', QUERY_LAYERS=f'modis.ba.{year}', SRS='EPSG:4326',
                                       BBOX=f'{lon - d},{lat - d},{lon + d},{lat + d}', WIDTH=101, HEIGHT=101, X=50, Y=50, INFO_FORMAT='text/html', FEATURE_COUNT=1, STYLES=''), timeout=60)
-    cells = re.findall(r'<td>([^<]*)</td>\s*<td>([^<]*)</td>', r.text)
+    r.encoding = 'utf-8'; cells = re.findall(r'<td>([^<]*)</td>\s*<td>([^<]*)</td>', r.text)
     return {k.strip(): v.strip() for k, v in cells} or None
 
 
