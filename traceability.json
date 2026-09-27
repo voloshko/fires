@@ -130,7 +130,8 @@
         "SPEC-84",
         "SPEC-85",
         "SPEC-86",
-        "SPEC-87"
+        "SPEC-87",
+        "SPEC-88"
       ]
     }
   },
@@ -954,7 +955,16 @@
       "depends_on": [
         "SPEC-84"
       ],
-      "status": "active"
+      "status": "rejected"
+    },
+    "SPEC-88": {
+      "title": "Две даты, исправлено: dNBR только на чистой суше, проверка на свежем MTBS-2",
+      "file": "specs/SPEC-88-two-date-fixed.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-87"
+      ],
+      "status": "rejected"
     }
   }
 }
