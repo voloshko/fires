@@ -937,7 +937,7 @@
         "SPEC-82",
         "SPEC-83"
       ],
-      "status": "active"
+      "status": "implemented"
     },
     "SPEC-86": {
       "title": "Степень выгорания для леса и гор: 4 класса по MTBS против порогов dNBR",
