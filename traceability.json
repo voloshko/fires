@@ -128,7 +128,8 @@
         "SPEC-82",
         "SPEC-83",
         "SPEC-84",
-        "SPEC-85"
+        "SPEC-85",
+        "SPEC-86"
       ]
     }
   },
@@ -932,6 +933,16 @@
       "depends_on": [
         "SPEC-82",
         "SPEC-83"
+      ],
+      "status": "active"
+    },
+    "SPEC-86": {
+      "title": "Степень выгорания для леса и гор: 4 класса по MTBS против порогов dNBR",
+      "file": "specs/SPEC-86-severity-mountains.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-75",
+        "SPEC-82"
       ],
       "status": "active"
     }

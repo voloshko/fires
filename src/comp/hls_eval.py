@@ -35,6 +35,27 @@ def c1_probs(X, model_dirs, cache):
     acc /= len(model_dirs); cache.parent.mkdir(parents=True, exist_ok=True); np.save(cache, acc.astype(np.float16)); return acc
 
 
+
+def c1_softmax(X, model_dirs, cache):
+    """SPEC-86: средний softmax по всем классам (модели с головой на 4 класса), кэш float16 (N, C, H, W)."""
+    cache = Path(cache)
+    if cache.exists(): return np.load(cache).astype(np.float32)
+    import torch
+    from scripts.train_unet import UNet
+    from src.comp.hls import tta8
+    dev = 'cuda' if torch.cuda.is_available() else 'cpu'; acc = None
+    for md in model_dirs:
+        b = torch.load(Path(md) / 'model.pt', map_location='cpu', weights_only=False); nc = b.get('classes', 2)
+        net = UNet(b.get('cin', 6), classes=nc, w=b['w'], depth=7); net.load_state_dict(b['state']); net = net.to(dev).eval(); mean, std = b['mean'], b['std']
+        acc = np.zeros((len(X), nc) + X.shape[2:], np.float32) if acc is None else acc
+        with torch.no_grad(), torch.autocast(dev, dtype=torch.bfloat16, enabled=dev == 'cuda'):
+            for i, x in enumerate(X):
+                xt = torch.from_numpy(((x - mean[:, None, None]) / std[:, None, None]).astype(np.float32))[None].to(dev)
+                acc[i] += tta8(net, xt).softmax(1)[0].float().cpu().numpy()
+        del net
+    acc /= len(model_dirs); cache.parent.mkdir(parents=True, exist_ok=True); np.save(cache, acc.astype(np.float16)); return acc
+
+
 def prithvi_probs(X, cache, tta=False):
     cache = Path(cache)
     if cache.exists(): return np.load(cache).astype(np.float32)
