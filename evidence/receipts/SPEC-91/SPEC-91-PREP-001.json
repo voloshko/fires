@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-91",
+  "run_id": "SPEC-91-PREP-001",
+  "created_at": "2026-10-03T13:12:06.899003+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Model and pair preparation implemented; unit tests and synthetic CUDA execution passed. Full training and accuracy acceptance remain pending.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && OMP_NUM_THREADS=2 .runtime/bin/python -m pytest tests/test_forest_pair.py tests/test_forest_pair_data.py tests/test_accuracy_contract.py -q'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .venv/bin/python scripts/forest_pair_train.py --manifest research/unused.json --data-root research --out research/pair-smoke-REPLAY --variant pair --seed 1 --smoke'"
+  ],
+  "acceptance": {
+    "model_tests": 5,
+    "data_tests": 2,
+    "contract_tests": 13,
+    "cuda_smoke": "completed, synthetic only",
+    "pair_qc": "4 real MTBS pairs prepared, 0 failures",
+    "training_acceptance": "pending"
+  },
+  "limitations": [
+    "Only synthetic CUDA training has executed; no model accuracy was scored.",
+    "Full pair dataset is still being prepared on omarchy."
+  ],
+  "non_claims": [
+    "Does not establish any accuracy gain or competitor superiority.",
+    "Smoke does not satisfy the 120-epoch three-seed recipe."
+  ]
+}

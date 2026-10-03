@@ -1,6 +1,6 @@
 # SPEC-91: Обученная пара дат для леса и гор
 
-Status: planned
+Status: active
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-82, SPEC-88
 
