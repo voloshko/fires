@@ -1,6 +1,7 @@
 """SPEC-92: split-safe background mining from published interval perimeters."""
 import math
 import numpy as np
+from src.comp.accuracy_contract import canonical_hash
 
 
 def hard_background_weights(records, false_positive_counts):
@@ -16,8 +17,22 @@ def hard_background_weights(records, false_positive_counts):
     return {sid: 2 if sid in hard else 1 for sid in ids}
 
 
-def transfer_acceptance(russian_comparison, stability, competitor):
+def transfer_acceptance(russian_comparison, stability, competitors):
     accepted = russian_comparison["delta"] >= .01 and russian_comparison["ci95"][0] > 0
     accepted &= all(c["delta"] >= -.01 for c in stability.values())
-    competitor_won = competitor["delta"] > 0 and competitor["ci95"][0] > 0
-    return dict(accepted=bool(accepted), competitor_superiority=bool(competitor_won))
+    if set(competitors) != {"c1mm", "prithvi"}: raise ValueError("all named competitors are required")
+    wins = {name: c["delta"] > 0 and c["ci95"][0] > 0 for name, c in competitors.items()}
+    return dict(accepted=bool(accepted), competitor_superiority=all(wins.values()),
+                per_competitor_superiority=wins)
+
+
+def validate_pair_initializer(bundle, seed, base_manifest, expected_recipe):
+    if (bundle.get("variant") != "pair" or bundle.get("seed") != seed or bundle.get("epochs") != 120
+            or bundle.get("smoke") or bundle.get("width") != 32 or bundle.get("depth") != 7
+            or bundle.get("batch") != 8 or bundle.get("data_manifest") != base_manifest):
+        raise ValueError("initializer does not match frozen SPEC-91 base")
+    fields = ("source_hashes", "software", "data_manifest", "fit_ids", "width", "depth", "epochs", "batch", "evaluation_ids")
+    if any(k not in bundle for k in fields): raise ValueError("initializer lacks archived recipe fields")
+    recipe = canonical_hash({k: bundle[k] for k in fields})
+    if recipe != expected_recipe: raise ValueError("initializer source recipe does not match SPEC-91")
+    return recipe

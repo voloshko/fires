@@ -18,6 +18,7 @@ def test_transfer_checks_actual_fit_population_and_initializers(tmp_path,monkeyp
             meta=dict(source_hashes={'train':'hash'},software={'torch':'version'},base_manifest='base',
                       russian_manifest='russia',width=32,depth=7,epochs=30,batch=8,steps_per_epoch=58,
                       classes=2,variant=v,seed=seed,smoke=False,
+                      initializer_recipe_id='recipe',initializer_result_sha256='result',
                       fit_ids=['base']+(['russia'] if v=='reserve' else []),
                       initialization_sha256=sha256_file(initializers[seed-1]))
             save_checkpoint(p,{'w':torch.ones(1)},meta);(d/'data_manifest.json').write_text(json.dumps(meta));models[v].append(p)

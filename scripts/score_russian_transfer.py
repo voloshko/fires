@@ -30,6 +30,7 @@ def model_recipe_audit(models, base_hash, russian_hash, initializers, base_fit, 
     values = [r for rows in metadata.values() for r in rows]
     fields = ("source_hashes", "software", "base_manifest", "russian_manifest", "width", "depth",
               "epochs", "batch", "steps_per_epoch", "classes")
+    fields += ("initializer_recipe_id", "initializer_result_sha256")
     for field in fields:
         if any(v.get(field) != values[0].get(field) for v in values): raise ValueError("transfer recipe drift: " + field)
     for variant, rows in metadata.items():
@@ -135,7 +136,8 @@ def main():
                  for v, paths in dict(models, c1mm=references).items()}
         cm, _ = counts_for(a.data_root, records, preds)
         stability[dataset] = paired_group_comparison([r["group_id"] for r in records], cm["reserve"], cm["c1mm"])
-    decision = transfer_acceptance(comparisons["control"], stability, comparisons["prithvi"])
+    decision = transfer_acceptance(comparisons["control"], stability,
+                                   {v: comparisons[v] for v in ("c1mm", "prithvi")})
     result = dict(spec_id="SPEC-92", recipe_id=recipe, comparisons=comparisons, stability=stability, **decision,
                   per_window=rows, russian_manifest=sha256_file(a.russian_manifest), base_manifest=sha256_file(a.base_manifest),
                   model_hashes={v: [sha256_file(p) for p in paths] for v, paths in dict(models, c1mm=references).items()},

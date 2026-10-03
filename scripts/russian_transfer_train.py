@@ -17,7 +17,7 @@ from src.comp.accuracy_artifacts import execution_sources, load_checkpoint, save
 from src.comp.forest_pair import augment_forest, forest_loss, make_forest_model
 from src.comp.hls import tta8
 from src.comp.l2a_finetuning import l2a_water
-from src.comp.russian_transfer import hard_background_weights
+from src.comp.russian_transfer import hard_background_weights, validate_pair_initializer
 from scripts.forest_pair_train import load_frozen, normalization, read_sample
 from scripts.prepare_russian_windows import interval_pair_valid
 
@@ -54,6 +54,7 @@ def main():
     p.add_argument("--base-manifest", type=Path, required=True)
     p.add_argument("--russian-manifest", type=Path, required=True)
     p.add_argument("--checkpoint", type=Path, required=True)
+    p.add_argument("--initializer-result", type=Path, default=Path("research/forest-pair-v1-result.json"))
     p.add_argument("--seed", type=int, choices=(1, 2, 3), required=True)
     p.add_argument("--variant", choices=("control", "reserve"), required=True)
     p.add_argument("--out", type=Path, required=True)
@@ -67,8 +68,10 @@ def main():
     russian_fit = [r for r in russian if r["partition"] == "fit"]
     torch.manual_seed(args.seed); rng = np.random.default_rng(args.seed)
     bundle = load_checkpoint(args.checkpoint, sha256_file(args.checkpoint), export_root=Path("research/tensor-exports"))
-    if bundle["variant"] != "pair" or bundle["seed"] != args.seed or bundle["epochs"] != 120 or bundle["smoke"]:
-        raise ValueError("wrong source pair checkpoint")
+    frozen_result = json.loads(args.initializer_result.read_text())
+    if sha256_file(args.checkpoint) != frozen_result["models"]["pair"][args.seed - 1]["sha256"]:
+        raise ValueError("initializer is not the archived SPEC-91 checkpoint")
+    initializer_recipe = validate_pair_initializer(bundle, args.seed, sha256_file(args.base_manifest), frozen_result["recipe_id"])
     net = make_forest_model("pair").cuda(); net.load_state_dict(bundle["state"])
     initial_mean, initial_std = np.asarray(bundle["mean"]), np.asarray(bundle["std"])
     del bundle
@@ -92,6 +95,7 @@ def main():
                   mean=mean.tolist(), std=std.tolist(), fingerprint=signature,
                   base_manifest=sha256_file(args.base_manifest), russian_manifest=sha256_file(args.russian_manifest),
                   initialization_sha256=sha256_file(args.checkpoint),
+                  initializer_recipe_id=initializer_recipe, initializer_result_sha256=sha256_file(args.initializer_result),
                   fit_ids=[r["sample_id"] for r in fit], mining_counts=counts, mining_weights=mining_weights,
                   source_hashes={str(s): sha256_file(s) for s in sources},
                   software={"torch": str(torch.__version__), "numpy": str(np.__version__)})
