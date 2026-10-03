@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-93",
+  "run_id": "SPEC-93-PREP-001",
+  "created_at": "2026-10-03T13:38:43.989673+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "L2A encoding/masks, matched finetuning and twin collector implemented. Four unit tests and real four-window QC completed; full dataset and accuracy acceptance pending.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_l2a_finetuning.py -q'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/prepare_l2a_finetuning.py --data-root /home/mc/fires-accuracy-next/data-store --out /home/mc/fires-accuracy-next/data-store/l2a-twins --limit 4'"
+  ],
+  "acceptance": {
+    "unit_tests": 4,
+    "qc_windows": 4,
+    "valid_twins": 3,
+    "full_collection": "running",
+    "training": "pending"
+  },
+  "limitations": [
+    "QC does not meet minimum 300 twins or 70% retained fit groups.",
+    "No fine-tuned model scored."
+  ],
+  "non_claims": [
+    "Does not prove accuracy gain, cheap transfer or competitor superiority."
+  ]
+}

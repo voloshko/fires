@@ -1,6 +1,6 @@
 # SPEC-93: Дообучение C1-MM на Sentinel-2 L2A
 
-Status: planned
+Status: active
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-83
 
