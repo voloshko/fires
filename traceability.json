@@ -1029,7 +1029,8 @@
       "requirement": "REQ-008",
       "depends_on": [
         "SPEC-90",
-        "SPEC-89"
+        "SPEC-89",
+        "SPEC-91"
       ],
       "status": "active"
     }

@@ -2,7 +2,7 @@
 
 Status: active
 Requirement: REQ-008
-Depends on: SPEC-90, SPEC-89
+Depends on: SPEC-90, SPEC-89, SPEC-91
 
 ## Summary
 
@@ -17,6 +17,8 @@ mIoU_sev0.279, но градация грубая. Учим степень по 
   (178 пригодных окон тяжести до дополнительного QC). Нет переноса окон
   проверки в обучение, группы event_id и spatial isolation SPEC-90.
   Минимум100 пригодных evaluation окон и200 fit; иначе insufficient evidence.
+  Для соблюдения spatial isolation рамки evaluation фиксируются первыми;
+  пересекающие их fit-окна исключаются до получения predictions.
 - Вход:6 полос pre+6 post, одинMGRS/сетка. КлассыMTBS2/3/4=>0/1/2 головы;
   MTBS0/1/5/6 и неизвестные пиксели не обучают степень. Известный фон
   обрабатывает отдельно фиксированная модель контура C1-MM.
