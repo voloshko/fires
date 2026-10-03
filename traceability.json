@@ -132,7 +132,8 @@
         "SPEC-86",
         "SPEC-87",
         "SPEC-88",
-        "SPEC-89"
+        "SPEC-89",
+        "SPEC-90"
       ]
     }
   },
@@ -975,6 +976,17 @@
         "SPEC-86"
       ],
       "status": "implemented"
+    },
+    "SPEC-90": {
+      "title": "Контракт новой кампании точности: группы, входы и доказательства",
+      "file": "specs/SPEC-90-accuracy-contract.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-82",
+        "SPEC-85",
+        "SPEC-89"
+      ],
+      "status": "planned"
     }
   }
 }

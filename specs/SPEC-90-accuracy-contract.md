@@ -1,0 +1,62 @@
+# SPEC-90: Контракт новой кампании точности: группы, входы и доказательства
+
+Status: planned
+
+Requirement: REQ-008
+
+Depends on: SPEC-82, SPEC-85, SPEC-89
+
+## Summary
+
+Общий fail-closed контракт четырёх следующих экспериментов: обученная пара дат,
+российская разметка, L2A и степень. SPEC-82/85 считают bootstrap по окнам, хотя
+70 проверочных окон EMS относятся к 54 активациям. Новый контракт считает
+парный bootstrap по активации/пожару, связывает кэш с моделями, входами и
+препроцессингом и запрещает слабую автоматическую разметку как эталон проверки.
+Это поставка измерительного слоя, не заявление о прибавке качества.
+
+Работа из managed worktree `codex/fire-accuracy-next`. Исходные новые данные —
+`omarchy:/home/mc/fires-accuracy-data`; GPU после уточнения пользователя — k8plus,
+`/home/mc/fires-accuracy-next`. Большие данные и веса локально не копируются.
+Чужие процессы и файлы не изменяются. Код и компактные receipts коммитятся по спеке.
+
+## Acceptance Criteria
+
+- `src/comp/accuracy_contract.py`: проверяет уникальные sample_id, группу события,
+  непересечение групп и рамок между fit/calibration/evaluation. Повторы обучения
+  задаются весом выборки, не дубликатами идентификаторов. Группа EMS — code,
+  FLOGA — id, MTBS — event_id, Россия — пространственно-временной кластер контура.
+- Оценка требует происхождения меток: expert_perimeter, participatory_perimeter,
+  mtbs_severity или reviewed_negative. weak_candidate допускается только в fit.
+  Отсутствие контура/термоточки не создаёт reviewed_negative автоматически.
+- Проверяются даты pre < начало <= post, один MGRS, сетка пары и ограничение
+  available_at <= as_of, если заявлена оперативная карта. Отсутствующие обязательные
+  данные блокируют контракт, а не подменяются нулём. Эксперимент степени явно
+  допускает MTBS как спутниковую интерпретацию, без заявления наземной истины.
+- Fingerprint включает упорядоченный манифест, sha256 входов/моделей/исходников,
+  препроцессинг и настройки. Кэш с иной подписью не принимается.
+- Парный bootstrap 2000 раз, seed 20261003, суммирует counts по группам;
+  публикует число окон и независимых групп, pooled IoU и delta/CI. Нулевая
+  совокупная истинная и предсказанная площадь не становится IoU=1.
+- `tests/test_accuracy_contract.py` проверяет утечку события и геометрии,
+  слабую разметку, будущий снимок, другую сетку, изменение fingerprint,
+  нечисловые counts и групповое агрегирование на проверяемых примерах.
+
+## Verification
+
+- `python3 -m unittest discover -s tests -p test_accuracy_contract.py -v`
+- `make gate`
+- SYNTHETIC receipt в `evidence/receipts/SPEC-90/`: не доказывает качество
+  модели, независимость фактически полученных контуров или превосходство над
+  конкурентом. Для этого нужны реальные отдельные прогоны следующих спек.
+
+<!--
+## Resolution (added when work lands — do not fill in advance)
+
+Appended by the orchestrating session when the spec reaches a terminal-ish
+status. Records honestly: what was planned vs what was found, deviations and
+why, measured numbers, what was deliberately NOT done, and follow-up specs
+opened. The Status line above is flipped ONLY together with writing this
+section, and only by the orchestrating session — never by an implementing
+subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
+-->
