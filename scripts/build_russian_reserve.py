@@ -109,7 +109,41 @@ def partition(cluster):
     return "fit" if digit < 6 else "calibration" if digit < 8 else "evaluation"
 
 
-def audit(out, archive):
+def prior_overlap_audit(out, prior):
+    from shapely.geometry import box
+    from shapely.strtree import STRtree
+    plan_path = out / "reserve_plan.json"
+    plan = json.loads(plan_path.read_text()); history = json.loads(prior.read_text())
+    frames = [box(*r["bbox_wgs84"]) for r in history["records"]]
+    if not frames: raise ValueError("prior footprint registry is empty")
+    tree = STRtree(frames); overlaps = []
+    for record in plan["records"]:
+        if record["partition"] not in ("evaluation", "calibration"): continue
+        hits = tree.query(box(*record["bbox_wgs84"]), predicate="intersects")
+        if len(hits): overlaps.append(dict(sample_id=record["sample_id"], partition=record["partition"],
+                                          prior_samples=[history["records"][int(i)]["sample_id"] for i in hits]))
+    payload = dict(spec_id="SPEC-92", reserve_plan_sha256=sha256_file(plan_path),
+                   prior_sha256=sha256_file(prior), prior_count=len(frames), overlaps=overlaps,
+                   scope="Contour bounding boxes only; actual selected chip frames need a second check.",
+                   ready_for_frame_selection=not overlaps)
+    path = out / "prior_overlap.json"
+    if path.exists():
+        if json.loads(path.read_text()) != payload: raise ValueError("prior overlap audit changed")
+    else:
+        with path.open("x") as stream: json.dump(payload, stream, indent=2)
+    print("PRIOR", len(frames), "footprints", len(overlaps), "contour overlaps", flush=True)
+    if overlaps: raise ValueError("held-out Russian contours intersect previously observed frames")
+
+
+def audit(out, archive, prior):
+    plan_path = out / "reserve_plan.json"
+    if plan_path.exists():
+        frozen = json.loads(plan_path.read_text())
+        digest = frozen.pop("manifest_sha256")
+        if frozen["source_sha256"] != sha256_file(archive) or digest != canonical_hash(frozen):
+            raise ValueError("frozen Russian split provenance changed")
+        prior_overlap_audit(out, prior)
+        return
     import geopandas as gpd
     from shapely.geometry import box
     g = gpd.read_file("zip://" + str(archive.resolve()))
@@ -149,16 +183,20 @@ def audit(out, archive):
     if not (out / "target_contours.gpkg").exists():
         selected.to_file(out / "target_contours.gpkg", driver="GPKG")
     print(json.dumps({k: v for k, v in summary.items() if k != "records"}), flush=True)
+    prior_overlap_audit(out, prior)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--audit", action="store_true")
+    parser.add_argument("--prior-footprints", type=Path)
     args = parser.parse_args()
     archive = fetch(args.out)
     print("archive", archive, "sha256", sha256_file(archive), flush=True)
-    if args.audit: audit(args.out, archive)
+    if args.audit:
+        if args.prior_footprints is None: raise ValueError("prior footprint registry is required for split audit")
+        audit(args.out, archive, args.prior_footprints)
 
 
 if __name__ == "__main__": main()

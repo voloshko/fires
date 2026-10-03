@@ -1,0 +1,9 @@
+{
+  "spec_id": "SPEC-92",
+  "reserve_plan_sha256": "71784110ff66622c9c48baf71ee63deeff766f59363693915be6b492889cce02",
+  "prior_sha256": "eb7bb1af7800c00e1837cca0634ffcad82792bf1dcd41cbd06fe112ea9aeecad",
+  "prior_count": 2658,
+  "overlaps": [],
+  "scope": "Contour bounding boxes only; actual selected chip frames need a second check.",
+  "ready_for_frame_selection": true
+}
