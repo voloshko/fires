@@ -156,3 +156,51 @@ Errorreport sourcebound:77observableseedcontours, misses10/7/14 (reserve/C1-MM/P
 не путать с missedwindows3/7/7 и spatialclusters1/2/3. Родительский SHA
 242acac3cf2ccd30728e5919997895e7cf1d83de223a8802b06f3c4daaaa296d.
 Новаяseveritycollection всёещёживая; SPEC100scorer ждётfulladmission.
+
+## SPEC101: полный HLS replay + реальные L2A views
+
+Старая SPEC93/97 dataadmission остаётсянепройденной. НовыйSPEC101 (68ead53,
+implementation8f576e7) сохраняет fulloriginalfit929: HLS540/MTBS300/EMS49/FLOGA40.
+Oddepochs — весь исходныйvalidHLSGT в обоих вариантах; evenepochs сtwin:
+controlHLS/replayL2A сОДИНАКОВОЙcommonmask иunknownpixel fill. Fallbackодинаковый.
+Каждыйsample посещаетсякаждуюэпоху, Med×2;30epochs/3seeds, batch8,lr3e-5,
+normalizationlockedto C1-MMinitializer. GPUflock освобождаетсямеждуjobs.
+Это прямыеL2Aweightupdates сполнымreplay, анеPASS L2A-onlyeventcoverage.
+
+RealCPUprepare-v1 finished exit0 at23:51 Oct03:929originalfit/889fitPCtwins/
+40fallback,119evaluationwindows (EMS29/FLOGA87groups),237735800originalvalid
+pixels and229586644commonpixels. Existing immutable
+`data-store/l2a-full-replay-v1/manifest.json` сохранён. Он созданДО исправления
+полной5seedbaseline lineage; fulltraining его НЕ должениспользовать.
+Currentlocalbuilder creates append-only `manifest-v2.json` (--manifest-name),
+verifies/stores all5C1-MM hashes from exactSPEC92result; training initializers3.
+Queues/trainer/scorer use v2. Allsource/identity/grid/band/date/SCL/hash checks.
+Local5testsPASS by reviewer; earlier4testsPASS remotely before baselinefix.
+Scopedcode-review afterrepair noHIGH/CRITICAL. FullGPUtraining НЕ стартовало.
+
+**Operationalaccessblock:** sshk8plus asked TailscaleSSH reauthentication.
+AwaitingSSHclient execsession64983 (it attempts to start smoke-v1 unit afterauth).
+No serverjobs were stopped/restarted. Lastverified SPEC100CPUcollection alive;
+currentstatus afterreauth must be read, not inferred. AuthURL onlyinchat/browser,
+notinrepo. No computation/download onomarchy.
+
+Nextactions afteraccess:
+1. Resume session64983 andinspect fires-accuracy-full-replay-smoke-v1 actualstatus.
+   Ifit ran, itused oldremotev1code/data; preserve itsartifacts, don't callit
+   validationof latestlineagefix. Neveredit numericalcode during a livejob.
+2. Beforeoverwriting remote prepare script, optionallyarchive itsv1text (observed
+   SHA9cb144f8d9245544d82120c9db08e34a3aa13968d51fd6255446523c79e15d01)
+   ascompactcode evidence. Sync only SPEC101files from thisworktree; don'ttouch
+   sealedSPEC100 or oldmodels/data. Latestbaselinefix islocalonly untilthissync.
+3. New CPUunit fires-accuracy-full-replay-prepare-v2 runs preparecommand inSPEC101
+   with `--manifest-name manifest-v2.json`. Neveroverwrite v1. Verify929/889/
+   119counts,ready,5baselinehashes; run5regressions onk8plus.
+4. Use distinctsmoke-v2unit/outputdirectories ifsmoke-v1 artifacts exist.
+   Smoke exercises actualodd/even/missingtwin andlastbatch1 paths, notaccuracy.
+   Afterbothvariants terminalexit0 launch queue_l2a_full_replay.sh as own
+   systemduserunit CPU400%/MemoryMax18G/OMP4. Perjobflock letsSPEC100score run.
+5. Revalidatestatus of fires-accuracy-covered-prepare-v1 and-covered-score-v1.
+   No restart fromobservationtimeout. Finishedresult cannot be assumed absent.
+
+Completion stillrequires realaccuracy acceptance/fullgoal; source counts,
+negativeoutcomes,code-review andgreen gate do not establish superiority.
