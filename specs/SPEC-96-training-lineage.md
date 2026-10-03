@@ -1,6 +1,6 @@
 # SPEC-96: Аудит событий HLS и географии прежнего обучения
 
-Status: planned
+Status: active
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-92, SPEC-93
 

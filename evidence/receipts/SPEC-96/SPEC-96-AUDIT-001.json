@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-96",
+  "run_id": "SPEC-96-AUDIT-001",
+  "created_at": "2026-10-03T15:36:55.214153+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Official MTBS geometry/date audit matched523/540 HLS scenes;17 remain unresolved and full original-event coverage is blocked. Prior2658 known frames registered.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/audit_training_lineage.py events --source-root /home/mc/fires --out data-store/hls-events.json'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/audit_training_lineage.py footprints --source-root /home/mc/fires --out data-store/prior-footprints.json'"
+  ],
+  "acceptance": {
+    "matched_hls_scenes": 523,
+    "unknown_hls_scenes": 17,
+    "prior_frames": 2658,
+    "russian_contour_overlaps": 0,
+    "hls_event_gate": "fails closed for unresolved originals"
+  },
+  "limitations": [
+    "Geometric/date association, not a publisher-provided mapping.",
+    "The Russian check is contour-based; selected chip frames still need isolation audit."
+  ],
+  "non_claims": [
+    "Does not prove model accuracy or independent field truth.",
+    "Does not claim original-event retention for unresolved HLS scenes."
+  ]
+}

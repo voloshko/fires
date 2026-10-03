@@ -1,0 +1,496 @@
+{
+  "events": {
+    "spec_id": "SPEC-96",
+    "vector_hashes": {
+      "mtbs_perims_DD.cpg": "09fc313075748ce8ead962229ed89c919d5a9ff71974ee725a0b48bb87d975a2",
+      "mtbs_perims_DD.dbf": "4e9c37f14618a394030183a37f009f824d69ea5bcf3317fae4880750c23de0c1",
+      "mtbs_perims_DD.prj": "84cf5b9a3c1a444f83ac30ff76f8c5035990223027ba69b2f4d628388adcbd65",
+      "mtbs_perims_DD.shp": "145302d2985ec536a1fc2d8c2da3f4a73437d402082190c45e292e3f9aa08be2",
+      "mtbs_perims_DD.shx": "e8ed9fe593eeba35d134d7e3ea0c0cc35fc42ba6da96e1b7d4933d48b358b164"
+    },
+    "matched": 523,
+    "unknown": 17,
+    "criteria": {
+      "positive_pixel_coverage": 0.95,
+      "second_candidate_max": 0.05,
+      "max_age_days": 450
+    },
+    "non_claims": [
+      "Geometric/date association, not a publisher-provided event lookup.",
+      "Unknown associations block full event-retention claims."
+    ],
+    "audit_sha256": "5b21dfad69b579f63bce059c1d837f32cb7201e23d903765a718a4aeef10520b"
+  },
+  "unknown": [
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T11SKB.2020222.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T11SKB.2020222.v1.4_merged.tif",
+      "source_sha256": "eb1a462ccb8cab53b6d41c10108967a81761ae53d4d69f438cb72d6ffab76c4d",
+      "label_sha256": "138b312a8d22e1bd63c64d94e6d546978bfe52a1c04457841933fb50e8064fa7",
+      "acquisition_day": "2020-08-09",
+      "bbox_wgs84": [
+        -119.70115027259241,
+        37.77017931957325,
+        -119.52187948654232,
+        37.912346560013404
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": []
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T12SVC.2020190.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T12SVC.2020190.v1.4_merged.tif",
+      "source_sha256": "341f0742f7e056a0dcd9aece03d175cb0d1d797f0a0dc6fa9ab1020b156aff66",
+      "label_sha256": "a92e3db68d0566031a7b445a7e317db7e6b6161e964656fbd63c70ca30d4c0ca",
+      "acquisition_day": "2020-07-08",
+      "bbox_wgs84": [
+        -112.08292442504643,
+        33.88535093882471,
+        -111.91509017074536,
+        34.02521026799157
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": [
+        [
+          "AZ3393011207420200620",
+          0.999748047367095
+        ],
+        [
+          "AZ3395311201220190903",
+          0.8818342151675485
+        ]
+      ]
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T14SPH.2018095.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T14SPH.2018095.v1.4_merged.tif",
+      "source_sha256": "b0029c96db04df03af8e188efeb0ea9e435e9d3b1f45d890dfae2b98b0289a94",
+      "label_sha256": "d182f0b18289bbb55814b4c92dd3c35fee4c5ee49a744e7b68882d22f4d18ab8",
+      "acquisition_day": "2018-04-05",
+      "bbox_wgs84": [
+        -96.93410540438677,
+        37.83812603559768,
+        -96.75545944151986,
+        37.979666666755236
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": []
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T14SPJ.2018125.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T14SPJ.2018125.v1.4_merged.tif",
+      "source_sha256": "047a0cdb0cfc88b2ec5cc90bcf847695d9462fefe56a51d1dfb1e4e2d9151a54",
+      "label_sha256": "9028df8443ced0cc99302ceb27b2708a304d10c3078921811bdeb2d3d6d46456",
+      "acquisition_day": "2018-05-05",
+      "bbox_wgs84": [
+        -96.74517952341364,
+        39.29341806008877,
+        -96.56239749981548,
+        39.43530090725468
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": []
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T14SQF.2018125.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T14SQF.2018125.v1.4_merged.tif",
+      "source_sha256": "3de7706ac817b778a80bbf8c46bf1e79f0acd5e2a6ab8f8aa33ccd82f766dbb1",
+      "label_sha256": "fbdb370b96d3137945aec81213c116004c41d12a46aee06fed81b1111944fd51",
+      "acquisition_day": "2018-05-05",
+      "bbox_wgs84": [
+        -96.71877153977317,
+        36.64540735300981,
+        -96.54267422268934,
+        36.78717894101488
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": [
+        [
+          "OK3668409662320180130",
+          0.009417373295299129
+        ]
+      ]
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T14SQG.2018125.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T14SQG.2018125.v1.4_merged.tif",
+      "source_sha256": "a1a9dacad05de470960b6a7fe48b9c73266db8f8f282ce465914c5fa25faf1ee",
+      "label_sha256": "996d1a56dcaf5c99f0c7dabd8f57553cc6fb0be02aa2d1932dac4901723320fb",
+      "acquisition_day": "2018-05-05",
+      "bbox_wgs84": [
+        -96.55249205112491,
+        37.09361352192324,
+        -96.37503265166013,
+        37.235636386112944
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": []
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T14TQT.2021112.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T14TQT.2021112.v1.4_merged.tif",
+      "source_sha256": "21bdb4054c4616a204716cf5668fabdf46dabffe15a84cb55716a76c95363df3",
+      "label_sha256": "85796dc30613095e1608c8ff8f13c07d4895bab11c501de66126f5363ffa03f8",
+      "acquisition_day": "2021-04-22",
+      "bbox_wgs84": [
+        -96.33616584038074,
+        47.651294922134475,
+        -96.1242666011177,
+        47.79427766687128
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": [
+        [
+          "MN4771209630220210329",
+          0.9999406175771971
+        ],
+        [
+          "MN4770309629020200521",
+          0.13105700712589075
+        ]
+      ]
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T15STC.2018125.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T15STC.2018125.v1.4_merged.tif",
+      "source_sha256": "cca5e6a66e2d5a03aeb46ceb3d66c6466e1607f1883e8e4c66017afa1527208e",
+      "label_sha256": "c4bac8203644b9ddb869868bca73c6a35e3a02145410048fe816471f9312f7bd",
+      "acquisition_day": "2018-05-05",
+      "bbox_wgs84": [
+        -96.0320729145528,
+        38.51951042282609,
+        -95.8502880089798,
+        38.66218183994217
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": []
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T15STD.2018125.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T15STD.2018125.v1.4_merged.tif",
+      "source_sha256": "e96c9440f7ab7f6aeec1e10690d0f809bf4498ce54321810586fd888a9adae33",
+      "label_sha256": "4e647dd1dcdfa17569055ce3642001c3a81549e56a019641b6403bc3015cca3f",
+      "acquisition_day": "2018-05-05",
+      "bbox_wgs84": [
+        -95.99025266881644,
+        38.961940026751705,
+        -95.8073608459921,
+        39.104584190775704
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": []
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T15SUB.2018127.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T15SUB.2018127.v1.4_merged.tif",
+      "source_sha256": "59e37df824d348e438eac4f41c1b48317225e42104405c7ae2b946cea6ba3b21",
+      "label_sha256": "feff1fa1abf1c73a8d3545ce69a6f595d6ad91bd8b1769dad9c6889777213db7",
+      "acquisition_day": "2018-05-07",
+      "bbox_wgs84": [
+        -95.13961070335782,
+        37.69002784890608,
+        -94.96151829417651,
+        37.83141597160357
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": []
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T15SUC.2018127.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T15SUC.2018127.v1.4_merged.tif",
+      "source_sha256": "c04c7d3533131fd95f43e5f4b8732a2f91a3f84ca9edf7b8b844c99871f4eb79",
+      "label_sha256": "2bdecaa9f994a3ff2b0d56c451ab66446ab080518e3483e4e60a11898eeb1c67",
+      "acquisition_day": "2018-05-07",
+      "bbox_wgs84": [
+        -95.28435346853894,
+        38.09337202986439,
+        -95.10499322860605,
+        38.234980005836306
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": []
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T16REV.2019080.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T16REV.2019080.v1.4_merged.tif",
+      "source_sha256": "e82917fb145a0b0905bbda8dd6d07886c76c4d38ccfcc8520d9aa55053971758",
+      "label_sha256": "2f679cfe79fd67e3167d4d4468cc68574a4f0900be385afa0379121e0974b716",
+      "acquisition_day": "2019-03-21",
+      "bbox_wgs84": [
+        -86.82419534356025,
+        31.01903353307107,
+        -86.66278080148115,
+        31.157947161900648
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": [
+        [
+          "AL3109508674120190225",
+          0.9995465880752664
+        ],
+        [
+          "AL3106308675220180419",
+          0.051235547494899114
+        ],
+        [
+          "AL3108708676220180313",
+          0.01949671276354568
+        ],
+        [
+          "AL3110808674720180411",
+          0.017909771026978008
+        ],
+        [
+          "AL3100708683320180405",
+          0.0
+        ],
+        [
+          "AL3106208675220190307",
+          0.0
+        ],
+        [
+          "AL3111408672120180125",
+          0.0
+        ],
+        [
+          "AL3111408672120180424",
+          0.0
+        ],
+        [
+          "AL3113508674520190306",
+          0.0
+        ]
+      ]
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T16SEC.2021094.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T16SEC.2021094.v1.4_merged.tif",
+      "source_sha256": "a116c1d1b5f08ddc3d2989b3f8653697ded6a2552d5b7592ed963275a356c8fc",
+      "label_sha256": "ce78b3a059000130d2596c4b852f6ad66d90268054300531adda16fdd0825464",
+      "acquisition_day": "2021-04-04",
+      "bbox_wgs84": [
+        -85.99751278944106,
+        33.34722554906872,
+        -85.83061009678077,
+        33.487190115952984
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": [
+        [
+          "AL3341708591520210223",
+          0.9998245921768111
+        ],
+        [
+          "AL3339608591620200301",
+          0.06753201192773198
+        ],
+        [
+          "AL3341208588320200228",
+          0.038238905455183304
+        ],
+        [
+          "AL3334408600920210309",
+          0.0
+        ],
+        [
+          "AL3337908600020210224",
+          0.0
+        ],
+        [
+          "AL3346408589520210117",
+          0.0
+        ],
+        [
+          "AL3348408584620201117",
+          0.0
+        ]
+      ]
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T16TGQ.2019158.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T16TGQ.2019158.v1.4_merged.tif",
+      "source_sha256": "6dbc2d6e7c6f38d8e8e6ec3e2c07fb4e6786d047224d036767589a5fbf9b188b",
+      "label_sha256": "b4deeb9d9a2bef427a51e056af48b2d65cddd23f6579884de6df426e4b561d5f",
+      "acquisition_day": "2019-06-07",
+      "bbox_wgs84": [
+        -83.8342495689097,
+        44.374178189552474,
+        -83.63382793502657,
+        44.517752467923785
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": [
+        [
+          "MI4444608373420190428",
+          0.999213217938631
+        ],
+        [
+          "MI4440008375020180430",
+          0.09087332808811958
+        ],
+        [
+          "MI4441808363520190421",
+          0.0
+        ],
+        [
+          "MI4443108369620190421",
+          0.0
+        ]
+      ]
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T17RMJ.2018064.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T17RMJ.2018064.v1.4_merged.tif",
+      "source_sha256": "8d132ff1e353cbaa274e308244353c57d8a66f1d61a93da72b846e187e4d3c0b",
+      "label_sha256": "3b84babf9fa39304f93b730edd5dcbda5d21c67686781c74998465eb0a785e12",
+      "acquisition_day": "2018-03-05",
+      "bbox_wgs84": [
+        -81.53867739062919,
+        26.07968887047345,
+        -81.38446118080265,
+        26.21887238220201
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": [
+        [
+          "FL2616308144920180212",
+          0.9993613488312684
+        ],
+        [
+          "FL2619608144520170120",
+          0.1357772384723464
+        ],
+        [
+          "FL2618808154420170420",
+          0.0
+        ]
+      ]
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T17SMV.2021096.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T17SMV.2021096.v1.4_merged.tif",
+      "source_sha256": "5f33f7020811c6becef6c2f465da547ca49033e8c61af1a8285ae64c338fd675",
+      "label_sha256": "f0bface07c3007e996f1cec3e64086afc6fd247a3f31a1a4ae0bebdd7d2c5099",
+      "acquisition_day": "2021-04-06",
+      "bbox_wgs84": [
+        -81.91413940293376,
+        35.82335094503268,
+        -81.74251887928179,
+        35.96299730499599
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": [
+        [
+          "NC3589008184220210311",
+          0.9996700214486058
+        ],
+        [
+          "NC3590608185020210220",
+          0.060881042732222404
+        ]
+      ]
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T17SPS.2019094.v1.4_merged.tif",
+      "source": "external/hls_burn_scars/training/subsetted_512x512_HLS.S30.T17SPS.2019094.v1.4_merged.tif",
+      "source_sha256": "14ef6babd11726c78adaf8e5b9b1e00cf095ed6468d4788c3b69e34aa9ead69f",
+      "label_sha256": "dd5e2ecca2226c50d1ad15e83b219a28b11052e2900ba69fdbaad3b700a00f42",
+      "acquisition_day": "2019-04-04",
+      "bbox_wgs84": [
+        -79.62189817937993,
+        33.1434563571675,
+        -79.4548244071341,
+        33.28389497653639
+      ],
+      "event_id": null,
+      "decision": "unknown",
+      "candidates": [
+        [
+          "SC3321007954020190322",
+          0.9995228248767297
+        ],
+        [
+          "SC3319007955020180322",
+          0.05089867981549229
+        ],
+        [
+          "SC3319307953020180304",
+          0.0054079847303960555
+        ],
+        [
+          "SC3323007950020190306",
+          0.002067758867504374
+        ],
+        [
+          "SC3315007947020180413",
+          0.0
+        ],
+        [
+          "SC3315007949020180607",
+          0.0
+        ],
+        [
+          "SC3315407960820180305",
+          0.0
+        ],
+        [
+          "SC3316007953020190321",
+          0.0
+        ],
+        [
+          "SC3316007962020180322",
+          0.0
+        ],
+        [
+          "SC3318007952020180222",
+          0.0
+        ],
+        [
+          "SC3319007946020180323",
+          0.0
+        ],
+        [
+          "SC3323807959620190319",
+          0.0
+        ],
+        [
+          "SC3324007962020180228",
+          0.0
+        ],
+        [
+          "SC3327007958020180207",
+          0.0
+        ]
+      ]
+    }
+  ],
+  "prior_footprints": {
+    "count": 2658,
+    "audit_sha256": "3d6b537cfafc06cea407cade2b8bb09bcad210bd7ba94fb8e3acadd7d121d540",
+    "source_manifests": {
+      "external/hls_fresh/manifest.json": "08cd8687b7d02421fc193e7df5dcd181c3de57c37d5bae08f40808fa4f2835f7",
+      "external/hls_fresh2/manifest.json": "555e7ecca71ff663881922a7cd23f41fa0d580903650aa39bc3e70ed8e6b7ad2",
+      "external/hls_fresh3/manifest.json": "224317abffb23e4ee6154b0294004c2d8b3e5864bae3dda2794be1734ab3bfa6",
+      "external/hls_fresh4/manifest.json": "d1a49c8990496a05229cbd6d724adc25d66c5f7241fe00831e4f7ede525d1c13",
+      "external/ems_hls/manifest.json": "d3c3fc50b075660ddc7f012062fa28cb411495daac8a4f45555441d022c4bba0",
+      "external/floga_hls/manifest.json": "62e5c9191352e0aa6dd795a63b223625373ef193d996950f0adfeab811a003b6",
+      "data/comp/train/bs/meta.csv": "f5e4506ee6b33e02ffdeb758f87c4447d0a3a112668fc7eee714da4756450183"
+    }
+  }
+}
