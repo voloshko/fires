@@ -12,11 +12,18 @@ SPEC-83: перенос C1-MM с HLS на L2A не прошёл допуск н�
 
 ## Acceptance Criteria
 
+- L2A берётся из Planetary Computer (`sentinel-2-l2a`), анонимно, согласно
+  AGENTS.md. Ранний Earth Search QC сохраняется как отдельный PREP-артефакт
+  и не входит в новое обучение/проверку. Новый каталог l2a-pc-v1.
 - L2A twins для fit C1-MM: HLS540 + MTBS300 + EMS49/FLOGA40, взвешивание
   средиземноморских ×2. Наборы evaluation не добавляются в fit. Минимум
   300 fit twins, >=70% исходного fit по событиям, иначе insufficient evidence.
+  События HLS определяются registry SPEC-96; MGRS не заменяет event_id,
+  любое неизвестное событие блокирует заявленную original-event coverage.
 - Метаданные STAC определяют bands/scales/offsets, B8A+B12 подтверждаются
-  по assets. SCL invalid 0/1/3/8/9/10/11; вода SCL6 и NDWI>0; сетка30м.
+  по assets. Если PC не отдаёт raster:bands, scale/offset берутся по
+  официальной кодировке ESA и s2:processing_baseline (до04:0, с04:-1000 DN),
+  с явным encoding_basis. Неизвестный baseline блокирует окно. SCL invalid 0/1/3/8/9/10/11; вода SCL6 и NDWI>0; сетка30м.
   Сохранение hashed inputs/labels/ids/dates; кэш tied to input+model+code.
 - Сиды1/2/3 из C1-MM соответствующих сидов: полное дообучение 30 эпох,
   AdamW lr3e-5, cosine schedule, CE[.25,1]+Dice, batch8, BF16, C1 augmentation.
