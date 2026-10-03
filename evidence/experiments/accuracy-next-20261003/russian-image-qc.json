@@ -1,0 +1,70 @@
+{
+  "spec_id": "SPEC-92",
+  "counts": {
+    "samples": 447,
+    "groups": 127,
+    "partitions": {
+      "calibration": 61,
+      "evaluation": 77,
+      "fit": 309
+    }
+  },
+  "failures": [
+    {
+      "sample_id": "russia:95eacb4f3f126c067f5b4c4aa45fc8e0090ce9a94f41cc2b289c4d559d914cff",
+      "reason": "fewer than nine valid labelled fire pixels"
+    },
+    {
+      "sample_id": "russia:c042ea997e1cd6187d9b3e17ecf47f7a2ee135f0daf48cea219043383583f23a",
+      "reason": "no clean seasonal image in frozen interval"
+    },
+    {
+      "sample_id": "russia:ac3006f1089b471f088ba230a30a70285331b16a12af501c15ee96fbedd5e273",
+      "reason": "no clean seasonal image in frozen interval"
+    },
+    {
+      "sample_id": "russia:465bf4183970a2145a6b9243a5c3938ad84014262f57620b114aaadc05967037",
+      "reason": "no clean seasonal image in frozen interval"
+    },
+    {
+      "sample_id": "russia:3c2f6b6ceaa73f8857b3679a3b66ad09fe2559dc591766521976269de66e425a",
+      "reason": "no clean seasonal image in frozen interval"
+    },
+    {
+      "sample_id": "russia:3445be238a5d3d769fb23b839ff85a8f32c4b367d97c24299d0dddfefa15062d",
+      "reason": "no clean seasonal image in frozen interval"
+    },
+    {
+      "sample_id": "russia:3b02d516076dbe6dd3ab8c7c44d370de939c167593696815c4cf345fc2c2bff1",
+      "reason": "no clean seasonal image in frozen interval"
+    },
+    {
+      "sample_id": "russia:6dded0cf79369ba5295df64f40cda1aab028f75eb71bec869a970b075a674c09",
+      "reason": "no clean seasonal image in frozen interval"
+    },
+    {
+      "sample_id": "russia:d7e5ec21582b9b65379340e1549fcf87db29989108b4765ff95638cabda30957",
+      "reason": "no clean seasonal image in frozen interval"
+    },
+    {
+      "sample_id": "russia:aa12508863d8004b2543cceda4ca4a210c3343d1a6eb6edc3f2b7e4941b8eefb",
+      "reason": "no clean seasonal image in frozen interval"
+    },
+    {
+      "sample_id": "russia:d17fd7fb7bc0d017d8a13d2756c675a97f7b8a8059a50ce490873d7a36a4ca9a",
+      "reason": "no clean seasonal image in frozen interval"
+    },
+    {
+      "sample_id": "russia:9268eb83be58c5e955c57f27544fb8dde92bc884553b823724e404811eeedd82",
+      "reason": "no clean seasonal image in frozen interval"
+    }
+  ],
+  "selection_sha256": "af18ff201b892187b5e459ceed5bc418e5662e386ce1fe2f3b11c312b655270b",
+  "ready_for_training": true,
+  "qc_probe": false,
+  "evaluation_groups": 24,
+  "non_claims": [
+    "Interval labels, not individual ignition dates.",
+    "Spring2020 participatory perimeters, not field truth or summer taiga validation."
+  ]
+}
