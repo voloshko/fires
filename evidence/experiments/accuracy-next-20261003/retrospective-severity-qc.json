@@ -1,0 +1,27 @@
+{
+  "spec_id": "SPEC-99",
+  "profile": "retrospective-2016-17",
+  "records": [],
+  "counts": {
+    "samples": 0,
+    "groups": 0
+  },
+  "class_counts": [
+    0,
+    0,
+    0
+  ],
+  "failures": [
+    {
+      "event_id": "CA3900312269020171009",
+      "reason": "no clean post window"
+    },
+    {
+      "event_id": "TX3526710199520160213",
+      "reason": "no clean post window"
+    }
+  ],
+  "ready_for_evaluation": false,
+  "qc_probe": true,
+  "selection_sha256": "ac08b0138641971a9e23994acbda4c1ae9e8623f28befef4a5776599c296f22b"
+}

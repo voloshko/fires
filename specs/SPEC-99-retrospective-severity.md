@@ -1,6 +1,6 @@
 # SPEC-99: Retrospective independent paired severity confirmation
 
-Status: active
+Status: deferred
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-94, SPEC-95, SPEC-98
 
@@ -48,3 +48,14 @@ Do not describe this as prospective or2024 evidence. No new training.
 - Receipts include input/model/source hashes, per-event failures/counts,
   limitations: retrospective2016–2017, satellite interpretation, notfieldtruth,
   notSiberia, notprospective, no accuracy evidence from QC/synthetic tests.
+
+## Resolution
+
+Deferred before model inference: PlanetaryComputer hls2-s30 temporal interval
+starts2020-01-01; both2016/2017 annual source queries return0features. The
+2-event QC yielded0pairs (no clean post), consistent with absence of source
+coverage. Minimum100 cannot be reached with this source. No loss/accuracy
+conclusion. Collection/source integrity code and6 regressions passed onk8plus.
+All metadata/partial outputs preserved. Next population must lie inside actual
+PCcoverage; metadata audit2020–2024 found240 independent candidates before any
+model predictions. No prospective superiority claim from retrospective data.

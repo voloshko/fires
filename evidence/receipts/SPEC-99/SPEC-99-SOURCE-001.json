@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-99",
+  "run_id": "SPEC-99-SOURCE-001",
+  "created_at": "2026-10-03T19:44:27.367660+00:00",
+  "evidence_class": "LIVE",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "HLS source begins2020; frozen2016\u20132017 events have no available images. No model inference.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/prepare_fresh_paired_severity.py --profile retrospective-2016-17 --data-root data-store --source-root /home/mc/fires --prior data-store/prior-footprints.json --out data-store/severity-retrospective-v1 --limit 2'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_fresh_paired_severity.py -q'",
+    "make gate"
+  ],
+  "acceptance": {
+    "qc_windows": 0,
+    "pc_hls_source_start": "2020-01-01T00:00:00Z",
+    "source_metadata_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/hls2-s30",
+    "annual_queries": {
+      "CA3900312269020171009": 0,
+      "TX3526710199520160213": 0
+    },
+    "regression_tests_passed": 6
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/retrospective-severity-qc.json"
+  ],
+  "limitations": [
+    "QC ran before the final water-mask/count cache checks;0pairs prove no current pipeline acceptance.",
+    "Immutable QC output is preserved; rerun requires a separate output directory."
+  ],
+  "non_claims": [
+    "No accuracy evaluation or negative model conclusion.",
+    "No prospective/field/Russian severity proof."
+  ]
+}
