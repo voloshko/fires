@@ -135,7 +135,8 @@
         "SPEC-89",
         "SPEC-90",
         "SPEC-91",
-        "SPEC-92"
+        "SPEC-92",
+        "SPEC-93"
       ]
     }
   },
@@ -1008,6 +1009,16 @@
       "depends_on": [
         "SPEC-90",
         "SPEC-91"
+      ],
+      "status": "planned"
+    },
+    "SPEC-93": {
+      "title": "Дообучение C1-MM на Sentinel-2 L2A",
+      "file": "specs/SPEC-93-l2a-finetuning.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-83"
       ],
       "status": "planned"
     }
