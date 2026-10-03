@@ -1,0 +1,145 @@
+{
+  "counts": {
+    "samples": 515,
+    "groups": 474,
+    "partitions": {
+      "calibration": 0,
+      "evaluation": 141,
+      "fit": 374
+    }
+  },
+  "ready_for_training": true,
+  "failures": [
+    {
+      "sample": "fresh_SD4473910058920230501_HLS.S30.T14TLQ.2023200T172859.v2.0",
+      "reason": "no clean pre in same MGRS within 90 days"
+    },
+    {
+      "sample": "fresh_FL2523108078620230213_HLS.S30.T17RNH.2023075T160511.v2.0",
+      "reason": "no clean pre in same MGRS within 90 days"
+    },
+    {
+      "sample": "fresh_UT3878211150620260309_HLS.S30.T12SVH.2026131T180911.v2.0",
+      "reason": "no clean pre in same MGRS within 90 days"
+    },
+    {
+      "sample": "fresh_FL2645708025120220517_HLS.S30.T17RNK.2022270T160521.v2.0",
+      "reason": "no labelled fire remains on common valid pixels"
+    },
+    {
+      "sample": "fresh_SD4375810390520220317_HLS.S30.T13TEJ.2022108T173859.v2.0",
+      "reason": "no clean pre in same MGRS within 90 days"
+    },
+    {
+      "sample": "ems_EMSR837_AOI08_HLS.S30.T29SQC.2025225T110619.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR892_AOI01_HLS.S30.T30SWG.2026184T104619.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR908_AOI01_HLS.S30.T29TQF.2026208T112111.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR932_AOI01_HLS.S30.T29SPB.2026258T112111.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "floga_2020_743489_HLS.S30.T34SEJ.2020129T092029.v2.0",
+      "reason": "no clean pre in same MGRS within 90 days"
+    },
+    {
+      "sample": "floga_2021_831017_HLS.S30.T34TEL.2021051T093031.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "floga_2021_823895_HLS.S30.T34SEH.2021048T092041.v2.0",
+      "reason": "no labelled fire remains on common valid pixels"
+    },
+    {
+      "sample": "floga_2021_833500_HLS.S30.T34TDK.2021086T093039.v2.0",
+      "reason": "no clean pre in same MGRS within 90 days"
+    },
+    {
+      "sample": "floga_2021_877489_HLS.S30.T34SEF.2021213T092029.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "floga_2021_879820_HLS.S30.T34TDK.2021216T093039.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR673_AOI01_HLS.S30.T34SGH.2023195T090601.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR719_AOI01_HLS.S30.T30SYH.2024105T104619.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR746_AOI01_HLS.S30.T35SKC.2024220T090551.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR825_AOI01_HLS.S30.T34TFL.2025207T092051.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR835_AOI01_HLS.S30.T34SDJ.2025222T093051.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR885_AOI01_HLS.S30.T31TBG.2026174T104619.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR902_AOI01_HLS.S30.T30TXQ.2026202T105621.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR909_AOI01_HLS.S30.T34SFH.2026209T090601.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR918_AOI01_HLS.S30.T34TFK.2026217T092029.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "ems_EMSR925_AOI01_HLS.S30.T30TYK.2026231T104651.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "floga_2020_773013_HLS.S30.T34SGH.2020211T090601.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "floga_2020_782088_HLS.S30.T35TMF.2020241T090601.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "floga_2020_787271_HLS.S30.T34SFF.2020259T092029.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "floga_2021_867610_HLS.S30.T34SDH.2021183T092029.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "floga_2021_868916_HLS.S30.T35SKV.2021187T085559.v2.0",
+      "reason": "post predates ignition"
+    },
+    {
+      "sample": "floga_2021_878803_HLS.S30.T34TDK.2021216T093039.v2.0",
+      "reason": "post predates ignition"
+    }
+  ],
+  "by_dataset": {
+    "ems:evaluation": 60,
+    "ems:fit": 45,
+    "floga:evaluation": 81,
+    "floga:fit": 34,
+    "mtbs:fit": 295
+  }
+}
