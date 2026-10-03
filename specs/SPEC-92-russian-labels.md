@@ -49,6 +49,24 @@ PANGAEA.939429, CC-BY-4.0, визуальная интерпретация Senti
 - До заявления «выше конкурента» на российской отдельной проверке нужно
   CI95(delta к этому конкуренту)>0; разные датасеты не сравниваются рейтингом.
 
+## Frozen image preparation (до predictions)
+
+- `scripts/prepare_russian_windows.py`: source polygons >=1га, bins1–25,
+  25–250 и >250га; hash order round-robin внутри каждого пространственного
+  кластера. Max8fit/4calibration/16evaluation окон на кластер. Окно512×512,
+  30м UTM, центр representative_point полигона. Сначала фиксируется evaluation,
+  затем calibration, затем fit; пересечения с prior2658 и другими частями
+  исключаются до скачивания. После этого выбор не следует predictions.
+- Interval labels January1–May15 2020. Post: первый чистый PC S2 L2A в
+  May16–July15 2020; pre: сезонно совпадающее окно May16–July15 2019 до начала
+  интервала, строго тот же MGRS. Это годовая interval-пара, не short-gap
+  first-pass, и её сезонная/временная неопределённость публикуется.
+- SCL invalid0/1/3/8/9/10/11; <=30% bad на каждой дате, >=50% common valid,
+  >=9 положительных валидных пикселей. Маска rasterize ВСЕХ source-контуров
+  в выбранном окне; отсутствие FIRMS не создаёт отрицательную метку.
+- На готовых масках известный фон соответствует охвату опубликованной
+  participatory-разметки; не выдаётся за независимо проверенную наземную истину.
+
 ## Verification
 
 - `python scripts/build_russian_reserve.py --help`; unit tests кластеров,
