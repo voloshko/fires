@@ -162,3 +162,31 @@ mining/evaluation; проверить retention bound и разрешить L2A 
 при PASS исходного data gate. Разработать отдельную улучшенную pair recipe
 после SPEC91, опираясь на новые данные/свежую проверку, не на переименование FAIL.
 Цель четырёх направлений и превосходства над конкурентом остаётся active.
+
+## Российское дообучение готово к запуску
+
+Dataset readiness подтверждена:309fit/61cal/77eval,24evalgroups,447total.
+Русский transfer теперь полностью реализован: equal-step budget30epochs,
+fit-only top25%FP sample weighting, matched control без РФрезерва, same-pixel
+C1-MM и Prithvi scorer (TTA8, официальные веса; backbone_pretrained отключён
+перед strict full-checkpoint load, чтобы не качать лишние weights).
+GPU queue fires-accuracy-russian-transfer-v1 (PID742993) ждёт завершения
+SPEC94, затем6runs+score. Source92 trainers/score синхронизированы.
+
+Code-reviewer нашёл и перепроверил две правки: initializer должен совпасть
+с SHA/result/recipe frozen SPEC91 и base_manifest; combined competitor flag
+требует wins и над C1-MM и над Prithvi. Regression tests прошли, targeted
+review APPROVE; полный architecture verdict ещё не закрыт.
+
+PC collection terminal code2:1008windows,889fit/119eval. Known retained861/886,
+но2784protected pixels потеряны в16source frames, lower_bound unavailable.
+Все данные сохраняются. SPEC97-BOUND001 INSUFFICIENT_EVIDENCE: нельзя запускать
+SPEC93 fine-tune по текущему admission gate; это не negative model outcome.
+Причины: missing twins, SCLcloud/shadow/snow и nodata. Нельзя снять SCL ради
+получения PASS. Продолжить source/event evidence repair или реальные альтернативные
+L2A twins до исходной приёмки; цель L2A не заменять меньшим набором.
+
+Следующая работа: завершить GPUseverity; проверить Russian initializer/source
+lineage before6runs, затем genuine new Russian performance/competitor comparison.
+Для SRC93 нужна дальнейшая data proof, а не утверждение «97%events» по известной
+подвыборке. Нет общего доказанного превосходства/полного результата четырёх пунктов.
