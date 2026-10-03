@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-91",
+  "run_id": "SPEC-91-REPLAY-001",
+  "created_at": "2026-10-03T16:24:16.579746+00:00",
+  "status": "FAIL",
+  "conclusion": "Pooled paired gain is positive but frozen acceptance fails FLOGA lower bound and lost-events safeguard.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/score_forest_pair.py --data-root data-store --manifest data-store/forest-pairs/manifest.json --runs research/forest-pair-v1 --reference-root /home/mc/fires/research --out research/forest-pair-review-result.json'",
+    "make gate"
+  ],
+  "acceptance": {
+    "comparisons": {
+      "matched_post": {
+        "samples": 141,
+        "groups": 125,
+        "candidate_iou": 0.785477817891237,
+        "control_iou": 0.7618015591864853,
+        "delta": 0.023676258704751763,
+        "ci95": [
+          0.004694101599033845,
+          0.05144907063090477
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      },
+      "c1mm": {
+        "samples": 141,
+        "groups": 125,
+        "candidate_iou": 0.785477817891237,
+        "control_iou": 0.7579511802786358,
+        "delta": 0.027526637612601212,
+        "ci95": [
+          0.006894489336024601,
+          0.05534811042903162
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      }
+    },
+    "per_dataset": {
+      "ems": {
+        "matched_post": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.790742267746768,
+          "control_iou": 0.7707375362120554,
+          "delta": 0.020004731534712605,
+          "ci95": [
+            -0.0011793508917898904,
+            0.05272217846492655
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.790742267746768,
+          "control_iou": 0.7597326710584411,
+          "delta": 0.031009596688326924,
+          "ci95": [
+            0.01146095118020743,
+            0.0631453410341538
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        }
+      },
+      "floga": {
+        "matched_post": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.752343058821303,
+          "control_iou": 0.7075238415695804,
+          "delta": 0.044819217251722665,
+          "ci95": [
+            -0.0018523911784841915,
+            0.0999485663050259
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.752343058821303,
+          "control_iou": 0.7467238428169065,
+          "delta": 0.005619216004396521,
+          "ci95": [
+            -0.05371769896771885,
+            0.05767384140270976
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        }
+      }
+    },
+    "lost_events": {
+      "pair": 2,
+      "post": 0,
+      "c1mm": 1
+    },
+    "accepted": false,
+    "recipe_id": "d46363e0848887556d3b5bf15f71fa29d3695da383ace2337e26fb4a58a39af9",
+    "data_manifest": "1a70bf29a0b9e3c8462396967fdc12fca7f92ae29a236636de5585c74692f373"
+  },
+  "limitations": [
+    "Previously used EMS/FLOGA development sets after adaptive research.",
+    "Only141 paired-QC eligible windows, not all157 original windows."
+  ],
+  "non_claims": [
+    "Development revalidation after adaptive model selection.",
+    "Not an independent hidden test or field truth.",
+    "No global ranking from metrics on different datasets."
+  ]
+}

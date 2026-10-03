@@ -1,0 +1,3269 @@
+{
+  "comparisons": {
+    "matched_post": {
+      "samples": 141,
+      "groups": 125,
+      "candidate_iou": 0.785477817891237,
+      "control_iou": 0.7618015591864853,
+      "delta": 0.023676258704751763,
+      "ci95": [
+        0.004694101599033845,
+        0.05144907063090477
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "better"
+    },
+    "c1mm": {
+      "samples": 141,
+      "groups": 125,
+      "candidate_iou": 0.785477817891237,
+      "control_iou": 0.7579511802786358,
+      "delta": 0.027526637612601212,
+      "ci95": [
+        0.006894489336024601,
+        0.05534811042903162
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "better"
+    }
+  },
+  "per_dataset": {
+    "ems": {
+      "matched_post": {
+        "samples": 60,
+        "groups": 44,
+        "candidate_iou": 0.790742267746768,
+        "control_iou": 0.7707375362120554,
+        "delta": 0.020004731534712605,
+        "ci95": [
+          -0.0011793508917898904,
+          0.05272217846492655
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      },
+      "c1mm": {
+        "samples": 60,
+        "groups": 44,
+        "candidate_iou": 0.790742267746768,
+        "control_iou": 0.7597326710584411,
+        "delta": 0.031009596688326924,
+        "ci95": [
+          0.01146095118020743,
+          0.0631453410341538
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      }
+    },
+    "floga": {
+      "matched_post": {
+        "samples": 81,
+        "groups": 81,
+        "candidate_iou": 0.752343058821303,
+        "control_iou": 0.7075238415695804,
+        "delta": 0.044819217251722665,
+        "ci95": [
+          -0.0018523911784841915,
+          0.0999485663050259
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      },
+      "c1mm": {
+        "samples": 81,
+        "groups": 81,
+        "candidate_iou": 0.752343058821303,
+        "control_iou": 0.7467238428169065,
+        "delta": 0.005619216004396521,
+        "ci95": [
+          -0.05371769896771885,
+          0.05767384140270976
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      }
+    }
+  },
+  "lost_events": {
+    "pair": 2,
+    "post": 0,
+    "c1mm": 1
+  },
+  "accepted": false,
+  "pooled_iou": {
+    "pair": 0.785477817891237,
+    "post": 0.7618015591864853,
+    "c1mm": 0.7579511802786358
+  },
+  "spec_id": "SPEC-91",
+  "recipe_id": "d46363e0848887556d3b5bf15f71fa29d3695da383ace2337e26fb4a58a39af9",
+  "data_manifest": "1a70bf29a0b9e3c8462396967fdc12fca7f92ae29a236636de5585c74692f373",
+  "models": {
+    "post": [
+      {
+        "path": "research/forest-pair-v1/post-s1/model.pt",
+        "sha256": "d90e94d9d5272356c7d1acc07356630eb4124cfcb019007d9969425d79e67d35"
+      },
+      {
+        "path": "research/forest-pair-v1/post-s2/model.pt",
+        "sha256": "e44ce94b3f3719470837d0fccca0519ed4e32c84e14bad19ff6352ca0dcf7de4"
+      },
+      {
+        "path": "research/forest-pair-v1/post-s3/model.pt",
+        "sha256": "73dbc44d336dcb55d80cc3f7b4357083129a60fae35a522ca395722f0d6d398a"
+      }
+    ],
+    "pair": [
+      {
+        "path": "research/forest-pair-v1/pair-s1/model.pt",
+        "sha256": "77760acf926191be8683c614ed4298edbca7899ada98a5848765ef891eb4299a"
+      },
+      {
+        "path": "research/forest-pair-v1/pair-s2/model.pt",
+        "sha256": "b5c90fac02e39c3db4de5f9d5557af46c24ef7b02f9a90b0a56b41baaca325a2"
+      },
+      {
+        "path": "research/forest-pair-v1/pair-s3/model.pt",
+        "sha256": "e407232a0b6b8b3c71eb7d59a26066ce86ad9bc350988657b2ab661f8fc1d5d2"
+      }
+    ],
+    "c1mm": [
+      {
+        "path": "/home/mc/fires/research/hls-c1mm-final-s1/model.pt",
+        "sha256": "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c"
+      },
+      {
+        "path": "/home/mc/fires/research/hls-c1mm-final-s2/model.pt",
+        "sha256": "a0282b7c31c77d0941c1ed0d10981dd526c7345c5c7335cd2d8fb071ec40c0e0"
+      },
+      {
+        "path": "/home/mc/fires/research/hls-c1mm-final-s3/model.pt",
+        "sha256": "48a3faa63c8814f793e2963f8db8ef2a42466d0f021463f84e58b5cdb834d61e"
+      },
+      {
+        "path": "/home/mc/fires/research/hls-c1mm-final-s4/model.pt",
+        "sha256": "504141c858b50615e0a884dfa512f20360ceb2b86455967cb056279d2497ba8b"
+      },
+      {
+        "path": "/home/mc/fires/research/hls-c1mm-final-s5/model.pt",
+        "sha256": "a48abe8b5c98883cf2f60a23eb457e39e5fea7584bafb4266d05eb7bcb16719f"
+      }
+    ]
+  },
+  "per_window": [
+    {
+      "sample_id": "ems:ems_EMSR656_AOI01_HLS.S30.T30TYK.2023095T105031.v2.0",
+      "group_id": "ems:EMSR656",
+      "dataset": "ems",
+      "valid_pixels": 107229,
+      "fmask_sha256": "4ebace992064e2ee279c8a6bee90974fb6361cf640cfed0bd90e88623040e7fc",
+      "post": [
+        49442,
+        4811,
+        827
+      ],
+      "pair": [
+        48128,
+        3012,
+        2141
+      ],
+      "c1mm": [
+        49886,
+        3457,
+        383
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR667_AOI01_HLS.S30.T30TTK.2023176T110619.v2.0",
+      "group_id": "ems:EMSR667",
+      "dataset": "ems",
+      "valid_pixels": 262144,
+      "fmask_sha256": "0fc5269dc62dfd111f17829d4ae04cd28822970610aea7cd4a4888d2ba665172",
+      "post": [
+        100170,
+        2766,
+        10267
+      ],
+      "pair": [
+        104617,
+        3102,
+        5820
+      ],
+      "c1mm": [
+        109525,
+        6167,
+        912
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR671_AOI01_HLS.S30.T28RBS.2023223T120331.v2.0",
+      "group_id": "ems:EMSR671",
+      "dataset": "ems",
+      "valid_pixels": 144335,
+      "fmask_sha256": "6dfba33128789d81c90e1f173d5953ef511a937b539242b22c6f73cd6c343b40",
+      "post": [
+        7093,
+        289,
+        17783
+      ],
+      "pair": [
+        21930,
+        3669,
+        2946
+      ],
+      "c1mm": [
+        20455,
+        2105,
+        4421
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR674_AOI01_HLS.S30.T34SFH.2023215T090601.v2.0",
+      "group_id": "ems:EMSR674",
+      "dataset": "ems",
+      "valid_pixels": 28936,
+      "fmask_sha256": "ede977ddbc354adb35283f9c1a7f02a5e11de99b7aee5e2b0195e3ec8959a9c4",
+      "post": [
+        10634,
+        831,
+        437
+      ],
+      "pair": [
+        10713,
+        815,
+        358
+      ],
+      "c1mm": [
+        10859,
+        1370,
+        212
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR675_AOI01_HLS.S30.T35SNV.2023209T084601.v2.0",
+      "group_id": "ems:EMSR675",
+      "dataset": "ems",
+      "valid_pixels": 211849,
+      "fmask_sha256": "299ed42bfdfbd1c5b3b70fd8aec9e1bbeb125b02f93b55d278c833dfcbd9cc8a",
+      "post": [
+        107389,
+        1879,
+        2653
+      ],
+      "pair": [
+        107766,
+        2423,
+        2276
+      ],
+      "c1mm": [
+        109423,
+        6191,
+        619
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR677_AOI01_HLS.S30.T34TDK.2023231T093041.v2.0",
+      "group_id": "ems:EMSR677",
+      "dataset": "ems",
+      "valid_pixels": 131001,
+      "fmask_sha256": "67b7484b18dad28a7673f45d7292f4058fb64e7aee0b908de84a02698d5a2dc4",
+      "post": [
+        21568,
+        843,
+        2648
+      ],
+      "pair": [
+        22180,
+        754,
+        2036
+      ],
+      "c1mm": [
+        21325,
+        851,
+        2891
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR681_AOI01_HLS.S30.T29TPE.2023219T112119.v2.0",
+      "group_id": "ems:EMSR681",
+      "dataset": "ems",
+      "valid_pixels": 234291,
+      "fmask_sha256": "3d525642a761a8163637ce0bd26b38732423c513b2dfc96a3be4d24819a40374",
+      "post": [
+        57318,
+        1680,
+        1366
+      ],
+      "pair": [
+        56877,
+        1201,
+        1807
+      ],
+      "c1mm": [
+        58196,
+        2923,
+        488
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR686_AOI01_HLS.S30.T35TMF.2023240T090559.v2.0",
+      "group_id": "ems:EMSR686",
+      "dataset": "ems",
+      "valid_pixels": 249674,
+      "fmask_sha256": "07c61532ca12076b1838c7a35434db6c8dd3bb18e718582c9a3327d7c42b51a8",
+      "post": [
+        175431,
+        264,
+        49770
+      ],
+      "pair": [
+        182934,
+        311,
+        42267
+      ],
+      "c1mm": [
+        190127,
+        976,
+        35074
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR688_AOI01_HLS.S30.T34SGH.2023235T090601.v2.0",
+      "group_id": "ems:EMSR688",
+      "dataset": "ems",
+      "valid_pixels": 110306,
+      "fmask_sha256": "64be09512251b1863c94e2fb79472087566b56f999796d62310d81946d42b999",
+      "post": [
+        5824,
+        866,
+        49
+      ],
+      "pair": [
+        5834,
+        934,
+        39
+      ],
+      "c1mm": [
+        5827,
+        1082,
+        46
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR689_AOI01_HLS.S30.T35TLF.2023240T090559.v2.0",
+      "group_id": "ems:EMSR689",
+      "dataset": "ems",
+      "valid_pixels": 113097,
+      "fmask_sha256": "a5ae4911abb5f2e8dbd687ad53e4a4012df180a1ab49e461be58d2fb9d5a2608",
+      "post": [
+        22921,
+        1880,
+        4594
+      ],
+      "pair": [
+        23025,
+        1674,
+        4490
+      ],
+      "c1mm": [
+        23552,
+        2419,
+        3963
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR689_AOI02_HLS.S30.T35TLF.2023240T090559.v2.0",
+      "group_id": "ems:EMSR689",
+      "dataset": "ems",
+      "valid_pixels": 15713,
+      "fmask_sha256": "a0a74b3eb21a692c4424f5e7fa98b0da01de1f411c15a09889417189e8152bd1",
+      "post": [
+        3678,
+        1084,
+        196
+      ],
+      "pair": [
+        3742,
+        1367,
+        132
+      ],
+      "c1mm": [
+        3767,
+        1503,
+        107
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR704_AOI01_HLS.S30.T31SBD.2023325T105341.v2.0",
+      "group_id": "ems:EMSR704",
+      "dataset": "ems",
+      "valid_pixels": 114142,
+      "fmask_sha256": "e4597c835ff944ccdcf96fb253eeae22e5f0709d079f6319208cb942e92bddb9",
+      "post": [
+        21570,
+        3649,
+        698
+      ],
+      "pair": [
+        21761,
+        3893,
+        507
+      ],
+      "c1mm": [
+        21363,
+        3412,
+        905
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR731_AOI01_HLS.S30.T34SEG.2024198T091559.v2.0",
+      "group_id": "ems:EMSR731",
+      "dataset": "ems",
+      "valid_pixels": 13938,
+      "fmask_sha256": "fcd8d29c24761854d81b5cd879a10c222d4a39363d23336417083122b170f0e6",
+      "post": [
+        916,
+        356,
+        225
+      ],
+      "pair": [
+        969,
+        380,
+        172
+      ],
+      "c1mm": [
+        977,
+        460,
+        164
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR733_AOI01_HLS.S30.T34SGH.2024210T090601.v2.0",
+      "group_id": "ems:EMSR733",
+      "dataset": "ems",
+      "valid_pixels": 9113,
+      "fmask_sha256": "a04b71a8119f008cbb9f46323637cbeb95f7f924e0b33a5559032c241ea8ea52",
+      "post": [
+        704,
+        284,
+        10
+      ],
+      "pair": [
+        708,
+        294,
+        6
+      ],
+      "c1mm": [
+        675,
+        59,
+        39
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR733_AOI02_HLS.S30.T35SKC.2024205T090559.v2.0",
+      "group_id": "ems:EMSR733",
+      "dataset": "ems",
+      "valid_pixels": 11302,
+      "fmask_sha256": "9fff6b6b76725db84a5f176d1563acd20553b4604ace639065ad1104a72dfae9",
+      "post": [
+        1309,
+        145,
+        151
+      ],
+      "pair": [
+        1395,
+        240,
+        65
+      ],
+      "c1mm": [
+        1369,
+        242,
+        91
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR733_AOI03_HLS.S30.T35SKB.2024210T090601.v2.0",
+      "group_id": "ems:EMSR733",
+      "dataset": "ems",
+      "valid_pixels": 34257,
+      "fmask_sha256": "30bdfeca4c397f84dbd18eb1e6682ffa9f4d0b0482ea2ed1dd1939e21f134259",
+      "post": [
+        3699,
+        922,
+        306
+      ],
+      "pair": [
+        3725,
+        636,
+        280
+      ],
+      "c1mm": [
+        3890,
+        1471,
+        115
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR735_AOI01_HLS.S30.T35SNA.2024212T085559.v2.0",
+      "group_id": "ems:EMSR735",
+      "dataset": "ems",
+      "valid_pixels": 67647,
+      "fmask_sha256": "19a7d4994880a2a4acaf6cf54817b5ae96a1070988887a9597c79e0e405c6b72",
+      "post": [
+        4693,
+        809,
+        194
+      ],
+      "pair": [
+        4808,
+        1252,
+        79
+      ],
+      "c1mm": [
+        4787,
+        1395,
+        100
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR737_AOI01_HLS.S30.T34SFH.2024205T090559.v2.0",
+      "group_id": "ems:EMSR737",
+      "dataset": "ems",
+      "valid_pixels": 61897,
+      "fmask_sha256": "2ecc87872d1642401fd1e65a0bdfcd8fd968699fb3a3563f297079cb84b58b48",
+      "post": [
+        5151,
+        801,
+        821
+      ],
+      "pair": [
+        5347,
+        871,
+        625
+      ],
+      "c1mm": [
+        5476,
+        1346,
+        496
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR739_AOI01_HLS.S30.T33TVL.2024220T095549.v2.0",
+      "group_id": "ems:EMSR739",
+      "dataset": "ems",
+      "valid_pixels": 8224,
+      "fmask_sha256": "a31eb26d16fee9c5d57527531de2b3a55212e61446b14caeae0396f2f29991c5",
+      "post": [
+        203,
+        4,
+        328
+      ],
+      "pair": [
+        375,
+        55,
+        156
+      ],
+      "c1mm": [
+        3,
+        0,
+        528
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR743_AOI01_HLS.S30.T34SGH.2024230T090551.v2.0",
+      "group_id": "ems:EMSR743",
+      "dataset": "ems",
+      "valid_pixels": 121313,
+      "fmask_sha256": "3b652ead86b1602a1854d5f3cae16bec985eec5cd254e1f5b527909d322fe031",
+      "post": [
+        8469,
+        275,
+        241
+      ],
+      "pair": [
+        8568,
+        320,
+        142
+      ],
+      "c1mm": [
+        8580,
+        474,
+        130
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR745_AOI01_HLS.S30.T35SKV.2024225T090559.v2.0",
+      "group_id": "ems:EMSR745",
+      "dataset": "ems",
+      "valid_pixels": 69588,
+      "fmask_sha256": "0eb94d61717db4be6178d65e48bf4a04cda0350e15bafed38e225dad66e18a90",
+      "post": [
+        9341,
+        800,
+        1305
+      ],
+      "pair": [
+        9512,
+        850,
+        1134
+      ],
+      "c1mm": [
+        10231,
+        1567,
+        415
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR760_AOI01_HLS.S30.T29TNF.2024274T112119.v2.0",
+      "group_id": "ems:EMSR760",
+      "dataset": "ems",
+      "valid_pixels": 259002,
+      "fmask_sha256": "7b3621276f19df4f84147b039132014d8ca1ea4005bc833c9575b62d7e6773d1",
+      "post": [
+        151668,
+        12215,
+        12473
+      ],
+      "pair": [
+        143327,
+        6633,
+        20814
+      ],
+      "c1mm": [
+        162389,
+        35203,
+        1752
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR760_AOI02_HLS.S30.T29TNF.2024274T112119.v2.0",
+      "group_id": "ems:EMSR760",
+      "dataset": "ems",
+      "valid_pixels": 260846,
+      "fmask_sha256": "6aab37d607bd73d857df2e673ec8a6010a088bf06d45e1295095eb58a75474aa",
+      "post": [
+        91460,
+        5269,
+        6578
+      ],
+      "pair": [
+        84296,
+        3041,
+        13742
+      ],
+      "c1mm": [
+        80792,
+        4135,
+        17246
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0",
+      "group_id": "ems:EMSR760",
+      "dataset": "ems",
+      "valid_pixels": 260290,
+      "fmask_sha256": "ac690a275aa376428bba1be702bbfb8c2a1bc1ee642c05a798763b1859f8a470",
+      "post": [
+        0,
+        700,
+        41564
+      ],
+      "pair": [
+        0,
+        0,
+        41564
+      ],
+      "c1mm": [
+        0,
+        1869,
+        41564
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR760_AOI04_HLS.S30.T29TNG.2024274T112119.v2.0",
+      "group_id": "ems:EMSR760",
+      "dataset": "ems",
+      "valid_pixels": 259271,
+      "fmask_sha256": "e8dd7ea4d1c76f3f32f4c595d84da5795fbf3cf105c7d1c035e787ec34440abd",
+      "post": [
+        34101,
+        3667,
+        3434
+      ],
+      "pair": [
+        31131,
+        1974,
+        6404
+      ],
+      "c1mm": [
+        34102,
+        3599,
+        3433
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR806_AOI01_HLS.S30.T35SMC.2025183T090411.v2.0",
+      "group_id": "ems:EMSR806",
+      "dataset": "ems",
+      "valid_pixels": 201263,
+      "fmask_sha256": "3b99fa8933256a1833f33d6813bc33059a23a7a3e7242a698e9482d10c3a4a79",
+      "post": [
+        51636,
+        16282,
+        1025
+      ],
+      "pair": [
+        49742,
+        11464,
+        2919
+      ],
+      "c1mm": [
+        52063,
+        18111,
+        598
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR806_AOI02_HLS.S30.T35SMC.2025174T090611.v2.0",
+      "group_id": "ems:EMSR806",
+      "dataset": "ems",
+      "valid_pixels": 5222,
+      "fmask_sha256": "7082d743f6ca20280109fd7e858b22be91bbaafbb02530fe232ba1b839136156",
+      "post": [
+        139,
+        98,
+        15
+      ],
+      "pair": [
+        154,
+        360,
+        0
+      ],
+      "c1mm": [
+        154,
+        982,
+        0
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR807_AOI01_HLS.S30.T34SGG.2025204T090621.v2.0",
+      "group_id": "ems:EMSR807",
+      "dataset": "ems",
+      "valid_pixels": 11508,
+      "fmask_sha256": "4de9fa03bc6132ffcd203f109651642fcc19961d665b39fd0c2710bc5fa61da8",
+      "post": [
+        2608,
+        289,
+        178
+      ],
+      "pair": [
+        2676,
+        413,
+        110
+      ],
+      "c1mm": [
+        2705,
+        584,
+        81
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR809_AOI01_HLS.S30.T35SLU.2025201T085621.v2.0",
+      "group_id": "ems:EMSR809",
+      "dataset": "ems",
+      "valid_pixels": 132572,
+      "fmask_sha256": "8c708288de727845bc1fbc647b3da4cf6dfb96288493514fe2b9dbb4e6632c22",
+      "post": [
+        3248,
+        1009,
+        366
+      ],
+      "pair": [
+        3238,
+        1019,
+        376
+      ],
+      "c1mm": [
+        3491,
+        1672,
+        123
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR812_AOI01_HLS.S30.T31TBF.2025214T105051.v2.0",
+      "group_id": "ems:EMSR812",
+      "dataset": "ems",
+      "valid_pixels": 180178,
+      "fmask_sha256": "94e0383fff07ede7df45ef73aee00749d8da61c66fa53d1b8d8bef1dfed5af15",
+      "post": [
+        17679,
+        6197,
+        1030
+      ],
+      "pair": [
+        17096,
+        5025,
+        1613
+      ],
+      "c1mm": [
+        17605,
+        5886,
+        1104
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR815_AOI01_HLS.S30.T34SFH.2025209T092231.v2.0",
+      "group_id": "ems:EMSR815",
+      "dataset": "ems",
+      "valid_pixels": 67110,
+      "fmask_sha256": "eab7d26b158d7280444d68fd2f882e560bc9c5229154d83d17963eb2a0d6c2b5",
+      "post": [
+        9437,
+        642,
+        191
+      ],
+      "pair": [
+        9487,
+        635,
+        141
+      ],
+      "c1mm": [
+        8856,
+        502,
+        772
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR821_AOI01_HLS.S30.T34SEG.2025209T092231.v2.0",
+      "group_id": "ems:EMSR821",
+      "dataset": "ems",
+      "valid_pixels": 173205,
+      "fmask_sha256": "d6eb8df1ed3936d78e5f8cfc220c00a8aaa688f518f7f248821ca0cb47de5b96",
+      "post": [
+        5548,
+        729,
+        94
+      ],
+      "pair": [
+        5361,
+        671,
+        281
+      ],
+      "c1mm": [
+        5585,
+        974,
+        57
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR823_AOI01_HLS.S30.T35SKV.2025234T090611.v2.0",
+      "group_id": "ems:EMSR823",
+      "dataset": "ems",
+      "valid_pixels": 138811,
+      "fmask_sha256": "ba4e77c45abda4457be55ea0d08649f92ee2e102c64848ea446928811d5497c6",
+      "post": [
+        7736,
+        1730,
+        135
+      ],
+      "pair": [
+        7775,
+        637,
+        96
+      ],
+      "c1mm": [
+        7775,
+        787,
+        96
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR824_AOI01_HLS.S30.T29TNF.2025208T112119.v2.0",
+      "group_id": "ems:EMSR824",
+      "dataset": "ems",
+      "valid_pixels": 257611,
+      "fmask_sha256": "29daf9a28bb3ac70a6110a1a7059970373afdfec2fd72bee3fee0919acfaed9d",
+      "post": [
+        784,
+        135,
+        76296
+      ],
+      "pair": [
+        902,
+        12,
+        76178
+      ],
+      "c1mm": [
+        58,
+        144,
+        77022
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR824_AOI02_HLS.S30.T29TNG.2025221T113319.v2.0",
+      "group_id": "ems:EMSR824",
+      "dataset": "ems",
+      "valid_pixels": 194292,
+      "fmask_sha256": "7050f9156402ca655c50f59da2d8719897666f0aaf478a150bd28ddc05871f62",
+      "post": [
+        74656,
+        4285,
+        1287
+      ],
+      "pair": [
+        72999,
+        2510,
+        2944
+      ],
+      "c1mm": [
+        75122,
+        5861,
+        821
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR824_AOI03_HLS.S30.T29TNF.2025228T112119.v2.0",
+      "group_id": "ems:EMSR824",
+      "dataset": "ems",
+      "valid_pixels": 214461,
+      "fmask_sha256": "e3b4aade685790c14e399239ec702635ab92d97b662e6ac95ef5a39f8bac6ccf",
+      "post": [
+        31858,
+        16526,
+        280
+      ],
+      "pair": [
+        31401,
+        15112,
+        737
+      ],
+      "c1mm": [
+        31533,
+        16741,
+        605
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR826_AOI01_HLS.S30.T30TUK.2025222T110701.v2.0",
+      "group_id": "ems:EMSR826",
+      "dataset": "ems",
+      "valid_pixels": 81706,
+      "fmask_sha256": "24a06cec5b1e4b3cf14818ab4e4b7de0d5c576ee3080a184cfa1a3b6f0735bbe",
+      "post": [
+        19288,
+        3937,
+        147
+      ],
+      "pair": [
+        19174,
+        3244,
+        261
+      ],
+      "c1mm": [
+        19248,
+        4336,
+        187
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR828_AOI01_HLS.S30.T35SKB.2025226T091031.v2.0",
+      "group_id": "ems:EMSR828",
+      "dataset": "ems",
+      "valid_pixels": 145691,
+      "fmask_sha256": "3c3e263ab20a261b3eed12bdee68e24b8ed961b90d63f9a3ba21de5ce2d75d32",
+      "post": [
+        17167,
+        6777,
+        416
+      ],
+      "pair": [
+        17152,
+        4227,
+        431
+      ],
+      "c1mm": [
+        17346,
+        9212,
+        237
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR830_AOI01_HLS.S30.T33TVF.2025231T095029.v2.0",
+      "group_id": "ems:EMSR830",
+      "dataset": "ems",
+      "valid_pixels": 61090,
+      "fmask_sha256": "7377cab05a1788b21992043ecd607123482ce694e59184041f420f3b47df58d5",
+      "post": [
+        5504,
+        1059,
+        135
+      ],
+      "pair": [
+        5457,
+        894,
+        182
+      ],
+      "c1mm": [
+        5412,
+        781,
+        227
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR836_AOI01_HLS.S30.T34TCN.2025245T094041.v2.0",
+      "group_id": "ems:EMSR836",
+      "dataset": "ems",
+      "valid_pixels": 210463,
+      "fmask_sha256": "c7949aff50c43e565ba29b42439a82eb2cef0f0a7f8038739e4cafaa63c21b26",
+      "post": [
+        27407,
+        2315,
+        37580
+      ],
+      "pair": [
+        49063,
+        3301,
+        15924
+      ],
+      "c1mm": [
+        14775,
+        1609,
+        50212
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR836_AOI02_HLS.S30.T34TCN.2025245T094041.v2.0",
+      "group_id": "ems:EMSR836",
+      "dataset": "ems",
+      "valid_pixels": 44329,
+      "fmask_sha256": "012300088e5702898522bec4af38a57fc1bde132b6c30c93a52d5b26a1d5476b",
+      "post": [
+        4709,
+        3826,
+        731
+      ],
+      "pair": [
+        4286,
+        1028,
+        1154
+      ],
+      "c1mm": [
+        4607,
+        3813,
+        833
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR836_AOI03_HLS.S30.T34TCM.2025245T093029.v2.0",
+      "group_id": "ems:EMSR836",
+      "dataset": "ems",
+      "valid_pixels": 18501,
+      "fmask_sha256": "8d6c23664236acde49473587924ea77f59da70d8f281586693bde6a86c443dd0",
+      "post": [
+        349,
+        3248,
+        2
+      ],
+      "pair": [
+        279,
+        1471,
+        72
+      ],
+      "c1mm": [
+        225,
+        1355,
+        126
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR836_AOI04_HLS.S30.T34TCN.2025223T094051.v2.0",
+      "group_id": "ems:EMSR836",
+      "dataset": "ems",
+      "valid_pixels": 110329,
+      "fmask_sha256": "fcb8cfad712fc1b5736c85ac3f66b7bbf7ab657d8f6881cfad1027453f04dda8",
+      "post": [
+        1426,
+        4772,
+        2338
+      ],
+      "pair": [
+        0,
+        0,
+        3764
+      ],
+      "c1mm": [
+        82,
+        108,
+        3682
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR836_AOI05_HLS.S30.T34TCN.2025245T094041.v2.0",
+      "group_id": "ems:EMSR836",
+      "dataset": "ems",
+      "valid_pixels": 64679,
+      "fmask_sha256": "d233d5d7b07364197b845238b8ab9922dca90b4a90d5cec422752674f4ebc5f8",
+      "post": [
+        10058,
+        3051,
+        595
+      ],
+      "pair": [
+        10345,
+        1852,
+        308
+      ],
+      "c1mm": [
+        9768,
+        2575,
+        885
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR836_AOI06_HLS.S30.T34TCM.2025245T093029.v2.0",
+      "group_id": "ems:EMSR836",
+      "dataset": "ems",
+      "valid_pixels": 27350,
+      "fmask_sha256": "8e11be81686af63bc2a9ac9a870ff0166f10463ad65c10fcb321156d637f9f5b",
+      "post": [
+        3192,
+        949,
+        523
+      ],
+      "pair": [
+        3554,
+        1195,
+        161
+      ],
+      "c1mm": [
+        2893,
+        952,
+        822
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR873_AOI01_HLS.S30.T32TPP.2026122T101019.v2.0",
+      "group_id": "ems:EMSR873",
+      "dataset": "ems",
+      "valid_pixels": 118788,
+      "fmask_sha256": "78736663448a265d76fdeb831e28a41caf92f62db547ac3d52d98887d5d4f754",
+      "post": [
+        2486,
+        4458,
+        58
+      ],
+      "pair": [
+        2492,
+        3391,
+        52
+      ],
+      "c1mm": [
+        2492,
+        4344,
+        52
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR889_AOI01_HLS.S30.T31TDH.2026188T103701.v2.0",
+      "group_id": "ems:EMSR889",
+      "dataset": "ems",
+      "valid_pixels": 235942,
+      "fmask_sha256": "fe7cf0b8e908cd01f689dcefd328127e38907179512b0126625449ac3698d288",
+      "post": [
+        35354,
+        9469,
+        421
+      ],
+      "pair": [
+        35265,
+        8104,
+        510
+      ],
+      "c1mm": [
+        35505,
+        11601,
+        270
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR894_AOI01_HLS.S30.T31UDP.2026201T105051.v2.0",
+      "group_id": "ems:EMSR894",
+      "dataset": "ems",
+      "valid_pixels": 106029,
+      "fmask_sha256": "90671aaf46a74bcae6e937e7325f01111fff2c43c01a7c39ab37a4f977eddd90",
+      "post": [
+        8883,
+        4962,
+        1119
+      ],
+      "pair": [
+        9541,
+        4854,
+        461
+      ],
+      "c1mm": [
+        6032,
+        3264,
+        3970
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR896_AOI01_HLS.S30.T30TXM.2026204T104619.v2.0",
+      "group_id": "ems:EMSR896",
+      "dataset": "ems",
+      "valid_pixels": 262144,
+      "fmask_sha256": "7fdcafacf4bcd3c940f7ce20404b752af4b1676f6ea80776c12be28018b58cd4",
+      "post": [
+        124109,
+        17923,
+        3394
+      ],
+      "pair": [
+        124565,
+        17032,
+        2938
+      ],
+      "c1mm": [
+        126401,
+        27678,
+        1102
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR898_AOI01_HLS.S30.T30TVL.2026202T105621.v2.0",
+      "group_id": "ems:EMSR898",
+      "dataset": "ems",
+      "valid_pixels": 257350,
+      "fmask_sha256": "ca2ddf0c8e0e8ddbba9c7a137cec8e67d7b48c3761a3592b38c24e07a735fb8c",
+      "post": [
+        136089,
+        25572,
+        4624
+      ],
+      "pair": [
+        136000,
+        23169,
+        4713
+      ],
+      "c1mm": [
+        137599,
+        33152,
+        3114
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR898_AOI02_HLS.S30.T30TWL.2026202T105621.v2.0",
+      "group_id": "ems:EMSR898",
+      "dataset": "ems",
+      "valid_pixels": 89097,
+      "fmask_sha256": "5b97f4c4bda59911f17ef55192c84b288e4a398c37ce298e9fa085492dc280f8",
+      "post": [
+        1188,
+        458,
+        26415
+      ],
+      "pair": [
+        2065,
+        1138,
+        25538
+      ],
+      "c1mm": [
+        7680,
+        2665,
+        19923
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR899_AOI01_HLS.S30.T30TXQ.2026224T105651.v2.0",
+      "group_id": "ems:EMSR899",
+      "dataset": "ems",
+      "valid_pixels": 258487,
+      "fmask_sha256": "193c1f1c6a3b8fe0cbe1bda08f403e3e7d6b2afe5e0d43c89ee617fea1e83db4",
+      "post": [
+        190025,
+        19002,
+        4389
+      ],
+      "pair": [
+        189039,
+        15737,
+        5375
+      ],
+      "c1mm": [
+        192107,
+        27635,
+        2307
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR905_AOI01_HLS.S30.T31TBE.2026229T104621.v2.0",
+      "group_id": "ems:EMSR905",
+      "dataset": "ems",
+      "valid_pixels": 222772,
+      "fmask_sha256": "45acdd70913c1f8d6009b4ed058ebfa66669ad3c8aa113c3060ad1387d2f713a",
+      "post": [
+        79712,
+        15353,
+        1900
+      ],
+      "pair": [
+        80045,
+        17340,
+        1567
+      ],
+      "c1mm": [
+        81120,
+        23121,
+        492
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR913_AOI01_HLS.S30.T29SQB.2026227T110711.v2.0",
+      "group_id": "ems:EMSR913",
+      "dataset": "ems",
+      "valid_pixels": 262144,
+      "fmask_sha256": "58619aea4f07cf27d9ce34f7602c30756437bd79bcda99ef1bed2a4eb1cb1a80",
+      "post": [
+        158735,
+        27461,
+        8937
+      ],
+      "pair": [
+        161118,
+        30156,
+        6554
+      ],
+      "c1mm": [
+        160850,
+        37720,
+        6822
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR915_AOI01_HLS.S30.T34TCL.2026237T093151.v2.0",
+      "group_id": "ems:EMSR915",
+      "dataset": "ems",
+      "valid_pixels": 32721,
+      "fmask_sha256": "5c957a700a3a48e668623d78620f8743ccf99312b2854dafb4a783fa13996f7c",
+      "post": [
+        1355,
+        1038,
+        928
+      ],
+      "pair": [
+        1741,
+        1137,
+        542
+      ],
+      "c1mm": [
+        1302,
+        804,
+        981
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR917_AOI01_HLS.S30.T34TDM.2026240T093029.v2.0",
+      "group_id": "ems:EMSR917",
+      "dataset": "ems",
+      "valid_pixels": 29652,
+      "fmask_sha256": "e95362eb5956532d951be98b7e20e119d22df39068d2e53729e9242673b1c673",
+      "post": [
+        2460,
+        1360,
+        179
+      ],
+      "pair": [
+        2436,
+        921,
+        203
+      ],
+      "c1mm": [
+        2546,
+        1490,
+        93
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR917_AOI02_HLS.S30.T34TCM.2026240T093029.v2.0",
+      "group_id": "ems:EMSR917",
+      "dataset": "ems",
+      "valid_pixels": 60604,
+      "fmask_sha256": "9a814054adb2a56f5ddea4c8845e293999db5f077c5318de2e04fa610b7ca8e3",
+      "post": [
+        347,
+        1300,
+        497
+      ],
+      "pair": [
+        504,
+        130,
+        340
+      ],
+      "c1mm": [
+        13,
+        6,
+        831
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR921_AOI01_HLS.S30.T30TXN.2026231T104651.v2.0",
+      "group_id": "ems:EMSR921",
+      "dataset": "ems",
+      "valid_pixels": 262137,
+      "fmask_sha256": "c07cf8f9eca84d5ac231161ea7965627e1c4696cda1d3bf45962d0ba0d2f0676",
+      "post": [
+        136457,
+        22638,
+        1440
+      ],
+      "pair": [
+        137336,
+        28251,
+        561
+      ],
+      "c1mm": [
+        137492,
+        34642,
+        405
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR923_AOI01_HLS.S30.T34SGJ.2026254T090549.v2.0",
+      "group_id": "ems:EMSR923",
+      "dataset": "ems",
+      "valid_pixels": 45903,
+      "fmask_sha256": "e6d260616d0c43acebaa51fae4190781a376f280379c008cb94cdb3b6fb4dd90",
+      "post": [
+        4170,
+        1359,
+        54
+      ],
+      "pair": [
+        4196,
+        1641,
+        28
+      ],
+      "c1mm": [
+        4182,
+        1752,
+        42
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR924_AOI01_HLS.S30.T33TUM.2026259T100701.v2.0",
+      "group_id": "ems:EMSR924",
+      "dataset": "ems",
+      "valid_pixels": 168023,
+      "fmask_sha256": "a468ae28c2fdfabf5eee1684f04b5278e9f6d3a1cd96b6afa4a4de1005cf9339",
+      "post": [
+        2511,
+        413,
+        2302
+      ],
+      "pair": [
+        3806,
+        965,
+        1007
+      ],
+      "c1mm": [
+        2544,
+        401,
+        2269
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_729978_HLS.S30.T35TMF.2020061T090901.v2.0",
+      "group_id": "floga:729978",
+      "dataset": "floga",
+      "valid_pixels": 261755,
+      "fmask_sha256": "317d92e51c3226cebef719440c7183730fec4bb181e1ecceea9a3c2f5b8567a9",
+      "post": [
+        305,
+        4601,
+        1
+      ],
+      "pair": [
+        297,
+        1881,
+        9
+      ],
+      "c1mm": [
+        272,
+        2600,
+        34
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_742837_HLS.S30.T34SEG.2020129T092029.v2.0",
+      "group_id": "floga:742837",
+      "dataset": "floga",
+      "valid_pixels": 255632,
+      "fmask_sha256": "68002ac16efa6d95c10bb1e44dd9e53747eb05368557b47af6891b16d91b6798",
+      "post": [
+        375,
+        55,
+        34
+      ],
+      "pair": [
+        409,
+        938,
+        0
+      ],
+      "c1mm": [
+        396,
+        85,
+        13
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_758391_HLS.S30.T34SGH.2020181T090601.v2.0",
+      "group_id": "floga:758391",
+      "dataset": "floga",
+      "valid_pixels": 246149,
+      "fmask_sha256": "ad3a3a29c89cef5701d72eb2eb02f91590bf6fc04aa767170f4fc74927848e81",
+      "post": [
+        566,
+        682,
+        3
+      ],
+      "pair": [
+        553,
+        176,
+        16
+      ],
+      "c1mm": [
+        563,
+        568,
+        6
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_758845_HLS.S30.T35TKE.2020186T090559.v2.0",
+      "group_id": "floga:758845",
+      "dataset": "floga",
+      "valid_pixels": 244610,
+      "fmask_sha256": "68e57e09a33ed0cb591a8f7966b8c43b3a1b53f247611483108aed09199138aa",
+      "post": [
+        448,
+        63,
+        3
+      ],
+      "pair": [
+        451,
+        419,
+        0
+      ],
+      "c1mm": [
+        446,
+        93,
+        5
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_760637_HLS.S30.T34SFH.2020186T090559.v2.0",
+      "group_id": "floga:760637",
+      "dataset": "floga",
+      "valid_pixels": 237036,
+      "fmask_sha256": "8683a98e8daff0797ca412418acc10140f7a039c0f9a2e82a5b0192ec96a19b7",
+      "post": [
+        3249,
+        389,
+        67
+      ],
+      "pair": [
+        3288,
+        565,
+        28
+      ],
+      "c1mm": [
+        3276,
+        568,
+        40
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_766850_HLS.S30.T34SFG.2020211T090601.v2.0",
+      "group_id": "floga:766850",
+      "dataset": "floga",
+      "valid_pixels": 255253,
+      "fmask_sha256": "a0ec19597913fd027d05d258ece732c24d9e77c7a009d66259b7dd3c3a55e3d3",
+      "post": [
+        31124,
+        1974,
+        2594
+      ],
+      "pair": [
+        31660,
+        3084,
+        2058
+      ],
+      "c1mm": [
+        32681,
+        3806,
+        1037
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_770245_HLS.S30.T35SMD.2020213T085559.v2.0",
+      "group_id": "floga:770245",
+      "dataset": "floga",
+      "valid_pixels": 262022,
+      "fmask_sha256": "0b4e92641055c995171aa41b1ea149610ae9b41b7507d09dc7e1d50bc31ddc93",
+      "post": [
+        303,
+        3751,
+        0
+      ],
+      "pair": [
+        302,
+        513,
+        1
+      ],
+      "c1mm": [
+        303,
+        1529,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_771135_HLS.S30.T34SEG.2020214T092031.v2.0",
+      "group_id": "floga:771135",
+      "dataset": "floga",
+      "valid_pixels": 239280,
+      "fmask_sha256": "113302202147de643ffbfe640407916dd2334965ed14284c98b1101ba2498584",
+      "post": [
+        2992,
+        390,
+        131
+      ],
+      "pair": [
+        3080,
+        441,
+        43
+      ],
+      "c1mm": [
+        3053,
+        732,
+        70
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_771206_HLS.S30.T34SGG.2020211T090601.v2.0",
+      "group_id": "floga:771206",
+      "dataset": "floga",
+      "valid_pixels": 261113,
+      "fmask_sha256": "f4055254bbc14495374cc34419072d773393ddc7e7c7d792aed95dbe72435fde",
+      "post": [
+        622,
+        145,
+        2
+      ],
+      "pair": [
+        623,
+        263,
+        1
+      ],
+      "c1mm": [
+        623,
+        136,
+        1
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_771785_HLS.S30.T34SEG.2020214T092031.v2.0",
+      "group_id": "floga:771785",
+      "dataset": "floga",
+      "valid_pixels": 256307,
+      "fmask_sha256": "b5cfbb7903c8a32c7392745b5b12e134a74bb3b7bc9b20a8cee8227a8ef56963",
+      "post": [
+        619,
+        51,
+        69
+      ],
+      "pair": [
+        682,
+        141,
+        6
+      ],
+      "c1mm": [
+        667,
+        123,
+        21
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_772120_HLS.S30.T35SLV.2020213T085559.v2.0",
+      "group_id": "floga:772120",
+      "dataset": "floga",
+      "valid_pixels": 256799,
+      "fmask_sha256": "f2df887a872e7b4ab519e4e1f0b99ad8fd8590e7953e6700694b57480b607e65",
+      "post": [
+        557,
+        97,
+        5
+      ],
+      "pair": [
+        561,
+        149,
+        1
+      ],
+      "c1mm": [
+        557,
+        110,
+        5
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_773502_HLS.S30.T34SFH.2020224T092031.v2.0",
+      "group_id": "floga:773502",
+      "dataset": "floga",
+      "valid_pixels": 261379,
+      "fmask_sha256": "526c446037eac015cd3363bd43f9d20b24b9b133fa0f80338b759ab2f3044e32",
+      "post": [
+        336,
+        162,
+        6
+      ],
+      "pair": [
+        340,
+        180,
+        2
+      ],
+      "c1mm": [
+        325,
+        55,
+        17
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_774109_HLS.S30.T34TDK.2020217T093041.v2.0",
+      "group_id": "floga:774109",
+      "dataset": "floga",
+      "valid_pixels": 258482,
+      "fmask_sha256": "4918e7c619069895b441ba025b7c84cc923ebf2fb1c609b275b3f5edcb660448",
+      "post": [
+        5407,
+        953,
+        108
+      ],
+      "pair": [
+        4999,
+        283,
+        516
+      ],
+      "c1mm": [
+        5423,
+        1280,
+        92
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_774221_HLS.S30.T34SFG.2020216T090559.v2.0",
+      "group_id": "floga:774221",
+      "dataset": "floga",
+      "valid_pixels": 258718,
+      "fmask_sha256": "ce3d844522f8ed0fb8c76abc33ed64f17c6691df7fc56f0a2b219792ab832c13",
+      "post": [
+        718,
+        50,
+        13
+      ],
+      "pair": [
+        725,
+        80,
+        6
+      ],
+      "c1mm": [
+        727,
+        91,
+        4
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_775468_HLS.S30.T34SFH.2020239T092029.v2.0",
+      "group_id": "floga:775468",
+      "dataset": "floga",
+      "valid_pixels": 253192,
+      "fmask_sha256": "09f34b11e5ad206cde06af33150b520e2618bf5728be4788d425f13617fd01a7",
+      "post": [
+        468,
+        67,
+        8
+      ],
+      "pair": [
+        475,
+        161,
+        1
+      ],
+      "c1mm": [
+        473,
+        117,
+        3
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_777334_HLS.S30.T35SMC.2020243T085559.v2.0",
+      "group_id": "floga:777334",
+      "dataset": "floga",
+      "valid_pixels": 257878,
+      "fmask_sha256": "5514cd95231add23b83a72fe6ab7d3d6f9e2e1ad8cab72f2a00df87d12797685",
+      "post": [
+        304,
+        152,
+        0
+      ],
+      "pair": [
+        304,
+        56,
+        0
+      ],
+      "c1mm": [
+        304,
+        81,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_777338_HLS.S30.T34SGE.2020236T090559.v2.0",
+      "group_id": "floga:777338",
+      "dataset": "floga",
+      "valid_pixels": 260143,
+      "fmask_sha256": "cf4bffc07de52c0b1ec154204ac9d5c52ee8ce7307ace40d82ba1bd941ff1ad7",
+      "post": [
+        3374,
+        546,
+        86
+      ],
+      "pair": [
+        3388,
+        494,
+        72
+      ],
+      "c1mm": [
+        3423,
+        868,
+        37
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_777493_HLS.S30.T35SMB.2020228T085601.v2.0",
+      "group_id": "floga:777493",
+      "dataset": "floga",
+      "valid_pixels": 258791,
+      "fmask_sha256": "303ab5772d208a7ca40c94b57512ed696eed9d15ec4fdf1b10a31002505f7a9d",
+      "post": [
+        297,
+        34,
+        9
+      ],
+      "pair": [
+        306,
+        67,
+        0
+      ],
+      "c1mm": [
+        305,
+        85,
+        1
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_777825_HLS.S30.T35SLB.2020246T090559.v2.0",
+      "group_id": "floga:777825",
+      "dataset": "floga",
+      "valid_pixels": 259769,
+      "fmask_sha256": "96158e4d0189217f45261a561b5124fc14fef4fae7a25cf857a79545a2573a1f",
+      "post": [
+        1215,
+        108,
+        39
+      ],
+      "pair": [
+        1234,
+        159,
+        20
+      ],
+      "c1mm": [
+        1226,
+        184,
+        28
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_778632_HLS.S30.T35SMD.2020236T090559.v2.0",
+      "group_id": "floga:778632",
+      "dataset": "floga",
+      "valid_pixels": 262091,
+      "fmask_sha256": "1d4009fe44f2c5b4b2d3dfe6d902a2e7ad27994c108c0ac7d605791a62ee5293",
+      "post": [
+        672,
+        82,
+        21
+      ],
+      "pair": [
+        680,
+        116,
+        13
+      ],
+      "c1mm": [
+        683,
+        135,
+        10
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_779965_HLS.S30.T34SFF.2020244T092031.v2.0",
+      "group_id": "floga:779965",
+      "dataset": "floga",
+      "valid_pixels": 262117,
+      "fmask_sha256": "1c6aa4b763cea94af099f2bb450c6e2539b2bab6282e93691155dc0a3508e971",
+      "post": [
+        18685,
+        1859,
+        283
+      ],
+      "pair": [
+        18684,
+        1532,
+        284
+      ],
+      "c1mm": [
+        18815,
+        2278,
+        153
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_780038_HLS.S30.T34SFG.2020246T090559.v2.0",
+      "group_id": "floga:780038",
+      "dataset": "floga",
+      "valid_pixels": 253014,
+      "fmask_sha256": "485ca193d233a469ca6c398332f6cde7e2a00320e9152b10e3de9a1aced3230d",
+      "post": [
+        980,
+        25,
+        72
+      ],
+      "pair": [
+        1016,
+        51,
+        36
+      ],
+      "c1mm": [
+        1011,
+        70,
+        41
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_782085_HLS.S30.T34SFG.2020251T090601.v2.0",
+      "group_id": "floga:782085",
+      "dataset": "floga",
+      "valid_pixels": 259193,
+      "fmask_sha256": "ae9673a492ba3b68e7c610324aea179fca2115e646ed7a40c80a27fe8c68de41",
+      "post": [
+        1200,
+        106,
+        168
+      ],
+      "pair": [
+        1264,
+        206,
+        104
+      ],
+      "c1mm": [
+        1269,
+        228,
+        99
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_782102_HLS.S30.T35TMF.2020246T090559.v2.0",
+      "group_id": "floga:782102",
+      "dataset": "floga",
+      "valid_pixels": 255397,
+      "fmask_sha256": "a747efed35440794dfdd67fd60e1ff510c861b8d8dd60f7266d91fe5740ef73a",
+      "post": [
+        1253,
+        82,
+        87
+      ],
+      "pair": [
+        1268,
+        47,
+        72
+      ],
+      "c1mm": [
+        1315,
+        276,
+        25
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_782801_HLS.S30.T34SFJ.2020249T092029.v2.0",
+      "group_id": "floga:782801",
+      "dataset": "floga",
+      "valid_pixels": 262141,
+      "fmask_sha256": "ae43b3e1e1ad8601541a35a96a2a507e11384cf71c2b845ac9d5b5513ccf361c",
+      "post": [
+        510,
+        62,
+        39
+      ],
+      "pair": [
+        538,
+        140,
+        11
+      ],
+      "c1mm": [
+        534,
+        118,
+        15
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_783384_HLS.S30.T34SFG.2020254T092031.v2.0",
+      "group_id": "floga:783384",
+      "dataset": "floga",
+      "valid_pixels": 260989,
+      "fmask_sha256": "0e0080f84a0b218107e2032200141b54a68bc1b60fce266c5d2e657e01e879af",
+      "post": [
+        840,
+        12,
+        53
+      ],
+      "pair": [
+        883,
+        102,
+        10
+      ],
+      "c1mm": [
+        864,
+        38,
+        29
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_783502_HLS.S30.T34SDH.2020257T093041.v2.0",
+      "group_id": "floga:783502",
+      "dataset": "floga",
+      "valid_pixels": 257181,
+      "fmask_sha256": "66854d6ebea4a6670baffba13f383d828bc2a0c7b85aade58f6423c86e24347d",
+      "post": [
+        266,
+        275,
+        18
+      ],
+      "pair": [
+        278,
+        405,
+        6
+      ],
+      "c1mm": [
+        267,
+        73,
+        17
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_783508_HLS.S30.T34SFF.2020259T092029.v2.0",
+      "group_id": "floga:783508",
+      "dataset": "floga",
+      "valid_pixels": 261673,
+      "fmask_sha256": "82dccccbc87e622e578c7d306b9c7f890be1b1a6acc2cdc9eb3537a956f4c208",
+      "post": [
+        576,
+        194,
+        1
+      ],
+      "pair": [
+        577,
+        169,
+        0
+      ],
+      "c1mm": [
+        577,
+        157,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_786097_HLS.S30.T35TMF.2020261T090631.v2.0",
+      "group_id": "floga:786097",
+      "dataset": "floga",
+      "valid_pixels": 262059,
+      "fmask_sha256": "58e78548b7aeb5adce901099a56393bfb3f8c38774351956b84400e6c759d1dd",
+      "post": [
+        1790,
+        156,
+        198
+      ],
+      "pair": [
+        1705,
+        83,
+        283
+      ],
+      "c1mm": [
+        1953,
+        529,
+        35
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_786466_HLS.S30.T34SEH.2020264T092031.v2.0",
+      "group_id": "floga:786466",
+      "dataset": "floga",
+      "valid_pixels": 244873,
+      "fmask_sha256": "4e93341e1b44565dc0a856e7b2372417270183b02f370059cd0fdb4f107e00af",
+      "post": [
+        855,
+        364,
+        38
+      ],
+      "pair": [
+        814,
+        262,
+        79
+      ],
+      "c1mm": [
+        877,
+        761,
+        16
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_786481_HLS.S30.T34SFG.2020269T092029.v2.0",
+      "group_id": "floga:786481",
+      "dataset": "floga",
+      "valid_pixels": 228556,
+      "fmask_sha256": "5a4e9a1424ead03d5203d059da1ba8db3fabf3ab72f0d7dcf38794d93f9eaa34",
+      "post": [
+        221,
+        245,
+        19
+      ],
+      "pair": [
+        221,
+        264,
+        19
+      ],
+      "c1mm": [
+        222,
+        142,
+        18
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_786656_HLS.S30.T34SDH.2020259T092029.v2.0",
+      "group_id": "floga:786656",
+      "dataset": "floga",
+      "valid_pixels": 255576,
+      "fmask_sha256": "a28494ad6823a43a74c5931c8b7c2276a870063fb99832b47a5670dbbba35f39",
+      "post": [
+        320,
+        475,
+        12
+      ],
+      "pair": [
+        329,
+        193,
+        3
+      ],
+      "c1mm": [
+        319,
+        78,
+        13
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_786775_HLS.S30.T34SDJ.2020259T092029.v2.0",
+      "group_id": "floga:786775",
+      "dataset": "floga",
+      "valid_pixels": 259897,
+      "fmask_sha256": "0b9b147f0c06403eea22995c5fde09f883e4da10cebc276b3fee5231358b1a48",
+      "post": [
+        224,
+        761,
+        1158
+      ],
+      "pair": [
+        0,
+        0,
+        1382
+      ],
+      "c1mm": [
+        3,
+        88,
+        1379
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_787231_HLS.S30.T34SEH.2020269T092029.v2.0",
+      "group_id": "floga:787231",
+      "dataset": "floga",
+      "valid_pixels": 235911,
+      "fmask_sha256": "aa7a4e36321be041cd79a8e13a755208039c04c1437b76d253b2b9b6d7af863f",
+      "post": [
+        550,
+        125,
+        28
+      ],
+      "pair": [
+        559,
+        144,
+        19
+      ],
+      "c1mm": [
+        574,
+        266,
+        4
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_790723_HLS.S30.T35SLB.2020278T085831.v2.0",
+      "group_id": "floga:790723",
+      "dataset": "floga",
+      "valid_pixels": 261018,
+      "fmask_sha256": "6d656be6ec1c56673836420a487f9423e412a4ef357ffaedffcfb7a45865c9c7",
+      "post": [
+        927,
+        247,
+        26
+      ],
+      "pair": [
+        949,
+        430,
+        4
+      ],
+      "c1mm": [
+        947,
+        432,
+        6
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_791065_HLS.S30.T35SLB.2020271T090731.v2.0",
+      "group_id": "floga:791065",
+      "dataset": "floga",
+      "valid_pixels": 249423,
+      "fmask_sha256": "0b1146058b8175d54a12a90e36f4c6fa6eaee685899886541be3aba135a73f16",
+      "post": [
+        134,
+        54,
+        533
+      ],
+      "pair": [
+        249,
+        582,
+        418
+      ],
+      "c1mm": [
+        646,
+        3213,
+        21
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_792406_HLS.S30.T35TMF.2020278T085831.v2.0",
+      "group_id": "floga:792406",
+      "dataset": "floga",
+      "valid_pixels": 262126,
+      "fmask_sha256": "2aa9f4073cdc85804d87a41a39695f7151a8e63fc2996c475688c3a86df7663b",
+      "post": [
+        5793,
+        580,
+        310
+      ],
+      "pair": [
+        5948,
+        795,
+        155
+      ],
+      "c1mm": [
+        6041,
+        919,
+        62
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_793098_HLS.S30.T34SEH.2020294T092031.v2.0",
+      "group_id": "floga:793098",
+      "dataset": "floga",
+      "valid_pixels": 231028,
+      "fmask_sha256": "f276bfe904bba5e732dbb34bf4b901bcde705059d137e1746504e2451f4347c1",
+      "post": [
+        616,
+        1457,
+        1
+      ],
+      "pair": [
+        587,
+        115,
+        30
+      ],
+      "c1mm": [
+        604,
+        518,
+        13
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_793417_HLS.S30.T34SDG.2020297T093051.v2.0",
+      "group_id": "floga:793417",
+      "dataset": "floga",
+      "valid_pixels": 252768,
+      "fmask_sha256": "1bea6f78f21efb1097fc4dc29c8a512e20f5409a592d79f6a7a8aa4add46f27b",
+      "post": [
+        1802,
+        176,
+        25
+      ],
+      "pair": [
+        1826,
+        639,
+        1
+      ],
+      "c1mm": [
+        1818,
+        282,
+        9
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_793905_HLS.S30.T34SEF.2020284T092031.v2.0",
+      "group_id": "floga:793905",
+      "dataset": "floga",
+      "valid_pixels": 246796,
+      "fmask_sha256": "0245c3a1b4cb369578504038311208506f56450b83a3e8ff4d355842a0658de8",
+      "post": [
+        272,
+        33,
+        10
+      ],
+      "pair": [
+        282,
+        283,
+        0
+      ],
+      "c1mm": [
+        278,
+        66,
+        4
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_794018_HLS.S30.T35SMD.2020298T090041.v2.0",
+      "group_id": "floga:794018",
+      "dataset": "floga",
+      "valid_pixels": 262103,
+      "fmask_sha256": "f8a4345867fe20b4edbf59cb1437c3aa7e86e06e22d013dc3a664daf1589ec4c",
+      "post": [
+        691,
+        4454,
+        8
+      ],
+      "pair": [
+        694,
+        3178,
+        5
+      ],
+      "c1mm": [
+        690,
+        780,
+        9
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_804947_HLS.S30.T34TEK.2020332T093339.v2.0",
+      "group_id": "floga:804947",
+      "dataset": "floga",
+      "valid_pixels": 256830,
+      "fmask_sha256": "ce0dd9d72eb9dd593ba8d98993c68f056596b3f9cc050c35fb5584078fabc23d",
+      "post": [
+        1682,
+        5060,
+        123
+      ],
+      "pair": [
+        1030,
+        1035,
+        775
+      ],
+      "c1mm": [
+        1783,
+        6012,
+        22
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_807048_HLS.S30.T34TGL.2021005T091351.v2.0",
+      "group_id": "floga:807048",
+      "dataset": "floga",
+      "valid_pixels": 212594,
+      "fmask_sha256": "0debcece76bc12b7b7ff7f2e1c798c64cbc037881caff869598c59e7fc2d7752",
+      "post": [
+        2571,
+        4789,
+        3203
+      ],
+      "pair": [
+        0,
+        64,
+        5774
+      ],
+      "c1mm": [
+        2347,
+        5071,
+        3427
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_809191_HLS.S30.T34SGH.2021005T091351.v2.0",
+      "group_id": "floga:809191",
+      "dataset": "floga",
+      "valid_pixels": 231431,
+      "fmask_sha256": "5b5cfd18cfe0b71e309000677f0f958b90e88ff70b590689a5de276693e2cbb1",
+      "post": [
+        461,
+        757,
+        0
+      ],
+      "pair": [
+        461,
+        2189,
+        0
+      ],
+      "c1mm": [
+        461,
+        499,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_833175_HLS.S30.T34TEK.2021063T092029.v2.0",
+      "group_id": "floga:833175",
+      "dataset": "floga",
+      "valid_pixels": 256456,
+      "fmask_sha256": "9c98227acd34a9ccd2203f88ad072bca5e2f4769093702e87efea00aa012d920",
+      "post": [
+        281,
+        3190,
+        13
+      ],
+      "pair": [
+        294,
+        11754,
+        0
+      ],
+      "c1mm": [
+        270,
+        130,
+        24
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_842753_HLS.S30.T35SKB.2021110T090549.v2.0",
+      "group_id": "floga:842753",
+      "dataset": "floga",
+      "valid_pixels": 220780,
+      "fmask_sha256": "1201d6011d35d42b7435442a77ba6b6ae671e9e5d35608c45e57290622cee5fa",
+      "post": [
+        5,
+        5769,
+        2596
+      ],
+      "pair": [
+        30,
+        863,
+        2571
+      ],
+      "c1mm": [
+        0,
+        1515,
+        2601
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_844986_HLS.S30.T34TEL.2021126T093029.v2.0",
+      "group_id": "floga:844986",
+      "dataset": "floga",
+      "valid_pixels": 258852,
+      "fmask_sha256": "de943135b88884e4cfe32eaef0b0f4522b3436502c2fca28c578e3fd1d29845d",
+      "post": [
+        584,
+        1570,
+        0
+      ],
+      "pair": [
+        513,
+        132,
+        71
+      ],
+      "c1mm": [
+        584,
+        1211,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_854440_HLS.S30.T34SFH.2021145T090601.v2.0",
+      "group_id": "floga:854440",
+      "dataset": "floga",
+      "valid_pixels": 256997,
+      "fmask_sha256": "2110fac8f682e689823f705d5c30bb80e74943e6f19f0410c9eb5f53d1814b7b",
+      "post": [
+        51140,
+        5933,
+        5114
+      ],
+      "pair": [
+        54533,
+        7748,
+        1721
+      ],
+      "c1mm": [
+        53466,
+        11399,
+        2788
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_854571_HLS.S30.T34SFH.2021145T090601.v2.0",
+      "group_id": "floga:854571",
+      "dataset": "floga",
+      "valid_pixels": 258801,
+      "fmask_sha256": "9b942b43a144b2e7c7d44e0ed6b383c3a6d10bf09d0be4e465356c950ea6ae5c",
+      "post": [
+        1232,
+        1222,
+        21
+      ],
+      "pair": [
+        1246,
+        203,
+        7
+      ],
+      "c1mm": [
+        1242,
+        471,
+        11
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_855779_HLS.S30.T35SKB.2021155T090601.v2.0",
+      "group_id": "floga:855779",
+      "dataset": "floga",
+      "valid_pixels": 238528,
+      "fmask_sha256": "34c364a07fb617d803aba2660b474cc0a8b53d50c9b2a7eec2be64fa110917ee",
+      "post": [
+        1562,
+        117,
+        25
+      ],
+      "pair": [
+        1586,
+        162,
+        1
+      ],
+      "c1mm": [
+        1586,
+        117,
+        1
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_864865_HLS.S30.T34TFL.2021178T092031.v2.0",
+      "group_id": "floga:864865",
+      "dataset": "floga",
+      "valid_pixels": 258013,
+      "fmask_sha256": "259173416ee6fd2c45374425a13d7058abd4003a2a66f2eca6daf84e87f8ba8a",
+      "post": [
+        809,
+        240,
+        6
+      ],
+      "pair": [
+        814,
+        725,
+        1
+      ],
+      "c1mm": [
+        814,
+        350,
+        1
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_865564_HLS.S30.T34TFL.2021193T092029.v2.0",
+      "group_id": "floga:865564",
+      "dataset": "floga",
+      "valid_pixels": 259658,
+      "fmask_sha256": "247d2e325ded860f143ea13648d4960e85b145e4a5db6e59b58c2db4da95b5d0",
+      "post": [
+        1468,
+        1248,
+        4
+      ],
+      "pair": [
+        1468,
+        756,
+        4
+      ],
+      "c1mm": [
+        1468,
+        370,
+        4
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_867203_HLS.S30.T34SFJ.2021193T092029.v2.0",
+      "group_id": "floga:867203",
+      "dataset": "floga",
+      "valid_pixels": 262135,
+      "fmask_sha256": "27d22796aab3020c7000a94623423adc3a88e6df4fb5113a2dd7255d262ce4ea",
+      "post": [
+        12064,
+        717,
+        161
+      ],
+      "pair": [
+        11998,
+        631,
+        227
+      ],
+      "c1mm": [
+        12139,
+        1134,
+        86
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_867256_HLS.S30.T34TFL.2021193T092029.v2.0",
+      "group_id": "floga:867256",
+      "dataset": "floga",
+      "valid_pixels": 255319,
+      "fmask_sha256": "f5ebfd913bd3cd9b010c7126fa069c39fa6867cde8a9e472cece82670671dd16",
+      "post": [
+        6627,
+        633,
+        91
+      ],
+      "pair": [
+        6472,
+        272,
+        246
+      ],
+      "c1mm": [
+        6661,
+        712,
+        57
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_867703_HLS.S30.T34TFL.2021203T092029.v2.0",
+      "group_id": "floga:867703",
+      "dataset": "floga",
+      "valid_pixels": 260345,
+      "fmask_sha256": "99b4a61b518182b05a51b38a6cd27781f93caed1f40a709b406a9f90416a2970",
+      "post": [
+        375,
+        663,
+        3
+      ],
+      "pair": [
+        375,
+        200,
+        3
+      ],
+      "c1mm": [
+        367,
+        130,
+        11
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_869091_HLS.S30.T34SEJ.2021193T092029.v2.0",
+      "group_id": "floga:869091",
+      "dataset": "floga",
+      "valid_pixels": 259061,
+      "fmask_sha256": "1a390a541199987841424dc1d17de171f602d48ec501df556e36bb67cab928e7",
+      "post": [
+        83,
+        292,
+        1605
+      ],
+      "pair": [
+        13,
+        48,
+        1675
+      ],
+      "c1mm": [
+        56,
+        5,
+        1632
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_869687_HLS.S30.T34SGH.2021210T090559.v2.0",
+      "group_id": "floga:869687",
+      "dataset": "floga",
+      "valid_pixels": 245257,
+      "fmask_sha256": "72df979cf6c3d0ae24f11be887e791755a08a61346693a66e8cb03d47e7b3158",
+      "post": [
+        894,
+        465,
+        155
+      ],
+      "pair": [
+        917,
+        349,
+        132
+      ],
+      "c1mm": [
+        979,
+        523,
+        70
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_871351_HLS.S30.T35SMB.2021217T085559.v2.0",
+      "group_id": "floga:871351",
+      "dataset": "floga",
+      "valid_pixels": 257865,
+      "fmask_sha256": "e5891bb786fdfe6966a4ba47f9d7a9805beb350fec09ff6731c67485c2a3f892",
+      "post": [
+        4005,
+        843,
+        104
+      ],
+      "pair": [
+        4044,
+        1012,
+        65
+      ],
+      "c1mm": [
+        4055,
+        1227,
+        54
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_873612_HLS.S30.T35SLU.2021222T085601.v2.0",
+      "group_id": "floga:873612",
+      "dataset": "floga",
+      "valid_pixels": 227018,
+      "fmask_sha256": "929c38529657dab57bb53f1cf0e16545a5bef7dd6f423946357bd70a2d04b3c7",
+      "post": [
+        813,
+        93,
+        43
+      ],
+      "pair": [
+        849,
+        211,
+        7
+      ],
+      "c1mm": [
+        847,
+        196,
+        9
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_873797_HLS.S30.T34SFH.2021220T090559.v2.0",
+      "group_id": "floga:873797",
+      "dataset": "floga",
+      "valid_pixels": 238659,
+      "fmask_sha256": "7d30be14ea08a0bfc6d85f492fadb658388f26c62a6c64f369b73f7a94420540",
+      "post": [
+        2032,
+        560,
+        339
+      ],
+      "pair": [
+        2210,
+        290,
+        161
+      ],
+      "c1mm": [
+        2160,
+        346,
+        211
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_874304_HLS.S30.T34SFG.2021213T092029.v2.0",
+      "group_id": "floga:874304",
+      "dataset": "floga",
+      "valid_pixels": 261722,
+      "fmask_sha256": "a1d6db931ba94301de9e630c0f540ca2df2301e60a8d7b841f2f3d3bf398fdd8",
+      "post": [
+        4132,
+        316,
+        45
+      ],
+      "pair": [
+        4107,
+        271,
+        70
+      ],
+      "c1mm": [
+        4155,
+        452,
+        22
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_874400_HLS.S30.T35SKC.2021210T090559.v2.0",
+      "group_id": "floga:874400",
+      "dataset": "floga",
+      "valid_pixels": 242826,
+      "fmask_sha256": "431ec90cafc9d41bd7811bf90b7d7239ca92749ef8ef80c890bd1b12014b4b9a",
+      "post": [
+        683,
+        162,
+        2
+      ],
+      "pair": [
+        673,
+        73,
+        12
+      ],
+      "c1mm": [
+        684,
+        177,
+        1
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_874623_HLS.S30.T35SNA.2021224T084559.v2.0",
+      "group_id": "floga:874623",
+      "dataset": "floga",
+      "valid_pixels": 261623,
+      "fmask_sha256": "4cf94f8fc42c20e568ea7acd72cc80fff5a9b9a53d58551430b5408184f6768e",
+      "post": [
+        10079,
+        1786,
+        730
+      ],
+      "pair": [
+        10590,
+        2121,
+        219
+      ],
+      "c1mm": [
+        10386,
+        2950,
+        423
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_874641_HLS.S30.T34SEH.2021223T092029.v2.0",
+      "group_id": "floga:874641",
+      "dataset": "floga",
+      "valid_pixels": 259376,
+      "fmask_sha256": "601c382f7cff16d345e054d56b4093f3a85bd327fc005099adb59f60ffaa6d83",
+      "post": [
+        2713,
+        1055,
+        170
+      ],
+      "pair": [
+        2487,
+        444,
+        396
+      ],
+      "c1mm": [
+        2821,
+        1722,
+        62
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_874904_HLS.S30.T35SKC.2021210T090559.v2.0",
+      "group_id": "floga:874904",
+      "dataset": "floga",
+      "valid_pixels": 191669,
+      "fmask_sha256": "58e41de9f1f0c49651531c159878f6bd6284dd947a0ada95ecce722bb8884588",
+      "post": [
+        290,
+        85,
+        17
+      ],
+      "pair": [
+        294,
+        137,
+        13
+      ],
+      "c1mm": [
+        305,
+        207,
+        2
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_875222_HLS.S30.T34SEG.2021213T092029.v2.0",
+      "group_id": "floga:875222",
+      "dataset": "floga",
+      "valid_pixels": 262144,
+      "fmask_sha256": "68709c1da6a33ba8b3df5f5e844ab2877765469ada19b2c1f1f9732e92228499",
+      "post": [
+        2625,
+        571,
+        34
+      ],
+      "pair": [
+        2600,
+        323,
+        59
+      ],
+      "c1mm": [
+        2649,
+        963,
+        10
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_876936_HLS.S30.T35TMF.2021220T090559.v2.0",
+      "group_id": "floga:876936",
+      "dataset": "floga",
+      "valid_pixels": 260510,
+      "fmask_sha256": "d471443da4a5a86bc310dcfa2037175f0d6eae727ffb00cbde2f4db3b501bc98",
+      "post": [
+        647,
+        83,
+        55
+      ],
+      "pair": [
+        659,
+        131,
+        43
+      ],
+      "c1mm": [
+        681,
+        172,
+        21
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_877372_HLS.S30.T34TEK.2021228T092031.v2.0",
+      "group_id": "floga:877372",
+      "dataset": "floga",
+      "valid_pixels": 233359,
+      "fmask_sha256": "ecb3db5ed0f2759445f568b7289a574f76cbc610988dc4ac0cb5d322a27af7bf",
+      "post": [
+        419,
+        36,
+        14
+      ],
+      "pair": [
+        430,
+        80,
+        3
+      ],
+      "c1mm": [
+        428,
+        68,
+        5
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_877500_HLS.S30.T34SGH.2021230T090559.v2.0",
+      "group_id": "floga:877500",
+      "dataset": "floga",
+      "valid_pixels": 259558,
+      "fmask_sha256": "5982e7ba77b992a7bc0a8d51032e0417279ea2bd22458be641535727eea40044",
+      "post": [
+        330,
+        485,
+        5
+      ],
+      "pair": [
+        335,
+        164,
+        0
+      ],
+      "c1mm": [
+        328,
+        77,
+        7
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_877532_HLS.S30.T34TEK.2021228T092031.v2.0",
+      "group_id": "floga:877532",
+      "dataset": "floga",
+      "valid_pixels": 260386,
+      "fmask_sha256": "fe20e04f7719c099561f2ab8ba7c13baa3e686fc021ab96d78e00ac6768fc95e",
+      "post": [
+        7546,
+        1398,
+        2025
+      ],
+      "pair": [
+        7790,
+        1986,
+        1781
+      ],
+      "c1mm": [
+        8634,
+        2320,
+        937
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_878255_HLS.S30.T34SEG.2021238T092031.v2.0",
+      "group_id": "floga:878255",
+      "dataset": "floga",
+      "valid_pixels": 262127,
+      "fmask_sha256": "a065cf73dd3f50bd932a356c0e90a02825ad2cf37272421138d9862876162799",
+      "post": [
+        87401,
+        3559,
+        24290
+      ],
+      "pair": [
+        90859,
+        4510,
+        20832
+      ],
+      "c1mm": [
+        96678,
+        7733,
+        15013
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_879291_HLS.S30.T34SFH.2021225T090601.v2.0",
+      "group_id": "floga:879291",
+      "dataset": "floga",
+      "valid_pixels": 257653,
+      "fmask_sha256": "6c66c9cee8988ff339aa7cbd9ea152c7528f9de06e966c91637cfc73a011e5f6",
+      "post": [
+        1739,
+        1000,
+        75
+      ],
+      "pair": [
+        1709,
+        845,
+        105
+      ],
+      "c1mm": [
+        1736,
+        1385,
+        78
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_879409_HLS.S30.T34SDJ.2021221T093041.v2.0",
+      "group_id": "floga:879409",
+      "dataset": "floga",
+      "valid_pixels": 253618,
+      "fmask_sha256": "0cbf843940e9e295c69da71a70acb2274014e0dcdb6e785435aaf991d6e1e1fd",
+      "post": [
+        1236,
+        928,
+        14
+      ],
+      "pair": [
+        1207,
+        242,
+        43
+      ],
+      "c1mm": [
+        1225,
+        589,
+        25
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_880766_HLS.S30.T34TFL.2021228T092031.v2.0",
+      "group_id": "floga:880766",
+      "dataset": "floga",
+      "valid_pixels": 257906,
+      "fmask_sha256": "d4292e121503550d687c12bc3b5dfa56245443450d0bc8a0ec4cf5ef41b89d08",
+      "post": [
+        851,
+        307,
+        5
+      ],
+      "pair": [
+        850,
+        158,
+        6
+      ],
+      "c1mm": [
+        848,
+        185,
+        8
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_881961_HLS.S30.T34SGG.2021235T090601.v2.0",
+      "group_id": "floga:881961",
+      "dataset": "floga",
+      "valid_pixels": 261961,
+      "fmask_sha256": "5be966c5d78562a50abee07be0b5f21697938dd64e76dc1457e8ee746f08ea84",
+      "post": [
+        548,
+        455,
+        6
+      ],
+      "pair": [
+        551,
+        235,
+        3
+      ],
+      "c1mm": [
+        551,
+        670,
+        3
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_882005_HLS.S30.T34SGH.2021240T090549.v2.0",
+      "group_id": "floga:882005",
+      "dataset": "floga",
+      "valid_pixels": 236819,
+      "fmask_sha256": "19e4fef1dde90185f0a19d040a69c78d30a682eafc6c0b09b558c8e38aa8a721",
+      "post": [
+        468,
+        1364,
+        0
+      ],
+      "pair": [
+        466,
+        712,
+        2
+      ],
+      "c1mm": [
+        466,
+        1315,
+        2
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_882957_HLS.S30.T34SFG.2021233T092029.v2.0",
+      "group_id": "floga:882957",
+      "dataset": "floga",
+      "valid_pixels": 249889,
+      "fmask_sha256": "49d84f5b5b6d0e64b1ac60e81b9b6d7ff43bf619ab32732c7c0612499c14d300",
+      "post": [
+        950,
+        5247,
+        70
+      ],
+      "pair": [
+        962,
+        89,
+        58
+      ],
+      "c1mm": [
+        976,
+        140,
+        44
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_885041_HLS.S30.T35SKC.2021240T090549.v2.0",
+      "group_id": "floga:885041",
+      "dataset": "floga",
+      "valid_pixels": 262066,
+      "fmask_sha256": "c9f13afb78357dc5c5221f3b2c763d08094162ac2d0d0dfb55db2ada8b4942a6",
+      "post": [
+        684,
+        130,
+        41
+      ],
+      "pair": [
+        724,
+        322,
+        1
+      ],
+      "c1mm": [
+        711,
+        176,
+        14
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_885323_HLS.S30.T34SFH.2021240T090549.v2.0",
+      "group_id": "floga:885323",
+      "dataset": "floga",
+      "valid_pixels": 202793,
+      "fmask_sha256": "8066cae4bd852be51b32a1ba66cc4bf0abd80f1f90589f3c42cfb66d769d60fd",
+      "post": [
+        2965,
+        149,
+        78
+      ],
+      "pair": [
+        2999,
+        214,
+        44
+      ],
+      "c1mm": [
+        2984,
+        210,
+        59
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_887929_HLS.S30.T34TGL.2021258T092031.v2.0",
+      "group_id": "floga:887929",
+      "dataset": "floga",
+      "valid_pixels": 261640,
+      "fmask_sha256": "49eda25a1b89813dfa05e48f2f3a5a94fb8528d7e75e7cf3ba420064ddaded35",
+      "post": [
+        5278,
+        179,
+        126
+      ],
+      "pair": [
+        5257,
+        99,
+        147
+      ],
+      "c1mm": [
+        5338,
+        596,
+        66
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_888273_HLS.S30.T35SMA.2021262T085631.v2.0",
+      "group_id": "floga:888273",
+      "dataset": "floga",
+      "valid_pixels": 260296,
+      "fmask_sha256": "ef8238938d62a109b1657434daed803929133929fa23d90407ba4d21886a6e95",
+      "post": [
+        577,
+        2207,
+        63
+      ],
+      "pair": [
+        614,
+        90,
+        26
+      ],
+      "c1mm": [
+        591,
+        2531,
+        49
+      ]
+    }
+  ],
+  "non_claims": [
+    "Development revalidation after adaptive model selection.",
+    "Not an independent hidden test or field truth.",
+    "No global ranking from metrics on different datasets."
+  ]
+}
