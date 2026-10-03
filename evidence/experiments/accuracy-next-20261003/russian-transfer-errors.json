@@ -1,0 +1,1609 @@
+{
+  "spec_id": "SPEC-92",
+  "parent_result_sha256": "242acac3cf2ccd30728e5919997895e7cf1d83de223a8802b06f3c4daaaa296d",
+  "source_archive_sha256": "5f1cfb843d5579d800a1e8359a017f8cd33c5658f6e0c0a6eda7ac534a1c6b3c",
+  "datasets": {
+    "russia": {
+      "all": {
+        "windows": 77,
+        "groups": 24,
+        "valid_pixels": 16998039,
+        "true_pixels": 279844,
+        "known_background_pixels": 16718195,
+        "masked_fraction": 0.15789126111315444,
+        "models": {
+          "control": {
+            "tp": 108682,
+            "fp": 163198,
+            "fn": 171162,
+            "iou": 0.24530857119641028,
+            "fp_fraction_of_known_background": 0.00976169975287404,
+            "missed_positive_windows": [
+              "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+              "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+              "russia:14f0dd525739710be379cfd715214cb9a2ea3d1be7b92233c36a978419058ac6",
+              "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+              "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+              "russia:7d5c02e93557150a35157ab7bd82044d0d947bb7b881ceb6b0ede6eed816547f",
+              "russia:ee95a27c018bceef9647275e8d1d79f8d6e90bc4031ccea973ff1441187f337c",
+              "russia:f9e87c1fd4114fd816cd227727b501575ff4e2ed48cc6a8cf81b4942ec0fe94b"
+            ],
+            "missed_positive_groups": []
+          },
+          "reserve": {
+            "tp": 137000,
+            "fp": 144240,
+            "fn": 142844,
+            "iou": 0.3230492072325294,
+            "fp_fraction_of_known_background": 0.0086277256605752,
+            "missed_positive_windows": [
+              "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+              "russia:a9284f0f4e978443ff688f551b324d24b8ed32f4ff0d6fa5d4cb28e80d769c61",
+              "russia:ed2ebc53a846a5fc93be67230d7158c13c5243a2dfa2869a390e0ddb728abe5b"
+            ],
+            "missed_positive_groups": [
+              "russia:b7f146a952da624cc41efceba29b406ba17dffe1ac7320de1d957f36132f0966"
+            ]
+          },
+          "c1mm": {
+            "tp": 136760,
+            "fp": 139526,
+            "fn": 143084,
+            "iou": 0.32610820993394857,
+            "fp_fraction_of_known_background": 0.008345757421779086,
+            "missed_positive_windows": [
+              "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+              "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+              "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+              "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+              "russia:4da327137065846688f2541126436ee2a03736c3cfc4fa6b0039649750727ac9",
+              "russia:b5701f0dcce37c75536dd7fc32949eec39162f23161065af8208b5addc87f5ec",
+              "russia:e3e06929437e479127f79e729f6c20730baff6c626bdc79195dee7ef2b1df74c"
+            ],
+            "missed_positive_groups": [
+              "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+              "russia:e55982863745015bbe5d6fbbd959c065f60b7a1d44cd812d03224008dfd5ee86"
+            ]
+          },
+          "prithvi": {
+            "tp": 175323,
+            "fp": 570347,
+            "fn": 104521,
+            "iou": 0.20621601498957293,
+            "fp_fraction_of_known_background": 0.0341153455860516,
+            "missed_positive_windows": [
+              "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+              "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+              "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+              "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+              "russia:4da327137065846688f2541126436ee2a03736c3cfc4fa6b0039649750727ac9",
+              "russia:caecf663c87fd0605564a05517a94200bad23b14ca110ea9066f681558754a70",
+              "russia:e3e06929437e479127f79e729f6c20730baff6c626bdc79195dee7ef2b1df74c"
+            ],
+            "missed_positive_groups": [
+              "russia:9ea7d4bd40c51a8c41a527c790ca6141b55f280a1a0815df66a2bdbe10760fea",
+              "russia:e55982863745015bbe5d6fbbd959c065f60b7a1d44cd812d03224008dfd5ee86"
+            ]
+          }
+        }
+      },
+      "reference_top25pct_fp": {
+        "sample_ids": [
+          "russia:3ebdcac091c2d074c6249d4fd7dcaf8c7e047dd5ea492d09d431f6e8469a5067",
+          "russia:a9284f0f4e978443ff688f551b324d24b8ed32f4ff0d6fa5d4cb28e80d769c61",
+          "russia:12dde8fe4da15dcd637a44b101c42c745075e7331edefdd890ff9387fdff4ef6",
+          "russia:ed2ebc53a846a5fc93be67230d7158c13c5243a2dfa2869a390e0ddb728abe5b",
+          "russia:626718e83b2b71460b29b0e14bc68fea3d7d19dca345d13f8fe14e6ebb34903b",
+          "russia:57cb76b717897e1c582a1d8eb36f08ec2fc577addfbef297dacdba15c73224c9",
+          "russia:04ba9345bfd145e63fe98564bf6aa45a94fa5a5ce1a5ebdd1fbdef31c058ae76",
+          "russia:9ee41e8c879c3399f1196961bf9660be7bc70135f535f56f5676ab9c76f47aeb",
+          "russia:caecf663c87fd0605564a05517a94200bad23b14ca110ea9066f681558754a70",
+          "russia:ee80f695150babd53eeb13b39c799ac5bfa40b4584be59109dcd9ba35d3e0071",
+          "russia:ee95a27c018bceef9647275e8d1d79f8d6e90bc4031ccea973ff1441187f337c",
+          "russia:ffe5bbee83528ac1491468420d637e7d079d36e6f0244ddb90a726d070853915",
+          "russia:8da9c1fe2427dcaca561eb81686883a40ed7b97b234cca2fd1de6dd22666a478",
+          "russia:7d5c02e93557150a35157ab7bd82044d0d947bb7b881ceb6b0ede6eed816547f",
+          "russia:9524e4ebedfcec6c66c7f39a91faf1f64cfda140d3c6148fab6cfc0154d0ba0e",
+          "russia:7a87eac54950722c599a0f202f4f08eb46ef687070e368e17f0d473ee4a77269",
+          "russia:091121198c867fe5f0266679c1498dc0cbb88ecb482d3c4391c71f90fd3da0ad",
+          "russia:70876ab520b9a060cf985f362102631ac6bbf101fc13344fb0a69dfb13a6039b",
+          "russia:a5c4d96f3d69a38cd74e74d541b22586a2d7f19991f4281b6c31f1d01ab834ad",
+          "russia:fa6ebc7682e96aae706ab1b27a41adb49f104f7fb9639bbf96c2958fd2c19863"
+        ],
+        "report": {
+          "windows": 20,
+          "groups": 7,
+          "valid_pixels": 4357822,
+          "true_pixels": 96761,
+          "known_background_pixels": 4261061,
+          "masked_fraction": 0.16881141662597654,
+          "models": {
+            "control": {
+              "tp": 35020,
+              "fp": 66519,
+              "fn": 61741,
+              "iou": 0.21447819696227338,
+              "fp_fraction_of_known_background": 0.01561090066535072,
+              "missed_positive_windows": [
+                "russia:ee95a27c018bceef9647275e8d1d79f8d6e90bc4031ccea973ff1441187f337c",
+                "russia:7d5c02e93557150a35157ab7bd82044d0d947bb7b881ceb6b0ede6eed816547f"
+              ],
+              "missed_positive_groups": []
+            },
+            "reserve": {
+              "tp": 41098,
+              "fp": 65625,
+              "fn": 55663,
+              "iou": 0.25308832042171125,
+              "fp_fraction_of_known_background": 0.015401093765144409,
+              "missed_positive_windows": [
+                "russia:a9284f0f4e978443ff688f551b324d24b8ed32f4ff0d6fa5d4cb28e80d769c61",
+                "russia:ed2ebc53a846a5fc93be67230d7158c13c5243a2dfa2869a390e0ddb728abe5b"
+              ],
+              "missed_positive_groups": [
+                "russia:b7f146a952da624cc41efceba29b406ba17dffe1ac7320de1d957f36132f0966"
+              ]
+            },
+            "c1mm": {
+              "tp": 55945,
+              "fp": 85057,
+              "fn": 40816,
+              "iou": 0.3076978076978077,
+              "fp_fraction_of_known_background": 0.019961460302962104,
+              "missed_positive_windows": [],
+              "missed_positive_groups": []
+            },
+            "prithvi": {
+              "tp": 62614,
+              "fp": 197001,
+              "fn": 34147,
+              "iou": 0.2131453353394925,
+              "fp_fraction_of_known_background": 0.04623285139546231,
+              "missed_positive_windows": [
+                "russia:caecf663c87fd0605564a05517a94200bad23b14ca110ea9066f681558754a70"
+              ],
+              "missed_positive_groups": [
+                "russia:9ea7d4bd40c51a8c41a527c790ca6141b55f280a1a0815df66a2bdbe10760fea"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ems": {
+      "all": {
+        "windows": 60,
+        "groups": 44,
+        "valid_pixels": 7911569,
+        "true_pixels": 2412001,
+        "known_background_pixels": 5499568,
+        "masked_fraction": 0.49699598948160806,
+        "models": {
+          "control": {
+            "tp": 2086369,
+            "fp": 246121,
+            "fn": 325632,
+            "iou": 0.7849034017249773,
+            "fp_fraction_of_known_background": 0.044752787855337,
+            "missed_positive_windows": [
+              "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0",
+              "ems:ems_EMSR836_AOI04_HLS.S30.T34TCN.2025223T094051.v2.0"
+            ],
+            "missed_positive_groups": []
+          },
+          "reserve": {
+            "tp": 2137609,
+            "fp": 277154,
+            "fn": 274392,
+            "iou": 0.7948998849080845,
+            "fp_fraction_of_known_background": 0.050395594708529834,
+            "missed_positive_windows": [
+              "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0",
+              "ems:ems_EMSR836_AOI04_HLS.S30.T34TCN.2025223T094051.v2.0"
+            ],
+            "missed_positive_groups": []
+          },
+          "c1mm": {
+            "tp": 2113222,
+            "fp": 370528,
+            "fn": 298779,
+            "iou": 0.7594609076850591,
+            "fp_fraction_of_known_background": 0.06737401919568956,
+            "missed_positive_windows": [
+              "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0"
+            ],
+            "missed_positive_groups": []
+          }
+        }
+      },
+      "reference_top25pct_fp": {
+        "sample_ids": [
+          "ems:ems_EMSR913_AOI01_HLS.S30.T29SQB.2026227T110711.v2.0",
+          "ems:ems_EMSR760_AOI01_HLS.S30.T29TNF.2024274T112119.v2.0",
+          "ems:ems_EMSR921_AOI01_HLS.S30.T30TXN.2026231T104651.v2.0",
+          "ems:ems_EMSR898_AOI01_HLS.S30.T30TVL.2026202T105621.v2.0",
+          "ems:ems_EMSR896_AOI01_HLS.S30.T30TXM.2026204T104619.v2.0",
+          "ems:ems_EMSR899_AOI01_HLS.S30.T30TXQ.2026224T105651.v2.0",
+          "ems:ems_EMSR905_AOI01_HLS.S30.T31TBE.2026229T104621.v2.0",
+          "ems:ems_EMSR806_AOI01_HLS.S30.T35SMC.2025183T090411.v2.0",
+          "ems:ems_EMSR824_AOI03_HLS.S30.T29TNF.2025228T112119.v2.0",
+          "ems:ems_EMSR889_AOI01_HLS.S30.T31TDH.2026188T103701.v2.0",
+          "ems:ems_EMSR828_AOI01_HLS.S30.T35SKB.2025226T091031.v2.0",
+          "ems:ems_EMSR675_AOI01_HLS.S30.T35SNV.2023209T084601.v2.0",
+          "ems:ems_EMSR667_AOI01_HLS.S30.T30TTK.2023176T110619.v2.0",
+          "ems:ems_EMSR824_AOI02_HLS.S30.T29TNG.2025221T113319.v2.0",
+          "ems:ems_EMSR812_AOI01_HLS.S30.T31TBF.2025214T105051.v2.0"
+        ],
+        "report": {
+          "windows": 15,
+          "groups": 14,
+          "valid_pixels": 3429856,
+          "true_pixels": 1467240,
+          "known_background_pixels": 1962616,
+          "masked_fraction": 0.12774251302083328,
+          "models": {
+            "control": {
+              "tp": 1399912,
+              "fp": 187383,
+              "fn": 67328,
+              "iou": 0.8460610060418596,
+              "fp_fraction_of_known_background": 0.09547614000904915,
+              "missed_positive_windows": [],
+              "missed_positive_groups": []
+            },
+            "reserve": {
+              "tp": 1423229,
+              "fp": 211191,
+              "fn": 44011,
+              "iou": 0.8479520456902905,
+              "fp_fraction_of_known_background": 0.10760688794955305,
+              "missed_positive_windows": [],
+              "missed_positive_groups": []
+            },
+            "c1mm": {
+              "tp": 1445789,
+              "fp": 298382,
+              "fn": 21451,
+              "iou": 0.8188553382320791,
+              "fp_fraction_of_known_background": 0.15203279704231495,
+              "missed_positive_windows": [],
+              "missed_positive_groups": []
+            }
+          }
+        }
+      }
+    },
+    "floga": {
+      "all": {
+        "windows": 81,
+        "groups": 81,
+        "valid_pixels": 20404778,
+        "true_pixels": 361062,
+        "known_background_pixels": 20043716,
+        "masked_fraction": 0.03903640935450425,
+        "models": {
+          "control": {
+            "tp": 317704,
+            "fp": 62827,
+            "fn": 43358,
+            "iou": 0.7494980997383749,
+            "fp_fraction_of_known_background": 0.0031344986129318536,
+            "missed_positive_windows": [
+              "floga:floga_2020_786775_HLS.S30.T34SDJ.2020259T092029.v2.0",
+              "floga:floga_2020_807048_HLS.S30.T34TGL.2021005T091351.v2.0"
+            ],
+            "missed_positive_groups": [
+              "floga:786775",
+              "floga:807048"
+            ]
+          },
+          "reserve": {
+            "tp": 321904,
+            "fp": 82590,
+            "fn": 39158,
+            "iou": 0.7255777050481008,
+            "fp_fraction_of_known_background": 0.004120493425470606,
+            "missed_positive_windows": [
+              "floga:floga_2020_786775_HLS.S30.T34SDJ.2020259T092029.v2.0"
+            ],
+            "missed_positive_groups": [
+              "floga:786775"
+            ]
+          },
+          "c1mm": {
+            "tp": 329594,
+            "fp": 80481,
+            "fn": 31468,
+            "iou": 0.7464595747186571,
+            "fp_fraction_of_known_background": 0.004015273415368687,
+            "missed_positive_windows": [],
+            "missed_positive_groups": []
+          }
+        }
+      },
+      "reference_top25pct_fp": {
+        "sample_ids": [
+          "floga:floga_2021_854440_HLS.S30.T34SFH.2021145T090601.v2.0",
+          "floga:floga_2021_878255_HLS.S30.T34SEG.2021238T092031.v2.0",
+          "floga:floga_2020_804947_HLS.S30.T34TEK.2020332T093339.v2.0",
+          "floga:floga_2020_807048_HLS.S30.T34TGL.2021005T091351.v2.0",
+          "floga:floga_2020_766850_HLS.S30.T34SFG.2020211T090601.v2.0",
+          "floga:floga_2021_874623_HLS.S30.T35SNA.2021224T084559.v2.0",
+          "floga:floga_2020_791065_HLS.S30.T35SLB.2020271T090731.v2.0",
+          "floga:floga_2020_729978_HLS.S30.T35TMF.2020061T090901.v2.0",
+          "floga:floga_2021_888273_HLS.S30.T35SMA.2021262T085631.v2.0",
+          "floga:floga_2021_877532_HLS.S30.T34TEK.2021228T092031.v2.0",
+          "floga:floga_2020_779965_HLS.S30.T34SFF.2020244T092031.v2.0",
+          "floga:floga_2021_842753_HLS.S30.T35SKB.2021110T090549.v2.0",
+          "floga:floga_2021_874641_HLS.S30.T34SEH.2021223T092029.v2.0",
+          "floga:floga_2020_770245_HLS.S30.T35SMD.2020213T085559.v2.0",
+          "floga:floga_2021_879291_HLS.S30.T34SFH.2021225T090601.v2.0",
+          "floga:floga_2020_774109_HLS.S30.T34TDK.2020217T093041.v2.0",
+          "floga:floga_2021_871351_HLS.S30.T35SMB.2021217T085559.v2.0",
+          "floga:floga_2021_844986_HLS.S30.T34TEL.2021126T093029.v2.0",
+          "floga:floga_2021_882005_HLS.S30.T34SGH.2021240T090549.v2.0",
+          "floga:floga_2021_867203_HLS.S30.T34SFJ.2021193T092029.v2.0",
+          "floga:floga_2021_875222_HLS.S30.T34SEG.2021213T092029.v2.0"
+        ],
+        "report": {
+          "windows": 21,
+          "groups": 21,
+          "valid_pixels": 5335529,
+          "true_pixels": 283364,
+          "known_background_pixels": 5052165,
+          "masked_fraction": 0.03078914823986234,
+          "models": {
+            "control": {
+              "tp": 245183,
+              "fp": 29502,
+              "fn": 38181,
+              "iou": 0.7836677683097556,
+              "fp_fraction_of_known_background": 0.0058394767391801335,
+              "missed_positive_windows": [
+                "floga:floga_2020_807048_HLS.S30.T34TGL.2021005T091351.v2.0"
+              ],
+              "missed_positive_groups": [
+                "floga:807048"
+              ]
+            },
+            "reserve": {
+              "tp": 248848,
+              "fp": 32536,
+              "fn": 34516,
+              "iou": 0.7877429566318456,
+              "fp_fraction_of_known_background": 0.006440011361465827,
+              "missed_positive_windows": [],
+              "missed_positive_groups": []
+            },
+            "c1mm": {
+              "tp": 256457,
+              "fp": 62948,
+              "fn": 26907,
+              "iou": 0.7405374344521704,
+              "fp_fraction_of_known_background": 0.012459608900342724,
+              "missed_positive_windows": [],
+              "missed_positive_groups": []
+            }
+          }
+        }
+      }
+    }
+  },
+  "seed_summary": {
+    "all": {
+      "selected_contours": 77,
+      "observable_contours": 77,
+      "unobservable_contours": 0,
+      "missed_contours": {
+        "control": 12,
+        "reserve": 10,
+        "c1mm": 7,
+        "prithvi": 14
+      }
+    },
+    "1-25ha": {
+      "selected_contours": 34,
+      "observable_contours": 34,
+      "unobservable_contours": 0,
+      "missed_contours": {
+        "control": 10,
+        "reserve": 9,
+        "c1mm": 7,
+        "prithvi": 12
+      }
+    },
+    "25-250ha": {
+      "selected_contours": 40,
+      "observable_contours": 40,
+      "unobservable_contours": 0,
+      "missed_contours": {
+        "control": 2,
+        "reserve": 1,
+        "c1mm": 0,
+        "prithvi": 2
+      }
+    },
+    "250ha+": {
+      "selected_contours": 3,
+      "observable_contours": 3,
+      "unobservable_contours": 0,
+      "missed_contours": {
+        "control": 0,
+        "reserve": 0,
+        "c1mm": 0,
+        "prithvi": 0
+      }
+    }
+  },
+  "per_seed": [
+    {
+      "sample_id": "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+      "group_id": "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+      "area_ha": 2.6735093281361424,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 31,
+      "masked_fraction": 0.14496612548828125,
+      "tp": {
+        "control": 0,
+        "reserve": 0,
+        "c1mm": 0,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:04ba9345bfd145e63fe98564bf6aa45a94fa5a5ce1a5ebdd1fbdef31c058ae76",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 25.857120066963738,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 287,
+      "masked_fraction": 0.061725616455078125,
+      "tp": {
+        "control": 285,
+        "reserve": 286,
+        "c1mm": 286,
+        "prithvi": 287
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:050797d0bf91faa8215d94e490a13cb03a2f3296d757b7dbc8126d56f9c9ef5d",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 102.89268113153287,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 1140,
+      "masked_fraction": 0.03801727294921875,
+      "tp": {
+        "control": 1136,
+        "reserve": 1139,
+        "c1mm": 1136,
+        "prithvi": 1139
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:091121198c867fe5f0266679c1498dc0cbb88ecb482d3c4391c71f90fd3da0ad",
+      "group_id": "russia:92798b9a1043bbbfeb072b44f9cd00538a53bb5943a53d2d171c33968ec256c3",
+      "area_ha": 55.269978609121196,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 605,
+      "masked_fraction": 0.23949432373046875,
+      "tp": {
+        "control": 348,
+        "reserve": 438,
+        "c1mm": 570,
+        "prithvi": 532
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+      "group_id": "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+      "area_ha": 9.7849781157386,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 105,
+      "masked_fraction": 0.14491653442382812,
+      "tp": {
+        "control": 0,
+        "reserve": 0,
+        "c1mm": 0,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:12dde8fe4da15dcd637a44b101c42c745075e7331edefdd890ff9387fdff4ef6",
+      "group_id": "russia:c2fb800b66805386135e562035877ed0ef727768ca0b76513226a77ac794bd76",
+      "area_ha": 99.2207794112148,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 1100,
+      "masked_fraction": 0.29109954833984375,
+      "tp": {
+        "control": 676,
+        "reserve": 487,
+        "c1mm": 1041,
+        "prithvi": 19
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:145ded358eaf5ef65bd91a8862de4667adc6e4ec7358e1f4c6774c3820d76b5b",
+      "group_id": "russia:2e4b8e09fc16b7459e417805200793d26908bf21333c6ac3422ef278af7a29b1",
+      "area_ha": 24.6431180034676,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 270,
+      "masked_fraction": 0.1747589111328125,
+      "tp": {
+        "control": 270,
+        "reserve": 270,
+        "c1mm": 270,
+        "prithvi": 267
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:14f0dd525739710be379cfd715214cb9a2ea3d1be7b92233c36a978419058ac6",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "area_ha": 13.71546646741388,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 152,
+      "masked_fraction": 0.2537727355957031,
+      "tp": {
+        "control": 0,
+        "reserve": 86,
+        "c1mm": 152,
+        "prithvi": 152
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:15bb3ab80b90696de3eddf3390f8af84612487fd410693b76d4ced2cb1683c92",
+      "group_id": "russia:f084b50bc6fa43bf4b15e47239dde38589966d04db4fb934ac3693a2d4dc0185",
+      "area_ha": 168.531884125378,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 634,
+      "masked_fraction": 0.4172782897949219,
+      "tp": {
+        "control": 284,
+        "reserve": 326,
+        "c1mm": 437,
+        "prithvi": 634
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:15c395e3dab77ec1a051d27e3eb7a51f70f933492848460835fd51f98ace8c3b",
+      "group_id": "russia:c2fb800b66805386135e562035877ed0ef727768ca0b76513226a77ac794bd76",
+      "area_ha": 34.25778586486521,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 63,
+      "masked_fraction": 0.24268722534179688,
+      "tp": {
+        "control": 18,
+        "reserve": 44,
+        "c1mm": 59,
+        "prithvi": 60
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:1ffdcb60cdc531342565abc26ce2ca98ceba52dee6ca1acf73a3d58919eed5d6",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 46.75212175031258,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 519,
+      "masked_fraction": 0.06949234008789062,
+      "tp": {
+        "control": 517,
+        "reserve": 466,
+        "c1mm": 512,
+        "prithvi": 516
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:2265d35d223d0bd06d740966df3049548abd0cccc39cee63e178561b15a68200",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 66.04083825947389,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 681,
+      "masked_fraction": 0.07075881958007812,
+      "tp": {
+        "control": 297,
+        "reserve": 319,
+        "c1mm": 641,
+        "prithvi": 681
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:22c7273ce4d58cf90bca2dfc10a185c89ff6a379d7373efebb0163fa8087ca17",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "area_ha": 99.0182899189464,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 1098,
+      "masked_fraction": 0.334686279296875,
+      "tp": {
+        "control": 311,
+        "reserve": 467,
+        "c1mm": 786,
+        "prithvi": 102
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:279799f389bf63a3ff8f12446a25e0999bd4b3a292224d2aebfddbd4f2c2628b",
+      "group_id": "russia:20090c5f8b18e981b9d5f997698340b07ea0d9faeedae1c27d8dec5dbfeddf0f",
+      "area_ha": 15.583183239173682,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 175,
+      "masked_fraction": 0.07078170776367188,
+      "tp": {
+        "control": 175,
+        "reserve": 175,
+        "c1mm": 175,
+        "prithvi": 175
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:2bf6094e1e1dd2ae9ccfdcc25bb14d6f0291b056a6f759f56e20b1860da439d5",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 12.034389350783938,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 124,
+      "masked_fraction": 0.07920074462890625,
+      "tp": {
+        "control": 124,
+        "reserve": 124,
+        "c1mm": 124,
+        "prithvi": 124
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:36a462181acdf2dd0cdfc086d856d15187534373ddd0a8e1f1dc5e8d730728fc",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 34.63771855490161,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 384,
+      "masked_fraction": 0.2960929870605469,
+      "tp": {
+        "control": 373,
+        "reserve": 384,
+        "c1mm": 384,
+        "prithvi": 378
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:3c28eb0b94621c3c273e2f3e38c9221f5c7adb7de9bf75def24597fe31003241",
+      "group_id": "russia:c23ea3d10e6d76d1002a3f1169a9cab7ca5a23f042767e51575dc7adc76f7101",
+      "area_ha": 332.2545263993984,
+      "size_bin": "250ha+",
+      "observed_seed_pixels": 3519,
+      "masked_fraction": 0.2517242431640625,
+      "tp": {
+        "control": 3247,
+        "reserve": 3341,
+        "c1mm": 3302,
+        "prithvi": 3018
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:3c39b54275b12dfb44bc589225216c8df11b077e4fb2aa942a3785b4e7a7a918",
+      "group_id": "russia:a1c1670c77356fd7f3df27d882ad19b7083c712053d31a8d0b830933b0255e29",
+      "area_ha": 33.26070085036689,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 364,
+      "masked_fraction": 0.07865524291992188,
+      "tp": {
+        "control": 354,
+        "reserve": 357,
+        "c1mm": 364,
+        "prithvi": 364
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:3ebdcac091c2d074c6249d4fd7dcaf8c7e047dd5ea492d09d431f6e8469a5067",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 15.990029079096793,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 170,
+      "masked_fraction": 0.050296783447265625,
+      "tp": {
+        "control": 170,
+        "reserve": 170,
+        "c1mm": 170,
+        "prithvi": 170
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+      "group_id": "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+      "area_ha": 6.691414689097717,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 72,
+      "masked_fraction": 0.14413833618164062,
+      "tp": {
+        "control": 0,
+        "reserve": 0,
+        "c1mm": 0,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+      "group_id": "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+      "area_ha": 12.129822179006641,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 131,
+      "masked_fraction": 0.13872146606445312,
+      "tp": {
+        "control": 0,
+        "reserve": 0,
+        "c1mm": 0,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:4da327137065846688f2541126436ee2a03736c3cfc4fa6b0039649750727ac9",
+      "group_id": "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+      "area_ha": 12.561528182458988,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 131,
+      "masked_fraction": 0.14444732666015625,
+      "tp": {
+        "control": 1,
+        "reserve": 7,
+        "c1mm": 0,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:545aee5a73b1079d51b1c83931a1e8b218f46f230ccaa4f1731daf7a9128a38c",
+      "group_id": "russia:2e4b8e09fc16b7459e417805200793d26908bf21333c6ac3422ef278af7a29b1",
+      "area_ha": 26.324413993540144,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 292,
+      "masked_fraction": 0.13867568969726562,
+      "tp": {
+        "control": 248,
+        "reserve": 265,
+        "c1mm": 275,
+        "prithvi": 275
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:57cb76b717897e1c582a1d8eb36f08ec2fc577addfbef297dacdba15c73224c9",
+      "group_id": "russia:0c3fa74d6166cbad9d1016be92fa04db137fac15fcb06c664986123fde44ebbc",
+      "area_ha": 2.0579388762535893,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 21,
+      "masked_fraction": 0.13520431518554688,
+      "tp": {
+        "control": 21,
+        "reserve": 21,
+        "c1mm": 21,
+        "prithvi": 21
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:626718e83b2b71460b29b0e14bc68fea3d7d19dca345d13f8fe14e6ebb34903b",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 27.415214738234877,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 282,
+      "masked_fraction": 0.055316925048828125,
+      "tp": {
+        "control": 281,
+        "reserve": 282,
+        "c1mm": 279,
+        "prithvi": 282
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:675b9d05ec8446b98877f64b39ab7690a4acda51229c4743378213c6020ee5f6",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 63.363694131431345,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 706,
+      "masked_fraction": 0.2926025390625,
+      "tp": {
+        "control": 652,
+        "reserve": 679,
+        "c1mm": 705,
+        "prithvi": 700
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:68a72334dca6db10d2322c6673ecbd89f8df4e0518fee9071dfcb19f635c2c03",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 27.542225078060692,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 288,
+      "masked_fraction": 0.067901611328125,
+      "tp": {
+        "control": 288,
+        "reserve": 288,
+        "c1mm": 288,
+        "prithvi": 288
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:6ca151f5b2e84bf40dc8f23afb766a914f9dfdf1740490871ddf784078ed820c",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 33.896383683599744,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 374,
+      "masked_fraction": 0.0059967041015625,
+      "tp": {
+        "control": 374,
+        "reserve": 374,
+        "c1mm": 368,
+        "prithvi": 354
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:70876ab520b9a060cf985f362102631ac6bbf101fc13344fb0a69dfb13a6039b",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 5.3885573708118395,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 56,
+      "masked_fraction": 0.06411361694335938,
+      "tp": {
+        "control": 54,
+        "reserve": 55,
+        "c1mm": 55,
+        "prithvi": 56
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:7386ad528b3f5bbf8e9e23d3a2881ca28e4cc638d0a4bfd3ed03e29bca80384c",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 78.26941563669362,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 875,
+      "masked_fraction": 0.043239593505859375,
+      "tp": {
+        "control": 855,
+        "reserve": 875,
+        "c1mm": 869,
+        "prithvi": 875
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:789e564aa585143a5256463e33984a5292668005bb41e57903a889c611ad7c28",
+      "group_id": "russia:43e69446a14adc255b0af3ed8cb9b31f46d8ec3f53f94494c06d61075b4eefd6",
+      "area_ha": 182.79182634173412,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 2004,
+      "masked_fraction": 0.0371856689453125,
+      "tp": {
+        "control": 2000,
+        "reserve": 2002,
+        "c1mm": 1995,
+        "prithvi": 1967
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:7a87eac54950722c599a0f202f4f08eb46ef687070e368e17f0d473ee4a77269",
+      "group_id": "russia:c2fb800b66805386135e562035877ed0ef727768ca0b76513226a77ac794bd76",
+      "area_ha": 55.15417710181593,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 611,
+      "masked_fraction": 0.2459564208984375,
+      "tp": {
+        "control": 423,
+        "reserve": 461,
+        "c1mm": 608,
+        "prithvi": 609
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:7ae6637da5e9169a865bb6a282fe6bb0243747d082dc100bb97af95f22a19a8a",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 57.7265793718127,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 641,
+      "masked_fraction": 0.07985687255859375,
+      "tp": {
+        "control": 606,
+        "reserve": 616,
+        "c1mm": 637,
+        "prithvi": 640
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:7d5c02e93557150a35157ab7bd82044d0d947bb7b881ceb6b0ede6eed816547f",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "area_ha": 8.229999781861073,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 91,
+      "masked_fraction": 0.23424148559570312,
+      "tp": {
+        "control": 0,
+        "reserve": 40,
+        "c1mm": 91,
+        "prithvi": 91
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:7db3f4f18d1c119dfa4d8a7b4607634a7c1a73c77a47729e87a8f20ba48b9b23",
+      "group_id": "russia:23e19b184085035f8412a454e37b8c5fba8cdcac1d52d852ff1c5f0717b42e24",
+      "area_ha": 142.57967133831482,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 1586,
+      "masked_fraction": 0.00090789794921875,
+      "tp": {
+        "control": 1488,
+        "reserve": 1525,
+        "c1mm": 1516,
+        "prithvi": 1544
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:8196c22e5bb0f2281088e20430404527457618f194ab9776d713d64339687a86",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "area_ha": 9.542983568484837,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 102,
+      "masked_fraction": 0.2801055908203125,
+      "tp": {
+        "control": 99,
+        "reserve": 102,
+        "c1mm": 102,
+        "prithvi": 102
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:8447239836771287a380d75543ad28442cb395f1aa2486178da35484cb115245",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 10.752164652808267,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 119,
+      "masked_fraction": 0.0054473876953125,
+      "tp": {
+        "control": 119,
+        "reserve": 119,
+        "c1mm": 119,
+        "prithvi": 119
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:8cb8676eec778d31e818eafc794cb56856708268d458f49f69c815fbcfe4afe9",
+      "group_id": "russia:2e4b8e09fc16b7459e417805200793d26908bf21333c6ac3422ef278af7a29b1",
+      "area_ha": 30.20374973326216,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 333,
+      "masked_fraction": 0.061431884765625,
+      "tp": {
+        "control": 333,
+        "reserve": 333,
+        "c1mm": 333,
+        "prithvi": 333
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:8da9c1fe2427dcaca561eb81686883a40ed7b97b234cca2fd1de6dd22666a478",
+      "group_id": "russia:c2fb800b66805386135e562035877ed0ef727768ca0b76513226a77ac794bd76",
+      "area_ha": 36.36923795161391,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 408,
+      "masked_fraction": 0.3111152648925781,
+      "tp": {
+        "control": 408,
+        "reserve": 403,
+        "c1mm": 408,
+        "prithvi": 362
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:8e6eef100f22a92beb37d80a06fb6f577f86fdf8cf0a47d0732320b3a1de2849",
+      "group_id": "russia:0947e64197d306ccbde904d53bac09999af7f8de447f53dd6a5a246c20b7c8a4",
+      "area_ha": 291.3076990340299,
+      "size_bin": "250ha+",
+      "observed_seed_pixels": 2938,
+      "masked_fraction": 0.2762870788574219,
+      "tp": {
+        "control": 2686,
+        "reserve": 2744,
+        "c1mm": 2802,
+        "prithvi": 2858
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:914ca85dae948f2a075a2fb25868a3b5c0d2d815b7687aeac441c29cb3cb55b6",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 190.34224024287133,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 2120,
+      "masked_fraction": 0.005855560302734375,
+      "tp": {
+        "control": 2120,
+        "reserve": 2120,
+        "c1mm": 2110,
+        "prithvi": 2108
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:91c39f443c13e3f0baa30dd2fe92ba7288b71fe55d2aaf17c4f8510b25a2cad4",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 13.92440446703709,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 137,
+      "masked_fraction": 0.17733001708984375,
+      "tp": {
+        "control": 102,
+        "reserve": 106,
+        "c1mm": 115,
+        "prithvi": 137
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:9524e4ebedfcec6c66c7f39a91faf1f64cfda140d3c6148fab6cfc0154d0ba0e",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 23.614075497448393,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 257,
+      "masked_fraction": 0.049869537353515625,
+      "tp": {
+        "control": 257,
+        "reserve": 257,
+        "c1mm": 257,
+        "prithvi": 257
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:98b09fe4684c456adfab9ce075c8aa65a44cdbc0b566a90f0d6f514f4ed0fb89",
+      "group_id": "russia:76cd5212c405333b61de9cebab9ac1974576e1c787b591a7f38ceb2390afa033",
+      "area_ha": 57.133962469471854,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 336,
+      "masked_fraction": 0.2960853576660156,
+      "tp": {
+        "control": 257,
+        "reserve": 273,
+        "c1mm": 308,
+        "prithvi": 336
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:9b3a0e65e7a6b0a674683223a782ef7e1db27666e4bd951023a56cb4e9c5d216",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 29.091967542810174,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 324,
+      "masked_fraction": 0.23909759521484375,
+      "tp": {
+        "control": 237,
+        "reserve": 315,
+        "c1mm": 311,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:9c70bb4060e6c3a589f9bfd2909a3aa4a157005d4c3ab53b7d6df9404c4cc33e",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 174.42410817195935,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 1920,
+      "masked_fraction": 0.09726715087890625,
+      "tp": {
+        "control": 1372,
+        "reserve": 1334,
+        "c1mm": 1835,
+        "prithvi": 1821
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:9ee41e8c879c3399f1196961bf9660be7bc70135f535f56f5676ab9c76f47aeb",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "area_ha": 3.2911701184510296,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 34,
+      "masked_fraction": 0.218597412109375,
+      "tp": {
+        "control": 0,
+        "reserve": 20,
+        "c1mm": 34,
+        "prithvi": 34
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:a0c00187b582caa84e14fd80b96e55f3dda42b623160d4155394586a38d0868c",
+      "group_id": "russia:1162a23067f027e396195307d242b558d907e90c634f6e5fc3096061a8e98178",
+      "area_ha": 37.7537287424859,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 416,
+      "masked_fraction": 0.011257171630859375,
+      "tp": {
+        "control": 416,
+        "reserve": 416,
+        "c1mm": 416,
+        "prithvi": 404
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:a5c4d96f3d69a38cd74e74d541b22586a2d7f19991f4281b6c31f1d01ab834ad",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 13.819908861489525,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 153,
+      "masked_fraction": 0.04628753662109375,
+      "tp": {
+        "control": 153,
+        "reserve": 153,
+        "c1mm": 153,
+        "prithvi": 153
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:a9284f0f4e978443ff688f551b324d24b8ed32f4ff0d6fa5d4cb28e80d769c61",
+      "group_id": "russia:b7f146a952da624cc41efceba29b406ba17dffe1ac7320de1d957f36132f0966",
+      "area_ha": 15.294975636976847,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 95,
+      "masked_fraction": 0.17385101318359375,
+      "tp": {
+        "control": 25,
+        "reserve": 0,
+        "c1mm": 95,
+        "prithvi": 95
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:b3ee58f010edf746a399027cba06f35ebb8e01bb28c5a31bc6fe3999182c156a",
+      "group_id": "russia:46f612bcea304d6e6babb86cf71d305dd06176b2b0f22f55f86655254aa47035",
+      "area_ha": 27.751594503836706,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 304,
+      "masked_fraction": 0.08059310913085938,
+      "tp": {
+        "control": 304,
+        "reserve": 173,
+        "c1mm": 304,
+        "prithvi": 304
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:b5701f0dcce37c75536dd7fc32949eec39162f23161065af8208b5addc87f5ec",
+      "group_id": "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+      "area_ha": 2.246287049128275,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 23,
+      "masked_fraction": 0.1460723876953125,
+      "tp": {
+        "control": 0,
+        "reserve": 0,
+        "c1mm": 0,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:bcf8a2422f520cbd700f63d04577b0ca213a469b524c7239171e54d3fc36a563",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "area_ha": 1.4832041973746033,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 17,
+      "masked_fraction": 0.35462188720703125,
+      "tp": {
+        "control": 0,
+        "reserve": 0,
+        "c1mm": 3,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:c0cf7fa0b5a7e63e67ce0492b0ecca54365774ba8e6d50a6194e47f146901a60",
+      "group_id": "russia:c2fb800b66805386135e562035877ed0ef727768ca0b76513226a77ac794bd76",
+      "area_ha": 534.7623024850897,
+      "size_bin": "250ha+",
+      "observed_seed_pixels": 5495,
+      "masked_fraction": 0.18072891235351562,
+      "tp": {
+        "control": 4419,
+        "reserve": 5102,
+        "c1mm": 5164,
+        "prithvi": 5417
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:c2fd1af34397df33e21472314938035494d5c313a8df3300d33e65a62fe1b2e1",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 7.736384070326971,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 84,
+      "masked_fraction": 0.2925567626953125,
+      "tp": {
+        "control": 7,
+        "reserve": 43,
+        "c1mm": 84,
+        "prithvi": 78
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:c481070229c61391c6acef554936185432534b173ac1e11197313bb4c6130cf8",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 3.5566202148248207,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 38,
+      "masked_fraction": 0.005748748779296875,
+      "tp": {
+        "control": 38,
+        "reserve": 38,
+        "c1mm": 38,
+        "prithvi": 38
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:c735f336f02d88dd6fde97414636630d5585b6d6a11c883d6878df4df6529679",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 36.04480470140582,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 400,
+      "masked_fraction": 0.273284912109375,
+      "tp": {
+        "control": 342,
+        "reserve": 359,
+        "c1mm": 395,
+        "prithvi": 400
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:caecf663c87fd0605564a05517a94200bad23b14ca110ea9066f681558754a70",
+      "group_id": "russia:9ea7d4bd40c51a8c41a527c790ca6141b55f280a1a0815df66a2bdbe10760fea",
+      "area_ha": 5.276108172659308,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 57,
+      "masked_fraction": 0.00868988037109375,
+      "tp": {
+        "control": 3,
+        "reserve": 31,
+        "c1mm": 40,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:cbd368a89752f52e29bcd389eb3c8d2903a21eaa9c2086c4207648a8817143d9",
+      "group_id": "russia:46f612bcea304d6e6babb86cf71d305dd06176b2b0f22f55f86655254aa47035",
+      "area_ha": 62.03264745620445,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 688,
+      "masked_fraction": 0.08764266967773438,
+      "tp": {
+        "control": 685,
+        "reserve": 520,
+        "c1mm": 688,
+        "prithvi": 688
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:cff1c5ec89a623e40a2044eb5fbee3b16337f03bb156a254cbc8dedda03da659",
+      "group_id": "russia:053fa8a811b2cf2e621c9d23eaa97535595b1a0acdbc7ba56f925549910d9b23",
+      "area_ha": 29.46168239479931,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 330,
+      "masked_fraction": 0.43010711669921875,
+      "tp": {
+        "control": 308,
+        "reserve": 329,
+        "c1mm": 330,
+        "prithvi": 308
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:d7fd4390256f43693d2d90d6470c8d9b0a3082d642828826c906687c810b0503",
+      "group_id": "russia:9de218afe453d6b0c92c164e624d9ab23a10f03e8627f42e2c9c81ea9d926552",
+      "area_ha": 12.41377375281625,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 139,
+      "masked_fraction": 0.017742156982421875,
+      "tp": {
+        "control": 92,
+        "reserve": 78,
+        "c1mm": 139,
+        "prithvi": 139
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:d9b7d0f5fa14e16f4f797597935f71b3826bf1b7e751db1a92f0f2bb0398c5ba",
+      "group_id": "russia:c2fb800b66805386135e562035877ed0ef727768ca0b76513226a77ac794bd76",
+      "area_ha": 212.33236894782186,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 2071,
+      "masked_fraction": 0.21436691284179688,
+      "tp": {
+        "control": 1836,
+        "reserve": 1942,
+        "c1mm": 1955,
+        "prithvi": 1989
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:dc4ee356450197b07ee155cd84a91136405e8370bc44ebcbb9fb89023273954b",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "area_ha": 1.0289281711636666,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 10,
+      "masked_fraction": 0.34705352783203125,
+      "tp": {
+        "control": 7,
+        "reserve": 9,
+        "c1mm": 10,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:e3e06929437e479127f79e729f6c20730baff6c626bdc79195dee7ef2b1df74c",
+      "group_id": "russia:e55982863745015bbe5d6fbbd959c065f60b7a1d44cd812d03224008dfd5ee86",
+      "area_ha": 13.793929945974366,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 154,
+      "masked_fraction": 0.035888671875,
+      "tp": {
+        "control": 94,
+        "reserve": 143,
+        "c1mm": 0,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:ea4ef0453998074f263aa7b6cbcdf5ce432a26e50c7f1d7bd8bbb7e480735a9c",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 36.78821480551646,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 368,
+      "masked_fraction": 0.07328033447265625,
+      "tp": {
+        "control": 295,
+        "reserve": 303,
+        "c1mm": 327,
+        "prithvi": 334
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:ed2ebc53a846a5fc93be67230d7158c13c5243a2dfa2869a390e0ddb728abe5b",
+      "group_id": "russia:b7f146a952da624cc41efceba29b406ba17dffe1ac7320de1d957f36132f0966",
+      "area_ha": 2.7522914905918747,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 31,
+      "masked_fraction": 0.18367385864257812,
+      "tp": {
+        "control": 25,
+        "reserve": 0,
+        "c1mm": 31,
+        "prithvi": 1
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:ee80f695150babd53eeb13b39c799ac5bfa40b4584be59109dcd9ba35d3e0071",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "area_ha": 3.9843233944158296,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 43,
+      "masked_fraction": 0.3614044189453125,
+      "tp": {
+        "control": 42,
+        "reserve": 42,
+        "c1mm": 43,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:ee95a27c018bceef9647275e8d1d79f8d6e90bc4031ccea973ff1441187f337c",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "area_ha": 103.48069909349186,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 1149,
+      "masked_fraction": 0.236724853515625,
+      "tp": {
+        "control": 0,
+        "reserve": 9,
+        "c1mm": 1102,
+        "prithvi": 1149
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:f0d29fee5ef940dcb8655d77853ab592e1f23d530c059ed406bb821ae28f3543",
+      "group_id": "russia:cb681790e6880be13ef0836481eccc3f3a9ce50e15282e5b2e08d7c343725bfa",
+      "area_ha": 94.18051301072529,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 1043,
+      "masked_fraction": 0.003391265869140625,
+      "tp": {
+        "control": 1043,
+        "reserve": 1026,
+        "c1mm": 1043,
+        "prithvi": 1037
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:f5e75617436bcd267442f562a2c39c432ff04d1165141f26b23f0b2cd6349c04",
+      "group_id": "russia:1162a23067f027e396195307d242b558d907e90c634f6e5fc3096061a8e98178",
+      "area_ha": 81.4797150757907,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 907,
+      "masked_fraction": 0.01023101806640625,
+      "tp": {
+        "control": 907,
+        "reserve": 907,
+        "c1mm": 907,
+        "prithvi": 892
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:f68c84edfb7fa6919631095264f943626f4edeca768c036630d4875b3d89e4c0",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 15.420289301885068,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 170,
+      "masked_fraction": 0.0410614013671875,
+      "tp": {
+        "control": 165,
+        "reserve": 168,
+        "c1mm": 170,
+        "prithvi": 170
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:f979ea13b6b426895fe6f4479a1fd7acd4637596cfd6041276b44e318a324aa9",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 218.51995091690262,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 2427,
+      "masked_fraction": 0.1541595458984375,
+      "tp": {
+        "control": 1837,
+        "reserve": 1850,
+        "c1mm": 2255,
+        "prithvi": 1992
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:f9e87c1fd4114fd816cd227727b501575ff4e2ed48cc6a8cf81b4942ec0fe94b",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "area_ha": 164.08906103856322,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 1829,
+      "masked_fraction": 0.232147216796875,
+      "tp": {
+        "control": 0,
+        "reserve": 0,
+        "c1mm": 1223,
+        "prithvi": 1179
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:fa6ebc7682e96aae706ab1b27a41adb49f104f7fb9639bbf96c2958fd2c19863",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "area_ha": 18.597266298570982,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 175,
+      "masked_fraction": 0.06381988525390625,
+      "tp": {
+        "control": 174,
+        "reserve": 175,
+        "c1mm": 175,
+        "prithvi": 175
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:fd4d6197f8853d230e3876019194a8c77b7726ba9037fee25157d866c24b4fc5",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "area_ha": 4.610324305054614,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 52,
+      "masked_fraction": 0.31188201904296875,
+      "tp": {
+        "control": 0,
+        "reserve": 0,
+        "c1mm": 52,
+        "prithvi": 0
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:ffafb61ba72cfeb22a11a8692d11f704e34b502a2d061a6b40338c324c747aee",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "area_ha": 13.73669344745925,
+      "size_bin": "1-25ha",
+      "observed_seed_pixels": 149,
+      "masked_fraction": 0.2772102355957031,
+      "tp": {
+        "control": 132,
+        "reserve": 115,
+        "c1mm": 149,
+        "prithvi": 149
+      },
+      "status": "observable"
+    },
+    {
+      "sample_id": "russia:ffe5bbee83528ac1491468420d637e7d079d36e6f0244ddb90a726d070853915",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "area_ha": 61.308141840453025,
+      "size_bin": "25-250ha",
+      "observed_seed_pixels": 689,
+      "masked_fraction": 0.3447456359863281,
+      "tp": {
+        "control": 26,
+        "reserve": 84,
+        "c1mm": 689,
+        "prithvi": 0
+      },
+      "status": "observable"
+    }
+  ],
+  "source_hashes": {
+    "scripts/report_russian_errors.py": "cb3df2d9f3f742df9dd91714edd66ceb023ee2cefd4b830be645958a4c8ca78e",
+    "src/comp/russian_error_report.py": "b58d4050fb0027cf6ca21f86efedf264fad4f76bacd18b7204a5b74b7101c7c6",
+    "scripts/score_russian_transfer.py": "87de555d9212b54d7bae737d8ebd6167091c95d8561974d5e0be5cfb557bef93",
+    "src/comp/l2a_finetuning.py": "60e0979252822355fa62d896faba9ad2d1d97f3b8bdcbb31328fbaea677fc67c",
+    "src/comp/terrain.py": "6ca6e9dc58be50888024c9d60e1142014c26e69b26e9a8f300833f226b1dbb38",
+    "src/comp/severity_layers.py": "887bde7c5aeb5797b906507b7a211bc4e5865cd79451a77e34916d6d49817d4d"
+  },
+  "non_claims": [
+    "Russian groups are spatial clusters, not physical fire IDs.",
+    "Missed source contours/windows do not prove a count of physical fires.",
+    "Reference-defined hard subset is diagnostic; it cannot select a new model/threshold.",
+    "Satellite interpretation and fixed common observation mask, not field truth."
+  ]
+}

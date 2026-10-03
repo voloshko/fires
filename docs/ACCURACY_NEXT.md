@@ -146,3 +146,13 @@ SPEC100-PREP001 INSUFFICIENT_EVIDENCE: QC2pairs, classes[8838,4691,3478],
 fullcollection running; actual frozen models inference pending. Последний
 HIGH reviewfix26f50f8 independently checked: noHIGH/CRITICAL. 6remote regressions
 PASS. Это scoped review, не подтверждение общей accuracy цели.
+
+## Российский итог (последнее завершённое измерение)
+
+SPEC92 rejected, recipe полностью выполнен. Reserve0.323049/control0.245309,
+Prithvi0.206216/C1-MM0.326108. Significantgain toPrithvi only; FLOGA delta−0.020882
+violates−0.01. FullreceiptFAIL, originalGPUqueue exit0terminal, не запускатьзаново.
+Errorreport sourcebound:77observableseedcontours, misses10/7/14 (reserve/C1-MM/Prithvi),
+не путать с missedwindows3/7/7 и spatialclusters1/2/3. Родительский SHA
+242acac3cf2ccd30728e5919997895e7cf1d83de223a8802b06f3c4daaaa296d.
+Новаяseveritycollection всёещёживая; SPEC100scorer ждётfulladmission.

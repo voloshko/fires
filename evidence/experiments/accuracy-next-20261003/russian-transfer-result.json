@@ -1,0 +1,2037 @@
+{
+  "spec_id": "SPEC-92",
+  "recipe_id": "bd9410962dfecba6a792b8a7b8c77b25e60187d9679baa46c6578c160d334090",
+  "comparisons": {
+    "control": {
+      "samples": 77,
+      "groups": 24,
+      "candidate_iou": 0.3230492072325294,
+      "control_iou": 0.24530857119641028,
+      "delta": 0.07774063603611911,
+      "ci95": [
+        0.03506793487111282,
+        0.18132717253181238
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "better"
+    },
+    "c1mm": {
+      "samples": 77,
+      "groups": 24,
+      "candidate_iou": 0.3230492072325294,
+      "control_iou": 0.32610820993394857,
+      "delta": -0.003059002701419178,
+      "ci95": [
+        -0.06755436973928312,
+        0.15079586557598482
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "inconclusive"
+    },
+    "prithvi": {
+      "samples": 77,
+      "groups": 24,
+      "candidate_iou": 0.3230492072325294,
+      "control_iou": 0.20621601498957293,
+      "delta": 0.11683319224295646,
+      "ci95": [
+        0.03940597010124545,
+        0.31527668234727935
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "better"
+    }
+  },
+  "stability": {
+    "ems": {
+      "samples": 60,
+      "groups": 44,
+      "candidate_iou": 0.7948998849080845,
+      "control_iou": 0.7594609076850591,
+      "delta": 0.03543897722302536,
+      "ci95": [
+        0.01422381892486218,
+        0.06596006900824015
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "better"
+    },
+    "floga": {
+      "samples": 81,
+      "groups": 81,
+      "candidate_iou": 0.7255777050481008,
+      "control_iou": 0.7464595747186571,
+      "delta": -0.020881869670556275,
+      "ci95": [
+        -0.12150441724112526,
+        0.0458425688344527
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "inconclusive"
+    }
+  },
+  "accepted": false,
+  "competitor_superiority": false,
+  "per_competitor_superiority": {
+    "c1mm": false,
+    "prithvi": true
+  },
+  "per_window": [
+    {
+      "sample_id": "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+      "group_id": "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+      "valid_pixels": 224142,
+      "control": [
+        0,
+        0,
+        493
+      ],
+      "reserve": [
+        7,
+        71,
+        486
+      ],
+      "c1mm": [
+        0,
+        0,
+        493
+      ],
+      "prithvi": [
+        0,
+        8421,
+        493
+      ]
+    },
+    {
+      "sample_id": "russia:04ba9345bfd145e63fe98564bf6aa45a94fa5a5ce1a5ebdd1fbdef31c058ae76",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 245963,
+      "control": [
+        4816,
+        4027,
+        5036
+      ],
+      "reserve": [
+        5495,
+        5152,
+        4357
+      ],
+      "c1mm": [
+        7173,
+        4526,
+        2679
+      ],
+      "prithvi": [
+        8192,
+        10273,
+        1660
+      ]
+    },
+    {
+      "sample_id": "russia:050797d0bf91faa8215d94e490a13cb03a2f3296d757b7dbc8126d56f9c9ef5d",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 252178,
+      "control": [
+        3378,
+        2250,
+        5388
+      ],
+      "reserve": [
+        4547,
+        4855,
+        4219
+      ],
+      "c1mm": [
+        1713,
+        1296,
+        7053
+      ],
+      "prithvi": [
+        7180,
+        14384,
+        1586
+      ]
+    },
+    {
+      "sample_id": "russia:091121198c867fe5f0266679c1498dc0cbb88ecb482d3c4391c71f90fd3da0ad",
+      "group_id": "russia:92798b9a1043bbbfeb072b44f9cd00538a53bb5943a53d2d171c33968ec256c3",
+      "valid_pixels": 199362,
+      "control": [
+        348,
+        2863,
+        257
+      ],
+      "reserve": [
+        438,
+        2723,
+        167
+      ],
+      "c1mm": [
+        570,
+        2877,
+        35
+      ],
+      "prithvi": [
+        532,
+        7315,
+        73
+      ]
+    },
+    {
+      "sample_id": "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+      "group_id": "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+      "valid_pixels": 224155,
+      "control": [
+        0,
+        26,
+        493
+      ],
+      "reserve": [
+        1,
+        121,
+        492
+      ],
+      "c1mm": [
+        0,
+        0,
+        493
+      ],
+      "prithvi": [
+        0,
+        9408,
+        493
+      ]
+    },
+    {
+      "sample_id": "russia:12dde8fe4da15dcd637a44b101c42c745075e7331edefdd890ff9387fdff4ef6",
+      "group_id": "russia:c2fb800b66805386135e562035877ed0ef727768ca0b76513226a77ac794bd76",
+      "valid_pixels": 185834,
+      "control": [
+        676,
+        5366,
+        424
+      ],
+      "reserve": [
+        487,
+        2261,
+        613
+      ],
+      "c1mm": [
+        1041,
+        5450,
+        59
+      ],
+      "prithvi": [
+        19,
+        7720,
+        1081
+      ]
+    },
+    {
+      "sample_id": "russia:145ded358eaf5ef65bd91a8862de4667adc6e4ec7358e1f4c6774c3820d76b5b",
+      "group_id": "russia:2e4b8e09fc16b7459e417805200793d26908bf21333c6ac3422ef278af7a29b1",
+      "valid_pixels": 216332,
+      "control": [
+        270,
+        1763,
+        0
+      ],
+      "reserve": [
+        270,
+        1823,
+        0
+      ],
+      "c1mm": [
+        270,
+        114,
+        0
+      ],
+      "prithvi": [
+        267,
+        265,
+        3
+      ]
+    },
+    {
+      "sample_id": "russia:14f0dd525739710be379cfd715214cb9a2ea3d1be7b92233c36a978419058ac6",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "valid_pixels": 195619,
+      "control": [
+        0,
+        806,
+        5262
+      ],
+      "reserve": [
+        90,
+        366,
+        5172
+      ],
+      "c1mm": [
+        1181,
+        2288,
+        4081
+      ],
+      "prithvi": [
+        752,
+        10561,
+        4510
+      ]
+    },
+    {
+      "sample_id": "russia:15bb3ab80b90696de3eddf3390f8af84612487fd410693b76d4ced2cb1683c92",
+      "group_id": "russia:f084b50bc6fa43bf4b15e47239dde38589966d04db4fb934ac3693a2d4dc0185",
+      "valid_pixels": 152757,
+      "control": [
+        284,
+        4,
+        350
+      ],
+      "reserve": [
+        326,
+        163,
+        308
+      ],
+      "c1mm": [
+        437,
+        527,
+        197
+      ],
+      "prithvi": [
+        634,
+        27191,
+        0
+      ]
+    },
+    {
+      "sample_id": "russia:15c395e3dab77ec1a051d27e3eb7a51f70f933492848460835fd51f98ace8c3b",
+      "group_id": "russia:c2fb800b66805386135e562035877ed0ef727768ca0b76513226a77ac794bd76",
+      "valid_pixels": 198525,
+      "control": [
+        2487,
+        529,
+        4909
+      ],
+      "reserve": [
+        5244,
+        214,
+        2152
+      ],
+      "c1mm": [
+        1953,
+        110,
+        5443
+      ],
+      "prithvi": [
+        2005,
+        634,
+        5391
+      ]
+    },
+    {
+      "sample_id": "russia:1ffdcb60cdc531342565abc26ce2ca98ceba52dee6ca1acf73a3d58919eed5d6",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 243927,
+      "control": [
+        3909,
+        7279,
+        5354
+      ],
+      "reserve": [
+        4947,
+        6101,
+        4316
+      ],
+      "c1mm": [
+        3320,
+        2655,
+        5943
+      ],
+      "prithvi": [
+        8274,
+        16294,
+        989
+      ]
+    },
+    {
+      "sample_id": "russia:2265d35d223d0bd06d740966df3049548abd0cccc39cee63e178561b15a68200",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 243595,
+      "control": [
+        1493,
+        4449,
+        6837
+      ],
+      "reserve": [
+        3214,
+        3861,
+        5116
+      ],
+      "c1mm": [
+        4578,
+        1621,
+        3752
+      ],
+      "prithvi": [
+        7851,
+        22365,
+        479
+      ]
+    },
+    {
+      "sample_id": "russia:22c7273ce4d58cf90bca2dfc10a185c89ff6a379d7373efebb0163fa8087ca17",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "valid_pixels": 174408,
+      "control": [
+        427,
+        808,
+        4457
+      ],
+      "reserve": [
+        642,
+        600,
+        4242
+      ],
+      "c1mm": [
+        1428,
+        1227,
+        3456
+      ],
+      "prithvi": [
+        115,
+        4061,
+        4769
+      ]
+    },
+    {
+      "sample_id": "russia:279799f389bf63a3ff8f12446a25e0999bd4b3a292224d2aebfddbd4f2c2628b",
+      "group_id": "russia:20090c5f8b18e981b9d5f997698340b07ea0d9faeedae1c27d8dec5dbfeddf0f",
+      "valid_pixels": 243589,
+      "control": [
+        175,
+        1575,
+        0
+      ],
+      "reserve": [
+        175,
+        1650,
+        0
+      ],
+      "c1mm": [
+        175,
+        807,
+        0
+      ],
+      "prithvi": [
+        175,
+        2740,
+        0
+      ]
+    },
+    {
+      "sample_id": "russia:2bf6094e1e1dd2ae9ccfdcc25bb14d6f0291b056a6f759f56e20b1860da439d5",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 241382,
+      "control": [
+        2670,
+        4234,
+        5872
+      ],
+      "reserve": [
+        3752,
+        4111,
+        4790
+      ],
+      "c1mm": [
+        3817,
+        2540,
+        4725
+      ],
+      "prithvi": [
+        8354,
+        14969,
+        188
+      ]
+    },
+    {
+      "sample_id": "russia:36a462181acdf2dd0cdfc086d856d15187534373ddd0a8e1f1dc5e8d730728fc",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 184525,
+      "control": [
+        831,
+        168,
+        1135
+      ],
+      "reserve": [
+        1526,
+        370,
+        440
+      ],
+      "c1mm": [
+        1039,
+        300,
+        927
+      ],
+      "prithvi": [
+        767,
+        460,
+        1199
+      ]
+    },
+    {
+      "sample_id": "russia:3c28eb0b94621c3c273e2f3e38c9221f5c7adb7de9bf75def24597fe31003241",
+      "group_id": "russia:c23ea3d10e6d76d1002a3f1169a9cab7ca5a23f042767e51575dc7adc76f7101",
+      "valid_pixels": 196156,
+      "control": [
+        3247,
+        1211,
+        272
+      ],
+      "reserve": [
+        3341,
+        1895,
+        178
+      ],
+      "c1mm": [
+        3302,
+        1585,
+        217
+      ],
+      "prithvi": [
+        3018,
+        1352,
+        501
+      ]
+    },
+    {
+      "sample_id": "russia:3c39b54275b12dfb44bc589225216c8df11b077e4fb2aa942a3785b4e7a7a918",
+      "group_id": "russia:a1c1670c77356fd7f3df27d882ad19b7083c712053d31a8d0b830933b0255e29",
+      "valid_pixels": 241525,
+      "control": [
+        354,
+        313,
+        10
+      ],
+      "reserve": [
+        357,
+        268,
+        7
+      ],
+      "c1mm": [
+        364,
+        604,
+        0
+      ],
+      "prithvi": [
+        364,
+        4712,
+        0
+      ]
+    },
+    {
+      "sample_id": "russia:3ebdcac091c2d074c6249d4fd7dcaf8c7e047dd5ea492d09d431f6e8469a5067",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 248959,
+      "control": [
+        3631,
+        8219,
+        6221
+      ],
+      "reserve": [
+        5280,
+        9042,
+        4572
+      ],
+      "c1mm": [
+        7886,
+        9953,
+        1966
+      ],
+      "prithvi": [
+        7307,
+        11387,
+        2545
+      ]
+    },
+    {
+      "sample_id": "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+      "group_id": "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+      "valid_pixels": 224359,
+      "control": [
+        0,
+        15,
+        493
+      ],
+      "reserve": [
+        4,
+        80,
+        489
+      ],
+      "c1mm": [
+        0,
+        0,
+        493
+      ],
+      "prithvi": [
+        0,
+        20165,
+        493
+      ]
+    },
+    {
+      "sample_id": "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+      "group_id": "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+      "valid_pixels": 225779,
+      "control": [
+        0,
+        218,
+        493
+      ],
+      "reserve": [
+        0,
+        259,
+        493
+      ],
+      "c1mm": [
+        0,
+        0,
+        493
+      ],
+      "prithvi": [
+        0,
+        11334,
+        493
+      ]
+    },
+    {
+      "sample_id": "russia:4da327137065846688f2541126436ee2a03736c3cfc4fa6b0039649750727ac9",
+      "group_id": "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+      "valid_pixels": 224278,
+      "control": [
+        1,
+        0,
+        492
+      ],
+      "reserve": [
+        7,
+        53,
+        486
+      ],
+      "c1mm": [
+        0,
+        0,
+        493
+      ],
+      "prithvi": [
+        0,
+        15846,
+        493
+      ]
+    },
+    {
+      "sample_id": "russia:545aee5a73b1079d51b1c83931a1e8b218f46f230ccaa4f1731daf7a9128a38c",
+      "group_id": "russia:2e4b8e09fc16b7459e417805200793d26908bf21333c6ac3422ef278af7a29b1",
+      "valid_pixels": 225791,
+      "control": [
+        248,
+        1262,
+        377
+      ],
+      "reserve": [
+        265,
+        1265,
+        360
+      ],
+      "c1mm": [
+        275,
+        1543,
+        350
+      ],
+      "prithvi": [
+        275,
+        2382,
+        350
+      ]
+    },
+    {
+      "sample_id": "russia:57cb76b717897e1c582a1d8eb36f08ec2fc577addfbef297dacdba15c73224c9",
+      "group_id": "russia:0c3fa74d6166cbad9d1016be92fa04db137fac15fcb06c664986123fde44ebbc",
+      "valid_pixels": 226701,
+      "control": [
+        21,
+        2486,
+        0
+      ],
+      "reserve": [
+        21,
+        5691,
+        0
+      ],
+      "c1mm": [
+        21,
+        4621,
+        0
+      ],
+      "prithvi": [
+        21,
+        6676,
+        0
+      ]
+    },
+    {
+      "sample_id": "russia:626718e83b2b71460b29b0e14bc68fea3d7d19dca345d13f8fe14e6ebb34903b",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 247643,
+      "control": [
+        4783,
+        4630,
+        5008
+      ],
+      "reserve": [
+        5411,
+        5894,
+        4380
+      ],
+      "c1mm": [
+        7766,
+        5028,
+        2025
+      ],
+      "prithvi": [
+        8216,
+        12580,
+        1575
+      ]
+    },
+    {
+      "sample_id": "russia:675b9d05ec8446b98877f64b39ab7690a4acda51229c4743378213c6020ee5f6",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 185440,
+      "control": [
+        702,
+        201,
+        2615
+      ],
+      "reserve": [
+        1521,
+        203,
+        1796
+      ],
+      "c1mm": [
+        789,
+        329,
+        2528
+      ],
+      "prithvi": [
+        782,
+        2549,
+        2535
+      ]
+    },
+    {
+      "sample_id": "russia:68a72334dca6db10d2322c6673ecbd89f8df4e0518fee9071dfcb19f635c2c03",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 244344,
+      "control": [
+        4955,
+        2541,
+        4733
+      ],
+      "reserve": [
+        5388,
+        4361,
+        4300
+      ],
+      "c1mm": [
+        4898,
+        2723,
+        4790
+      ],
+      "prithvi": [
+        7836,
+        10537,
+        1852
+      ]
+    },
+    {
+      "sample_id": "russia:6ca151f5b2e84bf40dc8f23afb766a914f9dfdf1740490871ddf784078ed820c",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 260572,
+      "control": [
+        2496,
+        5307,
+        377
+      ],
+      "reserve": [
+        2641,
+        3447,
+        232
+      ],
+      "c1mm": [
+        2478,
+        729,
+        395
+      ],
+      "prithvi": [
+        2464,
+        949,
+        409
+      ]
+    },
+    {
+      "sample_id": "russia:70876ab520b9a060cf985f362102631ac6bbf101fc13344fb0a69dfb13a6039b",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 245337,
+      "control": [
+        4948,
+        2650,
+        4660
+      ],
+      "reserve": [
+        5357,
+        4506,
+        4251
+      ],
+      "c1mm": [
+        4972,
+        2866,
+        4636
+      ],
+      "prithvi": [
+        7916,
+        11400,
+        1692
+      ]
+    },
+    {
+      "sample_id": "russia:7386ad528b3f5bbf8e9e23d3a2881ca28e4cc638d0a4bfd3ed03e29bca80384c",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 250809,
+      "control": [
+        855,
+        2143,
+        1054
+      ],
+      "reserve": [
+        1690,
+        1829,
+        219
+      ],
+      "c1mm": [
+        869,
+        573,
+        1040
+      ],
+      "prithvi": [
+        875,
+        1078,
+        1034
+      ]
+    },
+    {
+      "sample_id": "russia:789e564aa585143a5256463e33984a5292668005bb41e57903a889c611ad7c28",
+      "group_id": "russia:43e69446a14adc255b0af3ed8cb9b31f46d8ec3f53f94494c06d61075b4eefd6",
+      "valid_pixels": 252396,
+      "control": [
+        2000,
+        4011,
+        4
+      ],
+      "reserve": [
+        2002,
+        3086,
+        2
+      ],
+      "c1mm": [
+        1995,
+        324,
+        9
+      ],
+      "prithvi": [
+        1967,
+        455,
+        37
+      ]
+    },
+    {
+      "sample_id": "russia:7a87eac54950722c599a0f202f4f08eb46ef687070e368e17f0d473ee4a77269",
+      "group_id": "russia:c2fb800b66805386135e562035877ed0ef727768ca0b76513226a77ac794bd76",
+      "valid_pixels": 197668,
+      "control": [
+        423,
+        1034,
+        188
+      ],
+      "reserve": [
+        461,
+        389,
+        150
+      ],
+      "c1mm": [
+        608,
+        2893,
+        3
+      ],
+      "prithvi": [
+        609,
+        4294,
+        2
+      ]
+    },
+    {
+      "sample_id": "russia:7ae6637da5e9169a865bb6a282fe6bb0243747d082dc100bb97af95f22a19a8a",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 241210,
+      "control": [
+        811,
+        288,
+        2257
+      ],
+      "reserve": [
+        1670,
+        260,
+        1398
+      ],
+      "c1mm": [
+        637,
+        173,
+        2431
+      ],
+      "prithvi": [
+        749,
+        576,
+        2319
+      ]
+    },
+    {
+      "sample_id": "russia:7d5c02e93557150a35157ab7bd82044d0d947bb7b881ceb6b0ede6eed816547f",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "valid_pixels": 200739,
+      "control": [
+        0,
+        235,
+        5262
+      ],
+      "reserve": [
+        100,
+        52,
+        5162
+      ],
+      "c1mm": [
+        2717,
+        3039,
+        2545
+      ],
+      "prithvi": [
+        2107,
+        14584,
+        3155
+      ]
+    },
+    {
+      "sample_id": "russia:7db3f4f18d1c119dfa4d8a7b4607634a7c1a73c77a47729e87a8f20ba48b9b23",
+      "group_id": "russia:23e19b184085035f8412a454e37b8c5fba8cdcac1d52d852ff1c5f0717b42e24",
+      "valid_pixels": 261906,
+      "control": [
+        1488,
+        1008,
+        98
+      ],
+      "reserve": [
+        1525,
+        1400,
+        61
+      ],
+      "c1mm": [
+        1516,
+        285,
+        70
+      ],
+      "prithvi": [
+        1544,
+        4908,
+        42
+      ]
+    },
+    {
+      "sample_id": "russia:8196c22e5bb0f2281088e20430404527457618f194ab9776d713d64339687a86",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "valid_pixels": 188716,
+      "control": [
+        397,
+        1523,
+        3438
+      ],
+      "reserve": [
+        533,
+        733,
+        3302
+      ],
+      "c1mm": [
+        680,
+        2168,
+        3155
+      ],
+      "prithvi": [
+        987,
+        6879,
+        2848
+      ]
+    },
+    {
+      "sample_id": "russia:8447239836771287a380d75543ad28442cb395f1aa2486178da35484cb115245",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 260716,
+      "control": [
+        157,
+        3129,
+        714
+      ],
+      "reserve": [
+        529,
+        2300,
+        342
+      ],
+      "c1mm": [
+        157,
+        136,
+        714
+      ],
+      "prithvi": [
+        157,
+        634,
+        714
+      ]
+    },
+    {
+      "sample_id": "russia:8cb8676eec778d31e818eafc794cb56856708268d458f49f69c815fbcfe4afe9",
+      "group_id": "russia:2e4b8e09fc16b7459e417805200793d26908bf21333c6ac3422ef278af7a29b1",
+      "valid_pixels": 246040,
+      "control": [
+        333,
+        315,
+        288
+      ],
+      "reserve": [
+        340,
+        480,
+        281
+      ],
+      "c1mm": [
+        333,
+        123,
+        288
+      ],
+      "prithvi": [
+        333,
+        1627,
+        288
+      ]
+    },
+    {
+      "sample_id": "russia:8da9c1fe2427dcaca561eb81686883a40ed7b97b234cca2fd1de6dd22666a478",
+      "group_id": "russia:c2fb800b66805386135e562035877ed0ef727768ca0b76513226a77ac794bd76",
+      "valid_pixels": 180587,
+      "control": [
+        408,
+        5873,
+        0
+      ],
+      "reserve": [
+        403,
+        1363,
+        5
+      ],
+      "c1mm": [
+        408,
+        3265,
+        0
+      ],
+      "prithvi": [
+        362,
+        761,
+        46
+      ]
+    },
+    {
+      "sample_id": "russia:8e6eef100f22a92beb37d80a06fb6f577f86fdf8cf0a47d0732320b3a1de2849",
+      "group_id": "russia:0947e64197d306ccbde904d53bac09999af7f8de447f53dd6a5a246c20b7c8a4",
+      "valid_pixels": 189717,
+      "control": [
+        2686,
+        77,
+        252
+      ],
+      "reserve": [
+        2744,
+        165,
+        194
+      ],
+      "c1mm": [
+        2802,
+        189,
+        136
+      ],
+      "prithvi": [
+        2858,
+        227,
+        80
+      ]
+    },
+    {
+      "sample_id": "russia:914ca85dae948f2a075a2fb25868a3b5c0d2d815b7687aeac441c29cb3cb55b6",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 260609,
+      "control": [
+        2494,
+        4019,
+        264
+      ],
+      "reserve": [
+        2559,
+        2740,
+        199
+      ],
+      "c1mm": [
+        2471,
+        725,
+        287
+      ],
+      "prithvi": [
+        2456,
+        930,
+        302
+      ]
+    },
+    {
+      "sample_id": "russia:91c39f443c13e3f0baa30dd2fe92ba7288b71fe55d2aaf17c4f8510b25a2cad4",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 215658,
+      "control": [
+        102,
+        2303,
+        35
+      ],
+      "reserve": [
+        106,
+        2271,
+        31
+      ],
+      "c1mm": [
+        115,
+        1339,
+        22
+      ],
+      "prithvi": [
+        137,
+        3694,
+        0
+      ]
+    },
+    {
+      "sample_id": "russia:9524e4ebedfcec6c66c7f39a91faf1f64cfda140d3c6148fab6cfc0154d0ba0e",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 249071,
+      "control": [
+        4784,
+        8699,
+        5068
+      ],
+      "reserve": [
+        5622,
+        8423,
+        4230
+      ],
+      "c1mm": [
+        3312,
+        2954,
+        6540
+      ],
+      "prithvi": [
+        7522,
+        13547,
+        2330
+      ]
+    },
+    {
+      "sample_id": "russia:98b09fe4684c456adfab9ce075c8aa65a44cdbc0b566a90f0d6f514f4ed0fb89",
+      "group_id": "russia:76cd5212c405333b61de9cebab9ac1974576e1c787b591a7f38ceb2390afa033",
+      "valid_pixels": 184527,
+      "control": [
+        257,
+        263,
+        79
+      ],
+      "reserve": [
+        273,
+        188,
+        63
+      ],
+      "c1mm": [
+        308,
+        153,
+        28
+      ],
+      "prithvi": [
+        336,
+        8591,
+        0
+      ]
+    },
+    {
+      "sample_id": "russia:9b3a0e65e7a6b0a674683223a782ef7e1db27666e4bd951023a56cb4e9c5d216",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 199466,
+      "control": [
+        699,
+        84,
+        744
+      ],
+      "reserve": [
+        950,
+        239,
+        493
+      ],
+      "c1mm": [
+        1079,
+        282,
+        364
+      ],
+      "prithvi": [
+        767,
+        424,
+        676
+      ]
+    },
+    {
+      "sample_id": "russia:9c70bb4060e6c3a589f9bfd2909a3aa4a157005d4c3ab53b7d6df9404c4cc33e",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 236646,
+      "control": [
+        4953,
+        1990,
+        4899
+      ],
+      "reserve": [
+        5699,
+        3306,
+        4153
+      ],
+      "c1mm": [
+        4200,
+        1355,
+        5652
+      ],
+      "prithvi": [
+        8926,
+        11027,
+        926
+      ]
+    },
+    {
+      "sample_id": "russia:9ee41e8c879c3399f1196961bf9660be7bc70135f535f56f5676ab9c76f47aeb",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "valid_pixels": 204840,
+      "control": [
+        2,
+        1051,
+        5260
+      ],
+      "reserve": [
+        55,
+        526,
+        5207
+      ],
+      "c1mm": [
+        1681,
+        4268,
+        3581
+      ],
+      "prithvi": [
+        2029,
+        16705,
+        3233
+      ]
+    },
+    {
+      "sample_id": "russia:a0c00187b582caa84e14fd80b96e55f3dda42b623160d4155394586a38d0868c",
+      "group_id": "russia:1162a23067f027e396195307d242b558d907e90c634f6e5fc3096061a8e98178",
+      "valid_pixels": 259193,
+      "control": [
+        1323,
+        8990,
+        0
+      ],
+      "reserve": [
+        1323,
+        2134,
+        0
+      ],
+      "c1mm": [
+        1322,
+        848,
+        1
+      ],
+      "prithvi": [
+        1283,
+        510,
+        40
+      ]
+    },
+    {
+      "sample_id": "russia:a5c4d96f3d69a38cd74e74d541b22586a2d7f19991f4281b6c31f1d01ab834ad",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 250010,
+      "control": [
+        4600,
+        8955,
+        5147
+      ],
+      "reserve": [
+        5470,
+        9915,
+        4277
+      ],
+      "c1mm": [
+        6987,
+        2841,
+        2760
+      ],
+      "prithvi": [
+        7184,
+        11437,
+        2563
+      ]
+    },
+    {
+      "sample_id": "russia:a9284f0f4e978443ff688f551b324d24b8ed32f4ff0d6fa5d4cb28e80d769c61",
+      "group_id": "russia:b7f146a952da624cc41efceba29b406ba17dffe1ac7320de1d957f36132f0966",
+      "valid_pixels": 216570,
+      "control": [
+        47,
+        1380,
+        79
+      ],
+      "reserve": [
+        0,
+        932,
+        126
+      ],
+      "c1mm": [
+        126,
+        7824,
+        0
+      ],
+      "prithvi": [
+        126,
+        15913,
+        0
+      ]
+    },
+    {
+      "sample_id": "russia:b3ee58f010edf746a399027cba06f35ebb8e01bb28c5a31bc6fe3999182c156a",
+      "group_id": "russia:46f612bcea304d6e6babb86cf71d305dd06176b2b0f22f55f86655254aa47035",
+      "valid_pixels": 241017,
+      "control": [
+        724,
+        3758,
+        268
+      ],
+      "reserve": [
+        464,
+        789,
+        528
+      ],
+      "c1mm": [
+        992,
+        1476,
+        0
+      ],
+      "prithvi": [
+        992,
+        2333,
+        0
+      ]
+    },
+    {
+      "sample_id": "russia:b5701f0dcce37c75536dd7fc32949eec39162f23161065af8208b5addc87f5ec",
+      "group_id": "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+      "valid_pixels": 223852,
+      "control": [
+        2,
+        0,
+        491
+      ],
+      "reserve": [
+        8,
+        45,
+        485
+      ],
+      "c1mm": [
+        0,
+        0,
+        493
+      ],
+      "prithvi": [
+        21,
+        22904,
+        472
+      ]
+    },
+    {
+      "sample_id": "russia:bcf8a2422f520cbd700f63d04577b0ca213a469b524c7239171e54d3fc36a563",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "valid_pixels": 169182,
+      "control": [
+        4,
+        259,
+        5258
+      ],
+      "reserve": [
+        75,
+        238,
+        5187
+      ],
+      "c1mm": [
+        591,
+        1437,
+        4671
+      ],
+      "prithvi": [
+        329,
+        7676,
+        4933
+      ]
+    },
+    {
+      "sample_id": "russia:c0cf7fa0b5a7e63e67ce0492b0ecca54365774ba8e6d50a6194e47f146901a60",
+      "group_id": "russia:c2fb800b66805386135e562035877ed0ef727768ca0b76513226a77ac794bd76",
+      "valid_pixels": 214767,
+      "control": [
+        5480,
+        712,
+        2149
+      ],
+      "reserve": [
+        6750,
+        302,
+        879
+      ],
+      "c1mm": [
+        5164,
+        296,
+        2465
+      ],
+      "prithvi": [
+        6865,
+        1830,
+        764
+      ]
+    },
+    {
+      "sample_id": "russia:c2fd1af34397df33e21472314938035494d5c313a8df3300d33e65a62fe1b2e1",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 185452,
+      "control": [
+        609,
+        94,
+        3102
+      ],
+      "reserve": [
+        1436,
+        150,
+        2275
+      ],
+      "c1mm": [
+        790,
+        384,
+        2921
+      ],
+      "prithvi": [
+        763,
+        433,
+        2948
+      ]
+    },
+    {
+      "sample_id": "russia:c481070229c61391c6acef554936185432534b173ac1e11197313bb4c6130cf8",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 260637,
+      "control": [
+        157,
+        3467,
+        616
+      ],
+      "reserve": [
+        432,
+        2190,
+        341
+      ],
+      "c1mm": [
+        157,
+        134,
+        616
+      ],
+      "prithvi": [
+        155,
+        276,
+        618
+      ]
+    },
+    {
+      "sample_id": "russia:c735f336f02d88dd6fde97414636630d5585b6d6a11c883d6878df4df6529679",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 190504,
+      "control": [
+        1090,
+        122,
+        957
+      ],
+      "reserve": [
+        1668,
+        376,
+        379
+      ],
+      "c1mm": [
+        1182,
+        435,
+        865
+      ],
+      "prithvi": [
+        1108,
+        2716,
+        939
+      ]
+    },
+    {
+      "sample_id": "russia:caecf663c87fd0605564a05517a94200bad23b14ca110ea9066f681558754a70",
+      "group_id": "russia:9ea7d4bd40c51a8c41a527c790ca6141b55f280a1a0815df66a2bdbe10760fea",
+      "valid_pixels": 259866,
+      "control": [
+        3,
+        2717,
+        54
+      ],
+      "reserve": [
+        31,
+        2086,
+        26
+      ],
+      "c1mm": [
+        40,
+        3936,
+        17
+      ],
+      "prithvi": [
+        0,
+        8036,
+        57
+      ]
+    },
+    {
+      "sample_id": "russia:cbd368a89752f52e29bcd389eb3c8d2903a21eaa9c2086c4207648a8817143d9",
+      "group_id": "russia:46f612bcea304d6e6babb86cf71d305dd06176b2b0f22f55f86655254aa47035",
+      "valid_pixels": 239169,
+      "control": [
+        811,
+        3166,
+        181
+      ],
+      "reserve": [
+        623,
+        926,
+        369
+      ],
+      "c1mm": [
+        957,
+        2205,
+        35
+      ],
+      "prithvi": [
+        978,
+        2724,
+        14
+      ]
+    },
+    {
+      "sample_id": "russia:cff1c5ec89a623e40a2044eb5fbee3b16337f03bb156a254cbc8dedda03da659",
+      "group_id": "russia:053fa8a811b2cf2e621c9d23eaa97535595b1a0acdbc7ba56f925549910d9b23",
+      "valid_pixels": 149394,
+      "control": [
+        308,
+        2637,
+        22
+      ],
+      "reserve": [
+        329,
+        3136,
+        1
+      ],
+      "c1mm": [
+        330,
+        1167,
+        0
+      ],
+      "prithvi": [
+        308,
+        8981,
+        22
+      ]
+    },
+    {
+      "sample_id": "russia:d7fd4390256f43693d2d90d6470c8d9b0a3082d642828826c906687c810b0503",
+      "group_id": "russia:9de218afe453d6b0c92c164e624d9ab23a10f03e8627f42e2c9c81ea9d926552",
+      "valid_pixels": 257493,
+      "control": [
+        92,
+        43,
+        47
+      ],
+      "reserve": [
+        78,
+        14,
+        61
+      ],
+      "c1mm": [
+        139,
+        2297,
+        0
+      ],
+      "prithvi": [
+        139,
+        3151,
+        0
+      ]
+    },
+    {
+      "sample_id": "russia:d9b7d0f5fa14e16f4f797597935f71b3826bf1b7e751db1a92f0f2bb0398c5ba",
+      "group_id": "russia:c2fb800b66805386135e562035877ed0ef727768ca0b76513226a77ac794bd76",
+      "valid_pixels": 205949,
+      "control": [
+        3507,
+        382,
+        4122
+      ],
+      "reserve": [
+        5982,
+        267,
+        1647
+      ],
+      "c1mm": [
+        1955,
+        149,
+        5674
+      ],
+      "prithvi": [
+        3381,
+        553,
+        4248
+      ]
+    },
+    {
+      "sample_id": "russia:dc4ee356450197b07ee155cd84a91136405e8370bc44ebcbb9fb89023273954b",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "valid_pixels": 171166,
+      "control": [
+        452,
+        963,
+        4432
+      ],
+      "reserve": [
+        674,
+        630,
+        4210
+      ],
+      "c1mm": [
+        1613,
+        2255,
+        3271
+      ],
+      "prithvi": [
+        146,
+        4523,
+        4738
+      ]
+    },
+    {
+      "sample_id": "russia:e3e06929437e479127f79e729f6c20730baff6c626bdc79195dee7ef2b1df74c",
+      "group_id": "russia:e55982863745015bbe5d6fbbd959c065f60b7a1d44cd812d03224008dfd5ee86",
+      "valid_pixels": 252736,
+      "control": [
+        94,
+        1100,
+        60
+      ],
+      "reserve": [
+        143,
+        353,
+        11
+      ],
+      "c1mm": [
+        0,
+        2494,
+        154
+      ],
+      "prithvi": [
+        0,
+        17703,
+        154
+      ]
+    },
+    {
+      "sample_id": "russia:ea4ef0453998074f263aa7b6cbcdf5ce432a26e50c7f1d7bd8bbb7e480735a9c",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 242934,
+      "control": [
+        4505,
+        2262,
+        5156
+      ],
+      "reserve": [
+        5126,
+        3859,
+        4535
+      ],
+      "c1mm": [
+        4793,
+        2552,
+        4868
+      ],
+      "prithvi": [
+        7563,
+        10778,
+        2098
+      ]
+    },
+    {
+      "sample_id": "russia:ed2ebc53a846a5fc93be67230d7158c13c5243a2dfa2869a390e0ddb728abe5b",
+      "group_id": "russia:b7f146a952da624cc41efceba29b406ba17dffe1ac7320de1d957f36132f0966",
+      "valid_pixels": 213995,
+      "control": [
+        44,
+        1290,
+        82
+      ],
+      "reserve": [
+        0,
+        915,
+        126
+      ],
+      "c1mm": [
+        126,
+        5428,
+        0
+      ],
+      "prithvi": [
+        65,
+        8397,
+        61
+      ]
+    },
+    {
+      "sample_id": "russia:ee80f695150babd53eeb13b39c799ac5bfa40b4584be59109dcd9ba35d3e0071",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "valid_pixels": 167404,
+      "control": [
+        415,
+        1038,
+        4469
+      ],
+      "reserve": [
+        611,
+        665,
+        4273
+      ],
+      "c1mm": [
+        1468,
+        3745,
+        3416
+      ],
+      "prithvi": [
+        219,
+        5261,
+        4665
+      ]
+    },
+    {
+      "sample_id": "russia:ee95a27c018bceef9647275e8d1d79f8d6e90bc4031ccea973ff1441187f337c",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "valid_pixels": 200088,
+      "control": [
+        0,
+        400,
+        5262
+      ],
+      "reserve": [
+        50,
+        119,
+        5212
+      ],
+      "c1mm": [
+        2784,
+        3468,
+        2478
+      ],
+      "prithvi": [
+        2664,
+        15204,
+        2598
+      ]
+    },
+    {
+      "sample_id": "russia:f0d29fee5ef940dcb8655d77853ab592e1f23d530c059ed406bb821ae28f3543",
+      "group_id": "russia:cb681790e6880be13ef0836481eccc3f3a9ce50e15282e5b2e08d7c343725bfa",
+      "valid_pixels": 261255,
+      "control": [
+        1043,
+        243,
+        0
+      ],
+      "reserve": [
+        1026,
+        133,
+        17
+      ],
+      "c1mm": [
+        1043,
+        222,
+        0
+      ],
+      "prithvi": [
+        1037,
+        345,
+        6
+      ]
+    },
+    {
+      "sample_id": "russia:f5e75617436bcd267442f562a2c39c432ff04d1165141f26b23f0b2cd6349c04",
+      "group_id": "russia:1162a23067f027e396195307d242b558d907e90c634f6e5fc3096061a8e98178",
+      "valid_pixels": 259462,
+      "control": [
+        1323,
+        9023,
+        0
+      ],
+      "reserve": [
+        1323,
+        2330,
+        0
+      ],
+      "c1mm": [
+        1323,
+        1171,
+        0
+      ],
+      "prithvi": [
+        1306,
+        607,
+        17
+      ]
+    },
+    {
+      "sample_id": "russia:f68c84edfb7fa6919631095264f943626f4edeca768c036630d4875b3d89e4c0",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 251380,
+      "control": [
+        3794,
+        2038,
+        5164
+      ],
+      "reserve": [
+        4706,
+        4624,
+        4252
+      ],
+      "c1mm": [
+        2871,
+        1757,
+        6087
+      ],
+      "prithvi": [
+        7409,
+        16550,
+        1549
+      ]
+    },
+    {
+      "sample_id": "russia:f979ea13b6b426895fe6f4479a1fd7acd4637596cfd6041276b44e318a324aa9",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 221732,
+      "control": [
+        2038,
+        271,
+        1812
+      ],
+      "reserve": [
+        2877,
+        364,
+        973
+      ],
+      "c1mm": [
+        2255,
+        336,
+        1595
+      ],
+      "prithvi": [
+        1992,
+        357,
+        1858
+      ]
+    },
+    {
+      "sample_id": "russia:f9e87c1fd4114fd816cd227727b501575ff4e2ed48cc6a8cf81b4942ec0fe94b",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "valid_pixels": 201288,
+      "control": [
+        0,
+        204,
+        5262
+      ],
+      "reserve": [
+        94,
+        60,
+        5168
+      ],
+      "c1mm": [
+        2334,
+        1647,
+        2928
+      ],
+      "prithvi": [
+        2115,
+        16262,
+        3147
+      ]
+    },
+    {
+      "sample_id": "russia:fa6ebc7682e96aae706ab1b27a41adb49f104f7fb9639bbf96c2958fd2c19863",
+      "group_id": "russia:2b4547b555e94a90fbb2767160b52fef9428e267fd2fe55c76d0541760ec70e4",
+      "valid_pixels": 245414,
+      "control": [
+        4697,
+        2357,
+        4754
+      ],
+      "reserve": [
+        5159,
+        4231,
+        4292
+      ],
+      "c1mm": [
+        4840,
+        2724,
+        4611
+      ],
+      "prithvi": [
+        7432,
+        10913,
+        2019
+      ]
+    },
+    {
+      "sample_id": "russia:fd4d6197f8853d230e3876019194a8c77b7726ba9037fee25157d866c24b4fc5",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "valid_pixels": 180386,
+      "control": [
+        104,
+        581,
+        4780
+      ],
+      "reserve": [
+        345,
+        210,
+        4539
+      ],
+      "c1mm": [
+        484,
+        1957,
+        4400
+      ],
+      "prithvi": [
+        96,
+        7505,
+        4788
+      ]
+    },
+    {
+      "sample_id": "russia:ffafb61ba72cfeb22a11a8692d11f704e34b502a2d061a6b40338c324c747aee",
+      "group_id": "russia:d8c0be4b30799c3533bb58b93cb1529502cf1b625790dfd2407f13ee4f77db9f",
+      "valid_pixels": 189475,
+      "control": [
+        1043,
+        252,
+        1004
+      ],
+      "reserve": [
+        1535,
+        351,
+        512
+      ],
+      "c1mm": [
+        1341,
+        427,
+        706
+      ],
+      "prithvi": [
+        1518,
+        2000,
+        529
+      ]
+    },
+    {
+      "sample_id": "russia:ffe5bbee83528ac1491468420d637e7d079d36e6f0244ddb90a726d070853915",
+      "group_id": "russia:ef8af8483174f0c2fcd64bd9946e26ef116a6dca54cf73f3aeabafd10713abac",
+      "valid_pixels": 171771,
+      "control": [
+        374,
+        1249,
+        4510
+      ],
+      "reserve": [
+        647,
+        740,
+        4237
+      ],
+      "c1mm": [
+        1419,
+        3351,
+        3465
+      ],
+      "prithvi": [
+        92,
+        4598,
+        4792
+      ]
+    }
+  ],
+  "russian_manifest": "1d487c711beb657a4c0ea0114379ddc51be2a31302891e47699942f95459f3db",
+  "base_manifest": "1a70bf29a0b9e3c8462396967fdc12fca7f92ae29a236636de5585c74692f373",
+  "model_hashes": {
+    "control": [
+      "82e8a3d04f139935b8febc3795374a14cac2e8d8758857878d86f0dbc8b277fc",
+      "bbb8cc75dfc80be811f3966bf86bec100e2044c602cc51ee1187f5ecc7accdd5",
+      "8d68803d552dc25d2297bc7531659b96fbea8286bade734b945ee89e6ed6af26"
+    ],
+    "reserve": [
+      "93e3c9f225e486e204678cad950d83453d022587978872c285fe9dac9dada95e",
+      "460c2cce7677e0c774b632fd43e2dd01b7ad8f5af0a60d04ad06b56238974f6a",
+      "4b21d27e174da86726e5c930a19641301cb43392d7645d931c91b80d42810ad3"
+    ],
+    "c1mm": [
+      "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c",
+      "a0282b7c31c77d0941c1ed0d10981dd526c7345c5c7335cd2d8fb071ec40c0e0",
+      "48a3faa63c8814f793e2963f8db8ef2a42466d0f021463f84e58b5cdb834d61e",
+      "504141c858b50615e0a884dfa512f20360ceb2b86455967cb056279d2497ba8b",
+      "a48abe8b5c98883cf2f60a23eb457e39e5fea7584bafb4266d05eb7bcb16719f"
+    ]
+  },
+  "competitor_weights_sha256": "0c5f9334be9a75c9006387ab8f3dc05a55ea7fb5ef7956717316be57c62954d3",
+  "non_claims": [
+    "Spring2020 participatory interval labels, not field truth.",
+    "No claim of superiority on all regions or different benchmark datasets."
+  ]
+}

@@ -1,6 +1,6 @@
 # SPEC-92: Российские контуры и трудные отрицательные: целевой домен
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-91
 
@@ -104,3 +104,21 @@ seedpixels и их TP на тех же масках/пороге0.5 у всех�
 уже подписанных cachearrays, обязательно той же counts_for логикой. Counts
 России обязаны точно совпасть с parentresult; все cache/input/model hashes
 проверяются. Отчёт append-only, связан SHA с parentresult и исходнымZIP.
+
+## Resolution
+
+Rejected frozentransfer recipe; all6matched30epochruns and complete samepixel
+competitor/stability measurement executed successfully onk8plus. Russian77windows/
+24clusters: reserveIoU0.323049 vscontrol0.245309 (+0.077741, CI[0.035068,0.181327]);
+Prithvi0.206216 (+0.116833, CI[0.039406,0.315277]); C1-MM0.326108
+(delta−0.003059, CI[−0.067554,0.150796]). Superior to Prithvi here, not toC1-MM.
+EMS0.794900 vsC1-MM0.759461; FLOGA0.725578 vs0.746460 (−0.020882), below
+allowed−0.01. AcceptanceFAIL and combinedcompetitor_superiorityfalse.
+
+Requirederrorreport reconstructedallcachedcounts and matchedparentresult exactly.
+SelectedRussian sourcecontours:77visible, reserve misses10 vsC1-MM7 vsPrithvi14
+(among34small1–25ha:9/7/12). Window/cluster counts differ: reserve3missedwindows/
+1cluster, C1-MM7windows/2clusters. Clusters are not physicalfireevents; this
+distinction prevents hidinglosses behindpooledIoU. KnownbackgroundFP:reserve144240,
+C1-MM139526, Prithvi570347. No productpromotion, no globalranking, nofieldtruth.
+Data/mining/frozenmodels retained for a separate source/recipe experiment.

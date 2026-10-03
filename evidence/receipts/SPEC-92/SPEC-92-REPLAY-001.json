@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-92",
+  "run_id": "SPEC-92-REPLAY-001",
+  "created_at": "2026-10-03T20:30:49.038957+00:00",
+  "status": "FAIL",
+  "evidence_class": "REPLAY",
+  "conclusion": "Russian transfer improves over matched continuation and Prithvi, but not C1-MM; FLOGA stability fails frozen\u22120.01 safeguard.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && bash scripts/queues/queue_russian_transfer.sh'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/report_russian_errors.py --data-root data-store --russian-manifest data-store/russia/manifest.json --base-manifest data-store/forest-pairs/manifest.json --parent research/russian-transfer-v1-result.json --runs research/russian-transfer-v1 --reference-root /home/mc/fires/research --prithvi-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --out research/russian-transfer-v1-errors.json'",
+    "make gate"
+  ],
+  "acceptance": {
+    "comparisons": {
+      "control": {
+        "samples": 77,
+        "groups": 24,
+        "candidate_iou": 0.3230492072325294,
+        "control_iou": 0.24530857119641028,
+        "delta": 0.07774063603611911,
+        "ci95": [
+          0.03506793487111282,
+          0.18132717253181238
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      },
+      "c1mm": {
+        "samples": 77,
+        "groups": 24,
+        "candidate_iou": 0.3230492072325294,
+        "control_iou": 0.32610820993394857,
+        "delta": -0.003059002701419178,
+        "ci95": [
+          -0.06755436973928312,
+          0.15079586557598482
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      },
+      "prithvi": {
+        "samples": 77,
+        "groups": 24,
+        "candidate_iou": 0.3230492072325294,
+        "control_iou": 0.20621601498957293,
+        "delta": 0.11683319224295646,
+        "ci95": [
+          0.03940597010124545,
+          0.31527668234727935
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      }
+    },
+    "stability": {
+      "ems": {
+        "samples": 60,
+        "groups": 44,
+        "candidate_iou": 0.7948998849080845,
+        "control_iou": 0.7594609076850591,
+        "delta": 0.03543897722302536,
+        "ci95": [
+          0.01422381892486218,
+          0.06596006900824015
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      },
+      "floga": {
+        "samples": 81,
+        "groups": 81,
+        "candidate_iou": 0.7255777050481008,
+        "control_iou": 0.7464595747186571,
+        "delta": -0.020881869670556275,
+        "ci95": [
+          -0.12150441724112526,
+          0.0458425688344527
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      }
+    },
+    "accepted": false,
+    "competitor_superiority": false,
+    "per_competitor_superiority": {
+      "c1mm": false,
+      "prithvi": true
+    }
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/russian-transfer-result.json",
+    "evidence/experiments/accuracy-next-20261003/russian-transfer-errors.json"
+  ],
+  "recipe_id": "bd9410962dfecba6a792b8a7b8c77b25e60187d9679baa46c6578c160d334090",
+  "error_parent_sha256": "242acac3cf2ccd30728e5919997895e7cf1d83de223a8802b06f3c4daaaa296d",
+  "limitations": [
+    "Frozen existing run/output directories refuse overwrite; replay scorers/errorreports to fresh output paths using completed immutable models.",
+    "Spring2020 annualpairs and spatialclusters, not allSiberian seasons.",
+    "Sourcecontours do not prove counts of physicalfireevents."
+  ],
+  "non_claims": [
+    "Spring2020 participatory interval labels, not field truth.",
+    "No claim of superiority on all regions or different benchmark datasets.",
+    "Russian groups are spatial clusters, not physical fire IDs.",
+    "Missed source contours/windows do not prove a count of physical fires.",
+    "Reference-defined hard subset is diagnostic; it cannot select a new model/threshold.",
+    "Satellite interpretation and fixed common observation mask, not field truth."
+  ]
+}
