@@ -133,7 +133,8 @@
         "SPEC-87",
         "SPEC-88",
         "SPEC-89",
-        "SPEC-90"
+        "SPEC-90",
+        "SPEC-91"
       ]
     }
   },
@@ -987,6 +988,17 @@
         "SPEC-89"
       ],
       "status": "implemented"
+    },
+    "SPEC-91": {
+      "title": "Обученная пара дат для леса и гор",
+      "file": "specs/SPEC-91-learned-pair.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-82",
+        "SPEC-88"
+      ],
+      "status": "planned"
     }
   }
 }
