@@ -131,6 +131,7 @@ def main():
     parser.add_argument("--event-registry", required=True, type=Path)
     parser.add_argument("--retention-proof", type=Path, help="SPEC-97 protected-pixel bound")
     parser.add_argument("--limit", type=int, help="QC only, cannot authorize full training")
+    parser.add_argument("--manifest-name", help="append-only alternative result filename")
     args = parser.parse_args(); root, out = args.data_root.resolve(), args.out.resolve()
     if not out.is_relative_to(root): raise ValueError("outputs must be inside data root")
     out.mkdir(parents=True, exist_ok=True)
@@ -190,7 +191,9 @@ def main():
                   conservative_event_bound=bound,
                   retention_proof_sha256=None if args.retention_proof is None else sha256_file(args.retention_proof),
                   ready_for_training=ready, qc_probe=args.limit is not None)
-    with (out / ("qc-manifest.json" if args.limit else "manifest.json")).open("x") as stream:
+    filename = args.manifest_name or ("qc-manifest.json" if args.limit else "manifest.json")
+    if Path(filename).name != filename or not filename.endswith(".json"): raise ValueError("manifest name must be a JSON basename")
+    with (out / filename).open("x") as stream:
         json.dump(result, stream, indent=2)
     print("RESULT", json.dumps({k: v for k, v in result.items() if k not in ("records", "failures")}), flush=True)
     if not ready and args.limit is None: raise SystemExit(2)
