@@ -141,7 +141,8 @@
         "SPEC-95",
         "SPEC-96",
         "SPEC-97",
-        "SPEC-98"
+        "SPEC-98",
+        "SPEC-99"
       ]
     }
   },
@@ -1079,6 +1080,18 @@
         "SPEC-95"
       ],
       "status": "deferred"
+    },
+    "SPEC-99": {
+      "title": "Retrospective independent paired severity confirmation",
+      "file": "specs/SPEC-99-retrospective-severity.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-94",
+        "SPEC-95",
+        "SPEC-98"
+      ],
+      "status": "active"
     }
   }
 }
