@@ -140,7 +140,8 @@
         "SPEC-94",
         "SPEC-95",
         "SPEC-96",
-        "SPEC-97"
+        "SPEC-97",
+        "SPEC-98"
       ]
     }
   },
@@ -1065,6 +1066,17 @@
       "depends_on": [
         "SPEC-93",
         "SPEC-96"
+      ],
+      "status": "active"
+    },
+    "SPEC-98": {
+      "title": "Fresh confirmation of equal-weight paired severity",
+      "file": "specs/SPEC-98-fresh-paired-severity.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-94",
+        "SPEC-95"
       ],
       "status": "active"
     }
