@@ -18,7 +18,7 @@ from src.comp.hls import tta8
 from src.comp.l2a_finetuning import l2a_water
 from scripts.l2a_finetune import load_twins, read_twin
 from scripts.score_forest_pair import binary_counts
-from src.comp.accuracy_artifacts import assert_matched_recipes, execution_sources, load_checkpoint
+from src.comp.accuracy_artifacts import assert_matched_recipes, execution_sources, load_checkpoint, checkpoint_metadata
 
 
 def l2a_acceptance(records, candidate, hls, initial):
@@ -87,13 +87,14 @@ def main():
     manifest_hash = sha256_file(args.manifest)
     models = {v: [args.runs / f"{v}-s{s}" / "model.pt" for s in (1, 2, 3)] for v in ("hls", "l2a")}
     models["initial"] = [args.reference_root / f"hls-c1mm-final-s{s}" / "model.pt" for s in (1, 2, 3, 4, 5)]
-    archived = [json.loads(path.with_name("data_manifest.json").read_text())
+    archived = [checkpoint_metadata(path, export_root=Path("research/tensor-exports"))
                 for v in ("hls", "l2a") for path in models[v]]
     recipe_id = assert_matched_recipes(archived, ("w", "depth", "epochs", "classes", "initialization_family"))
     for seed in (1, 2, 3):
         expected = sha256_file(args.reference_root / f"hls-c1mm-final-s{seed}" / "model.pt")
         for variant in ("hls", "l2a"):
-            record = json.loads((args.runs / f"{variant}-s{seed}" / "data_manifest.json").read_text())
+            record = checkpoint_metadata(args.runs / f"{variant}-s{seed}" / "model.pt",
+                                         export_root=Path("research/tensor-exports"))
             if record["initialization_sha256"] != expected:
                 raise ValueError("continuation does not use its corresponding C1-MM initializer")
     probabilities = {v: predict(args.data_root, records, paths, v, manifest_hash,

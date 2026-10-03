@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 import torch
 
-from src.comp.accuracy_artifacts import assert_matched_recipes, execution_sources, freeze_recipe, load_checkpoint
+from src.comp.accuracy_artifacts import assert_matched_recipes, execution_sources, freeze_recipe, load_checkpoint, save_checkpoint, checkpoint_metadata
 from src.comp.accuracy_contract import canonical_hash, experiment_fingerprint, sha256_file
 
 
@@ -76,3 +76,23 @@ def test_recipe_seal_cannot_follow_mutable_code(tmp_path):
     source.write_text("new recipe")
     with pytest.raises(ValueError, match="sealed recipe changed"):
         freeze_recipe(recipe, [source], {"epochs": 30})
+
+
+def test_native_artifact_binds_metadata_without_duplicate_weights(tmp_path):
+    path = tmp_path / "model.pt"
+    save_checkpoint(path, {"w": torch.ones(2)}, {"epochs": 30, "mean": [1, 2]})
+    checksum = sha256_file(path); bundle = load_checkpoint(path, checksum)
+    assert bundle["epochs"] == 30 and torch.equal(bundle["state"]["w"], torch.ones(2))
+    assert not path.with_name("model.tensor.pt").exists()
+    meta = path.with_name("model.metadata.json"); x = json.loads(meta.read_text()); x["metadata"]["epochs"] = 1
+    meta.write_text(json.dumps(x))
+    with pytest.raises(ValueError, match="tensor-bound digest"): load_checkpoint(path, checksum)
+
+
+def test_free_standing_archive_cannot_hide_recipe_drift(tmp_path):
+    path = tmp_path / "model.pt"; metadata = {"source_hashes": {"train": "real"}, "epochs": 120}
+    save_checkpoint(path, {"w": torch.ones(2)}, metadata)
+    archive = path.with_name("data_manifest.json"); archive.write_text(json.dumps(metadata))
+    assert checkpoint_metadata(path) == metadata
+    archive.write_text(json.dumps({"source_hashes": {"train": "fake"}, "epochs": 120}))
+    with pytest.raises(ValueError, match="checkpoint-bound metadata"): checkpoint_metadata(path)

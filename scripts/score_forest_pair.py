@@ -18,7 +18,7 @@ from src.comp.forest_pair import make_forest_model
 from src.comp.hls import tta8
 from src.comp.terrain import water_ndwi
 from scripts.forest_pair_train import load_frozen, read_sample
-from src.comp.accuracy_artifacts import assert_matched_recipes, execution_sources, load_checkpoint
+from src.comp.accuracy_artifacts import assert_matched_recipes, execution_sources, load_checkpoint, checkpoint_metadata
 
 
 def binary_counts(truth, prediction, valid):
@@ -117,7 +117,7 @@ def main():
     checkpoints = {variant: [args.runs / f"{variant}-s{s}" / "model.pt" for s in (1, 2, 3)]
                    for variant in ("post", "pair")}
     checkpoints["c1mm"] = [args.reference_root / f"hls-c1mm-final-s{s}" / "model.pt" for s in (1, 2, 3, 4, 5)]
-    archived = [json.loads(path.with_name("data_manifest.json").read_text())
+    archived = [checkpoint_metadata(path, export_root=Path("research/tensor-exports"))
                 for key in ("post", "pair") for path in checkpoints[key]]
     recipe_id = assert_matched_recipes(archived, ("width", "depth", "epochs", "batch", "evaluation_ids"))
     predictions = {key: infer(args.data_root, records, models, key, sha256_file(args.manifest),

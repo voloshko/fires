@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.comp.accuracy_contract import experiment_fingerprint, sha256_file, validate_manifest
 from src.comp.forest_pair import augment_forest, forest_loss, make_forest_model
 from scripts.forest_pair_train import normalization
-from src.comp.accuracy_artifacts import execution_sources, load_checkpoint
+from src.comp.accuracy_artifacts import execution_sources, load_checkpoint, save_checkpoint
 
 
 def load_twins(root, manifest):
@@ -100,7 +100,7 @@ def main():
             optimizer.step(); scheduler.step(); loss_values.append(float(loss.detach()))
         losses.append(float(np.mean(loss_values)))
         print("epoch", epoch + 1, "loss", losses[-1], "seconds", int(time.monotonic() - start), flush=True)
-    torch.save(dict(state=net.cpu().state_dict(), **config), args.out / "model.pt")
+    save_checkpoint(args.out / "model.pt", net.cpu().state_dict(), config)
     result = dict(**config, completed=True, loss=losses, seconds=time.monotonic() - start,
                   peak_vram_bytes=torch.cuda.max_memory_allocated())
     with (args.out / "summary.json").open("x") as stream: json.dump(result, stream, indent=2)

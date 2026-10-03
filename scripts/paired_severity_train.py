@@ -16,7 +16,7 @@ from src.comp.accuracy_contract import experiment_fingerprint, sha256_file
 from src.comp.forest_pair import augment_forest
 from src.comp.paired_severity import PairedSeverityUNet, fit_class_weights, mtbs_targets, severity_loss
 from scripts.forest_pair_train import load_frozen, normalization, read_sample
-from src.comp.accuracy_artifacts import execution_sources
+from src.comp.accuracy_artifacts import execution_sources, save_checkpoint
 
 
 def severity_sample(root, record):
@@ -88,7 +88,7 @@ def main():
         losses.append(float(np.mean(values)))
         if (epoch + 1) % 10 == 0:
             print("epoch", epoch + 1, "loss", losses[-1], "seconds", int(time.monotonic() - start), flush=True)
-    torch.save(dict(state=net.cpu().state_dict(), **config), args.out / "model.pt")
+    save_checkpoint(args.out / "model.pt", net.cpu().state_dict(), config)
     result = dict(**config, completed=True, loss=losses, seconds=time.monotonic() - start,
                   peak_vram_bytes=torch.cuda.max_memory_allocated())
     with (args.out / "summary.json").open("x") as stream: json.dump(result, stream, indent=2)

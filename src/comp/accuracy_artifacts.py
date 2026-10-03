@@ -40,6 +40,18 @@ def load_checkpoint(path, expected_sha256, export_root=None):
     """Never invoke unrestricted pickle, even for a known local legacy artifact."""
     path = Path(path)
     if sha256_file(path) != expected_sha256: raise ValueError("raw checkpoint checksum mismatch")
+    native_metadata = path.with_name(path.stem + ".metadata.json")
+    if native_metadata.exists():
+        stored = json.loads(native_metadata.read_text())
+        if stored.get("schema_version") != 2 or stored["state_sha256"] != expected_sha256:
+            raise ValueError("native artifact provenance mismatch")
+        payload = torch.load(path, map_location="cpu", weights_only=True)
+        digest = bytes(payload["metadata_digest"].tolist()).hex()
+        if digest != canonical_hash(stored["metadata"]): raise ValueError("native metadata differs from tensor-bound digest")
+        state = payload["state"]
+        if not isinstance(state, dict) or not all(isinstance(v, torch.Tensor) for v in state.values()):
+            raise ValueError("native state is not tensor-only")
+        return dict(stored["metadata"], state=state)
     if export_root is None:
         tensor_path = path.with_name(path.stem + ".tensor.pt")
         meta_path = path.with_name(path.stem + ".tensor.json")
@@ -90,6 +102,16 @@ def assert_matched_recipes(metadata, fields):
     return canonical_hash({key: first[key] for key in common})
 
 
+def checkpoint_metadata(path, export_root=None):
+    path = Path(path)
+    bundle = load_checkpoint(path, sha256_file(path), export_root=export_root)
+    metadata = {k: v for k, v in bundle.items() if k != "state"}
+    archive = path.with_name("data_manifest.json")
+    if archive.exists() and canonical_hash(json.loads(archive.read_text())) != canonical_hash(metadata):
+        raise ValueError("run archive differs from checkpoint-bound metadata")
+    return metadata
+
+
 def freeze_recipe(path, sources, configuration):
     """Append-once seal; subsequent starts must use precisely the same code/config."""
     payload = dict(source_hashes={str(p): sha256_file(p) for p in sources},
@@ -103,3 +125,15 @@ def freeze_recipe(path, sources, configuration):
         path.parent.mkdir(parents=True, exist_ok=True)
         with path.open("x") as stream: json.dump(payload, stream, indent=2)
     return payload["recipe_id"]
+
+
+def save_checkpoint(path, state, metadata):
+    """New models store one tensor artifact, cryptographically binding JSON metadata."""
+    path = Path(path); meta_path = path.with_name(path.stem + ".metadata.json")
+    if path.exists() or meta_path.exists(): raise ValueError("model artifact already exists")
+    if not all(isinstance(v, torch.Tensor) for v in state.values()): raise ValueError("state must contain tensors only")
+    metadata = _json_value(metadata); digest = canonical_hash(metadata)
+    with path.open("xb") as stream:
+        torch.save(dict(state=state, metadata_digest=torch.tensor(list(bytes.fromhex(digest)), dtype=torch.uint8)), stream)
+    payload = dict(schema_version=2, state_sha256=sha256_file(path), metadata=metadata)
+    with meta_path.open("x") as stream: json.dump(payload, stream, indent=2)

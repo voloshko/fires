@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-95",
+  "run_id": "SPEC-95-REPLAY-002",
+  "predecessor_run_id": "SPEC-95-REPLAY-001",
+  "created_at": "2026-10-03T15:37:34.944831+00:00",
+  "status": "PASS",
+  "conclusion": "Native tensor-bound JSON format avoids duplicate weights; recipe audits now consume loader-verified checkpoint metadata and reject inconsistent free-standing run archives.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && OMP_NUM_THREADS=2 .runtime/bin/python -m pytest tests/test_accuracy_artifacts.py -q'",
+    "make gate"
+  ],
+  "acceptance": {
+    "artifact_tests": 9,
+    "native_metadata_digest": "bound into tensor artifact",
+    "free_standing_archive_drift": "rejected",
+    "legacy_tensor_exports": "owned research/tensor-exports"
+  },
+  "limitations": [
+    "Full six-run accuracy comparison is still pending."
+  ],
+  "non_claims": [
+    "Not an accuracy gain or claim of independent data."
+  ]
+}

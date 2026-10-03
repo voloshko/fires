@@ -20,7 +20,7 @@ from src.comp.terrain import water_ndwi
 from src.comp.severity_layers import evaluation_fmask
 from scripts.forest_pair_train import load_frozen, read_sample
 from scripts.score_forest_pair import infer as infer_boundary
-from src.comp.accuracy_artifacts import assert_matched_recipes, execution_sources, load_checkpoint
+from src.comp.accuracy_artifacts import assert_matched_recipes, execution_sources, load_checkpoint, checkpoint_metadata
 
 
 def severity_acceptance(groups, candidate, equal, hybrid):
@@ -82,7 +82,7 @@ def main():
     manifest_hash = sha256_file(args.manifest)
     checkpoints = {v: [args.runs / f"{v}-s{s}" / "model.pt" for s in (1, 2, 3)]
                    for v in ("balanced", "equal")}
-    archived = [json.loads(path.with_name("data_manifest.json").read_text())
+    archived = [checkpoint_metadata(path, export_root=Path("research/tensor-exports"))
                 for paths in checkpoints.values() for path in paths]
     recipe_id = assert_matched_recipes(archived, ("width", "depth", "epochs", "batch", "classes", "evaluation_ids",
                                                 "fit_class_counts", "mean", "std"))
