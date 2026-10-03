@@ -142,7 +142,8 @@
         "SPEC-96",
         "SPEC-97",
         "SPEC-98",
-        "SPEC-99"
+        "SPEC-99",
+        "SPEC-100"
       ]
     }
   },
@@ -1092,6 +1093,18 @@
         "SPEC-98"
       ],
       "status": "deferred"
+    },
+    "SPEC-100": {
+      "title": "Paired severity confirmation within PC coverage",
+      "file": "specs/SPEC-100-covered-fresh-severity.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-94",
+        "SPEC-95",
+        "SPEC-99"
+      ],
+      "status": "active"
     }
   }
 }
