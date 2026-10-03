@@ -33,7 +33,7 @@ SPEC-83: перенос C1-MM с HLS на L2A не прошёл допуск н�
 ## Verification
 
 - `python -m pytest tests/test_l2a_finetuning.py -q`; `make gate`.
-- Данные на omarchy; подготовленные окна и GPU jobs на k8plus, отдельные
+- Данные, подготовленные окна и GPU jobs на k8plus в data-store/, отдельные
   каталоги и systemd, 1 GPU job. Receipts с CI/group counts и hashes.
 - non_claims: не независимый тест после адаптивного ресёрча, не мировой
   рейтинг и не подтверждение на Сибири (отдельная проверка SPEC-92).
