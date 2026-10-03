@@ -13,10 +13,12 @@ class FreshSeverityTest(unittest.TestCase):
         import rasterio
         self.assertEqual(population("retrospective-2016-17"),("SPEC-99",{2016,2017},"spec99:"))
         self.assertEqual(population("2024-west")[0],"SPEC-98")
+        self.assertEqual(population("pc-covered-2020-24"),("SPEC-100",set(range(2020,2025)),"spec100:"))
         with self.assertRaises(ValueError):population("adaptive")
         grid=dict(crs="EPSG:32611",transform=rasterio.Affine(30,0,300000,0,-30,4000000))
         self.assertIn("mtbs_CONUS_2016",severity_identity(grid,2016)["query"]["mosaicRule"])
-        with self.assertRaises(ValueError):severity_identity(grid,2023)
+        self.assertIn("mtbs_CONUS_2023",severity_identity(grid,2023)["query"]["mosaicRule"])
+        with self.assertRaises(ValueError):severity_identity(grid,2025)
 
     def test_modified_development_archive_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:

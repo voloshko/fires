@@ -26,7 +26,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ("data-root","manifest","runs","development-result","reference-root","out"):
         p.add_argument("--"+key,type=Path,required=True)
-    p.add_argument("--profile",choices=("2024-west","retrospective-2016-17"),default="2024-west")
+    p.add_argument("--profile",choices=("2024-west","retrospective-2016-17","pc-covered-2020-24"),default="2024-west")
     args=p.parse_args()
     if args.out.exists():raise ValueError("immutable result already exists")
     payload=json.loads(args.manifest.read_text());records=payload["records"]

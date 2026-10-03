@@ -7,6 +7,7 @@ DEVELOPMENT_SHA256 = "5f6b2839b89c807692dc4c931b2f4e713ae03294f869cd5233faf89a56
 def population(profile):
     if profile=="2024-west":return "SPEC-98",{2024},"spec98:"
     if profile=="retrospective-2016-17":return "SPEC-99",{2016,2017},"spec99:"
+    if profile=="pc-covered-2020-24":return "SPEC-100",set(range(2020,2025)),"spec100:"
     raise ValueError("unknown frozen severity population")
 
 

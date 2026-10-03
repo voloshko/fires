@@ -55,7 +55,7 @@ def validate_severity(path, grid, identity):
 
 
 def severity_identity(grid, year=2024):
-    if year not in (2016,2017,2024):raise ValueError("year outside frozen severity populations")
+    if year not in (2016,2017,2020,2021,2022,2023,2024):raise ValueError("year outside frozen severity populations")
     left,bottom,right,top=rasterio.transform.array_bounds(512,512,grid["transform"])
     epsg=rasterio.crs.CRS.from_string(grid["crs"]).to_epsg()
     query=dict(bbox=f"{left},{bottom},{right},{top}",bboxSR=epsg,imageSR=epsg,
@@ -95,6 +95,16 @@ def freeze_plan(source, prior, out, profile="2024-west"):
         manifests[name] = sha256_file(p)
         used.update(w["event_id"] for w in json.loads(p.read_text())["windows"])
     bindings = dict(vector_hashes=hashes, old_manifests=manifests, prior_sha256=sha256_file(prior))
+    if profile=="pc-covered-2020-24":
+        coverage=out/"source-coverage.json"
+        if not coverage.exists():
+            url="https://planetarycomputer.microsoft.com/api/stac/v1/collections/hls2-s30"
+            response=requests.get(url,timeout=30);response.raise_for_status()
+            immutable(coverage,dict(url=url,temporal=response.json()["extent"]["temporal"]["interval"]))
+        observed=json.loads(coverage.read_text())
+        if not observed["temporal"] or observed["temporal"][0][0]>"2020-01-01T00:00:00Z":
+            raise ValueError("HLS source does not cover frozen2020 start")
+        bindings["hls_coverage_sha256"]=sha256_file(coverage)
     if path.exists():
         plan = json.loads(path.read_text())
         if plan["bindings"] != bindings or plan.get("profile","2024-west")!=profile:
@@ -110,7 +120,8 @@ def freeze_plan(source, prior, out, profile="2024-west"):
     candidates = []
     for row in frame.sort_values("order").itertuples():
         geom = gpd.GeoSeries([row.geometry], crs=frame.crs)
-        crs = geom.estimate_utm_crs()
+        lon=geom.to_crs(4326).iloc[0].centroid.x
+        crs = rasterio.crs.CRS.from_epsg(32600+int((lon+180)//6)+1)
         polygon = geom.to_crs(crs).iloc[0]; c = polygon.centroid
         left = np.floor(c.x/30)*30-256*30; top = np.floor(c.y/30)*30+256*30
         transform = from_origin(left, top, 30, 30)
@@ -118,9 +129,10 @@ def freeze_plan(source, prior, out, profile="2024-west"):
         bounds = list(transform_bounds(crs, 4326, left, top-512*30, left+512*30, top))
         candidates.append(dict(event_id=row.event_id, ig_date=str(pd.Timestamp(row.ig_date).date()),
                                grid=grid, bbox_wgs84=bounds, polygon_wkt=polygon.wkt))
-    selected, excluded = isolate(candidates, used, json.loads(prior.read_text())["records"])
+    cap = 240 if profile == "pc-covered-2020-24" else 180
+    selected, excluded = isolate(candidates, used, json.loads(prior.read_text())["records"],limit=cap)
     plan = dict(spec_id=spec_id,profile=profile, bindings=bindings, used_events=sorted(used), selected=selected,
-                excluded=excluded, eligible=len(candidates), cap=180)
+                excluded=excluded, eligible=len(candidates), cap=cap)
     immutable(path, plan)
     return plan
 
@@ -189,7 +201,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ("data-root","source-root","prior","out"):p.add_argument("--"+key,type=Path,required=True)
     p.add_argument("--limit",type=int,help="QC only")
-    p.add_argument("--profile",choices=("2024-west","retrospective-2016-17"),default="2024-west")
+    p.add_argument("--profile",choices=("2024-west","retrospective-2016-17","pc-covered-2020-24"),default="2024-west")
     args=p.parse_args();root=args.data_root.resolve();out=args.out.resolve()
     if not out.is_relative_to(root):raise ValueError("outputs escape data root")
     out.mkdir(parents=True,exist_ok=True)
