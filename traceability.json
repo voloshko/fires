@@ -136,7 +136,8 @@
         "SPEC-90",
         "SPEC-91",
         "SPEC-92",
-        "SPEC-93"
+        "SPEC-93",
+        "SPEC-94"
       ]
     }
   },
@@ -1019,6 +1020,16 @@
       "depends_on": [
         "SPEC-90",
         "SPEC-83"
+      ],
+      "status": "planned"
+    },
+    "SPEC-94": {
+      "title": "Степень по паре дат внутри фиксированного контура",
+      "file": "specs/SPEC-94-paired-severity.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-89"
       ],
       "status": "planned"
     }
