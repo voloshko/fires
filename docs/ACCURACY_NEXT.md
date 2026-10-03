@@ -129,3 +129,36 @@ common valid pixels и новый Fmask (включая снег/тень/cirrus
 - Не прерывать действующую GPU очередь. Для последующих изменений trainers
   соблюдать recipe seal; изменение semantics требует нового парного прогона,
   а не смешивания старого контроля с новым кандидатом.
+
+## Итог SPEC-91 и новая подготовка (последний срез)
+
+SPEC-91 rejected: все6full runs и scorer завершены. Pair IoU0.785478,
+post0.761802, C1-MM0.757951. Global delta+0.027527 CI[0.006894,0.055348],
+но FLOGA lower=-0.053718 ниже-0.03 и lost events2>1. Receipt FAIL,
+порог не менялся, продукт не переключён. Это положительный общий сигнал
+для новой отдельной data/recipe гипотезы, а не выполненная цель.
+
+SPEC-94 GPU очередь работает: первый equal-s1 complete, balanced-s1
+запущен. Шесть сравнительных моделей и scorer по-прежнему впереди.
+
+SPEC-92 image collector implemented, caps fit8/cal4/eval16/source-cluster,
+>=1ha и round-robin size bins. Actual frames purged against prior/cross-partition
+до predictions. Geometry identity берётся из raw ZIP: GPKG меняет ring order.
+Russian QC4/4 реальные interval pairs прошёл. Полный сервис
+fires-accuracy-russian-prepare-v1 (PID719505) живой. Данные в data-store/russia.
+Не менять selection после оценки; published perimeters не field truth.
+
+SPEC-97 planned/code-in-progress: математическая lower bound охвата событий
+с сохранением ВСЕХ неизвестных и residual-positive pixels. Pixel proofs
+в data-store/event-retention/manifest.json, источник registry SPEC-96;
+original denominator не сокращается. Unified MTBS IDs. Четыре теста прошли.
+Полный PC collector fires-accuracy-l2a-pc-prepare-v1 запущен с --retention-proof;
+может terminal code2/ready=false, если хоть один protected pixel потерян.
+Это не отрицательная accuracy гипотеза и не повод ослаблять SCL.
+Полный output data-store/l2a-pc-v1/manifest.json, QC successor qc-bound.json.
+
+Продолжить: закончить российскую подготовку и написать её matched transfer/
+mining/evaluation; проверить retention bound и разрешить L2A обучение только
+при PASS исходного data gate. Разработать отдельную улучшенную pair recipe
+после SPEC91, опираясь на новые данные/свежую проверку, не на переименование FAIL.
+Цель четырёх направлений и превосходства над конкурентом остаётся active.
