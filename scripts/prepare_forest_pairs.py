@@ -37,8 +37,8 @@ def read_grid(href, grid, mask=False):
         return warped.read(1)
 
 
-def prepare(data, out, dataset, partition, window):
-    source = data / "external" / ("hls_fresh" if dataset == "mtbs" else dataset + "_hls")
+def prepare(data, out, dataset, partition, window, source_directory=None):
+    source = data / "external" / (source_directory or ("hls_fresh" if dataset == "mtbs" else dataset + "_hls"))
     name = window["name"]; destination = out / dataset / name
     meta_path = Path(str(destination) + ".pair.json")
     if meta_path.exists():
