@@ -110,3 +110,34 @@ ssh k8plus 'nvidia-smi --query-compute-apps=pid,process_name,used_memory --forma
 Ремонтировать L2A admission реальными данными/доказательствами, затем matched
 fine-tune. Сохранять отрицательные outcomes, per-window counts и ограничения.
 Полного доказанного превосходства и завершения всех четырёх пунктов пока нет.
+
+## Независимое подтверждение степени — новый запуск
+
+SPEC98 deferred: после prior/event isolation осталось21western2024 событие,
+при минимуме100. ДажеallCONUS2024 даёт57. No inference, admission receipt
+INSUFFICIENT_EVIDENCE. SPEC99 deferred: PC hls2-s30 temporal extent начинается
+2020-01-01, пары2016–2017 недоступны (QC0/2). Это ограничения данных,
+не отрицательный результат модели; оба набора и receipts сохранены.
+
+SPEC100 active, commit337ba1d (+последующие фиксы/документация): явный профиль
+pc-covered-2020-24. Metadata-only240 independent candidates, cap240,
+старые1300events и prior2658frames исключены. Frozen equal checkpoints
+изSPEC94 и fixedC1-MM contour, без нового обучения/выбора по этому набору.
+Минимум100admitted events/all3classes; delta>=.02 кhybrid, lowerCI>0,
+perclassdrop<=.02. Это retrospectiveMTBS agreement, не prospectivefieldproof.
+
+Все handles **на k8plus**:
+- `fires-accuracy-covered-qc-v1` PID830564: первые4пары; на последнем срезе
+  2prepared, остальные ещё собираются. Не означает fulladmission.
+- `fires-accuracy-covered-prepare-v1` PID831033: ждёт успешныйQC с>=1pair,
+  затем собирает весь frozenнабор в data-store/severity-covered-v1.
+- `fires-accuracy-covered-score-v1` PID831035: ждёт Russianqueue и fullcollection,
+  проверяет ready/eventminimum/lineage, затем sealedGPUscore через общийflock.
+  Результат research/fresh-covered-v1-result.json; пока нет qualityresult.
+- Russianqueue:4/6fullmodels готовы, control-s3 15/30epochs на последнем срезе,
+  далее reserve-s3 иcomparison. ActualGPUprocess828563,8802MiB.
+
+Свободно около14GiB. Freshcollection проверяет>=8GiB перед каждым новымevent.
+Код сcachedsource/grid/hash/model/count/Fmask checks:6regressions PASS наk8plus;
+makegatePASS. Targeted code-review HIGH cache bypasses исправлены; повторная
+проверка не нашлаHIGH. Общая accuracy цель и L2A admission ещё не закрыты.
