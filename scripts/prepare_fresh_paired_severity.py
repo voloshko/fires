@@ -54,6 +54,27 @@ def validate_severity(path, grid, identity):
     return raw
 
 
+def severity_identity(grid):
+    left,bottom,right,top=rasterio.transform.array_bounds(512,512,grid["transform"])
+    epsg=rasterio.crs.CRS.from_string(grid["crs"]).to_epsg()
+    query=dict(bbox=f"{left},{bottom},{right},{top}",bboxSR=epsg,imageSR=epsg,
+               size="512,512",format="tiff",pixelType="U8",interpolation="RSP_NearestNeighbor",
+               mosaicRule=json.dumps({"mosaicMethod":"esriMosaicNone","where":"name='mtbs_CONUS_2024'"}),f="image")
+    return dict(url=SEVERITY_URL,query=query)
+
+
+def validate_cached_record(root, record, event):
+    if (record["group_id"]!="mtbs:"+event["event_id"] or record["grid"]!=event["grid"]
+            or record["partition"]!="evaluation" or record.get("severity_source")!=SEVERITY_URL):
+        raise ValueError("cached record differs from frozen event/source")
+    for key,relative in record["files"].items():
+        path=(root/relative).resolve()
+        if not path.is_relative_to(root.resolve()) or sha256_file(path)!=record["hashes"][key]:
+            raise ValueError("cached record input changed or escaped own data root")
+    grid=dict(event["grid"],transform=rasterio.Affine(*event["grid"]["transform"]))
+    validate_severity(root/record["files"]["severity"],grid,severity_identity(grid))
+
+
 def freeze_plan(source, prior, out):
     path = out / "selection.json"
     vector = source / "external/mtbs/mtbs_perims_DD.shp"
@@ -131,13 +152,9 @@ def collect(root, out, event):
                 target.write(array)
     record = prepare(root,out,"mtbs","evaluation",window,source_directory="hls_fresh98")
     severity = inputs/(name+".sev.tif")
-    left, bottom, right, top = rasterio.transform.array_bounds(512,512,grid["transform"])
-    query = dict(bbox=f"{left},{bottom},{right},{top}",bboxSR=rasterio.crs.CRS.from_string(grid["crs"]).to_epsg(),
-                     imageSR=rasterio.crs.CRS.from_string(grid["crs"]).to_epsg(),size="512,512",format="tiff",pixelType="U8",
-                     interpolation="RSP_NearestNeighbor", mosaicRule=json.dumps({"mosaicMethod":"esriMosaicNone","where":"name='mtbs_CONUS_2024'"}),f="image")
-    identity=dict(url=SEVERITY_URL,query=query)
+    identity=severity_identity(grid)
     if not severity.exists():
-        response = requests.get(SEVERITY_URL,params=query,timeout=120);response.raise_for_status()
+        response = requests.get(SEVERITY_URL,params=identity["query"],timeout=120);response.raise_for_status()
         with rasterio.open(io.BytesIO(response.content)) as source:
             if source.shape!=(512,512) or str(source.crs)!=grid["crs"] or source.transform!=grid["transform"]:
                 raise ValueError("MTBS response grid differs")
@@ -172,9 +189,11 @@ def main():
     if args.limit:events=events[:args.limit]
     def run(event):
         record_path=out/(event["event_id"]+".record.json")
-        if record_path.exists():return json.loads(record_path.read_text()),None
         for attempt in range(3):
             try:
+                if record_path.exists():
+                    record=json.loads(record_path.read_text());validate_cached_record(root,record,event)
+                    return record,None
                 record=collect(root,out,event);immutable(record_path,record)
                 print("prepared",event["event_id"],flush=True);return record,None
             except (ValueError,RuntimeError) as error:return None,dict(event_id=event["event_id"],reason=str(error))

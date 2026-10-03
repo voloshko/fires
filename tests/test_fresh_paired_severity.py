@@ -17,7 +17,7 @@ class FreshSeverityTest(unittest.TestCase):
         import json
         import numpy as np
         import rasterio
-        from scripts.prepare_fresh_paired_severity import validate_severity
+        from scripts.prepare_fresh_paired_severity import validate_severity, validate_cached_record, severity_identity, SEVERITY_URL
         with tempfile.TemporaryDirectory() as directory:
             path=Path(directory)/"severity.tif"
             grid=dict(crs="EPSG:32611",transform=rasterio.Affine(30,0,300000,0,-30,4000000))
@@ -35,6 +35,12 @@ class FreshSeverityTest(unittest.TestCase):
             with self.assertRaises(ValueError):validate_severity(path,grid,dict(identity,url="different source"))
             path.with_suffix(".source.json").unlink()
             with self.assertRaises(ValueError):validate_severity(path,grid,identity)
+            event=dict(event_id="new",grid=dict(grid,transform=list(grid["transform"])[:6],width=512,height=512))
+            record=dict(group_id="mtbs:new",grid=event["grid"],partition="evaluation",severity_source=SEVERITY_URL,
+                        files=dict(severity="severity.tif"),hashes=dict(severity=hashlib.sha256(path.read_bytes()).hexdigest()))
+            with self.assertRaises(ValueError):validate_cached_record(Path(directory),record,event)
+            path.with_suffix(".source.json").write_text(json.dumps(dict(identity=severity_identity(grid),sha256=record["hashes"]["severity"])))
+            validate_cached_record(Path(directory),record,event)
 
     def test_excludes_old_events_and_frames_before_cap(self):
         rows=[dict(event_id=e,bbox_wgs84=b) for e,b in (
