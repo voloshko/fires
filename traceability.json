@@ -138,7 +138,8 @@
         "SPEC-92",
         "SPEC-93",
         "SPEC-94",
-        "SPEC-95"
+        "SPEC-95",
+        "SPEC-96"
       ]
     }
   },
@@ -1042,6 +1043,17 @@
       "depends_on": [
         "SPEC-90",
         "SPEC-91"
+      ],
+      "status": "planned"
+    },
+    "SPEC-96": {
+      "title": "Аудит событий HLS и географии прежнего обучения",
+      "file": "specs/SPEC-96-training-lineage.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-92",
+        "SPEC-93"
       ],
       "status": "planned"
     }
