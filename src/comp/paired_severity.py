@@ -4,6 +4,7 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 from src.comp.forest_pair import ForestPairUNet
+from src.comp.accuracy_contract import _percentile
 
 
 class PairedSeverityUNet(ForestPairUNet):
@@ -55,3 +56,63 @@ def apply_fixed_boundary(probabilities, boundary, valid):
         raise ValueError("misaligned fixed boundary")
     if not np.isfinite(probabilities).all(): raise ValueError("nonfinite severity probabilities")
     return np.where(boundary & valid, probabilities.argmax(0) + 1, 0).astype(np.uint8)
+
+
+def mtbs_evaluation_labels(mtbs, valid):
+    """Known background counts in evaluation even though it does not train severity."""
+    raw, valid = np.asarray(mtbs), np.asarray(valid, dtype=bool)
+    if raw.shape != valid.shape: raise ValueError("unaligned evaluation labels")
+    labels = np.full(raw.shape, -1, np.int64)
+    labels[np.isin(raw, [0, 1, 5]) & valid] = 0
+    for source, target in ((2, 1), (3, 2), (4, 3)):
+        labels[(raw == source) & valid] = target
+    return labels
+
+
+def severity_confusion(truth, prediction):
+    truth, prediction = np.asarray(truth), np.asarray(prediction)
+    if truth.shape != prediction.shape: raise ValueError("unaligned severity predictions")
+    known = truth >= 0
+    if np.any(truth[known] > 3) or np.any(prediction[known] < 0) or np.any(prediction[known] > 3):
+        raise ValueError("invalid severity class")
+    return np.bincount((4 * truth[known] + prediction[known]).astype(np.int64), minlength=16).reshape(4, 4)
+
+
+def severity_metrics(confusion):
+    cm = np.asarray(confusion, np.float64)
+    if cm.shape != (4, 4) or not np.isfinite(cm).all() or np.any(cm < 0) or np.any(cm != np.floor(cm)):
+        raise ValueError("invalid confusion")
+    tp = np.diag(cm)[1:]; union = cm.sum(0)[1:] + cm.sum(1)[1:] - tp
+    if np.any(union == 0): raise ValueError("severity IoU undefined for an absent class")
+    per_class = tp / union
+    burn_tp, burn_fp, burn_fn = cm[1:, 1:].sum(), cm[0, 1:].sum(), cm[1:, 0].sum()
+    denominator = burn_tp + burn_fp + burn_fn
+    if denominator == 0: raise ValueError("undefined burned-area IoU")
+    return dict(miou=float(per_class.mean()), per_class=per_class.tolist(),
+                burn_iou=float(burn_tp / denominator))
+
+
+def grouped_severity_comparison(groups, candidate, baseline, n_boot=2000, seed=20261003):
+    import random
+    if not groups or len(groups) != len(candidate) or len(groups) != len(baseline):
+        raise ValueError("unaligned severity groups")
+    if n_boot < 2 or any(not group for group in groups): raise ValueError("invalid severity bootstrap")
+    a, b = {}, {}
+    for group, ca, cb in zip(groups, candidate, baseline):
+        for cm in (ca, cb):
+            cm = np.asarray(cm)
+            if cm.shape != (4, 4) or not np.isfinite(cm).all() or np.any(cm < 0) or np.any(cm != np.floor(cm)):
+                raise ValueError("invalid window confusion")
+        a[group] = a.get(group, np.zeros((4, 4))) + ca
+        b[group] = b.get(group, np.zeros((4, 4))) + cb
+    keys = sorted(a)
+    if len(keys) < 2: raise ValueError("at least two severity groups required")
+    ga, gb = np.stack([a[k] for k in keys]), np.stack([b[k] for k in keys])
+    rng = random.Random(seed); deltas = []
+    for _ in range(n_boot):
+        idx = rng.choices(range(len(keys)), k=len(keys))
+        deltas.append(severity_metrics(ga[idx].sum(0))["miou"] - severity_metrics(gb[idx].sum(0))["miou"])
+    ma, mb = severity_metrics(ga.sum(0)), severity_metrics(gb.sum(0))
+    lo, hi = _percentile(deltas, .025), _percentile(deltas, .975)
+    return dict(samples=len(groups), groups=len(keys), candidate=ma, baseline=mb,
+                delta=ma["miou"] - mb["miou"], ci95=[lo, hi], n_boot=n_boot, seed=seed)

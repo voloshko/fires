@@ -4,6 +4,7 @@ import torch
 
 from src.comp.paired_severity import (
     PairedSeverityUNet, apply_fixed_boundary, fit_class_weights, mtbs_targets, severity_loss,
+    grouped_severity_comparison, mtbs_evaluation_labels, severity_confusion, severity_metrics,
 )
 
 
@@ -53,3 +54,22 @@ def test_three_class_pair_model_backward_and_reload(tmp_path):
     loaded = PairedSeverityUNet(width=4, depth=3).eval()
     loaded.load_state_dict(torch.load(path, weights_only=True))
     with torch.no_grad(): assert torch.equal(net(x), loaded(x))
+
+
+def test_evaluation_background_is_not_ignored():
+    raw = np.array([0, 1, 2, 3, 4, 5, 6], np.uint8)
+    labels = mtbs_evaluation_labels(raw, np.ones_like(raw, bool))
+    np.testing.assert_array_equal(labels, [0, 0, 1, 2, 3, 0, -1])
+    cm = severity_confusion(labels, np.array([1, 2, 1, 2, 3, 3, 3]))
+    assert cm[0, 1:].sum() == 3 and cm[1:, 1:].sum() == 3
+    assert severity_metrics(cm)["miou"] == .5
+
+
+def test_severity_bootstrap_uses_whole_events():
+    good = np.diag([10, 10, 10, 10])
+    weak = np.array([[10, 0, 0, 0], [0, 5, 5, 0], [0, 0, 5, 5], [0, 5, 0, 5]])
+    result = grouped_severity_comparison(["a", "a", "b"], [good] * 3, [weak] * 3, n_boot=50)
+    aggregated = grouped_severity_comparison(["a", "b"], [2 * good, good], [2 * weak, weak], n_boot=50)
+    assert result["ci95"] == aggregated["ci95"] and result["groups"] == 2
+    assert result["delta"] > 0 and result["ci95"][0] > 0
+    with pytest.raises(ValueError): severity_metrics(np.zeros((4, 4)))
