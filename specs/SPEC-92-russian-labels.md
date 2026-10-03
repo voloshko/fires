@@ -18,7 +18,7 @@ PANGAEA.939429, CC-BY-4.0, визуальная интерпретация Senti
 ## Acceptance Criteria
 
 - `scripts/build_russian_reserve.py`: загрузка опубликованных архивов строго
-  на omarchy, URL/license/DOI/hash и схема полей в source_manifest.json.
+  на k8plus в data-store/, URL/license/DOI/hash и схема полей в source_manifest.json.
   Исходники не подменяются слоем FireCCI/MCD64/dNBR. Проверка валидной геометрии
   и покрытия bbox 80–115°E, 50–65°N; source-поля и потери отбора публикуются.
 - До получения предсказаний контуры объединяются в пространственные кластеры
@@ -53,7 +53,7 @@ PANGAEA.939429, CC-BY-4.0, визуальная интерпретация Senti
 
 - `python scripts/build_russian_reserve.py --help`; unit tests кластеров,
   отрицательной provenance, геометрии, фиксированного split и interval.
-- CPU/скачивания на omarchy, GPU на k8plus после подготовки; systemd,
+- CPU/скачивания/GPU на k8plus после подготовки; systemd,
   один собственный GPU job, без больших локальных файлов.
 - `make gate`; отдельные LIVE/REPLAY receipts; non_claims: спутниковая
   интерпретация, весна2020, не вся Сибирь и не физическая наземная площадь.
