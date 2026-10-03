@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-94",
+  "run_id": "SPEC-94-SYNTHETIC-PREP-001",
+  "created_at": "2026-10-03T13:25:25.084480+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Three-class pair head, fit-only balancing, masked CE/Dice and fixed-boundary inference pass tests; real training and accuracy comparison remain pending.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && OMP_NUM_THREADS=2 .runtime/bin/python -m pytest tests/test_paired_severity.py -q'"
+  ],
+  "acceptance": {
+    "unit_tests": 5,
+    "training": "pending",
+    "real_accuracy": "not_measured"
+  },
+  "limitations": [
+    "Synthetic tensors only. No fresh2 severity experiment has run."
+  ],
+  "non_claims": [
+    "Does not prove severity gain, target-region validity or superiority over the fixed dNBR hybrid."
+  ]
+}

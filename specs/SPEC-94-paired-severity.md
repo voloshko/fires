@@ -1,6 +1,6 @@
 # SPEC-94: Степень по паре дат внутри фиксированного контура
 
-Status: planned
+Status: active
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-89
 
