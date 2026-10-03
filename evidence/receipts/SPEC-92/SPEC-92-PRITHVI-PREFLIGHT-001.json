@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-92",
+  "run_id": "SPEC-92-PRITHVI-PREFLIGHT-001",
+  "created_at": "2026-10-03T18:23:25.910678+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Official Prithvi checkpoint loaded via installed TerraTorch after converting API paths to strings; synthetic CPU forward shape(1,2,32,32) is finite. Russian comparison not yet executed.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/score_russian_transfer.py --help'"
+  ],
+  "acceptance": {
+    "official_checkpoint_load": "strict weights_only via TerraTorch",
+    "synthetic_forward_shape": [
+      1,
+      2,
+      32,
+      32
+    ],
+    "finite": true,
+    "data_used": "synthetic zeros only",
+    "fix": "from_config expects str paths"
+  },
+  "limitations": [
+    "Synthetic32pixel input does not establish512pixel performance or accuracy.",
+    "Full transfer training/scoring remains queued after SPEC94."
+  ],
+  "non_claims": [
+    "Does not prove any competitor superiority or real-data model score."
+  ]
+}

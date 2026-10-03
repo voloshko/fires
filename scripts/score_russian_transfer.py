@@ -66,7 +66,7 @@ def predict(root, records, paths, kind, cache, prithvi_root):
         inference_cfg = cache.with_suffix(".prithvi-config.yaml")
         if not inference_cfg.exists(): inference_cfg.write_text(yaml.safe_dump(cfg))
         elif yaml.safe_load(inference_cfg.read_text()) != cfg: raise ValueError("Prithvi inference config changed")
-        model = LightningInferenceModel.from_config(inference_cfg, paths[0]).model.to(dev).eval()
+        model = LightningInferenceModel.from_config(str(inference_cfg), str(paths[0])).model.to(dev).eval()
         wrappers = [(model, mean, std)]
     else:
         wrappers = []
