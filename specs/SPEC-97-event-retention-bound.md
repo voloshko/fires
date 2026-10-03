@@ -1,6 +1,6 @@
 # SPEC-97: Консервативная нижняя граница покрытия событий L2A
 
-Status: planned
+Status: active
 Requirement: REQ-008
 Depends on: SPEC-93, SPEC-96
 

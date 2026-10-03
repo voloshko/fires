@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-97",
+  "run_id": "SPEC-97-BOUND-001",
+  "created_at": "2026-10-03T17:49:24.521684+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Full original-pixel audit cannot certify event-retention bound: protected positives were lost in16windows. L2A training remains gated.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_event_retention_bound.py -q'"
+  ],
+  "acceptance": {
+    "fit_twins": 889,
+    "known_original_events": 886,
+    "known_retained_events": 861,
+    "failed_protected_windows": 16,
+    "lost_protected_pixels": 2784,
+    "bound": null
+  },
+  "limitations": [
+    "Original unknown/residual event survival not certified under existing cloud masks.",
+    "This is a data-admission audit, not a model quality experiment."
+  ],
+  "non_claims": [
+    "Does not claim70% full original-event retention.",
+    "Does not claim a negative L2A model result or accuracy improvement."
+  ]
+}

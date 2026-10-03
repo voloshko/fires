@@ -1,0 +1,424 @@
+{
+  "spec_id": "SPEC-93",
+  "counts": {
+    "samples": 1008,
+    "groups": 762,
+    "partitions": {
+      "calibration": 0,
+      "evaluation": 119,
+      "fit": 889
+    }
+  },
+  "failures": [
+    {
+      "sample": "hls:subsetted_512x512_HLS.S30.T10SGD.2021306.v1.4_merged.tif",
+      "reason": "no same-day same-MGRS L2A"
+    },
+    {
+      "sample": "hls:subsetted_512x512_HLS.S30.T11SNB.2018224.v1.4_merged.tif",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "hls:subsetted_512x512_HLS.S30.T11SNT.2018216.v1.4_merged.tif",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "hls:subsetted_512x512_HLS.S30.T11SQC.2020241.v1.4_merged.tif",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "hls:subsetted_512x512_HLS.S30.T11TNE.2018199.v1.4_merged.tif",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "hls:subsetted_512x512_HLS.S30.T16RCV.2021167.v1.4_merged.tif",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "mtbs:fresh_SC3495708310320230316_HLS.S30.T17SKU.2023221T160901.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "mtbs:fresh_TN3509508460120240109_HLS.S30.T16SGD.2024089T161851.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "mtbs:fresh_ND4625010310920241017_HLS.S30.T13TFM.2025052T174249.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "mtbs:fresh_CA3671811888320230930_HLS.S30.T11SLA.2024056T184339.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "mtbs:fresh_FL2645708025120220517_HLS.S30.T17RNK.2022270T160521.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "mtbs:fresh_CO3730110724620231019_HLS.S30.T13SCB.2024061T175239.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR682_AOI01_HLS.S30.T31TEH.2023222T103631.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR676_AOI01_HLS.S30.T34SFH.2023208T092031.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR816_AOI02_HLS.S30.T34TCK.2025222T093051.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR817_AOI01_HLS.S30.T30TUK.2025205T110619.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR837_AOI01_HLS.S30.T29TPG.2025248T112109.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR837_AOI09_HLS.S30.T29TPH.2025248T112109.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR837_AOI12_HLS.S30.T29TPG.2025248T112109.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR837_AOI10_HLS.S30.T30TUK.2025260T110731.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR837_AOI11_HLS.S30.T30TUL.2025260T110731.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR837_AOI14_HLS.S30.T29TPH.2025248T112109.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR837_AOI13_HLS.S30.T29TPG.2025238T112119.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR842_AOI02_HLS.S30.T29TQH.2025268T112109.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR842_AOI01_HLS.S30.T29TPG.2025268T112109.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR887_AOI01_HLS.S30.T29TPH.2026183T112109.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR888_AOI01_HLS.S30.T31TDG.2026186T103621.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR893_AOI01_HLS.S30.T33TXH.2026201T095031.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR900_AOI01_HLS.S30.T30TVL.2026207T110711.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR900_AOI02_HLS.S30.T30TUK.2026210T110619.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR900_AOI05_HLS.S30.T30TUK.2026210T110619.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR900_AOI07_HLS.S30.T30TUK.2026210T110619.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR906_AOI01_HLS.S30.T29TQH.2026208T112111.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR922_AOI01_HLS.S30.T34TCN.2026260T094041.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR922_AOI02_HLS.S30.T34TCM.2026233T094029.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR931_AOI01_HLS.S30.T33TXJ.2026256T095029.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR922_AOI05_HLS.S30.T33TYH.2026248T094031.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "floga:floga_2020_798638_HLS.S30.T34SFF.2020301T091101.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "floga:floga_2021_823895_HLS.S30.T34SEH.2021048T092041.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "floga:floga_2021_831017_HLS.S30.T34TEL.2021051T093031.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR656_AOI01_HLS.S30.T30TYK.2023095T105031.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR674_AOI01_HLS.S30.T34SFH.2023215T090601.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR688_AOI01_HLS.S30.T34SGH.2023235T090601.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR689_AOI01_HLS.S30.T35TLF.2023240T090559.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR689_AOI02_HLS.S30.T35TLF.2023240T090559.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR704_AOI01_HLS.S30.T31SBD.2023325T105341.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR719_AOI01_HLS.S30.T30SYH.2024105T104619.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR731_AOI01_HLS.S30.T34SEG.2024198T091559.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR733_AOI01_HLS.S30.T34SGH.2024210T090601.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR733_AOI02_HLS.S30.T35SKC.2024205T090559.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR733_AOI03_HLS.S30.T35SKB.2024210T090601.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR737_AOI01_HLS.S30.T34SFH.2024205T090559.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR739_AOI01_HLS.S30.T33TVL.2024220T095549.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR735_AOI01_HLS.S30.T35SNA.2024212T085559.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR743_AOI01_HLS.S30.T34SGH.2024230T090551.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR745_AOI01_HLS.S30.T35SKV.2024225T090559.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0",
+      "reason": "no same-day same-MGRS L2A"
+    },
+    {
+      "sample": "ems:ems_EMSR807_AOI01_HLS.S30.T34SGG.2025204T090621.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR806_AOI02_HLS.S30.T35SMC.2025174T090611.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR815_AOI01_HLS.S30.T34SFH.2025209T092231.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR824_AOI03_HLS.S30.T29TNF.2025228T112119.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR826_AOI01_HLS.S30.T30TUK.2025222T110701.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR830_AOI01_HLS.S30.T33TVF.2025231T095029.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR836_AOI02_HLS.S30.T34TCN.2025245T094041.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR836_AOI05_HLS.S30.T34TCN.2025245T094041.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR836_AOI04_HLS.S30.T34TCN.2025223T094051.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR836_AOI03_HLS.S30.T34TCM.2025245T093029.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR836_AOI06_HLS.S30.T34TCM.2025245T093029.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR873_AOI01_HLS.S30.T32TPP.2026122T101019.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR894_AOI01_HLS.S30.T31UDP.2026201T105051.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR899_AOI01_HLS.S30.T30TXQ.2026224T105651.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR898_AOI02_HLS.S30.T30TWL.2026202T105621.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR915_AOI01_HLS.S30.T34TCL.2026237T093151.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR918_AOI01_HLS.S30.T34TFK.2026217T092029.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR917_AOI01_HLS.S30.T34TDM.2026240T093029.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR917_AOI02_HLS.S30.T34TCM.2026240T093029.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR925_AOI01_HLS.S30.T30TYK.2026231T104651.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    },
+    {
+      "sample": "ems:ems_EMSR923_AOI01_HLS.S30.T34SGJ.2026254T090549.v2.0",
+      "reason": "not enough common valid pixels / no annotated fire"
+    }
+  ],
+  "original_fit_events": 886,
+  "retained_fit_event_fraction": 0.9717832957110609,
+  "unknown_original_hls_events": [
+    "hls:subsetted_512x512_HLS.S30.T11SKB.2020222.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T12SVC.2020190.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T14SPH.2018095.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T14SPJ.2018125.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T14SQF.2018125.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T14SQG.2018125.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T14TQT.2021112.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T15STC.2018125.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T15STD.2018125.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T15SUB.2018127.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T15SUC.2018127.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T16REV.2019080.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T16SEC.2021094.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T16TGQ.2019158.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T17RMJ.2018064.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T17SMV.2021096.v1.4_merged.tif",
+    "hls:subsetted_512x512_HLS.S30.T17SPS.2019094.v1.4_merged.tif"
+  ],
+  "event_registry_sha256": "86f2210603e5921d384c62a52e90167ae64abbad3473bc1cce686ea7bbad3ed2",
+  "conservative_event_bound": {
+    "original_known_events": 886,
+    "retained_known_events": 861,
+    "unresolved_guaranteed": false,
+    "lost_protected": [
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T10SGD.2021306.v1.4_merged.tif",
+        "lost_protected_pixels": 5
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T10TGS.2018215.v1.4_merged.tif",
+        "lost_protected_pixels": 2
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T11SKB.2020222.v1.4_merged.tif",
+        "lost_protected_pixels": 1948
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T11SMT.2018249.v1.4_merged.tif",
+        "lost_protected_pixels": 1
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T11SNT.2018216.v1.4_merged.tif",
+        "lost_protected_pixels": 2
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T11SQC.2020241.v1.4_merged.tif",
+        "lost_protected_pixels": 4
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T11TNE.2018199.v1.4_merged.tif",
+        "lost_protected_pixels": 1
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T11TPF.2018289.v1.4_merged.tif",
+        "lost_protected_pixels": 1
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T12SVC.2020190.v1.4_merged.tif",
+        "lost_protected_pixels": 802
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T14RLV.2018043.v1.4_merged.tif",
+        "lost_protected_pixels": 1
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T14SPH.2018095.v1.4_merged.tif",
+        "lost_protected_pixels": 1
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T14SQF.2018125.v1.4_merged.tif",
+        "lost_protected_pixels": 4
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T14TQT.2021112.v1.4_merged.tif",
+        "lost_protected_pixels": 8
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T15SUB.2018127.v1.4_merged.tif",
+        "lost_protected_pixels": 2
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T15SUC.2018127.v1.4_merged.tif",
+        "lost_protected_pixels": 1
+      },
+      {
+        "sample_id": "hls:subsetted_512x512_HLS.S30.T17SQD.2020094.v1.4_merged.tif",
+        "lost_protected_pixels": 1
+      }
+    ],
+    "event_retention_lower_bound": null,
+    "accepted": false
+  },
+  "retention_proof_sha256": "0ff6c1bc4b6aeeca6dcb5c14fc7f8141491fc16cc69f209ab472a27027b5958b",
+  "ready_for_training": false,
+  "qc_probe": false
+}
