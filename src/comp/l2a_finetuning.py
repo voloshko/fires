@@ -6,6 +6,22 @@ EXPECTED_BANDS = {"blue": "B02", "green": "B03", "red": "B04", "nir08": "B8A",
 SCL_INVALID = (0, 1, 3, 8, 9, 10, 11)
 
 
+def pc_asset_encoding(asset, key, processing_baseline):
+    """PC omits raster:bands; the ESA processing baseline identifies DN offset."""
+    import copy
+    import re
+    encoded = copy.deepcopy(asset)
+    if encoded.get("raster:bands") and all(k in encoded["raster:bands"][0] for k in ("scale", "offset", "nodata")):
+        asset_encoding(encoded, key)
+        return encoded, "STAC-raster:bands"
+    if not isinstance(processing_baseline, str) or not re.fullmatch(r"\d{2}\.\d{2}", processing_baseline):
+        raise ValueError("PC reflectance encoding needs a known ESA processing baseline")
+    major, minor = map(int, processing_baseline.split("."))
+    encoded["raster:bands"] = [{"scale": .0001, "offset": -.1 if (major, minor) >= (4, 0) else 0., "nodata": 0}]
+    asset_encoding(encoded, key)
+    return encoded, "ESA-L2A-processing-baseline:" + processing_baseline
+
+
 def asset_encoding(asset, key):
     bands = asset.get("eo:bands", [])
     raster = asset.get("raster:bands", [])

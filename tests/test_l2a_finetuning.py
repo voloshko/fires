@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from src.comp.l2a_finetuning import asset_encoding, l2a_valid, l2a_water, physical_reflectance
+from src.comp.l2a_finetuning import asset_encoding, l2a_valid, l2a_water, physical_reflectance, pc_asset_encoding
 
 
 def asset(band="B8A", offset=-.1):
@@ -29,3 +29,13 @@ def test_snow_cloud_and_unknown_pixels_are_not_training_targets():
 def test_water_requires_both_scl_and_ndwi():
     image = np.ones((6, 1, 3), np.float32); image[1] = [2, 2, .5]
     np.testing.assert_array_equal(l2a_water(image, [[6, 4, 6]]), [[True, False, False]])
+
+
+def test_pc_baseline_offset_without_raster_extension():
+    raw = {"eo:bands": [{"name": "B8A"}]}
+    encoded, basis = pc_asset_encoding(raw, "nir08", "05.11")
+    assert asset_encoding(encoded, "nir08") == (.0001, -.1, 0)
+    assert basis.endswith("05.11")
+    old, _ = pc_asset_encoding(raw, "nir08", "03.01")
+    assert asset_encoding(old, "nir08")[1] == 0
+    with pytest.raises(ValueError): pc_asset_encoding(raw, "nir08", None)

@@ -14,17 +14,27 @@ import rasterio
 from rasterio.vrt import WarpedVRT
 from rasterio.warp import Resampling, transform_bounds
 import pystac_client
+import planetary_computer
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.comp.accuracy_contract import event_group, sha256_file, validate_manifest
-from src.comp.l2a_finetuning import EXPECTED_BANDS, asset_encoding, l2a_valid
+from src.comp.l2a_finetuning import EXPECTED_BANDS, asset_encoding, l2a_valid, pc_asset_encoding
 
 
-def source_jobs(root):
+def source_jobs(root, event_registry):
+    registry = json.loads(event_registry.read_text())
+    audited = {r["sample_id"]: r for r in registry["records"]}
     jobs = []
     for image in sorted((root / "external/hls_burn_scars/training").glob("*_merged.tif")):
         tile = re.search(r"HLS\.S30\.(T[0-9A-Z]+)\.", image.name).group(1)
-        jobs.append(dict(sample_id="hls:" + image.name, group_id="hls:" + tile,
+        identity = "hls:" + image.name
+        if identity not in audited: raise ValueError("HLS source is absent from audited registry")
+        entry = audited[identity]
+        if entry["source_sha256"] != sha256_file(image): raise ValueError("HLS event registry source changed")
+        label = Path(str(image).replace("_merged.tif", ".mask.tif"))
+        if entry["label_sha256"] != sha256_file(label): raise ValueError("HLS event registry annotation changed")
+        event = entry.get("event_id")
+        jobs.append(dict(sample_id=identity, group_id="hls:" + tile, audited_event=event,
                          dataset="hls", partition="fit", label_provenance="expert_perimeter",
                          source=str(image.relative_to(root)), sampling_weight=1))
     for dataset, directory, manifest, part in [
@@ -56,9 +66,10 @@ def twin(root, out, job):
     match = re.search(r"HLS\.S30\.(T[0-9A-Z]+)\.(\d{7})", name)
     if match is None: raise ValueError("cannot identify source MGRS and acquisition day")
     tile, day = match.group(1), datetime.strptime(match.group(2), "%Y%j")
-    catalog = pystac_client.Client.open("https://earth-search.aws.element84.com/v1")
-    items = list(catalog.search(collections=["sentinel-2-c1-l2a"],
-                 query={"grid:code": {"eq": "MGRS-" + tile[1:]}},
+    catalog = pystac_client.Client.open("https://planetarycomputer.microsoft.com/api/stac/v1",
+                                       modifier=planetary_computer.sign_inplace)
+    items = list(catalog.search(collections=["sentinel-2-l2a"],
+                 query={"s2:mgrs_tile": {"eq": tile[1:]}},
                  datetime=f"{day:%Y-%m-%dT00:00:00Z}/{day + timedelta(days=1):%Y-%m-%dT00:00:00Z}").items())
     if not items: raise ValueError("no same-day same-MGRS L2A")
     item = min(items, key=lambda i: i.properties.get("eo:cloud_cover", 100))
@@ -69,16 +80,19 @@ def twin(root, out, job):
         bbox = list(transform_bounds(source.crs, 4326, *source.bounds))
     bands, encodings = [], {}
     for key in EXPECTED_BANDS:
-        asset = item.assets[key].to_dict()
+        asset_key = EXPECTED_BANDS[key]
+        asset, basis = pc_asset_encoding(item.assets[asset_key].to_dict(), key,
+                                         item.properties.get("s2:processing_baseline"))
         scale, offset, nodata = asset_encoding(asset, key)
-        with rasterio.open(item.assets[key].href) as source, WarpedVRT(
+        with rasterio.open(item.assets[asset_key].href) as source, WarpedVRT(
             source, **grid, resampling=Resampling.average, src_nodata=nodata, nodata=np.nan,
             dtype="float32",
         ) as warped: raw = warped.read(1)
         bands.append(np.where(np.isfinite(raw), raw * scale + offset, -9999).astype(np.float32))
-        encodings[key] = dict(band=EXPECTED_BANDS[key], scale=scale, offset=offset, nodata=nodata)
+        encodings[key] = dict(band=EXPECTED_BANDS[key], scale=scale, offset=offset, nodata=nodata,
+                              encoding_basis=basis)
     image = np.stack(bands)
-    with rasterio.open(item.assets["scl"].href) as source, WarpedVRT(
+    with rasterio.open(item.assets["SCL"].href) as source, WarpedVRT(
         source, **grid, resampling=Resampling.nearest, src_nodata=0, nodata=0,
     ) as warped: scl = warped.read(1).astype(np.uint8)
     label_path = Path(str(image_path).replace("_merged.tif", ".mask.tif"))
@@ -102,7 +116,8 @@ def twin(root, out, job):
     record = dict(job, bbox_wgs84=bbox, grid=dict(crs=str(grid["crs"]),
                   transform=list(grid["transform"])[:6], width=grid["width"], height=grid["height"]),
                   files=files, hashes={key: sha256_file(root / path) for key, path in files.items()},
-                  l2a_item=item.id, acquisition=item.datetime.isoformat(), encodings=encodings,
+                  l2a_item=item.id, collection="sentinel-2-l2a", provider="Planetary Computer",
+                  acquisition=item.datetime.isoformat(), encodings=encodings,
                   valid_fraction=float(valid.mean()))
     with metadata.open("x") as stream: json.dump(record, stream, indent=2)
     return record
@@ -112,11 +127,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-root", required=True, type=Path)
     parser.add_argument("--out", required=True, type=Path)
+    parser.add_argument("--event-registry", required=True, type=Path)
     parser.add_argument("--limit", type=int, help="QC only, cannot authorize full training")
     args = parser.parse_args(); root, out = args.data_root.resolve(), args.out.resolve()
     if not out.is_relative_to(root): raise ValueError("outputs must be inside data root")
     out.mkdir(parents=True, exist_ok=True)
-    jobs = source_jobs(root); fit_groups = {j["group_id"] for j in jobs if j["partition"] == "fit"}
+    jobs = source_jobs(root, args.event_registry)
+    unknown = [j["sample_id"] for j in jobs if j["dataset"] == "hls" and not j["audited_event"]]
+    def event_of(r): return r["audited_event"] if r["dataset"] == "hls" else r["group_id"]
+    original_events = {event_of(j) for j in jobs if j["partition"] == "fit" and event_of(j) is not None}
     if args.limit: jobs = jobs[:args.limit]
     failures = []
     def run(job):
@@ -132,10 +151,11 @@ def main():
     with ThreadPoolExecutor(4) as pool: records = [r for r in pool.map(run, jobs) if r]
     records.sort(key=lambda r: r["sample_id"]); counts = validate_manifest(records)
     fit = [r for r in records if r["partition"] == "fit"]
-    fraction = len({r["group_id"] for r in fit}) / len(fit_groups)
-    ready = args.limit is None and len(fit) >= 300 and fraction >= .7
+    fraction = len({event_of(r) for r in fit if event_of(r) is not None}) / len(original_events)
+    ready = args.limit is None and not unknown and len(fit) >= 300 and fraction >= .7
     result = dict(spec_id="SPEC-93", records=records, counts=counts, failures=failures,
-                  original_fit_groups=len(fit_groups), retained_fit_group_fraction=fraction,
+                  original_fit_events=len(original_events), retained_fit_event_fraction=fraction,
+                  unknown_original_hls_events=unknown, event_registry_sha256=sha256_file(args.event_registry),
                   ready_for_training=ready, qc_probe=args.limit is not None)
     with (out / ("qc-manifest.json" if args.limit else "manifest.json")).open("x") as stream:
         json.dump(result, stream, indent=2)
