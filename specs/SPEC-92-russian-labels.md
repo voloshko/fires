@@ -42,7 +42,13 @@ PANGAEA.939429, CC-BY-4.0, визуальная интерпретация Senti
   predictions fit: weight2 для окон с наибольшим FP, верхние 25%, без удаления
   положительных пикселей. Negative mining не видит calibration/evaluation.
 - Парное дообучение на резерве (30 эпох, lr3e-5, AdamW, 3 сида 1/2/3) против
-  такого же продолжения без резерва. Сравнение с C1-MM и Prithvi на тех же
+  такого же продолжения без резерва. Инициализация — соответствующие pair-s1/2/3
+  SPEC-91 (valid trained artifacts, хотя продуктовый acceptance не пройден).
+  Base fit374 остаётся в обоих вариантах. Бюджет обоих одинаковый:
+  steps/epoch=ceil(sum(base sampling_weight)/8), batch8,30эпох, cosineLR3e-5;
+  weighted replacement sampling: base1/2, российский fit1 либо2 по mining.
+  Mining делается каждым initializer только на российском fit, до fine-tuning.
+  Нормализация только fit, без post-to-pre regression. Сравнение с C1-MM и Prithvi на тех же
   пикселях, provenance, invalid/water masks и пороге 0.5. Принятие: delta >=.01
   и CI95 нижняя >0 на России; EMS/FLOGA деградация <=.01. Количество потерянных
   пожаров и FP на трудном фоне публикуются независимо от pooled IoU.
