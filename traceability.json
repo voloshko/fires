@@ -137,7 +137,8 @@
         "SPEC-91",
         "SPEC-92",
         "SPEC-93",
-        "SPEC-94"
+        "SPEC-94",
+        "SPEC-95"
       ]
     }
   },
@@ -1033,6 +1034,16 @@
         "SPEC-91"
       ],
       "status": "active"
+    },
+    "SPEC-95": {
+      "title": "Безопасные веса и проверка общего рецепта экспериментов",
+      "file": "specs/SPEC-95-artifact-recipe-identity.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-91"
+      ],
+      "status": "planned"
     }
   }
 }
