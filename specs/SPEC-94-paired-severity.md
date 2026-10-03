@@ -40,6 +40,6 @@ mIoU_sev0.279, но градация грубая. Учим степень по 
 ## Verification
 
 - `python -m pytest tests/test_paired_severity.py -q`; `make gate`.
-- Загрузка пар на omarchy, GPU на k8plus, systemd, 1 собственный job.
+- Загрузка пар и GPU на k8plus в data-store/, systemd, 1 собственный job.
 - Receipts: satellite-label agreement only. MTBS — интерпретация
   dNBR/RdNBR, не наземная истина и не проверенная степень для Сибири/Кипра.
