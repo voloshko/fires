@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-94",
+  "run_id": "SPEC-94-REPLAY-001",
+  "created_at": "2026-10-03T19:10:33.932675+00:00",
+  "status": "FAIL",
+  "conclusion": "Paired severity improves over dNBR hybrid, but inverse-sqrt weighting fails the frozen no-worse-than-equal control condition.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/score_paired_severity.py --data-root data-store --manifest data-store/severity-pairs/manifest.json --runs research/paired-severity-v1 --reference-root /home/mc/fires/research --out research/paired-severity-review-result.json'",
+    "make gate"
+  ],
+  "acceptance": {
+    "versus_hybrid": {
+      "samples": 172,
+      "groups": 172,
+      "candidate": {
+        "miou": 0.36380183107018293,
+        "per_class": [
+          0.38751005110133707,
+          0.301200739649275,
+          0.4026947024599367
+        ],
+        "burn_iou": 0.4534632697158119
+      },
+      "baseline": {
+        "miou": 0.3088882489582079,
+        "per_class": [
+          0.3413001605195654,
+          0.2520939237995947,
+          0.3332706625554636
+        ],
+        "burn_iou": 0.4534632697158119
+      },
+      "delta": 0.05491358211197506,
+      "ci95": [
+        0.0213758402795633,
+        0.09199966425757936
+      ],
+      "n_boot": 2000,
+      "seed": 20261003
+    },
+    "versus_equal": {
+      "samples": 172,
+      "groups": 172,
+      "candidate": {
+        "miou": 0.36380183107018293,
+        "per_class": [
+          0.38751005110133707,
+          0.301200739649275,
+          0.4026947024599367
+        ],
+        "burn_iou": 0.4534632697158119
+      },
+      "baseline": {
+        "miou": 0.3671966423120147,
+        "per_class": [
+          0.39386158850938746,
+          0.30960177363342506,
+          0.39812656479323144
+        ],
+        "burn_iou": 0.4534632697158119
+      },
+      "delta": -0.0033948112418317744,
+      "ci95": [
+        -0.016902923526243174,
+        0.011719601005974644
+      ],
+      "n_boot": 2000,
+      "seed": 20261003
+    },
+    "per_class_delta": [
+      0.04620989058177166,
+      0.049106815849680296,
+      0.0694240399044731
+    ],
+    "accepted": false,
+    "recipe_id": "7b396b552381de6b52f5e3eb9f298d481f6b9771330dba4bfac2885bab785682",
+    "data_manifest": "5f80002e316fb0f7a0170ff16b3cf19ade07b5fcea5649885ad09247739edfd6"
+  },
+  "limitations": [
+    "Previously evaluated MTBSfresh2 development cohort; common paired-valid172of178original severity windows."
+  ],
+  "non_claims": [
+    "MTBS satellite interpretation, not field truth.",
+    "Development evaluation after adaptive experimentation.",
+    "Not validated severity in Siberia or Cyprus."
+  ]
+}
