@@ -1,0 +1,13 @@
+{
+  "evidence_class": "SYNTHETIC",
+  "shape": [
+    1,
+    2,
+    512,
+    512
+  ],
+  "finite": true,
+  "non_claims": [
+    "Does not measure accuracy or real-data inference performance."
+  ]
+}

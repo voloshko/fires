@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-92",
+  "run_id": "SPEC-92-PRITHVI-PREFLIGHT-002",
+  "predecessor_run_id": "SPEC-92-PRITHVI-PREFLIGHT-001",
+  "created_at": "2026-10-03T18:35:08.017199+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Reproducible official Prithvi loading and full512x512 synthetic CPU forward passed; no evaluation labels or images consumed.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && OMP_NUM_THREADS=2 .runtime/bin/python scripts/preflight_prithvi.py --model-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --size 512 --out research/prithvi-preflight-512-review.json'"
+  ],
+  "acceptance": {
+    "evidence_class": "SYNTHETIC",
+    "shape": [
+      1,
+      2,
+      512,
+      512
+    ],
+    "finite": true,
+    "non_claims": [
+      "Does not measure accuracy or real-data inference performance."
+    ]
+  },
+  "limitations": [
+    "Synthetic zeros only; actual reserve/control/competitor comparison remains pending."
+  ],
+  "non_claims": [
+    "Does not prove accuracy or competitor superiority."
+  ]
+}
