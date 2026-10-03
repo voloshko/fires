@@ -139,7 +139,8 @@
         "SPEC-93",
         "SPEC-94",
         "SPEC-95",
-        "SPEC-96"
+        "SPEC-96",
+        "SPEC-97"
       ]
     }
   },
@@ -1056,6 +1057,16 @@
         "SPEC-93"
       ],
       "status": "active"
+    },
+    "SPEC-97": {
+      "title": "Консервативная нижняя граница покрытия событий L2A",
+      "file": "specs/SPEC-97-event-retention-bound.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-93",
+        "SPEC-96"
+      ],
+      "status": "planned"
     }
   }
 }
