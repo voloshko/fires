@@ -16,6 +16,7 @@ from src.comp.accuracy_contract import experiment_fingerprint, sha256_file
 from src.comp.forest_pair import augment_forest
 from src.comp.paired_severity import PairedSeverityUNet, fit_class_weights, mtbs_targets, severity_loss
 from scripts.forest_pair_train import load_frozen, normalization, read_sample
+from src.comp.accuracy_artifacts import execution_sources
 
 
 def severity_sample(root, record):
@@ -46,8 +47,7 @@ def main():
     mean, std = normalization(samples, "pair")
     torch.manual_seed(args.seed); rng = np.random.default_rng(args.seed)
     net = PairedSeverityUNet().cuda().train(); epochs, batch = 120, 8
-    sources = [Path(__file__), Path("src/comp/paired_severity.py"), Path("src/comp/forest_pair.py"),
-               Path("scripts/forest_pair_train.py"), Path("src/comp/accuracy_contract.py")]
+    sources = execution_sources(Path(__file__), "src/comp/paired_severity.py", "scripts/forest_pair_train.py", tta=False)
     files = [args.data_root / r["files"][k] for r in records for k in sorted(r["files"])]
     signature = experiment_fingerprint(records, files, [], sources,
                 dict(variant=args.variant, seed=args.seed, mean=mean.tolist(), std=std.tolist(),

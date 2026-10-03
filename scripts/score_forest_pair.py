@@ -18,6 +18,7 @@ from src.comp.forest_pair import make_forest_model
 from src.comp.hls import tta8
 from src.comp.terrain import water_ndwi
 from scripts.forest_pair_train import load_frozen, read_sample
+from src.comp.accuracy_artifacts import assert_matched_recipes, execution_sources, load_checkpoint
 
 
 def binary_counts(truth, prediction, valid):
@@ -59,8 +60,7 @@ def acceptance_report(records, candidate, control, reference):
 
 def infer(root, records, models, variant, manifest_hash, cache):
     files = [root / r["files"][key] for r in records for key in sorted(r["files"])]
-    sources = [Path(__file__), Path("src/comp/forest_pair.py"), Path("src/comp/hls.py"),
-               Path("scripts/forest_pair_train.py"), Path("src/comp/accuracy_contract.py")]
+    sources = execution_sources(Path(__file__), "scripts/forest_pair_train.py")
     signature = experiment_fingerprint(records, files, models, sources,
                                        {"variant": variant, "tta": 8, "precision": "bf16"})
     if cache.exists():
@@ -72,7 +72,7 @@ def infer(root, records, models, variant, manifest_hash, cache):
     dev = "cuda" if torch.cuda.is_available() else "cpu"
     probabilities = np.zeros((len(records), records[0]["grid"]["height"], records[0]["grid"]["width"]), np.float32)
     for seed, path in enumerate(models, 1):
-        bundle = torch.load(path, map_location="cpu", weights_only=False)
+        bundle = load_checkpoint(path, sha256_file(path), export_root=Path("research/tensor-exports"))
         if variant != "c1mm":
             summary = json.loads(path.with_name("summary.json").read_text())
             if (bundle["variant"] != variant or bundle["seed"] != seed or bundle["smoke"]
@@ -117,6 +117,9 @@ def main():
     checkpoints = {variant: [args.runs / f"{variant}-s{s}" / "model.pt" for s in (1, 2, 3)]
                    for variant in ("post", "pair")}
     checkpoints["c1mm"] = [args.reference_root / f"hls-c1mm-final-s{s}" / "model.pt" for s in (1, 2, 3, 4, 5)]
+    archived = [json.loads(path.with_name("data_manifest.json").read_text())
+                for key in ("post", "pair") for path in checkpoints[key]]
+    recipe_id = assert_matched_recipes(archived, ("width", "depth", "epochs", "batch", "evaluation_ids"))
     predictions = {key: infer(args.data_root, records, models, key, sha256_file(args.manifest),
                               args.out.parent / (args.out.stem + "-" + key + ".npy"))
                    for key, models in checkpoints.items()}
@@ -137,7 +140,7 @@ def main():
             counts[key].append(cm); row[key] = cm
         per_window.append(row)
     result = acceptance_report(records, counts["pair"], counts["post"], counts["c1mm"])
-    result.update(spec_id="SPEC-91", data_manifest=sha256_file(args.manifest),
+    result.update(spec_id="SPEC-91", recipe_id=recipe_id, data_manifest=sha256_file(args.manifest),
                   models={key: [{"path": str(path), "sha256": sha256_file(path)} for path in paths]
                           for key, paths in checkpoints.items()}, per_window=per_window,
                   non_claims=["Development revalidation after adaptive model selection.",

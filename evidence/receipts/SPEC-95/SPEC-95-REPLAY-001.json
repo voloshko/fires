@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-95",
+  "run_id": "SPEC-95-REPLAY-001",
+  "created_at": "2026-10-03T14:51:30.614324+00:00",
+  "status": "PASS",
+  "conclusion": "Restricted tensor exports, source dependency closure and recipe drift checks passed; actual completed post-s1 and C1-MM legacy checkpoints loaded without unrestricted pickle.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && OMP_NUM_THREADS=2 .runtime/bin/python -m pytest tests/test_accuracy_artifacts.py -q'",
+    "make gate"
+  ],
+  "acceptance": {
+    "artifact_tests": 7,
+    "safe_actual_exports": [
+      "post-s1",
+      "C1-MM-s1"
+    ],
+    "matched_completed_pair_recipe": "d46363e0848887556d3b5bf15f71fa29d3695da383ace2337e26fb4a58a39af9",
+    "new_start_seal": "append-once API tested"
+  },
+  "limitations": [
+    "Current six-job training still in progress; its full recipe audit runs at acceptance time.",
+    "NumPy legacy adapter allows narrowly listed numeric metadata types."
+  ],
+  "non_claims": [
+    "Does not prove accuracy gain or competitor superiority.",
+    "Does not establish reference training lineage or independent labels."
+  ]
+}

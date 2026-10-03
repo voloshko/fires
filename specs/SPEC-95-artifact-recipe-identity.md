@@ -1,6 +1,6 @@
 # SPEC-95: Безопасные веса и проверка общего рецепта экспериментов
 
-Status: planned
+Status: implemented
 
 Requirement: REQ-008
 
@@ -47,13 +47,11 @@ Depends on: SPEC-90, SPEC-91
 - Receipt SYNTHETIC/REPLAY, non_claims: не прирост точности, не исходная
   независимость разметки и не доказательство полного model-training lineage.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+Implemented: 7 тестов защиты артефактов и рецептов прошли; ограниченная загрузка
+завершённого post-s1 и C1-MM выполнена на k8plus. Tensor exports находятся
+в собственном research/tensor-exports. Source hashes первой завершённой пары
+post/pair одинаковы (recipe d46363e0…). Текущий trainer SPEC-91 не изменён.
+Проверка всех шести архивов будет обязательной перед их acceptance.
+Receipt SPEC-95-REPLAY-001 не заявляет прирост точности.

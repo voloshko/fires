@@ -1044,7 +1044,7 @@
         "SPEC-90",
         "SPEC-91"
       ],
-      "status": "planned"
+      "status": "implemented"
     },
     "SPEC-96": {
       "title": "Аудит событий HLS и географии прежнего обучения",

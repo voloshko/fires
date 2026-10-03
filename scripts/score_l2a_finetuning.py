@@ -18,6 +18,7 @@ from src.comp.hls import tta8
 from src.comp.l2a_finetuning import l2a_water
 from scripts.l2a_finetune import load_twins, read_twin
 from scripts.score_forest_pair import binary_counts
+from src.comp.accuracy_artifacts import assert_matched_recipes, execution_sources, load_checkpoint
 
 
 def l2a_acceptance(records, candidate, hls, initial):
@@ -39,8 +40,7 @@ def l2a_acceptance(records, candidate, hls, initial):
 
 def predict(root, records, models, variant, manifest_hash, cache):
     inputs = [root / r["files"][k] for r in records for k in sorted(r["files"])]
-    sources = [Path(__file__), Path("scripts/l2a_finetune.py"), Path("src/comp/l2a_finetuning.py"),
-               Path("src/comp/hls.py"), Path("src/comp/forest_pair.py")]
+    sources = execution_sources(Path(__file__), "scripts/l2a_finetune.py", "src/comp/l2a_finetuning.py")
     signature = experiment_fingerprint(records, inputs, models, sources,
                                        dict(model_variant=variant, input_source="l2a", tta=8, precision="bf16"))
     shape = (len(records), records[0]["grid"]["height"], records[0]["grid"]["width"])
@@ -50,7 +50,7 @@ def predict(root, records, models, variant, manifest_hash, cache):
         return probabilities
     dev = "cuda" if torch.cuda.is_available() else "cpu"; probabilities = np.zeros(shape, np.float32)
     for seed, path in enumerate(models, 1):
-        bundle = torch.load(path, map_location="cpu", weights_only=False)
+        bundle = load_checkpoint(path, sha256_file(path), export_root=Path("research/tensor-exports"))
         if variant != "initial":
             summary = json.loads(path.with_name("summary.json").read_text())
             if (bundle["seed"] != seed or bundle["variant"] != variant or bundle["epochs"] != 30
@@ -87,6 +87,15 @@ def main():
     manifest_hash = sha256_file(args.manifest)
     models = {v: [args.runs / f"{v}-s{s}" / "model.pt" for s in (1, 2, 3)] for v in ("hls", "l2a")}
     models["initial"] = [args.reference_root / f"hls-c1mm-final-s{s}" / "model.pt" for s in (1, 2, 3, 4, 5)]
+    archived = [json.loads(path.with_name("data_manifest.json").read_text())
+                for v in ("hls", "l2a") for path in models[v]]
+    recipe_id = assert_matched_recipes(archived, ("w", "depth", "epochs", "classes", "initialization_family"))
+    for seed in (1, 2, 3):
+        expected = sha256_file(args.reference_root / f"hls-c1mm-final-s{seed}" / "model.pt")
+        for variant in ("hls", "l2a"):
+            record = json.loads((args.runs / f"{variant}-s{seed}" / "data_manifest.json").read_text())
+            if record["initialization_sha256"] != expected:
+                raise ValueError("continuation does not use its corresponding C1-MM initializer")
     probabilities = {v: predict(args.data_root, records, paths, v, manifest_hash,
                                 args.out.parent / (args.out.stem + "-" + v + ".npy")) for v, paths in models.items()}
     counts = {v: [] for v in models}; rows = []
@@ -101,7 +110,7 @@ def main():
             counts[v].append(cm); row[v] = cm
         rows.append(row)
     result = l2a_acceptance(records, counts["l2a"], counts["hls"], counts["initial"])
-    result.update(spec_id="SPEC-93", data_manifest=manifest_hash, per_window=rows,
+    result.update(spec_id="SPEC-93", recipe_id=recipe_id, data_manifest=manifest_hash, per_window=rows,
                   models={v: [{"path": str(p), "sha256": sha256_file(p)} for p in paths] for v, paths in models.items()},
                   non_claims=["Development evaluation after adaptive experimentation.",
                               "No independent Siberian transfer or field-truth claim.",

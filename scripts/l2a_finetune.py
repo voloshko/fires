@@ -15,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.comp.accuracy_contract import experiment_fingerprint, sha256_file, validate_manifest
 from src.comp.forest_pair import augment_forest, forest_loss, make_forest_model
 from scripts.forest_pair_train import normalization
+from src.comp.accuracy_artifacts import execution_sources, load_checkpoint
 
 
 def load_twins(root, manifest):
@@ -53,15 +54,14 @@ def main():
     fit = [r for r in records if r["partition"] == "fit"]
     samples = [read_twin(args.data_root, r, args.variant) for r in fit]
     mean, std = normalization(samples, "post")
-    bundle = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
+    bundle = load_checkpoint(args.checkpoint, sha256_file(args.checkpoint), export_root=Path("research/tensor-exports"))
     if bundle.get("seed") != args.seed or bundle.get("w") != 32 or bundle.get("cin", 6) != 6:
         raise ValueError("initializer is not the matching six-band C1-MM seed")
     torch.manual_seed(args.seed); rng = np.random.default_rng(args.seed)
     net = make_forest_model("post", 32, 7); net.load_state_dict(bundle["state"]); del bundle
     net.cuda().train(); epochs, batch = 30, 8
     template = np.repeat(np.arange(len(fit)), [r["sampling_weight"] for r in fit])
-    sources = [Path(__file__), Path("src/comp/l2a_finetuning.py"), Path("src/comp/forest_pair.py"),
-               Path("scripts/forest_pair_train.py"), Path("scripts/train_unet.py")]
+    sources = execution_sources(Path(__file__), "src/comp/l2a_finetuning.py", "scripts/forest_pair_train.py", tta=False)
     inputs = [args.data_root / r["files"][k] for r in records for k in sorted(r["files"])]
     signature = experiment_fingerprint(records, inputs, [args.checkpoint], sources,
                 dict(variant=args.variant, seed=args.seed, epochs=epochs, lr=3e-5, batch=batch,
@@ -70,6 +70,7 @@ def main():
                   w=32, depth=7, cin=6, classes=2, mean=mean.tolist(), std=std.tolist(),
                   fingerprint=signature, data_manifest=sha256_file(args.manifest),
                   initialization_sha256=sha256_file(args.checkpoint),
+                  initialization_family="C1-MM-seeds1-3",
                   fit_ids=[r["sample_id"] for r in fit], smoke=False,
                   source_hashes={str(p): sha256_file(p) for p in sources},
                   software={"torch": torch.__version__, "numpy": np.__version__})

@@ -20,6 +20,7 @@ from src.comp.terrain import water_ndwi
 from src.comp.severity_layers import evaluation_fmask
 from scripts.forest_pair_train import load_frozen, read_sample
 from scripts.score_forest_pair import infer as infer_boundary
+from src.comp.accuracy_artifacts import assert_matched_recipes, execution_sources, load_checkpoint
 
 
 def severity_acceptance(groups, candidate, equal, hybrid):
@@ -34,8 +35,7 @@ def severity_acceptance(groups, candidate, equal, hybrid):
 
 def predict_severity(root, records, checkpoints, variant, manifest_hash, cache):
     files = [root / r["files"][k] for r in records for k in sorted(r["files"])]
-    sources = [Path(__file__), Path("src/comp/paired_severity.py"), Path("src/comp/forest_pair.py"),
-               Path("src/comp/hls.py"), Path("scripts/forest_pair_train.py")]
+    sources = execution_sources(Path(__file__), "src/comp/paired_severity.py", "scripts/forest_pair_train.py")
     signature = experiment_fingerprint(records, files, checkpoints, sources,
                                        dict(variant=variant, tta=8, precision="bf16"))
     shape = (len(records), 3, records[0]["grid"]["height"], records[0]["grid"]["width"])
@@ -46,7 +46,7 @@ def predict_severity(root, records, checkpoints, variant, manifest_hash, cache):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     probabilities = np.zeros(shape, np.float32)
     for seed, path in enumerate(checkpoints, 1):
-        bundle = torch.load(path, map_location="cpu", weights_only=False)
+        bundle = load_checkpoint(path, sha256_file(path), export_root=Path("research/tensor-exports"))
         summary = json.loads(path.with_name("summary.json").read_text())
         if (bundle["seed"] != seed or bundle["variant"] != variant or bundle["epochs"] != 120
                 or bundle["width"] != 32 or bundle["depth"] != 7 or bundle["classes"] != 3
@@ -82,6 +82,10 @@ def main():
     manifest_hash = sha256_file(args.manifest)
     checkpoints = {v: [args.runs / f"{v}-s{s}" / "model.pt" for s in (1, 2, 3)]
                    for v in ("balanced", "equal")}
+    archived = [json.loads(path.with_name("data_manifest.json").read_text())
+                for paths in checkpoints.values() for path in paths]
+    recipe_id = assert_matched_recipes(archived, ("width", "depth", "epochs", "batch", "classes", "evaluation_ids",
+                                                "fit_class_counts", "mean", "std"))
     probabilities = {v: predict_severity(args.data_root, records, checkpoints[v], v, manifest_hash,
                                         args.out.parent / (args.out.stem + "-" + v + ".npy")) for v in checkpoints}
     references = [args.reference_root / f"hls-c1mm-final-s{s}" / "model.pt" for s in (1, 2, 3, 4, 5)]
@@ -109,7 +113,7 @@ def main():
             conditional[v].append(severity_confusion(conditional_truth, grade_pred))
         rows.append(row)
     result = severity_acceptance([r["group_id"] for r in records], counts["balanced"], counts["equal"], counts["hybrid"])
-    result.update(spec_id="SPEC-94", data_manifest=manifest_hash, per_window=rows,
+    result.update(spec_id="SPEC-94", recipe_id=recipe_id, data_manifest=manifest_hash, per_window=rows,
                   on_true_burn={v: severity_metrics(np.sum(cm, axis=0)) for v, cm in conditional.items()},
                   model_hashes={v: [sha256_file(p) for p in paths] for v, paths in checkpoints.items()},
                   boundary_hashes=[sha256_file(p) for p in references],
