@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-90",
+  "run_id": "SPEC-90-SYNTHETIC-001",
+  "created_at": "2026-10-03T12:51:35.822983+00:00",
+  "status": "PASS",
+  "conclusion": "Event leakage, provenance, paired grids, availability, cache identity and grouped bootstrap are enforced.",
+  "commands": [
+    "python3 -m unittest discover -s tests -p test_accuracy_contract.py -v",
+    "make gate"
+  ],
+  "acceptance": {
+    "contract_tests": 13,
+    "gate_regression_tests": 14,
+    "evidence_class": "SYNTHETIC"
+  },
+  "limitations": [
+    "Synthetic examples and local standard-library runtime only."
+  ],
+  "non_claims": [
+    "Does not prove model accuracy or superiority over any competitor.",
+    "Does not establish independence or correctness of real annotations."
+  ]
+}

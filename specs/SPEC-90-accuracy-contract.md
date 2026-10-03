@@ -1,6 +1,6 @@
 # SPEC-90: Контракт новой кампании точности: группы, входы и доказательства
 
-Status: planned
+Status: implemented
 
 Requirement: REQ-008
 
@@ -50,13 +50,8 @@ Depends on: SPEC-82, SPEC-85, SPEC-89
   модели, независимость фактически полученных контуров или превосходство над
   конкурентом. Для этого нужны реальные отдельные прогоны следующих спек.
 
-<!--
-## Resolution (added when work lands — do not fill in advance)
+## Resolution
 
-Appended by the orchestrating session when the spec reaches a terminal-ish
-status. Records honestly: what was planned vs what was found, deviations and
-why, measured numbers, what was deliberately NOT done, and follow-up specs
-opened. The Status line above is flipped ONLY together with writing this
-section, and only by the orchestrating session — never by an implementing
-subagent. See CLAUDE.md "Resolution convention"; SPEC-545 is a good model.
--->
+Implemented: 13 тестов контракта и 14 негативных тестов make gate проходят.
+Receipt SPEC-90-SYNTHETIC-001 фиксирует только корректность измерительного слоя.
+Реальные метрики и прирост точности не измерялись этой спекой.
