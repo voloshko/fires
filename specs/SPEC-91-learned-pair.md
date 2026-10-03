@@ -47,6 +47,7 @@ fusion [pre, post, post-pre] на каждом уровне, BatchNorm и BF16. 
 - `python scripts/forest_pair_train.py --help`
 - GPU: k8plus, отдельный `/home/mc/fires-accuracy-next`, один собственный job,
   systemd MemoryMax=18G CPUQuota=400%, ожидание свободной GPU, чужие jobs не трогать.
-- Новые скачивания на omarchy, прямой перенос подготовленных данных в k8plus.
+- Все скачивания и подготовка на k8plus в data-store/ (уточнение пользователя
+  2026-10-03). Уже подготовленные пары перенесены с omarchy напрямую.
 - `make gate`; receipt SPEC-91 с non_claims: development после отбора,
   спутниковые контуры, не наземная истина и не мировой рейтинг разных наборов.
