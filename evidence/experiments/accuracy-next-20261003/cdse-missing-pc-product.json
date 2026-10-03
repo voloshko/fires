@@ -1,0 +1,15 @@
+{
+  "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27MSIL2A%27%29+and+contains%28Name%2C%27T10SGD%27%29+and+ContentDate%2FStart+ge+2021-11-02T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2021-11-03T00%3A00%3A00.000Z&%24top=100",
+  "products": [
+    {
+      "id": "d667446c-c97f-5a7a-a8d1-eea6d7362b82",
+      "name": "S2A_MSIL2A_20211102T184531_N0500_R070_T10SGD_20230108T083334.SAFE",
+      "bytes": 1102870337,
+      "online": true,
+      "date": {
+        "Start": "2021-11-02T18:45:31.024000Z",
+        "End": "2021-11-02T18:45:31.024000Z"
+      }
+    }
+  ]
+}

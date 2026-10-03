@@ -190,3 +190,16 @@ L2A twins до исходной приёмки; цель L2A не заменят
 lineage before6runs, затем genuine new Russian performance/competitor comparison.
 Для SRC93 нужна дальнейшая data proof, а не утверждение «97%events» по известной
 подвыборке. Нет общего доказанного превосходства/полного результата четырёх пунктов.
+
+## Prithvi preflight и резерв источника
+
+Из установленного TerraTorch API выяснено: from_config принимает strings,
+не Path. Scorer исправлен; scripts/preflight_prithvi.py воспроизводит загрузку
+официальных весов и synthetic512×512 CPU forward, finite shape[1,2,512,512].
+Реальная accuracy от этого не заявляется. Receipt successor PREFLIGHT002.
+
+Read-only CDSE metadata: пропущенный PC T10SGD20211102 существует как N0500,
+доступный online. T11SKB20200809 и T12SVC20200708 также имеют N0500 counterparts,
+в отличие от старой обработки в PC. Пока скачивания нет: credentials CDSE
+не обнаружены в проверенных конфигурациях. Async question пользователю
+спросил только наличие/path, без секретов в чате. Другие GPU jobs продолжаются.
