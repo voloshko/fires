@@ -1,6 +1,6 @@
 # SPEC-98: Fresh confirmation of equal-weight paired severity
 
-Status: active
+Status: deferred
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-94, SPEC-95
 
@@ -50,3 +50,16 @@ agreement; it cannot establish field accuracy or a global leaderboard rank.
   CPU collection systemd quota200%, MemoryMax8G. No omarchy computation.
 - non_claims: published MTBS agreement only, CONUS2024 only, no field truth,
   no Siberian severity validation, no superiority over models not compared.
+
+## Resolution
+
+Deferred: frozen western2024 population contains only21 independent candidates
+after exclusion against prior2658frames/old1300events, below required100.
+Full admission exits2 before further imagery or predictions. The exploratory
+2-event QC produced1 valid pair and1 without published severity; this is data
+plumbing only. It ran before the cache-validator repair and cannot certify the
+repaired pipeline. Current cached-raster/source/model regressions:5 PASS onk8plus.
+Receipt INSUFFICIENT_EVIDENCE, no accuracy conclusion, no threshold change.
+All-CONUS2024 metadata still offers only57 independent events. A separately
+specified retrospective2016–2017 population offers at least180 candidates;
+that new test must explicitly avoid claiming prospective2024 validation.

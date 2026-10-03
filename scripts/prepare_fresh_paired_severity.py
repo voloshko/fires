@@ -1,0 +1,197 @@
+"""SPEC-98: collect a bounded, frozen, previously unused MTBS2024 paired test."""
+from __future__ import annotations
+import argparse
+from concurrent.futures import ThreadPoolExecutor
+import hashlib
+import io
+import json
+from pathlib import Path
+import shutil
+import sys
+import time
+
+import geopandas as gpd
+import numpy as np
+import pandas as pd
+import planetary_computer
+import pystac_client
+import rasterio
+from rasterio.features import rasterize
+from rasterio.transform import from_origin
+from rasterio.warp import transform_bounds
+import requests
+from shapely import wkt
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from src.comp.accuracy_contract import sha256_file, validate_manifest
+from src.comp.fresh_severity import isolate, assert_fresh
+from src.comp.paired_severity import mtbs_targets
+from scripts.prepare_forest_pairs import prepare, read_grid, hls_bad, BANDS
+
+SEVERITY_URL = "https://imagery.geoplatform.gov/iipp/rest/services/Fire_Aviation/USFS_EDW_MTBS_CONUS/ImageServer/exportImage"
+STATES = {"CA", "OR", "WA", "ID", "MT", "CO", "WY", "UT", "NV", "AZ", "NM"}
+
+
+def immutable(path, payload):
+    if path.exists():
+        if json.loads(path.read_text()) != payload:
+            raise ValueError("immutable collection artifact differs")
+    else:
+        with path.open("x") as stream: json.dump(payload, stream, indent=2)
+
+
+def validate_severity(path, grid, identity):
+    metadata=path.with_suffix(".source.json")
+    if not metadata.exists():raise ValueError("existing severity lacks source binding")
+    stored=json.loads(metadata.read_text())
+    if stored!={"identity":identity,"sha256":sha256_file(path)}:
+        raise ValueError("severity source/hash binding differs")
+    with rasterio.open(path) as source:
+        if source.count!=1 or source.shape!=(512,512) or str(source.crs)!=grid["crs"] or source.transform!=grid["transform"]:
+            raise ValueError("MTBS severity grid differs")
+        raw=source.read(1)
+    if not np.isin(raw,[0,1,2,3,4,5,6]).all():raise ValueError("unknown MTBS severity encoding")
+    return raw
+
+
+def freeze_plan(source, prior, out):
+    path = out / "selection.json"
+    vector = source / "external/mtbs/mtbs_perims_DD.shp"
+    hashes = {p.name: sha256_file(p) for p in sorted(vector.parent.glob("mtbs_perims_DD.*"))}
+    used, manifests = set(), {}
+    for name in ("hls_fresh", "hls_fresh2", "hls_fresh3", "hls_fresh4"):
+        p = source / "external" / name / "manifest.json"
+        manifests[name] = sha256_file(p)
+        used.update(w["event_id"] for w in json.loads(p.read_text())["windows"])
+    bindings = dict(vector_hashes=hashes, old_manifests=manifests, prior_sha256=sha256_file(prior))
+    if path.exists():
+        plan = json.loads(path.read_text())
+        if plan["bindings"] != bindings: raise ValueError("selection inputs changed")
+        return plan
+    frame = gpd.read_file(vector)
+    dates = pd.to_datetime(frame.ig_date)
+    frame = frame[(dates.dt.year == 2024) & frame.event_id.str[:2].isin(STATES)].copy()
+    projected = frame.to_crs(5070).bounds
+    frame = frame[((projected.maxx-projected.minx) <= 14000) & ((projected.maxy-projected.miny) <= 14000)]
+    frame["order"] = frame.event_id.map(lambda e: hashlib.sha256(("spec98:"+e).encode()).hexdigest())
+    candidates = []
+    for row in frame.sort_values("order").itertuples():
+        geom = gpd.GeoSeries([row.geometry], crs=frame.crs)
+        crs = geom.estimate_utm_crs()
+        polygon = geom.to_crs(crs).iloc[0]; c = polygon.centroid
+        left = np.floor(c.x/30)*30-256*30; top = np.floor(c.y/30)*30+256*30
+        transform = from_origin(left, top, 30, 30)
+        grid = dict(crs=str(crs), transform=list(transform)[:6], width=512, height=512)
+        bounds = list(transform_bounds(crs, 4326, left, top-512*30, left+512*30, top))
+        candidates.append(dict(event_id=row.event_id, ig_date=str(pd.Timestamp(row.ig_date).date()),
+                               grid=grid, bbox_wgs84=bounds, polygon_wkt=polygon.wkt))
+    selected, excluded = isolate(candidates, used, json.loads(prior.read_text())["records"])
+    plan = dict(spec_id="SPEC-98", bindings=bindings, used_events=sorted(used), selected=selected,
+                excluded=excluded, eligible=len(candidates), cap=180)
+    immutable(path, plan)
+    return plan
+
+
+def collect(root, out, event):
+    if shutil.disk_usage(root).free < 8*1024**3:
+        raise RuntimeError("less than8GiB free; preserve data and stop collection")
+    inputs = root / "external/hls_fresh98"
+    inputs.mkdir(parents=True, exist_ok=True)
+    if not inputs.resolve().is_relative_to(root): raise ValueError("outputs escape own data root")
+    grid = dict(event["grid"], transform=rasterio.Affine(*event["grid"]["transform"]))
+    start = pd.Timestamp(event["ig_date"], tz="UTC")
+    catalog = pystac_client.Client.open("https://planetarycomputer.microsoft.com/api/stac/v1", modifier=planetary_computer.sign_inplace)
+    items = list(catalog.search(collections=["hls2-s30"], bbox=event["bbox_wgs84"],
+                 datetime=f"{(start+pd.Timedelta(days=30)).date()}/{(start+pd.Timedelta(days=150)).date()}").items())
+    ranked = []
+    for item in sorted(items, key=lambda i: i.id):
+        fm = read_grid(item.assets["Fmask"].href, grid, mask=True)
+        bad = hls_bad(fm)
+        if bad.mean() < .10: ranked.append((float(bad.mean()), item.datetime, item.id, item, fm))
+    if not ranked: raise ValueError("no clean post window")
+    _, dt, _, item, fm = min(ranked, key=lambda x:x[:3])
+    name = f"fresh_{event['event_id']}_{item.id}"
+    window = dict(name=name, event_id=event["event_id"], ig_date=event["ig_date"], item=item.id,
+                  item_date=str(dt.date()))
+    image = np.stack([read_grid(item.assets[b].href, grid) for b in BANDS]).astype(np.float32)
+    bad = hls_bad(fm) | (image == -9999).any(0) | ~np.isfinite(image).all(0)
+    if bad.mean() >= .10: raise ValueError("post reflectance nodata fails QC")
+    labels = rasterize([(wkt.loads(event["polygon_wkt"]),1)], out_shape=(512,512), transform=grid["transform"], dtype="int16")
+    labels[bad] = -1
+    profile = dict(driver="GTiff", crs=grid["crs"], transform=grid["transform"], width=512, height=512, compress="deflate")
+    arrays = {"_merged.tif": (np.where(bad[None],-9999,image*.0001).astype(np.float32), -9999),
+              ".mask.tif": (labels[None], -1), ".fmask.tif": (fm[None].astype(np.uint8), 255)}
+    for suffix,(array,nodata) in arrays.items():
+        path = inputs/(name+suffix)
+        if path.exists():
+            with rasterio.open(path) as old:
+                if not np.array_equal(old.read(),array): raise ValueError("existing post differs")
+        else:
+            with rasterio.open(path,"w",**profile,count=array.shape[0],dtype=array.dtype,nodata=nodata) as target:
+                target.write(array)
+    record = prepare(root,out,"mtbs","evaluation",window,source_directory="hls_fresh98")
+    severity = inputs/(name+".sev.tif")
+    left, bottom, right, top = rasterio.transform.array_bounds(512,512,grid["transform"])
+    query = dict(bbox=f"{left},{bottom},{right},{top}",bboxSR=rasterio.crs.CRS.from_string(grid["crs"]).to_epsg(),
+                     imageSR=rasterio.crs.CRS.from_string(grid["crs"]).to_epsg(),size="512,512",format="tiff",pixelType="U8",
+                     interpolation="RSP_NearestNeighbor", mosaicRule=json.dumps({"mosaicMethod":"esriMosaicNone","where":"name='mtbs_CONUS_2024'"}),f="image")
+    identity=dict(url=SEVERITY_URL,query=query)
+    if not severity.exists():
+        response = requests.get(SEVERITY_URL,params=query,timeout=120);response.raise_for_status()
+        with rasterio.open(io.BytesIO(response.content)) as source:
+            if source.shape!=(512,512) or str(source.crs)!=grid["crs"] or source.transform!=grid["transform"]:
+                raise ValueError("MTBS response grid differs")
+            raw = source.read(1)
+        if not np.isin(raw,[0,1,2,3,4,5,6]).all():raise ValueError("unknown MTBS severity encoding")
+        with rasterio.open(severity,"w",**profile,count=1,dtype="uint8") as target:target.write(raw[None].astype(np.uint8))
+        immutable(severity.with_suffix(".source.json"),dict(identity=identity,sha256=sha256_file(severity)))
+    raw=validate_severity(severity,grid,identity)
+    with rasterio.open(root/record["files"]["valid"]) as source: valid = source.read(1).astype(bool)
+    targets = mtbs_targets(raw,valid);counts=np.bincount(targets[targets>=0],minlength=3)
+    if not counts.sum():raise ValueError("no published severity on common-valid fire")
+    return dict(record, label_provenance="mtbs_severity", severity_counts=counts.tolist(),
+                severity_source=SEVERITY_URL, files=dict(record["files"],severity=str(severity.relative_to(root))),
+                hashes=dict(record["hashes"],severity=sha256_file(severity)))
+
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    for key in ("data-root","source-root","prior","out"):p.add_argument("--"+key,type=Path,required=True)
+    p.add_argument("--limit",type=int,help="QC only")
+    args=p.parse_args();root=args.data_root.resolve();out=args.out.resolve()
+    if not out.is_relative_to(root):raise ValueError("outputs escape data root")
+    out.mkdir(parents=True,exist_ok=True)
+    destination=out/("qc-manifest.json" if args.limit else "manifest.json")
+    if destination.exists():raise ValueError("immutable collection already exists")
+    plan=freeze_plan(args.source_root.resolve(),args.prior,out);events=plan["selected"]
+    if len(events)<100 and not args.limit:
+        payload=dict(spec_id="SPEC-98",records=[],counts=dict(samples=0,groups=0),
+                     failures=[dict(reason="insufficient independent candidate population",selected=len(events),minimum=100)],
+                     ready_for_evaluation=False,qc_probe=False,selection_sha256=sha256_file(out/"selection.json"))
+        immutable(destination,payload);print("RESULT",json.dumps(payload),flush=True);raise SystemExit(2)
+    if args.limit:events=events[:args.limit]
+    def run(event):
+        record_path=out/(event["event_id"]+".record.json")
+        if record_path.exists():return json.loads(record_path.read_text()),None
+        for attempt in range(3):
+            try:
+                record=collect(root,out,event);immutable(record_path,record)
+                print("prepared",event["event_id"],flush=True);return record,None
+            except (ValueError,RuntimeError) as error:return None,dict(event_id=event["event_id"],reason=str(error))
+            except Exception as error:
+                if attempt==2:return None,dict(event_id=event["event_id"],reason=type(error).__name__)
+                time.sleep(5*(attempt+1))
+    with ThreadPoolExecutor(2) as pool:results=list(pool.map(run,events))
+    records=sorted([r for r,e in results if r],key=lambda r:r["sample_id"])
+    assert_fresh(records,plan)
+    counts=validate_manifest(records,require_pairs=True) if records else dict(samples=0,groups=0)
+    classes=np.sum([r["severity_counts"] for r in records],axis=0).tolist() if records else [0,0,0]
+    ready=not args.limit and counts["groups"]>=100 and all(c>0 for c in classes)
+    payload=dict(spec_id="SPEC-98",records=records,counts=counts,class_counts=classes,
+                 failures=[e for r,e in results if e],ready_for_evaluation=ready,qc_probe=bool(args.limit),
+                 selection_sha256=sha256_file(out/"selection.json"))
+    immutable(destination,payload);print("RESULT",json.dumps({k:v for k,v in payload.items() if k not in ("records","failures")}),flush=True)
+    if not ready and not args.limit:raise SystemExit(2)
+
+
+if __name__=="__main__":main()

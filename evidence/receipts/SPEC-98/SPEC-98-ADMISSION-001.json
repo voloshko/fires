@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-98",
+  "run_id": "SPEC-98-ADMISSION-001",
+  "created_at": "2026-10-03T19:30:57.157863+00:00",
+  "evidence_class": "REPLAY",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Only21 frozen independent candidates; minimum100 cannot be reached. No model evaluation.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/prepare_fresh_paired_severity.py --data-root data-store --source-root /home/mc/fires --prior data-store/prior-footprints.json --out data-store/severity-fresh-v1'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_fresh_paired_severity.py -q'",
+    "make gate"
+  ],
+  "acceptance": {
+    "selected": 21,
+    "minimum": 100,
+    "collector_exit": 2,
+    "ready_for_evaluation": false,
+    "regression_tests_passed": 5
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/fresh-severity-admission.json"
+  ],
+  "limitations": [
+    "Immutable collector output exists; use a separate output directory to replay admission.",
+    "Initial QC preceded cached-raster repair; its single pair is not current acceptance evidence."
+  ],
+  "non_claims": [
+    "No accuracy inference or superiority claim.",
+    "No field truth or Russian severity validation."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "spec_id": "SPEC-98",
+  "records": [],
+  "counts": {
+    "samples": 0,
+    "groups": 0
+  },
+  "failures": [
+    {
+      "reason": "insufficient independent candidate population",
+      "selected": 21,
+      "minimum": 100
+    }
+  ],
+  "ready_for_evaluation": false,
+  "qc_probe": false,
+  "selection_sha256": "1d98fbe879688a76dddd1924a746af4bd7986e578ce5f5792f88f086587eea35"
+}
