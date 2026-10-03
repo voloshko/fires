@@ -24,7 +24,7 @@ from shapely import wkt
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.comp.accuracy_contract import sha256_file, validate_manifest
-from src.comp.fresh_severity import isolate, assert_fresh
+from src.comp.fresh_severity import isolate, assert_fresh, population
 from src.comp.paired_severity import mtbs_targets
 from scripts.prepare_forest_pairs import prepare, read_grid, hls_bad, BANDS
 
@@ -54,12 +54,13 @@ def validate_severity(path, grid, identity):
     return raw
 
 
-def severity_identity(grid):
+def severity_identity(grid, year=2024):
+    if year not in (2016,2017,2024):raise ValueError("year outside frozen severity populations")
     left,bottom,right,top=rasterio.transform.array_bounds(512,512,grid["transform"])
     epsg=rasterio.crs.CRS.from_string(grid["crs"]).to_epsg()
     query=dict(bbox=f"{left},{bottom},{right},{top}",bboxSR=epsg,imageSR=epsg,
                size="512,512",format="tiff",pixelType="U8",interpolation="RSP_NearestNeighbor",
-               mosaicRule=json.dumps({"mosaicMethod":"esriMosaicNone","where":"name='mtbs_CONUS_2024'"}),f="image")
+               mosaicRule=json.dumps({"mosaicMethod":"esriMosaicNone","where":f"name='mtbs_CONUS_{year}'"}),f="image")
     return dict(url=SEVERITY_URL,query=query)
 
 
@@ -72,10 +73,11 @@ def validate_cached_record(root, record, event):
         if not path.is_relative_to(root.resolve()) or sha256_file(path)!=record["hashes"][key]:
             raise ValueError("cached record input changed or escaped own data root")
     grid=dict(event["grid"],transform=rasterio.Affine(*event["grid"]["transform"]))
-    validate_severity(root/record["files"]["severity"],grid,severity_identity(grid))
+    validate_severity(root/record["files"]["severity"],grid,severity_identity(grid,int(event.get("ig_date","2024")[:4])))
 
 
-def freeze_plan(source, prior, out):
+def freeze_plan(source, prior, out, profile="2024-west"):
+    spec_id,years,prefix=population(profile)
     path = out / "selection.json"
     vector = source / "external/mtbs/mtbs_perims_DD.shp"
     hashes = {p.name: sha256_file(p) for p in sorted(vector.parent.glob("mtbs_perims_DD.*"))}
@@ -87,14 +89,16 @@ def freeze_plan(source, prior, out):
     bindings = dict(vector_hashes=hashes, old_manifests=manifests, prior_sha256=sha256_file(prior))
     if path.exists():
         plan = json.loads(path.read_text())
-        if plan["bindings"] != bindings: raise ValueError("selection inputs changed")
+        if plan["bindings"] != bindings or plan.get("profile","2024-west")!=profile:
+            raise ValueError("selection inputs/population changed")
         return plan
     frame = gpd.read_file(vector)
     dates = pd.to_datetime(frame.ig_date)
-    frame = frame[(dates.dt.year == 2024) & frame.event_id.str[:2].isin(STATES)].copy()
+    regional=frame.event_id.str[:2].isin(STATES) if profile=="2024-west" else ~frame.event_id.str[:2].isin({"AK","HI","PR"})
+    frame = frame[dates.dt.year.isin(years) & regional].copy()
     projected = frame.to_crs(5070).bounds
     frame = frame[((projected.maxx-projected.minx) <= 14000) & ((projected.maxy-projected.miny) <= 14000)]
-    frame["order"] = frame.event_id.map(lambda e: hashlib.sha256(("spec98:"+e).encode()).hexdigest())
+    frame["order"] = frame.event_id.map(lambda e: hashlib.sha256((prefix+e).encode()).hexdigest())
     candidates = []
     for row in frame.sort_values("order").itertuples():
         geom = gpd.GeoSeries([row.geometry], crs=frame.crs)
@@ -107,7 +111,7 @@ def freeze_plan(source, prior, out):
         candidates.append(dict(event_id=row.event_id, ig_date=str(pd.Timestamp(row.ig_date).date()),
                                grid=grid, bbox_wgs84=bounds, polygon_wkt=polygon.wkt))
     selected, excluded = isolate(candidates, used, json.loads(prior.read_text())["records"])
-    plan = dict(spec_id="SPEC-98", bindings=bindings, used_events=sorted(used), selected=selected,
+    plan = dict(spec_id=spec_id,profile=profile, bindings=bindings, used_events=sorted(used), selected=selected,
                 excluded=excluded, eligible=len(candidates), cap=180)
     immutable(path, plan)
     return plan
@@ -116,7 +120,7 @@ def freeze_plan(source, prior, out):
 def collect(root, out, event):
     if shutil.disk_usage(root).free < 8*1024**3:
         raise RuntimeError("less than8GiB free; preserve data and stop collection")
-    inputs = root / "external/hls_fresh98"
+    inputs = root / "external" / ("hls_"+out.name)
     inputs.mkdir(parents=True, exist_ok=True)
     if not inputs.resolve().is_relative_to(root): raise ValueError("outputs escape own data root")
     grid = dict(event["grid"], transform=rasterio.Affine(*event["grid"]["transform"]))
@@ -150,9 +154,9 @@ def collect(root, out, event):
         else:
             with rasterio.open(path,"w",**profile,count=array.shape[0],dtype=array.dtype,nodata=nodata) as target:
                 target.write(array)
-    record = prepare(root,out,"mtbs","evaluation",window,source_directory="hls_fresh98")
+    record = prepare(root,out,"mtbs","evaluation",window,source_directory=inputs.name)
     severity = inputs/(name+".sev.tif")
-    identity=severity_identity(grid)
+    identity=severity_identity(grid,int(event["ig_date"][:4]))
     if not severity.exists():
         response = requests.get(SEVERITY_URL,params=identity["query"],timeout=120);response.raise_for_status()
         with rasterio.open(io.BytesIO(response.content)) as source:
@@ -175,14 +179,16 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ("data-root","source-root","prior","out"):p.add_argument("--"+key,type=Path,required=True)
     p.add_argument("--limit",type=int,help="QC only")
+    p.add_argument("--profile",choices=("2024-west","retrospective-2016-17"),default="2024-west")
     args=p.parse_args();root=args.data_root.resolve();out=args.out.resolve()
     if not out.is_relative_to(root):raise ValueError("outputs escape data root")
     out.mkdir(parents=True,exist_ok=True)
     destination=out/("qc-manifest.json" if args.limit else "manifest.json")
     if destination.exists():raise ValueError("immutable collection already exists")
-    plan=freeze_plan(args.source_root.resolve(),args.prior,out);events=plan["selected"]
+    spec_id,_,_=population(args.profile)
+    plan=freeze_plan(args.source_root.resolve(),args.prior,out,args.profile);events=plan["selected"]
     if len(events)<100 and not args.limit:
-        payload=dict(spec_id="SPEC-98",records=[],counts=dict(samples=0,groups=0),
+        payload=dict(spec_id=spec_id,profile=args.profile,records=[],counts=dict(samples=0,groups=0),
                      failures=[dict(reason="insufficient independent candidate population",selected=len(events),minimum=100)],
                      ready_for_evaluation=False,qc_probe=False,selection_sha256=sha256_file(out/"selection.json"))
         immutable(destination,payload);print("RESULT",json.dumps(payload),flush=True);raise SystemExit(2)
@@ -206,7 +212,7 @@ def main():
     counts=validate_manifest(records,require_pairs=True) if records else dict(samples=0,groups=0)
     classes=np.sum([r["severity_counts"] for r in records],axis=0).tolist() if records else [0,0,0]
     ready=not args.limit and counts["groups"]>=100 and all(c>0 for c in classes)
-    payload=dict(spec_id="SPEC-98",records=records,counts=counts,class_counts=classes,
+    payload=dict(spec_id=spec_id,profile=args.profile,records=records,counts=counts,class_counts=classes,
                  failures=[e for r,e in results if e],ready_for_evaluation=ready,qc_probe=bool(args.limit),
                  selection_sha256=sha256_file(out/"selection.json"))
     immutable(destination,payload);print("RESULT",json.dumps({k:v for k,v in payload.items() if k not in ("records","failures")}),flush=True)

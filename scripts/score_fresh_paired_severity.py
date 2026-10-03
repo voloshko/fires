@@ -11,7 +11,8 @@ import rasterio
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from src.comp.accuracy_contract import sha256_file, validate_manifest
 from src.comp.accuracy_artifacts import checkpoint_metadata, assert_matched_recipes, execution_sources
-from src.comp.fresh_severity import assert_fresh, verify_frozen_models, verify_development_result
+from src.comp.fresh_severity import assert_fresh, verify_frozen_models, verify_development_result, population
+from scripts.prepare_fresh_paired_severity import validate_cached_record
 from src.comp.paired_severity import (apply_fixed_boundary, grouped_severity_comparison,
     mtbs_evaluation_labels, severity_confusion, severity_metrics)
 from src.comp.severity_layers import evaluation_fmask
@@ -25,16 +26,23 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ("data-root","manifest","runs","development-result","reference-root","out"):
         p.add_argument("--"+key,type=Path,required=True)
+    p.add_argument("--profile",choices=("2024-west","retrospective-2016-17"),default="2024-west")
     args=p.parse_args()
     if args.out.exists():raise ValueError("immutable result already exists")
     payload=json.loads(args.manifest.read_text());records=payload["records"]
+    spec_id,_,_=population(args.profile)
+    if payload["spec_id"]!=spec_id or payload.get("profile","2024-west")!=args.profile:
+        raise ValueError("evaluation manifest belongs to another population")
     if not payload["ready_for_evaluation"] or payload["qc_probe"]:raise ValueError("no full evaluation admission")
     counts=validate_manifest(records,require_pairs=True)
     if counts["groups"]<100:raise ValueError("fewer than100 independent fresh events")
     selection=args.manifest.parent/"selection.json"
     if sha256_file(selection)!=payload["selection_sha256"]:raise ValueError("selection changed")
-    assert_fresh(records,json.loads(selection.read_text()))
+    plan=json.loads(selection.read_text());assert_fresh(records,plan)
+    if plan.get("profile","2024-west")!=args.profile:raise ValueError("selection profile differs")
+    events={r["event_id"]:r for r in plan["selected"]}
     for record in records:
+        validate_cached_record(args.data_root,record,events[record["group_id"].removeprefix("mtbs:")])
         for key,path in record["files"].items():
             if sha256_file(args.data_root/path)!=record["hashes"][key]:raise ValueError("evaluation input changed")
     verify_development_result(args.development_result)
@@ -78,13 +86,14 @@ def main():
     sources=execution_sources(Path(__file__),"scripts/score_paired_severity.py","src/comp/paired_severity.py",
                               "scripts/score_forest_pair.py","scripts/forest_pair_train.py",
                               "src/comp/severity_layers.py","src/comp/fresh_severity.py","src/comp/terrain.py")
-    result=dict(spec_id="SPEC-98",accepted=bool(accepted),versus_hybrid=comparison,
+    result=dict(spec_id=spec_id,profile=args.profile,accepted=bool(accepted),versus_hybrid=comparison,
                 per_class_delta=delta.tolist(),class_pixels=class_pixels.tolist(),per_window=rows,
                 on_true_burn={k:severity_metrics(np.sum(c,axis=0)) for k,c in conditional.items()},
                 recipe_id=recipe,data_manifest=sha256_file(args.manifest),development_sha256=sha256_file(args.development_result),
                 model_hashes=development["model_hashes"]["equal"],boundary_hashes=development["boundary_hashes"],
                 source_hashes={str(s):sha256_file(s) for s in sources},
-                non_claims=["CONUS2024 published MTBS satellite-label agreement, not field truth.",
+                non_claims=[f"{args.profile} published MTBS satellite-label agreement, not field truth.",
+                            "Retrospective independent events do not establish prospective accuracy.",
                             "No Siberian severity validation or global leaderboard claim.",
                             "No superiority over models not compared on these pixels."])
     with args.out.open("x") as stream:json.dump(result,stream,indent=2)

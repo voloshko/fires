@@ -4,6 +4,12 @@ from .accuracy_contract import sha256_file
 DEVELOPMENT_SHA256 = "5f6b2839b89c807692dc4c931b2f4e713ae03294f869cd5233faf89a5617999e"
 
 
+def population(profile):
+    if profile=="2024-west":return "SPEC-98",{2024},"spec98:"
+    if profile=="retrospective-2016-17":return "SPEC-99",{2016,2017},"spec99:"
+    raise ValueError("unknown frozen severity population")
+
+
 def verify_development_result(path):
     if sha256_file(path) != DEVELOPMENT_SHA256:
         raise ValueError("development result differs from committed SPEC94 evidence")

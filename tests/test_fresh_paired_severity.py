@@ -4,10 +4,20 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from src.comp.fresh_severity import isolate, assert_fresh, verify_frozen_models, verify_development_result
+from src.comp.fresh_severity import isolate, assert_fresh, verify_frozen_models, verify_development_result, population
 
 
 class FreshSeverityTest(unittest.TestCase):
+    def test_populations_and_source_year_are_explicit(self):
+        from scripts.prepare_fresh_paired_severity import severity_identity
+        import rasterio
+        self.assertEqual(population("retrospective-2016-17"),("SPEC-99",{2016,2017},"spec99:"))
+        self.assertEqual(population("2024-west")[0],"SPEC-98")
+        with self.assertRaises(ValueError):population("adaptive")
+        grid=dict(crs="EPSG:32611",transform=rasterio.Affine(30,0,300000,0,-30,4000000))
+        self.assertIn("mtbs_CONUS_2016",severity_identity(grid,2016)["query"]["mosaicRule"])
+        with self.assertRaises(ValueError):severity_identity(grid,2023)
+
     def test_modified_development_archive_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             path=Path(directory)/"result.json";path.write_text('{"model_hashes":[]}')
