@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-92",
+  "run_id": "SPEC-92-SOURCE-001",
+  "created_at": "2026-10-03T13:16:04.168565+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Russian independent perimeter source acquired and spatial split frozen. Image preparation, reviewed hard negatives and accuracy comparison remain pending.",
+  "commands": [
+    "ssh omarchy 'cd /home/mc/fires-accuracy-next && .venv/bin/python scripts/build_russian_reserve.py --out /home/mc/fires-accuracy-data/russia --audit'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_russian_reserve.py -q'"
+  ],
+  "acceptance": {
+    "source_sha256": "5f1cfb843d5579d800a1e8359a017f8cd33c5658f6e0c0a6eda7ac534a1c6b3c",
+    "source_contours": 196673,
+    "target_contours": 29071,
+    "spatial_groups": {
+      "fit": 75,
+      "calibration": 29,
+      "evaluation": 24
+    },
+    "plan_sha256": "b35e4ccce171a06da8d6e7ed507d6285cd2d3aac91c0e67b8182831c0b0e7297",
+    "source_fields": [
+      "area",
+      "geometry"
+    ],
+    "unit_tests": 3,
+    "initial_download_failure": "HTTP503; bounded retries succeeded"
+  },
+  "limitations": [
+    "Individual ignition dates are absent; coverage interval January1-May15 2020 only.",
+    "No negative labels were manufactured from absence of contours.",
+    "No target-region images or model accuracy evaluated yet."
+  ],
+  "non_claims": [
+    "Does not prove target-region transfer, accuracy gain or competitor superiority.",
+    "Not field truth or coverage of summer taiga fires."
+  ]
+}

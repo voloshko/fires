@@ -1,0 +1,19 @@
+{
+  "doi": "https://doi.pangaea.de/10.1594/PANGAEA.939429",
+  "citation": "Drozdovskaya et al. (2024), Spring fires 2020 in Russia, PANGAEA.939429",
+  "license": "CC-BY-4.0",
+  "url": "https://download.pangaea.de/dataset/939429/files/burned_area_2020_topology.zip",
+  "sha256": "5f1cfb843d5579d800a1e8359a017f8cd33c5658f6e0c0a6eda7ac534a1c6b3c",
+  "bytes": 69862132,
+  "downloaded_at": "2026-10-03T13:12:19.420834+00:00",
+  "provenance": "participatory_perimeter",
+  "interval": [
+    "2020-01-01",
+    "2020-05-15"
+  ],
+  "limitations": [
+    "Satellite visual interpretation, not field truth.",
+    "Publisher notes archive was not proof-read by author.",
+    "Individual fire dates must be audited, never inferred from polygon absence."
+  ]
+}

@@ -1011,7 +1011,7 @@
         "SPEC-90",
         "SPEC-91"
       ],
-      "status": "planned"
+      "status": "active"
     },
     "SPEC-93": {
       "title": "Дообучение C1-MM на Sentinel-2 L2A",

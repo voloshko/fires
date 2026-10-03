@@ -1,6 +1,6 @@
 # SPEC-92: Российские контуры и трудные отрицательные: целевой домен
 
-Status: planned
+Status: active
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-91
 

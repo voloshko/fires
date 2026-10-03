@@ -1,0 +1,27 @@
+{
+  "source_sha256": "5f1cfb843d5579d800a1e8359a017f8cd33c5658f6e0c0a6eda7ac534a1c6b3c",
+  "total_contours": 196673,
+  "invalid_contours": 0,
+  "target_contours": 29071,
+  "fields": {
+    "area": "float64",
+    "geometry": "geometry"
+  },
+  "target_bbox": [
+    80,
+    50,
+    115,
+    65
+  ],
+  "cluster_distance_m": 20000,
+  "split_seed": "russia-20261003",
+  "groups": {
+    "fit": 75,
+    "calibration": 29,
+    "evaluation": 24
+  },
+  "date_status": "interval-only-until-source-fields-reviewed",
+  "negative_status": "no-negative-labels-created",
+  "manifest_sha256": "b35e4ccce171a06da8d6e7ed507d6285cd2d3aac91c0e67b8182831c0b0e7297",
+  "records_count": 29071
+}
