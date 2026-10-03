@@ -134,7 +134,8 @@
         "SPEC-88",
         "SPEC-89",
         "SPEC-90",
-        "SPEC-91"
+        "SPEC-91",
+        "SPEC-92"
       ]
     }
   },
@@ -997,6 +998,16 @@
         "SPEC-90",
         "SPEC-82",
         "SPEC-88"
+      ],
+      "status": "planned"
+    },
+    "SPEC-92": {
+      "title": "Российские контуры и трудные отрицательные: целевой домен",
+      "file": "specs/SPEC-92-russian-labels.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-91"
       ],
       "status": "planned"
     }
