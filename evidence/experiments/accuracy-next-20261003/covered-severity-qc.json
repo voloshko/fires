@@ -1,0 +1,175 @@
+{
+  "spec_id": "SPEC-100",
+  "profile": "pc-covered-2020-24",
+  "records": [
+    {
+      "sample_id": "mtbs:fresh_ID4431211510020200914_HLS.S30.T11TPK.2020304T183519.v2.0",
+      "group_id": "mtbs:ID4431211510020200914",
+      "partition": "evaluation",
+      "label_provenance": "mtbs_severity",
+      "bbox_wgs84": [
+        -115.21190184075733,
+        44.261905963040704,
+        -115.01491132687833,
+        44.403297755546625
+      ],
+      "grid": {
+        "crs": "EPSG:32611",
+        "transform": [
+          30.0,
+          0.0,
+          642720.0,
+          0.0,
+          -30.0,
+          4918230.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "pre_grid": {
+        "crs": "EPSG:32611",
+        "transform": [
+          30.0,
+          0.0,
+          642720.0,
+          0.0,
+          -30.0,
+          4918230.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "mgrs": "T11TPK",
+      "pre_mgrs": "T11TPK",
+      "pre_at": "2020-09-10T18:41:58.326770+00:00",
+      "start_at": "2020-09-14T00:00:00+00:00",
+      "post_at": "2020-10-30T18:42:01.589010+00:00",
+      "pre_item": "HLS.S30.T11TPK.2020254T182929.v2.0",
+      "post_item": "HLS.S30.T11TPK.2020304T183519.v2.0",
+      "files": {
+        "pre": "severity-covered-v1/mtbs/fresh_ID4431211510020200914_HLS.S30.T11TPK.2020304T183519.v2.0.pre.tif",
+        "valid": "severity-covered-v1/mtbs/fresh_ID4431211510020200914_HLS.S30.T11TPK.2020304T183519.v2.0.valid.tif",
+        "post": "external/hls_severity-covered-v1/fresh_ID4431211510020200914_HLS.S30.T11TPK.2020304T183519.v2.0_merged.tif",
+        "mask": "external/hls_severity-covered-v1/fresh_ID4431211510020200914_HLS.S30.T11TPK.2020304T183519.v2.0.mask.tif",
+        "severity": "external/hls_severity-covered-v1/fresh_ID4431211510020200914_HLS.S30.T11TPK.2020304T183519.v2.0.sev.tif",
+        "fmask": "external/hls_severity-covered-v1/fresh_ID4431211510020200914_HLS.S30.T11TPK.2020304T183519.v2.0.fmask.tif"
+      },
+      "hashes": {
+        "pre": "2898aa2dac1236a5f68198da45be6e6f50d83e2d174f6fe188c5ab7cae112599",
+        "valid": "3be49e6952bafa8244e00be6944a9208a309390cdd7d251eb0adb0cf57c27b01",
+        "post": "5c30e88e9dd4a5324f76b13193e345faa6dd9731ffc96645b45a5cb5c2df5238",
+        "mask": "7e7c7974f70cbc9e3353520ae0ae4df9a47f5d58dd8b1a634c1a05263d7b4bc5",
+        "severity": "7d0a79b5233a47a051291ca5094a8703cfc8c7e01ba0c7afc76033b50549ff35",
+        "fmask": "898bd3238e7720e433a9087bce8670b8b9eb9431e07a7016c09aa67047efca2a"
+      },
+      "dataset": "mtbs",
+      "sampling_weight": 1,
+      "valid_fraction": 0.9788169860839844,
+      "burned_pixels": 10942,
+      "severity_counts": [
+        2334,
+        4691,
+        3478
+      ],
+      "severity_source": "https://imagery.geoplatform.gov/iipp/rest/services/Fire_Aviation/USFS_EDW_MTBS_CONUS/ImageServer/exportImage"
+    },
+    {
+      "sample_id": "mtbs:fresh_TX2868709726020220128_HLS.S30.T14RPS.2022071T170111.v2.0",
+      "group_id": "mtbs:TX2868709726020220128",
+      "partition": "evaluation",
+      "label_provenance": "mtbs_severity",
+      "bbox_wgs84": [
+        -97.3423202064837,
+        28.59011158768346,
+        -97.18291764453471,
+        28.730709358874535
+      ],
+      "grid": {
+        "crs": "EPSG:32614",
+        "transform": [
+          30.0,
+          0.0,
+          662100.0,
+          0.0,
+          -30.0,
+          3179280.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "pre_grid": {
+        "crs": "EPSG:32614",
+        "transform": [
+          30.0,
+          0.0,
+          662100.0,
+          0.0,
+          -30.0,
+          3179280.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "mgrs": "T14RPS",
+      "pre_mgrs": "T14RPS",
+      "pre_at": "2022-01-26T17:15:51.132870+00:00",
+      "start_at": "2022-01-28T00:00:00+00:00",
+      "post_at": "2022-03-12T17:16:01.235680+00:00",
+      "pre_item": "HLS.S30.T14RPS.2022026T170549.v2.0",
+      "post_item": "HLS.S30.T14RPS.2022071T170111.v2.0",
+      "files": {
+        "pre": "severity-covered-v1/mtbs/fresh_TX2868709726020220128_HLS.S30.T14RPS.2022071T170111.v2.0.pre.tif",
+        "valid": "severity-covered-v1/mtbs/fresh_TX2868709726020220128_HLS.S30.T14RPS.2022071T170111.v2.0.valid.tif",
+        "post": "external/hls_severity-covered-v1/fresh_TX2868709726020220128_HLS.S30.T14RPS.2022071T170111.v2.0_merged.tif",
+        "mask": "external/hls_severity-covered-v1/fresh_TX2868709726020220128_HLS.S30.T14RPS.2022071T170111.v2.0.mask.tif",
+        "severity": "external/hls_severity-covered-v1/fresh_TX2868709726020220128_HLS.S30.T14RPS.2022071T170111.v2.0.sev.tif",
+        "fmask": "external/hls_severity-covered-v1/fresh_TX2868709726020220128_HLS.S30.T14RPS.2022071T170111.v2.0.fmask.tif"
+      },
+      "hashes": {
+        "pre": "5827b1f66a28966b448d372b973a9273c07e5df452c554da7ca4da0cbbf564a8",
+        "valid": "32946cfba053eb289f82517a4968722f7fcadaeea04a02e5ebdfe7c5bb50180f",
+        "post": "8a6961b21459956da7470e220e0d25aef65389160ef48072ffbf67f1d62ea408",
+        "mask": "155937ec95ee31f159b5a38271055f5837ecc973f099c830aa3456631277a464",
+        "severity": "9b83e54d580f8c9145d7c3b7ca0fc8c10ce47714d50e70bf4ca910fb54ed721c",
+        "fmask": "8fa1a6f4e6e84b6bc79e78413e0e20346e74832a07a287bfe776fd7949af6d81"
+      },
+      "dataset": "mtbs",
+      "sampling_weight": 1,
+      "valid_fraction": 0.9975738525390625,
+      "burned_pixels": 6848,
+      "severity_counts": [
+        6504,
+        0,
+        0
+      ],
+      "severity_source": "https://imagery.geoplatform.gov/iipp/rest/services/Fire_Aviation/USFS_EDW_MTBS_CONUS/ImageServer/exportImage"
+    }
+  ],
+  "counts": {
+    "samples": 2,
+    "groups": 2,
+    "partitions": {
+      "calibration": 0,
+      "evaluation": 2,
+      "fit": 0
+    }
+  },
+  "class_counts": [
+    8838,
+    4691,
+    3478
+  ],
+  "failures": [
+    {
+      "event_id": "WA4776011939020240811",
+      "reason": "no published severity on common-valid fire"
+    },
+    {
+      "event_id": "OR4380211972520201105",
+      "reason": "no clean post window"
+    }
+  ],
+  "ready_for_evaluation": false,
+  "qc_probe": true,
+  "selection_sha256": "32faf7504d3986fc0bee6b32eaebd012b8ad1cf9e2daddc424495214b5aa3b64"
+}

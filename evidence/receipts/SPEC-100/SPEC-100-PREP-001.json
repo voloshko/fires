@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-100",
+  "run_id": "SPEC-100-PREP-001",
+  "created_at": "2026-10-03T19:54:51.464723+00:00",
+  "evidence_class": "LIVE",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Two real QC pairs contain all3severityclasses; full collection and frozen model comparison still running/pending.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/prepare_fresh_paired_severity.py --profile pc-covered-2020-24 --data-root data-store --source-root /home/mc/fires --prior data-store/prior-footprints.json --out data-store/severity-covered-v1 --limit 4'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_fresh_paired_severity.py -q'",
+    "make gate"
+  ],
+  "acceptance": {
+    "qc_samples": 2,
+    "qc_groups": 2,
+    "class_counts": [
+      8838,
+      4691,
+      3478
+    ],
+    "full_admission": false,
+    "accuracy_evaluation": "NOT_RUN",
+    "regression_tests_passed": 6
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/covered-severity-qc.json",
+    "evidence/experiments/accuracy-next-20261003/covered-severity-source.json"
+  ],
+  "source_manifest": {
+    "git_revision": "26f50f8",
+    "files": [
+      {
+        "path": "evidence/experiments/accuracy-next-20261003/covered-severity-qc.json",
+        "sha256": "372e99262029698692ceb695a6bd0e47c3cccd3adb94721e99ac89b7c37fa735"
+      }
+    ]
+  },
+  "limitations": [
+    "QC ran before the final scoring-mask repair; it is not a full/current accuracy acceptance.",
+    "Frozen240 candidates must still yield>=100 admitted distinct events.",
+    "Immutable existing QC artifacts must not be overwritten; replay to a separate output directory."
+  ],
+  "non_claims": [
+    "QC and tests do not prove accuracy gain.",
+    "Retrospective published satellite labels, not field truth or prospective Siberian accuracy.",
+    "No global competitor ranking."
+  ]
+}

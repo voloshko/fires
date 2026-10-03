@@ -1,0 +1,9 @@
+{
+  "url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/hls2-s30",
+  "temporal": [
+    [
+      "2020-01-01T00:00:00Z",
+      null
+    ]
+  ]
+}

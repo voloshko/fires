@@ -127,8 +127,8 @@ pc-covered-2020-24. Metadata-only240 independent candidates, cap240,
 perclassdrop<=.02. Это retrospectiveMTBS agreement, не prospectivefieldproof.
 
 Все handles **на k8plus**:
-- `fires-accuracy-covered-qc-v1` PID830564: первые4пары; на последнем срезе
-  2prepared, остальные ещё собираются. Не означает fulladmission.
+- `fires-accuracy-covered-qc-v1` terminalexit0: QC2/4pairs, all3severityclasses represented.
+  Это не fulladmission; QC завершён до последней scorer-mask правки.
 - `fires-accuracy-covered-prepare-v1` PID831033: ждёт успешныйQC с>=1pair,
   затем собирает весь frozenнабор в data-store/severity-covered-v1.
 - `fires-accuracy-covered-score-v1` PID831035: ждёт Russianqueue и fullcollection,
@@ -141,3 +141,8 @@ perclassdrop<=.02. Это retrospectiveMTBS agreement, не prospectivefieldproo
 Код сcachedsource/grid/hash/model/count/Fmask checks:6regressions PASS наk8plus;
 makegatePASS. Targeted code-review HIGH cache bypasses исправлены; повторная
 проверка не нашлаHIGH. Общая accuracy цель и L2A admission ещё не закрыты.
+
+SPEC100-PREP001 INSUFFICIENT_EVIDENCE: QC2pairs, classes[8838,4691,3478],
+fullcollection running; actual frozen models inference pending. Последний
+HIGH reviewfix26f50f8 independently checked: noHIGH/CRITICAL. 6remote regressions
+PASS. Это scoped review, не подтверждение общей accuracy цели.
