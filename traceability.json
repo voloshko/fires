@@ -143,7 +143,8 @@
         "SPEC-97",
         "SPEC-98",
         "SPEC-99",
-        "SPEC-100"
+        "SPEC-100",
+        "SPEC-101"
       ]
     }
   },
@@ -1103,6 +1104,19 @@
         "SPEC-94",
         "SPEC-95",
         "SPEC-99"
+      ],
+      "status": "active"
+    },
+    "SPEC-101": {
+      "title": "L2A adaptation with complete original supervision replay",
+      "file": "specs/SPEC-101-l2a-full-replay.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-93",
+        "SPEC-95",
+        "SPEC-96",
+        "SPEC-97"
       ],
       "status": "active"
     }
