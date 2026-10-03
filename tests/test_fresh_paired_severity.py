@@ -49,12 +49,17 @@ class FreshSeverityTest(unittest.TestCase):
             fmask=Path(directory)/"water.fmask.tif"
             with rasterio.open(fmask,"w",driver="GTiff",width=512,height=512,count=1,dtype="uint8",**grid) as target:
                 target.write(np.zeros((1,512,512),np.uint8))
+            valid=Path(directory)/"valid.tif"
+            with rasterio.open(valid,"w",driver="GTiff",width=512,height=512,count=1,dtype="uint8",**grid) as target:
+                target.write(np.ones((1,512,512),np.uint8))
             record=dict(group_id="mtbs:new",grid=event["grid"],partition="evaluation",severity_source=SEVERITY_URL,
-                        files=dict(severity="severity.tif",fmask="water.fmask.tif"),
-                        hashes=dict(severity=hashlib.sha256(path.read_bytes()).hexdigest(),fmask=hashlib.sha256(fmask.read_bytes()).hexdigest()))
+                        files=dict(severity="severity.tif",fmask="water.fmask.tif",valid="valid.tif"),severity_counts=[512*512,0,0],
+                        hashes=dict(severity=hashlib.sha256(path.read_bytes()).hexdigest(),fmask=hashlib.sha256(fmask.read_bytes()).hexdigest(),
+                                    valid=hashlib.sha256(valid.read_bytes()).hexdigest()))
             with self.assertRaises(ValueError):validate_cached_record(Path(directory),record,event)
             path.with_suffix(".source.json").write_text(json.dumps(dict(identity=severity_identity(grid),sha256=record["hashes"]["severity"])))
             validate_cached_record(Path(directory),record,event)
+            with self.assertRaises(ValueError):validate_cached_record(Path(directory),dict(record,severity_counts=[0,1,2]),event)
 
     def test_excludes_old_events_and_frames_before_cap(self):
         rows=[dict(event_id=e,bbox_wgs84=b) for e,b in (

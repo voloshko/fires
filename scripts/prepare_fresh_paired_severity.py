@@ -74,7 +74,14 @@ def validate_cached_record(root, record, event):
         if not path.is_relative_to(root.resolve()) or sha256_file(path)!=record["hashes"][key]:
             raise ValueError("cached record input changed or escaped own data root")
     grid=dict(event["grid"],transform=rasterio.Affine(*event["grid"]["transform"]))
-    validate_severity(root/record["files"]["severity"],grid,severity_identity(grid,int(event.get("ig_date","2024")[:4])))
+    raw=validate_severity(root/record["files"]["severity"],grid,severity_identity(grid,int(event.get("ig_date","2024")[:4])))
+    with rasterio.open(root/record["files"]["valid"]) as source:
+        if source.shape!=(512,512) or str(source.crs)!=grid["crs"] or source.transform!=grid["transform"]:
+            raise ValueError("cached common-valid mask grid differs")
+        valid=source.read(1).astype(bool)
+    targets=mtbs_targets(raw,valid)
+    counts=np.bincount(targets[targets>=0],minlength=3).tolist()
+    if counts!=record["severity_counts"]:raise ValueError("cached class population differs from raster")
 
 
 def freeze_plan(source, prior, out, profile="2024-west"):
