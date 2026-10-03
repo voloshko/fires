@@ -68,6 +68,7 @@ def validate_cached_record(root, record, event):
     if (record["group_id"]!="mtbs:"+event["event_id"] or record["grid"]!=event["grid"]
             or record["partition"]!="evaluation" or record.get("severity_source")!=SEVERITY_URL):
         raise ValueError("cached record differs from frozen event/source")
+    if "fmask" not in record["files"]:raise ValueError("cached record lacks frozen water Fmask")
     for key,relative in record["files"].items():
         path=(root/relative).resolve()
         if not path.is_relative_to(root.resolve()) or sha256_file(path)!=record["hashes"][key]:
@@ -170,9 +171,11 @@ def collect(root, out, event):
     with rasterio.open(root/record["files"]["valid"]) as source: valid = source.read(1).astype(bool)
     targets = mtbs_targets(raw,valid);counts=np.bincount(targets[targets>=0],minlength=3)
     if not counts.sum():raise ValueError("no published severity on common-valid fire")
+    fmask_path=inputs/(name+".fmask.tif")
     return dict(record, label_provenance="mtbs_severity", severity_counts=counts.tolist(),
-                severity_source=SEVERITY_URL, files=dict(record["files"],severity=str(severity.relative_to(root))),
-                hashes=dict(record["hashes"],severity=sha256_file(severity)))
+                severity_source=SEVERITY_URL, files=dict(record["files"],severity=str(severity.relative_to(root)),
+                                                       fmask=str(fmask_path.relative_to(root))),
+                hashes=dict(record["hashes"],severity=sha256_file(severity),fmask=sha256_file(fmask_path)))
 
 
 def main():

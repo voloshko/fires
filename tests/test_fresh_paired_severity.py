@@ -46,8 +46,12 @@ class FreshSeverityTest(unittest.TestCase):
             path.with_suffix(".source.json").unlink()
             with self.assertRaises(ValueError):validate_severity(path,grid,identity)
             event=dict(event_id="new",grid=dict(grid,transform=list(grid["transform"])[:6],width=512,height=512))
+            fmask=Path(directory)/"water.fmask.tif"
+            with rasterio.open(fmask,"w",driver="GTiff",width=512,height=512,count=1,dtype="uint8",**grid) as target:
+                target.write(np.zeros((1,512,512),np.uint8))
             record=dict(group_id="mtbs:new",grid=event["grid"],partition="evaluation",severity_source=SEVERITY_URL,
-                        files=dict(severity="severity.tif"),hashes=dict(severity=hashlib.sha256(path.read_bytes()).hexdigest()))
+                        files=dict(severity="severity.tif",fmask="water.fmask.tif"),
+                        hashes=dict(severity=hashlib.sha256(path.read_bytes()).hexdigest(),fmask=hashlib.sha256(fmask.read_bytes()).hexdigest()))
             with self.assertRaises(ValueError):validate_cached_record(Path(directory),record,event)
             path.with_suffix(".source.json").write_text(json.dumps(dict(identity=severity_identity(grid),sha256=record["hashes"]["severity"])))
             validate_cached_record(Path(directory),record,event)
