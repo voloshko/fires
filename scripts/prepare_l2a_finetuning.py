@@ -19,6 +19,7 @@ import planetary_computer
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.comp.accuracy_contract import event_group, sha256_file, validate_manifest
 from src.comp.l2a_finetuning import EXPECTED_BANDS, asset_encoding, l2a_valid, pc_asset_encoding
+from src.comp.event_retention import conservative_bound, pixel_survival
 
 
 def source_jobs(root, event_registry):
@@ -128,6 +129,7 @@ def main():
     parser.add_argument("--data-root", required=True, type=Path)
     parser.add_argument("--out", required=True, type=Path)
     parser.add_argument("--event-registry", required=True, type=Path)
+    parser.add_argument("--retention-proof", type=Path, help="SPEC-97 protected-pixel bound")
     parser.add_argument("--limit", type=int, help="QC only, cannot authorize full training")
     args = parser.parse_args(); root, out = args.data_root.resolve(), args.out.resolve()
     if not out.is_relative_to(root): raise ValueError("outputs must be inside data root")
@@ -153,9 +155,40 @@ def main():
     fit = [r for r in records if r["partition"] == "fit"]
     fraction = len({event_of(r) for r in fit if event_of(r) is not None}) / len(original_events)
     ready = args.limit is None and not unknown and len(fit) >= 300 and fraction >= .7
+    bound = None
+    if args.retention_proof is not None:
+        proof = json.loads(args.retention_proof.read_text())
+        if proof["registry_sha256"] != sha256_file(args.event_registry): raise ValueError("retention proof registry mismatch")
+        protected = {r["sample_id"]: r for r in proof["records"]}
+        original, observed = [], {}
+        fitted = {r["sample_id"]: r for r in fit}
+        # source_jobs always contains the entire original fit, even in a QC probe.
+        for job in source_jobs(root, args.event_registry):
+            if job["partition"] != "fit": continue
+            sample = job["sample_id"]
+            if job["dataset"] == "hls":
+                if sample not in protected: raise ValueError("retention proof omitted an original HLS window")
+                row = protected[sample]
+                original.append(dict(sample_id=sample,event_key=row["event_key"],protected_pixels=row["protected_pixels"]))
+                if sample in fitted:
+                    mask_path = root / row["proof"]
+                    if sha256_file(mask_path) != row["proof_sha256"]: raise ValueError("retention pixel proof changed")
+                    with rasterio.open(mask_path) as src: pixels = src.read(1)
+                    with rasterio.open(root / fitted[sample]["files"]["valid"]) as src: validity = src.read(1).astype(bool)
+                    observed[sample] = pixel_survival(pixels, validity)
+            else:
+                key = job["group_id"]
+                if job["dataset"] == "mtbs": key = "MTBS:" + key.split(":",1)[1]
+                original.append(dict(sample_id=sample,event_key=key,protected_pixels=0))
+                if sample in fitted:
+                    observed[sample] = dict(known_event_survives=True,protected_pixels=0,lost_protected_pixels=0)
+        bound = conservative_bound(original, observed)
+        ready = args.limit is None and len(fit) >= 300 and bound["accepted"]
     result = dict(spec_id="SPEC-93", records=records, counts=counts, failures=failures,
                   original_fit_events=len(original_events), retained_fit_event_fraction=fraction,
                   unknown_original_hls_events=unknown, event_registry_sha256=sha256_file(args.event_registry),
+                  conservative_event_bound=bound,
+                  retention_proof_sha256=None if args.retention_proof is None else sha256_file(args.retention_proof),
                   ready_for_training=ready, qc_probe=args.limit is not None)
     with (out / ("qc-manifest.json" if args.limit else "manifest.json")).open("x") as stream:
         json.dump(result, stream, indent=2)
