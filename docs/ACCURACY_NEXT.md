@@ -36,23 +36,34 @@
   пожаров нет. Источник покрывает январь–15мая2020; interval-пары разрешены
   спекой отдельно от first-pass. Снимки, трудный фон и обучение ещё нужны.
   source_manifest/reserve_plan/target_contours.gpkg в data-store/russia.
-- SPEC-93 planned: критерии записаны, реализация L2A-дообучения ещё нужна.
+- SPEC-93 active: twins, matched finetune и scorer реализованы. Источник
+  исправлен на Planetary Computer согласно AGENTS.md; Earth Search PREP
+  остаётся отдельной историей и в новый fit не входит. PC QC4/4 прошёл.
+  Регистрация событий:523/540 HLS сопоставлены с MTBS,17unknown. Полный
+  event-retention gate пока ready=false, обучение L2A не запущено.
 - SPEC-94 active: отдельная трёхклассовая парная голова, fit-only weights,
   ignored pixels в обоих loss terms, фиксированный контур. 5 тестов.
-  Реальное обучение/замер ещё нужны. При оценке MTBS0/1/5 — известный фон,
+  Подготовка завершена:420fit/172eval, counts[5196215,807990,302790].
+  Matched trainer/scorer и sealed очередь реализованы; GPU очередь ждёт
+  завершения SPEC-91/его scorer. При оценке MTBS0/1/5 — известный фон,
   хотя в **обучении степени** они игнорируются; не потерять этот смысл.
 
-Всего28 новых тестов прошли на k8plus (последние5 отдельно от первых23).
+Добавлены SPEC-95 implemented (restricted loading, tensor-bound JSON,
+source dependency closure, checkpoint-bound recipe audit) и SPEC-96 active
+(HLS event associations + prior2658frames). Артефакты новой формы экономят
+место: один tensor checkpoint с встроенным digest метаданных. Current
+SPEC-91 trainer не менялся; первый post/pair имеют одинаковый recipe audit.
 make gate зелёный. Нет измеренного прироста точности этой новой кампании.
 
 ## Запущенные handles
 
-На момент записи проверены живыми:
+Первая подготовка пар terminal success:515sample/474group,374fit/141eval.
+На последнем осмотре post1/2/3 и pair1/2 complete, pair3 обучается.
+Живые/очередные handles:
 
 - `fires-accuracy-pairs-k8-v1.service`, PID610491: CPU/сетевой сборщик
   `scripts/prepare_forest_pairs.py`, data-store/forest-pairs. Продолжает
-  ранее подготовленные окна по их hashes. Итоговый manifest.json создаётся
-  только после всех jobs и validate_manifest. Не запускать дубликат.
+  terminal success, manifest.json готов; не запускать заново.
 - `fires-accuracy-train-k8-v1.service`, PID610520: queue_forest_pair.sh,
   ожидает окончания сборщика и ready_for_training. Затем ждёт >=22000MiB
   свободной GPU и запускает post/pair по сидам1/2/3. Одна собственная GPU
@@ -89,3 +100,32 @@ common valid pixels и новый Fmask (включая снег/тень/cirrus
    коммиты. Пользовательская цель не закрывается без реальной общей проверки
    улучшения и всех четырёх направлений. Нынешние PREP receipts —
    INSUFFICIENT_EVIDENCE, они не доказывают accuracy acceptance.
+
+## Продолжение после ревью
+
+- `fires-accuracy-pair-score-v1` ожидает все6 моделей, затем GPU scorer.
+  Scorer обновлён: доверяет metadata из проверенного checkpoint, а не
+  отдельно редактируемому data_manifest.json; archive сверяется с checkpoint.
+- `fires-accuracy-severity-train-v1` ждёт SPEC-91+score, затем6 новых severity
+  моделей и итоговый scorer. Before-start recipe seal проверяется для каждого
+  job; общий flock. Source code уже синхронизирован на k8plus.
+- `fires-accuracy-hls-events-v1` terminal success:523matched/17unknown;
+  `fires-accuracy-prior-frames-v1` terminal success:2658frames. Registry:
+  data-store/hls-events.json, prior-footprints.json. Unknown не подменяется MGRS.
+- Russian prior_overlap.json:0 пересечений контуров с prior2658. Это ещё
+  не actual chip-frame audit. Снимки/negative mining/перенос по России нужны.
+- Архитектурное ревью подтвердило математический путь устранить unknown
+  event gate без выдумывания IDs или сокращения данных: если ВСЕ неизвестные
+  события гарантированно удержаны, (R+U)/(K+U)>=R/K. Для этого нужно сохранить
+  ВСЕ исходно валидные положительные пиксели unknown-окон И неизвестных
+  остаточных частей matched-окон. Сохранить17файлов недостаточно: облака
+  могут удалить отдельный пожар. Нужна отдельная спека/реализация proof gate;
+  unified MTBS IDs для HLS+MTBS и полный denominator. Порог70% не ослаблять.
+- Original code review REQUEST CHANGES; architect BLOCK. Source/provider,
+  missing executable hash и unbound recipe archive исправлены, но coverage и
+  фактическая Russian frame isolation требуют дальнейших доказательств.
+  Independent review не объявлен APPROVE. Native architect profile был
+  unavailable, отдельный default-agent архитектурный lane вернул evidence.
+- Не прерывать действующую GPU очередь. Для последующих изменений trainers
+  соблюдать recipe seal; изменение semantics требует нового парного прогона,
+  а не смешивания старого контроля с новым кандидатом.
