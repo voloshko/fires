@@ -1,205 +1,112 @@
-# Новая кампания точности, 2026-10-03
+# Кампания точности — состояние 2026-10-03
 
-Цель пользователя сохраняется полностью: реализовать и реально проверить
-обученную пару дат, российскую разметку/трудный фон, L2A-дообучение и степень
-по паре дат; добиться доказанного превосходства над конкурентом на общей
-проверке. Синтетические тесты и поставка отрицательной гипотезы сами по себе
-не достигают этой цели. Спеки перед кодом, отдельные коммиты по спеке.
+Цель: проверить обученную пару дат, российскую разметку и трудный фон,
+L2A-дообучение и степень по паре дат; доказать превосходство на общей проверке.
+Отрицательные эксперименты сами по себе цель не закрывают. Спеки перед кодом,
+коммиты по спекам, неизменные критерии, append-only receipts.
 
-## Размещение
+## Размещение и ограничения
 
-- Worktree `/Users/mc/.codex/worktrees/fire-accuracy-next/fires`, ветка
-  `codex/fire-accuracy-next`, исходная точка main `1f0ea52`.
-- Все дальнейшие вычисления и скачивания **k8plus** (последнее уточнение
-  пользователя). `/home/mc/fires-accuracy-next`, `data-store/` для данных,
-  `research/` для весов и результатов. На Mac — только код и компактные receipts.
-- Старые данные читаются через symlinks из `data-store/external/` на
-  `/home/mc/fires/external/`. Исходные файлы не изменять. Новые пары и Россия —
-  собственные каталоги в data-store. На диске k8plus около 43 ГБ свободно.
-- `.runtime` — собственный venv с pytest, использует существующие ML-пакеты
-  через `.pth`. `.venv` — ссылка на старый runtime, не устанавливать туда пакеты.
-- Свои задачи omarchy остановлены. Подготовленные пары и российский источник
-  перенесены напрямую. Остаток прерванной копии старых данных на omarchy
-  сохраняется; удаление не запрошено.
+Worktree `/Users/mc/.codex/worktrees/fire-accuracy-next/fires`, ветка
+`codex/fire-accuracy-next`, исходный main `1f0ea52`.
+**Все вычисления и скачивания — ssh k8plus**, `/home/mc/fires-accuracy-next`.
+На Mac только код и компактные доказательства. Данные в `data-store/`, веса
+и результаты в `research/`. На k8plus свободно около16ГБ: новые данные ограничивать.
+Старый `/home/mc/fires` и его данные читаются без изменений через symlinks.
+`.runtime` — собственный venv; `.venv` ведёт в старую среду, ничего туда не ставить.
+Свои задания omarchy остановлены; остаток прерванной копии сохраняется.
 
-## Спеки и фактически выполненное
+Один собственный GPU job, `flock research/accuracy-gpu.lock`, старт после
+memory.free>=22000MiB. Не трогать соседние задания. Существующие модели и
+receipts не переписывать. Native checkpoints: один tensor-файл и связанные
+с ним JSON metadata, без дублирования весов.
 
-- SPEC-90 implemented: event/spatial isolation, provenance, временная
-  доступность, source-bound caches, grouped bootstrap. 13 тестов.
-- SPEC-91 active: ForestPairUNet, matched trainer post/pair, подготовка пар,
-  очередь 3 сидов × 2 варианта. 5 модельных + 2 data теста; CUDA smoke прошёл.
-  Полное обучение и acceptance scoring **ещё не завершены**.
-- SPEC-92 active: PANGAEA.939429 CC-BY-4.0 получен после HTTP503/retry.
-  SHA256 `5f1cfb843d5579d800a1e8359a017f8cd33c5658f6e0c0a6eda7ac534a1c6b3c`.
-  Всего196673 контуров, целевой bbox80–115E/50–65N:29071. Кластеры20км:
-  fit75/calibration29/evaluation24. Поля только area и geometry: точных дат
-  пожаров нет. Источник покрывает январь–15мая2020; interval-пары разрешены
-  спекой отдельно от first-pass. Снимки, трудный фон и обучение ещё нужны.
-  source_manifest/reserve_plan/target_contours.gpkg в data-store/russia.
-- SPEC-93 active: twins, matched finetune и scorer реализованы. Источник
-  исправлен на Planetary Computer согласно AGENTS.md; Earth Search PREP
-  остаётся отдельной историей и в новый fit не входит. PC QC4/4 прошёл.
-  Регистрация событий:523/540 HLS сопоставлены с MTBS,17unknown. Полный
-  event-retention gate пока ready=false, обучение L2A не запущено.
-- SPEC-94 active: отдельная трёхклассовая парная голова, fit-only weights,
-  ignored pixels в обоих loss terms, фиксированный контур. 5 тестов.
-  Подготовка завершена:420fit/172eval, counts[5196215,807990,302790].
-  Matched trainer/scorer и sealed очередь реализованы; GPU очередь ждёт
-  завершения SPEC-91/его scorer. При оценке MTBS0/1/5 — известный фон,
-  хотя в **обучении степени** они игнорируются; не потерять этот смысл.
+## Завершённые измерения
 
-Добавлены SPEC-95 implemented (restricted loading, tensor-bound JSON,
-source dependency closure, checkpoint-bound recipe audit) и SPEC-96 active
-(HLS event associations + prior2658frames). Артефакты новой формы экономят
-место: один tensor checkpoint с встроенным digest метаданных. Current
-SPEC-91 trainer не менялся; первый post/pair имеют одинаковый recipe audit.
-make gate зелёный. Нет измеренного прироста точности этой новой кампании.
+**SPEC-91 rejected**, все6full models120epochs и scorer завершены.
+141окно/125групп: pair IoU0.785478, post0.761802, C1-MM0.757951.
+Pair−C1-MM=+0.027527, CI95[0.006894,0.055348]. Общий прирост реален,
+но FLOGA lower=-0.053718 ниже-0.03 и потерянных событий2 против1 у C1-MM.
+Предзаданные safeguards не пройдены. Receipt SPEC-91-REPLAY-001 FAIL,
+`research/forest-pair-v1-result.json`. Не переключать продукт по pooled gain.
 
-## Запущенные handles
+**SPEC-94 rejected** для inverse-sqrt весов, все6full models и scorer завершены.
+172окна/172события. Balanced mIoU0.363802, hybrid0.308888:
++0.054914, CI95[0.021376,0.092000], все3класса лучше гибрида.
+Equal weights0.367197; balanced−equal=-0.003395. Условие «не ниже контроля»
+не выполнено. Receipt SPEC-94-REPLAY-001 FAIL,
+`research/paired-severity-v1-result.json`. Оба парных варианта дают сигнал
+улучшения степени; выбор equal после этого результата требует новой спеки
+и свежих событий. Контур фиксирован: binaryIoU0.453463 у всех вариантов.
+MTBS — спутниковая интерпретация, не наземная истина.
 
-Первая подготовка пар terminal success:515sample/474group,374fit/141eval.
-На последнем осмотре post1/2/3 и pair1/2 complete, pair3 обучается.
-Живые/очередные handles:
+## Российское дообучение — SPEC-92 active
 
-- `fires-accuracy-pairs-k8-v1.service`, PID610491: CPU/сетевой сборщик
-  `scripts/prepare_forest_pairs.py`, data-store/forest-pairs. Продолжает
-  terminal success, manifest.json готов; не запускать заново.
-- `fires-accuracy-train-k8-v1.service`, PID610520: queue_forest_pair.sh,
-  ожидает окончания сборщика и ready_for_training. Затем ждёт >=22000MiB
-  свободной GPU и запускает post/pair по сидам1/2/3. Одна собственная GPU
-  задача, flock research/accuracy-gpu.lock. Активная очередь во время
-  ожидания не означает, что GPU уже обучает модель.
+Источник PANGAEA.939429, CC-BY-4.0, визуальная Sentinel-2 разметка с GIS-проверкой;
+авторы использовали FIRMS вспомогательно. Не field truth.
+Исходник SHA256 `5f1cfb843d5579d800a1e8359a017f8cd33c5658f6e0c0a6eda7ac534a1c6b3c`.
+196673контуров, целевой bbox80–115E/50–65N:29071. Источник содержит geometry/area,
+не точные даты. Пары interval январь–15мая2020: postMay16–July15 2020,
+pre тот же сезон2019, PC Sentinel-2 L2A, одна сетка/MGRS, строгий SCL.
+Нельзя выдумывать точную ignition date.
 
-Проверять actual processes, exit status и лог, а не только файл/lock:
+Готовы447окон/127групп:309fit/61cal/77eval,24evalclusters.
+Frozen reserve_plan/frame_selection, actual frames purged against prior2658
+и между partitions до predictions. Geometry IDs из rawZIP, GPKG меняет ring order.
+Данные `data-store/russia/manifest.json`.
+
+Очередь `fires-accuracy-russian-transfer-v1` (MainPID742993) **обучает на GPU**.
+Первый control-s1 дошёл до29/30эпох на последнем осмотре. Далее reserve-s1,
+control/reserve-s2/s3, общий same-pixel scorer C1-MM+Prithvi.
+Control продолжает SPEC91 pair на base374fit; reserve добавляет309Russianfit.
+Одинаковый бюджет30epochs, batch8, шаги по base, AdamW3e-5/cosine/BF16.
+Mining top25%FP только Russianfit, weight2, без удаления positives.
+Initializer SHA/source/manifest/recipe сверяются с frozenSPEC91result.
+Recipe `349b9c51f319432e707467c4ae25ce0d55db28050506e055c621346e391ca30f`.
+Результат ожидается в `research/russian-transfer-v1-result.json`.
+
+Только CI lower>0 **к обоим** C1-MM и Prithvi разрешает combined superiority.
+Prithvi full512CPU preflight прошёл с официальными весами, accuracy не доказывает.
+TerraTorch from_config принимает stringpaths; backbone_pretrained=False перед
+strict полным checkpoint load. Targeted code review правок APPROVE;
+общий независимый architecture verdict пока не закрыт.
+
+## L2A — SPEC-93/96/97 active
+
+Planetary Computer — основной источник. Отдельный ранний EarthSearch PREP
+не смешивается с PC. PB<04 offset0; PB>=04 offset−0.1, scale0.0001;
+неизвестный baseline fail-closed. Полный PC collector terminal exit2:
+1008окон,889fit/119eval,861/886 известных событий сохранены.
+
+Registry SPEC96:523/540 HLS matched MTBS,17unknown, prior2658frames.
+SPEC97 защищает все GT-positive pixels неизвестных/остаточных частей;
+если все сохранены, (R+U)/(K+U)>=R/K даёт честную нижнюю границу70%.
+2784protected pixels потеряны в16окнах. Lower bound unavailable,
+ready=false; **L2A fine-tuning не запускался**. Это нехватка data evidence,
+не отрицательный результат модели. Receipt SPEC-97-BOUND001 INSUFFICIENT_EVIDENCE.
+
+Причины в `evidence/experiments/accuracy-next-20261003/l2a-protected-pixel-causes.json`:
+T11SKB1948pixels SCLcloud/shadow; T12SVC802nodata; остальные cloud/snow/missing.
+PC same-day не даёт альтернативных продуктов; T10SGD20211102 отсутствует.
+Публичный CDSE catalog показывает online N0500 counterparts для трёх окон,
+но скачивания нет: credentials не обнаружены в проверенных конфигурациях.
+Запрошены только наличие/путь конфигурации на k8plus, без секретов в чате.
+Не снимать SCL, не выкидывать unknown из denominator, не снижать70%.
+
+## Проверка и следующий шаг
+
+SPEC90/95 implemented: isolation, provenance, grouped bootstrap, source-bound
+caches, restricted legacy loading, tensor-bound metadata, exact recipe lineage.
+`make gate` зелёный; это не доказательство accuracy acceptance.
 
 ```sh
-ssh k8plus 'systemctl --user show fires-accuracy-pairs-k8-v1 fires-accuracy-train-k8-v1 -p Id -p ActiveState -p SubState -p MainPID -p ExecMainStatus'
-ssh k8plus 'journalctl --user -u fires-accuracy-pairs-k8-v1 -u fires-accuracy-train-k8-v1 -n 30 --no-pager'
+ssh k8plus 'systemctl --user show fires-accuracy-russian-transfer-v1 -p ActiveState -p SubState -p MainPID -p ExecMainStatus'
+ssh k8plus 'journalctl --user -u fires-accuracy-russian-transfer-v1 -n 12 --no-pager'
 ssh k8plus 'nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv,noheader'
 ```
 
-При подготовке используются MTBSfresh1 + EMS49/FLOGA40 fit; EMS70/FLOGA87 eval.
-Сборщик пишет failures и точные counts, проверяет одну сетку/MGRS, pre<start<=post,
-common valid pixels и новый Fmask (включая снег/тень/cirrus). Не ослаблять
-минимум200 MTBS +50 средиземноморских fit pairs после результата.
-
-## Следующая работа
-
-1. Проверить итог pair collection, реальные sample/group counts, отсутствие
-   потери набора из-за сетки/дат, и полное обучение. Обработать только
-   фактические сбои; отрицательная/неполная дата не становится «не горело».
-2. Написать scorer SPEC-91: ансамбли3, matched post и исходный C1-MM на тех
-   же common valid pixels, TTA8, water mask, per-window counts, потерянные
-   события, event-grouped bootstrap и заранее заданные thresholds. Очередь
-   сама scorer пока **не вызывает**. Нельзя принять гипотезу по train loss.
-3. Подготовить российские interval-пары и фиксированную отдельную проверку;
-   не превращать отсутствие контура в reviewed_negative. Mining только fit.
-4. Реализовать и протестировать SPEC-93 и тренировочный/eval путь SPEC-94.
-   Их вычислительные очереди используют тот же GPU flock, без конкуренции.
-5. Артефакты/receipts, реальные Resolution/status, make gate, per-spec
-   коммиты. Пользовательская цель не закрывается без реальной общей проверки
-   улучшения и всех четырёх направлений. Нынешние PREP receipts —
-   INSUFFICIENT_EVIDENCE, они не доказывают accuracy acceptance.
-
-## Продолжение после ревью
-
-- `fires-accuracy-pair-score-v1` ожидает все6 моделей, затем GPU scorer.
-  Scorer обновлён: доверяет metadata из проверенного checkpoint, а не
-  отдельно редактируемому data_manifest.json; archive сверяется с checkpoint.
-- `fires-accuracy-severity-train-v1` ждёт SPEC-91+score, затем6 новых severity
-  моделей и итоговый scorer. Before-start recipe seal проверяется для каждого
-  job; общий flock. Source code уже синхронизирован на k8plus.
-- `fires-accuracy-hls-events-v1` terminal success:523matched/17unknown;
-  `fires-accuracy-prior-frames-v1` terminal success:2658frames. Registry:
-  data-store/hls-events.json, prior-footprints.json. Unknown не подменяется MGRS.
-- Russian prior_overlap.json:0 пересечений контуров с prior2658. Это ещё
-  не actual chip-frame audit. Снимки/negative mining/перенос по России нужны.
-- Архитектурное ревью подтвердило математический путь устранить unknown
-  event gate без выдумывания IDs или сокращения данных: если ВСЕ неизвестные
-  события гарантированно удержаны, (R+U)/(K+U)>=R/K. Для этого нужно сохранить
-  ВСЕ исходно валидные положительные пиксели unknown-окон И неизвестных
-  остаточных частей matched-окон. Сохранить17файлов недостаточно: облака
-  могут удалить отдельный пожар. Нужна отдельная спека/реализация proof gate;
-  unified MTBS IDs для HLS+MTBS и полный denominator. Порог70% не ослаблять.
-- Original code review REQUEST CHANGES; architect BLOCK. Source/provider,
-  missing executable hash и unbound recipe archive исправлены, но coverage и
-  фактическая Russian frame isolation требуют дальнейших доказательств.
-  Independent review не объявлен APPROVE. Native architect profile был
-  unavailable, отдельный default-agent архитектурный lane вернул evidence.
-- Не прерывать действующую GPU очередь. Для последующих изменений trainers
-  соблюдать recipe seal; изменение semantics требует нового парного прогона,
-  а не смешивания старого контроля с новым кандидатом.
-
-## Итог SPEC-91 и новая подготовка (последний срез)
-
-SPEC-91 rejected: все6full runs и scorer завершены. Pair IoU0.785478,
-post0.761802, C1-MM0.757951. Global delta+0.027527 CI[0.006894,0.055348],
-но FLOGA lower=-0.053718 ниже-0.03 и lost events2>1. Receipt FAIL,
-порог не менялся, продукт не переключён. Это положительный общий сигнал
-для новой отдельной data/recipe гипотезы, а не выполненная цель.
-
-SPEC-94 GPU очередь работает: первый equal-s1 complete, balanced-s1
-запущен. Шесть сравнительных моделей и scorer по-прежнему впереди.
-
-SPEC-92 image collector implemented, caps fit8/cal4/eval16/source-cluster,
->=1ha и round-robin size bins. Actual frames purged against prior/cross-partition
-до predictions. Geometry identity берётся из raw ZIP: GPKG меняет ring order.
-Russian QC4/4 реальные interval pairs прошёл. Полный сервис
-fires-accuracy-russian-prepare-v1 (PID719505) живой. Данные в data-store/russia.
-Не менять selection после оценки; published perimeters не field truth.
-
-SPEC-97 planned/code-in-progress: математическая lower bound охвата событий
-с сохранением ВСЕХ неизвестных и residual-positive pixels. Pixel proofs
-в data-store/event-retention/manifest.json, источник registry SPEC-96;
-original denominator не сокращается. Unified MTBS IDs. Четыре теста прошли.
-Полный PC collector fires-accuracy-l2a-pc-prepare-v1 запущен с --retention-proof;
-может terminal code2/ready=false, если хоть один protected pixel потерян.
-Это не отрицательная accuracy гипотеза и не повод ослаблять SCL.
-Полный output data-store/l2a-pc-v1/manifest.json, QC successor qc-bound.json.
-
-Продолжить: закончить российскую подготовку и написать её matched transfer/
-mining/evaluation; проверить retention bound и разрешить L2A обучение только
-при PASS исходного data gate. Разработать отдельную улучшенную pair recipe
-после SPEC91, опираясь на новые данные/свежую проверку, не на переименование FAIL.
-Цель четырёх направлений и превосходства над конкурентом остаётся active.
-
-## Российское дообучение готово к запуску
-
-Dataset readiness подтверждена:309fit/61cal/77eval,24evalgroups,447total.
-Русский transfer теперь полностью реализован: equal-step budget30epochs,
-fit-only top25%FP sample weighting, matched control без РФрезерва, same-pixel
-C1-MM и Prithvi scorer (TTA8, официальные веса; backbone_pretrained отключён
-перед strict full-checkpoint load, чтобы не качать лишние weights).
-GPU queue fires-accuracy-russian-transfer-v1 (PID742993) ждёт завершения
-SPEC94, затем6runs+score. Source92 trainers/score синхронизированы.
-
-Code-reviewer нашёл и перепроверил две правки: initializer должен совпасть
-с SHA/result/recipe frozen SPEC91 и base_manifest; combined competitor flag
-требует wins и над C1-MM и над Prithvi. Regression tests прошли, targeted
-review APPROVE; полный architecture verdict ещё не закрыт.
-
-PC collection terminal code2:1008windows,889fit/119eval. Known retained861/886,
-но2784protected pixels потеряны в16source frames, lower_bound unavailable.
-Все данные сохраняются. SPEC97-BOUND001 INSUFFICIENT_EVIDENCE: нельзя запускать
-SPEC93 fine-tune по текущему admission gate; это не negative model outcome.
-Причины: missing twins, SCLcloud/shadow/snow и nodata. Нельзя снять SCL ради
-получения PASS. Продолжить source/event evidence repair или реальные альтернативные
-L2A twins до исходной приёмки; цель L2A не заменять меньшим набором.
-
-Следующая работа: завершить GPUseverity; проверить Russian initializer/source
-lineage before6runs, затем genuine new Russian performance/competitor comparison.
-Для SRC93 нужна дальнейшая data proof, а не утверждение «97%events» по известной
-подвыборке. Нет общего доказанного превосходства/полного результата четырёх пунктов.
-
-## Prithvi preflight и резерв источника
-
-Из установленного TerraTorch API выяснено: from_config принимает strings,
-не Path. Scorer исправлен; scripts/preflight_prithvi.py воспроизводит загрузку
-официальных весов и synthetic512×512 CPU forward, finite shape[1,2,512,512].
-Реальная accuracy от этого не заявляется. Receipt successor PREFLIGHT002.
-
-Read-only CDSE metadata: пропущенный PC T10SGD20211102 существует как N0500,
-доступный online. T11SKB20200809 и T12SVC20200708 также имеют N0500 counterparts,
-в отличие от старой обработки в PC. Пока скачивания нет: credentials CDSE
-не обнаружены в проверенных конфигурациях. Async question пользователю
-спросил только наличие/path, без секретов в чате. Другие GPU jobs продолжаются.
+Завершить Russian6runs и обе competitor comparisons. Подготовить независимое
+подтверждение equal paired severity на ранее не использованных событиях.
+Ремонтировать L2A admission реальными данными/доказательствами, затем matched
+fine-tune. Сохранять отрицательные outcomes, per-window counts и ограничения.
+Полного доказанного превосходства и завершения всех четырёх пунктов пока нет.
