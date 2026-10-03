@@ -12,10 +12,9 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from src.comp.accuracy_contract import sha256_file, validate_manifest
 from src.comp.accuracy_artifacts import checkpoint_metadata, assert_matched_recipes, execution_sources
 from src.comp.fresh_severity import assert_fresh, verify_frozen_models, verify_development_result, population
-from scripts.prepare_fresh_paired_severity import validate_cached_record
+from scripts.prepare_fresh_paired_severity import validate_cached_record, read_bound_fmask
 from src.comp.paired_severity import (apply_fixed_boundary, grouped_severity_comparison,
     mtbs_evaluation_labels, severity_confusion, severity_metrics)
-from src.comp.severity_layers import evaluation_fmask
 from src.comp.terrain import water_ndwi
 from scripts.forest_pair_train import read_sample
 from scripts.score_forest_pair import infer as infer_boundary
@@ -67,7 +66,7 @@ def main():
         with rasterio.open(args.data_root/record["files"]["severity"]) as source:raw=source.read(1)
         truth=mtbs_evaluation_labels(raw,valid);known=truth>=0
         class_pixels+=np.array([(truth==c).sum() for c in (1,2,3)])
-        fm,fm_hash=evaluation_fmask(args.data_root,record);post=image[6:]
+        fm,fm_hash=read_bound_fmask(args.data_root,record);post=image[6:]
         boundary=(boundary_prob[i]>=.5)&~water_ndwi(fm,post[1],post[3])
         nbr=lambda x:(x[3]-x[5])/(x[3]+x[5]+1e-6)
         levels=np.digitize(nbr(image[:6])-nbr(post),[.27,.66])+1

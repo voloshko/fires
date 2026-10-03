@@ -64,11 +64,26 @@ def severity_identity(grid, year=2024):
     return dict(url=SEVERITY_URL,query=query)
 
 
+def read_bound_fmask(root, record):
+    relative=record["files"]["fmask"]
+    if relative!=record["files"]["post"].replace("_merged.tif",".fmask.tif"):
+        raise ValueError("water Fmask is not bound to the selected post")
+    path=root/relative;checksum=sha256_file(path)
+    if checksum!=record["hashes"]["fmask"]:raise ValueError("bound water Fmask changed")
+    grid=record["grid"]
+    with rasterio.open(path) as source:
+        if (source.count!=1 or source.shape!=(grid["height"],grid["width"])
+                or str(source.crs)!=grid["crs"] or list(source.transform)[:6]!=grid["transform"]):
+            raise ValueError("bound water Fmask grid differs")
+        return source.read(1),checksum
+
+
 def validate_cached_record(root, record, event):
     if (record["group_id"]!="mtbs:"+event["event_id"] or record["grid"]!=event["grid"]
             or record["partition"]!="evaluation" or record.get("severity_source")!=SEVERITY_URL):
         raise ValueError("cached record differs from frozen event/source")
     if "fmask" not in record["files"]:raise ValueError("cached record lacks frozen water Fmask")
+    read_bound_fmask(root,record)
     for key,relative in record["files"].items():
         path=(root/relative).resolve()
         if not path.is_relative_to(root.resolve()) or sha256_file(path)!=record["hashes"][key]:
