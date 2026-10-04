@@ -423,3 +423,29 @@ binary predictions/counts, not duplicate backbones or full floating caches for
 all old development populations. Full training has NOT started. All own units
 terminal, GPU free. Existing populations are consumed development; eligibility
 cannot become independent confirmation or a claim of achieving the full goal.
+
+## SPEC-109 full experiment launched (latest)
+
+Full trainer, six-run queue, packed-mask scorer and score queue implemented,
+11 tests passed in the three relevant test files. Old reference caches checked
+on all populations77/61/96/60/81; Russian per-window counts exactly reconstruct
+each immutable parent. No reference re-inference, new data or backbone copy.
+Training source seal8a9654584ff0d93f0256c18a0e8dba13c63916873186126a0610aa51252a7d3d
+matches committed local numeric sources. Do not edit any sealed training source
+while the queue is live; scoring code/queue are separate from the training seal.
+
+At progress audit2026-10-04, pair-s1/post-s1/pair-s2 completed30epochs,
+683 unique IDs each, minimum30 exposures, frozen backbone digest preserved.
+The first seed's pair/post ordered batches and exposure counts match exactly.
+Queue fires-accuracy-temporal-adapter-train-v1 PID1238180 remains active;
+child1255988 was post-s2 epoch13/30 at the snapshot. GPU about4.8GiB,
+host MemoryCurrent about12GiB within18G. About20seconds/epoch observed.
+Score queue fires-accuracy-temporal-adapter-score-v1 PID1258419 waits for all
+six complete summaries, then takes the same GPU lock and checks22GB free.
+
+Expected result: research/temporal-adapter-v1/development.json. Both variants
+anchor the original C1-MM5 mean probability and apply their mean3 corrections.
+Lossless packed binary masks avoid full floating caches; <=512MiB new-output
+budget and3GiB free floor retained. All existing populations are development.
+Accuracy has NOT been measured yet. Goal active; SPEC-109 not implemented/
+verified from training losses or the partial queue. Do not restart live handles.

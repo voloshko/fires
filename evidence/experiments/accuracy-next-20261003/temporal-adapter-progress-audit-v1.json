@@ -1,0 +1,46 @@
+{
+  "spec_id": "SPEC-109",
+  "utc": "2026-10-04T08:26:08.128454+00:00",
+  "completed": [
+    {
+      "run": "pair-s1",
+      "completed": true,
+      "epochs": 30,
+      "minimum_exposure": 30,
+      "unique_ids": 683,
+      "seconds": 595.6564079597592,
+      "backbone_unchanged": true
+    },
+    {
+      "run": "pair-s2",
+      "completed": true,
+      "epochs": 30,
+      "minimum_exposure": 30,
+      "unique_ids": 683,
+      "seconds": 599.3230712339282,
+      "backbone_unchanged": true
+    },
+    {
+      "run": "post-s1",
+      "completed": true,
+      "epochs": 30,
+      "minimum_exposure": 30,
+      "unique_ids": 683,
+      "seconds": 550.864354422316,
+      "backbone_unchanged": true
+    }
+  ],
+  "first_pair_traces_exact": true,
+  "reference_cache_populations_valid": [
+    77,
+    61,
+    96,
+    60,
+    81
+  ],
+  "reference_exact_parent_counts": [
+    77,
+    61,
+    96
+  ]
+}

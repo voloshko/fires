@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-109",
+  "run_id": "SPEC-109-TRAINING-PROGRESS-001",
+  "created_at": "2026-10-04T08:26:08.128454+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "evidence_class": "REPLAY",
+  "conclusion": "Three full runs complete with exact first-pair traces; other runs and accuracy measurement pending.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && bash scripts/queues/queue_temporal_adapter.sh'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && bash scripts/queues/queue_score_temporal_adapter.sh'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_temporal_adapter.py tests/test_temporal_adapter_contract.py tests/test_temporal_adapter_evaluation.py -q'",
+    "make gate"
+  ],
+  "acceptance": {
+    "completed_runs": [
+      {
+        "run": "pair-s1",
+        "completed": true,
+        "epochs": 30,
+        "minimum_exposure": 30,
+        "unique_ids": 683,
+        "seconds": 595.6564079597592,
+        "backbone_unchanged": true
+      },
+      {
+        "run": "pair-s2",
+        "completed": true,
+        "epochs": 30,
+        "minimum_exposure": 30,
+        "unique_ids": 683,
+        "seconds": 599.3230712339282,
+        "backbone_unchanged": true
+      },
+      {
+        "run": "post-s1",
+        "completed": true,
+        "epochs": 30,
+        "minimum_exposure": 30,
+        "unique_ids": 683,
+        "seconds": 550.864354422316,
+        "backbone_unchanged": true
+      }
+    ],
+    "first_pair_traces_exact": true,
+    "training_recipe": "8a9654584ff0d93f0256c18a0e8dba13c63916873186126a0610aa51252a7d3d",
+    "reference_cache_populations_valid": [
+      77,
+      61,
+      96,
+      60,
+      81
+    ],
+    "reference_exact_parent_counts": [
+      77,
+      61,
+      96
+    ],
+    "unit_tests_passed": 11,
+    "accuracy": "PENDING"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/temporal-adapter-training-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/temporal-adapter-progress-audit-v1.json"
+  ],
+  "limitations": [
+    "Live snapshot, not complete six-run acceptance.",
+    "Old development populations are consumed, and old reference-cache integrity is not candidate superiority.",
+    "Immutable finished run directories must not be silently overwritten or restarted."
+  ],
+  "non_claims": [
+    "No useful accuracy gain, independent confirmation, model promotion or full goal completion."
+  ]
+}

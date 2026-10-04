@@ -1,0 +1,54 @@
+{
+  "source_hashes": {
+    "scripts/forest_pair_train.py": "199c020cd30fb3936bac76ce04d6982dbde459093430c02bc548d799779fae6e",
+    "scripts/prepare_russian_windows.py": "f6ff816794b328b89fe62a3fc670208b570f35ba5e60123ddfcb217557811abc",
+    "scripts/queues/queue_temporal_adapter.sh": "6ff3fd33927f2f278d95df427b49d5a797ae25286ba876f4a84382107b88e3b1",
+    "scripts/russian_transfer_train.py": "f7dc6eabd463abdc4dd38893773f9cf7f2e1c689e5b7a59c230a1f40097d7f70",
+    "scripts/train_temporal_adapter.py": "c2b2666ae9eafba1a26a1838b66cea6d03fd2678b5cd1485c0a106f5b08823d9",
+    "scripts/train_unet.py": "3f7a8fe08d303cdd482033386118328f0db810f86db1c003d8c08c9d57dc7ee7",
+    "src/comp/accuracy_artifacts.py": "17e4e6d021fcf4a2d3c14a57aab626cf98b38ca599545f601f5ce0017652285c",
+    "src/comp/accuracy_contract.py": "6c71e49762838b1344355c10dceea1f6ced3d61fb6a9646ad8f0a37ec429e423",
+    "src/comp/forest_pair.py": "a8923953ccefd160e5e0e952929e4691ca8f908493d404658aa6ff722d785949",
+    "src/comp/hls.py": "37daa4ec8e6223a10e161681b5dcaa090697af279aaf559d44d1e254a106290f",
+    "src/comp/l2a_finetuning.py": "60e0979252822355fa62d896faba9ad2d1d97f3b8bdcbb31328fbaea677fc67c",
+    "src/comp/russian_transfer.py": "66c2a2f9301f77e2f4adf1713f752696dd6b05213a5a0c8aa2067e6f281c5dc0",
+    "src/comp/temporal_adapter.py": "4771d4c68a5790fd801e04a34b787d2cffddf416347492abebe94fcabbfb8228",
+    "src/comp/temporal_adapter_contract.py": "db8fe0dc69615e970e7bb97444c93f94c1e46bbab25cd92df9407eb45fbe13a1"
+  },
+  "configuration": {
+    "base_manifest": "1a70bf29a0b9e3c8462396967fdc12fca7f92ae29a236636de5585c74692f373",
+    "russian_manifest": "1d487c711beb657a4c0ea0114379ddc51be2a31302891e47699942f95459f3db",
+    "initializers": [
+      "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c",
+      "a0282b7c31c77d0941c1ed0d10981dd526c7345c5c7335cd2d8fb071ec40c0e0",
+      "48a3faa63c8814f793e2963f8db8ef2a42466d0f021463f84e58b5cdb834d61e"
+    ],
+    "epochs": 30,
+    "batch": 8,
+    "rank": 8,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "variants": [
+      "pair",
+      "post"
+    ],
+    "precision": "bf16",
+    "normalization": "locked-C1-MM",
+    "fit_unique": 683,
+    "full_pool": true,
+    "correction_bounds": [
+      -2,
+      4
+    ]
+  },
+  "software": {
+    "torch": "2.14.0+cu130",
+    "numpy": "2.5.3"
+  },
+  "recipe_id": "8a9654584ff0d93f0256c18a0e8dba13c63916873186126a0610aa51252a7d3d"
+}
