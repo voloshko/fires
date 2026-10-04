@@ -146,7 +146,8 @@
         "SPEC-100",
         "SPEC-101",
         "SPEC-102",
-        "SPEC-103"
+        "SPEC-103",
+        "SPEC-104"
       ]
     }
   },
@@ -1145,6 +1146,19 @@
         "SPEC-102"
       ],
       "status": "rejected"
+    },
+    "SPEC-104": {
+      "title": "Reference-preserving high-confidence paired additions",
+      "file": "specs/SPEC-104-reference-preserving-additions.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-92",
+        "SPEC-95",
+        "SPEC-102",
+        "SPEC-103"
+      ],
+      "status": "active"
     }
   }
 }
