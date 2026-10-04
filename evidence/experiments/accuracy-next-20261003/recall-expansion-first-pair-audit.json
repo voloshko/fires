@@ -1,0 +1,18 @@
+{
+  "spec_id": "SPEC-111",
+  "utc": "2026-10-04T10:05:54.350959+00:00",
+  "matched_seed": 1,
+  "ordered_batches_exact": true,
+  "exposures_exact": true,
+  "base_tensor_digest_exact": true,
+  "unique_fit_ids": 683,
+  "minimum_exposure": 30,
+  "maximum_exposure": 60,
+  "completed_runs": [
+    "pair-s2",
+    "post-s1",
+    "pair-s1"
+  ],
+  "systemd": "Id=fires-accuracy-recall-expansion-train-v1.service\nActiveState=active\nMainPID=1297082\nExecMainStatus=0\n\nId=fires-accuracy-recall-expansion-score-v1.service\nActiveState=active\nMainPID=1297106\nExecMainStatus=0\n",
+  "accuracy": "PENDING"
+}

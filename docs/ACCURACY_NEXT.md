@@ -527,3 +527,15 @@ Unused means relative to recorded campaign histories; spatial groups not
 physical fire IDs, same publisher/spring2020. SPEC111 training/score queues
 still live; do not edit sealed sources or restart current handles. No quality
 claim or original-goal completion from this metadata milestone.
+
+## SPEC-111 first full seed pair audited
+
+Pair-s1 and post-s1 completed30epochs. All683 originalfit IDs shown30times,
+originalMed repetition60; orderedbatch hashes, exact exposure maps and frozen
+backbone tensor digests match between variants. Compact executed audit saved
+as recall-expansion-first-pair-audit.json. This is mechanics, not accuracy.
+Queue1297082 live, child1309059 pair-s2 epoch26/30 at latest snapshot;
+score queue1297106 still waits allsix complete summaries. ~20seconds/epoch,
+GPU4.9GiB/99% utilization, no error/restart or source edits. SPEC111 remains
+active; don't retry the immutable queue/outputs because polling expires.
+Eastern metadata selection remains unused and no new imagery collected.
