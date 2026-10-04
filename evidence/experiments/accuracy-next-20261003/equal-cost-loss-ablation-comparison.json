@@ -1,0 +1,78 @@
+{
+  "spec_id": "SPEC-114",
+  "cross111_comparisons": {
+    "russia_eval": {
+      "samples": 77,
+      "groups": 24,
+      "candidate_iou": 0.363987070526198,
+      "control_iou": 0.3613253800945445,
+      "delta": 0.002661690431653485,
+      "ci95": [
+        -0.013292074850682857,
+        0.018266708544412938
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "inconclusive"
+    },
+    "russia_cal": {
+      "samples": 61,
+      "groups": 29,
+      "candidate_iou": 0.37954896148727113,
+      "control_iou": 0.41823403809922544,
+      "delta": -0.038685076611954305,
+      "ci95": [
+        -0.06488253202148206,
+        -0.007675636738631119
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "worse"
+    },
+    "western": {
+      "samples": 96,
+      "groups": 37,
+      "candidate_iou": 0.22708360866387595,
+      "control_iou": 0.22903326620390807,
+      "delta": -0.0019496575400321237,
+      "ci95": [
+        -0.029069378262832988,
+        0.03153572747480135
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "inconclusive"
+    },
+    "ems": {
+      "samples": 60,
+      "groups": 44,
+      "candidate_iou": 0.7596425585186638,
+      "control_iou": 0.76145708608625,
+      "delta": -0.001814527567586155,
+      "ci95": [
+        -0.0036551066980529874,
+        -0.00031077118989640003
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "worse"
+    },
+    "floga": {
+      "samples": 81,
+      "groups": 81,
+      "candidate_iou": 0.742195503619395,
+      "control_iou": 0.7242866644277182,
+      "delta": 0.01790883919167685,
+      "ci95": [
+        0.0008172867872344892,
+        0.05610955200881059
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "better"
+    }
+  },
+  "non_claims": [
+    "Controlled loss-ablation comparison on consumed development, not independent confirmation"
+  ]
+}

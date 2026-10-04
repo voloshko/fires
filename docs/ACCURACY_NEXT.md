@@ -691,3 +691,15 @@ queue1342954, firstRF77 done14:58:51; all5populations375windows required.
 No quality result or promotion yet. Conditional116source1361531waits allfour
 eligibleguards; no neweastern images. Preserve sealed114sources/outputs and
 neverrestart merely because observation expires. Full four-goal objective active.
+
+## SPEC-114 final result: competitor gains, temporal eligibility unresolved
+
+Train/score terminal exit0; full6matched/native audits and750mask-derived
+counts/decision fields exact. Russia234/90 pair0.292350/C1-MM0.219247/
+Prithvi0.116043; C1CI[0.000426,0.129729] andPrithviCI[0.131200,0.231691]
+positive. Pair-post+0.070378 CI[-0.002345,0.126803] fails sameeligibilitygate.
+Allregional/Med/recallguards pass, but overall114rejected/immutableFAIL.
+Lossablationvs111 FLOGA+0.017909 positiveCI;calibration-0.038685 negativeCI.
+Do not call it universallybetter or interpret consumeddevelopment as fresh.
+Conditional116unit exited0 SKIPPED_INELIGIBLE_SPEC114, noimages/childdispatch.
+112eastern72/43 unchanged/unused. Alloriginalgoalrequirements remain unproven.

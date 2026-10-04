@@ -1,6 +1,6 @@
 # SPEC-114: Equal-cost background supervision for monotonic temporal additions
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-95, SPEC-111
 
@@ -56,3 +56,20 @@ inference calibration. The suspected loss mechanism is not proven causality.
 - non_claims: consumed development, published background not reviewed absence;
   no new independent geography/field truth/severity/L2A/global ranking,
   product promotion or completion of the original four-direction objective.
+
+## Resolution
+
+Rejected full eligibility without changing thresholds. All6 full30epoch runs,
+within/cross111 data/order/exposure/base identity and750 packed confusion
+counts verified. Russia234/90 pairIoU0.292350/C1-MM0.219247/Prithvi0.116043;
+pair-C1 delta+0.073103 CI95[0.000426,0.129729], pair-Prithvi+0.176307
+CI95[0.131200,0.231691]. Pair-post+0.070378 CI95[-0.002345,0.126803]
+fails positive lower bound. Regional points, Med and missed-group guards pass.
+FLOGA0.742196 vs C1-MM0.746460, allowed delta-0.004264 lower-0.014916.
+
+Controlled loss ablation FLOGA+0.017909 CI[0.000817,0.056110] vs111, while
+Russian calibration-0.038685 CI[-0.064883,-0.007676]. Added FLOGAFP reduced
+14028->2592; not universally better loss. Train/score exit0 and no retries.
+Immutable FAIL receipt SPEC-114-REPLAY-001. Competitor gains are consumed
+regional development; no independent confirmation/promotion or original goal
+closure. Conditional116 skipped without collecting images;112 stays unused.

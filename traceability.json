@@ -1289,7 +1289,7 @@
         "SPEC-95",
         "SPEC-111"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-115": {
       "title": "Audit unresolved HLS publisher metadata and archival label reuse",
