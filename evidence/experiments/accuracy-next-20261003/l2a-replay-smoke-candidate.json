@@ -1,0 +1,84 @@
+{
+  "spec_id": "SPEC-101",
+  "variant": "replay",
+  "seed": 1,
+  "w": 32,
+  "width": 32,
+  "depth": 7,
+  "cin": 6,
+  "classes": 2,
+  "epochs": 2,
+  "batch": 2,
+  "lr": 3e-05,
+  "mean": [
+    0.04736143350601196,
+    0.07184944301843643,
+    0.08360425382852554,
+    0.2173718959093094,
+    0.21316397190093994,
+    0.14734360575675964
+  ],
+  "std": [
+    0.051973823457956314,
+    0.0572526790201664,
+    0.06964784860610962,
+    0.09603846818208694,
+    0.101622074842453,
+    0.08755330741405487
+  ],
+  "smoke": true,
+  "data_manifest": "6d2dc454f31ce930acf6514335994c3f3d7996ad1d73607c6912724e099d66cc",
+  "fit_ids": [
+    "ems:ems_EMSR685_AOI01_HLS.S30.T28RCS.2023250T115221.v2.0",
+    "ems:ems_EMSR736_AOI01_HLS.S30.T34TDK.2024211T092549.v2.0",
+    "ems:ems_EMSR676_AOI01_HLS.S30.T34SFH.2023208T092031.v2.0"
+  ],
+  "fingerprint": "7bb778fd5afabe581ee9ce2eabb48a3df17b8ba53d83721b609fcc4ef27941a5",
+  "initialization_sha256": "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c",
+  "initialization_family": "C1-MM-seeds1-3",
+  "initializer_pool": [
+    "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c",
+    "a0282b7c31c77d0941c1ed0d10981dd526c7345c5c7335cd2d8fb071ec40c0e0",
+    "48a3faa63c8814f793e2963f8db8ef2a42466d0f021463f84e58b5cdb834d61e"
+  ],
+  "source_schedule": "odd-full/even-common/fallback-full",
+  "normalization_mode": "initializer-fit-locked",
+  "source_hashes": {
+    "scripts/l2a_full_replay_io.py": "660121b16e85c8ba67fbf77fc835d8f701f06bc2561e208923640c76c7e35e48",
+    "scripts/l2a_full_replay_train.py": "f9d21bfb426b169e5522a51de741c5049ccfbe0c55baab0a492579883eacbc69",
+    "scripts/queues/queue_l2a_full_replay.sh": "29fde42fb2ac5fdb9012ac656dbbdb77edbd1808c1239b97d7112b3b2ac3ce08",
+    "scripts/train_unet.py": "3f7a8fe08d303cdd482033386118328f0db810f86db1c003d8c08c9d57dc7ee7",
+    "src/comp/accuracy_artifacts.py": "17e4e6d021fcf4a2d3c14a57aab626cf98b38ca599545f601f5ce0017652285c",
+    "src/comp/accuracy_contract.py": "6c71e49762838b1344355c10dceea1f6ced3d61fb6a9646ad8f0a37ec429e423",
+    "src/comp/forest_pair.py": "a8923953ccefd160e5e0e952929e4691ca8f908493d404658aa6ff722d785949",
+    "src/comp/l2a_finetuning.py": "60e0979252822355fa62d896faba9ad2d1d97f3b8bdcbb31328fbaea677fc67c",
+    "src/comp/l2a_full_replay.py": "c48537bf9e2fe25518563c32811c3cd47b3e7ad82c5ee5ef869020a74c44dbf1"
+  },
+  "software": {
+    "torch": "2.14.0+cu130",
+    "numpy": "2.5.3"
+  },
+  "completed": true,
+  "loss": [
+    0.585908850034078,
+    0.5881288647651672
+  ],
+  "seconds": 1.7828356306999922,
+  "full_hls_exposures": [
+    2,
+    2,
+    4
+  ],
+  "common_exposures": [
+    2,
+    2,
+    0
+  ],
+  "l2a_exposures": [
+    2,
+    2,
+    0
+  ],
+  "order_sha256": "efc789f1658d8ff71e2701803f8894e6c3b39835cee35cd93c463c9c6a487384",
+  "peak_vram_bytes": 2594233344
+}

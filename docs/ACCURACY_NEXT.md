@@ -214,3 +214,17 @@ Latest SPEC101code syncedtok8plus;5testsPASS remotely. Archivedactual
 v1prep source9cb144… ascompactcodefixture beforeoverwrite. Newprepare-v2
 finishedexit0:929/889/119,all5baselineSHAs,readytrue. Smoke-v2 active under
 commonGPUflock, waits/usesmanifest-v2. Fulltrainingnotyetstarted.
+
+## SPEC101 fulltrainingstarted (latest)
+
+Prepare-v2 terminal0;5latestregressionsPASS onk8plus. Smoke-v2 terminal0,
+bothvariants completed2epochs, matchedorder/commonmasks, actualL2Aexposures
+[2,2,0] versuscontrol[0,0,0], alloriginalGTviews retained. Fullfallbackrecord
+isMed×2, exposures[2,2,4]; genericlastbatch1 coveredbyregression, fullbatch8
+lastbatch2 matches testedGPUshape. Noaccuracyclaim fromsmoke.
+FullGPUqueue fires-accuracy-full-replay-train-v1 MainPID1106633, child1106704
+control-s1 epoch17/30 confirmed;5536MiBGPU,~14.8GBMemoryCurrent under18Glimit.
+Recipef78ae585bfa0748da0e8791d3dea90b6619443a251668b47376a2d60be20b7a5.
+Do notedit sealednumericalsources/queue during6jobs. Expected result
+research/l2a-full-replay-v1-result.json. Free disk8.6GiB; no newimagerydownload,
+nativecheckpoints only. Goalactive; access/preparation/deployment resolved.

@@ -1,0 +1,51 @@
+{
+  "manifest_sha256": "6d2dc454f31ce930acf6514335994c3f3d7996ad1d73607c6912724e099d66cc",
+  "spec_id": "SPEC-101",
+  "full_original_fit_count": 929,
+  "fit_twins": 889,
+  "evaluation_count": 119,
+  "evaluation_groups": {
+    "ems": 29,
+    "floga": 87
+  },
+  "initializers": [
+    {
+      "seed": 1,
+      "path": "/home/mc/fires/research/hls-c1mm-final-s1/model.pt",
+      "sha256": "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c"
+    },
+    {
+      "seed": 2,
+      "path": "/home/mc/fires/research/hls-c1mm-final-s2/model.pt",
+      "sha256": "a0282b7c31c77d0941c1ed0d10981dd526c7345c5c7335cd2d8fb071ec40c0e0"
+    },
+    {
+      "seed": 3,
+      "path": "/home/mc/fires/research/hls-c1mm-final-s3/model.pt",
+      "sha256": "48a3faa63c8814f793e2963f8db8ef2a42466d0f021463f84e58b5cdb834d61e"
+    }
+  ],
+  "baseline_model_hashes": [
+    "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c",
+    "a0282b7c31c77d0941c1ed0d10981dd526c7345c5c7335cd2d8fb071ec40c0e0",
+    "48a3faa63c8814f793e2963f8db8ef2a42466d0f021463f84e58b5cdb834d61e",
+    "504141c858b50615e0a884dfa512f20360ceb2b86455967cb056279d2497ba8b",
+    "a48abe8b5c98883cf2f60a23eb457e39e5fea7584bafb4266d05eb7bcb16719f"
+  ],
+  "twin_bank_sha256": "75d1afa37b8dd51d98ea23c2d364b6f1f24e6c253e8ed354f7167d2dcfe3794b",
+  "event_registry_sha256": "86f2210603e5921d384c62a52e90167ae64abbad3473bc1cce686ea7bbad3ed2",
+  "reference_result_sha256": "242acac3cf2ccd30728e5919997895e7cf1d83de223a8802b06f3c4daaaa296d",
+  "ready_for_replay": true,
+  "original_supervised_pixels": 237735800,
+  "common_supervised_pixels": 229586644,
+  "source_hashes": {
+    "/home/mc/fires-accuracy-next/scripts/prepare_l2a_full_replay.py": "737c1629d8a6e6497c7ee40baf2c9a79ac6a4bace803cc41f2d48e07fe972f22",
+    "src/comp/l2a_full_replay.py": "c48537bf9e2fe25518563c32811c3cd47b3e7ad82c5ee5ef869020a74c44dbf1",
+    "scripts/prepare_l2a_finetuning.py": "7cb47132ab76353d24bffac6a229b35fcfabfd82b225dde9fb16007524174d6d",
+    "src/comp/l2a_finetuning.py": "60e0979252822355fa62d896faba9ad2d1d97f3b8bdcbb31328fbaea677fc67c"
+  },
+  "non_claims": [
+    "Original samples/supervision retained through HLS replay, not all events have L2A exposure.",
+    "Does not turn SPEC93/97 event-retention gate into PASS."
+  ]
+}

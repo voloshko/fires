@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-101",
+  "run_id": "SPEC-101-PREFLIGHT-001",
+  "created_at": "2026-10-04T04:08:19.535357+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "evidence_class": "REPLAY",
+  "conclusion": "Paired real GPU plumbing passed; full6run accuracy comparison still pending.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_l2a_full_replay.py -q'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && bash scripts/queues/smoke_l2a_full_replay.sh'",
+    "make gate"
+  ],
+  "acceptance": {
+    "regression_tests_passed": 5,
+    "control_completed": true,
+    "replay_completed": true,
+    "same_order": true,
+    "same_common_exposures": true,
+    "control_l2a_exposures": [
+      0,
+      0,
+      0
+    ],
+    "replay_l2a_exposures": [
+      2,
+      2,
+      0
+    ],
+    "original_full_exposures": [
+      2,
+      2,
+      4
+    ],
+    "accuracy": "NOT_RUN"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/l2a-replay-prep-v2.json",
+    "evidence/experiments/accuracy-next-20261003/l2a-replay-smoke-control.json",
+    "evidence/experiments/accuracy-next-20261003/l2a-replay-smoke-candidate.json"
+  ],
+  "limitations": [
+    "Smoke3records/2epochs is not full accuracy evidence.",
+    "Existing outputs immutable; rerun to distinct outputpaths.",
+    "Smoke batch2 covers full-run finalbatch2; generic lastbatch1 retained by regression."
+  ],
+  "non_claims": [
+    "Not a SPEC93/97 event-coverage PASS.",
+    "No accuracy gain, competitor superiority, field truth or completed6run claim."
+  ]
+}
