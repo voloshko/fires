@@ -751,3 +751,13 @@ Parentexit0 skip/dispatch≠completedquality. Positivepath NOT_RUN.
 Parent1141/2/3 alreadycomplete/immutable; full10qualitygate stillpending.
 Allsealed118sources immutable, no restart on observationtimeout, original
 four-direction goal active, no model/data/product promotion.
+
+## SPEC-118 newseed4 matched pair complete
+
+Pair/post-s4 bothfull30epochs/22860views(min30/max60), newnative SPEC118/
+base4/loss/trainrecipe/source/fit identity validated. Withinpair orders/
+exposures/base tensor/mean/std exact. Immutableparent114 sources/models/hash
+reauthenticated. Newseed5 pair/post stillpending; no partialensemblequality.
+Train1397226/score1397250/source1191404000 remain live and data112unused.
+Allsealed118numeric sources immutable, preserve exact handles/outputnames,
+no observation-timeout retry. Fouroriginalgoals unfulfilled, no promotion.

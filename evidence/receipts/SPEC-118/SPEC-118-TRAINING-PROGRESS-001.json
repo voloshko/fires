@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-118",
+  "run_id": "SPEC-118-TRAINING-PROGRESS-001",
+  "predecessor_run_id": "SPEC-118-PREFLIGHT-001",
+  "created_at": "2026-10-04T12:51:58.370614+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Newseed4 pair/post bothcomplete and fullnative/fit/source/order/exposure/base verified; parent114unchanged. Newseed5/fullensemblequality pending.",
+  "commands": [
+    "ssh k8plus: CPU new-seed4 native/source/summary and parentaudit",
+    "make gate"
+  ],
+  "acceptance": {
+    "spec_id": "SPEC-118",
+    "new_seed4_pair_complete": true,
+    "parent114_native_sources_unchanged": true,
+    "matched_order_exposure_base_exact": true,
+    "runs": [
+      {
+        "seed": 4,
+        "variant": "pair",
+        "epochs": 30,
+        "exposure_total": 22860,
+        "min_exposure": 30,
+        "max_exposure": 60,
+        "checkpoint_sha256": "8932c673d8bac21a485952374efba7ce3e3a1070cc2f1e06e104bf00ad6c0af9",
+        "seconds": 594.854589741677
+      },
+      {
+        "seed": 4,
+        "variant": "post",
+        "epochs": 30,
+        "exposure_total": 22860,
+        "min_exposure": 30,
+        "max_exposure": 60,
+        "checkpoint_sha256": "173308c7cdd02a88ae3e51158588bf8b88d45e04c1b2be5463af77d418132aa4",
+        "seconds": 554.5068305321038
+      }
+    ],
+    "non_claims": [
+      "Newseed4 mechanics only; seed5 and fullten-member accuracy pending. No promotion or original goal completion"
+    ]
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/five-seed-new-seed4-audit.json"
+  ],
+  "limitations": [
+    "No partialensemble scoring; still require all10 native runs and all375 windows."
+  ],
+  "non_claims": [
+    "Newseed4 mechanics only; seed5 and fullten-member accuracy pending. No promotion or original goal completion"
+  ]
+}
