@@ -14,10 +14,13 @@ def normalize(record):
         countries = []
     if not isinstance(countries, list):
         raise ValueError('malformed country schema')
-    names = []
+    names, unknown_country = [], not countries
     for country in countries:
         name = country.get('short_name') if isinstance(country, dict) else country
-        if not isinstance(name, str) or not name.strip():
+        if name is None or (isinstance(name, str) and not name.strip()):
+            unknown_country = True
+            continue
+        if not isinstance(name, str):
             raise ValueError('malformed country label')
         names.append(name.strip())
     category = record.get('category')
@@ -38,7 +41,7 @@ def normalize(record):
     return dict(code=code, countries=names, category=name, wildfire=wildfire,
         activation_time=timestamp, timestamp_semantics='activation, not physical ignition',
         name=record.get('name'), n_aois=record.get('n_aois'), n_products=record.get('n_products'),
-        country_unknown=not names)
+        country_unknown=unknown_country)
 
 
 def summarize(records, declared_count):

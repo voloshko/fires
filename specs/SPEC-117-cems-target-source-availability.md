@@ -45,8 +45,16 @@ potential source for additional Russian/taiga labels. No model/data promotion.
 ## Verification
 
 - k8plus: `.runtime/bin/python -m pytest tests/test_cems_source_availability.py -q`.
-- k8plus: `.runtime/bin/python scripts/audit_cems_source_availability.py --out research/cems-source-availability-v1`.
+- k8plus: `.runtime/bin/python scripts/audit_cems_source_availability.py --out research/cems-source-availability-v2`.
 - `make gate`.
 - non_claims: snapshot of two public activation listings, not all worldwide
   mapping products or fireabsence; no labels/imagery or data split, Russian/
   boreal accuracy, field truth, model promotion or original goal completion.
+
+## Execution notes
+
+V1 snapshot completed265/1065 and raw counts replayed exactly. Independent
+review found empty individual country labels should remain unknown, rather
+than abort on schema ambiguity. Fix preserves mixed known/unknown countries
+and five tests pass. V1 raw/result/seal retained; finalv2 uses a fresh output
+and source seal. No changed source filters, metric or data admission.

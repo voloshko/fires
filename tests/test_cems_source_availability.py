@@ -34,5 +34,16 @@ def test_declared_russia_and_old_boreal_activation_counts():
 def test_partial_duplicate_and_malformed_do_not_mean_zero():
     for records, count in (([row()], 2), ([row(), row()], 2), ([row()], True)):
         with pytest.raises(ValueError): summarize(records, count)
-    for bad in ({**row(), 'category': {}}, {**row(), 'countries': [{}]}):
+    for bad in ({**row(), 'category': {}}, {**row(), 'countries': [42]}):
         with pytest.raises(ValueError): normalize(bad)
+
+
+def test_blank_or_missing_country_labels_are_preserved_as_unknown():
+    for countries in ([{}], [{'short_name': ''}], [' '], [None]):
+        result = summarize([{**row(), 'countries': countries}], 1)
+        assert len(result['unknown_country_records']) == 1
+        assert result['declared_russian_records'] == []
+    mixed = {**row(), 'countries': [{'short_name': 'Russia'}, {}]}
+    result = summarize([mixed], 1)
+    assert len(result['unknown_country_records']) == 1
+    assert len(result['declared_russian_records']) == 1
