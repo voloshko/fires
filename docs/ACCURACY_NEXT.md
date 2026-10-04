@@ -204,3 +204,13 @@ Nextactions afteraccess:
 
 Completion stillrequires realaccuracy acceptance/fullgoal; source counts,
 negativeoutcomes,code-review andgreen gate do not establish superiority.
+
+## Возобновление2026-10-04
+
+SSHreauth completed; pendingoldsmoke-v1unit notfound, noartifacts. SPEC100
+collection173pairs andscore finishedexit0. Equal0.433595/hybrid0.407446,
+delta+0.026149 CI[−0.007822,0.057260]: rejected/frozenFAIL, nopromotion.
+Latest SPEC101code syncedtok8plus;5testsPASS remotely. Archivedactual
+v1prep source9cb144… ascompactcodefixture beforeoverwrite. Newprepare-v2
+finishedexit0:929/889/119,all5baselineSHAs,readytrue. Smoke-v2 active under
+commonGPUflock, waits/usesmanifest-v2. Fulltrainingnotyetstarted.

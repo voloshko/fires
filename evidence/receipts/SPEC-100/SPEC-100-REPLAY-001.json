@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-100",
+  "run_id": "SPEC-100-REPLAY-001",
+  "created_at": "2026-10-04T03:52:43.726908+00:00",
+  "status": "FAIL",
+  "evidence_class": "REPLAY",
+  "conclusion": "Fresh paired severity point gain meets .02, but CI includes zero; frozen acceptance fails.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/score_fresh_paired_severity.py --profile pc-covered-2020-24 --data-root data-store --manifest data-store/severity-covered-v1/manifest.json --runs research/paired-severity-v1 --development-result research/paired-severity-v1-result.json --reference-root /home/mc/fires/research --out research/fresh-covered-review-result.json'",
+    "make gate"
+  ],
+  "acceptance": {
+    "accepted": false,
+    "versus_hybrid": {
+      "samples": 173,
+      "groups": 173,
+      "candidate": {
+        "miou": 0.4335951929263231,
+        "per_class": [
+          0.4953590786893298,
+          0.30736359090861315,
+          0.49806290918102625
+        ],
+        "burn_iou": 0.6576588954686797
+      },
+      "baseline": {
+        "miou": 0.40744618852254755,
+        "per_class": [
+          0.45702165338210404,
+          0.28932169241101413,
+          0.4759952197745246
+        ],
+        "burn_iou": 0.6576588954686797
+      },
+      "delta": 0.026149004403775544,
+      "ci95": [
+        -0.007822000086836945,
+        0.05726036658670719
+      ],
+      "n_boot": 2000,
+      "seed": 20261003
+    },
+    "per_class_delta": [
+      0.03833742530722578,
+      0.018041898497599018,
+      0.022067689406501667
+    ],
+    "class_pixels": [
+      1811783,
+      487478,
+      268677
+    ],
+    "on_true_burn": {
+      "equal": {
+        "miou": 0.5706824394572463,
+        "per_class": [
+          0.8317972304950149,
+          0.34277878530580363,
+          0.5374713025709204
+        ],
+        "burn_iou": 1.0
+      },
+      "hybrid": {
+        "miou": 0.5391032547930198,
+        "per_class": [
+          0.7809033950979826,
+          0.31649424141197585,
+          0.5199121278691008
+        ],
+        "burn_iou": 1.0
+      }
+    }
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/covered-severity-result.json"
+  ],
+  "recipe_id": "7b396b552381de6b52f5e3eb9f298d481f6b9771330dba4bfac2885bab785682",
+  "data_manifest_sha256": "ed7903750216a4e341a394908dbe06f44fd195e0ade8f67034ec8497a83e79dc",
+  "limitations": [
+    "Point gain does not prove superiority with a CI crossing zero.",
+    "New review output is append-only; original result remains unchanged."
+  ],
+  "non_claims": [
+    "pc-covered-2020-24 published MTBS satellite-label agreement, not field truth.",
+    "Retrospective independent events do not establish prospective accuracy.",
+    "No Siberian severity validation or global leaderboard claim.",
+    "No superiority over models not compared on these pixels."
+  ]
+}

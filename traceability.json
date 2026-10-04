@@ -1105,7 +1105,7 @@
         "SPEC-95",
         "SPEC-99"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-101": {
       "title": "L2A adaptation with complete original supervision replay",

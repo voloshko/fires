@@ -1,6 +1,6 @@
 # SPEC-100: Paired severity confirmation within PC coverage
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-94, SPEC-95, SPEC-99
 
@@ -45,3 +45,14 @@ CONUS events within actual source coverage. Retrospective, no prospective claim.
 - non_claims: published satellite MTBS agreement only, retrospective2020–2024,
   no fieldtruth, no Siberian severity proof, no globalrank or victory over
   untested competitors. QC/model-load tests cannot prove real accuracy.
+
+## Resolution
+
+Rejected on173previouslyunusedevents; collector andfrozenGPUscorer terminalexit0.
+Equal mIoU0.433595 versus hybrid0.407446, delta+0.026149,
+CI95[−0.007822,0.057260]. Pointgain>=.02 andallclasses improve, but mandatory
+CIlower>0 failed. No thresholdchange ormodelpromotion. Ontrueburn grades:
+equal0.570682/hybrid0.539103; fixedboundary binaryIoU0.657659 inboth.
+Allinputs/model/sourcehashes andperwindowconfusions retained. This is
+retrospective MTBS-label agreement, notfieldtruth/prospective/Siberianproof.
+The pairedseverity signal remains positivebutfreshconfirmation is inconclusive.
