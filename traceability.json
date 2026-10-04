@@ -159,7 +159,8 @@
         "SPEC-113",
         "SPEC-114",
         "SPEC-115",
-        "SPEC-116"
+        "SPEC-116",
+        "SPEC-117"
       ]
     }
   },
@@ -1308,6 +1309,16 @@
         "SPEC-112",
         "SPEC-114",
         "SPEC-113"
+      ],
+      "status": "active"
+    },
+    "SPEC-117": {
+      "title": "Audit CEMS Russian and boreal label source availability",
+      "file": "specs/SPEC-117-cems-target-source-availability.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-96"
       ],
       "status": "active"
     }
