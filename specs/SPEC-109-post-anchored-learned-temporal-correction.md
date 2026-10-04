@@ -64,6 +64,9 @@ fixed threshold fusion or inference-only dNBR rule is introduced.
 - k8plus: `bash scripts/queues/smoke_temporal_adapter.sh` (shared lease and
   22GB free-memory admission before the source-bound real512 smoke).
 - Full trainer/scorer/queue commands recorded before launch; make gate required.
+- k8plus: `.runtime/bin/python scripts/train_temporal_adapter.py --data-root data-store --reference-root /home/mc/fires/research --runs research/temporal-adapter-v1 --seal-only`.
+- k8plus: `bash scripts/queues/queue_temporal_adapter.sh` (three pair/post
+  seed pairs, original fit exposures, per-run shared GPU lease).
 - non_claims: structural/smoke guarantees are not accuracy; all existing
   development populations consumed, PANGAEA background unreviewed, no physical
   fire IDs/field truth/severity/L2A useful-gain proof or original goal closure.
