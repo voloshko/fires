@@ -620,3 +620,18 @@ Post-s1 epoch18/30 at snapshot, train MainPID1342930 and score1342954 live.
 Scorer still waits all6; do not alter sealed sources or retry existing outputs.
 First-temporal auditv2 clarifies narrower scope of predecessor v1 field naming;
 both immutable outputs retained. Accuracy remains unmeasured, no promotion.
+
+## SPEC-116 conditional114 confirmation prepared
+
+Spec5ca7bfb precedes code7d598a6 and any114 quality result. Successor binds
+SPEC114 equal-loss/native metadata and exact trainseal a6e432e3f0eeb21ac550027e7b5278d67aa1639ed819ed40c4d53539484ab690
+before catalogue/mkdir. Old111/113 sources/artifacts unchanged; same fixed
+112selection72/43,50/20 source admission and all fresh comparator/CI guards.
+New own data-store/eastern-confirmation-v2 and research/eastern-confirmation-v2.
+Twelve CPU tests pass; current partial114 missing result rejects before output.
+Initial forged-decision test fixture corrected to2groups, not a gate change.
+CodeAPPROVE/architectureWATCH, finalCOMMENT; INSUFFICIENT preflight receipt.
+No new images, positive source/quality path NOT_RUN. Training114 still live;
+if it fails, defer116 without consuming112selection. If it passes, bind actual
+sealed models/counts then collect/scoring under existing resource/GPU lease.
+No original-goal completion from preflight or metadata readiness.

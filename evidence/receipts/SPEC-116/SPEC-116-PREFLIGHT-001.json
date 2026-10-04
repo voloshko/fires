@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-116",
+  "run_id": "SPEC-116-PREFLIGHT-001",
+  "created_at": "2026-10-04T11:20:30.329807+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Conditional successor implemented and12CPU tests pass. Actual incomplete114 candidate stops before new output creation; eligible positive path remains unexecuted.",
+  "commands": [
+    "ssh k8plus: .runtime/bin/python -m pytest tests/test_equal_cost_eastern_confirmation.py tests/test_eastern_confirmation.py -q",
+    "ssh k8plus: .runtime/bin/python scripts/collect_equal_cost_eastern.py --data-root data-store --selection data-store/eastern-holdout-plan-v1/selection.json --candidate research/equal-cost-additions-v1/development.json --runs research/equal-cost-additions-v1 --reference-root /home/mc/fires/research --prithvi-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --out data-store/eastern-confirmation-v2",
+    "make gate"
+  ],
+  "acceptance": {
+    "unit_tests_passed": 12,
+    "partial_candidate_proof": {
+      "spec_id": "SPEC-116",
+      "condition": "actual114trainingincomplete; resultnotpresent",
+      "exit_status": 1,
+      "output_created": false,
+      "fresh_images": 0,
+      "last_error": "FileNotFoundError: [Errno 2] No such file or directory: 'research/equal-cost-additions-v1/development.json'",
+      "command": [
+        ".runtime/bin/python",
+        "scripts/collect_equal_cost_eastern.py",
+        "--data-root",
+        "data-store",
+        "--selection",
+        "data-store/eastern-holdout-plan-v1/selection.json",
+        "--candidate",
+        "research/equal-cost-additions-v1/development.json",
+        "--runs",
+        "research/equal-cost-additions-v1",
+        "--reference-root",
+        "/home/mc/fires/research",
+        "--prithvi-root",
+        "/home/mc/fires/external/prithvi-eo2-300m-burnscars",
+        "--out",
+        "data-store/eastern-confirmation-v2"
+      ],
+      "positive_path": "NOT_RUN",
+      "non_claims": [
+        "Missing-candidate rejection only, not eligible positive-path authentication/admission/accuracy"
+      ]
+    },
+    "review_code": "APPROVE",
+    "review_architecture": "WATCH",
+    "review_synthesis": "COMMENT",
+    "fresh_images": 0,
+    "positive_path": "NOT_RUN"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/equal-cost-eastern-preflight.json",
+    "docs/SPEC-116-REVIEW.md"
+  ],
+  "limitations": [
+    "Initial forged-decision fixture used one group and stopped on the statistical minimum before the intended recomputation branch; corrected to two groups per population with all gates unchanged.",
+    "Missing114 result proves rejection of current partial state, not successful authentication/admission/fresh accuracy.",
+    "Partial source collection is preserved and lacks a resume path."
+  ],
+  "non_claims": [
+    "No new eastern imagery, source admission or independent accuracy evidence.",
+    "No product promotion, globalrank, field truth, severity/L2A success or original goal completion."
+  ]
+}

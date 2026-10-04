@@ -43,7 +43,7 @@ class EqualCostEasternConfirmationTest(unittest.TestCase):
         for name in ('russia_eval','russia_cal','western','ems','floga'):
             row=dict(sample_id=name,group_id=name,valid_pixels=100,total_pixels=100,
                 pair=[1,0,9],post=[10,0,0],c1mm=[10,0,0],reserve=[10,0,0],prithvi=[10,0,0])
-            value['per_window'][name]=[row]
+            value['per_window'][name]=[dict(row,sample_id=name+str(i),group_id=name+str(i)) for i in range(2)]
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder);candidate=root/'candidate.json';candidate.write_text(json.dumps(value));out=root/'out'
             args=['collect','--data-root',str(root),'--candidate',str(candidate),'--out',str(out)]

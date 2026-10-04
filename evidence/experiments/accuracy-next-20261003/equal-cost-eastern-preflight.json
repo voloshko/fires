@@ -1,0 +1,30 @@
+{
+  "spec_id": "SPEC-116",
+  "condition": "actual114trainingincomplete; resultnotpresent",
+  "exit_status": 1,
+  "output_created": false,
+  "fresh_images": 0,
+  "last_error": "FileNotFoundError: [Errno 2] No such file or directory: 'research/equal-cost-additions-v1/development.json'",
+  "command": [
+    ".runtime/bin/python",
+    "scripts/collect_equal_cost_eastern.py",
+    "--data-root",
+    "data-store",
+    "--selection",
+    "data-store/eastern-holdout-plan-v1/selection.json",
+    "--candidate",
+    "research/equal-cost-additions-v1/development.json",
+    "--runs",
+    "research/equal-cost-additions-v1",
+    "--reference-root",
+    "/home/mc/fires/research",
+    "--prithvi-root",
+    "/home/mc/fires/external/prithvi-eo2-300m-burnscars",
+    "--out",
+    "data-store/eastern-confirmation-v2"
+  ],
+  "positive_path": "NOT_RUN",
+  "non_claims": [
+    "Missing-candidate rejection only, not eligible positive-path authentication/admission/accuracy"
+  ]
+}
