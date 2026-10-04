@@ -1,0 +1,33 @@
+{
+  "spec_id": "SPEC-114",
+  "completed_seed_pairs": 1,
+  "runs": [
+    {
+      "variant": "pair",
+      "seed": 1,
+      "completed": true,
+      "epochs": 30,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "8d022d364e907695d77369f04c9f07faf271a901aef3d854ce123611f30487cf",
+      "seconds": 596.0676758475602
+    },
+    {
+      "variant": "post",
+      "seed": 1,
+      "completed": true,
+      "epochs": 30,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "5ecbc72262a1e67deede3d6a5b300d538e1fc48d8c80950735e747704ac674ff",
+      "seconds": 556.8976973276585
+    }
+  ],
+  "within_seed_orders_exposures_base_exact": true,
+  "cross_spec_native_metadata_order_exposure_base_exact": true,
+  "non_claims": [
+    "Seed1 mechanics only; other four runs/accuracy pending. No measured quality or causal superiority."
+  ]
+}

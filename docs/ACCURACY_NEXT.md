@@ -635,3 +635,11 @@ No new images, positive source/quality path NOT_RUN. Training114 still live;
 if it fails, defer116 without consuming112selection. If it passes, bind actual
 sealed models/counts then collect/scoring under existing resource/GPU lease.
 No original-goal completion from preflight or metadata readiness.
+
+## SPEC-114 first complete seed pair audited
+
+Pair/post-s1 bothcomplete30epochs/22860views (min30/max60 exposures);596.1/
+556.9seconds. Tensor-bound metadata/base/loss identity validated. Exact within-
+seed and cross111 fit/statistics/order/exposure/base digest; full6quality still
+pending, no partialensemble scoring or superiority claim. Pair-s2 live near
+end30epochs, post-s2/pair-s3/post-s3 follow. Sealed114 sources immutable.
