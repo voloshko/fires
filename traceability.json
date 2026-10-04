@@ -155,7 +155,8 @@
         "SPEC-109",
         "SPEC-110",
         "SPEC-111",
-        "SPEC-112"
+        "SPEC-112",
+        "SPEC-113"
       ]
     }
   },
@@ -1262,6 +1263,18 @@
         "SPEC-111"
       ],
       "status": "implemented"
+    },
+    "SPEC-113": {
+      "title": "Guarded eastern source collection and frozen confirmation",
+      "file": "specs/SPEC-113-guarded-eastern-source-collection-and-frozen-confirmation.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-95",
+        "SPEC-111",
+        "SPEC-112"
+      ],
+      "status": "active"
     }
   }
 }
