@@ -149,7 +149,8 @@
         "SPEC-103",
         "SPEC-104",
         "SPEC-105",
-        "SPEC-106"
+        "SPEC-106",
+        "SPEC-107"
       ]
     }
   },
@@ -1186,6 +1187,17 @@
         "SPEC-105"
       ],
       "status": "implemented"
+    },
+    "SPEC-107": {
+      "title": "Russian annotation temporal semantics audit",
+      "file": "specs/SPEC-107-russian-annotation-temporal-semantics-audit.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-92",
+        "SPEC-105",
+        "SPEC-106"
+      ],
+      "status": "active"
     }
   }
 }
