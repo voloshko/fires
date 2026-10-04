@@ -160,7 +160,8 @@
         "SPEC-114",
         "SPEC-115",
         "SPEC-116",
-        "SPEC-117"
+        "SPEC-117",
+        "SPEC-118"
       ]
     }
   },
@@ -1321,6 +1322,17 @@
         "SPEC-96"
       ],
       "status": "implemented"
+    },
+    "SPEC-118": {
+      "title": "Five-initializer matched equal-cost temporal additions",
+      "file": "specs/SPEC-118-five-seed-equal-cost-additions.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-95",
+        "SPEC-114"
+      ],
+      "status": "active"
     }
   }
 }
