@@ -17,7 +17,7 @@ def label_signature(labels, valid, grid):
 
 
 def prior_ignition(ignition, acquisition):
-    if ignition is None:
+    if not isinstance(ignition, str):
         return False
     return date.fromisoformat(ignition) <= date.fromisoformat(acquisition)
 

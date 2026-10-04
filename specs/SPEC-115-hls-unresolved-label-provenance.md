@@ -42,7 +42,7 @@ fire date or a replacement of the original source-admission criteria.
 ## Verification
 
 - k8plus: `.runtime/bin/python -m pytest tests/test_hls_label_provenance.py -q`.
-- k8plus: `.runtime/bin/python scripts/audit_hls_label_provenance.py --source-root /home/mc/fires --registry data-store/hls-events.json --out research/hls-label-provenance-v2.json`.
+- k8plus: `.runtime/bin/python scripts/audit_hls_label_provenance.py --source-root /home/mc/fires --registry data-store/hls-events.json --out research/hls-label-provenance-v3.json`.
 - `make gate`.
 - non_claims: no publisher lookup/physical ignition inference, new label IDs,
   change to SPEC96/97/93 admission, new data/predictions, competitor improvement
@@ -56,3 +56,10 @@ Immutable recipe/journal retained in SPEC-115-AUDIT-FAIL-001. Explicit .loc
 with boolean dtype preserves geographic schema; regression tests cover empty,
 future and unknown-date candidates. Successor v2 uses a new output/recipe path
 and the identical source population; no old recipe or result overwritten.
+
+
+V2 completed17 records, but a regression fixture exposed pandas' conversion
+of absent dates to NaN. Explicit non-string dates now remain unknown; tests
+pass4/4. Actual v2 intersecting candidates had zero missing ignitions, so this
+is defensive source-schema repair, not a changed event association. Preserve
+v2 and run final v3 in a fresh recipe/output under the repaired source.

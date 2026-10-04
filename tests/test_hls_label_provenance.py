@@ -21,6 +21,7 @@ def test_prior_ignition_excludes_future_and_unknown_without_age_cutoff():
     assert prior_ignition('2020-08-09', '2020-08-09')
     assert not prior_ignition('2020-08-10', '2020-08-09')
     assert not prior_ignition(None, '2020-08-09')
+    assert not prior_ignition(np.nan, '2020-08-09')
 
 
 def test_reuse_witness_does_not_assign_an_event_or_fire_date():
