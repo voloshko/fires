@@ -48,4 +48,6 @@ scoring require an eligible frozen candidate and a separate executable spec.
 ## Verification
 
 - k8plus CPU planner and unit-test commands recorded before execution.
+- k8plus: `.runtime/bin/python -m pytest tests/test_eastern_confirmation_plan.py -q`.
+- k8plus: `.runtime/bin/python scripts/plan_eastern_confirmation.py --data-root data-store --out data-store/eastern-holdout-plan-v1`.
 - `make gate`.
