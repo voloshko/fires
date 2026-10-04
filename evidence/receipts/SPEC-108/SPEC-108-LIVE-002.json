@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-108",
+  "run_id": "SPEC-108-LIVE-002",
+  "predecessor_run_id": "SPEC-108-EXECUTION-FAIL-001",
+  "created_at": "2026-10-04T07:12:28.557971+00:00",
+  "status": "FAIL",
+  "evidence_class": "LIVE",
+  "conclusion": "Recovered execution completed; frozen visibility criterion rejected: only one of three assessable frames has required extra separation, minimum two.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/probe_spring_visibility.py --data-root data-store --manifest data-store/western-holdout-v1/manifest.json --parent research/western-holdout-v1-result.json --out data-store/spring-visibility-v1 --recover'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_spring_visibility.py -q'",
+    "make gate"
+  ],
+  "acceptance": {
+    "assessable_frames": 3,
+    "supported_frames": 1,
+    "minimum_supported": 2,
+    "usable_views": 7,
+    "retained_views": 8,
+    "inclusive_storage_bytes": 43469115,
+    "result_sha256": "448a6e7d63ae237a7aff7ecf528c8f77b4751fd3a92722f2942b0ba0dd7f81f3",
+    "original_partial_sha256": "f09e24d31879247a76fa6081cfa0f72dea365961f21d3a8daf1032d8d9193def",
+    "decision_recomputed_exact": true,
+    "source_verified_pixel_hashes": true,
+    "unit_exit": 0,
+    "elapsed_seconds": 56.891,
+    "peak_memory": "141.5 MiB",
+    "tests_passed": 6,
+    "supports_multidate_followup": false
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/spring-visibility-result-v2.json",
+    "evidence/experiments/accuracy-next-20261003/spring-visibility-audit-v2.json"
+  ],
+  "limitations": [
+    "Four post-result selected missed examples; no independent population or model measurement.",
+    "One additional window has extra separation but only one usable date, so it is not temporally assessable under the frozen rule.",
+    "The April24 observation has common fraction 0.496784 below unchanged minimum .5.",
+    "Source masks and acquisition dates retain gaps; rejection does not show that all multi-date approaches are ineffective."
+  ],
+  "non_claims": [
+    "Selected consumed examples, not independent accuracy or a new model.",
+    "Published background is not reviewed fire absence; contrasts do not determine ignition dates.",
+    "No causal regrowth/misannotation, complete temporal coverage, field truth or goal completion."
+  ]
+}

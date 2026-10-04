@@ -377,3 +377,23 @@ k8plus, compact schema/source audit and source-linked report in the worktree.
 No old label/data/recipe/result altered. Next safe experiment: bounded temporal
 visibility probe of the four missed windows, under a new spec, with strict SCL,
 no inferred ignition day and no independent accuracy claim. No running GPU job.
+
+## SPEC-108 temporal probe completed
+
+Frozen sixteen bins / four missed windows, original MGRS and pixel grid.
+First execution exited1 at JSON serialization of a NumPy boolean. Execution
+FAIL, source snapshots and partial JSON preserved. Fixed serialization and
+recovered against the exact original plan, with source-verified existing pixel
+arrays; successor result-recovered-v2.json, exit0, no original overwrite.
+Eight image/SCL pairs retained, seven usable observations, 43,469,115 total
+bytes. Six regressions passed. No imagery or weights copied to Mac.
+
+Three windows are temporally assessable (two dates / >=14 days); only one
+shows required extra spectral separation, minimum two. SPEC-108 rejected,
+scientific FAIL. Another window shows separation on May4 but has only one
+usable date; April24 common coverage0.496784 does not meet .5. Do not tune
+the rule or conclude all multi-date models are ineffective. It is not an
+independent accuracy comparison and does not close the four-direction goal.
+All probe units terminal; GPU unused, free disk about4.0 GiB. Next candidate
+must retain the strong single-date signal that the unconstrained paired model
+lost, rather than repeating date/threshold sweeps on these four examples.

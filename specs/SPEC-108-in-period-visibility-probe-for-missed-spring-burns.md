@@ -1,6 +1,6 @@
 # SPEC-108: In-period visibility probe for missed spring burns
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-93, SPEC-105, SPEC-106, SPEC-107
 
@@ -71,3 +71,22 @@ unchanged dependencies and source-verified retained pixels; it writes
 result-recovered-v2.json, never replaces plan/result/pixels. No date, selection,
 observation threshold or scientific acceptance is changed. Recovery is the
 same command with --recover; a separate unit avoids restarting the old handle.
+
+## Resolution
+
+Recovered execution terminated with exit0, 56.891 seconds and 141.5 MiB peak
+memory. Original plan, eight image/SCL pairs and partial JSON remain intact;
+all retained pixel arrays matched freshly read frozen sources. Inclusive
+storage was 43,469,115 bytes, free disk 4,330,520,576 bytes. Six tests passed.
+
+Seven observations were usable. Three windows have two usable dates separated
+by 23–30 days; only one supplies the fixed extra separation. Required minimum
+is two, so publish scientific FAIL and reject this visibility criterion.
+The fourth window has extra separation on May4 but only one usable date;
+April24 common fraction 0.496784 remains below .5 and was not admitted.
+No threshold, pixel domain, group or acquisition choice was changed to pass.
+
+Earlier observations can help particular examples, but they do not establish
+a common explanation or an accuracy gain. This rejection concerns the frozen
+probe, not all learned multi-date models. Further model work needs a new spec
+and new confirmation data before product promotion; the full goal stays open.

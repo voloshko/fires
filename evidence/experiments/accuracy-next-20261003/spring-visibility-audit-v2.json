@@ -1,0 +1,13 @@
+{
+  "spec_id": "SPEC-108",
+  "utc": "2026-10-04T07:12:28.557971+00:00",
+  "inclusive_storage_bytes": 43469115,
+  "free_bytes": 4330520576,
+  "planned_views": 16,
+  "retained_views": 8,
+  "usable_views": 7,
+  "all_file_hashes_exact": true,
+  "decision_recomputed_exact": true,
+  "result_sha256": "448a6e7d63ae237a7aff7ecf528c8f77b4751fd3a92722f2942b0ba0dd7f81f3",
+  "original_partial_json_sha256": "f09e24d31879247a76fa6081cfa0f72dea365961f21d3a8daf1032d8d9193def"
+}
