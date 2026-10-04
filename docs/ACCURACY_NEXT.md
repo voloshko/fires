@@ -703,3 +703,11 @@ Lossablationvs111 FLOGA+0.017909 positiveCI;calibration-0.038685 negativeCI.
 Do not call it universallybetter or interpret consumeddevelopment as fresh.
 Conditional116unit exited0 SKIPPED_INELIGIBLE_SPEC114, noimages/childdispatch.
 112eastern72/43 unchanged/unused. Alloriginalgoalrequirements remain unproven.
+
+## SPEC-116 deferred after genuine114 refusal
+
+Sourceunit1361531 terminalexit0, journalSKIPPED_INELIGIBLE_SPEC114. No child
+or eastern-confirmation-v2 dir/images;112plan stillunused. Conditionalcode,
+12tests/independentreviews/receipts preserved, positivepath NOT_RUN.
+114 train/scorer allterminalexit0. No product/source/accuracypromotion.
+Futurecandidate requiresnew spec/binding rather than weakening114/116criteria.

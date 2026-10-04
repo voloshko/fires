@@ -1,6 +1,6 @@
 # SPEC-116: Frozen eastern confirmation for equal-cost temporal candidate
 
-Status: active
+Status: deferred
 Requirement: REQ-008
 Depends on: SPEC-112, SPEC-114, SPEC-113
 
@@ -63,3 +63,13 @@ source admission and fresh accuracy criteria, and no data until eligibility.
 - non_claims: shared PANGAEA publisher/spring2020, groups not physicalfireIDs;
   background not reviewed fireabsence; no field truth, worldranking, severity/
   L2A success, product promotion or full original goal completion.
+
+## Resolution
+
+Deferred: completedSPEC114 fails its unchanged pair-versus-post pooledCI
+lower bound. Ownsourcequeue terminalexit0 with SKIPPED_INELIGIBLE_SPEC114;
+zeroeasternimages, nochilddispatch. Preserve reviewedconditionalcode/12tests/
+preflight and immutable skipjournal. No eligible-positive admission/inference
+executed. SPEC112 selection72/43 remains unused and all fresh criteria intact.
+A separately specified eligible successor is required before reactivation;
+do not silently repurpose fixed114/loss/trainseal binding for another model.

@@ -1310,7 +1310,7 @@
         "SPEC-114",
         "SPEC-113"
       ],
-      "status": "active"
+      "status": "deferred"
     },
     "SPEC-117": {
       "title": "Audit CEMS Russian and boreal label source availability",

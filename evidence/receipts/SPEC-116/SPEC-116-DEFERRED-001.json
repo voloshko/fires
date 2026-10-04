@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-116",
+  "run_id": "SPEC-116-DEFERRED-001",
+  "predecessor_run_id": "SPEC-116-QUEUE-001",
+  "created_at": "2026-10-04T12:13:12.864645+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Completed114 candidate is ineligible; conditional queue skipped before imagery/childdispatch. Fresh confirmation deferred, unchanged112 selection unused.",
+  "commands": [
+    "ssh k8plus: systemctl/journal source-v1 and no-output check",
+    "make gate"
+  ],
+  "acceptance": {
+    "spec_id": "SPEC-116",
+    "candidate_sha256": "eddf5ba5df6e6d47265503234a7443d2ee4730df9c3c1eef25eefb30105f51bc",
+    "source_unit": "fires-accuracy-equal-cost-eastern-source-v1.service",
+    "source_exit_status": 0,
+    "source_journal": "Oct 04 14:26:15 k8 systemd[8199]: Started fires-accuracy-equal-cost-eastern-source-v1.service - [systemd-run] /usr/bin/bash /home/mc/fires-accuracy-next/scripts/queues/queue_equal_cost_eastern.sh.\nOct 04 15:05:16 k8 bash[1384086]: SKIPPED_INELIGIBLE_SPEC114 {\"pooled_gain\": false, \"regional_points\": true, \"mediterranean\": true, \"missed_groups\": true}\n",
+    "child_dispatched": false,
+    "fresh_images": 0,
+    "positive_path": "NOT_RUN",
+    "non_claims": [
+      "Conditional skip is not source admission or independent accuracy"
+    ]
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/equal-cost-eastern-skip.json"
+  ],
+  "limitations": [
+    "Eligible positive path unexecuted; no data/source or quality evidence."
+  ],
+  "non_claims": [
+    "Conditional skip is not source admission or independent accuracy"
+  ]
+}
