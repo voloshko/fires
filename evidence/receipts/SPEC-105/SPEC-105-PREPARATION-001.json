@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-105",
+  "run_id": "SPEC-105-PREPARATION-001",
+  "created_at": "2026-10-04T06:21:07.617863+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "evidence_class": "LIVE",
+  "conclusion": "Frozen geographic selection and regression checks passed; full data admission and competitor comparison are still pending.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/prepare_western_holdout.py --data-root data-store --out data-store/western-holdout-v1 --plan-only'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_western_holdout.py -q'",
+    "python3 -m unittest tests.test_western_holdout -v",
+    "make gate",
+    "ssh k8plus 'systemctl --user show fires-accuracy-western-collect-v1 fires-accuracy-western-score-v1 -p Id -p ActiveState -p SubState -p MainPID -p ExecMainStatus'"
+  ],
+  "acceptance": {
+    "selected_windows": 96,
+    "selected_groups": 37,
+    "selection_sha256": "89bba735a19cc2aad34666f6e5e3e92720113a82b5f5e96b98d571d6be1cd116",
+    "exclusion_audit": {
+      "prior-footprints.json": {
+        "spec_id": "SPEC-96",
+        "records": 2658,
+        "sha256": "eb7bb1af7800c00e1837cca0634ffcad82792bf1dcd41cbd06fe112ea9aeecad"
+      },
+      "russia/manifest.json": {
+        "spec_id": "SPEC-92",
+        "records": 447,
+        "sha256": "1d487c711beb657a4c0ea0114379ddc51be2a31302891e47699942f95459f3db"
+      },
+      "severity-covered-v1/manifest.json": {
+        "spec_id": "SPEC-100",
+        "records": 173,
+        "sha256": "ed7903750216a4e341a394908dbe06f44fd195e0ade8f67034ec8497a83e79dc"
+      }
+    },
+    "regression_tests_passed": 4,
+    "gate_negative_tests_passed": 14,
+    "prepared_frames_at_snapshot": 55,
+    "full_admission": "PENDING",
+    "accuracy_comparison": "NOT_RUN"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/western-selection-v2.json",
+    "evidence/experiments/accuracy-next-20261003/western-launch-snapshot.json"
+  ],
+  "limitations": [
+    "Live snapshot is not final data admission.",
+    "Existing outputs are immutable; repeat executed collectors only into a distinct spec-authorized directory.",
+    "QC probe used the earlier selection file; only the completed full manifest bound to selection-v2 can qualify inference."
+  ],
+  "non_claims": [
+    "No accuracy gain or competitor superiority is established by preparation.",
+    "No physical fire count, ground truth, severity, L2A useful gain or original goal completion claim."
+  ]
+}

@@ -301,3 +301,28 @@ pairedweights againstC1-MM5/Prithvi, delta.01/positiveCI toboth/missguard.
 No currentGPUjobsrunning; allsix101models+score and104confirm terminal0.
 User4partgoal stillactive/unachieved; newregionalvalidationdoesnotclosegrade
 orL2A usefulgain. No originaldata/modeldeletion orMac imagery/weight downloads.
+
+## SPEC-105: collection and confirmation queue launched
+
+At 2026-10-04 06:21 UTC the collector on k8plus was alive as PID 1185241,
+with 55 completed frame metadata files and 539,735,684 bytes of new data.
+Free disk was 5,092,061,184 bytes. Full admission is not established until
+the collector writes its final manifest; no accuracy claim follows from this
+snapshot. The scoring queue was alive as PID 1185243, waiting for collection.
+
+Frozen selection-v2 contains 96 windows from 37 groups. Its SHA256 is
+89bba735a19cc2aad34666f6e5e3e92720113a82b5f5e96b98d571d6be1cd116.
+All three exclusion sources were checked for exact identity and population:
+SPEC-96 2,658 footprints, SPEC-92 447 frames, SPEC-100 173 frames. Whole-group
+purging uses the original EPSG:3576 / 20 km rule. Four regressions passed on
+k8plus and locally; local Python lacks pytest, so local execution used unittest.
+The traceability gate and its 14 negative tests passed.
+
+Live units: fires-accuracy-western-collect-v1.service and
+fires-accuracy-western-score-v1.service. Do not restart them because a polling
+call times out. The queue requires final admission of at least 50 windows and
+20 groups, then obtains research/accuracy-gpu.lock and checks free GPU memory.
+Expected result: research/western-holdout-v1-result.json. Copy only compact
+manifests, results and receipts to Mac; preserve all old remote images/weights.
+SPEC-105 remains active. Regional model promotion needs its own spec even if
+this comparison passes; the original four-direction objective remains open.

@@ -1,0 +1,28 @@
+{
+  "utc": "2026-10-04T06:21:07.617863+00:00",
+  "selection_sha256": "89bba735a19cc2aad34666f6e5e3e92720113a82b5f5e96b98d571d6be1cd116",
+  "selected_windows": 96,
+  "selected_groups": 37,
+  "prepared_metadata": 55,
+  "storage_bytes": 539735684,
+  "free_bytes": 5092061184,
+  "exclusion_audit": {
+    "prior-footprints.json": {
+      "spec_id": "SPEC-96",
+      "records": 2658,
+      "sha256": "eb7bb1af7800c00e1837cca0634ffcad82792bf1dcd41cbd06fe112ea9aeecad"
+    },
+    "russia/manifest.json": {
+      "spec_id": "SPEC-92",
+      "records": 447,
+      "sha256": "1d487c711beb657a4c0ea0114379ddc51be2a31302891e47699942f95459f3db"
+    },
+    "severity-covered-v1/manifest.json": {
+      "spec_id": "SPEC-100",
+      "records": 173,
+      "sha256": "ed7903750216a4e341a394908dbe06f44fd195e0ade8f67034ec8497a83e79dc"
+    }
+  },
+  "systemd": "Id=fires-accuracy-western-collect-v1.service\nActiveState=active\nSubState=running\nMainPID=1185241\nExecMainStatus=0\n\nId=fires-accuracy-western-score-v1.service\nActiveState=active\nSubState=running\nMainPID=1185243\nExecMainStatus=0\n",
+  "processes": "    PID     ELAPSED %CPU   RSS COMMAND\n1185241       05:38 29.0 478672 /home/mc/fires-accuracy-next/.runtime/bin/python scripts/prepare_western_holdout.py --data-root data-store --out data-store/western-holdout-v1\n1185243       05:38  0.0  3940 /bin/bash /home/mc/fires-accuracy-next/scripts/queues/queue_western_holdout.sh\n"
+}
