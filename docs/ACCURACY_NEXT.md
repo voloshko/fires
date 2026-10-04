@@ -349,3 +349,17 @@ post-result analysis or changed recipe on these data is development. Next
 action is an explicit spec for failure diagnosis before further training;
 there is no current GPU job and free disk is about 4.1 GiB. Original four-part
 goal remains active: one comparator win does not establish the requested end state.
+
+## SPEC-106 diagnosis completed
+
+CPU-only, 15.909 seconds, exit 0, 500.2 MiB peak. Five tests passed, all
+96 parent confusions reconstructed from signed caches. Report and diagnostic
+PASS receipt saved; this PASS establishes diagnosis execution, not accuracy.
+One four-window group holds 52.88% of observed labelled pixels; removing it
+would reverse the reserve-minus-C1-MM point delta to -0.053299. Do not remove it.
+All four reserve-missed windows have no water-masked truth; their median
+dNBR is negative, post NDVI 0.672–0.785. Thus water is not the explanation,
+and temporal label/source semantics need checking before more training.
+This is not proof of misannotation; all old FAILs and raw evidence remain.
+No running GPU/collector jobs. Next: explicit temporal-source audit spec,
+using publisher documentation, without changing old supervised datasets.

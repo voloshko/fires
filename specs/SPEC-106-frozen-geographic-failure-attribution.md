@@ -1,6 +1,6 @@
 # SPEC-106: Frozen geographic failure attribution
 
-Status: active
+Status: implemented
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-92, SPEC-95, SPEC-105
 
@@ -50,3 +50,22 @@ diagnostic on consumed evaluation data, never a new confirmation or tuning run.
 - `make gate`.
 - non_claims: post-result diagnosis, not causal proof, field truth, new model
   improvement, independent selection evidence, global superiority or goal closure.
+
+## Resolution
+
+CPU-only diagnosis completed on k8plus in 15.909 seconds, exit 0, peak memory
+500.2 MiB. All 96 parent window counts reconstructed exactly from signed
+caches, without inference. The 641,702-byte JSON contains all 37 group influence
+rows and all 96 spectral/date summaries. Five regressions passed.
+
+One four-window group accounts for 379,830 of 718,280 labelled valid pixels
+(52.88%). Dropping it changes reserve-minus-C1-MM delta from +0.036730 to
+-0.053299. This explains concentration of the estimate, not a reason to omit
+the group. Preserve the original failed comparison and confidence interval.
+
+All four missed reserve windows have zero labelled valid pixels removed by
+the water rule. Their median dNBR values are -0.411906, -0.399169, -0.134003
+and -0.362641; median post NDVI is 0.672–0.785. These are observations, not
+proof of wrong labels or absence of fire. They motivate checking the published
+annotation temporal meaning before another model recipe or more imagery.
+No thresholds, labels, masks, fits or competitor scores were changed.

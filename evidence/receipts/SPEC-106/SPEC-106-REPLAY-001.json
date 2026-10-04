@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-106",
+  "run_id": "SPEC-106-REPLAY-001",
+  "created_at": "2026-10-04T06:40:29.554857+00:00",
+  "status": "PASS",
+  "evidence_class": "REPLAY",
+  "conclusion": "Completed source-bound CPU diagnosis; all parent counts reconstructed. No new model or accuracy acceptance.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_geographic_failure_report.py -q'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/report_geographic_failures.py --data-root data-store --manifest data-store/western-holdout-v1/manifest.json --parent research/western-holdout-v1-result.json --runs research/russian-transfer-v1 --reference-root /home/mc/fires/research --prithvi-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --out research/western-holdout-v1-diagnostics.json'",
+    "make gate"
+  ],
+  "acceptance": {
+    "windows": 96,
+    "groups": 37,
+    "all_parent_counts_exact": true,
+    "tests_passed": 5,
+    "cpu_only": true,
+    "exit_status": 0,
+    "elapsed_seconds": 15.909,
+    "peak_memory": "500.2 MiB",
+    "report_bytes": 641702,
+    "report_sha256": "6390e8a87f93dc240e453a6b16d1b9768499f130e0c6005aa5e11d9504d027fd",
+    "influential_group": "western:10805e404bb73641c4cf4f6520d7d723338b813761d3b412aec8c151e498e135",
+    "influential_truth_share": 0.5288049228713037,
+    "delta_without_influential_group": -0.05329928316682703,
+    "missed_reserve_windows": 4,
+    "water_truth_pixels_in_missed_windows": 0,
+    "all_missed_median_dnbr_negative": true
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/western-diagnostics.json"
+  ],
+  "limitations": [
+    "Post-result diagnostic on consumed evaluation data.",
+    "Summary quantiles are per-window; do not average medians as pixel-pooled statistics.",
+    "Negative dNBR is an observed property, not proof of annotation error or fire absence.",
+    "Immutable result rejects rerun to the same path."
+  ],
+  "non_claims": [
+    "Consumed evaluation: descriptive diagnosis, not independent confirmation or causal proof.",
+    "Leave-one-group-out is influence, not a new CI or authorization to exclude groups.",
+    "No new model, field truth, reviewed negatives, real ignition dates, accuracy gain or goal completion."
+  ]
+}
