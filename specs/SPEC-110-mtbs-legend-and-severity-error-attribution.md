@@ -1,6 +1,6 @@
 # SPEC-110: MTBS legend and severity error attribution
 
-Status: active
+Status: implemented
 Requirement: REQ-008
 Depends on: SPEC-94, SPEC-100, SPEC-107
 
@@ -50,3 +50,21 @@ its primary metric with an easier assessment-only score or relabel old FAILs.
 - non_claims: benchmark convention audit, not corrected independent model
   superiority, true burned area/field severity, reclassified labels, physical
   fire absence outside mapped areas or original goal completion.
+
+## Resolution
+
+CPU audit completed exit0,56.808seconds,4.3GiB peak. Three tests pass; all
+345 window confusions reconstruct and per-code decompositions recombine
+exactly. Unremapped MTBS0–6 exporter/source verified. Compact report1,045,741
+bytes, source-linked analysis and PASS receipt for audit execution only.
+
+Raw0 accounts for314,833/455,631 (69.10%) legacy background grade FP on
+development and200,280/416,115 (48.13%) on covered data. These are benchmark
+penalties outside assessment, not reviewed physical false fires. Raw5 has
+1,194/4,470 damage assignments respectively; it is increased postfire
+greenness and must not be interpreted as physical no-fire.
+
+Equal neural grading improves low-severity classification on reached pixels,
+but moderate remains worse than the hybrid; missing contour coverage is a
+distinct limitation. No easier replacement score, new model acceptance,
+label/threshold/contour change or reversal of old FAILs was performed.

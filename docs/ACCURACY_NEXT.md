@@ -467,3 +467,17 @@ Do not waive guards, promote a regional subset or claim independent superiority.
 Weights/caches/results/FAILreceipt preserved. All prior populations consumed.
 SPEC110 CPU raw-MTBS attribution also finished, pending receipt/report closure.
 No own GPU job remains; original four-direction goal active and unachieved.
+
+## SPEC-110 MTBS attribution completed
+
+Three tests, CPU exit0, exact reconstruction of345 old confusions. Raw0 is
+outside MTBS assessment; raw5 is burned increased greenness, not no-fire.
+Report docs/SPEC-110-MTBS-LEGEND.md; data audit/summary and PASS receipt for
+decomposition only. Legacy full-frame metric, labels and FAILs unchanged.
+69.10% /48.13% of legacy background grade FP lie on raw0 in dev/covered;
+same fixed contour makes these counts identical across grade heads. On
+actually reached raw2 pixels, neural equal head helps substantially; raw3
+moderate remains worse than hybrid. Do not fix this by hiding unassessed
+pixels or interpreting class5 as reviewed negatives. Separate contour coverage
+from damage grading in further experiments. All jobs terminal, no GPU work
+running; no model promoted. Four-direction user objective remains active.

@@ -1,0 +1,238 @@
+{
+  "spec_id": "SPEC-110",
+  "utc": "2026-10-04T08:59:26.619895+00:00",
+  "report_bytes": 1045741,
+  "all_confusions_exact": true,
+  "summary": {
+    "paired-severity-v1-result": {
+      "windows": 172,
+      "observed_pixels": 43858159,
+      "masked_fraction": 0.027293027833450667,
+      "raw0_pixels": 40739949,
+      "raw5_pixels": 4436,
+      "assessed_1_to_5_pixels": 3106951,
+      "models": {
+        "equal": {
+          "by_raw_code": {
+            "0": {
+              "observed": 40739949,
+              "damage_predictions": 314833,
+              "legacy_errors": 314833
+            },
+            "1": {
+              "observed": 470789,
+              "damage_predictions": 139604,
+              "legacy_errors": 139604
+            },
+            "2": {
+              "observed": 2252651,
+              "damage_predictions": 1131148,
+              "legacy_errors": 1162758
+            },
+            "6": {
+              "observed": 11259,
+              "damage_predictions": 0,
+              "legacy_errors": 0
+            },
+            "3": {
+              "observed": 263912,
+              "damage_predictions": 188247,
+              "legacy_errors": 160853
+            },
+            "5": {
+              "observed": 4436,
+              "damage_predictions": 1194,
+              "legacy_errors": 1194
+            },
+            "4": {
+              "observed": 115163,
+              "damage_predictions": 80608,
+              "legacy_errors": 59825
+            }
+          },
+          "total_legacy_errors": 1839067,
+          "legacy_background_grade_fp": 455631,
+          "raw0_fraction_of_legacy_background_fp": 0.6909823958422495
+        },
+        "balanced": {
+          "by_raw_code": {
+            "0": {
+              "observed": 40739949,
+              "damage_predictions": 314833,
+              "legacy_errors": 314833
+            },
+            "1": {
+              "observed": 470789,
+              "damage_predictions": 139604,
+              "legacy_errors": 139604
+            },
+            "2": {
+              "observed": 2252651,
+              "damage_predictions": 1131148,
+              "legacy_errors": 1194344
+            },
+            "6": {
+              "observed": 11259,
+              "damage_predictions": 0,
+              "legacy_errors": 0
+            },
+            "3": {
+              "observed": 263912,
+              "damage_predictions": 188247,
+              "legacy_errors": 150053
+            },
+            "5": {
+              "observed": 4436,
+              "damage_predictions": 1194,
+              "legacy_errors": 1194
+            },
+            "4": {
+              "observed": 115163,
+              "damage_predictions": 80608,
+              "legacy_errors": 55985
+            }
+          },
+          "total_legacy_errors": 1856013,
+          "legacy_background_grade_fp": 455631,
+          "raw0_fraction_of_legacy_background_fp": 0.6909823958422495
+        },
+        "hybrid": {
+          "by_raw_code": {
+            "0": {
+              "observed": 40739949,
+              "damage_predictions": 314833,
+              "legacy_errors": 314833
+            },
+            "1": {
+              "observed": 470789,
+              "damage_predictions": 139604,
+              "legacy_errors": 139604
+            },
+            "2": {
+              "observed": 2252651,
+              "damage_predictions": 1131148,
+              "legacy_errors": 1327532
+            },
+            "6": {
+              "observed": 11259,
+              "damage_predictions": 0,
+              "legacy_errors": 0
+            },
+            "3": {
+              "observed": 263912,
+              "damage_predictions": 188247,
+              "legacy_errors": 135272
+            },
+            "5": {
+              "observed": 4436,
+              "damage_predictions": 1194,
+              "legacy_errors": 1194
+            },
+            "4": {
+              "observed": 115163,
+              "damage_predictions": 80608,
+              "legacy_errors": 61985
+            }
+          },
+          "total_legacy_errors": 1980420,
+          "legacy_background_grade_fp": 455631,
+          "raw0_fraction_of_legacy_background_fp": 0.6909823958422495
+        }
+      }
+    },
+    "fresh-covered-v1-result": {
+      "windows": 173,
+      "observed_pixels": 44484013,
+      "masked_fraction": 0.019115359796954,
+      "raw0_pixels": 41532336,
+      "raw5_pixels": 5857,
+      "assessed_1_to_5_pixels": 2934347,
+      "models": {
+        "equal": {
+          "by_raw_code": {
+            "0": {
+              "observed": 41532336,
+              "damage_predictions": 200280,
+              "legacy_errors": 200280
+            },
+            "1": {
+              "observed": 360552,
+              "damage_predictions": 211365,
+              "legacy_errors": 211365
+            },
+            "2": {
+              "observed": 1811783,
+              "damage_predictions": 1290590,
+              "legacy_errors": 619795
+            },
+            "3": {
+              "observed": 487478,
+              "damage_predictions": 426646,
+              "legacy_errors": 282776
+            },
+            "4": {
+              "observed": 268677,
+              "damage_predictions": 245253,
+              "legacy_errors": 109906
+            },
+            "5": {
+              "observed": 5857,
+              "damage_predictions": 4470,
+              "legacy_errors": 4470
+            },
+            "6": {
+              "observed": 17330,
+              "damage_predictions": 0,
+              "legacy_errors": 0
+            }
+          },
+          "total_legacy_errors": 1428592,
+          "legacy_background_grade_fp": 416115,
+          "raw0_fraction_of_legacy_background_fp": 0.4813092534515699
+        },
+        "hybrid": {
+          "by_raw_code": {
+            "0": {
+              "observed": 41532336,
+              "damage_predictions": 200280,
+              "legacy_errors": 200280
+            },
+            "1": {
+              "observed": 360552,
+              "damage_predictions": 211365,
+              "legacy_errors": 211365
+            },
+            "2": {
+              "observed": 1811783,
+              "damage_predictions": 1290590,
+              "legacy_errors": 740261
+            },
+            "3": {
+              "observed": 487478,
+              "damage_predictions": 426646,
+              "legacy_errors": 252692
+            },
+            "4": {
+              "observed": 268677,
+              "damage_predictions": 245253,
+              "legacy_errors": 112542
+            },
+            "5": {
+              "observed": 5857,
+              "damage_predictions": 4470,
+              "legacy_errors": 4470
+            },
+            "6": {
+              "observed": 17330,
+              "damage_predictions": 0,
+              "legacy_errors": 0
+            }
+          },
+          "total_legacy_errors": 1521610,
+          "legacy_background_grade_fp": 416115,
+          "raw0_fraction_of_legacy_background_fp": 0.4813092534515699
+        }
+      }
+    }
+  }
+}

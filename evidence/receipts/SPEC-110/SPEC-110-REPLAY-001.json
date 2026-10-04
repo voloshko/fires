@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-110",
+  "run_id": "SPEC-110-REPLAY-001",
+  "created_at": "2026-10-04T08:59:26.619895+00:00",
+  "status": "PASS",
+  "evidence_class": "REPLAY",
+  "conclusion": "All345 legacy window confusions reconstructed and attributed to original MTBS codes; metric and model conventions unchanged.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/audit_mtbs_legend.py --data-root data-store --reference-root /home/mc/fires/research --out research/mtbs-legend-audit-v1.json'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_mtbs_legend_audit.py -q'",
+    "make gate"
+  ],
+  "acceptance": {
+    "populations": [
+      172,
+      173
+    ],
+    "all_confusions_exact": true,
+    "raw_code_recombination_exact": true,
+    "report_bytes": 1045741,
+    "report_sha256": "d1b449cfcc7cfef49312a6e49a86c6afc22bb37c0d47e682b6e3c8c82303b4fe",
+    "tests_passed": 3,
+    "unit_exit": 0,
+    "elapsed_seconds": 56.808,
+    "peak_memory": "4.3 GiB",
+    "inference": false,
+    "metric_changed": false
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/mtbs-legend-audit.json",
+    "evidence/experiments/accuracy-next-20261003/mtbs-legend-summary.json",
+    "docs/SPEC-110-MTBS-LEGEND.md"
+  ],
+  "limitations": [
+    "Consumed data and original source conventions: no independent model acceptance.",
+    "Background/no-data is benchmark class0, not proof of physical fire absence.",
+    "Grade false-positive attribution shares the fixed detector contour.",
+    "Immutable audit filename rejects rerun; any authorized successor must preserve old artifacts."
+  ],
+  "non_claims": [
+    "Legacy benchmark conventions preserved; no easier replacement metric or model promotion.",
+    "MTBS0 is outside assessment and5 is increased greenness, not independently reviewed physical fire absence.",
+    "No new accuracy, causal error proof, field severity, changed contours/labels or goal completion."
+  ]
+}
