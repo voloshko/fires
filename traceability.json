@@ -150,7 +150,8 @@
         "SPEC-104",
         "SPEC-105",
         "SPEC-106",
-        "SPEC-107"
+        "SPEC-107",
+        "SPEC-108"
       ]
     }
   },
@@ -1198,6 +1199,18 @@
         "SPEC-106"
       ],
       "status": "implemented"
+    },
+    "SPEC-108": {
+      "title": "In-period visibility probe for missed spring burns",
+      "file": "specs/SPEC-108-in-period-visibility-probe-for-missed-spring-burns.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-93",
+        "SPEC-105",
+        "SPEC-106",
+        "SPEC-107"
+      ],
+      "status": "active"
     }
   }
 }
