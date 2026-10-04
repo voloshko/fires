@@ -1,0 +1,24 @@
+{
+  "source_hashes": {
+    "/home/mc/fires-accuracy-next/scripts/audit_cems_source_availability.py": "c8a9a510895d0533715ba3bc160ae062f506718bd7e24ea27b0409d5210364b8",
+    "scripts/train_unet.py": "3f7a8fe08d303cdd482033386118328f0db810f86db1c003d8c08c9d57dc7ee7",
+    "src/comp/accuracy_artifacts.py": "17e4e6d021fcf4a2d3c14a57aab626cf98b38ca599545f601f5ce0017652285c",
+    "src/comp/accuracy_contract.py": "6c71e49762838b1344355c10dceea1f6ced3d61fb6a9646ad8f0a37ec429e423",
+    "src/comp/cems_source_availability.py": "d4c3f116247244aa1afca392d32f4dfe5340080d18b84456b23e43278e44d675",
+    "src/comp/forest_pair.py": "a8923953ccefd160e5e0e952929e4691ca8f908493d404658aa6ff722d785949",
+    "src/comp/hls.py": "37daa4ec8e6223a10e161681b5dcaa090697af279aaf559d44d1e254a106290f"
+  },
+  "configuration": {
+    "endpoints": {
+      "rapid": "https://rapidmapping.emergency.copernicus.eu/backend/dashboard-api/public-activations-info/?limit=1000",
+      "historical": "https://mapping.emergency.copernicus.eu/activations/api/activations/?limit=2000&activationTime=2012-01%2C2026-10-04"
+    },
+    "images": false,
+    "filter_basis": "declared country labels only; activation timestamps not ignition"
+  },
+  "software": {
+    "torch": "2.14.0+cu130",
+    "numpy": "2.5.3"
+  },
+  "recipe_id": "42b5d69f3dcbfb624ea2abf34dfbfe5045a30b2cd8ecbeb1d8d43664ef8eb5dd"
+}

@@ -666,3 +666,17 @@ pending, no partialensemble score. Train1342930/score1342954 and conditional
 source1361531 remain live. Wait specific handles, preserve all immutable
 sources/outputs; no eastern imagery until genuineeligible full114result.
 Four-direction goal and all original gates remain unfulfilled.
+
+## SPEC-117 metadata source audit implemented
+
+ExistingRapidAPI only265since2023; historicalportal1065since2012, bothzero
+declaredRussian records, historicalunknowncountry1 retained. Country-tagged
+Sweden wildfire candidates4 (3from2015+), not proven boreal labels/fireIDs.
+No CEMS Russian training source established by these two snapshots. No global
+fireabsence claim. Finalv2 sourceauditexit0/4.968s/323.8MiB,5tests/gate and
+1330rawrows exactreplay; raw786017bytes retained onk8plus, compactJSON onMac.
+Sourcecode parity; blankcountry reviewerfix; codeAPPROVE/architectureWATCH,
+scopedCOMMENT and metadata-onlyPASS. No images/GPU/datasplit or olddeletion.
+SPEC114 lastpost-s3 nownearend30epochs; score1342954waits, conditional116
+source1361531waits forfullqualityeligible. All114sources/criteria immutable;
+no neweastern imagery and no original four-direction goal completion.

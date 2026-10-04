@@ -1,0 +1,206 @@
+{
+  "spec_id": "SPEC-117",
+  "recipe_id": "42b5d69f3dcbfb624ea2abf34dfbfe5045a30b2cd8ecbeb1d8d43664ef8eb5dd",
+  "snapshots": {
+    "rapid": {
+      "pages": [
+        {
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/dashboard-api/public-activations-info/?limit=1000",
+          "response_url": "https://rapidmapping.emergency.copernicus.eu/backend/dashboard-api/public-activations-info/?limit=1000",
+          "status": 200,
+          "captured_at": "2026-10-04T11:55:05.451804+00:00",
+          "path": "research/cems-source-availability-v2/rapid-page0.json",
+          "sha256": "543e240cf2a9324822cd104833d157ef4eecd20d149e679d2ab01d4fee8d71a5"
+        }
+      ],
+      "declared_count": 265,
+      "complete": true,
+      "summary": {
+        "records": 265,
+        "unknown_country_records": [],
+        "declared_russian_records": [],
+        "declared_russian_wildfires": [],
+        "boreal_wildfire_activations": [
+          {
+            "code": "EMSR660",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2023-05-10T21:35:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest fire in Ulricehamn region, Sweden",
+            "n_aois": 1,
+            "n_products": 1,
+            "country_unknown": false
+          }
+        ],
+        "post2015_boreal_activations": [
+          {
+            "code": "EMSR660",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2023-05-10T21:35:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest fire in Ulricehamn region, Sweden",
+            "n_aois": 1,
+            "n_products": 1,
+            "country_unknown": false
+          }
+        ],
+        "activation_time_bounds": [
+          "2023-03-24T12:39:00",
+          "2026-09-15T16:58:00"
+        ]
+      }
+    },
+    "historical": {
+      "pages": [
+        {
+          "url": "https://mapping.emergency.copernicus.eu/activations/api/activations/?limit=2000&activationTime=2012-01%2C2026-10-04",
+          "response_url": "https://mapping.emergency.copernicus.eu/activations/api/activations/?limit=2000&activationTime=2012-01%2C2026-10-04",
+          "status": 200,
+          "captured_at": "2026-10-04T11:55:07.611511+00:00",
+          "path": "research/cems-source-availability-v2/historical-page0.json",
+          "sha256": "b81ceb1145f068e22b754e2b1be073b3e21ef6225c139740412cf4ee0f817382"
+        }
+      ],
+      "declared_count": 1065,
+      "complete": true,
+      "summary": {
+        "records": 1065,
+        "unknown_country_records": [
+          {
+            "code": "EMSR103",
+            "countries": [],
+            "category": "Other",
+            "wildfire": false,
+            "activation_time": "2014-09-18T18:53:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Agriculture Assessment in the Gaza Strip",
+            "n_aois": 1,
+            "n_products": 18,
+            "country_unknown": true
+          }
+        ],
+        "declared_russian_records": [],
+        "declared_russian_wildfires": [],
+        "boreal_wildfire_activations": [
+          {
+            "code": "EMSR660",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2023-05-10T21:35:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest fire in Ulricehamn region, Sweden",
+            "n_aois": 1,
+            "n_products": 1,
+            "country_unknown": false
+          },
+          {
+            "code": "EMSR298",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2018-07-16T21:17:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest Fire in Central Sweden",
+            "n_aois": 11,
+            "n_products": 39,
+            "country_unknown": false
+          },
+          {
+            "code": "EMSR290",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2018-06-06T11:27:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest fire in Sweden",
+            "n_aois": 5,
+            "n_products": 11,
+            "country_unknown": false
+          },
+          {
+            "code": "EMSR096",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2014-08-04T13:59:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Fire in Sweden",
+            "n_aois": 1,
+            "n_products": 4,
+            "country_unknown": false
+          }
+        ],
+        "post2015_boreal_activations": [
+          {
+            "code": "EMSR660",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2023-05-10T21:35:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest fire in Ulricehamn region, Sweden",
+            "n_aois": 1,
+            "n_products": 1,
+            "country_unknown": false
+          },
+          {
+            "code": "EMSR298",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2018-07-16T21:17:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest Fire in Central Sweden",
+            "n_aois": 11,
+            "n_products": 39,
+            "country_unknown": false
+          },
+          {
+            "code": "EMSR290",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2018-06-06T11:27:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest fire in Sweden",
+            "n_aois": 5,
+            "n_products": 11,
+            "country_unknown": false
+          }
+        ],
+        "activation_time_bounds": [
+          "2012-04-27T09:00:00",
+          "2026-09-15T16:58:00"
+        ]
+      }
+    }
+  },
+  "non_claims": [
+    "Snapshot of two public activation listings, not every mapping source or absence of fire.",
+    "Country tags and activation timestamps do not prove physical ignition, labels, imagery admission or independent fire counts.",
+    "No data split/training, Russian accuracy, model promotion or original goal completion."
+  ]
+}

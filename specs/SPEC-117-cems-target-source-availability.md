@@ -1,6 +1,6 @@
 # SPEC-117: Audit CEMS Russian and boreal label source availability
 
-Status: active
+Status: implemented
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-96
 
@@ -58,3 +58,17 @@ review found empty individual country labels should remain unknown, rather
 than abort on schema ambiguity. Fix preserves mixed known/unknown countries
 and five tests pass. V1 raw/result/seal retained; finalv2 uses a fresh output
 and source seal. No changed source filters, metric or data admission.
+
+## Resolution
+
+Implemented metadata audit of two public listings. Finalv2 exit0/4.968s/
+323.8MiB peak; five tests/gate pass and1330raw records replayed exactly.
+Rapid265 since2023-03-24, historical1065 since2012-04-27; both latest2026-09-15.
+No declared Russian records/wildfires. Historical one unknown-country record
+retained; four country-tagged Swedish wildfire candidates, three from2015+.
+No claim of physical fire counts, boreal ecology, available labels or absence
+of Russian fires/mapping elsewhere. Raw pages and oldv1 preserved onk8plus,
+compact report/seals onMac. Total786017bytes before tiny replayaudit, below16MiB.
+Independent codeAPPROVE after unknown-country fix; architectureWATCH, scoped
+finalCOMMENT. PASS receipt source availability only; no model/GPU or new data
+admission. Original four-direction goal remains active.

@@ -1,0 +1,10 @@
+{
+  "spec_id": "SPEC-117",
+  "result_sha256": "4c92c1252c68b61ba99ab5c83e11943b3190962bbc4ee1869c3595095b2f42bd",
+  "raw_summaries_recomputed_exact": true,
+  "records_replayed": 1330,
+  "output_bytes_before_audit": 786017,
+  "non_claims": [
+    "Endpoint snapshot replay only; no imagery/admission/accuracy inference"
+  ]
+}

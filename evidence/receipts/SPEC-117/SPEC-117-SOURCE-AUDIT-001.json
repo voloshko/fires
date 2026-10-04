@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-117",
+  "run_id": "SPEC-117-SOURCE-AUDIT-001",
+  "created_at": "2026-10-04T11:58:20.416460+00:00",
+  "status": "PASS",
+  "evidence_class": "LIVE",
+  "conclusion": "Bounded public listings captured265current/1065historical with no declared Russian records; missing country and candidate limits preserved. No label collection or accuracy claim.",
+  "commands": [
+    "ssh k8plus: .runtime/bin/python -m pytest tests/test_cems_source_availability.py -q",
+    "ssh k8plus: audit_cems_source_availability.py --out research/cems-source-availability-v2",
+    "ssh k8plus: raw SHA/count/summary replay",
+    "make gate"
+  ],
+  "acceptance": {
+    "summaries": {
+      "rapid": {
+        "records": 265,
+        "unknown_country_records": [],
+        "declared_russian_records": [],
+        "declared_russian_wildfires": [],
+        "boreal_wildfire_activations": [
+          {
+            "code": "EMSR660",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2023-05-10T21:35:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest fire in Ulricehamn region, Sweden",
+            "n_aois": 1,
+            "n_products": 1,
+            "country_unknown": false
+          }
+        ],
+        "post2015_boreal_activations": [
+          {
+            "code": "EMSR660",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2023-05-10T21:35:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest fire in Ulricehamn region, Sweden",
+            "n_aois": 1,
+            "n_products": 1,
+            "country_unknown": false
+          }
+        ],
+        "activation_time_bounds": [
+          "2023-03-24T12:39:00",
+          "2026-09-15T16:58:00"
+        ]
+      },
+      "historical": {
+        "records": 1065,
+        "unknown_country_records": [
+          {
+            "code": "EMSR103",
+            "countries": [],
+            "category": "Other",
+            "wildfire": false,
+            "activation_time": "2014-09-18T18:53:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Agriculture Assessment in the Gaza Strip",
+            "n_aois": 1,
+            "n_products": 18,
+            "country_unknown": true
+          }
+        ],
+        "declared_russian_records": [],
+        "declared_russian_wildfires": [],
+        "boreal_wildfire_activations": [
+          {
+            "code": "EMSR660",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2023-05-10T21:35:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest fire in Ulricehamn region, Sweden",
+            "n_aois": 1,
+            "n_products": 1,
+            "country_unknown": false
+          },
+          {
+            "code": "EMSR298",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2018-07-16T21:17:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest Fire in Central Sweden",
+            "n_aois": 11,
+            "n_products": 39,
+            "country_unknown": false
+          },
+          {
+            "code": "EMSR290",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2018-06-06T11:27:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest fire in Sweden",
+            "n_aois": 5,
+            "n_products": 11,
+            "country_unknown": false
+          },
+          {
+            "code": "EMSR096",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2014-08-04T13:59:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Fire in Sweden",
+            "n_aois": 1,
+            "n_products": 4,
+            "country_unknown": false
+          }
+        ],
+        "post2015_boreal_activations": [
+          {
+            "code": "EMSR660",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2023-05-10T21:35:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest fire in Ulricehamn region, Sweden",
+            "n_aois": 1,
+            "n_products": 1,
+            "country_unknown": false
+          },
+          {
+            "code": "EMSR298",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2018-07-16T21:17:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest Fire in Central Sweden",
+            "n_aois": 11,
+            "n_products": 39,
+            "country_unknown": false
+          },
+          {
+            "code": "EMSR290",
+            "countries": [
+              "Sweden"
+            ],
+            "category": "Wildfire",
+            "wildfire": true,
+            "activation_time": "2018-06-06T11:27:00",
+            "timestamp_semantics": "activation, not physical ignition",
+            "name": "Forest fire in Sweden",
+            "n_aois": 5,
+            "n_products": 11,
+            "country_unknown": false
+          }
+        ],
+        "activation_time_bounds": [
+          "2012-04-27T09:00:00",
+          "2026-09-15T16:58:00"
+        ]
+      }
+    },
+    "replay": {
+      "spec_id": "SPEC-117",
+      "result_sha256": "4c92c1252c68b61ba99ab5c83e11943b3190962bbc4ee1869c3595095b2f42bd",
+      "raw_summaries_recomputed_exact": true,
+      "records_replayed": 1330,
+      "output_bytes_before_audit": 786017,
+      "non_claims": [
+        "Endpoint snapshot replay only; no imagery/admission/accuracy inference"
+      ]
+    },
+    "unit_tests_passed": 5,
+    "execution_exit": 0,
+    "seconds": 4.968,
+    "host_peak": "323.8 MiB",
+    "source_recipe": "42b5d69f3dcbfb624ea2abf34dfbfe5045a30b2cd8ecbeb1d8d43664ef8eb5dd",
+    "local_source_parity": true,
+    "review_code": "APPROVE",
+    "review_architecture": "WATCH",
+    "review_synthesis": "COMMENT"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/cems-source-availability.json",
+    "evidence/experiments/accuracy-next-20261003/cems-source-availability-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/cems-source-availability-v2.json",
+    "evidence/experiments/accuracy-next-20261003/cems-source-availability-v2-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/cems-source-availability-v2-replay-audit.json",
+    "docs/SPEC-117-SOURCE-AVAILABILITY.md"
+  ],
+  "limitations": [
+    "All raw pages retained only on k8plus; compact source-bound summaries on Mac.",
+    "Declared pagination completeness is not global or multi-endpoint atomic coverage.",
+    "Country-tagged northern candidates do not establish boreal ecology, usable vectors or independent physical fires.",
+    "The265/1065 discovery counts were already observed before the metadata audit spec; no preregistered model-test claim."
+  ],
+  "non_claims": [
+    "Snapshot of two public activation listings, not every mapping source or absence of fire.",
+    "Country tags and activation timestamps do not prove physical ignition, labels, imagery admission or independent fire counts.",
+    "No data split/training, Russian accuracy, model promotion or original goal completion."
+  ]
+}
