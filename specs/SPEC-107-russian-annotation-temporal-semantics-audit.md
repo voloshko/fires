@@ -1,6 +1,6 @@
 # SPEC-107: Russian annotation temporal semantics audit
 
-Status: active
+Status: implemented
 Requirement: REQ-008
 Depends on: SPEC-92, SPEC-105, SPEC-106
 
@@ -43,3 +43,20 @@ statements justify; preserve all prior labels, measurements and FAIL receipts.
 - `make gate`.
 - non_claims: no field truth, complete negatives, per-fire date recovery,
   causal proof from observed spectra, new model gain or full goal closure.
+
+## Resolution
+
+Publisher landing page and author archive returned HTTP 200 on k8plus;
+compact audit records raw HTML SHA256 and UTC. Methods paper was read via
+publisher-provided full text on ResearchGate, sections 2.2–2.4 and 4.
+No PDF downloaded. Source interval Jan1–May15 2020 confirmed. Existing ZIP
+contains 196673 polygons and only the area attribute, no dates/auxiliary file.
+
+The source used multiple in-period observations; fire timing in the paper
+was inferred from active detections or first observed scar with uncertainty.
+Our seasonal 2019/2020 pair is an approximation to those observations. This
+does not prove erroneous labels or invalidate the preserved comparisons.
+The source table and author archive differ in descriptions of derived files;
+no replacement or reinterpretation of the frozen raw ZIP was performed.
+Next: separately specified small multi-date visibility audit on consumed
+missed windows, before a new temporal-data/training recipe. No model promotion.

@@ -363,3 +363,17 @@ and temporal label/source semantics need checking before more training.
 This is not proof of misannotation; all old FAILs and raw evidence remain.
 No running GPU/collector jobs. Next: explicit temporal-source audit spec,
 using publisher documentation, without changing old supervised datasets.
+
+## SPEC-107 source audit completed
+
+PANGAEA and author archive independently confirm the Jan1–May15 2020 fire
+interval. Paper full text read at publisher-provided ResearchGate mirror,
+sections 2.2–2.4/4: authors used multiple in-period observations, rather than
+our fixed May–July scene pair. ZIP schema confirms area only, no fire dates.
+Our pairing is an approximation, not proven wrong ground truth. Observed
+negative dNBR/green post scenes can reflect recovery/phenology or an individual
+label mismatch; neither is established causally. Raw HTML and hashes on
+k8plus, compact schema/source audit and source-linked report in the worktree.
+No old label/data/recipe/result altered. Next safe experiment: bounded temporal
+visibility probe of the four missed windows, under a new spec, with strict SCL,
+no inferred ignition day and no independent accuracy claim. No running GPU job.

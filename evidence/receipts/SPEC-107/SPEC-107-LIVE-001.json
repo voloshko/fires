@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-107",
+  "run_id": "SPEC-107-LIVE-001",
+  "created_at": "2026-10-04T06:44:43.372680+00:00",
+  "status": "PASS",
+  "evidence_class": "LIVE",
+  "conclusion": "Publisher interval confirmed; existing schema has no polygon dates and fixed annual pairing is an observation approximation.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -c \"import pyogrio; print(pyogrio.read_info(\\\"zip:///home/mc/fires-accuracy-next/data-store/russia/burned_area_2020_topology.zip\\\"))\"'",
+    "make gate"
+  ],
+  "acceptance": {
+    "primary_source_pages": [
+      {
+        "name": "pangaea",
+        "url": "https://doi.pangaea.de/10.1594/PANGAEA.939429?format=html",
+        "status": 200,
+        "bytes": 51282,
+        "sha256": "f935ceb5d23bdf620e5d47db5b5c09829916ac4f775da39c6ebf04ab14c4ebcb"
+      },
+      {
+        "name": "authors-archive",
+        "url": "https://erda.ku.dk/archives/0ede932ec097c6095710ed9c5f4e49ac/published-archive.html",
+        "status": 200,
+        "bytes": 33060,
+        "sha256": "873ec4f6c9eb143c185191849547d91d3be55e50d194ed7b32e04aeffe8261db"
+      }
+    ],
+    "schema": {
+      "fields": [
+        "area"
+      ],
+      "dtypes": [
+        "float64"
+      ],
+      "crs": "EPSG:4326",
+      "features": 196673,
+      "geometry_type": "Polygon"
+    },
+    "polygon_dates": "UNKNOWN",
+    "dated_auxiliary_file_present": false,
+    "current_pairing": "APPROXIMATION",
+    "methods_article_doi": "10.1088/1748-9326/ac3287",
+    "methods_sections_read": [
+      "2.2",
+      "2.3",
+      "2.4",
+      "4"
+    ],
+    "methods_fulltext_url": "https://www.researchgate.net/publication/355490657_Spring_fires_in_Russia_Results_from_participatory_burned_area_mapping_with_Sentinel-2_imagery",
+    "pdf_download_bytes": 0,
+    "old_artifacts_changed": false
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/temporal-source-audit.json",
+    "docs/research/SPEC-107-temporal-audit.md"
+  ],
+  "limitations": [
+    "Publisher HTML bodies retained only on k8plus with raw SHA256; full paper read via web text, no PDF artifact.",
+    "No per-fire dates or causal proof recovered.",
+    "No changes to any existing label, window, threshold or failed result."
+  ],
+  "non_claims": [
+    "No field truth, complete reviewed negatives, causal annotation-error proof, new model improvement or goal completion."
+  ]
+}

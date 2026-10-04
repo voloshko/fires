@@ -1,0 +1,40 @@
+{
+  "spec_id": "SPEC-107",
+  "utc": "2026-10-04T06:44:43.372680+00:00",
+  "source_pages": [
+    {
+      "name": "pangaea",
+      "url": "https://doi.pangaea.de/10.1594/PANGAEA.939429?format=html",
+      "status": 200,
+      "bytes": 51282,
+      "sha256": "f935ceb5d23bdf620e5d47db5b5c09829916ac4f775da39c6ebf04ab14c4ebcb"
+    },
+    {
+      "name": "authors-archive",
+      "url": "https://erda.ku.dk/archives/0ede932ec097c6095710ed9c5f4e49ac/published-archive.html",
+      "status": 200,
+      "bytes": 33060,
+      "sha256": "873ec4f6c9eb143c185191849547d91d3be55e50d194ed7b32e04aeffe8261db"
+    }
+  ],
+  "source_zip_sha256": "5f1cfb843d5579d800a1e8359a017f8cd33c5658f6e0c0a6eda7ac534a1c6b3c",
+  "archive_files": [
+    "burned_area_2020_topology.dbf",
+    "burned_area_2020_topology.prj",
+    "burned_area_2020_topology.qpj",
+    "burned_area_2020_topology.shp",
+    "burned_area_2020_topology.shx"
+  ],
+  "schema": {
+    "fields": [
+      "area"
+    ],
+    "dtypes": [
+      "float64"
+    ],
+    "crs": "EPSG:4326",
+    "features": 196673,
+    "geometry_type": "Polygon"
+  },
+  "downloaded_pdf_bytes": 0
+}
