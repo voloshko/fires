@@ -161,7 +161,8 @@
         "SPEC-115",
         "SPEC-116",
         "SPEC-117",
-        "SPEC-118"
+        "SPEC-118",
+        "SPEC-119"
       ]
     }
   },
@@ -1331,6 +1332,17 @@
         "SPEC-90",
         "SPEC-95",
         "SPEC-114"
+      ],
+      "status": "active"
+    },
+    "SPEC-119": {
+      "title": "Frozen eastern confirmation for five-member temporal ensemble",
+      "file": "specs/SPEC-119-five-seed-eastern-confirmation.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-112",
+        "SPEC-118",
+        "SPEC-116"
       ],
       "status": "active"
     }
