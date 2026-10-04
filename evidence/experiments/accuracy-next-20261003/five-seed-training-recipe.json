@@ -1,0 +1,76 @@
+{
+  "source_hashes": {
+    "scripts/forest_pair_train.py": "199c020cd30fb3936bac76ce04d6982dbde459093430c02bc548d799779fae6e",
+    "scripts/prepare_russian_windows.py": "f6ff816794b328b89fe62a3fc670208b570f35ba5e60123ddfcb217557811abc",
+    "scripts/queues/queue_five_seed_additions.sh": "ffc30f6f2bf32656b62f5d3b1b44083bea1c3d598882e0454e461ef34095d450",
+    "scripts/russian_transfer_train.py": "f7dc6eabd463abdc4dd38893773f9cf7f2e1c689e5b7a59c230a1f40097d7f70",
+    "scripts/score_equal_cost_additions.py": "a9ff4c11f4178cac879758d415177fa22258d2b1b64dd124ea4b097f047ed342",
+    "scripts/train_equal_cost_additions.py": "a00651a584c1bfa9baca4dc3e5d84f8faa52ad0fe6d167df8fe239c598e31462",
+    "scripts/train_five_seed_additions.py": "4c7f1c8be033f1b5a01422b2ce16c84747e4089ea4c8753805a326c198686250",
+    "scripts/train_unet.py": "3f7a8fe08d303cdd482033386118328f0db810f86db1c003d8c08c9d57dc7ee7",
+    "src/comp/accuracy_artifacts.py": "17e4e6d021fcf4a2d3c14a57aab626cf98b38ca599545f601f5ce0017652285c",
+    "src/comp/accuracy_contract.py": "6c71e49762838b1344355c10dceea1f6ced3d61fb6a9646ad8f0a37ec429e423",
+    "src/comp/equal_cost_additions.py": "0aa7b50e706ad1790ae69a5a582e95fdd82d3a1469ce00410624f266bf805e35",
+    "src/comp/five_seed_additions.py": "60ddbb3b9918140e48999a1e60ca3b7cfac87c29345a7b0331174e9b0984f330",
+    "src/comp/forest_pair.py": "a8923953ccefd160e5e0e952929e4691ca8f908493d404658aa6ff722d785949",
+    "src/comp/hls.py": "37daa4ec8e6223a10e161681b5dcaa090697af279aaf559d44d1e254a106290f",
+    "src/comp/l2a_finetuning.py": "60e0979252822355fa62d896faba9ad2d1d97f3b8bdcbb31328fbaea677fc67c",
+    "src/comp/recall_expansion.py": "dd437e9ac97299bd1ed65b1e47f1fdc073281f9716f0022f4e88317aa448ea61",
+    "src/comp/russian_transfer.py": "66c2a2f9301f77e2f4adf1713f752696dd6b05213a5a0c8aa2067e6f281c5dc0",
+    "src/comp/temporal_adapter_contract.py": "db8fe0dc69615e970e7bb97444c93f94c1e46bbab25cd92df9407eb45fbe13a1"
+  },
+  "configuration": {
+    "base_manifest": "1a70bf29a0b9e3c8462396967fdc12fca7f92ae29a236636de5585c74692f373",
+    "russian_manifest": "1d487c711beb657a4c0ea0114379ddc51be2a31302891e47699942f95459f3db",
+    "initializers": [
+      "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c",
+      "a0282b7c31c77d0941c1ed0d10981dd526c7345c5c7335cd2d8fb071ec40c0e0",
+      "48a3faa63c8814f793e2963f8db8ef2a42466d0f021463f84e58b5cdb834d61e",
+      "504141c858b50615e0a884dfa512f20360ceb2b86455967cb056279d2497ba8b",
+      "a48abe8b5c98883cf2f60a23eb457e39e5fea7584bafb4266d05eb7bcb16719f"
+    ],
+    "parent_recipe": "a6e432e3f0eeb21ac550027e7b5278d67aa1639ed819ed40c4d53539484ab690",
+    "parent_result": "eddf5ba5df6e6d47265503234a7443d2ee4730df9c3c1eef25eefb30105f51bc",
+    "parent_adapters": {
+      "pair": [
+        "8d022d364e907695d77369f04c9f07faf271a901aef3d854ce123611f30487cf",
+        "55ad02e60e0df2e4f4542ccbd16ef1e860a875fb6162e443e2936c6dd6bdb0d1",
+        "c90e4c6ffc7ec9f845c1783c764478360eef94fa33010b2f675202df336f40f3"
+      ],
+      "post": [
+        "5ecbc72262a1e67deede3d6a5b300d538e1fc48d8c80950735e747704ac674ff",
+        "a65c5a8a28ad4c9f722783f00b29ac297a74e6a19fd61dc630ef95d0de6b17e9",
+        "1e90b19c99f7d1fb31cd33cee7a548c56005414c9931001ca5f1231aad4d4e58"
+      ]
+    },
+    "epochs": 30,
+    "batch": 8,
+    "rank": 8,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "seeds": [
+      4,
+      5
+    ],
+    "variants": [
+      "pair",
+      "post"
+    ],
+    "precision": "bf16",
+    "normalization": "locked-C1-MM",
+    "fit_unique": 683,
+    "full_pool": true,
+    "loss_id": "equal-ce-dice-v1",
+    "ce_weights": [
+      1,
+      1
+    ],
+    "addition_prior_logit": -4,
+    "scoring": "C1-MM5+uniform-mean5-probability-union"
+  },
+  "software": {
+    "torch": "2.14.0+cu130",
+    "numpy": "2.5.3"
+  },
+  "recipe_id": "ccf1df7dd1eb779f7b2d5d66019751eb675b1b48e916716c3171837692f550dc"
+}

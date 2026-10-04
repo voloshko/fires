@@ -711,3 +711,26 @@ or eastern-confirmation-v2 dir/images;112plan stillunused. Conditionalcode,
 12tests/independentreviews/receipts preserved, positivepath NOT_RUN.
 114 train/scorer allterminalexit0. No product/source/accuracypromotion.
 Futurecandidate requiresnew spec/binding rather than weakening114/116criteria.
+
+## SPEC-118 fixed five-member hypothesis launched
+
+Spec cdb7e36 beforecode183901b. Reuse unchanged1141/2/3 native pair/post;
+train only4/5 (four jobs), same683fit/762views/30epochs/CE[1,1]/Dice/sealed
+C1init4/5 statistics/augmentation/optimizer. Uniformmean5q aroundC1-MM5,
+TTA8/.5, all375 oldwindows/unchangedeligibility. Newmembers118, parentmembers
+114 identities retained. All10 members/fullsummaries required before inference.
+Parent114FAIL and resultSHAeddf5ba5df6e6d47265503234a7443d2ee4730df9c3c1eef25eefb30105f51bc
+immutable. Parenttrain/scoring/code/model and native/exposure bindings audited.
+
+Seven tests and real512 smoke4/5pair/post FP32/BF16 passed (10.696s/2.5Gpeak),
+source/config/software parity. CodeAPPROVE/architectureWATCH/finalCOMMENT;
+seeddiversity isn't more independent samples or guaranteedCIgain, and meanq
+anchor isn't exactlymean individually expandedp. Trainingseal
+ccf1df7dd1eb779f7b2d5d66019751eb675b1b48e916716c3171837692f550dc.
+Own userunits fires-accuracy-five-seed-additions-train-v1(18G/CPU400%) and
+score-v1(12G/CPU400%) launched with WorkingDirectory/absolutequeues;
+sharedGPUlock/free22GB. Expectedresearch/five-seed-additions-v1/development.json.
+Prior estimate~40–43min fourtrainjobs plus~12–13min five-member score.
+Keep sealed sources immutable, preserve handles/outputs on observationtimeout.
+No newdata/deletion/localweights;112selection unused,116deferred, original
+four-direction goal active/unproven, no product or independent promotion.

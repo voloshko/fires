@@ -1,0 +1,40 @@
+{
+  "source_hashes": {
+    "/home/mc/fires-accuracy-next/scripts/smoke_five_seed_additions.py": "45260d1d6ec22af4d4dbf597b4b56934d454afecb604269792198db7abcd36bc",
+    "scripts/forest_pair_train.py": "199c020cd30fb3936bac76ce04d6982dbde459093430c02bc548d799779fae6e",
+    "scripts/queues/smoke_five_seed_additions.sh": "98d774dcd3e6d135ee68f217c5a89b3d08b81aaa44d84b01601baffee7522612",
+    "scripts/score_equal_cost_additions.py": "a9ff4c11f4178cac879758d415177fa22258d2b1b64dd124ea4b097f047ed342",
+    "scripts/train_unet.py": "3f7a8fe08d303cdd482033386118328f0db810f86db1c003d8c08c9d57dc7ee7",
+    "src/comp/accuracy_artifacts.py": "17e4e6d021fcf4a2d3c14a57aab626cf98b38ca599545f601f5ce0017652285c",
+    "src/comp/accuracy_contract.py": "6c71e49762838b1344355c10dceea1f6ced3d61fb6a9646ad8f0a37ec429e423",
+    "src/comp/equal_cost_additions.py": "0aa7b50e706ad1790ae69a5a582e95fdd82d3a1469ce00410624f266bf805e35",
+    "src/comp/five_seed_additions.py": "60ddbb3b9918140e48999a1e60ca3b7cfac87c29345a7b0331174e9b0984f330",
+    "src/comp/forest_pair.py": "a8923953ccefd160e5e0e952929e4691ca8f908493d404658aa6ff722d785949",
+    "src/comp/hls.py": "37daa4ec8e6223a10e161681b5dcaa090697af279aaf559d44d1e254a106290f",
+    "src/comp/recall_expansion.py": "dd437e9ac97299bd1ed65b1e47f1fdc073281f9716f0022f4e88317aa448ea61"
+  },
+  "configuration": {
+    "base_sha256": "504141c858b50615e0a884dfa512f20360ceb2b86455967cb056279d2497ba8b",
+    "manifest_sha256": "1d487c711beb657a4c0ea0114379ddc51be2a31302891e47699942f95459f3db",
+    "sample_id": "russia:002f1097a2aaf6f160b684cada5a0115349568f7f58b18a549c39557e3f1aa48",
+    "hashes": {
+      "pre": "9a4b227ca0e546e0f35fc4714fa618cfdf56ab5f61d16a4970a7da6e071b4595",
+      "post": "aa8eea7fd27d7dbcdd311647da650dc50e2b5eb5f919bea3207f2baae84f6427",
+      "pre_scl": "60d995b1e9700fba73b682feffe24204bfdaa9a11f5b1d6745b861f48cd8e1d8",
+      "post_scl": "c73bd44af9ddea63761fab1994c8cc1f8b68dbffa3247305f1d30fd00e7dd046",
+      "valid": "824fa1a327fe80fba03b757306b8d1858d133085e12f90783215857afc719ffd",
+      "mask": "f63279f76abe321b879e946826f9d5ae2982f762e87ab65fe98ff10e440543bd"
+    },
+    "rank": 8,
+    "variants": [
+      "pair",
+      "post"
+    ],
+    "smoke": true
+  },
+  "software": {
+    "torch": "2.14.0+cu130",
+    "numpy": "2.5.3"
+  },
+  "recipe_id": "b54a61db501ca2d4e87655b2ac54d0d628359b93a7576ab2f5eaea0d18d364c3"
+}

@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-118",
+  "run_id": "SPEC-118-PREFLIGHT-001",
+  "created_at": "2026-10-04T12:30:23.623340+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "evidence_class": "REPLAY",
+  "conclusion": "Seven unit tests and real512 smoke for new4/5 pair/post passed; parent/native/source/shared-config/software checks passed. Four new full runs launched; ten-member accuracy pending.",
+  "commands": [
+    "ssh k8plus: .runtime/bin/python -m pytest tests/test_five_seed_additions.py tests/test_equal_cost_additions.py -q",
+    "ssh k8plus: bash scripts/queues/smoke_five_seed_additions.sh",
+    "ssh k8plus: train_five_seed_additions.py --seal-only",
+    "ssh k8plus: queue_five_seed_additions.sh / queue_score_five_seed_additions.sh",
+    "make gate"
+  ],
+  "acceptance": {
+    "unit_tests_passed": 7,
+    "smokes": [
+      {
+        "spec_id": "SPEC-118",
+        "seed": 4,
+        "recipe_id": "b54a61db501ca2d4e87655b2ac54d0d628359b93a7576ab2f5eaea0d18d364c3",
+        "base_sha256": "504141c858b50615e0a884dfa512f20360ceb2b86455967cb056279d2497ba8b",
+        "sample_id": "russia:002f1097a2aaf6f160b684cada5a0115349568f7f58b18a549c39557e3f1aa48",
+        "variants": [
+          {
+            "variant": "pair",
+            "probability_formula": {
+              "fp32": true,
+              "bf16": true
+            },
+            "reference_positives_preserved": true,
+            "gradients_finite_nonzero": true,
+            "backbone_bn_frozen": true,
+            "checkpoint_sha256": "f9c94ec2e14863fad0e9d7dd0881d181710684f5af6ef8e48d8676bb0d69f172",
+            "checkpoint_bytes": 428778,
+            "trainable_parameters": 105689
+          },
+          {
+            "variant": "post",
+            "probability_formula": {
+              "fp32": true,
+              "bf16": true
+            },
+            "reference_positives_preserved": true,
+            "gradients_finite_nonzero": true,
+            "backbone_bn_frozen": true,
+            "checkpoint_sha256": "b4eee398fe3d0f8960bc8d641ff006ca008fbea5296102f19c8e0d54debe4bdf",
+            "checkpoint_bytes": 428778,
+            "trainable_parameters": 105689
+          }
+        ],
+        "completed": true,
+        "non_claims": [
+          "Mechanical GPU/source/adapter check only, no full training or accuracy gain.",
+          "No new independent competitor comparison, severity/L2A useful gain or goal completion."
+        ]
+      },
+      {
+        "spec_id": "SPEC-118",
+        "seed": 5,
+        "recipe_id": "c9c57fd101da39ed0c6d06e9ecd4eea5f02f169eb436025ba18ad8c326a02663",
+        "base_sha256": "a48abe8b5c98883cf2f60a23eb457e39e5fea7584bafb4266d05eb7bcb16719f",
+        "sample_id": "russia:002f1097a2aaf6f160b684cada5a0115349568f7f58b18a549c39557e3f1aa48",
+        "variants": [
+          {
+            "variant": "pair",
+            "probability_formula": {
+              "fp32": true,
+              "bf16": true
+            },
+            "reference_positives_preserved": true,
+            "gradients_finite_nonzero": true,
+            "backbone_bn_frozen": true,
+            "checkpoint_sha256": "71aa646738c63fb8b288d01757e26d66778c9daacf366025e6efad1a8c3d78c7",
+            "checkpoint_bytes": 428778,
+            "trainable_parameters": 105689
+          },
+          {
+            "variant": "post",
+            "probability_formula": {
+              "fp32": true,
+              "bf16": true
+            },
+            "reference_positives_preserved": true,
+            "gradients_finite_nonzero": true,
+            "backbone_bn_frozen": true,
+            "checkpoint_sha256": "3c6b80947331660bc366c15bcf4b1c7d7a8dfc8b936d6b308c4979116a0511d7",
+            "checkpoint_bytes": 428778,
+            "trainable_parameters": 105689
+          }
+        ],
+        "completed": true,
+        "non_claims": [
+          "Mechanical GPU/source/adapter check only, no full training or accuracy gain.",
+          "No new independent competitor comparison, severity/L2A useful gain or goal completion."
+        ]
+      }
+    ],
+    "smoke_exit": 0,
+    "smoke_wall_seconds": 10.696,
+    "smoke_host_peak": "2.5 GiB",
+    "training_recipe": "ccf1df7dd1eb779f7b2d5d66019751eb675b1b48e916716c3171837692f550dc",
+    "local_source_parity": true,
+    "shared_configuration_parity": true,
+    "software_parity": true,
+    "parent_result": "eddf5ba5df6e6d47265503234a7443d2ee4730df9c3c1eef25eefb30105f51bc",
+    "training": "LIVE",
+    "accuracy": "NOT_RUN",
+    "review_code": "APPROVE",
+    "review_architecture": "WATCH",
+    "review_synthesis": "COMMENT"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/five-seed-smoke-s4.json",
+    "evidence/experiments/accuracy-next-20261003/five-seed-smoke-s5.json",
+    "evidence/experiments/accuracy-next-20261003/five-seed-smoke-s4-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/five-seed-smoke-s5-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/five-seed-training-recipe.json",
+    "docs/SPEC-118-REVIEW.md"
+  ],
+  "limitations": [
+    "Additional seeds do not increase independent geographic/event sample size or guarantee narrower CI.",
+    "C1-MM5 plus mean5q differs from mean5 individually expanded probabilities because of covariance.",
+    "All old populations consumed development; no promotion from mechanical preflight."
+  ],
+  "non_claims": [
+    "Real GPU/native/source mechanics only; no full-training quality or original goal completion.",
+    "No new imagery, independent competitor confirmation, field truth, severity/L2A useful gain or globalrank."
+  ]
+}
