@@ -54,6 +54,11 @@ source admission and fresh accuracy criteria, and no data until eligibility.
 - k8plus: `.runtime/bin/python -m pytest tests/test_equal_cost_eastern_confirmation.py tests/test_eastern_confirmation.py -q`.
 - Conditional collector: `.runtime/bin/python scripts/collect_equal_cost_eastern.py --data-root data-store --selection data-store/eastern-holdout-plan-v1/selection.json --candidate research/equal-cost-additions-v1/development.json --runs research/equal-cost-additions-v1 --reference-root /home/mc/fires/research --prithvi-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --out data-store/eastern-confirmation-v2`.
 - Conditional scorer: `.runtime/bin/python scripts/score_equal_cost_eastern.py --data-root data-store --selection data-store/eastern-holdout-plan-v1/selection.json --candidate research/equal-cost-additions-v1/development.json --runs research/equal-cost-additions-v1 --reference-root /home/mc/fires/research --prithvi-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --manifest data-store/eastern-confirmation-v2/manifest.json --out research/eastern-confirmation-v2/result.json`.
+- Conditional resource wrapper: `bash scripts/queues/queue_equal_cost_eastern.sh`
+  in CPU2/8G systemd unit; waits terminal114 scorer and skips ineligible result
+  before source I/O. After successful admitted collection starts separate
+  CPU4/12G scoring unit running `bash scripts/queues/queue_score_equal_cost_eastern.sh`
+  under shared GPU lock/free22GB. Wrapper command recorded before execution.
 - `make gate`.
 - non_claims: shared PANGAEA publisher/spring2020, groups not physicalfireIDs;
   background not reviewed fireabsence; no field truth, worldranking, severity/
