@@ -59,3 +59,17 @@ remain preserved; no experimental model has been promoted to the product.
 - Current next actions require the pending capacity/access decisions or a
   separately specified, justified experiment on existing consumed data. No
   automatic permission from elapsed time or a default question selection.
+
+## Blocking audit after completed experiments
+
+The same capacity/access condition persisted across three consecutive goal
+turns following the final121 run: available headroom above3GiB floor only
+25,096,192bytes at currentverification; no liveown GPUjobs, no newunused image
+population admitted, no CDSEcredential configuration or rootreserveapproval
+received. Existing independent populations have been consumed. More experiments
+on these cannot establish the requested new independent superiority by themselves.
+
+No protected inputs/outputs have been removed, rootreserve is unchanged, and
+credentials are not inferred from missing replies or defaultquestion options.
+Goal status is blocked pending an access/capacity decision, not complete or
+user-requested paused. Original four-direction scope and all fixedcriteria remain.
