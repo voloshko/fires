@@ -238,3 +238,12 @@ Russia0.351100(+0.024992), EMS/FLOGA+0.021228/+0.026363, notadopted.
 Code/tests/results/plans/FAILreceipts preserved. Do not tune cap postresult.
 Only103confirmation scaffold exists, notexecuted/validated onGPU (noteligible).
 MainSPEC101GPUqueue stilllive, control-s2 epoch9/30 onlastsnapshot,3rdof6runs.
+
+## Corrected liveSPEC101 handle
+
+Actualchildcommand confirms priorPID1127531 wasreplay-s2 (4thrun), notcontrol-s2.
+Fourfullmodels nowcomplete. Queue1106633 active; child1134639 control-s3
+(5thrun) startedafterreplay-s2 completed30epochs/exit0. Lastpair.source_recipe
+unchangedf78ae585…; do notedit sealednumericalsources. About22seconds/epoch
+measured, ~25minutes forlast2models plusactualscoring, not aqualityguarantee.
+Russianconfirmation61 stillnotconsumed byrejected102/103.
