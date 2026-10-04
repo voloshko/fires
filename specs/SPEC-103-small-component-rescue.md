@@ -1,6 +1,6 @@
 # SPEC-103: Small reference-component rescue for paired fusion
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-92, SPEC-95, SPEC-102
 
@@ -46,3 +46,12 @@ not optimized from thatmissed fire. Components are not physicalfireevents.
 - non_claims: sourceperimeters/GTagreement only, spring2020 annualpairs;
   developmentMediterraneanreuse, no globalrank/fieldtruth; connectedcomponents
   cannot certify physicalfirecount or generalrecall guarantee.
+
+## Resolution
+
+Rejected by frozen developmentguard; calibration61 notconsumed. RussiaIoU
+0.351100 versus0.326108 (+0.024992, CI[−0.019341,0.059026]); EMS+0.021228
+andFLOGA+0.026363 withpositiveCIs. Yet FLOGA stillmisses1group versus0
+forC1-MM. Fixed64pixel rescue cannot repair thisfailure. No cap/threshold
+change afterresult, no confirmationGPUrun or productpromotion.
+Allregisteredcaches verified andparentcounts reconstructed;3testsPASS.

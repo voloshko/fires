@@ -228,3 +228,13 @@ Recipef78ae585bfa0748da0e8791d3dea90b6619443a251668b47376a2d60be20b7a5.
 Do notedit sealednumericalsources/queue during6jobs. Expected result
 research/l2a-full-replay-v1-result.json. Free disk8.6GiB; no newimagerydownload,
 nativecheckpoints only. Goalactive; access/preparation/deployment resolved.
+
+## Cheapfusion102/103 outcomes
+
+Bothrejected by frozen lostgroupguard, Russianreservedcal61 remainsunused.
+102mean improvesEMS+0.021/FLOGA+0.028 but loses1FLOGAgroup versusC1-MM0;
+max lowersFLOGA−0.055. 103fixed64pixelcomponentrescue stillloses1FLOGAgroup;
+Russia0.351100(+0.024992), EMS/FLOGA+0.021228/+0.026363, notadopted.
+Code/tests/results/plans/FAILreceipts preserved. Do not tune cap postresult.
+Only103confirmation scaffold exists, notexecuted/validated onGPU (noteligible).
+MainSPEC101GPUqueue stilllive, control-s2 epoch9/30 onlastsnapshot,3rdof6runs.
