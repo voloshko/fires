@@ -153,7 +153,8 @@
         "SPEC-107",
         "SPEC-108",
         "SPEC-109",
-        "SPEC-110"
+        "SPEC-110",
+        "SPEC-111"
       ]
     }
   },
@@ -1237,6 +1238,17 @@
         "SPEC-107"
       ],
       "status": "implemented"
+    },
+    "SPEC-111": {
+      "title": "Learned monotonic burn recall expansion",
+      "file": "specs/SPEC-111-learned-monotonic-burn-recall-expansion.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-95",
+        "SPEC-109"
+      ],
+      "status": "active"
     }
   }
 }
