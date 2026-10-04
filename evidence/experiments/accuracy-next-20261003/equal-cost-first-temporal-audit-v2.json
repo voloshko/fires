@@ -1,0 +1,15 @@
+{
+  "spec_id": "SPEC-114",
+  "predecessor": "first-seed-cross-spec-audit-v1.json",
+  "scope": "completed pair-s1 only, not completed pair/post seed",
+  "temporal_run_complete": true,
+  "tensor_bound_metadata_validated": true,
+  "checkpoint_sha256": "8d022d364e907695d77369f04c9f07faf271a901aef3d854ce123611f30487cf",
+  "training_configuration_delta_only_loss": true,
+  "cross_spec_fit_order_exposure_base_exact": true,
+  "native_base_loss_binding_validated": true,
+  "actual_exposure_count": 22860,
+  "non_claims": [
+    "Other five runs still live; mechanics and treatment matching do not prove accuracy or quality causation"
+  ]
+}

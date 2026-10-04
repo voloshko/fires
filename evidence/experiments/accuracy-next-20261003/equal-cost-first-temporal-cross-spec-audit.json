@@ -1,0 +1,11 @@
+{
+  "spec_id": "SPEC-114",
+  "first_pair_complete": true,
+  "training_configuration_delta_only_loss": true,
+  "cross_spec_fit_order_exposure_base_exact": true,
+  "loss_id": "equal-ce-dice-v1",
+  "actual_exposure_count": 22860,
+  "non_claims": [
+    "Only first pair seed audited, remaining runs live; no accuracy or causal quality claim"
+  ]
+}

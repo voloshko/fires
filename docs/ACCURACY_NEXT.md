@@ -609,3 +609,14 @@ original93/96/97 masks/criteria/ready state changed. PASS source audit receipt;
 this does not establish L2A transfer or original goal completion.
 V1 empty-schema FAIL preserved; v2 successful result preserved; v3 fixes null
 schema with identical diagnostics and new source recipe. No data download/GPU.
+
+## SPEC-114 first temporal run source matched
+
+Pair-s1 complete30epochs/22860exposures. Native checkpoint digest and SPEC114/
+equal-loss/base binding validated. Configuration differs from111 only declared
+loss identity/equal CE; fit IDs/statistics/order traces/exposures/base digest
+match exactly. This is one temporal run, not one completed pair/post seed.
+Post-s1 epoch18/30 at snapshot, train MainPID1342930 and score1342954 live.
+Scorer still waits all6; do not alter sealed sources or retry existing outputs.
+First-temporal auditv2 clarifies narrower scope of predecessor v1 field naming;
+both immutable outputs retained. Accuracy remains unmeasured, no promotion.

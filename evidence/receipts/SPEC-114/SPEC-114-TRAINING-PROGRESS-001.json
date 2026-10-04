@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-114",
+  "run_id": "SPEC-114-TRAINING-PROGRESS-001",
+  "predecessor_run_id": "SPEC-114-PREFLIGHT-001",
+  "created_at": "2026-10-04T11:12:59.678899+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "First temporal pair-s1 run complete; native binding and exact cross-spec initializer/data/order/exposure matching verified. Five other runs and accuracy remain pending.",
+  "commands": [
+    "ssh k8plus: CPU cross-spec configuration/data/summary/native-metadata audit",
+    "ssh k8plus: systemctl --user show fires-accuracy-equal-cost-additions-train-v1.service fires-accuracy-equal-cost-additions-score-v1.service",
+    "make gate"
+  ],
+  "acceptance": {
+    "spec_id": "SPEC-114",
+    "predecessor": "first-seed-cross-spec-audit-v1.json",
+    "scope": "completed pair-s1 only, not completed pair/post seed",
+    "temporal_run_complete": true,
+    "tensor_bound_metadata_validated": true,
+    "checkpoint_sha256": "8d022d364e907695d77369f04c9f07faf271a901aef3d854ce123611f30487cf",
+    "training_configuration_delta_only_loss": true,
+    "cross_spec_fit_order_exposure_base_exact": true,
+    "native_base_loss_binding_validated": true,
+    "actual_exposure_count": 22860,
+    "non_claims": [
+      "Other five runs still live; mechanics and treatment matching do not prove accuracy or quality causation"
+    ]
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/equal-cost-first-temporal-audit-v2.json",
+    "evidence/experiments/accuracy-next-20261003/equal-cost-first-temporal-cross-spec-audit.json"
+  ],
+  "limitations": [
+    "Only pair-s1 complete; post-s1 epoch18/30 at snapshot.",
+    "Exact loss-treatment matching is not causal evidence of improved accuracy."
+  ],
+  "non_claims": [
+    "Other five runs still live; mechanics and treatment matching do not prove accuracy or quality causation"
+  ]
+}
