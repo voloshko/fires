@@ -157,7 +157,8 @@
         "SPEC-111",
         "SPEC-112",
         "SPEC-113",
-        "SPEC-114"
+        "SPEC-114",
+        "SPEC-115"
       ]
     }
   },
@@ -1285,6 +1286,16 @@
         "SPEC-90",
         "SPEC-95",
         "SPEC-111"
+      ],
+      "status": "active"
+    },
+    "SPEC-115": {
+      "title": "Audit unresolved HLS publisher metadata and archival label reuse",
+      "file": "specs/SPEC-115-hls-unresolved-label-provenance.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-96",
+        "SPEC-97"
       ],
       "status": "active"
     }
