@@ -1,0 +1,43 @@
+{
+  "source_hashes": {
+    "/home/mc/fires-accuracy-next/scripts/smoke_coupled_member_inference.py": "2947a33ad0ca7e23147d1fb8f8d40207940681cc8e14d975a956ceff86833b19",
+    "scripts/queues/smoke_coupled_member_inference.sh": "c7396010b63415388c661984f29a70a859362ab715946033d6f6e0d0aebbf8a5",
+    "scripts/score_coupled_member_inference.py": "7f7b5e54dad0ea66987f7f22a87fa6cc341ec476795e0694aecdf8cd967582f0",
+    "scripts/score_russian_transfer.py": "87de555d9212b54d7bae737d8ebd6167091c95d8561974d5e0be5cfb557bef93",
+    "scripts/train_unet.py": "3f7a8fe08d303cdd482033386118328f0db810f86db1c003d8c08c9d57dc7ee7",
+    "src/comp/accuracy_artifacts.py": "17e4e6d021fcf4a2d3c14a57aab626cf98b38ca599545f601f5ce0017652285c",
+    "src/comp/accuracy_contract.py": "6c71e49762838b1344355c10dceea1f6ced3d61fb6a9646ad8f0a37ec429e423",
+    "src/comp/coupled_member_inference.py": "75fd91d638d6cc3f67c99bc392fc748555a481ae53af886a82e9bbbaf380107f",
+    "src/comp/forest_pair.py": "a8923953ccefd160e5e0e952929e4691ca8f908493d404658aa6ff722d785949",
+    "src/comp/hls.py": "37daa4ec8e6223a10e161681b5dcaa090697af279aaf559d44d1e254a106290f"
+  },
+  "configuration": {
+    "sample_id": "russia:002f1097a2aaf6f160b684cada5a0115349568f7f58b18a549c39557e3f1aa48",
+    "input_hashes": {
+      "pre": "9a4b227ca0e546e0f35fc4714fa618cfdf56ab5f61d16a4970a7da6e071b4595",
+      "post": "aa8eea7fd27d7dbcdd311647da650dc50e2b5eb5f919bea3207f2baae84f6427",
+      "pre_scl": "60d995b1e9700fba73b682feffe24204bfdaa9a11f5b1d6745b861f48cd8e1d8",
+      "post_scl": "c73bd44af9ddea63761fab1994c8cc1f8b68dbffa3247305f1d30fd00e7dd046",
+      "valid": "824fa1a327fe80fba03b757306b8d1858d133085e12f90783215857afc719ffd",
+      "mask": "f63279f76abe321b879e946826f9d5ae2982f762e87ab65fe98ff10e440543bd"
+    },
+    "members": [
+      "8d022d364e907695d77369f04c9f07faf271a901aef3d854ce123611f30487cf",
+      "55ad02e60e0df2e4f4542ccbd16ef1e860a875fb6162e443e2936c6dd6bdb0d1",
+      "c90e4c6ffc7ec9f845c1783c764478360eef94fa33010b2f675202df336f40f3",
+      "8932c673d8bac21a485952374efba7ce3e3a1070cc2f1e06e104bf00ad6c0af9",
+      "51bc17e7329345059738a898a7772332c5753b741c11a1258e881b507bab5f29",
+      "5ecbc72262a1e67deede3d6a5b300d538e1fc48d8c80950735e747704ac674ff",
+      "a65c5a8a28ad4c9f722783f00b29ac297a74e6a19fd61dc630ef95d0de6b17e9",
+      "1e90b19c99f7d1fb31cd33cee7a548c56005414c9931001ca5f1231aad4d4e58",
+      "173308c7cdd02a88ae3e51158588bf8b88d45e04c1b2be5463af77d418132aa4",
+      "5d045133c2cd9b7ee2948595df1ea48242d6937a2f7269b293de70f4726f16b0"
+    ],
+    "smoke": true
+  },
+  "software": {
+    "torch": "2.14.0+cu130",
+    "numpy": "2.5.3"
+  },
+  "recipe_id": "5e62b250550d052257ceeeb8fcf8d734445d280dff0b366a0b1c3f2449f95170"
+}

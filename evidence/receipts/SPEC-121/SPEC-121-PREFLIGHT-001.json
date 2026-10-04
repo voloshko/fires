@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-121",
+  "run_id": "SPEC-121-PREFLIGHT-001",
+  "created_at": "2026-10-04T14:18:48.523340+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Three unit tests and actual512 pair/post coupling/parity/presevervation mechanics pass; frozen full444window inference launched, accuracy pending.",
+  "commands": [
+    "ssh k8plus: .runtime/bin/python -m pytest tests/test_coupled_member_inference.py -q",
+    "ssh k8plus: smoke_coupled_member_inference.sh",
+    "ssh k8plus: queue_coupled_member_inference.sh",
+    "make gate"
+  ],
+  "acceptance": {
+    "unit_tests_passed": 3,
+    "smoke": {
+      "spec_id": "SPEC-121",
+      "recipe_id": "5e62b250550d052257ceeeb8fcf8d734445d280dff0b366a0b1c3f2449f95170",
+      "variants": [
+        {
+          "variant": "pair",
+          "shape": [
+            1,
+            512,
+            512
+          ],
+          "reference_parity_passed": true,
+          "finite_coupled_probability": true,
+          "reference_positives_preserved": true,
+          "prediction_pixels": 1290,
+          "valid_pixels": 198305
+        },
+        {
+          "variant": "post",
+          "shape": [
+            1,
+            512,
+            512
+          ],
+          "reference_parity_passed": true,
+          "finite_coupled_probability": true,
+          "reference_positives_preserved": true,
+          "prediction_pixels": 818,
+          "valid_pixels": 198305
+        }
+      ],
+      "non_claims": [
+        "Actual512 source/model/coupling/parity mechanics only; no accuracy acceptance."
+      ]
+    },
+    "smoke_exit": 0,
+    "smoke_wall_seconds": 34.837,
+    "smoke_host_peak": "3.8 GiB",
+    "review_code": "APPROVE",
+    "review_architecture": "WATCH",
+    "review_synthesis": "COMMENT",
+    "full_inference": "LIVE",
+    "accuracy": "NOT_RUN"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/coupled-member-smoke.json",
+    "evidence/experiments/accuracy-next-20261003/coupled-member-smoke-recipe.json",
+    "docs/SPEC-121-REVIEW.md"
+  ],
+  "limitations": [
+    "Covariance sign varies; no guaranteed performance or proven bug repair.",
+    "All444windows consumed; no independent confirmation.",
+    "Fullpopulation anchorparity/storage/allcohorts stillmustpass; do not skip failures."
+  ],
+  "non_claims": [
+    "Actual512 mechanics only, no fullquality, newdata, fieldtruth, worldrank or original goal completion."
+  ]
+}

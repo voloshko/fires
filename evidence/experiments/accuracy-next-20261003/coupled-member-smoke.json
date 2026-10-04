@@ -1,0 +1,35 @@
+{
+  "spec_id": "SPEC-121",
+  "recipe_id": "5e62b250550d052257ceeeb8fcf8d734445d280dff0b366a0b1c3f2449f95170",
+  "variants": [
+    {
+      "variant": "pair",
+      "shape": [
+        1,
+        512,
+        512
+      ],
+      "reference_parity_passed": true,
+      "finite_coupled_probability": true,
+      "reference_positives_preserved": true,
+      "prediction_pixels": 1290,
+      "valid_pixels": 198305
+    },
+    {
+      "variant": "post",
+      "shape": [
+        1,
+        512,
+        512
+      ],
+      "reference_parity_passed": true,
+      "finite_coupled_probability": true,
+      "reference_positives_preserved": true,
+      "prediction_pixels": 818,
+      "valid_pixels": 198305
+    }
+  ],
+  "non_claims": [
+    "Actual512 source/model/coupling/parity mechanics only; no accuracy acceptance."
+  ]
+}

@@ -816,3 +816,21 @@ One missedgroup vsC1one andreservepointguardpassed. No promotion ororiginal
 four-goalclosure. 69newframes nowCONSUMED; neverfreshreuse. 118developmentPASS
 preserved. Data/caches/partials retained; free root3.1GiB near3GiBfloor.
 CDSEconfig question stillpending;120online16metadata isn'tpixelrepair.
+
+## SPEC-121 coupled inference launched
+
+Spec6e42e62 beforecodea4a9e95. Reuseall10native118weights, no training/newimages.
+Fixeduniformmeanmemberresidual(1-p_i)q_i aroundauthenticatedC1-MM5; p_i exactly
+originalrefcasting/TTAlogitmean->softmax/BF16, q exactly118float32norm/probmean.
+Reproducedbaseanchormustmatch1e-6/1e-5 beforecache. Pair/postsamechange,
+referencepositivepreservation. Three tests andactual512bothvariantssmoke
+exit0/34.837s/3.8G. CodeAPPROVE/architectureWATCH/finalCOMMENT; covariance
+signunknown and TTAexpandedprobabilityequivalence notclaimed.
+
+Ownfires-accuracy-coupled-member-score-v1 launched CPU400/12G/OMP4/shared
+GPUlease/free22GB. All375old+69nowconsumed cohortsrequired. Originalgates,
+extraRFdelta>=.005positiveCIvs118, consumedEast119guards allfixed. Compressed
+losslesspackedoutputs16MiB/free3GiB, no olddelete or samplingoncompression.
+Expectedresearch/coupled-member-v1/development.json. Allcurrent444consumed,
+no independentpromotion fromfuturePASS. Source/parents immutable, no retry
+because observationexpired. Originalfour-part goal active/unproven.
