@@ -193,7 +193,8 @@ def main():
     budget = StorageBudget(out)
     budget.check_write()
     sources = (str(Path(__file__)), "src/comp/equal_cost_eastern.py", "src/comp/eastern_confirmation.py", "src/comp/equal_cost_additions.py", "scripts/prepare_russian_windows.py",
-        "scripts/score_equal_cost_additions.py", "src/comp/l2a_finetuning.py", "src/comp/eastern_confirmation_plan.py")
+        "scripts/score_equal_cost_additions.py", "src/comp/l2a_finetuning.py", "src/comp/eastern_confirmation_plan.py",
+        "scripts/queues/queue_equal_cost_eastern.sh", "scripts/queues/queue_score_equal_cost_eastern.sh")
     seal = freeze_recipe(out/"binding.json", sources, binding)
     def run(record):
         try:

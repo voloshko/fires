@@ -85,7 +85,8 @@ def main():
     args.out.parent.mkdir(parents=True, exist_ok=True)
     sources = execution_sources(Path(__file__), "scripts/collect_equal_cost_eastern.py", "src/comp/equal_cost_eastern.py", "src/comp/eastern_confirmation.py", "src/comp/equal_cost_additions.py",
         "scripts/score_equal_cost_additions.py", "src/comp/recall_expansion.py", "scripts/score_russian_transfer.py",
-        "scripts/forest_pair_train.py", "src/comp/l2a_finetuning.py", "src/comp/terrain.py", "src/comp/severity_layers.py")
+        "scripts/forest_pair_train.py", "src/comp/l2a_finetuning.py", "src/comp/terrain.py", "src/comp/severity_layers.py",
+        "scripts/queues/queue_equal_cost_eastern.sh", "scripts/queues/queue_score_equal_cost_eastern.sh")
     scoring = freeze_recipe(args.out.with_suffix(".recipe.json"), sources,
         dict(binding=binding, source_manifest=sha256_file(args.manifest), threshold=.5, tta=8, bootstrap=2000, seed=20261003))
     probabilities = {}
