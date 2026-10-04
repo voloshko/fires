@@ -1,6 +1,6 @@
 # SPEC-105: New geographic holdout for frozen Siberian paired specialist
 
-Status: planned
+Status: active
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-92, SPEC-95, SPEC-96, SPEC-104
 
@@ -17,9 +17,9 @@ This doesnot close oldFAILs, severity, L2A usefulgain orprospective summerfires.
 ## Acceptance Criteria
 
 - Beforeimagery/inference, freeze sourceZIP/metadata hashes and Westernbbox
- 65–80E/54–65N, valid polygons>=1ha,20km connectedspatialgroups. ExcludeWHOLE
+ 65–80E/54–65N, valid polygons>=1ha,20km connectedspatialgroups (EPSG3576 asoriginal92; areaalsoequal-area). ExcludeWHOLE
  newgroups intersecting/buffer-near anyprior footprint or previousRussian
- fit/cal/eval frame; priorregistry andallold447frames required. No identities
+ fit/cal/eval frame; priorregistry andallold447frames required; addnew173SPEC100frames. Buffer20km inmetricCRS, preserveallvalidsourcepolygons forgrouping/rasterization, evenbelow1ha. No identities
  from GPKG reorderedrings; rawWKB IDs. No selection from modelpredictions.
 - Frozen order SHA256('spec105:'+geometry_id); roundrobin sourceareas1–25,
  25–250,>250ha; cap96frames, max4pergroup, distributeacrossgroups first.
@@ -49,6 +49,9 @@ This doesnot close oldFAILs, severity, L2A usefulgain orprospective summerfires.
 
 - ImplementCPU metadata/admission first; do notstartinference until frozen
  plan andfull50/20dataadmission pass. Allcompute/data sshk8plus.
-- Exactcollection/scoringcommands added beforeimplementation; gatePASS.
+- k8plus: `.runtime/bin/python scripts/prepare_western_holdout.py --data-root data-store --out data-store/western-holdout-v1 --plan-only` (freeze/checkeligiblepopulation first).
+- k8plus: `.runtime/bin/python scripts/prepare_western_holdout.py --data-root data-store --out data-store/western-holdout-v1` (sameplan; sourcecollection).
+- k8plus: `.runtime/bin/python scripts/score_western_holdout.py --data-root data-store --manifest data-store/western-holdout-v1/manifest.json --runs research/russian-transfer-v1 --reference-root /home/mc/fires/research --prithvi-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --parent research/russian-transfer-v1-result.json --out research/western-holdout-v1-result.json`.
+- `python -m pytest tests/test_western_holdout.py -q`; gatePASS.
 - non_claims: independentgeography only, sharedPANGAEAannotationmethod/season;
  satelliteinterpretation, notfieldtruth; no summerSiberian/grade/L2A acceptance.
