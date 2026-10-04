@@ -32,6 +32,23 @@ def storage_guard(used, reserved, free):
         raise ValueError("eastern confirmation free-space floor unavailable")
 
 
+def confirmation_decision(comparisons, missed):
+    if set(comparisons) != {"post", "c1mm", "prithvi", "reserve"}:
+        raise ValueError("all frozen comparators required")
+    return bool(all(comparisons[m]["delta"] >= .01 and comparisons[m]["ci95"][0] > 0
+        for m in ("post", "c1mm", "prithvi")) and comparisons["reserve"]["delta"] >= -.01
+        and missed["pair"] <= missed["c1mm"])
+
+
+def cache_guard(directory, reserve):
+    directory = Path(directory)
+    if reserve < 0:
+        raise ValueError("invalid cache reservation")
+    used = sum(p.stat().st_size for p in directory.rglob("*") if p.is_file())
+    if used+reserve > 256*1024**2 or shutil.disk_usage(directory).free-reserve < FREE_FLOOR:
+        raise ValueError("confirmation cache budget/free-space reserve unavailable")
+
+
 class StorageBudget:
     def __init__(self, directory):
         self.directory = Path(directory)

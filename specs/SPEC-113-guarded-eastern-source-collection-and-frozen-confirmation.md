@@ -55,6 +55,7 @@ This spec is not executed image/accuracy evidence merely because code exists.
 - Unit tests and guarded collection/scoring commands recorded before execution.
 - k8plus: `.runtime/bin/python -m pytest tests/test_eastern_confirmation.py -q`.
 - Conditional k8plus collection: `.runtime/bin/python scripts/collect_eastern_confirmation.py --data-root data-store --selection data-store/eastern-holdout-plan-v1/selection.json --candidate research/recall-expansion-v1/development.json --runs research/recall-expansion-v1 --reference-root /home/mc/fires/research --prithvi-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --out data-store/eastern-confirmation-v1`.
+- Conditional k8plus scoring: `.runtime/bin/python scripts/score_eastern_confirmation.py --data-root data-store --selection data-store/eastern-holdout-plan-v1/selection.json --candidate research/recall-expansion-v1/development.json --runs research/recall-expansion-v1 --reference-root /home/mc/fires/research --prithvi-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --manifest data-store/eastern-confirmation-v1/manifest.json --out research/eastern-confirmation-v1/result.json`.
 - Fresh collection never begins merely on metadata readiness or partial model
   completion; keep the new population untouched when111 is ineligible.
 - `make gate`.

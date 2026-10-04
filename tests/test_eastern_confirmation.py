@@ -5,7 +5,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from src.comp.eastern_confirmation import (DATA_BUDGET, FREE_FLOOR, RESERVATION, SELECTION_SHA,
-    require_admission, require_eligible, storage_guard)
+    require_admission, require_eligible, storage_guard, confirmation_decision)
 from scripts.collect_eastern_confirmation import main
 
 
@@ -45,6 +45,15 @@ class EasternConfirmationTest(unittest.TestCase):
         storage_guard(0,RESERVATION,FREE_FLOOR+RESERVATION)
         with self.assertRaises(ValueError):storage_guard(DATA_BUDGET,1,FREE_FLOOR+RESERVATION)
         with self.assertRaises(ValueError):storage_guard(0,RESERVATION,FREE_FLOOR+RESERVATION-1)
+
+    def test_fresh_confirmation_needs_every_competitor_and_recall_guard(self):
+        comparisons={k:dict(delta=.02,ci95=[.01,.04]) for k in ('post','c1mm','prithvi','reserve')}
+        missed=dict(pair=0,c1mm=0)
+        self.assertTrue(confirmation_decision(comparisons,missed))
+        comparisons['prithvi']['ci95']=[-.001,.04]
+        self.assertFalse(confirmation_decision(comparisons,missed))
+        comparisons['prithvi']['ci95']=[.01,.04];missed['pair']=1
+        self.assertFalse(confirmation_decision(comparisons,missed))
 
 
 if __name__=='__main__':unittest.main()
