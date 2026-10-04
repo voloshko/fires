@@ -45,6 +45,7 @@ its primary metric with an easier assessment-only score or relabel old FAILs.
 - k8plus: `.runtime/bin/python -m pytest tests/test_mtbs_legend_audit.py -q`.
 - CPU audit command recorded before execution, writes
   research/mtbs-legend-audit-v1.json from frozen existing artifacts.
+- k8plus: `.runtime/bin/python scripts/audit_mtbs_legend.py --data-root data-store --reference-root /home/mc/fires/research --out research/mtbs-legend-audit-v1.json`.
 - `make gate`.
 - non_claims: benchmark convention audit, not corrected independent model
   superiority, true burned area/field severity, reclassified labels, physical
