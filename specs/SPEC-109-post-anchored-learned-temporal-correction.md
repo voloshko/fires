@@ -61,6 +61,8 @@ fixed threshold fusion or inference-only dNBR rule is introduced.
 - k8plus: `.runtime/bin/python -m pytest tests/test_temporal_adapter.py -q`.
 - Real GPU preflight will write research/temporal-adapter-smoke-v1.json and
   small native checkpoint, binding exact base hash and fit sample hashes.
+- k8plus: `bash scripts/queues/smoke_temporal_adapter.sh` (shared lease and
+  22GB free-memory admission before the source-bound real512 smoke).
 - Full trainer/scorer/queue commands recorded before launch; make gate required.
 - non_claims: structural/smoke guarantees are not accuracy; all existing
   development populations consumed, PANGAEA background unreviewed, no physical
