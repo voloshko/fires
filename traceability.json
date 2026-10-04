@@ -151,7 +151,8 @@
         "SPEC-105",
         "SPEC-106",
         "SPEC-107",
-        "SPEC-108"
+        "SPEC-108",
+        "SPEC-109"
       ]
     }
   },
@@ -1211,6 +1212,19 @@
         "SPEC-107"
       ],
       "status": "rejected"
+    },
+    "SPEC-109": {
+      "title": "Post-anchored learned temporal correction",
+      "file": "specs/SPEC-109-post-anchored-learned-temporal-correction.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-92",
+        "SPEC-95",
+        "SPEC-105",
+        "SPEC-108"
+      ],
+      "status": "active"
     }
   }
 }
