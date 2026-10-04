@@ -1,0 +1,219 @@
+{
+  "spec_id": "SPEC-108",
+  "plan_sha256": "4161f1ab66986c09378ed631292e018cb2c1cffbc6eac65af283bca479bf6320",
+  "observations": [
+    {
+      "sample_id": "western:1205e8519991284890f3749f859f490cd2304fa211e3a10658a9e775b1a5c2d3",
+      "interval": [
+        "2020-03-01",
+        "2020-03-15"
+      ],
+      "usable": false,
+      "attempts": [
+        {
+          "item_id": "S2A_MSIL2A_20200315T070631_R106_T42VUQ_20201010T090919",
+          "scl_valid_fraction": 0.02741241455078125
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200305T070751_R106_T42VUQ_20200928T203313",
+          "scl_valid_fraction": 0.000377655029296875
+        }
+      ],
+      "reason": "no observable candidate"
+    },
+    {
+      "sample_id": "western:1205e8519991284890f3749f859f490cd2304fa211e3a10658a9e775b1a5c2d3",
+      "interval": [
+        "2020-03-16",
+        "2020-03-31"
+      ],
+      "usable": false,
+      "attempts": [
+        {
+          "item_id": "S2B_MSIL2A_20200323T071619_R006_T42VUQ_20201015T104453",
+          "scl_valid_fraction": 0.02214813232421875
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200328T071611_R006_T42VUQ_20201027T120801",
+          "scl_valid_fraction": 0.020168304443359375
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200318T071621_R006_T42VUQ_20201011T013400",
+          "scl_valid_fraction": 1.9073486328125e-05
+        }
+      ],
+      "reason": "no observable candidate"
+    },
+    {
+      "sample_id": "western:1205e8519991284890f3749f859f490cd2304fa211e3a10658a9e775b1a5c2d3",
+      "interval": [
+        "2020-04-01",
+        "2020-04-30"
+      ],
+      "usable": false,
+      "attempts": [
+        {
+          "item_id": "S2A_MSIL2A_20200407T071611_R006_T42VUQ_20200925T083537",
+          "scl_valid_fraction": 0.01467132568359375
+        },
+        {
+          "item_id": "S2B_MSIL2A_20200409T070619_R106_T42VUQ_20200925T164114",
+          "scl_valid_fraction": 0.0120391845703125
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200424T070621_R106_T42VUQ_20200921T212221",
+          "scl_valid_fraction": 0.515228271484375
+        }
+      ],
+      "reason": "below common observation admission",
+      "files": {
+        "image": {
+          "path": "spring-visibility-v1/western_1205e8519991284890f3749f859f490cd2304fa211e3a10658a9e775b1a5c2d3-2020-04-01-image.tif",
+          "sha256": "174fbe5e2287fa6561d81c2c154f3182c3ffda484c0e4a7215a64ade257846a6"
+        },
+        "scl": {
+          "path": "spring-visibility-v1/western_1205e8519991284890f3749f859f490cd2304fa211e3a10658a9e775b1a5c2d3-2020-04-01-scl.tif",
+          "sha256": "1e72a3a54d4326255953fd1148617935f546396f65feeac58f7a146d6935c1c8"
+        }
+      },
+      "current_valid_fraction": 0.515228271484375,
+      "common_valid_fraction": 0.4967842102050781,
+      "masked_fraction": 0.5032157897949219,
+      "truth_pixels": 239,
+      "background_pixels": 129990,
+      "labelled_burn": {
+        "pixels": 239,
+        "indices": {
+          "old_nbr": {
+            "finite_pixels": 239,
+            "undefined_pixels": 0,
+            "q10_median_q90": [
+              0.5719880938529969,
+              0.6137726902961731,
+              0.6503689169883728
+            ]
+          },
+          "old_ndvi": {
+            "finite_pixels": 239,
+            "undefined_pixels": 0,
+            "q10_median_q90": [
+              0.6630044937133789,
+              0.7760292291641235,
+              0.8306430101394654
+            ]
+          },
+          "current_nbr": {
+            "finite_pixels": 239,
+            "undefined_pixels": 0,
+            "q10_median_q90": [
+              0.05671081468462944,
+              0.09737668931484222,
+              0.14262130260467532
+            ]
+          },
+          "current_ndvi": {
+            "finite_pixels": 239,
+            "undefined_pixels": 0,
+            "q10_median_q90": [
+              0.08228088319301605,
+              0.1483376920223236,
+              0.2118112146854401
+            ]
+          }
+        }
+      },
+      "published_background": {
+        "pixels": 129990,
+        "indices": {
+          "old_nbr": {
+            "finite_pixels": 129990,
+            "undefined_pixels": 0,
+            "q10_median_q90": [
+              0.35317173898220067,
+              0.5409752428531647,
+              0.6634870767593384
+            ]
+          },
+          "old_ndvi": {
+            "finite_pixels": 129990,
+            "undefined_pixels": 0,
+            "q10_median_q90": [
+              -0.2403441235423088,
+              0.6264829635620117,
+              0.7782199501991273
+            ]
+          },
+          "current_nbr": {
+            "finite_pixels": 129990,
+            "undefined_pixels": 0,
+            "q10_median_q90": [
+              0.04813760966062546,
+              0.16532659530639648,
+              0.5571257710456848
+            ]
+          },
+          "current_ndvi": {
+            "finite_pixels": 129990,
+            "undefined_pixels": 0,
+            "q10_median_q90": [
+              0.10540655553340912,
+              0.2502438873052597,
+              0.5530847430229187
+            ]
+          }
+        }
+      },
+      "contrast": {
+        "old": 0.07279744744300842,
+        "current": -0.06794990599155426
+      },
+      "extra_separation": false,
+      "date": "2020-04-24T07:06:21.024000+00:00",
+      "item_id": "S2A_MSIL2A_20200424T070621_R106_T42VUQ_20200921T212221",
+      "mgrs": "42VUQ",
+      "encodings": {
+        "blue": {
+          "scale": 0.0001,
+          "offset": 0.0,
+          "basis": "ESA-L2A-processing-baseline:02.12",
+          "band": "B02"
+        },
+        "green": {
+          "scale": 0.0001,
+          "offset": 0.0,
+          "basis": "ESA-L2A-processing-baseline:02.12",
+          "band": "B03"
+        },
+        "red": {
+          "scale": 0.0001,
+          "offset": 0.0,
+          "basis": "ESA-L2A-processing-baseline:02.12",
+          "band": "B04"
+        },
+        "nir08": {
+          "scale": 0.0001,
+          "offset": 0.0,
+          "basis": "ESA-L2A-processing-baseline:02.12",
+          "band": "B8A"
+        },
+        "swir16": {
+          "scale": 0.0001,
+          "offset": 0.0,
+          "basis": "ESA-L2A-processing-baseline:02.12",
+          "band": "B11"
+        },
+        "swir22": {
+          "scale": 0.0001,
+          "offset": 0.0,
+          "basis": "ESA-L2A-processing-baseline:02.12",
+          "band": "B12"
+        }
+      }
+    },
+    {
+      "sample_id": "western:1205e8519991284890f3749f859f490cd2304fa211e3a10658a9e775b1a5c2d3",
+      "interval": [
+        "2020-05-01",
+        "2020-05-15"
+      ],
+      "usable": 

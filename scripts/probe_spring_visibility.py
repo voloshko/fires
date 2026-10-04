@@ -17,12 +17,27 @@ from src.comp.spring_visibility import BINS, candidates, compare_view, decision,
 from scripts.prepare_russian_windows import read_asset
 
 PARENT_SHA = "749699f3f6e01f0a0a6576afb496c891c4bc33c05ad1cca4087585ed5628cb2c"
+RECOVERY_PLAN_SHA = "4161f1ab66986c09378ed631292e018cb2c1cffbc6eac65af283bca479bf6320"
 
 
 def write_json(path, value):
+    content = json.dumps(value, indent=2, allow_nan=False)+"\n"
     with path.open("x") as stream:
-        json.dump(value, stream, indent=2, allow_nan=False)
-        stream.write("\n")
+        stream.write(content)
+
+
+def retain_pixels(path, array, record, dtype, nodata):
+    if path.exists():
+        with rasterio.open(path) as original:
+            if (str(original.crs) != record["grid"]["crs"]
+                    or list(original.transform)[:6] != record["grid"]["transform"]
+                    or original.nodata != nodata or not np.array_equal(original.read(), array)):
+                raise ValueError("preserved pixels differ from frozen source")
+        return
+    with rasterio.open(path, "w", driver="GTiff", width=512, height=512,
+        count=len(array), dtype=dtype, nodata=nodata, compress="deflate",
+        crs=record["grid"]["crs"], transform=rasterio.Affine(*record["grid"]["transform"])) as target:
+        target.write(array.astype(dtype))
 
 
 def item_metadata(item):
@@ -42,12 +57,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for key in ("data-root", "manifest", "parent", "out"):
         parser.add_argument("--"+key, type=Path, required=True)
+    parser.add_argument("--recover", action="store_true", help="Replay frozen plan, verify retained pixels, write a successor result")
     args = parser.parse_args()
     root, out = args.data_root.resolve(), args.out.resolve()
     if not out.is_relative_to(root):
         raise ValueError("visibility outputs escape own data root")
-    if out.exists():
+    if out.exists() and not args.recover:
         raise ValueError("immutable visibility experiment already exists")
+    destination = out/("result-recovered-v2.json" if args.recover else "result.json")
+    if destination.exists():
+        raise ValueError("immutable visibility result already exists")
     if sha256_file(args.parent) != PARENT_SHA:
         raise ValueError("wrong geographic parent")
     parent = json.loads(args.parent.read_text())
@@ -67,23 +86,38 @@ def main():
     catalog = pystac_client.Client.open("https://planetarycomputer.microsoft.com/api/stac/v1",
         modifier=planetary_computer.sign_inplace)
     views, item_lookup = [], {}
-    for record in records:
+    if args.recover:
+        if sha256_file(out/"plan.json") != RECOVERY_PLAN_SHA:
+            raise ValueError("recovery requires the original frozen plan")
+        frozen = json.loads((out/"plan.json").read_text())
+        if frozen["parent_sha256"] != PARENT_SHA or frozen["manifest_sha256"] != sha256_file(args.manifest):
+            raise ValueError("recovery parent/source differs")
+        for name, digest in frozen["source_hashes"].items():
+            if name not in (str(Path(__file__)), "src/comp/spring_visibility.py") and sha256_file(name) != digest:
+                raise ValueError("unchanged recovery dependency drift")
+        views = frozen["views"]
         items = list(catalog.search(collections=["sentinel-2-l2a"],
-            intersects={"type": "Point", "coordinates": record["center"]},
-            datetime="2020-03-01T00:00:00Z/2020-05-15T23:59:59Z").items())
+            ids=sorted({m["item_id"] for v in views for m in v["candidates"]})).items())
         item_lookup.update({i.id: i for i in items})
-        metadata = [item_metadata(i) for i in items]
-        for lower, upper in BINS:
-            views.append(dict(sample_id=record["sample_id"], interval=[lower, upper],
-                candidates=candidates(metadata, record["mgrs"], lower, upper)))
+    else:
+        for record in records:
+            items = list(catalog.search(collections=["sentinel-2-l2a"],
+                intersects={"type": "Point", "coordinates": record["center"]},
+                datetime="2020-03-01T00:00:00Z/2020-05-15T23:59:59Z").items())
+            item_lookup.update({i.id: i for i in items})
+            metadata = [item_metadata(i) for i in items]
+            for lower, upper in BINS:
+                views.append(dict(sample_id=record["sample_id"], interval=[lower, upper],
+                    candidates=candidates(metadata, record["mgrs"], lower, upper)))
     sources = {p: sha256_file(p) for p in (str(Path(__file__)), "src/comp/spring_visibility.py",
         "scripts/prepare_russian_windows.py", "src/comp/l2a_finetuning.py",
         "src/comp/geographic_failure_report.py", "src/comp/accuracy_contract.py")}
     plan = dict(spec_id="SPEC-108", parent_sha256=PARENT_SHA,
         manifest_sha256=sha256_file(args.manifest), views=views, source_hashes=sources)
-    out.mkdir()
-    check_space(out)
-    write_json(out/"plan.json", plan)
+    if not args.recover:
+        out.mkdir()
+        check_space(out)
+        write_json(out/"plan.json", plan)
     by_id = {r["sample_id"]: r for r in records}
     observations = []
     for view in views:
@@ -128,12 +162,7 @@ def main():
                 stage = "retained pixel write " + name
                 check_space(out)
                 path = out/(prefix+"-"+name+".tif")
-                if path.exists():
-                    raise ValueError("immutable view pixel file exists")
-                with rasterio.open(path, "w", driver="GTiff", width=512, height=512,
-                    count=len(array), dtype=dtype, nodata=nodata, compress="deflate",
-                    crs=record["grid"]["crs"], transform=rasterio.Affine(*record["grid"]["transform"])) as target:
-                    target.write(array.astype(dtype))
+                retain_pixels(path, array, record, dtype, nodata)
                 files[name] = dict(path=str(path.relative_to(root)), sha256=sha256_file(path))
             arrays = {}
             stage = "same-pixel comparison"
@@ -154,13 +183,14 @@ def main():
         observations.append(result)
     outcome = decision(observations, ids)
     payload = dict(spec_id="SPEC-108", plan_sha256=sha256_file(out/"plan.json"),
+        recovered=args.recover, execution_source_hashes=sources,
         observations=observations, **outcome,
         storage_bytes=sum(p.stat().st_size for p in out.rglob("*") if p.is_file()),
         non_claims=["Selected consumed examples, not independent accuracy or a new model.",
             "Published background is not reviewed fire absence; contrasts do not determine ignition dates.",
             "No causal regrowth/misannotation, complete temporal coverage, field truth or goal completion."])
     check_space(out)
-    write_json(out/"result.json", payload)
+    write_json(destination, payload)
     print("RESULT", json.dumps(outcome), flush=True)
 
 

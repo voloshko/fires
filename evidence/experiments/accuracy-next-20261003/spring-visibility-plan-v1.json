@@ -1,0 +1,474 @@
+{
+  "spec_id": "SPEC-108",
+  "parent_sha256": "749699f3f6e01f0a0a6576afb496c891c4bc33c05ad1cca4087585ed5628cb2c",
+  "manifest_sha256": "a5a01d9e3ca34c87914717e6c65a0f3e04bc2398c8b17db77403fc2c956f4bc3",
+  "views": [
+    {
+      "sample_id": "western:1205e8519991284890f3749f859f490cd2304fa211e3a10658a9e775b1a5c2d3",
+      "interval": [
+        "2020-03-01",
+        "2020-03-15"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2A_MSIL2A_20200315T070631_R106_T42VUQ_20201010T090919",
+          "date": "2020-03-15T07:06:31.024000+00:00",
+          "mgrs": "42VUQ",
+          "cloud": 36.822227,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200305T070751_R106_T42VUQ_20200928T203313",
+          "date": "2020-03-05T07:07:51.024000+00:00",
+          "mgrs": "42VUQ",
+          "cloud": 54.038209,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:1205e8519991284890f3749f859f490cd2304fa211e3a10658a9e775b1a5c2d3",
+      "interval": [
+        "2020-03-16",
+        "2020-03-31"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2B_MSIL2A_20200323T071619_R006_T42VUQ_20201015T104453",
+          "date": "2020-03-23T07:16:19.024000+00:00",
+          "mgrs": "42VUQ",
+          "cloud": 9.418005,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200328T071611_R006_T42VUQ_20201027T120801",
+          "date": "2020-03-28T07:16:11.024000+00:00",
+          "mgrs": "42VUQ",
+          "cloud": 9.738771,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200318T071621_R006_T42VUQ_20201011T013400",
+          "date": "2020-03-18T07:16:21.024000+00:00",
+          "mgrs": "42VUQ",
+          "cloud": 49.511842,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:1205e8519991284890f3749f859f490cd2304fa211e3a10658a9e775b1a5c2d3",
+      "interval": [
+        "2020-04-01",
+        "2020-04-30"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2A_MSIL2A_20200407T071611_R006_T42VUQ_20200925T083537",
+          "date": "2020-04-07T07:16:11.024000+00:00",
+          "mgrs": "42VUQ",
+          "cloud": 4.291839,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2B_MSIL2A_20200409T070619_R106_T42VUQ_20200925T164114",
+          "date": "2020-04-09T07:06:19.024000+00:00",
+          "mgrs": "42VUQ",
+          "cloud": 21.174414,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200424T070621_R106_T42VUQ_20200921T212221",
+          "date": "2020-04-24T07:06:21.024000+00:00",
+          "mgrs": "42VUQ",
+          "cloud": 47.021623,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:1205e8519991284890f3749f859f490cd2304fa211e3a10658a9e775b1a5c2d3",
+      "interval": [
+        "2020-05-01",
+        "2020-05-15"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2A_MSIL2A_20200504T070631_R106_T42VUQ_20200920T104501",
+          "date": "2020-05-04T07:06:31.024000+00:00",
+          "mgrs": "42VUQ",
+          "cloud": 1.548006,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200514T070631_R106_T42VUQ_20200918T033151",
+          "date": "2020-05-14T07:06:31.024000+00:00",
+          "mgrs": "42VUQ",
+          "cloud": 8.259338,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200507T071621_R006_T42VUQ_20200920T203825",
+          "date": "2020-05-07T07:16:21.024000+00:00",
+          "mgrs": "42VUQ",
+          "cloud": 8.336946,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:1e52c7407ae4a34cc77b5861bf7c678142ffe17b4d6497122aeadc2fc73c6d91",
+      "interval": [
+        "2020-03-01",
+        "2020-03-15"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2A_MSIL2A_20200306T063731_R120_T42VVH_20200929T135201",
+          "date": "2020-03-06T06:37:31.024000+00:00",
+          "mgrs": "42VVH",
+          "cloud": 4.635738,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200309T064711_R020_T42VVH_20201003T002023",
+          "date": "2020-03-09T06:47:11.024000+00:00",
+          "mgrs": "42VVH",
+          "cloud": 78.038997,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:1e52c7407ae4a34cc77b5861bf7c678142ffe17b4d6497122aeadc2fc73c6d91",
+      "interval": [
+        "2020-03-16",
+        "2020-03-31"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2B_MSIL2A_20200324T064619_R020_T42VVH_20201018T220601",
+          "date": "2020-03-24T06:46:19.024000+00:00",
+          "mgrs": "42VVH",
+          "cloud": 0.126496,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200316T063621_R120_T42VVH_20201010T095416",
+          "date": "2020-03-16T06:36:21.024000+00:00",
+          "mgrs": "42VVH",
+          "cloud": 2.364072,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200329T064621_R020_T42VVH_20201020T213349",
+          "date": "2020-03-29T06:46:21.024000+00:00",
+          "mgrs": "42VVH",
+          "cloud": 3.639659,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:1e52c7407ae4a34cc77b5861bf7c678142ffe17b4d6497122aeadc2fc73c6d91",
+      "interval": [
+        "2020-04-01",
+        "2020-04-30"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2B_MSIL2A_20200413T064619_R020_T42VVH_20200923T091732",
+          "date": "2020-04-13T06:46:19.024000+00:00",
+          "mgrs": "42VVH",
+          "cloud": 1.677098,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2B_MSIL2A_20200403T064619_R020_T42VVH_20200924T210538",
+          "date": "2020-04-03T06:46:19.024000+00:00",
+          "mgrs": "42VVH",
+          "cloud": 2.774673,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2B_MSIL2A_20200410T063619_R120_T42VVH_20200925T195518",
+          "date": "2020-04-10T06:36:19.024000+00:00",
+          "mgrs": "42VVH",
+          "cloud": 8.296188,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:1e52c7407ae4a34cc77b5861bf7c678142ffe17b4d6497122aeadc2fc73c6d91",
+      "interval": [
+        "2020-05-01",
+        "2020-05-15"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2A_MSIL2A_20200508T064631_R020_T42VVH_20200920T234954",
+          "date": "2020-05-08T06:46:31.024000+00:00",
+          "mgrs": "42VVH",
+          "cloud": 2.184933,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200505T063631_R120_T42VVH_20200920T135435",
+          "date": "2020-05-05T06:36:31.024000+00:00",
+          "mgrs": "42VVH",
+          "cloud": 48.06672,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2B_MSIL2A_20200510T063629_R120_T42VVH_20200917T160359",
+          "date": "2020-05-10T06:36:29.025000+00:00",
+          "mgrs": "42VVH",
+          "cloud": 64.276097,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:3e25d600968f1d1b8482a53551b085c4afbbb9dfb7c8c7da0928e928d2c9eca1",
+      "interval": [
+        "2020-03-01",
+        "2020-03-15"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2A_MSIL2A_20200302T065801_R063_T42VUH_20200926T020256",
+          "date": "2020-03-02T06:58:01.024000+00:00",
+          "mgrs": "42VUH",
+          "cloud": 1.054652,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200312T065651_R063_T42VUH_20201006T210850",
+          "date": "2020-03-12T06:56:51.024000+00:00",
+          "mgrs": "42VUH",
+          "cloud": 10.985687,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2B_MSIL2A_20200314T064639_R020_T42VUH_20201010T015120",
+          "date": "2020-03-14T06:46:39.024000+00:00",
+          "mgrs": "42VUH",
+          "cloud": 71.597247,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:3e25d600968f1d1b8482a53551b085c4afbbb9dfb7c8c7da0928e928d2c9eca1",
+      "interval": [
+        "2020-03-16",
+        "2020-03-31"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2A_MSIL2A_20200329T064621_R020_T42VUH_20201020T213607",
+          "date": "2020-03-29T06:46:21.024000+00:00",
+          "mgrs": "42VUH",
+          "cloud": 2.548164,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2B_MSIL2A_20200324T064619_R020_T42VUH_20201018T220617",
+          "date": "2020-03-24T06:46:19.024000+00:00",
+          "mgrs": "42VUH",
+          "cloud": 3.987457,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200322T065621_R063_T42VUH_20201014T185246",
+          "date": "2020-03-22T06:56:21.024000+00:00",
+          "mgrs": "42VUH",
+          "cloud": 18.624313,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:3e25d600968f1d1b8482a53551b085c4afbbb9dfb7c8c7da0928e928d2c9eca1",
+      "interval": [
+        "2020-04-01",
+        "2020-04-30"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2B_MSIL2A_20200413T064619_R020_T42VUH_20200923T091725",
+          "date": "2020-04-13T06:46:19.024000+00:00",
+          "mgrs": "42VUH",
+          "cloud": 1.420228,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200411T065621_R063_T42VUH_20200923T012503",
+          "date": "2020-04-11T06:56:21.024000+00:00",
+          "mgrs": "42VUH",
+          "cloud": 5.704607,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2B_MSIL2A_20200403T064619_R020_T42VUH_20200924T210530",
+          "date": "2020-04-03T06:46:19.024000+00:00",
+          "mgrs": "42VUH",
+          "cloud": 11.762853,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:3e25d600968f1d1b8482a53551b085c4afbbb9dfb7c8c7da0928e928d2c9eca1",
+      "interval": [
+        "2020-05-01",
+        "2020-05-15"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2B_MSIL2A_20200506T065619_R063_T42VUH_20200920T185238",
+          "date": "2020-05-06T06:56:19.024000+00:00",
+          "mgrs": "42VUH",
+          "cloud": 0.005561,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200508T064631_R020_T42VUH_20200920T234949",
+          "date": "2020-05-08T06:46:31.024000+00:00",
+          "mgrs": "42VUH",
+          "cloud": 4.482431,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200511T065631_R063_T42VUH_20200917T180449",
+          "date": "2020-05-11T06:56:31.024000+00:00",
+          "mgrs": "42VUH",
+          "cloud": 33.277349,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:f570aae7219db8f4cd75326c12d7755859a1dd5d36e4a3d5d267435b7fad07ae",
+      "interval": [
+        "2020-03-01",
+        "2020-03-15"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2A_MSIL2A_20200306T063731_R120_T42VWJ_20200929T135024",
+          "date": "2020-03-06T06:37:31.024000+00:00",
+          "mgrs": "42VWJ",
+          "cloud": 6.505261,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200309T064711_R020_T42VWJ_20201003T000944",
+          "date": "2020-03-09T06:47:11.024000+00:00",
+          "mgrs": "42VWJ",
+          "cloud": 29.449262,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:f570aae7219db8f4cd75326c12d7755859a1dd5d36e4a3d5d267435b7fad07ae",
+      "interval": [
+        "2020-03-16",
+        "2020-03-31"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2A_MSIL2A_20200329T064621_R020_T42VWJ_20201020T213613",
+          "date": "2020-03-29T06:46:21.024000+00:00",
+          "mgrs": "42VWJ",
+          "cloud": 1.686134,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200316T063621_R120_T42VWJ_20201010T095411",
+          "date": "2020-03-16T06:36:21.024000+00:00",
+          "mgrs": "42VWJ",
+          "cloud": 2.21972,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2B_MSIL2A_20200331T063629_R120_T42VWJ_20201022T155027",
+          "date": "2020-03-31T06:36:29.024000+00:00",
+          "mgrs": "42VWJ",
+          "cloud": 4.687689,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:f570aae7219db8f4cd75326c12d7755859a1dd5d36e4a3d5d267435b7fad07ae",
+      "interval": [
+        "2020-04-01",
+        "2020-04-30"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2B_MSIL2A_20200413T064619_R020_T42VWJ_20200923T091737",
+          "date": "2020-04-13T06:46:19.024000+00:00",
+          "mgrs": "42VWJ",
+          "cloud": 7.172718,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2B_MSIL2A_20200410T063619_R120_T42VWJ_20200925T195522",
+          "date": "2020-04-10T06:36:19.024000+00:00",
+          "mgrs": "42VWJ",
+          "cloud": 13.761039,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200418T064621_R020_T42VWJ_20200924T000745",
+          "date": "2020-04-18T06:46:21.024000+00:00",
+          "mgrs": "42VWJ",
+          "cloud": 14.85035,
+          "baseline": "02.12"
+        }
+      ]
+    },
+    {
+      "sample_id": "western:f570aae7219db8f4cd75326c12d7755859a1dd5d36e4a3d5d267435b7fad07ae",
+      "interval": [
+        "2020-05-01",
+        "2020-05-15"
+      ],
+      "candidates": [
+        {
+          "item_id": "S2B_MSIL2A_20200513T064629_R020_T42VWJ_20200918T015327",
+          "date": "2020-05-13T06:46:29.024000+00:00",
+          "mgrs": "42VWJ",
+          "cloud": 1.525989,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2B_MSIL2A_20200510T063629_R120_T42VWJ_20200917T160403",
+          "date": "2020-05-10T06:36:29.025000+00:00",
+          "mgrs": "42VWJ",
+          "cloud": 7.916245,
+          "baseline": "02.12"
+        },
+        {
+          "item_id": "S2A_MSIL2A_20200508T064631_R020_T42VWJ_20200920T234950",
+          "date": "2020-05-08T06:46:31.024000+00:00",
+          "mgrs": "42VWJ",
+          "cloud": 16.950792,
+          "baseline": "02.12"
+        }
+      ]
+    }
+  ],
+  "source_hashes": {
+    "/home/mc/fires-accuracy-next/scripts/probe_spring_visibility.py": "db3505810f56ab9749cc149ca8dc240212b98609ac655c855e6346926dc3db0e",
+    "src/comp/spring_visibility.py": "8facbf98fa29c691eb02d1f60802c342be90909b8b380f76ee809c77d84657a9",
+    "scripts/prepare_russian_windows.py": "f6ff816794b328b89fe62a3fc670208b570f35ba5e60123ddfcb217557811abc",
+    "src/comp/l2a_finetuning.py": "60e0979252822355fa62d896faba9ad2d1d97f3b8bdcbb31328fbaea677fc67c",
+    "src/comp/geographic_failure_report.py": "ed77b39da195341c667be0037b4ffc9564c7ec2ff1baad2695968a328357a36a",
+    "src/comp/accuracy_contract.py": "6c71e49762838b1344355c10dceea1f6ced3d61fb6a9646ad8f0a37ec429e423"
+  }
+}

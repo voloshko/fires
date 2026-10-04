@@ -58,3 +58,16 @@ not validation of a new model or justification to change old labels/results.
 - non_claims: post-result selected examples, not new independent accuracy;
   no exact ignition day, field truth, reviewed negative background, causal
   proof of regrowth/misannotation, full interval coverage or goal completion.
+
+## Execution repair
+
+The initial unit terminated with exit1 after writing eight image/SCL pairs:
+JSON could not serialize a NumPy boolean. The partial result and original
+source snapshots are preserved with an execution FAIL receipt. Correct the
+boolean boundary and serialize before creating a destination file. Recovery
+uses the exact original plan SHA256
+4161f1ab66986c09378ed631292e018cb2c1cffbc6eac65af283bca479bf6320,
+unchanged dependencies and source-verified retained pixels; it writes
+result-recovered-v2.json, never replaces plan/result/pixels. No date, selection,
+observation threshold or scientific acceptance is changed. Recovery is the
+same command with --recover; a separate unit avoids restarting the old handle.

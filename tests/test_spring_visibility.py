@@ -1,9 +1,13 @@
 import unittest
+import json
+import tempfile
+from pathlib import Path
 
 import numpy as np
 
 from src.comp.spring_visibility import (BUDGET_BYTES, FREE_FLOOR_BYTES, RESERVATION_BYTES,
     candidates, compare_view, decision, storage_guard)
+from scripts.probe_spring_visibility import retain_pixels, write_json
 
 
 class SpringVisibilityTest(unittest.TestCase):
@@ -26,6 +30,27 @@ class SpringVisibilityTest(unittest.TestCase):
         self.assertTrue(report["usable"])
         self.assertEqual(report["contrast"]["old"], report["contrast"]["current"])
         self.assertFalse(report["extra_separation"])
+        self.assertTrue(json.loads(json.dumps(report))["usable"])
+
+    def test_serialization_failure_does_not_create_partial_result(self):
+        with tempfile.TemporaryDirectory() as folder:
+            p = Path(folder)/"result.json"
+            with self.assertRaises(TypeError):
+                write_json(p, {"bad": np.bool_(True)})
+            self.assertFalse(p.exists())
+
+    def test_recovery_keeps_original_pixel_bytes_and_rejects_change(self):
+        record = dict(grid=dict(crs="EPSG:32643", transform=[30, 0, 500000, 0, -30, 6000000]))
+        with tempfile.TemporaryDirectory() as folder:
+            p = Path(folder)/"image.tif"
+            a = np.ones((1, 512, 512), np.float32)
+            retain_pixels(p, a, record, "float32", -9999)
+            original = p.read_bytes()
+            retain_pixels(p, a.copy(), record, "float32", -9999)
+            self.assertEqual(p.read_bytes(), original)
+            with self.assertRaises(ValueError):
+                retain_pixels(p, a+1, record, "float32", -9999)
+            self.assertEqual(p.read_bytes(), original)
 
     def test_absence_is_insufficient_not_negative(self):
         ids = [str(i) for i in range(4)]

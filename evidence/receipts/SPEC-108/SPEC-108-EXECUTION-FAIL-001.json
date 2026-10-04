@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-108",
+  "run_id": "SPEC-108-EXECUTION-FAIL-001",
+  "created_at": "2026-10-04T07:03:32.972160+00:00",
+  "status": "FAIL",
+  "evidence_class": "LIVE",
+  "conclusion": "Collection wrote eight image/SCL pairs, but final JSON serialization failed on numpy.bool_; scientific verdict unavailable.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/probe_spring_visibility.py --data-root data-store --manifest data-store/western-holdout-v1/manifest.json --parent research/western-holdout-v1-result.json --out data-store/spring-visibility-v1'"
+  ],
+  "acceptance": {
+    "systemd_exit": 1,
+    "failure": "TypeError: Object of type bool is not JSON serializable",
+    "image_windows": 8,
+    "storage_bytes": 43423884,
+    "plan_sha256": "4161f1ab66986c09378ed631292e018cb2c1cffbc6eac65af283bca479bf6320",
+    "partial_json_sha256": "f09e24d31879247a76fa6081cfa0f72dea365961f21d3a8daf1032d8d9193def",
+    "scientific_verdict": "NOT_SAVED",
+    "failure_origin": "NumPy scalar produced by an observation-admission comparison"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/spring-visibility-plan-v1.json",
+    "evidence/experiments/accuracy-next-20261003/spring-visibility-partial-v1.txt",
+    "evidence/experiments/accuracy-next-20261003/source-snapshots/probe_spring_visibility-v1.py",
+    "evidence/experiments/accuracy-next-20261003/source-snapshots/spring_visibility-v1.py"
+  ],
+  "limitations": [
+    "Append-only partial result preserved as invalid JSON; no scientific result may be extracted from a truncated record.",
+    "Recovery requires fixed serialization, same frozen source plan, source-verified existing pixels and a new output filename."
+  ],
+  "non_claims": [
+    "Execution failure is not rejection or confirmation of temporal visibility.",
+    "No model gain or independent accuracy claim."
+  ]
+}

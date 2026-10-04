@@ -47,7 +47,7 @@ def compare_view(old, current, labels, old_valid, current_valid):
     report = dict(current_valid_fraction=float(current_valid.mean()),
         common_valid_fraction=float(common.mean()), masked_fraction=1-float(common.mean()),
         truth_pixels=int(true.sum()), background_pixels=int(background.sum()))
-    report["usable"] = (report["current_valid_fraction"] >= .5 and
+    report["usable"] = bool(report["current_valid_fraction"] >= .5 and
         report["common_valid_fraction"] >= .5 and true.sum() >= 9 and background.sum() >= 9)
     indices = {}
     for name, image in (("old", old), ("current", current)):
