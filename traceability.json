@@ -145,7 +145,8 @@
         "SPEC-99",
         "SPEC-100",
         "SPEC-101",
-        "SPEC-102"
+        "SPEC-102",
+        "SPEC-103"
       ]
     }
   },
@@ -1132,6 +1133,18 @@
         "SPEC-95"
       ],
       "status": "rejected"
+    },
+    "SPEC-103": {
+      "title": "Small reference-component rescue for paired fusion",
+      "file": "specs/SPEC-103-small-component-rescue.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-92",
+        "SPEC-95",
+        "SPEC-102"
+      ],
+      "status": "active"
     }
   }
 }
