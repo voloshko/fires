@@ -539,3 +539,18 @@ score queue1297106 still waits allsix complete summaries. ~20seconds/epoch,
 GPU4.9GiB/99% utilization, no error/restart or source edits. SPEC111 remains
 active; don't retry the immutable queue/outputs because polling expires.
 Eastern metadata selection remains unused and no new imagery collected.
+
+## SPEC-113 conditional path prepared and negatively tested
+
+Collection/scoring code committed after its spec; five tests pass on k8plus.
+Actual rejected SPEC109 candidate stops before catalogue/output creation;
+no eastern-confirmation-v1 data directory and zero fresh images. Preflight
+receipt is INSUFFICIENT_EVIDENCE: eligible positive path has not executed.
+Independent code APPROVE/architecture WATCH, final COMMENT in
+SPEC-113-REVIEW.md. No recovery by deleting partial files or replacing windows.
+
+SPEC111 six full training runs completed; scoring unit1297106 remains active,
+completed Russia77/cal61/west96, EMS60/FLOGA81 still pending at snapshot.
+Do not alter sealed sources, thresholds or comparator guards. Conditional
+SPEC113 may collect only after genuine eligible111 result and full binding.
+Full four-direction goal remains active; no model promoted.

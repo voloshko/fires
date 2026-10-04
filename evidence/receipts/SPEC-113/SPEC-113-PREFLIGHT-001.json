@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-113",
+  "run_id": "SPEC-113-PREFLIGHT-001",
+  "created_at": "2026-10-04T10:42:58.704864+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "evidence_class": "REPLAY",
+  "conclusion": "Five tests and real ineligible-candidate rejection passed; eligible collection and fresh accuracy path remain unexecuted.",
+  "commands": [
+    "ssh k8plus: .runtime/bin/python -m pytest tests/test_eastern_confirmation.py -q",
+    "ssh k8plus: .runtime/bin/python scripts/collect_eastern_confirmation.py --data-root data-store --selection data-store/eastern-holdout-plan-v1/selection.json --candidate research/temporal-adapter-v1/development.json --runs research/recall-expansion-v1 --reference-root /home/mc/fires/research --prithvi-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --out data-store/eastern-confirmation-v1",
+    "make gate"
+  ],
+  "acceptance": {
+    "unit_tests_passed": 5,
+    "ineligible_candidate_exit": 1,
+    "output_created": false,
+    "fresh_images": 0,
+    "positive_path": "NOT_RUN",
+    "review_code": "APPROVE",
+    "review_architecture": "WATCH",
+    "review_synthesis": "COMMENT"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/eastern-guard-preflight.json",
+    "docs/SPEC-113-REVIEW.md"
+  ],
+  "limitations": [
+    "Negative guard execution does not establish successful eligible artifact authentication, catalogue admission or fresh scoring.",
+    "Interrupted collection has no resume path; preserve partial files and fixed selection."
+  ],
+  "non_claims": [
+    "No imagery, independent accuracy improvement, product promotion or full goal completion.",
+    "Same publisher/season and spatial groups do not establish physical ignition IDs or field truth."
+  ]
+}

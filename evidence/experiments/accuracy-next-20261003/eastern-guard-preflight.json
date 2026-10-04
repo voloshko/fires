@@ -1,0 +1,28 @@
+{
+  "spec_id": "SPEC-113",
+  "utc": "2026-10-04T10:36:47.954929+00:00",
+  "rejected_existing_SPEC109": true,
+  "exit_status": 1,
+  "output_created": false,
+  "command": [
+    ".runtime/bin/python",
+    "scripts/collect_eastern_confirmation.py",
+    "--data-root",
+    "data-store",
+    "--selection",
+    "data-store/eastern-holdout-plan-v1/selection.json",
+    "--candidate",
+    "research/temporal-adapter-v1/development.json",
+    "--runs",
+    "research/recall-expansion-v1",
+    "--reference-root",
+    "/home/mc/fires/research",
+    "--prithvi-root",
+    "/home/mc/fires/external/prithvi-eo2-300m-burnscars",
+    "--out",
+    "data-store/eastern-confirmation-v1"
+  ],
+  "last_error": "ValueError: complete eligible SPEC111 candidate required before external I/O",
+  "positive_path": "NOT_RUN",
+  "fresh_images": 0
+}
