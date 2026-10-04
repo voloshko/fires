@@ -1,0 +1,19 @@
+{
+  "bbox": [
+    65,
+    54,
+    80,
+    65
+  ],
+  "crs": "EPSG:4326",
+  "source_valid_contours": 10143,
+  "area_ge1ha": 7635,
+  "schema": [
+    "area",
+    "geometry"
+  ],
+  "source_sha256": "5f1cfb843d5579d800a1e8359a017f8cd33c5658f6e0c0a6eda7ac534a1c6b3c",
+  "non_claims": [
+    "Metadataavailability only, no spatialpurge/windowadmission/modelpredictions yet."
+  ]
+}

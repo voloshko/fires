@@ -1,0 +1,29 @@
+{
+  "scope": "Additional comparison of fixed predeclared reserve comparator on consumedcal61; not a fresh post-selection confirmation",
+  "c1mm": {
+    "candidate_iou": 0.3045746193131945,
+    "control_iou": 0.20591468859988143,
+    "delta": 0.09865993071331308,
+    "ci95": [
+      0.03373200038261558,
+      0.15640533144282612
+    ]
+  },
+  "prithvi": {
+    "candidate_iou": 0.3045746193131945,
+    "control_iou": 0.1426591138734276,
+    "delta": 0.1619155054397669,
+    "ci95": [
+      0.09257550653773382,
+      0.29492322891429157
+    ]
+  },
+  "samples": 61,
+  "groups": 29,
+  "n_boot": 2000,
+  "seed": 20261003,
+  "non_claims": [
+    "No fullSPEC92/104 PASS.",
+    "Choosing reserve afterthiscomparison consumes thispopulation forfuturemodelselection."
+  ]
+}

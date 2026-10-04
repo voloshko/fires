@@ -147,7 +147,8 @@
         "SPEC-101",
         "SPEC-102",
         "SPEC-103",
-        "SPEC-104"
+        "SPEC-104",
+        "SPEC-105"
       ]
     }
   },
@@ -1159,6 +1160,19 @@
         "SPEC-103"
       ],
       "status": "rejected"
+    },
+    "SPEC-105": {
+      "title": "New geographic holdout for frozen Siberian paired specialist",
+      "file": "specs/SPEC-105-western-geographic-holdout.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-92",
+        "SPEC-95",
+        "SPEC-96",
+        "SPEC-104"
+      ],
+      "status": "planned"
     }
   }
 }

@@ -287,3 +287,17 @@ Cal61nowconsumed;futureuse isdevelopment, notunusedconfirmation.
 Originalusergoal stillnotproven across4directions, nevermarkcomplete onnegative
 experiments orsinglecompetitorwins. Free5.4GiB: newdatacollection must have
 a predeclared boundedstorage policy andkeep originals, not silentlydelete data.
+
+## Next full-scope geographicvalidation105 (planned)
+
+Architecturereview recommends fixedmodel/newdata, no morefusion/cap tuning.
+Executedsecondary bootstrap ofpreregistered reserveonconsumedcal61:delta+.098660
+toC1-MM CI[.033732,.156405],+.161916toPrithvi CI[.092576,.294923]. Not borrowed
+fusionintervals, notfreshconfirmation afterselection. Existing FAILs preserved.
+Metadata Western65–80E/54–65N:10143validcontours/7635>=1ha. Noimages downloaded,
+no groups/admission verifiedyet. SPEC105 plannedbeforecode:wholegrouppriorpurge,
+cap96frames/min50windows20groups,1.5GiBnewdatabudget/freefloor3GiB, unchanged
+pairedweights againstC1-MM5/Prithvi, delta.01/positiveCI toboth/missguard.
+No currentGPUjobsrunning; allsix101models+score and104confirm terminal0.
+User4partgoal stillactive/unachieved; newregionalvalidationdoesnotclosegrade
+orL2A usefulgain. No originaldata/modeldeletion orMac imagery/weight downloads.
