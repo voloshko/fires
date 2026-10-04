@@ -554,3 +554,15 @@ completed Russia77/cal61/west96, EMS60/FLOGA81 still pending at snapshot.
 Do not alter sealed sources, thresholds or comparator guards. Conditional
 SPEC113 may collect only after genuine eligible111 result and full binding.
 Full four-direction goal remains active; no model promoted.
+
+## SPEC-111 full result rejected
+
+Six training runs complete and both systemd units terminal exit0. Reconstructed
+750 candidate confusion rows from375 original masks, exact decisions/CIs.
+Russian pooled pair0.300017 vs C1-MM0.219247 and Prithvi0.116043;
+C1 delta+0.080771 CI[-0.015436,0.156171], matchedpost delta+0.076283
+CI[-0.018935,0.151861]. Regional point and missed-group guards pass,
+pooled CI and Mediterranean guards fail. FLOGA0.724287 vs0.746460,
+370 recovered TP vs14,028 added FP; cannot call recall preservation safe IoU.
+Immutable FAIL receipt and rejected status; unchanged thresholds and no model
+promotion. SPEC112 unused geography untouched. All four goals remain unproven.

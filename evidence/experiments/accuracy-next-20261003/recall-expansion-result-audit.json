@@ -1,0 +1,30 @@
+{
+  "spec_id": "SPEC-111",
+  "result_sha256": "0cff6f6ff99f60c21e033b0c1733f530f9dac9a0d12de3e94f8e83bb59471db1",
+  "windows": 375,
+  "candidate_counts_reconstructed": 750,
+  "all_decision_fields_recomputed": true,
+  "reference_tp_fn_preserved": true,
+  "eligible": false,
+  "guards": {
+    "pooled_gain": false,
+    "regional_points": true,
+    "mediterranean": false,
+    "missed_groups": true
+  },
+  "cache_hashes": {
+    "russia_eval-pair.packed.npy": "d8a07f0eabf87ddfdc5f3a14bbf02302f4f4ceba3932d9d814f8a71fc5285858",
+    "russia_eval-post.packed.npy": "d6d396064091b5e31398cb0b4467bf07d407ece99273983fe65fe26567acb598",
+    "russia_cal-pair.packed.npy": "0335bb405169bed874a5f9dbab4834e54aac0f5178614a4001ad49815af9c3f4",
+    "russia_cal-post.packed.npy": "330d294d004c9d7d80dab457d3df8ab3da12e87271e49e385e6ebdf24c748ca7",
+    "western-pair.packed.npy": "0f9985669173f65e4175dae64b99f9f5a159c092fdfe90265ee37dbc4e88e0d6",
+    "western-post.packed.npy": "d74228346dce60486b0a776127072d55c5c5c00698971f11df9327abcd98fde2",
+    "ems-pair.packed.npy": "8eac3bf874451527ce7ec2a9fdbbeb0b7ace8a81c653a95f2d17c48bf026a667",
+    "ems-post.packed.npy": "146bc060857a2ec9d1830f56b8ea9debab479ee932b8cb59a94ee510a522bed7",
+    "floga-pair.packed.npy": "42f633624c7201c641390ba03a5c5f9a4e532256d800b327162141ebe649d002",
+    "floga-post.packed.npy": "236832e0ddf5eaf770066893e6f47b75f3d196629ebce8b324468ff808a16338"
+  },
+  "non_claims": [
+    "Existing consumed development; no independent confirmation or product promotion"
+  ]
+}

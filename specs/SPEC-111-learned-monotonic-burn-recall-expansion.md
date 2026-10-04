@@ -1,6 +1,6 @@
 # SPEC-111: Learned monotonic burn recall expansion
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-95, SPEC-109
 
@@ -64,3 +64,21 @@ Unlike rejected fixed fusion, additions are trained using fit labels only.
   cannot correct existing reference FP. PANGAEA background unreviewed,
   development consumed, no field truth/severity/L2A useful-gain proof,
   global superiority, product promotion or original goal completion.
+
+## Resolution
+
+Rejected after six full matched 30-epoch runs and scoring all375 windows.
+Russia234/90 pooled IoU pair0.300017/post0.223735/C1-MM0.219247/Prithvi0.116043.
+Pair-C1 gain+0.080771 CI95[-0.015436,0.156171]; pair-post+0.076283
+CI95[-0.018935,0.151861]. Both lower bounds fail despite large point gains.
+All Russian regional point safeguards pass. FLOGA0.724287 vs C1-MM0.746460,
+delta-0.022173 CI95[-0.069993,-0.001135], fails point and CI safeguards.
+Missed groups improve: Russian pool1 vs C1-MM3, with no extra Med misses.
+On FLOGA additions recover370 true pixels but add14,028 false positives;
+reference preservation cannot protect IoU against this growth.
+
+All750 candidate counts reconstructed from packed masks and original labels;
+complete decisions/CIs recomputed exactly. Native model/exposure/order audit
+passed, train/score exit0, source and criteria unchanged. Immutable FAIL
+SPEC-111-REPLAY-001.json. No promotion or eastern collection; unused SPEC112
+selection remains untouched. Full original four-direction objective not achieved.

@@ -1,0 +1,59 @@
+{
+  "spec_id": "SPEC-111",
+  "six_runs_completed": true,
+  "matched_exposures_orders_and_base": true,
+  "fit_ids": 683,
+  "runs": [
+    {
+      "variant": "pair",
+      "seed": 1,
+      "epochs": 30,
+      "final_loss": 0.47753154175976914,
+      "adapter_sha256": "28ca6add86975a9f12276081b62df223f491881ddb3c10b1ca54b23b8c0e90b4",
+      "adapter_bytes": 428778
+    },
+    {
+      "variant": "pair",
+      "seed": 2,
+      "epochs": 30,
+      "final_loss": 0.45844527582327527,
+      "adapter_sha256": "dc3b50d0cfad6dfa5d833b757c79c6ab02af252a2f74cd0a353770d96ebc2771",
+      "adapter_bytes": 428778
+    },
+    {
+      "variant": "pair",
+      "seed": 3,
+      "epochs": 30,
+      "final_loss": 0.4672532547265291,
+      "adapter_sha256": "d66b2e032d569148f345da898d0bea848f9bf535132d0d93013eb3df778ede40",
+      "adapter_bytes": 428778
+    },
+    {
+      "variant": "post",
+      "seed": 1,
+      "epochs": 30,
+      "final_loss": 0.5281329248100519,
+      "adapter_sha256": "96cd0f2fe8598276fbb4e7b988759c5d026f78a6f5e71231a12d598b95ac86e4",
+      "adapter_bytes": 428778
+    },
+    {
+      "variant": "post",
+      "seed": 2,
+      "epochs": 30,
+      "final_loss": 0.5657048920790354,
+      "adapter_sha256": "dd51e2de4f80ca5552875701107164ce8cc8d211a3b2ad3818e952d53d10489f",
+      "adapter_bytes": 428778
+    },
+    {
+      "variant": "post",
+      "seed": 3,
+      "epochs": 30,
+      "final_loss": 0.5943763932834069,
+      "adapter_sha256": "1511cbcc1bc1f2a1b8fa404393520f0b7e5c1c67ae15994a9b85a88734cae481",
+      "adapter_bytes": 428778
+    }
+  ],
+  "non_claims": [
+    "Mechanics audit, no accuracy or independent confirmation"
+  ]
+}

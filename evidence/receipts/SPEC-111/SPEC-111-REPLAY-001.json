@@ -1,0 +1,431 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-111",
+  "run_id": "SPEC-111-REPLAY-001",
+  "created_at": "2026-10-04T10:47:23.929162+00:00",
+  "status": "FAIL",
+  "evidence_class": "REPLAY",
+  "conclusion": "Full matched training and scoring completed. Russian pooled point gain is large but confidence intervals cross zero; FLOGA non-degradation fails. Reference-positive preservation and regional points pass; reject without promotion.",
+  "commands": [
+    "ssh k8plus: bash scripts/queues/queue_recall_expansion.sh",
+    "ssh k8plus: bash scripts/queues/queue_score_recall_expansion.sh",
+    "ssh k8plus: CPU reconstruction of 750 candidate confusion counts and development_decision",
+    "make gate"
+  ],
+  "acceptance": {
+    "eligible": false,
+    "guards": {
+      "pooled_gain": false,
+      "regional_points": true,
+      "mediterranean": false,
+      "missed_groups": true
+    },
+    "pooled": {
+      "post": {
+        "samples": 234,
+        "groups": 90,
+        "candidate_iou": 0.3000173851264897,
+        "control_iou": 0.2237347929678949,
+        "delta": 0.07628259215859479,
+        "ci95": [
+          -0.018935200008202185,
+          0.15186076739006785
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      },
+      "c1mm": {
+        "samples": 234,
+        "groups": 90,
+        "candidate_iou": 0.3000173851264897,
+        "control_iou": 0.2192468213093734,
+        "delta": 0.08077056381711628,
+        "ci95": [
+          -0.015436125753708028,
+          0.1561705630692235
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      },
+      "prithvi": {
+        "samples": 234,
+        "groups": 90,
+        "candidate_iou": 0.3000173851264897,
+        "control_iou": 0.11604312605925204,
+        "delta": 0.18397425906723763,
+        "ci95": [
+          0.13902199693415276,
+          0.23986871678226543
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      }
+    },
+    "per_dataset": {
+      "russia_eval": {
+        "post": {
+          "samples": 77,
+          "groups": 24,
+          "candidate_iou": 0.3613253800945445,
+          "control_iou": 0.3344809047264221,
+          "delta": 0.0268444753681224,
+          "ci95": [
+            -0.024811839127493934,
+            0.10420165761818034
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "reserve": {
+          "samples": 77,
+          "groups": 24,
+          "candidate_iou": 0.3613253800945445,
+          "control_iou": 0.3230492072325294,
+          "delta": 0.03827617286201512,
+          "ci95": [
+            -0.0945362723734882,
+            0.08547844008131114
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 77,
+          "groups": 24,
+          "candidate_iou": 0.3613253800945445,
+          "control_iou": 0.32610820993394857,
+          "delta": 0.035217170160595945,
+          "ci95": [
+            -0.021873990244215297,
+            0.10594308676128737
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "prithvi": {
+          "samples": 77,
+          "groups": 24,
+          "candidate_iou": 0.3613253800945445,
+          "control_iou": 0.20621601498957293,
+          "delta": 0.15510936510497159,
+          "ci95": [
+            0.08879648795657011,
+            0.28641256591871134
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        }
+      },
+      "russia_cal": {
+        "post": {
+          "samples": 61,
+          "groups": 29,
+          "candidate_iou": 0.41823403809922544,
+          "control_iou": 0.2094750094515183,
+          "delta": 0.20875902864770712,
+          "ci95": [
+            0.06704376041562186,
+            0.32556528438478094
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        },
+        "reserve": {
+          "samples": 61,
+          "groups": 29,
+          "candidate_iou": 0.41823403809922544,
+          "control_iou": 0.3045746193131945,
+          "delta": 0.11365941878603092,
+          "ci95": [
+            -0.01283158047016151,
+            0.20575543740517496
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 61,
+          "groups": 29,
+          "candidate_iou": 0.41823403809922544,
+          "control_iou": 0.20591468859988143,
+          "delta": 0.212319349499344,
+          "ci95": [
+            0.06641029037017032,
+            0.3303096893271777
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        },
+        "prithvi": {
+          "samples": 61,
+          "groups": 29,
+          "candidate_iou": 0.41823403809922544,
+          "control_iou": 0.1426591138734276,
+          "delta": 0.2755749242257978,
+          "ci95": [
+            0.14061322187558628,
+            0.39424995945805663
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        }
+      },
+      "western": {
+        "post": {
+          "samples": 96,
+          "groups": 37,
+          "candidate_iou": 0.22903326620390807,
+          "control_iou": 0.18751415024160528,
+          "delta": 0.04151911596230279,
+          "ci95": [
+            -0.08525112060560056,
+            0.13561219305623037
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "reserve": {
+          "samples": 96,
+          "groups": 37,
+          "candidate_iou": 0.22903326620390807,
+          "control_iou": 0.2206281739341134,
+          "delta": 0.008405092269794662,
+          "ci95": [
+            -0.03076524893442712,
+            0.03484311150504603
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 96,
+          "groups": 37,
+          "candidate_iou": 0.22903326620390807,
+          "control_iou": 0.1838986395342188,
+          "delta": 0.04513462666968926,
+          "ci95": [
+            -0.08203390989198851,
+            0.1388894576225207
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "prithvi": {
+          "samples": 96,
+          "groups": 37,
+          "candidate_iou": 0.22903326620390807,
+          "control_iou": 0.08466293357855248,
+          "delta": 0.1443703326253556,
+          "ci95": [
+            0.08000130206796176,
+            0.20125670249124744
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        }
+      },
+      "ems": {
+        "post": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.76145708608625,
+          "control_iou": 0.7606812718462812,
+          "delta": 0.0007758142399687529,
+          "ci95": [
+            -0.00017027215294855292,
+            0.0024815079801259222
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "reserve": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.76145708608625,
+          "control_iou": 0.7948998849080845,
+          "delta": -0.03344279882183454,
+          "ci95": [
+            -0.062257698496623014,
+            -0.01367234668640025
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "worse"
+        },
+        "c1mm": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.76145708608625,
+          "control_iou": 0.7594609076850591,
+          "delta": 0.001996178401190818,
+          "ci95": [
+            0.000275023668761476,
+            0.004072864029072254
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        }
+      },
+      "floga": {
+        "post": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.7242866644277182,
+          "control_iou": 0.7451403302339552,
+          "delta": -0.020853665806237043,
+          "ci95": [
+            -0.06614225800357894,
+            -0.0010045948854660901
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "worse"
+        },
+        "reserve": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.7242866644277182,
+          "control_iou": 0.7255777050481008,
+          "delta": -0.0012910406203826552,
+          "ci95": [
+            -0.05345191028760336,
+            0.058334957669154475
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.7242866644277182,
+          "control_iou": 0.7464595747186571,
+          "delta": -0.02217291029093893,
+          "ci95": [
+            -0.06999320115642756,
+            -0.0011352868114522935
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "worse"
+        }
+      }
+    },
+    "full_training": [
+      {
+        "variant": "pair",
+        "seed": 1,
+        "epochs": 30,
+        "final_loss": 0.47753154175976914,
+        "adapter_sha256": "28ca6add86975a9f12276081b62df223f491881ddb3c10b1ca54b23b8c0e90b4",
+        "adapter_bytes": 428778
+      },
+      {
+        "variant": "pair",
+        "seed": 2,
+        "epochs": 30,
+        "final_loss": 0.45844527582327527,
+        "adapter_sha256": "dc3b50d0cfad6dfa5d833b757c79c6ab02af252a2f74cd0a353770d96ebc2771",
+        "adapter_bytes": 428778
+      },
+      {
+        "variant": "pair",
+        "seed": 3,
+        "epochs": 30,
+        "final_loss": 0.4672532547265291,
+        "adapter_sha256": "d66b2e032d569148f345da898d0bea848f9bf535132d0d93013eb3df778ede40",
+        "adapter_bytes": 428778
+      },
+      {
+        "variant": "post",
+        "seed": 1,
+        "epochs": 30,
+        "final_loss": 0.5281329248100519,
+        "adapter_sha256": "96cd0f2fe8598276fbb4e7b988759c5d026f78a6f5e71231a12d598b95ac86e4",
+        "adapter_bytes": 428778
+      },
+      {
+        "variant": "post",
+        "seed": 2,
+        "epochs": 30,
+        "final_loss": 0.5657048920790354,
+        "adapter_sha256": "dd51e2de4f80ca5552875701107164ce8cc8d211a3b2ad3818e952d53d10489f",
+        "adapter_bytes": 428778
+      },
+      {
+        "variant": "post",
+        "seed": 3,
+        "epochs": 30,
+        "final_loss": 0.5943763932834069,
+        "adapter_sha256": "1511cbcc1bc1f2a1b8fa404393520f0b7e5c1c67ae15994a9b85a88734cae481",
+        "adapter_bytes": 428778
+      }
+    ],
+    "decision_and_counts_reconstructed": {
+      "spec_id": "SPEC-111",
+      "result_sha256": "0cff6f6ff99f60c21e033b0c1733f530f9dac9a0d12de3e94f8e83bb59471db1",
+      "windows": 375,
+      "candidate_counts_reconstructed": 750,
+      "all_decision_fields_recomputed": true,
+      "reference_tp_fn_preserved": true,
+      "eligible": false,
+      "guards": {
+        "pooled_gain": false,
+        "regional_points": true,
+        "mediterranean": false,
+        "missed_groups": true
+      },
+      "cache_hashes": {
+        "russia_eval-pair.packed.npy": "d8a07f0eabf87ddfdc5f3a14bbf02302f4f4ceba3932d9d814f8a71fc5285858",
+        "russia_eval-post.packed.npy": "d6d396064091b5e31398cb0b4467bf07d407ece99273983fe65fe26567acb598",
+        "russia_cal-pair.packed.npy": "0335bb405169bed874a5f9dbab4834e54aac0f5178614a4001ad49815af9c3f4",
+        "russia_cal-post.packed.npy": "330d294d004c9d7d80dab457d3df8ab3da12e87271e49e385e6ebdf24c748ca7",
+        "western-pair.packed.npy": "0f9985669173f65e4175dae64b99f9f5a159c092fdfe90265ee37dbc4e88e0d6",
+        "western-post.packed.npy": "d74228346dce60486b0a776127072d55c5c5c00698971f11df9327abcd98fde2",
+        "ems-pair.packed.npy": "8eac3bf874451527ce7ec2a9fdbbeb0b7ace8a81c653a95f2d17c48bf026a667",
+        "ems-post.packed.npy": "146bc060857a2ec9d1830f56b8ea9debab479ee932b8cb59a94ee510a522bed7",
+        "floga-pair.packed.npy": "42f633624c7201c641390ba03a5c5f9a4e532256d800b327162141ebe649d002",
+        "floga-post.packed.npy": "236832e0ddf5eaf770066893e6f47b75f3d196629ebce8b324468ff808a16338"
+      },
+      "non_claims": [
+        "Existing consumed development; no independent confirmation or product promotion"
+      ]
+    },
+    "result_sha256": "0cff6f6ff99f60c21e033b0c1733f530f9dac9a0d12de3e94f8e83bb59471db1",
+    "training_exit": 0,
+    "scoring_exit": 0
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/recall-expansion-development.json",
+    "evidence/experiments/accuracy-next-20261003/recall-expansion-scoring-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/recall-expansion-six-run-audit.json",
+    "evidence/experiments/accuracy-next-20261003/recall-expansion-result-audit.json"
+  ],
+  "limitations": [
+    "Pooled gain over C1-MM CI95 [-0.015436,0.156171] is inconclusive.",
+    "FLOGA loss -0.022173 with CI95 [-0.069993,-0.001135] fails both original safeguards.",
+    "All populations consumed development; calibration61 is not fresh confirmation."
+  ],
+  "non_claims": [
+    "Consumed development populations; eligibility is not independent confirmation or promotion.",
+    "PANGAEA background is published coverage, not reviewed absence of fire; spatial groups are not dated fires.",
+    "No field truth, severity/L2A useful gain, global ranking or original goal completion."
+  ]
+}

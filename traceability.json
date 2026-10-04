@@ -2,7 +2,7 @@
   "version": 1,
   "requirements": {
     "REQ-001": {
-      "title": "\u041e\u043f\u0435\u0440\u0430\u0442\u0438\u0432\u043d\u043e\u0435 \u043e\u0431\u043d\u0430\u0440\u0443\u0436\u0435\u043d\u0438\u0435 \u0430\u043a\u0442\u0438\u0432\u043d\u044b\u0445 \u043e\u0447\u0430\u0433\u043e\u0432 \u043d\u0430 \u043f\u0443\u0431\u043b\u0438\u0447\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445",
+      "title": "Оперативное обнаружение активных очагов на публичных данных",
       "file": "requirements/REQ-001.md",
       "specs": [
         "SPEC-1",
@@ -14,7 +14,7 @@
       ]
     },
     "REQ-002": {
-      "title": "\u041a\u0430\u0440\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0433\u0430\u0440\u0435\u0439 \u0438 \u043e\u0446\u0435\u043d\u043a\u0430 \u043f\u043b\u043e\u0449\u0430\u0434\u0438 \u043f\u043e\u0440\u0430\u0436\u0435\u043d\u0438\u044f",
+      "title": "Картирование гарей и оценка площади поражения",
       "file": "requirements/REQ-002.md",
       "specs": [
         "SPEC-7",
@@ -22,26 +22,26 @@
       ]
     },
     "REQ-003": {
-      "title": "\u041f\u0443\u0431\u043b\u0438\u0447\u043d\u044b\u0439 \u0434\u043e\u0441\u0442\u0443\u043f: REST API \u0438 \u0432\u0435\u0431-\u043a\u0430\u0440\u0442\u0430",
+      "title": "Публичный доступ: REST API и веб-карта",
       "file": "requirements/REQ-003.md",
       "specs": [
         "SPEC-8"
       ]
     },
     "REQ-004": {
-      "title": "\u0414\u043e\u043a\u0430\u0437\u0443\u0435\u043c\u043e\u0441\u0442\u044c, \u043f\u0440\u043e\u0441\u043b\u0435\u0436\u0438\u0432\u0430\u0435\u043c\u043e\u0441\u0442\u044c \u0438 \u0447\u0435\u0441\u0442\u043d\u043e\u0441\u0442\u044c \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432",
+      "title": "Доказуемость, прослеживаемость и честность результатов",
       "file": "requirements/REQ-004.md",
       "specs": []
     },
     "REQ-005": {
-      "title": "\u042d\u043a\u0441\u043f\u043b\u0443\u0430\u0442\u0430\u0446\u0438\u043e\u043d\u043d\u0430\u044f \u0443\u0441\u0442\u043e\u0439\u0447\u0438\u0432\u043e\u0441\u0442\u044c \u0438 \u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u0438\u044f \u0432\u043d\u0435\u0448\u043d\u0438\u0445 \u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u043e\u0432",
+      "title": "Эксплуатационная устойчивость и ограничения внешних источников",
       "file": "requirements/REQ-005.md",
       "specs": [
         "SPEC-14"
       ]
     },
     "REQ-006": {
-      "title": "\u041e\u0431\u0443\u0447\u0435\u043d\u0438\u0435 \u043d\u0430 \u0438\u0441\u0442\u043e\u0440\u0438\u0447\u0435\u0441\u043a\u0438\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 \u0438 \u0441\u043e\u043f\u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u0441 baseline",
+      "title": "Обучение на исторических данных и сопоставление с baseline",
       "file": "requirements/REQ-006.md",
       "specs": [
         "SPEC-10",
@@ -55,7 +55,7 @@
       ]
     },
     "REQ-007": {
-      "title": "\u0421\u043e\u0440\u0435\u0432\u043d\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0439 \u043a\u043e\u043d\u0442\u0443\u0440: \u043c\u0435\u0442\u0440\u0438\u043a\u0430, submission \u0438 \u0432\u043e\u0441\u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u043c\u043e\u0441\u0442\u044c",
+      "title": "Соревновательный контур: метрика, submission и воспроизводимость",
       "file": "requirements/REQ-007.md",
       "specs": [
         "SPEC-15",
@@ -108,7 +108,7 @@
       ]
     },
     "REQ-008": {
-      "title": "\u041c\u0443\u043b\u044c\u0442\u0438\u0431\u0438\u043e\u043c\u043d\u0430\u044f \u043c\u043e\u0434\u0435\u043b\u044c \u0433\u0430\u0440\u0438: \u0441\u0442\u0435\u043f\u044c, \u043b\u0435\u0441, \u0433\u043e\u0440\u044b",
+      "title": "Мультибиомная модель гари: степь, лес, горы",
       "file": "requirements/REQ-008.md",
       "specs": [
         "SPEC-64",
@@ -163,14 +163,14 @@
   "legacy_untracked_specs": [],
   "specs": {
     "SPEC-1": {
-      "title": "\u041a\u043e\u043d\u0444\u0438\u0433\u0443\u0440\u0430\u0446\u0438\u044f \u0440\u0435\u0433\u0438\u043e\u043d\u0430 \u0438 \u043f\u0440\u0438\u0451\u043c FIRMS Area API",
+      "title": "Конфигурация региона и приём FIRMS Area API",
       "file": "specs/SPEC-1-firms-ingestion.md",
       "requirement": "REQ-001",
       "depends_on": [],
       "status": "implemented"
     },
     "SPEC-2": {
-      "title": "\u041d\u0430\u043a\u043e\u043f\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0435 \u0445\u0440\u0430\u043d\u0438\u043b\u0438\u0449\u0435 \u0434\u0435\u0442\u0435\u043a\u0446\u0438\u0439 \u0438 \u0436\u0443\u0440\u043d\u0430\u043b \u043d\u0430\u0431\u043b\u044e\u0434\u0435\u043d\u0438\u0439",
+      "title": "Накопительное хранилище детекций и журнал наблюдений",
       "file": "specs/SPEC-2-detection-store.md",
       "requirement": "REQ-001",
       "depends_on": [
@@ -179,7 +179,7 @@
       "status": "implemented"
     },
     "SPEC-3": {
-      "title": "\u041d\u043e\u0440\u043c\u0430\u043b\u0438\u0437\u0430\u0446\u0438\u044f confidence \u0438 \u043f\u043e\u0440\u043e\u0433\u043e\u0432\u044b\u0439 \u0444\u0438\u043b\u044c\u0442\u0440",
+      "title": "Нормализация confidence и пороговый фильтр",
       "file": "specs/SPEC-3-confidence-filter.md",
       "requirement": "REQ-001",
       "depends_on": [
@@ -188,7 +188,7 @@
       "status": "implemented"
     },
     "SPEC-4": {
-      "title": "\u0424\u0438\u043b\u044c\u0442\u0440 \u0432\u0440\u0435\u043c\u0435\u043d\u043d\u043e\u0439 \u043f\u0435\u0440\u0441\u0438\u0441\u0442\u0435\u043d\u0442\u043d\u043e\u0441\u0442\u0438 \u0438 \u0441\u043b\u043e\u0439 \u0442\u0435\u043f\u043b\u043e\u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u043e\u0432",
+      "title": "Фильтр временной персистентности и слой теплоисточников",
       "file": "specs/SPEC-4-persistence-filter.md",
       "requirement": "REQ-001",
       "depends_on": [
@@ -197,7 +197,7 @@
       "status": "implemented"
     },
     "SPEC-5": {
-      "title": "\u041c\u0430\u0441\u043a\u0430 \u0441\u0435\u043b\u044c\u0445\u043e\u0437\u0437\u0435\u043c\u0435\u043b\u044c \u0438\u0437 ESA WorldCover",
+      "title": "Маска сельхозземель из ESA WorldCover",
       "file": "specs/SPEC-5-cropland-mask.md",
       "requirement": "REQ-001",
       "depends_on": [
@@ -206,7 +206,7 @@
       "status": "implemented"
     },
     "SPEC-6": {
-      "title": "\u041a\u043b\u0430\u0441\u0442\u0435\u0440\u0438\u0437\u0430\u0446\u0438\u044f \u0434\u0435\u0442\u0435\u043a\u0446\u0438\u0439 \u0432 \u0441\u043e\u0431\u044b\u0442\u0438\u044f \u043f\u043e\u0436\u0430\u0440\u043e\u0432",
+      "title": "Кластеризация детекций в события пожаров",
       "file": "specs/SPEC-6-event-clustering.md",
       "requirement": "REQ-001",
       "depends_on": [
@@ -216,7 +216,7 @@
       "status": "implemented"
     },
     "SPEC-7": {
-      "title": "\u041f\u043e\u0434\u0431\u043e\u0440 \u043f\u0430\u0440\u044b \u0441\u0446\u0435\u043d Sentinel-2 \u0438 \u0440\u0430\u0441\u0447\u0451\u0442 dNBR/RBR",
+      "title": "Подбор пары сцен Sentinel-2 и расчёт dNBR/RBR",
       "file": "specs/SPEC-7-burn-mapping.md",
       "requirement": "REQ-002",
       "depends_on": [
@@ -225,7 +225,7 @@
       "status": "implemented"
     },
     "SPEC-8": {
-      "title": "REST API \u0438 \u0432\u0435\u0431-\u043a\u0430\u0440\u0442\u0430",
+      "title": "REST API и веб-карта",
       "file": "specs/SPEC-8-api-and-map.md",
       "requirement": "REQ-003",
       "depends_on": [
@@ -235,7 +235,7 @@
       "status": "implemented"
     },
     "SPEC-9": {
-      "title": "\u0424\u0435\u043d\u043e\u043b\u043e\u0433\u0438\u0447\u0435\u0441\u043a\u043e\u0435 \u0441\u043e\u0433\u043b\u0430\u0441\u043e\u0432\u0430\u043d\u0438\u0435 \u043f\u0430\u0440\u044b \u0441\u0446\u0435\u043d \u0438 \u0432\u0430\u043b\u0438\u0434\u0430\u0446\u0438\u044f \u043f\u043b\u043e\u0449\u0430\u0434\u0438 \u0433\u0430\u0440\u0438",
+      "title": "Фенологическое согласование пары сцен и валидация площади гари",
       "file": "specs/SPEC-9-phenology-matching.md",
       "requirement": "REQ-002",
       "depends_on": [
@@ -244,14 +244,14 @@
       "status": "implemented"
     },
     "SPEC-10": {
-      "title": "\u041c\u043d\u043e\u0433\u043e\u043b\u0435\u0442\u043d\u0438\u0439 \u0430\u0440\u0445\u0438\u0432 \u0434\u0435\u0442\u0435\u043a\u0446\u0438\u0439 FIRMS \u043f\u043e \u0440\u0435\u0433\u0438\u043e\u043d\u0443",
+      "title": "Многолетний архив детекций FIRMS по региону",
       "file": "specs/SPEC-10-firms-archive.md",
       "requirement": "REQ-006",
       "depends_on": [],
       "status": "partial"
     },
     "SPEC-11": {
-      "title": "\u041a\u043e\u043d\u0442\u0440\u043e\u043b\u044c\u043d\u044b\u0435 \u043f\u0440\u043e\u0434\u0443\u043a\u0442\u044b \u0433\u0430\u0440\u0435\u0439 MCD64A1 \u0438 Fire_CCI \u043a\u0430\u043a \u0441\u043b\u0430\u0431\u044b\u0435 \u043c\u0435\u0442\u043a\u0438",
+      "title": "Контрольные продукты гарей MCD64A1 и Fire_CCI как слабые метки",
       "file": "specs/SPEC-11-weak-labels.md",
       "requirement": "REQ-006",
       "depends_on": [
@@ -260,7 +260,7 @@
       "status": "partial"
     },
     "SPEC-12": {
-      "title": "\u041e\u0431\u0443\u0447\u0430\u044e\u0449\u0430\u044f \u0432\u044b\u0431\u043e\u0440\u043a\u0430 \u043f\u0430\u0440 \u0441\u0446\u0435\u043d Sentinel-2 \u0441 \u0437\u0430\u043c\u043e\u0440\u043e\u0436\u0435\u043d\u043d\u044b\u043c \u0440\u0430\u0437\u0431\u0438\u0435\u043d\u0438\u0435\u043c",
+      "title": "Обучающая выборка пар сцен Sentinel-2 с замороженным разбиением",
       "file": "specs/SPEC-12-training-dataset.md",
       "requirement": "REQ-006",
       "depends_on": [
@@ -270,7 +270,7 @@
       "status": "planned"
     },
     "SPEC-13": {
-      "title": "\u0414\u043e\u043e\u0431\u0443\u0447\u0435\u043d\u0438\u0435 \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u0438 \u0433\u0430\u0440\u0435\u0439 \u0438 \u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0435 \u0441 \u043f\u043e\u0440\u043e\u0433\u043e\u0432\u044b\u043c baseline",
+      "title": "Дообучение сегментации гарей и сравнение с пороговым baseline",
       "file": "specs/SPEC-13-segmentation-training.md",
       "requirement": "REQ-006",
       "depends_on": [
@@ -279,7 +279,7 @@
       "status": "planned"
     },
     "SPEC-14": {
-      "title": "\u041b\u043e\u043a\u0430\u043b\u044c\u043d\u044b\u0439 \u043a\u0435\u0448 \u0441\u043d\u0438\u043c\u043a\u0430 \u0434\u0430\u043d\u043d\u044b\u0445 \u0434\u043b\u044f \u0431\u044b\u0441\u0442\u0440\u043e\u0433\u043e \u0441\u0442\u0430\u0440\u0442\u0430",
+      "title": "Локальный кеш снимка данных для быстрого старта",
       "file": "specs/SPEC-14-snapshot-cache.md",
       "requirement": "REQ-005",
       "depends_on": [
@@ -290,14 +290,14 @@
       "status": "implemented"
     },
     "SPEC-15": {
-      "title": "\u0427\u0438\u043f\u044b \u0441\u043e\u0440\u0435\u0432\u043d\u043e\u0432\u0430\u043d\u0438\u044f",
+      "title": "Чипы соревнования",
       "file": "specs/SPEC-15-comp-chips.md",
       "requirement": "REQ-007",
       "depends_on": [],
       "status": "implemented"
     },
     "SPEC-16": {
-      "title": "\u041a\u043e\u0434\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 RLE \u0438 \u0432\u0430\u043b\u0438\u0434\u0430\u0446\u0438\u044f submission.csv",
+      "title": "Кодирование RLE и валидация submission.csv",
       "file": "specs/SPEC-16-submission-rle.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -306,7 +306,7 @@
       "status": "implemented"
     },
     "SPEC-17": {
-      "title": "\u041f\u043e\u0440\u043e\u0433\u043e\u0432\u044b\u0439 baseline \u0434\u0435\u0442\u0435\u043a\u0446\u0438\u0438 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0433\u043e \u0433\u043e\u0440\u0435\u043d\u0438\u044f",
+      "title": "Пороговый baseline детекции активного горения",
       "file": "specs/SPEC-17-af-baseline.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -316,7 +316,7 @@
       "status": "partial"
     },
     "SPEC-18": {
-      "title": "\u041f\u043e\u0440\u043e\u0433\u043e\u0432\u044b\u0439 baseline \u0433\u0430\u0440\u0435\u0439 \u0438 \u0441\u0442\u0435\u043f\u0435\u043d\u0438 \u043f\u043e\u0440\u0430\u0436\u0435\u043d\u0438\u044f",
+      "title": "Пороговый baseline гарей и степени поражения",
       "file": "specs/SPEC-18-bs-baseline.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -326,7 +326,7 @@
       "status": "implemented"
     },
     "SPEC-19": {
-      "title": "\u041e\u0431\u0443\u0447\u0435\u043d\u0438\u0435 \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u043e\u043d\u043d\u043e\u0439 \u043c\u043e\u0434\u0435\u043b\u0438 \u0438 \u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0435 \u0441 baseline",
+      "title": "Обучение сегментационной модели и сравнение с baseline",
       "file": "specs/SPEC-19-model-training.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -336,7 +336,7 @@
       "status": "implemented"
     },
     "SPEC-20": {
-      "title": "\u0415\u0434\u0438\u043d\u0430\u044f \u043a\u043e\u043c\u0430\u043d\u0434\u0430 \u0438\u043d\u0444\u0435\u0440\u0435\u043d\u0441\u0430 \u0438 \u0432\u043e\u0441\u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u043c\u043e\u0441\u0442\u044c",
+      "title": "Единая команда инференса и воспроизводимость",
       "file": "specs/SPEC-20-inference-entrypoint.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -347,7 +347,7 @@
       "status": "implemented"
     },
     "SPEC-21": {
-      "title": "\u0421\u0435\u0440\u0432\u0438\u0441 \u043f\u043e\u0434 \u0442\u0440\u0435\u0431\u043e\u0432\u0430\u043d\u0438\u044f \u043a\u0435\u0439\u0441\u0430",
+      "title": "Сервис под требования кейса",
       "file": "specs/SPEC-21-case-service.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -357,7 +357,7 @@
       "status": "planned"
     },
     "SPEC-22": {
-      "title": "\u041f\u0440\u0435\u0434\u043e\u0431\u0443\u0447\u0435\u043d\u043d\u044b\u0435 \u043d\u0430 ImageNet \u043a\u043e\u0434\u0438\u0440\u043e\u0432\u0449\u0438\u043a\u0438 \u0432 U-Net \u0434\u043b\u044f BS",
+      "title": "Предобученные на ImageNet кодировщики в U-Net для BS",
       "file": "specs/SPEC-22-imagenet-u-net-bs.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -366,7 +366,7 @@
       "status": "rejected"
     },
     "SPEC-23": {
-      "title": "\u0414\u043e\u043e\u0431\u0443\u0447\u0435\u043d\u0438\u0435 Prithvi-EO-2.0 \u043d\u0430 \u0441\u0442\u0435\u043f\u0435\u043d\u0438 \u043f\u043e\u0440\u0430\u0436\u0435\u043d\u0438\u044f BS",
+      "title": "Дообучение Prithvi-EO-2.0 на степени поражения BS",
       "file": "specs/SPEC-23-prithvi-eo-2-0-bs.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -375,7 +375,7 @@
       "status": "rejected"
     },
     "SPEC-24": {
-      "title": "\u0422\u0440\u0430\u043d\u0441\u0444\u043e\u0440\u043c\u0435\u0440\u044b SegFormer \u0438 SegNext \u0434\u043b\u044f BS",
+      "title": "Трансформеры SegFormer и SegNext для BS",
       "file": "specs/SPEC-24-segformer-segnext-bs.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -384,7 +384,7 @@
       "status": "planned"
     },
     "SPEC-25": {
-      "title": "DOFA \u0441 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u043c \u043d\u0430\u0431\u043e\u0440\u043e\u043c \u043a\u0430\u043d\u0430\u043b\u043e\u0432 \u0434\u043b\u044f BS",
+      "title": "DOFA с произвольным набором каналов для BS",
       "file": "specs/SPEC-25-dofa-bs.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -393,7 +393,7 @@
       "status": "deferred"
     },
     "SPEC-26": {
-      "title": "\u041e\u043f\u0442\u0438\u0447\u0435\u0441\u043a\u0438\u0439 \u0430\u043d\u0441\u0430\u043c\u0431\u043b\u044c \u0441\u0435\u0442\u0435\u0439 \u0434\u043b\u044f BS",
+      "title": "Оптический ансамбль сетей для BS",
       "file": "specs/SPEC-26-bs.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -402,7 +402,7 @@
       "status": "implemented"
     },
     "SPEC-27": {
-      "title": "\u0421\u0432\u0451\u0440\u0442\u043e\u0447\u043d\u0430\u044f \u0441\u0435\u0442\u044c \u0434\u043b\u044f \u0434\u0435\u0442\u0435\u043a\u0446\u0438\u0438 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0433\u043e \u0433\u043e\u0440\u0435\u043d\u0438\u044f (AF)",
+      "title": "Свёрточная сеть для детекции активного горения (AF)",
       "file": "specs/SPEC-27-af.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -412,7 +412,7 @@
       "status": "rejected"
     },
     "SPEC-28": {
-      "title": "\u041c\u043d\u043e\u0433\u043e\u0434\u0430\u0442\u043d\u0430\u044f \u0430\u0443\u0433\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u044f \u043e\u0431\u0443\u0447\u0430\u044e\u0449\u0438\u0445 \u0447\u0438\u043f\u043e\u0432 BS \u0438\u0437 Planetary Computer",
+      "title": "Многодатная аугментация обучающих чипов BS из Planetary Computer",
       "file": "specs/SPEC-28-bs-planetary-computer.md",
       "requirement": "REQ-006",
       "depends_on": [
@@ -422,7 +422,7 @@
       "status": "planned"
     },
     "SPEC-29": {
-      "title": "\u041f\u0440\u043e\u0438\u0441\u0445\u043e\u0436\u0434\u0435\u043d\u0438\u0435 \u0440\u0430\u0437\u043c\u0435\u0442\u043a\u0438 BS: \u0430\u0443\u0434\u0438\u0442 \u043e\u0441\u0442\u0430\u0442\u043a\u0430 \u043b\u043e\u0436\u043d\u043e\u0439 \u0433\u0430\u0440\u0438",
+      "title": "Происхождение разметки BS: аудит остатка ложной гари",
       "file": "specs/SPEC-29-bs.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -431,7 +431,7 @@
       "status": "implemented"
     },
     "SPEC-30": {
-      "title": "\u0420\u0430\u0434\u0438\u043e\u043c\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u043d\u043e\u0440\u043c\u0430\u043b\u0438\u0437\u0430\u0446\u0438\u044f \u0441\u0446\u0435\u043d\u044b \u00ab\u043f\u043e\u0441\u043b\u0435\u00bb \u043a \u0441\u0446\u0435\u043d\u0435 \u00ab\u0434\u043e\u00bb \u0434\u043b\u044f BS",
+      "title": "Радиометрическая нормализация сцены «после» к сцене «до» для BS",
       "file": "specs/SPEC-30-bs.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -441,7 +441,7 @@
       "status": "rejected"
     },
     "SPEC-31": {
-      "title": "\u0414\u043b\u0438\u043d\u043d\u043e\u0435 \u043e\u0431\u0443\u0447\u0435\u043d\u0438\u0435 \u043e\u043f\u0442\u0438\u0447\u0435\u0441\u043a\u0438\u0445 \u0441\u0435\u0442\u0435\u0439 \u0441 \u0434\u0440\u043e\u0436\u0430\u043d\u0438\u0435\u043c",
+      "title": "Длинное обучение оптических сетей с дрожанием",
       "file": "specs/SPEC-31-long-optical-jitter.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -450,7 +450,7 @@
       "status": "rejected"
     },
     "SPEC-32": {
-      "title": "\u041f\u043e\u043b\u043d\u044b\u0435 \u0441\u043f\u0435\u043a\u0442\u0440\u0430\u043b\u044c\u043d\u044b\u0435 \u043f\u0430\u0440\u044b \u0438 \u0441\u0438\u0430\u043c\u0441\u043a\u0430\u044f \u0441\u0435\u0442\u044c BS",
+      "title": "Полные спектральные пары и сиамская сеть BS",
       "file": "specs/SPEC-32-bs-raw-pairs.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -459,7 +459,7 @@
       "status": "active"
     },
     "SPEC-33": {
-      "title": "\u0422\u0440\u0443\u0434\u043d\u044b\u0435 \u043e\u0442\u0440\u0438\u0446\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u043f\u0440\u0438\u043c\u0435\u0440\u044b AF \u0441 \u0432\u043b\u043e\u0436\u0435\u043d\u043d\u043e\u0439 \u043e\u0446\u0435\u043d\u043a\u043e\u0439",
+      "title": "Трудные отрицательные примеры AF с вложенной оценкой",
       "file": "specs/SPEC-33-af-hard-negatives.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -468,7 +468,7 @@
       "status": "implemented"
     },
     "SPEC-34": {
-      "title": "\u0412\u043d\u0435\u0448\u043d\u0438\u0435 \u0440\u0430\u0437\u043c\u0435\u0447\u0435\u043d\u043d\u044b\u0435 \u043f\u043e\u0436\u0430\u0440\u044b \u0434\u043b\u044f \u043f\u0440\u0435\u0434\u043e\u0431\u0443\u0447\u0435\u043d\u0438\u044f BS",
+      "title": "Внешние размеченные пожары для предобучения BS",
       "file": "specs/SPEC-34-bs-external-pretrain.md",
       "requirement": "REQ-006",
       "depends_on": [
@@ -477,7 +477,7 @@
       "status": "rejected"
     },
     "SPEC-35": {
-      "title": "\u041f\u0438\u043b\u043e\u0442 \u043c\u043d\u043e\u0433\u043e\u0434\u0430\u0442\u043d\u044b\u0445 \u043f\u0430\u0440 BS \u0441 \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u0435\u043c \u043c\u0435\u0442\u043a\u0438",
+      "title": "Пилот многодатных пар BS с контролем метки",
       "file": "specs/SPEC-35-bs-temporal-pilot.md",
       "requirement": "REQ-006",
       "depends_on": [
@@ -486,7 +486,7 @@
       "status": "rejected"
     },
     "SPEC-36": {
-      "title": "\u0418\u0437\u043e\u043b\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439 \u0441\u0442\u0435\u043d\u0434 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u0433\u0438\u043f\u043e\u0442\u0435\u0437 \u0438 \u0447\u0435\u0441\u0442\u043d\u043e\u0439 \u043e\u0446\u0435\u043d\u043a\u0438",
+      "title": "Изолированный стенд проверки гипотез и честной оценки",
       "file": "specs/SPEC-36-hypothesis-evaluation.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -495,7 +495,7 @@
       "status": "active"
     },
     "SPEC-37": {
-      "title": "\u041c\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u0430\u044f pre-only \u0430\u0443\u0433\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u044f BS",
+      "title": "Масштабированная pre-only аугментация BS",
       "file": "specs/SPEC-37-bs-pre-only-expansion.md",
       "requirement": "REQ-006",
       "depends_on": [
@@ -505,7 +505,7 @@
       "status": "rejected"
     },
     "SPEC-38": {
-      "title": "\u0424\u0438\u043d\u0430\u043b\u044c\u043d\u044b\u0439 AF hard-negative \u043a\u0430\u043d\u0434\u0438\u0434\u0430\u0442 \u043f\u043e\u0432\u0435\u0440\u0445 BS v13",
+      "title": "Финальный AF hard-negative кандидат поверх BS v13",
       "file": "specs/SPEC-38-af-hard-final-candidate.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -516,7 +516,7 @@
       "status": "implemented"
     },
     "SPEC-39": {
-      "title": "\u0424\u0438\u043b\u044c\u0442\u0440 \u0447\u0443\u0436\u0438\u0445 \u043f\u043e\u0436\u0430\u0440\u043e\u0432 \u043f\u043e \u0441\u043e\u0433\u043b\u0430\u0441\u0438\u044e \u043e\u043f\u0442\u0438\u043a\u0438 \u0438 \u0441\u0438\u0430\u043c\u0441\u043a\u0438\u0445 \u0441\u0435\u0442\u0435\u0439",
+      "title": "Фильтр чужих пожаров по согласию оптики и сиамских сетей",
       "file": "specs/SPEC-39-consensus-anchor.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -526,7 +526,7 @@
       "status": "partial"
     },
     "SPEC-40": {
-      "title": "\u041f\u043e\u0440\u043e\u0433 \u0432\u0435\u0440\u043e\u044f\u0442\u043d\u043e\u0441\u0442\u0438 \u0433\u0430\u0440\u0438 0.4 \u0432\u043c\u0435\u0441\u0442\u043e argmax",
+      "title": "Порог вероятности гари 0.4 вместо argmax",
       "file": "specs/SPEC-40-burn-threshold.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -536,7 +536,7 @@
       "status": "rejected"
     },
     "SPEC-41": {
-      "title": "\u0410\u0443\u0433\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u044f \u0432\u044b\u0446\u0432\u0435\u0442\u0430\u043d\u0438\u044f \u0433\u0430\u0440\u0438 \u0434\u043b\u044f \u0441\u0438\u0430\u043c\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438",
+      "title": "Аугментация выцветания гари для сиамской сети",
       "file": "specs/SPEC-41-fade-augmentation.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -546,7 +546,7 @@
       "status": "rejected"
     },
     "SPEC-42": {
-      "title": "\u041f\u0435\u0440\u0435\u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0444\u043e\u043d\u0430 \u0443\u0432\u0435\u0440\u0435\u043d\u043d\u044b\u043c \u0431\u0443\u0441\u0442\u0438\u043d\u0433\u043e\u043c \u043f\u043e \u043f\u0438\u043a\u0441\u0435\u043b\u044e",
+      "title": "Переопределение фона уверенным бустингом по пикселю",
       "file": "specs/SPEC-42-boost-override.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -556,7 +556,7 @@
       "status": "rejected"
     },
     "SPEC-43": {
-      "title": "\u041f\u0435\u0440\u0435\u0434\u0438\u0441\u043a\u0440\u0435\u0442\u0438\u0437\u0430\u0446\u0438\u044f \u0431\u043b\u0435\u0434\u043d\u044b\u0445 \u0433\u0430\u0440\u0435\u0439 \u043f\u0440\u0438 \u043e\u0431\u0443\u0447\u0435\u043d\u0438\u0438 \u0441\u0438\u0430\u043c\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438",
+      "title": "Передискретизация бледных гарей при обучении сиамской сети",
       "file": "specs/SPEC-43-faint-oversample.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -567,7 +567,7 @@
       "status": "implemented"
     },
     "SPEC-44": {
-      "title": "\u041f\u0435\u0440\u0435\u0434\u0438\u0441\u043a\u0440\u0435\u0442\u0438\u0437\u0430\u0446\u0438\u044f \u0431\u043b\u0435\u0434\u043d\u044b\u0445 \u0433\u0430\u0440\u0435\u0439 \u0434\u043b\u044f \u043e\u043f\u0442\u0438\u0447\u0435\u0441\u043a\u043e\u0439 \u0432\u0435\u0442\u0432\u0438",
+      "title": "Передискретизация бледных гарей для оптической ветви",
       "file": "specs/SPEC-44-faint-oversample-optical.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -576,7 +576,7 @@
       "status": "rejected"
     },
     "SPEC-45": {
-      "title": "\u0423\u0441\u0442\u043e\u0439\u0447\u0438\u0432\u043e\u0435 \u0443\u0441\u0440\u0435\u0434\u043d\u0435\u043d\u0438\u0435 \u0433\u043e\u0442\u043e\u0432\u043e\u0439 BS-\u043f\u044f\u0442\u0451\u0440\u043a\u0438",
+      "title": "Устойчивое усреднение готовой BS-пятёрки",
       "file": "specs/SPEC-45-bs-trimmed-mean.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -585,7 +585,7 @@
       "status": "rejected"
     },
     "SPEC-46": {
-      "title": "AF: \u043e\u0441\u0442\u043e\u0440\u043e\u0436\u043d\u043e\u0435 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u0435 \u0443\u0432\u0435\u0440\u0435\u043d\u043d\u044b\u0445 \u043e\u0447\u0430\u0433\u043e\u0432",
+      "title": "AF: осторожное расширение уверенных очагов",
       "file": "specs/SPEC-46-af-edge.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -594,7 +594,7 @@
       "status": "rejected"
     },
     "SPEC-47": {
-      "title": "SWIR-\u0438\u043d\u0434\u0435\u043a\u0441\u044b MIRBI \u0438 dNBR2 \u043a\u0430\u043a \u0432\u0445\u043e\u0434\u043d\u044b\u0435 \u043a\u0430\u043d\u0430\u043b\u044b",
+      "title": "SWIR-индексы MIRBI и dNBR2 как входные каналы",
       "file": "specs/SPEC-47-swir-indices.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -604,7 +604,7 @@
       "status": "partial"
     },
     "SPEC-48": {
-      "title": "\u041a\u0430\u0440\u0442\u0430 \u0431\u0443\u0441\u0442\u0438\u043d\u0433\u0430 \u043a\u0430\u043a \u0432\u0445\u043e\u0434\u043d\u043e\u0439 \u043a\u0430\u043d\u0430\u043b \u043e\u043f\u0442\u0438\u0447\u0435\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438",
+      "title": "Карта бустинга как входной канал оптической сети",
       "file": "specs/SPEC-48-boost-channel.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -613,7 +613,7 @@
       "status": "rejected"
     },
     "SPEC-49": {
-      "title": "\u041b\u043e\u043a\u0430\u043b\u044c\u043d\u044b\u0439 \u043a\u043e\u043d\u0442\u0440\u0430\u0441\u0442 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432 \u043a\u0430\u043a \u0432\u0445\u043e\u0434\u043d\u044b\u0435 \u043a\u0430\u043d\u0430\u043b\u044b",
+      "title": "Локальный контраст индексов как входные каналы",
       "file": "specs/SPEC-49-local-contrast.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -622,7 +622,7 @@
       "status": "rejected"
     },
     "SPEC-50": {
-      "title": "\u041f\u0435\u0440\u0435\u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430 \u0432\u0435\u0441\u043e\u0432 \u0441\u043c\u0435\u0441\u0438 \u043f\u043e\u0441\u043b\u0435 SWIR-\u0431\u0443\u0441\u0442\u0438\u043d\u0433\u0430",
+      "title": "Перенастройка весов смеси после SWIR-бустинга",
       "file": "specs/SPEC-50-mix-weights.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -631,7 +631,7 @@
       "status": "rejected"
     },
     "SPEC-51": {
-      "title": "\u0421\u0438\u0430\u043c\u0441\u043a\u0430\u044f \u0432\u0435\u0442\u0432\u044c: \u0440\u0430\u0437\u043d\u043e\u0441\u0442\u043d\u0430\u044f \u0444\u044c\u044e\u0436\u043d \u0438 \u0434\u0432\u0443\u0445\u044d\u0442\u0430\u043f\u043d\u0430\u044f \u043f\u043e\u0442\u0435\u0440\u044f",
+      "title": "Сиамская ветвь: разностная фьюжн и двухэтапная потеря",
       "file": "specs/SPEC-51-siam-diff.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -641,7 +641,7 @@
       "status": "rejected"
     },
     "SPEC-52": {
-      "title": "\u041c\u044f\u0433\u043a\u0438\u0435 \u043c\u0435\u0442\u043a\u0438 \u0443 \u043a\u0440\u043e\u043c\u043a\u0438 \u0433\u0430\u0440\u0438",
+      "title": "Мягкие метки у кромки гари",
       "file": "specs/SPEC-52-soft-edge.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -650,7 +650,7 @@
       "status": "rejected"
     },
     "SPEC-53": {
-      "title": "\u041f\u043e\u0447\u0438\u043f\u043e\u0432\u044b\u0439 \u0433\u0435\u0439\u0442 \u0441\u043c\u0435\u0441\u0438 \u043e\u043f\u0442\u0438\u043a\u0430/\u0441\u0438\u0430\u043c",
+      "title": "Почиповый гейт смеси оптика/сиам",
       "file": "specs/SPEC-53-chip-gate.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -659,14 +659,14 @@
       "status": "rejected"
     },
     "SPEC-54": {
-      "title": "\u041d\u0443\u043b\u0435\u0432\u043e\u0439 \u0432\u044b\u0441\u0442\u0440\u0435\u043b Prithvi-EO BurnScars \u043d\u0430 \u0441\u0442\u0435\u043f\u043d\u044b\u0445 \u0447\u0438\u043f\u0430\u0445",
+      "title": "Нулевой выстрел Prithvi-EO BurnScars на степных чипах",
       "file": "specs/SPEC-54-prithvi-zero-shot.md",
       "requirement": "REQ-008",
       "depends_on": [],
       "status": "rejected"
     },
     "SPEC-55": {
-      "title": "\u0421\u0442\u0435\u043d\u0434 \u0442\u0440\u0451\u0445 \u0431\u0438\u043e\u043c\u043e\u0432: \u0441\u0442\u0435\u043f\u044c, \u043b\u0435\u0441, \u0433\u043e\u0440\u044b",
+      "title": "Стенд трёх биомов: степь, лес, горы",
       "file": "specs/SPEC-55-biome-bench.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -675,7 +675,7 @@
       "status": "partial"
     },
     "SPEC-56": {
-      "title": "\u0413\u0435\u0439\u0442 \u043f\u043e \u0447\u0438\u043f\u0443, \u0432\u0442\u043e\u0440\u0430\u044f \u043f\u043e\u043f\u044b\u0442\u043a\u0430: \u043a\u0430\u0440\u0442\u0430 \u0440\u0430\u0437\u043d\u043e\u0433\u043b\u0430\u0441\u0438\u044f, \u043d\u043e\u0432\u0438\u0437\u043d\u0430 \u0432\u0445\u043e\u0434\u0430, \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u043e \u043f\u0430\u0440\u044b",
+      "title": "Гейт по чипу, вторая попытка: карта разногласия, новизна входа, качество пары",
       "file": "specs/SPEC-56-chip-gate-2.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -684,7 +684,7 @@
       "status": "rejected"
     },
     "SPEC-57": {
-      "title": "\u0420\u0430\u0434\u0430\u0440 \u043f\u043e\u0434 \u043c\u0430\u0441\u043a\u043e\u0439 \u043e\u0431\u043b\u0430\u043a\u043e\u0432 \u043a\u0430\u043a \u0433\u0435\u0439\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439 \u0432\u0445\u043e\u0434 \u0441\u0438\u0430\u043c\u0430",
+      "title": "Радар под маской облаков как гейтированный вход сиама",
       "file": "specs/SPEC-57-sar-gate.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -694,7 +694,7 @@
       "status": "partial"
     },
     "SPEC-58": {
-      "title": "\u0424\u0438\u043b\u044c\u0442\u0440 \u043a\u043e\u043c\u043f\u043e\u043d\u0435\u043d\u0442 \u0431\u043b\u0435\u0434\u043d\u043e\u0439 \u0433\u0430\u0440\u0438: \u043f\u0440\u0438\u043d\u044f\u0442\u044c \u0438\u043b\u0438 \u043e\u0442\u0431\u0440\u043e\u0441\u0438\u0442\u044c \u043f\u044f\u0442\u043d\u043e, \u043a\u043e\u0442\u043e\u0440\u043e\u0435 \u0432\u0438\u0434\u0438\u0442 \u0442\u043e\u043b\u044c\u043a\u043e \u0431\u0443\u0441\u0442\u0438\u043d\u0433",
+      "title": "Фильтр компонент бледной гари: принять или отбросить пятно, которое видит только бустинг",
       "file": "specs/SPEC-58-component-filter.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -704,7 +704,7 @@
       "status": "rejected"
     },
     "SPEC-59": {
-      "title": "\u0423\u0441\u043b\u043e\u0432\u043d\u043e\u0435 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u0435 \u0433\u0430\u0440\u0438: \u044f\u0434\u0440\u043e \u0441\u043c\u0435\u0441\u0438, \u0440\u043e\u0441\u0442 \u043f\u043e \u0431\u0443\u0441\u0442\u0438\u043d\u0433\u0443",
+      "title": "Условное расширение гари: ядро смеси, рост по бустингу",
       "file": "specs/SPEC-59-region-grow.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -714,7 +714,7 @@
       "status": "rejected"
     },
     "SPEC-60": {
-      "title": "\u041e\u0431\u044a\u0435\u043a\u0442\u043d\u044b\u0435 \u043f\u0440\u0438\u0437\u043d\u0430\u043a\u0438 \u043f\u044f\u0442\u043d\u0430 \u043d\u0435 \u0438\u0437 \u0441\u043f\u0435\u043a\u0442\u0440\u0430: \u0433\u0435\u043e\u043c\u0435\u0442\u0440\u0438\u044f \u043f\u043e\u043b\u044f, \u0442\u0435\u043a\u0441\u0442\u0443\u0440\u0430, \u0440\u0430\u0434\u0430\u0440 \u043f\u043e \u043f\u044f\u0442\u043d\u0443, \u0434\u0430\u0442\u0430",
+      "title": "Объектные признаки пятна не из спектра: геометрия поля, текстура, радар по пятну, дата",
       "file": "specs/SPEC-60-object-features.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -724,7 +724,7 @@
       "status": "rejected"
     },
     "SPEC-61": {
-      "title": "\u0421\u0438\u0430\u043c \u0434\u043b\u044f \u043c\u0430\u043b\u044b\u0445 \u043e\u0442\u0434\u0435\u043b\u044c\u043d\u044b\u0445 \u043f\u044f\u0442\u0435\u043d: \u0438\u043d\u0434\u0435\u043a\u0441\u044b \u0431\u0435\u0437 \u043d\u043e\u0440\u043c\u0430\u043b\u0438\u0437\u0430\u0446\u0438\u0438, blob loss, \u0432\u044b\u0440\u0435\u0437\u043a\u0438 \u0432\u043e\u043a\u0440\u0443\u0433 \u043f\u044f\u0442\u0435\u043d",
+      "title": "Сиам для малых отдельных пятен: индексы без нормализации, blob loss, вырезки вокруг пятен",
       "file": "specs/SPEC-61-siam-small-blobs.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -734,7 +734,7 @@
       "status": "rejected"
     },
     "SPEC-62": {
-      "title": "\u041f\u0440\u0430\u0432\u0438\u043b\u043e \u043f\u043e \u043f\u044f\u0442\u043d\u0443: \u043f\u0440\u0438\u043d\u044f\u0442\u044c \u043f\u044f\u0442\u043d\u043e \u0431\u0443\u0441\u0442\u0438\u043d\u0433\u0430 \u043f\u043e \u043e\u0442\u043a\u043b\u0438\u043a\u0443 \u0441\u0438\u0430\u043c\u0430",
+      "title": "Правило по пятну: принять пятно бустинга по отклику сиама",
       "file": "specs/SPEC-62-blob-siam-rule.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -744,7 +744,7 @@
       "status": "rejected"
     },
     "SPEC-63": {
-      "title": "\u041f\u0440\u0430\u0432\u0438\u043b\u043e \u043f\u043e \u043f\u0438\u043a\u0441\u0435\u043b\u044e: \u0433\u0430\u0440\u044c \u043f\u0440\u0438 \u0441\u043e\u0433\u043b\u0430\u0441\u0438\u0438 \u0434\u0432\u0443\u0445 \u0441\u043b\u0430\u0431\u044b\u0445 \u0441\u0438\u0433\u043d\u0430\u043b\u043e\u0432 \u2014 \u0431\u0443\u0441\u0442\u0438\u043d\u0433\u0430 \u0438 \u0441\u0438\u0430\u043c\u0430",
+      "title": "Правило по пикселю: гарь при согласии двух слабых сигналов — бустинга и сиама",
       "file": "specs/SPEC-63-two-signal-pixel.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -754,7 +754,7 @@
       "status": "rejected"
     },
     "SPEC-64": {
-      "title": "\u0414\u043e\u043e\u0431\u0443\u0447\u0435\u043d\u0438\u0435 \u043a\u043e\u0434\u0438\u0440\u043e\u0432\u0449\u0438\u043a\u0430 Prithvi-EO-2.0 \u043d\u0430 \u0441\u0442\u0435\u043f\u043d\u044b\u0445 \u0447\u0438\u043f\u0430\u0445 \u043a\u0430\u043a \u0447\u043b\u0435\u043d \u0441\u043c\u0435\u0441\u0438",
+      "title": "Дообучение кодировщика Prithvi-EO-2.0 на степных чипах как член смеси",
       "file": "specs/SPEC-64-prithvi-finetune.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -763,7 +763,7 @@
       "status": "rejected"
     },
     "SPEC-65": {
-      "title": "Prithvi \u043a\u0430\u043a \u0442\u0440\u0435\u0442\u0438\u0439 \u0433\u043e\u043b\u043e\u0441 \u0441\u043c\u0435\u0441\u0438: \u043a\u0440\u0438\u0442\u0435\u0440\u0438\u0439 \u043f\u043e \u0441\u043c\u0435\u0441\u0438, \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u0432\u0441\u043b\u0435\u043f\u0443\u044e \u043d\u0430 \u0444\u043e\u043b\u0434\u0430\u0445 2\u20134",
+      "title": "Prithvi как третий голос смеси: критерий по смеси, проверка вслепую на фолдах 2–4",
       "file": "specs/SPEC-65-prithvi-third-voice.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -772,7 +772,7 @@
       "status": "rejected"
     },
     "SPEC-66": {
-      "title": "\u041b\u0435\u0441 \u0441\u0432\u043e\u0438\u043c \u043f\u0443\u0442\u0451\u043c: \u043d\u0430\u0448 U-Net \u043d\u0430 HLS Burn Scars \u0438 \u043f\u0435\u0440\u0435\u043d\u043e\u0441 \u043b\u0435\u0441 \u2194 \u0441\u0442\u0435\u043f\u044c",
+      "title": "Лес своим путём: наш U-Net на HLS Burn Scars и перенос лес ↔ степь",
       "file": "specs/SPEC-66-forest-own-way.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -781,7 +781,7 @@
       "status": "implemented"
     },
     "SPEC-67": {
-      "title": "\u0423\u0441\u0442\u043e\u0439\u0447\u0438\u0432\u043e\u0441\u0442\u044c v22: \u0447\u0435\u0442\u044b\u0440\u0435 \u0441\u0438\u0434\u0430 \u0440\u0430\u0434\u0430\u0440\u043d\u043e\u0433\u043e \u0441\u0438\u0430\u043c\u0430",
+      "title": "Устойчивость v22: четыре сида радарного сиама",
       "file": "specs/SPEC-67-sar-four-seeds.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -790,7 +790,7 @@
       "status": "rejected"
     },
     "SPEC-68": {
-      "title": "AF: \u0440\u0430\u0437\u0431\u043e\u0440 \u0447\u0438\u043f\u043e\u0432 \u0441 \u043a\u043e\u043d\u0446\u0435\u043d\u0442\u0440\u0430\u0446\u0438\u0435\u0439 \u043e\u0448\u0438\u0431\u043e\u043a \u0438 \u044f\u0432\u043d\u044b\u0435 \u043f\u0440\u0438\u0437\u043d\u0430\u043a\u0438 I3/I4, \u0433\u043b\u0438\u043d\u0442",
+      "title": "AF: разбор чипов с концентрацией ошибок и явные признаки I3/I4, глинт",
       "file": "specs/SPEC-68-af-badchips.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -799,7 +799,7 @@
       "status": "rejected"
     },
     "SPEC-69": {
-      "title": "\u041e\u0431\u043e\u0433\u043d\u0430\u0442\u044c Prithvi \u043d\u0430 \u043b\u0435\u0441\u0435: \u043d\u0430\u0448 U-Net \u043d\u0430 HLS Burn Scars",
+      "title": "Обогнать Prithvi на лесе: наш U-Net на HLS Burn Scars",
       "file": "specs/SPEC-69-prithvi-u-net-hls-burn-scars.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -808,7 +808,7 @@
       "status": "partial"
     },
     "SPEC-70": {
-      "title": "\u0420\u0430\u0434\u0430\u0440\u043d\u044b\u0439 \u0441\u0438\u0430\u043c \u0441 \u043f\u043e\u0432\u043e\u0440\u043e\u0442\u0430\u043c\u0438 \u0438 \u0440\u0430\u0437\u0431\u0440\u043e\u0441\u043e\u043c \u043a\u0430\u043d\u0430\u043b\u043e\u0432 (\u0440\u0435\u0446\u0435\u043f\u0442 C1 \u043b\u0435\u0441\u0430 \u043d\u0430 \u0441\u0442\u0435\u043f\u0438)",
+      "title": "Радарный сиам с поворотами и разбросом каналов (рецепт C1 леса на степи)",
       "file": "specs/SPEC-70-c1.md",
       "requirement": "REQ-007",
       "depends_on": [
@@ -818,7 +818,7 @@
       "status": "rejected"
     },
     "SPEC-71": {
-      "title": "\u0427\u0435\u0441\u0442\u043d\u044b\u0439 Prithvi \u043d\u0430 \u043b\u0435\u0441\u0435 \u0438 \u0440\u0430\u0437\u0431\u043e\u0440, \u0433\u0434\u0435 \u043e\u043d \u043d\u0430\u0441 \u0431\u044c\u0451\u0442",
+      "title": "Честный Prithvi на лесе и разбор, где он нас бьёт",
       "file": "specs/SPEC-71-prithvi.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -827,7 +827,7 @@
       "status": "implemented"
     },
     "SPEC-72": {
-      "title": "\u0421\u0432\u0435\u0436\u0438\u0439 \u043b\u0435\u0441\u043d\u043e\u0439 \u0442\u0435\u0441\u0442: MTBS 2022+ \u043d\u0430 HLS v2, \u0441\u043c\u0435\u0441\u044c \u043d\u0430\u0448\u0435\u0439 \u043c\u043e\u0434\u0435\u043b\u0438 \u0438 Prithvi",
+      "title": "Свежий лесной тест: MTBS 2022+ на HLS v2, смесь нашей модели и Prithvi",
       "file": "specs/SPEC-72-mtbs-2022-hls-v2-prithvi.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -837,7 +837,7 @@
       "status": "implemented"
     },
     "SPEC-73": {
-      "title": "\u0413\u043e\u0440\u044b: FLOGA \u043a\u0430\u043a \u0442\u0440\u0435\u0442\u0438\u0439 \u0431\u0438\u043e\u043c \u0441\u0442\u0435\u043d\u0434\u0430",
+      "title": "Горы: FLOGA как третий биом стенда",
       "file": "specs/SPEC-73-floga.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -847,7 +847,7 @@
       "status": "implemented"
     },
     "SPEC-74": {
-      "title": "\u0412\u0442\u043e\u0440\u043e\u0439 \u0441\u0432\u0435\u0436\u0438\u0439 \u043d\u0430\u0431\u043e\u0440: \u0432\u0435\u0441\u0430 \u0441\u043c\u0435\u0441\u0438 \u043d\u0430 \u043f\u0435\u0440\u0432\u043e\u043c, \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u043d\u0430 \u0432\u0442\u043e\u0440\u043e\u043c",
+      "title": "Второй свежий набор: веса смеси на первом, проверка на втором",
       "file": "specs/SPEC-74-fresh-2-mix.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -856,7 +856,7 @@
       "status": "implemented"
     },
     "SPEC-75": {
-      "title": "\u0420\u0430\u0437\u043d\u043e\u043e\u0431\u0440\u0430\u0437\u0438\u0435 \u043f\u0440\u043e\u0442\u0438\u0432 \u043f\u0440\u0435\u0434\u043e\u0431\u0443\u0447\u0435\u043d\u0438\u044f: C1 \u043d\u0430 HLS + \u0441\u0432\u0435\u0436\u0435\u043c \u043d\u0430\u0431\u043e\u0440\u0435 \u043f\u0440\u043e\u0442\u0438\u0432 Prithvi",
+      "title": "Разнообразие против предобучения: C1 на HLS + свежем наборе против Prithvi",
       "file": "specs/SPEC-75-diversity-vs-pretraining.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -866,7 +866,7 @@
       "status": "implemented"
     },
     "SPEC-76": {
-      "title": "\u041c\u0430\u0441\u043a\u0430 \u0432\u043e\u0434\u044b \u0434\u043b\u044f \u0433\u0430\u0440\u0435\u0439 \u0432 \u0433\u043e\u0440\u0430\u0445",
+      "title": "Маска воды для гарей в горах",
       "file": "specs/SPEC-76-water-mask.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -875,7 +875,7 @@
       "status": "implemented"
     },
     "SPEC-77": {
-      "title": "\u041f\u043e\u043f\u0440\u0430\u0432\u043a\u0430 \u043d\u0430 \u043e\u0441\u0432\u0435\u0449\u0451\u043d\u043d\u043e\u0441\u0442\u044c \u0441\u043a\u043b\u043e\u043d\u0430 (C-\u043a\u043e\u0440\u0440\u0435\u043a\u0446\u0438\u044f \u043f\u043e DEM \u0438 \u0443\u0433\u043b\u0430\u043c \u0441\u043e\u043b\u043d\u0446\u0430)",
+      "title": "Поправка на освещённость склона (C-коррекция по DEM и углам солнца)",
       "file": "specs/SPEC-77-slope-illumination.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -885,7 +885,7 @@
       "status": "implemented"
     },
     "SPEC-78": {
-      "title": "\u041c\u0430\u0441\u043a\u0430 \u0432\u043e\u0434\u044b Fmask \u0438 NDWI: \u0432\u043e\u0434\u0430, \u043a\u043e\u0442\u043e\u0440\u0430\u044f \u043d\u0435 \u0441\u044a\u0435\u0434\u0430\u0435\u0442 \u0433\u0430\u0440\u044c",
+      "title": "Маска воды Fmask и NDWI: вода, которая не съедает гарь",
       "file": "specs/SPEC-78-water-ndwi.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -895,7 +895,7 @@
       "status": "implemented"
     },
     "SPEC-79": {
-      "title": "\u0421\u0440\u0435\u0434\u0438\u0437\u0435\u043c\u043d\u043e\u043c\u043e\u0440\u0441\u043a\u0438\u0439 \u043d\u0430\u0431\u043e\u0440: \u043a\u043e\u043d\u0442\u0443\u0440\u044b Copernicus EMS 2023+ \u043d\u0430 HLS v2",
+      "title": "Средиземноморский набор: контуры Copernicus EMS 2023+ на HLS v2",
       "file": "specs/SPEC-79-ems-mediterranean.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -905,7 +905,7 @@
       "status": "implemented"
     },
     "SPEC-80": {
-      "title": "\u041a\u0430\u0440\u0442\u0430 \u0440\u0435\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u043a\u0438\u043f\u0440\u0441\u043a\u043e\u0433\u043e \u043f\u043e\u0436\u0430\u0440\u0430 \u0440\u0435\u0446\u0435\u043f\u0442\u043e\u043c \u0434\u043b\u044f \u0433\u043e\u0440",
+      "title": "Карта реального кипрского пожара рецептом для гор",
       "file": "specs/SPEC-80-cyprus-fire-map.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -915,7 +915,7 @@
       "status": "implemented"
     },
     "SPEC-81": {
-      "title": "\u0421\u0440\u0435\u0434\u0438\u0437\u0435\u043c\u043d\u043e\u043c\u043e\u0440\u0441\u043a\u0430\u044f \u043c\u043e\u0434\u0435\u043b\u044c: C1-F + \u0440\u0435\u0437\u0435\u0440\u0432 EMS",
+      "title": "Средиземноморская модель: C1-F + резерв EMS",
       "file": "specs/SPEC-81-mediterranean-model.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -925,7 +925,7 @@
       "status": "rejected"
     },
     "SPEC-82": {
-      "title": "\u0421\u043c\u0435\u0448\u0430\u043d\u043d\u044b\u0439 \u0441\u0440\u0435\u0434\u0438\u0437\u0435\u043c\u043d\u043e\u043c\u043e\u0440\u0441\u043a\u0438\u0439 \u0440\u0435\u0437\u0435\u0440\u0432: EMS + \u043f\u043e\u043b\u043e\u0432\u0438\u043d\u0430 FLOGA",
+      "title": "Смешанный средиземноморский резерв: EMS + половина FLOGA",
       "file": "specs/SPEC-82-mixed-mediterranean.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -934,7 +934,7 @@
       "status": "implemented"
     },
     "SPEC-83": {
-      "title": "\u0421\u043a\u043e\u0440\u043e\u0441\u0442\u044c: Sentinel-2 L2A \u0432\u043c\u0435\u0441\u0442\u043e HLS \u0438 \u0437\u0430\u0434\u0435\u0440\u0436\u043a\u0430 \u043a\u0430\u0440\u0442\u044b \u043f\u0440\u043e\u0442\u0438\u0432 EMS",
+      "title": "Скорость: Sentinel-2 L2A вместо HLS и задержка карты против EMS",
       "file": "specs/SPEC-83-speed-s2-latency.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -944,7 +944,7 @@
       "status": "implemented"
     },
     "SPEC-84": {
-      "title": "\u0421\u0432\u0435\u0440\u043a\u0430 \u0441 EFFIS: \u043c\u044b \u0438 EFFIS \u043f\u0440\u043e\u0442\u0438\u0432 \u044d\u043a\u0441\u043f\u0435\u0440\u0442\u043d\u043e\u0439 \u0440\u0430\u0437\u043c\u0435\u0442\u043a\u0438, \u043f\u043b\u043e\u0449\u0430\u0434\u0438 \u043f\u043e \u041a\u0438\u043f\u0440\u0443",
+      "title": "Сверка с EFFIS: мы и EFFIS против экспертной разметки, площади по Кипру",
       "file": "specs/SPEC-84-effis-check.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -954,7 +954,7 @@
       "status": "implemented"
     },
     "SPEC-85": {
-      "title": "\u0421\u043a\u0432\u043e\u0437\u044c \u0434\u044b\u043c \u0438 \u043e\u0431\u043b\u0430\u043a\u0430: \u0440\u0430\u0434\u0430\u0440 Sentinel-1 \u043f\u043e\u0434 \u043c\u0430\u0441\u043a\u043e\u0439 \u0432 \u0433\u043e\u0440\u0430\u0445",
+      "title": "Сквозь дым и облака: радар Sentinel-1 под маской в горах",
       "file": "specs/SPEC-85-sar-mountains.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -964,7 +964,7 @@
       "status": "implemented"
     },
     "SPEC-86": {
-      "title": "\u0421\u0442\u0435\u043f\u0435\u043d\u044c \u0432\u044b\u0433\u043e\u0440\u0430\u043d\u0438\u044f \u0434\u043b\u044f \u043b\u0435\u0441\u0430 \u0438 \u0433\u043e\u0440: 4 \u043a\u043b\u0430\u0441\u0441\u0430 \u043f\u043e MTBS \u043f\u0440\u043e\u0442\u0438\u0432 \u043f\u043e\u0440\u043e\u0433\u043e\u0432 dNBR",
+      "title": "Степень выгорания для леса и гор: 4 класса по MTBS против порогов dNBR",
       "file": "specs/SPEC-86-severity-mountains.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -974,7 +974,7 @@
       "status": "implemented"
     },
     "SPEC-87": {
-      "title": "\u0414\u0432\u0435 \u0434\u0430\u0442\u044b \u0432 \u0433\u043e\u0440\u0430\u0445: \u043c\u043e\u0434\u0435\u043b\u044c \u0438\u043b\u0438 dNBR > 0.27 \u043f\u0440\u043e\u0442\u0438\u0432 \u043e\u0434\u043d\u043e\u0439 \u043c\u043e\u0434\u0435\u043b\u0438",
+      "title": "Две даты в горах: модель или dNBR > 0.27 против одной модели",
       "file": "specs/SPEC-87-two-date-mountains.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -983,7 +983,7 @@
       "status": "rejected"
     },
     "SPEC-88": {
-      "title": "\u0414\u0432\u0435 \u0434\u0430\u0442\u044b, \u0438\u0441\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e: dNBR \u0442\u043e\u043b\u044c\u043a\u043e \u043d\u0430 \u0447\u0438\u0441\u0442\u043e\u0439 \u0441\u0443\u0448\u0435, \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u043d\u0430 \u0441\u0432\u0435\u0436\u0435\u043c MTBS-2",
+      "title": "Две даты, исправлено: dNBR только на чистой суше, проверка на свежем MTBS-2",
       "file": "specs/SPEC-88-two-date-fixed.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -992,7 +992,7 @@
       "status": "rejected"
     },
     "SPEC-89": {
-      "title": "\u0421\u0442\u0435\u043f\u0435\u043d\u044c \u0433\u0438\u0431\u0440\u0438\u0434\u043e\u043c: \u0433\u0440\u0430\u043d\u0438\u0446\u0430 C1-MM, \u0433\u0440\u0430\u0434\u0430\u0446\u0438\u044f dNBR, \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u043d\u0430 \u0441\u0432\u0435\u0436\u0438\u0445 3 \u0438 4",
+      "title": "Степень гибридом: граница C1-MM, градация dNBR, проверка на свежих 3 и 4",
       "file": "specs/SPEC-89-severity-hybrid.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -1001,7 +1001,7 @@
       "status": "implemented"
     },
     "SPEC-90": {
-      "title": "\u041a\u043e\u043d\u0442\u0440\u0430\u043a\u0442 \u043d\u043e\u0432\u043e\u0439 \u043a\u0430\u043c\u043f\u0430\u043d\u0438\u0438 \u0442\u043e\u0447\u043d\u043e\u0441\u0442\u0438: \u0433\u0440\u0443\u043f\u043f\u044b, \u0432\u0445\u043e\u0434\u044b \u0438 \u0434\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u0430",
+      "title": "Контракт новой кампании точности: группы, входы и доказательства",
       "file": "specs/SPEC-90-accuracy-contract.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -1012,7 +1012,7 @@
       "status": "implemented"
     },
     "SPEC-91": {
-      "title": "\u041e\u0431\u0443\u0447\u0435\u043d\u043d\u0430\u044f \u043f\u0430\u0440\u0430 \u0434\u0430\u0442 \u0434\u043b\u044f \u043b\u0435\u0441\u0430 \u0438 \u0433\u043e\u0440",
+      "title": "Обученная пара дат для леса и гор",
       "file": "specs/SPEC-91-learned-pair.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -1023,7 +1023,7 @@
       "status": "rejected"
     },
     "SPEC-92": {
-      "title": "\u0420\u043e\u0441\u0441\u0438\u0439\u0441\u043a\u0438\u0435 \u043a\u043e\u043d\u0442\u0443\u0440\u044b \u0438 \u0442\u0440\u0443\u0434\u043d\u044b\u0435 \u043e\u0442\u0440\u0438\u0446\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0435: \u0446\u0435\u043b\u0435\u0432\u043e\u0439 \u0434\u043e\u043c\u0435\u043d",
+      "title": "Российские контуры и трудные отрицательные: целевой домен",
       "file": "specs/SPEC-92-russian-labels.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -1033,7 +1033,7 @@
       "status": "rejected"
     },
     "SPEC-93": {
-      "title": "\u0414\u043e\u043e\u0431\u0443\u0447\u0435\u043d\u0438\u0435 C1-MM \u043d\u0430 Sentinel-2 L2A",
+      "title": "Дообучение C1-MM на Sentinel-2 L2A",
       "file": "specs/SPEC-93-l2a-finetuning.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -1043,7 +1043,7 @@
       "status": "active"
     },
     "SPEC-94": {
-      "title": "\u0421\u0442\u0435\u043f\u0435\u043d\u044c \u043f\u043e \u043f\u0430\u0440\u0435 \u0434\u0430\u0442 \u0432\u043d\u0443\u0442\u0440\u0438 \u0444\u0438\u043a\u0441\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u043e\u0433\u043e \u043a\u043e\u043d\u0442\u0443\u0440\u0430",
+      "title": "Степень по паре дат внутри фиксированного контура",
       "file": "specs/SPEC-94-paired-severity.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -1054,7 +1054,7 @@
       "status": "rejected"
     },
     "SPEC-95": {
-      "title": "\u0411\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u044b\u0435 \u0432\u0435\u0441\u0430 \u0438 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u043e\u0431\u0449\u0435\u0433\u043e \u0440\u0435\u0446\u0435\u043f\u0442\u0430 \u044d\u043a\u0441\u043f\u0435\u0440\u0438\u043c\u0435\u043d\u0442\u043e\u0432",
+      "title": "Безопасные веса и проверка общего рецепта экспериментов",
       "file": "specs/SPEC-95-artifact-recipe-identity.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -1064,7 +1064,7 @@
       "status": "implemented"
     },
     "SPEC-96": {
-      "title": "\u0410\u0443\u0434\u0438\u0442 \u0441\u043e\u0431\u044b\u0442\u0438\u0439 HLS \u0438 \u0433\u0435\u043e\u0433\u0440\u0430\u0444\u0438\u0438 \u043f\u0440\u0435\u0436\u043d\u0435\u0433\u043e \u043e\u0431\u0443\u0447\u0435\u043d\u0438\u044f",
+      "title": "Аудит событий HLS и географии прежнего обучения",
       "file": "specs/SPEC-96-training-lineage.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -1075,7 +1075,7 @@
       "status": "active"
     },
     "SPEC-97": {
-      "title": "\u041a\u043e\u043d\u0441\u0435\u0440\u0432\u0430\u0442\u0438\u0432\u043d\u0430\u044f \u043d\u0438\u0436\u043d\u044f\u044f \u0433\u0440\u0430\u043d\u0438\u0446\u0430 \u043f\u043e\u043a\u0440\u044b\u0442\u0438\u044f \u0441\u043e\u0431\u044b\u0442\u0438\u0439 L2A",
+      "title": "Консервативная нижняя граница покрытия событий L2A",
       "file": "specs/SPEC-97-event-retention-bound.md",
       "requirement": "REQ-008",
       "depends_on": [
@@ -1250,7 +1250,7 @@
         "SPEC-95",
         "SPEC-109"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-112": {
       "title": "Preregister unused eastern geographic confirmation population",
