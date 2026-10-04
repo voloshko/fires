@@ -1,0 +1,16 @@
+{
+  "spec_id": "SPEC-105",
+  "utc": "2026-10-04T06:31:53.608410+00:00",
+  "result_sha256": "749699f3f6e01f0a0a6576afb496c891c4bc33c05ad1cca4087585ed5628cb2c",
+  "local_counts_and_bootstrap_exact": true,
+  "ordered_ids_exact": true,
+  "manifest_and_selection_sha_exact": true,
+  "source_files_matched": 14,
+  "tests_k8plus": 24,
+  "subtests_k8plus": 11,
+  "models": [
+    "reserve",
+    "c1mm",
+    "prithvi"
+  ]
+}

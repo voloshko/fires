@@ -1,6 +1,6 @@
 # SPEC-105: New geographic holdout for frozen Siberian paired specialist
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-92, SPEC-95, SPEC-96, SPEC-104
 
@@ -55,3 +55,28 @@ This doesnot close oldFAILs, severity, L2A usefulgain orprospective summerfires.
 - `python -m pytest tests/test_western_holdout.py -q`; gatePASS.
 - non_claims: independentgeography only, sharedPANGAEAannotationmethod/season;
  satelliteinterpretation, notfieldtruth; no summerSiberian/grade/L2A acceptance.
+
+## Resolution
+
+The full collector admitted all 96 windows from 37 groups, without failures,
+using 949,699,940 bytes of new data. Collection and scoring terminated with
+exit 0. All images remained on k8plus. The immutable result and FAIL receipt
+are preserved; the model is not promoted.
+
+Paired reserve IoU was 0.220628 versus C1-MM 0.183899: delta +0.036730,
+CI95 [-0.088181, 0.121254]. The positive point estimate does not establish
+superiority to C1-MM. Against Prithvi 0.084663, delta was +0.135965,
+CI95 [0.088455, 0.197404]. The candidate also missed two positive groups,
+versus zero for C1-MM. Both the C1-MM confidence criterion and missed-group
+safeguard failed. Thresholds, group definitions and masks were not changed.
+
+Masked fraction was 0.191908. TP/FP/FN for reserve were
+262236/470308/456044; C1-MM 196177/348487/522103;
+Prithvi 281175/2602831/437105. Local reconstruction exactly matched all
+confusions and both 2,000-resample bootstrap comparisons. All 24 relevant
+tests and 11 subtests passed on k8plus; the traceability gate passed.
+
+Western holdout is now consumed. Further changes tested on it are development,
+not independent confirmation. The next experiment must explain the extra
+false positives and missed groups before fitting or another data collection;
+do not repeat threshold/fusion sweeps or weaken the acceptance rule.

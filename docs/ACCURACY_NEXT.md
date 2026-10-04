@@ -326,3 +326,26 @@ Expected result: research/western-holdout-v1-result.json. Copy only compact
 manifests, results and receipts to Mac; preserve all old remote images/weights.
 SPEC-105 remains active. Regional model promotion needs its own spec even if
 this comparison passes; the original four-direction objective remains open.
+
+## SPEC-105 finished: negative confirmation
+
+Both units terminated with exit 0. The collector admitted all 96 windows /
+37 groups, zero failures, 949,699,940 bytes. Scoring passed source/grid/interval/
+supervision checks and used recipe 0ffdcd295a60a5083b44a30886380f29f59d7eb578ffc2f42646e2bf1d28029c.
+Fourteen numeric source files match the committed local worktree. Compact
+manifests, recipe, result and reconstruction audit are saved locally; images,
+weights and prediction arrays remain on k8plus. No assets were deleted.
+
+Reserve IoU 0.220628; C1-MM 0.183899; Prithvi 0.084663. Reserve minus C1-MM
+is +0.036730, CI [-0.088181, 0.121254]; minus Prithvi +0.135965,
+CI [0.088455, 0.197404]. Missed positive groups: reserve 2, C1-MM 0,
+Prithvi 2. SPEC-105 rejected: C1-MM superiority is inconclusive and the
+missed-group safeguard fails. Do not promote regional routing from this result.
+All 24 relevant tests plus 11 subtests passed on k8plus. Local reconstruction
+exactly reproduced aggregate counts, masks summary and both bootstrap CIs.
+
+The western population is now consumed, like original calibration61. Any
+post-result analysis or changed recipe on these data is development. Next
+action is an explicit spec for failure diagnosis before further training;
+there is no current GPU job and free disk is about 4.1 GiB. Original four-part
+goal remains active: one comparator win does not establish the requested end state.

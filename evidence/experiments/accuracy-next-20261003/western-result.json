@@ -1,0 +1,2149 @@
+{
+  "spec_id": "SPEC-105",
+  "accepted": false,
+  "comparisons": {
+    "c1mm": {
+      "samples": 96,
+      "groups": 37,
+      "candidate_iou": 0.2206281739341134,
+      "control_iou": 0.1838986395342188,
+      "delta": 0.0367295343998946,
+      "ci95": [
+        -0.08818149928669455,
+        0.12125385047665646
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "inconclusive"
+    },
+    "prithvi": {
+      "samples": 96,
+      "groups": 37,
+      "candidate_iou": 0.2206281739341134,
+      "control_iou": 0.08466293357855248,
+      "delta": 0.13596524035556093,
+      "ci95": [
+        0.0884546897710376,
+        0.19740359294459717
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "better"
+    }
+  },
+  "missed_positive_groups": {
+    "reserve": 2,
+    "c1mm": 0,
+    "prithvi": 2
+  },
+  "errors": {
+    "windows": 96,
+    "groups": 37,
+    "valid_pixels": 20336310,
+    "true_pixels": 718280,
+    "known_background_pixels": 19618030,
+    "masked_fraction": 0.19190764427185059,
+    "models": {
+      "reserve": {
+        "tp": 262236,
+        "fp": 470308,
+        "fn": 456044,
+        "iou": 0.2206281739341134,
+        "fp_fraction_of_known_background": 0.023973253175777587,
+        "missed_positive_windows": [
+          "western:1205e8519991284890f3749f859f490cd2304fa211e3a10658a9e775b1a5c2d3",
+          "western:1e52c7407ae4a34cc77b5861bf7c678142ffe17b4d6497122aeadc2fc73c6d91",
+          "western:3e25d600968f1d1b8482a53551b085c4afbbb9dfb7c8c7da0928e928d2c9eca1",
+          "western:f570aae7219db8f4cd75326c12d7755859a1dd5d36e4a3d5d267435b7fad07ae"
+        ],
+        "missed_positive_groups": [
+          "western:a5924840bc97032160e74a98038dd395950d57daed52ed035f7aabfd808916d6",
+          "western:dd8ff121133e29eabe2a971fc10f38abd3e19a56ab2e24668abcdfe35f4c73d1"
+        ]
+      },
+      "c1mm": {
+        "tp": 196177,
+        "fp": 348487,
+        "fn": 522103,
+        "iou": 0.1838986395342188,
+        "fp_fraction_of_known_background": 0.01776360827259414,
+        "missed_positive_windows": [
+          "western:10dfe7bad1d79573e490e19fcd83580e07297bee57f58a738c7c062886aed756",
+          "western:13e98a33f2c75ad992527efbfb8ab5ecc699e6f6629c8f497622605c91b79a06",
+          "western:8783f88abc3fbbd4fd8bff5a37a7cf700831547fade5e0dbe16231421d49e4ab",
+          "western:cf22fdbb09a1facd6a3523302e9b3a743928fc79bcdb969c70f9096b67ca29b9"
+        ],
+        "missed_positive_groups": []
+      },
+      "prithvi": {
+        "tp": 281175,
+        "fp": 2602831,
+        "fn": 437105,
+        "iou": 0.08466293357855248,
+        "fp_fraction_of_known_background": 0.13267545212235887,
+        "missed_positive_windows": [
+          "western:0e02dfab46cafdb6f7a74acfcfc6292d3ce90e84f8bfbb4274790b8061205a7d",
+          "western:10dfe7bad1d79573e490e19fcd83580e07297bee57f58a738c7c062886aed756",
+          "western:1e52c7407ae4a34cc77b5861bf7c678142ffe17b4d6497122aeadc2fc73c6d91",
+          "western:2443a7c8fd5af0c2de4becc7fe4f7ee78c8f22171abde283902f1b8bf6eca571",
+          "western:85777192bdf8cc17318d6f3ea60f942d044f46abce2d2f647e3eb87c077482d8",
+          "western:8783f88abc3fbbd4fd8bff5a37a7cf700831547fade5e0dbe16231421d49e4ab",
+          "western:921d54c3668f50d7d5722434aca793f6c815a4bddd935e7657ec22a1fecc6fb5",
+          "western:ae81fbdccd87c4a9147833cb22af44ef6659c413b4b18e53b329d09dbdeab212",
+          "western:c0beeee4f215bad9ad399414d52d2d5bc7e995e5d934d544d7a9ab072b6391f9",
+          "western:cb4052b665096b3833d350796694df753ce8999a6a6446919341c1c770344f2d",
+          "western:da6d59d3bb816228df5993db1fb18fa7921f92401564763d046e7beffb457939"
+        ],
+        "missed_positive_groups": [
+          "western:c6b88a067a792bf046a773fecf314531383ac37a897e5e838845c9426dfe21e5",
+          "western:1d731e55314f9ce5c4729ece12bd91db522f7bcf9606a82e9ed2c0d186ac458e"
+        ]
+      }
+    }
+  },
+  "per_window": [
+    {
+      "sample_id": "western:02b23b64322e474cc34e5f08b26621eaf3d9473fa287f760d7a80680de6e95a2",
+      "group_id": "western:e128ce9af0dfccee680929b7e8592b73ce62910e897fb9c8532193d3d47169d0",
+      "valid_pixels": 234314,
+      "reserve": [
+        2260,
+        571,
+        2871
+      ],
+      "c1mm": [
+        3057,
+        14498,
+        2074
+      ],
+      "prithvi": [
+        3564,
+        18877,
+        1567
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:030026917f382352b9bc0fd942bd2ca7e0e5ab4f545ade3b667643db8a2a8cb1",
+      "group_id": "western:8ceeac89fd14906165b40a0bf902a7d1df461774e1d90db426b56d94b42cc830",
+      "valid_pixels": 207207,
+      "reserve": [
+        601,
+        486,
+        4271
+      ],
+      "c1mm": [
+        117,
+        109,
+        4755
+      ],
+      "prithvi": [
+        290,
+        2017,
+        4582
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:061064b16eb6c52e6bdeb690c591c45883e52391aecbb0161a2ca915fe0a5ee3",
+      "group_id": "western:710e7f56744f101e56fad401ffb34d4de7d21ea842665056a84e4875a1ae9b4c",
+      "valid_pixels": 207758,
+      "reserve": [
+        15,
+        8572,
+        21
+      ],
+      "c1mm": [
+        33,
+        4944,
+        3
+      ],
+      "prithvi": [
+        36,
+        151804,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:0a4928ecf6c851c0b007d13b84e69ba19e96cfa7366908cddb644c094bcc2f6e",
+      "group_id": "western:847b7bf465c5e851070fa222fb4093f19a70dd46bf6c6369fa15ec7b9e1b3ebf",
+      "valid_pixels": 246580,
+      "reserve": [
+        259,
+        17216,
+        14
+      ],
+      "c1mm": [
+        245,
+        1035,
+        28
+      ],
+      "prithvi": [
+        273,
+        112832,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:0e02dfab46cafdb6f7a74acfcfc6292d3ce90e84f8bfbb4274790b8061205a7d",
+      "group_id": "western:8ceeac89fd14906165b40a0bf902a7d1df461774e1d90db426b56d94b42cc830",
+      "valid_pixels": 203115,
+      "reserve": [
+        624,
+        901,
+        4248
+      ],
+      "c1mm": [
+        312,
+        2,
+        4560
+      ],
+      "prithvi": [
+        0,
+        2509,
+        4872
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:10dfe7bad1d79573e490e19fcd83580e07297bee57f58a738c7c062886aed756",
+      "group_id": "western:8ceeac89fd14906165b40a0bf902a7d1df461774e1d90db426b56d94b42cc830",
+      "valid_pixels": 206304,
+      "reserve": [
+        174,
+        895,
+        4698
+      ],
+      "c1mm": [
+        0,
+        224,
+        4872
+      ],
+      "prithvi": [
+        0,
+        2745,
+        4872
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:114f6112a3aa6c977663a132a915d226f5b63d141ca83baa6eeec5508eb895cd",
+      "group_id": "western:286b254eabf727c32b6f4286fa1968363076d53caa74f122ba1b15e5faced8dd",
+      "valid_pixels": 262133,
+      "reserve": [
+        835,
+        19243,
+        7683
+      ],
+      "c1mm": [
+        190,
+        6177,
+        8328
+      ],
+      "prithvi": [
+        5815,
+        58441,
+        2703
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:1205e8519991284890f3749f859f490cd2304fa211e3a10658a9e775b1a5c2d3",
+      "group_id": "western:cb8641c72cca40c40e93f5b5475982c5bf76449f729b333dc0be167132ddf393",
+      "valid_pixels": 249981,
+      "reserve": [
+        0,
+        877,
+        876
+      ],
+      "c1mm": [
+        777,
+        2223,
+        99
+      ],
+      "prithvi": [
+        876,
+        6356,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:12917609757131dbb28efcde46c0845c619a7dd0c3ba9536bd814146096960b6",
+      "group_id": "western:7e59ea7d1e8249d9c93e4a0f2bc29231f556899c11bc2c7e9ba499adfd080539",
+      "valid_pixels": 190510,
+      "reserve": [
+        1138,
+        925,
+        3334
+      ],
+      "c1mm": [
+        1869,
+        471,
+        2603
+      ],
+      "prithvi": [
+        3626,
+        14849,
+        846
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:13e98a33f2c75ad992527efbfb8ab5ecc699e6f6629c8f497622605c91b79a06",
+      "group_id": "western:10805e404bb73641c4cf4f6520d7d723338b813761d3b412aec8c151e498e135",
+      "valid_pixels": 237514,
+      "reserve": [
+        27788,
+        777,
+        127833
+      ],
+      "c1mm": [
+        0,
+        0,
+        155621
+      ],
+      "prithvi": [
+        2121,
+        901,
+        153500
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:171fb126292bfe0aeb8ab3cea8df741b5e1161625535fa530a7291846d7b9cfb",
+      "group_id": "western:847b7bf465c5e851070fa222fb4093f19a70dd46bf6c6369fa15ec7b9e1b3ebf",
+      "valid_pixels": 262141,
+      "reserve": [
+        66,
+        18680,
+        0
+      ],
+      "c1mm": [
+        66,
+        24738,
+        0
+      ],
+      "prithvi": [
+        66,
+        126914,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:19ed5f4077f3615a588a2cb08f0adac238e30afd74f2d2d912f5af7e2e925a85",
+      "group_id": "western:847b7bf465c5e851070fa222fb4093f19a70dd46bf6c6369fa15ec7b9e1b3ebf",
+      "valid_pixels": 262142,
+      "reserve": [
+        102,
+        32513,
+        6
+      ],
+      "c1mm": [
+        40,
+        11263,
+        68
+      ],
+      "prithvi": [
+        81,
+        40030,
+        27
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:1d3874823c6cf7b1da79eddbdd3b0c4df1a213eac8af98ae982fb7882e369b53",
+      "group_id": "western:6c994b0d3dc5a8d23ad0f9d6e05ae385d86f540b17e5ad7649798a6860441756",
+      "valid_pixels": 197103,
+      "reserve": [
+        516,
+        3862,
+        711
+      ],
+      "c1mm": [
+        502,
+        5830,
+        725
+      ],
+      "prithvi": [
+        439,
+        5806,
+        788
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:1e52c7407ae4a34cc77b5861bf7c678142ffe17b4d6497122aeadc2fc73c6d91",
+      "group_id": "western:84d73f7cb50eb53a8a9e2180242c804091be68292ae7d02965d8289f5ea93cba",
+      "valid_pixels": 199032,
+      "reserve": [
+        0,
+        692,
+        416
+      ],
+      "c1mm": [
+        80,
+        4798,
+        336
+      ],
+      "prithvi": [
+        0,
+        2622,
+        416
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:215103c0fcc18cfc756d6cc1c67cb71956a24402a68ac415de3ec5d0db042bc7",
+      "group_id": "western:84d73f7cb50eb53a8a9e2180242c804091be68292ae7d02965d8289f5ea93cba",
+      "valid_pixels": 197129,
+      "reserve": [
+        335,
+        1841,
+        81
+      ],
+      "c1mm": [
+        336,
+        5806,
+        80
+      ],
+      "prithvi": [
+        51,
+        5306,
+        365
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:225e6b3f784e62f5e7e6b12e8723dea1afe0ee1c4d5c5ecb161f0b216bbf3a99",
+      "group_id": "western:6c994b0d3dc5a8d23ad0f9d6e05ae385d86f540b17e5ad7649798a6860441756",
+      "valid_pixels": 236343,
+      "reserve": [
+        654,
+        4248,
+        573
+      ],
+      "c1mm": [
+        514,
+        3606,
+        713
+      ],
+      "prithvi": [
+        396,
+        3504,
+        831
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:22ccf5fa96bec5e1125a87429f1dcee1f3a9128c916434ab3aa9f2bee8e7625e",
+      "group_id": "western:24953f887cd955adb5d6a215d41105dc56d9b6963ca4e0281d3f82d85fd510f5",
+      "valid_pixels": 180358,
+      "reserve": [
+        1341,
+        9365,
+        1402
+      ],
+      "c1mm": [
+        2675,
+        1954,
+        68
+      ],
+      "prithvi": [
+        2727,
+        3040,
+        16
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:2443a7c8fd5af0c2de4becc7fe4f7ee78c8f22171abde283902f1b8bf6eca571",
+      "group_id": "western:c6b88a067a792bf046a773fecf314531383ac37a897e5e838845c9426dfe21e5",
+      "valid_pixels": 213162,
+      "reserve": [
+        18,
+        7373,
+        27
+      ],
+      "c1mm": [
+        37,
+        507,
+        8
+      ],
+      "prithvi": [
+        0,
+        16688,
+        45
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:2bd6c904afbe5e23b3cbac3a80690c761ec2f4875e073eeb2b8529281e492409",
+      "group_id": "western:286b254eabf727c32b6f4286fa1968363076d53caa74f122ba1b15e5faced8dd",
+      "valid_pixels": 255501,
+      "reserve": [
+        3856,
+        12205,
+        2780
+      ],
+      "c1mm": [
+        3544,
+        8817,
+        3092
+      ],
+      "prithvi": [
+        3756,
+        66025,
+        2880
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:2dc36f975510acae28ea441dcb5dc1164696007bd9fe7f9a36f849ebed5ee947",
+      "group_id": "western:7908a388f80728368cd2a5b00841a21d0fcad4ecc5c8d1360cc8fa6ffa603307",
+      "valid_pixels": 183417,
+      "reserve": [
+        249,
+        6856,
+        0
+      ],
+      "c1mm": [
+        249,
+        10615,
+        0
+      ],
+      "prithvi": [
+        249,
+        12998,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:33a10b07f8bfda2117e513e111dddf4d60ee92e7bd587d23c40abf29d3f361c7",
+      "group_id": "western:216ec60cd1fb33e407959a18b3feba4488df80d5930e9b00c63ca976172e0adb",
+      "valid_pixels": 194910,
+      "reserve": [
+        8,
+        3519,
+        510
+      ],
+      "c1mm": [
+        458,
+        4472,
+        60
+      ],
+      "prithvi": [
+        517,
+        36761,
+        1
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:3606821f764bf135340fc07a736d5628f3dd388fcad1e24420c59cfdf6c649b5",
+      "group_id": "western:2262ac20e3d0996ee6f31158eab6a77783cbabec67d5ae16961133504cf2fd88",
+      "valid_pixels": 223405,
+      "reserve": [
+        1224,
+        742,
+        1360
+      ],
+      "c1mm": [
+        1246,
+        46,
+        1338
+      ],
+      "prithvi": [
+        1504,
+        267,
+        1080
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:3741b8144161ec1f48e6c784bcb6e439180e4fdb4f058229e0df02ad26248ee3",
+      "group_id": "western:6c994b0d3dc5a8d23ad0f9d6e05ae385d86f540b17e5ad7649798a6860441756",
+      "valid_pixels": 234246,
+      "reserve": [
+        695,
+        4110,
+        532
+      ],
+      "c1mm": [
+        535,
+        3220,
+        692
+      ],
+      "prithvi": [
+        525,
+        3349,
+        702
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:39467c1028e2b7c4cce9384d67834c41be97887afafb2c0b11b0bc5457898600",
+      "group_id": "western:84d73f7cb50eb53a8a9e2180242c804091be68292ae7d02965d8289f5ea93cba",
+      "valid_pixels": 204348,
+      "reserve": [
+        34,
+        7014,
+        90
+      ],
+      "c1mm": [
+        22,
+        6742,
+        102
+      ],
+      "prithvi": [
+        104,
+        80474,
+        20
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:3a4737d8150f4685bf3ac8d600962ca6f7b363c9e5582cbfd6c1ac9945ef58a4",
+      "group_id": "western:2262ac20e3d0996ee6f31158eab6a77783cbabec67d5ae16961133504cf2fd88",
+      "valid_pixels": 204311,
+      "reserve": [
+        2769,
+        5424,
+        871
+      ],
+      "c1mm": [
+        1107,
+        411,
+        2533
+      ],
+      "prithvi": [
+        2254,
+        705,
+        1386
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:3cbf75dc1e31fbc88c67a1089746364c7b681b77e6fa06bcc70590cbdc948cbd",
+      "group_id": "western:216ec60cd1fb33e407959a18b3feba4488df80d5930e9b00c63ca976172e0adb",
+      "valid_pixels": 189355,
+      "reserve": [
+        3591,
+        1644,
+        304
+      ],
+      "c1mm": [
+        3242,
+        1413,
+        653
+      ],
+      "prithvi": [
+        2999,
+        6616,
+        896
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:3e25d600968f1d1b8482a53551b085c4afbbb9dfb7c8c7da0928e928d2c9eca1",
+      "group_id": "western:a5924840bc97032160e74a98038dd395950d57daed52ed035f7aabfd808916d6",
+      "valid_pixels": 185148,
+      "reserve": [
+        0,
+        4085,
+        118
+      ],
+      "c1mm": [
+        102,
+        7663,
+        16
+      ],
+      "prithvi": [
+        118,
+        181886,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:43e1ea0ce2a8280a0cb11168c301bcb98b166bdb60fb80da6489239f39b0a924",
+      "group_id": "western:286b254eabf727c32b6f4286fa1968363076d53caa74f122ba1b15e5faced8dd",
+      "valid_pixels": 240775,
+      "reserve": [
+        2861,
+        10024,
+        819
+      ],
+      "c1mm": [
+        1770,
+        247,
+        1910
+      ],
+      "prithvi": [
+        2372,
+        24631,
+        1308
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:45e7df90e8e014a6d40ba2ca3ed296bda323aaed21357436a3972a24254b1911",
+      "group_id": "western:9a44661aa13eeaa69dde7f18f428ea2b06ad1d6c2424b7cdda225ee79d0e3b78",
+      "valid_pixels": 191652,
+      "reserve": [
+        508,
+        3293,
+        3638
+      ],
+      "c1mm": [
+        799,
+        6925,
+        3347
+      ],
+      "prithvi": [
+        1066,
+        15178,
+        3080
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:4b8091411a47d9f64903e7ea2b96d99338d788f3b6939fede9b2ae1702c72745",
+      "group_id": "western:87d3ae6c4c4d087461174584347f135b17c024c0ce4816a3bc72c1599cbd2845",
+      "valid_pixels": 174631,
+      "reserve": [
+        4,
+        2663,
+        24
+      ],
+      "c1mm": [
+        28,
+        8624,
+        0
+      ],
+      "prithvi": [
+        28,
+        50050,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:505d9288c982ddec0a498589ffa04e1276a9f14dc98bd50bb43c204b2c1c1878",
+      "group_id": "western:cb8641c72cca40c40e93f5b5475982c5bf76449f729b333dc0be167132ddf393",
+      "valid_pixels": 197367,
+      "reserve": [
+        2732,
+        339,
+        2412
+      ],
+      "c1mm": [
+        2938,
+        1174,
+        2206
+      ],
+      "prithvi": [
+        3343,
+        1590,
+        1801
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:57b2d478c9087d2beb6b855fd98bac677c3cbd2abb2fd1e66593ad3efbda5814",
+      "group_id": "western:42fcd63a3f6d11d9fa2868b4d42976336555242af0d9de805b74308ac2c7a2cf",
+      "valid_pixels": 249348,
+      "reserve": [
+        491,
+        12842,
+        48
+      ],
+      "c1mm": [
+        525,
+        17181,
+        14
+      ],
+      "prithvi": [
+        342,
+        91712,
+        197
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:5802c7c4e6b51b1c710a90323aa5f259e443be8d6da1af8db1befb146564259b",
+      "group_id": "western:e128ce9af0dfccee680929b7e8592b73ce62910e897fb9c8532193d3d47169d0",
+      "valid_pixels": 229167,
+      "reserve": [
+        1004,
+        501,
+        4127
+      ],
+      "c1mm": [
+        1598,
+        14521,
+        3533
+      ],
+      "prithvi": [
+        2944,
+        18831,
+        2187
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:591dc78f64e6d4a0f3728b83f8b46a6e424081536e643ea2d74b37ea8474e4cb",
+      "group_id": "western:b3230117669520c15a42c888f44399e3e190156611da64c81808df730fcf9237",
+      "valid_pixels": 189120,
+      "reserve": [
+        18300,
+        784,
+        10168
+      ],
+      "c1mm": [
+        17758,
+        1370,
+        10710
+      ],
+      "prithvi": [
+        25748,
+        10816,
+        2720
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:5d72ef8153dd509ef95a7c21165ac0b874145a0170739b27e6c068ffe2457771",
+      "group_id": "western:b3230117669520c15a42c888f44399e3e190156611da64c81808df730fcf9237",
+      "valid_pixels": 178114,
+      "reserve": [
+        23752,
+        1319,
+        10697
+      ],
+      "c1mm": [
+        29623,
+        4217,
+        4826
+      ],
+      "prithvi": [
+        31964,
+        10290,
+        2485
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:5f33bb3a619b725a7631f1a96a9805415c62cf1e28578b7c1eadfdb9240d699f",
+      "group_id": "western:5f1f83824310b1e479f1faaa8d87c899ca9a344b23f038ba09f271170d1d22af",
+      "valid_pixels": 175704,
+      "reserve": [
+        170,
+        874,
+        80
+      ],
+      "c1mm": [
+        180,
+        747,
+        70
+      ],
+      "prithvi": [
+        250,
+        11247,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:629e2aba8a44e7f1ce415d8f181762ebf6abf28d508821eb0473af68c48dd6c6",
+      "group_id": "western:2e89b4aefcef21ed01847fe36ac05d629e3f801ce9079744267f9831636051e0",
+      "valid_pixels": 237263,
+      "reserve": [
+        170,
+        2395,
+        3751
+      ],
+      "c1mm": [
+        173,
+        871,
+        3748
+      ],
+      "prithvi": [
+        170,
+        2413,
+        3751
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:64bb47d549470a298e4a937da2d99dc599cc199d8ec0315c1a0dcd71bc05a8db",
+      "group_id": "western:be148cd2c115655512f16e81e6acf8a00f1946ffea10c9780973abe0fc563f89",
+      "valid_pixels": 224054,
+      "reserve": [
+        10666,
+        1238,
+        3002
+      ],
+      "c1mm": [
+        12987,
+        4431,
+        681
+      ],
+      "prithvi": [
+        12400,
+        3540,
+        1268
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:673d227cf0ded5d7fdeb69422b58e743faed8d7996de858124aee4e436ae88d7",
+      "group_id": "western:9e97d516546213a7e9f5ef3d242a049d9206e42d67266b2c580b996c7507ab87",
+      "valid_pixels": 238685,
+      "reserve": [
+        92,
+        2257,
+        28
+      ],
+      "c1mm": [
+        120,
+        3733,
+        0
+      ],
+      "prithvi": [
+        21,
+        8892,
+        99
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:68ec256d09f4cd99f76e65fe79357979ffe5ee97901e1366929e298c9d00ee1b",
+      "group_id": "western:be148cd2c115655512f16e81e6acf8a00f1946ffea10c9780973abe0fc563f89",
+      "valid_pixels": 257869,
+      "reserve": [
+        803,
+        1266,
+        1771
+      ],
+      "c1mm": [
+        2144,
+        2832,
+        430
+      ],
+      "prithvi": [
+        1346,
+        2350,
+        1228
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:6ba550f451ba9cd3afb5d8ed5117a608e54eae0a12ba6051af25de607fbb1aa6",
+      "group_id": "western:cb8641c72cca40c40e93f5b5475982c5bf76449f729b333dc0be167132ddf393",
+      "valid_pixels": 212439,
+      "reserve": [
+        2448,
+        1461,
+        2696
+      ],
+      "c1mm": [
+        3392,
+        3961,
+        1752
+      ],
+      "prithvi": [
+        2860,
+        4911,
+        2284
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:6db9018c1958fe5d819f5750831804aac4622a63c2338741afa4a82218634d49",
+      "group_id": "western:216ec60cd1fb33e407959a18b3feba4488df80d5930e9b00c63ca976172e0adb",
+      "valid_pixels": 239123,
+      "reserve": [
+        549,
+        1779,
+        11
+      ],
+      "c1mm": [
+        476,
+        2172,
+        84
+      ],
+      "prithvi": [
+        558,
+        24302,
+        2
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:7594be8de750206202fca2b34172d7112a76f36b74584974541d642fc194dc31",
+      "group_id": "western:7e59ea7d1e8249d9c93e4a0f2bc29231f556899c11bc2c7e9ba499adfd080539",
+      "valid_pixels": 184777,
+      "reserve": [
+        395,
+        2561,
+        3848
+      ],
+      "c1mm": [
+        138,
+        2080,
+        4105
+      ],
+      "prithvi": [
+        2269,
+        54403,
+        1974
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:77e0bc5159038101cdf4fc99cd93f01e763a620cb7e2d9da0d0a976869c9ee1e",
+      "group_id": "western:b3230117669520c15a42c888f44399e3e190156611da64c81808df730fcf9237",
+      "valid_pixels": 198030,
+      "reserve": [
+        22223,
+        876,
+        9862
+      ],
+      "c1mm": [
+        28545,
+        5210,
+        3540
+      ],
+      "prithvi": [
+        28022,
+        7245,
+        4063
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:78bf82666b409b0be5d2c18ac477381d5aaff62313112d6e8fe572ec679c7bb9",
+      "group_id": "western:2262ac20e3d0996ee6f31158eab6a77783cbabec67d5ae16961133504cf2fd88",
+      "valid_pixels": 257505,
+      "reserve": [
+        1038,
+        6068,
+        2
+      ],
+      "c1mm": [
+        1013,
+        184,
+        27
+      ],
+      "prithvi": [
+        1040,
+        12484,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:7ccaa67638006d52db25d1e09a5d491c73c8ada7767d4f053ff8dc83c63cd843",
+      "group_id": "western:bed3b32a0fdfcb647b88eca5009af9925b0ffde17fce01923ec5c1e340a8afae",
+      "valid_pixels": 211903,
+      "reserve": [
+        327,
+        1403,
+        1412
+      ],
+      "c1mm": [
+        411,
+        2345,
+        1328
+      ],
+      "prithvi": [
+        988,
+        7102,
+        751
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:7db1c036e9865b8a985b1b9d3a35cdabf6838a52162506109ad9cefb4b9b401a",
+      "group_id": "western:f32385e0b91245407677cf9fccd7f17bd2961fe4cfec8cb7cbfdc0adb798db49",
+      "valid_pixels": 221339,
+      "reserve": [
+        1,
+        269,
+        167
+      ],
+      "c1mm": [
+        52,
+        762,
+        116
+      ],
+      "prithvi": [
+        168,
+        18592,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:7fd10ff9884d11301506cf2f0b9a7fe621f247f41934067e158c289c718c47ae",
+      "group_id": "western:de21025db3cbf551ae2dd12941758e339e8005e62177cb656efabc1e7bb4de69",
+      "valid_pixels": 253975,
+      "reserve": [
+        1818,
+        38522,
+        7148
+      ],
+      "c1mm": [
+        742,
+        1603,
+        8224
+      ],
+      "prithvi": [
+        1513,
+        103016,
+        7453
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:85777192bdf8cc17318d6f3ea60f942d044f46abce2d2f647e3eb87c077482d8",
+      "group_id": "western:bed3b32a0fdfcb647b88eca5009af9925b0ffde17fce01923ec5c1e340a8afae",
+      "valid_pixels": 212175,
+      "reserve": [
+        223,
+        781,
+        1220
+      ],
+      "c1mm": [
+        443,
+        2217,
+        1000
+      ],
+      "prithvi": [
+        0,
+        4380,
+        1443
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:8707cc20d144a75427078bacd647307f9b288fc1894e66ab6c54989cef40888c",
+      "group_id": "western:7e59ea7d1e8249d9c93e4a0f2bc29231f556899c11bc2c7e9ba499adfd080539",
+      "valid_pixels": 187275,
+      "reserve": [
+        256,
+        3562,
+        4257
+      ],
+      "c1mm": [
+        1320,
+        5496,
+        3193
+      ],
+      "prithvi": [
+        1138,
+        30472,
+        3375
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:8783f88abc3fbbd4fd8bff5a37a7cf700831547fade5e0dbe16231421d49e4ab",
+      "group_id": "western:de21025db3cbf551ae2dd12941758e339e8005e62177cb656efabc1e7bb4de69",
+      "valid_pixels": 195262,
+      "reserve": [
+        163,
+        12482,
+        28
+      ],
+      "c1mm": [
+        0,
+        0,
+        191
+      ],
+      "prithvi": [
+        0,
+        12001,
+        191
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:891cd8a2320a55919a2cb982018b588e4ed8d8cc90d2d13a7e15384b8cbc24e3",
+      "group_id": "western:10805e404bb73641c4cf4f6520d7d723338b813761d3b412aec8c151e498e135",
+      "valid_pixels": 194463,
+      "reserve": [
+        39195,
+        13003,
+        38929
+      ],
+      "c1mm": [
+        5794,
+        5096,
+        72330
+      ],
+      "prithvi": [
+        53678,
+        93105,
+        24446
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:894bb523d048a74f2ad3d4e8882d3b447e1594dc759fe29495eea1b190cc3f69",
+      "group_id": "western:10805e404bb73641c4cf4f6520d7d723338b813761d3b412aec8c151e498e135",
+      "valid_pixels": 255722,
+      "reserve": [
+        10232,
+        3480,
+        18692
+      ],
+      "c1mm": [
+        470,
+        1455,
+        28454
+      ],
+      "prithvi": [
+        610,
+        26976,
+        28314
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:89e7f673cbf24bf3cc2c04a03540b2ae4415bbfad37cf36cc69797f1bfc913ff",
+      "group_id": "western:5d6047429eceb6ae42a6c606b017fa65389ca2400d09bc333a28255956177b56",
+      "valid_pixels": 214008,
+      "reserve": [
+        529,
+        9216,
+        6
+      ],
+      "c1mm": [
+        531,
+        1309,
+        4
+      ],
+      "prithvi": [
+        533,
+        16413,
+        2
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:8f661f62fa6428e6d99f276db32a9f7e78d8fafd0eb09c88bfee3e2f8a981738",
+      "group_id": "western:4d74fb0d8f614031896f9ff31e0cd50214aea2904469cf4c336ce3799aeb0424",
+      "valid_pixels": 208572,
+      "reserve": [
+        4197,
+        1834,
+        1124
+      ],
+      "c1mm": [
+        4294,
+        644,
+        1027
+      ],
+      "prithvi": [
+        4604,
+        714,
+        717
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:91164852ce8d835f8e9a807c1237587bdfc6eed6eb20810daa6afd695f7cf7be",
+      "group_id": "western:0836b25e6bd3cc5a6c2c645a7f8ffb674755d26f22934e946a9fab1f47c4fd85",
+      "valid_pixels": 231805,
+      "reserve": [
+        1082,
+        3931,
+        9
+      ],
+      "c1mm": [
+        1034,
+        2709,
+        57
+      ],
+      "prithvi": [
+        33,
+        2173,
+        1058
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:921d54c3668f50d7d5722434aca793f6c815a4bddd935e7657ec22a1fecc6fb5",
+      "group_id": "western:8ceeac89fd14906165b40a0bf902a7d1df461774e1d90db426b56d94b42cc830",
+      "valid_pixels": 207813,
+      "reserve": [
+        1299,
+        758,
+        3573
+      ],
+      "c1mm": [
+        1043,
+        0,
+        3829
+      ],
+      "prithvi": [
+        0,
+        2581,
+        4872
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:9943fe2c4c5a6dc54974b5f00c13afa52e8eab432838a6e6c6e6252254bc764a",
+      "group_id": "western:48b63679414665fa951303b0cefa9139f41c3fc892413a9bde5da65d33b3d745",
+      "valid_pixels": 262141,
+      "reserve": [
+        691,
+        32637,
+        346
+      ],
+      "c1mm": [
+        492,
+        17366,
+        545
+      ],
+      "prithvi": [
+        1037,
+        134713,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:9aac107225f055d9359e5aff4316ec9b7664a146b9688da450dcb124b35a0d73",
+      "group_id": "western:e128ce9af0dfccee680929b7e8592b73ce62910e897fb9c8532193d3d47169d0",
+      "valid_pixels": 242000,
+      "reserve": [
+        2430,
+        1295,
+        2701
+      ],
+      "c1mm": [
+        3379,
+        5471,
+        1752
+      ],
+      "prithvi": [
+        3198,
+        4872,
+        1933
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:9f9a94b5a5b5b11287e43d15b79aefbfea2114353800d867578e4c0438d8ba7c",
+      "group_id": "western:d058e15f95c634ca9a740e862b3300bf888486d97597cfe4462d7807db97309e",
+      "valid_pixels": 184810,
+      "reserve": [
+        82,
+        830,
+        0
+      ],
+      "c1mm": [
+        82,
+        11301,
+        0
+      ],
+      "prithvi": [
+        71,
+        11221,
+        11
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:a0fa80e776381b87f9a8edc270e6a2588e78227448612e7caa511f9726f2cd7b",
+      "group_id": "western:d058e15f95c634ca9a740e862b3300bf888486d97597cfe4462d7807db97309e",
+      "valid_pixels": 185459,
+      "reserve": [
+        82,
+        831,
+        0
+      ],
+      "c1mm": [
+        82,
+        11468,
+        0
+      ],
+      "prithvi": [
+        48,
+        8453,
+        34
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:a65b35318da845e8ed5054c51fab173d81300260910191efb78325549e29c411",
+      "group_id": "western:5f1f83824310b1e479f1faaa8d87c899ca9a344b23f038ba09f271170d1d22af",
+      "valid_pixels": 175726,
+      "reserve": [
+        170,
+        1059,
+        80
+      ],
+      "c1mm": [
+        179,
+        567,
+        71
+      ],
+      "prithvi": [
+        250,
+        8726,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:a6cc84a6f765b3af5069f5c33c274d481fa17775ef0f4f3c30a144027ca27297",
+      "group_id": "western:9a44661aa13eeaa69dde7f18f428ea2b06ad1d6c2424b7cdda225ee79d0e3b78",
+      "valid_pixels": 185254,
+      "reserve": [
+        550,
+        4191,
+        3833
+      ],
+      "c1mm": [
+        547,
+        2564,
+        3836
+      ],
+      "prithvi": [
+        595,
+        21549,
+        3788
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:a79613749c9d5d664e5e982288ca9fae532cd10864dc79150eb1049e73b33ff2",
+      "group_id": "western:93e2b2eb9f8d361208f7dbe8ae16c9d2ece01739904e8114372c19e2dbbe3612",
+      "valid_pixels": 207468,
+      "reserve": [
+        129,
+        1177,
+        559
+      ],
+      "c1mm": [
+        370,
+        1825,
+        318
+      ],
+      "prithvi": [
+        370,
+        17398,
+        318
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:a969b9bfaf154321f0d47667140e078f3d4cd1ef0a64b0f230ce74bdfeb788fc",
+      "group_id": "western:de21025db3cbf551ae2dd12941758e339e8005e62177cb656efabc1e7bb4de69",
+      "valid_pixels": 240393,
+      "reserve": [
+        2353,
+        2515,
+        435
+      ],
+      "c1mm": [
+        1952,
+        100,
+        836
+      ],
+      "prithvi": [
+        1374,
+        192,
+        1414
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:aa52d52220ac45a5a74886e5989aeda288c285d87957c9ff6a60a38f932c544b",
+      "group_id": "western:cf216bebbda57fd363a1a04bd37b2e75daac08ac2463738a38bfc7f56936d29c",
+      "valid_pixels": 169128,
+      "reserve": [
+        929,
+        1117,
+        5013
+      ],
+      "c1mm": [
+        2281,
+        1020,
+        3661
+      ],
+      "prithvi": [
+        134,
+        5148,
+        5808
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:ae81fbdccd87c4a9147833cb22af44ef6659c413b4b18e53b329d09dbdeab212",
+      "group_id": "western:c6b88a067a792bf046a773fecf314531383ac37a897e5e838845c9426dfe21e5",
+      "valid_pixels": 214231,
+      "reserve": [
+        20,
+        7091,
+        25
+      ],
+      "c1mm": [
+        28,
+        406,
+        17
+      ],
+      "prithvi": [
+        0,
+        17499,
+        45
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:b4c4281ce9905f68b4550de60a0e59efb6413ee7f846fccfe58dcf74afc9b5d6",
+      "group_id": "western:2e89b4aefcef21ed01847fe36ac05d629e3f801ce9079744267f9831636051e0",
+      "valid_pixels": 144726,
+      "reserve": [
+        4227,
+        3041,
+        1421
+      ],
+      "c1mm": [
+        1276,
+        42,
+        4372
+      ],
+      "prithvi": [
+        5648,
+        42490,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:b6b0e539581e38bf964df34aec7d0b9833083963f95e08e559c56f95b211e4e4",
+      "group_id": "western:5f1f83824310b1e479f1faaa8d87c899ca9a344b23f038ba09f271170d1d22af",
+      "valid_pixels": 175989,
+      "reserve": [
+        192,
+        808,
+        58
+      ],
+      "c1mm": [
+        193,
+        452,
+        57
+      ],
+      "prithvi": [
+        250,
+        11309,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:bb6fb49d352b349cd55f12b981fc08742dfeb1467a2e4155289aa6f480fefcba",
+      "group_id": "western:2262ac20e3d0996ee6f31158eab6a77783cbabec67d5ae16961133504cf2fd88",
+      "valid_pixels": 210283,
+      "reserve": [
+        2940,
+        4105,
+        700
+      ],
+      "c1mm": [
+        1878,
+        705,
+        1762
+      ],
+      "prithvi": [
+        3282,
+        1137,
+        358
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:bc4001c83c3bfe412c25caf45a877bcbe287fd2978059289bf3f91533aec3ae8",
+      "group_id": "western:bed3b32a0fdfcb647b88eca5009af9925b0ffde17fce01923ec5c1e340a8afae",
+      "valid_pixels": 209114,
+      "reserve": [
+        38,
+        214,
+        2104
+      ],
+      "c1mm": [
+        431,
+        4432,
+        1711
+      ],
+      "prithvi": [
+        131,
+        4512,
+        2011
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:c0beeee4f215bad9ad399414d52d2d5bc7e995e5d934d544d7a9ab072b6391f9",
+      "group_id": "western:cf216bebbda57fd363a1a04bd37b2e75daac08ac2463738a38bfc7f56936d29c",
+      "valid_pixels": 194983,
+      "reserve": [
+        47,
+        7219,
+        803
+      ],
+      "c1mm": [
+        101,
+        1024,
+        749
+      ],
+      "prithvi": [
+        0,
+        16517,
+        850
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:c0dd73f23ef69293e1377d1cbc1d1c5bf5da5e194b2e68bef52d178caade29e3",
+      "group_id": "western:10805e404bb73641c4cf4f6520d7d723338b813761d3b412aec8c151e498e135",
+      "valid_pixels": 227948,
+      "reserve": [
+        7366,
+        233,
+        109795
+      ],
+      "c1mm": [
+        1308,
+        1510,
+        115853
+      ],
+      "prithvi": [
+        5945,
+        1417,
+        111216
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:c2eb686747c517855663a2487596a96d67f92f89091ee89b52ccbdec622efbf0",
+      "group_id": "western:de21025db3cbf551ae2dd12941758e339e8005e62177cb656efabc1e7bb4de69",
+      "valid_pixels": 259181,
+      "reserve": [
+        4071,
+        13993,
+        7363
+      ],
+      "c1mm": [
+        4184,
+        668,
+        7250
+      ],
+      "prithvi": [
+        6909,
+        53417,
+        4525
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:c35d63d406ce55bbe1156a888cefa0e513be5f6d2ba2ed85d45de64010c834fd",
+      "group_id": "western:710e7f56744f101e56fad401ffb34d4de7d21ea842665056a84e4875a1ae9b4c",
+      "valid_pixels": 205647,
+      "reserve": [
+        16,
+        7755,
+        20
+      ],
+      "c1mm": [
+        35,
+        3447,
+        1
+      ],
+      "prithvi": [
+        36,
+        148354,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:c633a511bf080a9e5acc64c96a86ba0a82e1137a9dc7cf56f9ce4e85c896dfd6",
+      "group_id": "western:87d3ae6c4c4d087461174584347f135b17c024c0ce4816a3bc72c1599cbd2845",
+      "valid_pixels": 253251,
+      "reserve": [
+        42,
+        9320,
+        978
+      ],
+      "c1mm": [
+        1020,
+        3702,
+        0
+      ],
+      "prithvi": [
+        1020,
+        156221,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:c784ad7f5e5117d88940b72736c679b965c8ac7b38a5b37eb402588a1dcce9d8",
+      "group_id": "western:bed3b32a0fdfcb647b88eca5009af9925b0ffde17fce01923ec5c1e340a8afae",
+      "valid_pixels": 208282,
+      "reserve": [
+        13,
+        165,
+        2140
+      ],
+      "c1mm": [
+        368,
+        3830,
+        1785
+      ],
+      "prithvi": [
+        201,
+        8255,
+        1952
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:cb4052b665096b3833d350796694df753ce8999a6a6446919341c1c770344f2d",
+      "group_id": "western:1d731e55314f9ce5c4729ece12bd91db522f7bcf9606a82e9ed2c0d186ac458e",
+      "valid_pixels": 196331,
+      "reserve": [
+        7,
+        2122,
+        180
+      ],
+      "c1mm": [
+        180,
+        3343,
+        7
+      ],
+      "prithvi": [
+        0,
+        5171,
+        187
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:cbf0ce30e855e2dcf17be3c8dd5e2cea01216470e56b2b2063d76d9865b42f37",
+      "group_id": "western:be148cd2c115655512f16e81e6acf8a00f1946ffea10c9780973abe0fc563f89",
+      "valid_pixels": 213537,
+      "reserve": [
+        11021,
+        1419,
+        2647
+      ],
+      "c1mm": [
+        11264,
+        2741,
+        2404
+      ],
+      "prithvi": [
+        12430,
+        3662,
+        1238
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:cd83848f04b3eda9fd51839693ebe16177a5111dd327e9bd83caf89ac7948e3a",
+      "group_id": "western:6c994b0d3dc5a8d23ad0f9d6e05ae385d86f540b17e5ad7649798a6860441756",
+      "valid_pixels": 236600,
+      "reserve": [
+        626,
+        3429,
+        601
+      ],
+      "c1mm": [
+        566,
+        3022,
+        661
+      ],
+      "prithvi": [
+        579,
+        6925,
+        648
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:ce5747186c05061636d9c286abd281bc4aa17ff99442f33e1f9572921b0c2894",
+      "group_id": "western:24953f887cd955adb5d6a215d41105dc56d9b6963ca4e0281d3f82d85fd510f5",
+      "valid_pixels": 154194,
+      "reserve": [
+        447,
+        10230,
+        173
+      ],
+      "c1mm": [
+        618,
+        5165,
+        2
+      ],
+      "prithvi": [
+        620,
+        46630,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:ce9fd1dd9626e42dba7b478c90ce9464eca8c0377af211465e2da571fc507531",
+      "group_id": "western:9a44661aa13eeaa69dde7f18f428ea2b06ad1d6c2424b7cdda225ee79d0e3b78",
+      "valid_pixels": 160248,
+      "reserve": [
+        5175,
+        4326,
+        778
+      ],
+      "c1mm": [
+        5282,
+        1555,
+        671
+      ],
+      "prithvi": [
+        5839,
+        4343,
+        114
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:cf22fdbb09a1facd6a3523302e9b3a743928fc79bcdb969c70f9096b67ca29b9",
+      "group_id": "western:84d73f7cb50eb53a8a9e2180242c804091be68292ae7d02965d8289f5ea93cba",
+      "valid_pixels": 223363,
+      "reserve": [
+        429,
+        9489,
+        41
+      ],
+      "c1mm": [
+        0,
+        1466,
+        470
+      ],
+      "prithvi": [
+        7,
+        83570,
+        463
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:d37408b0eb20e388d8b1bac44ab44425fbf9384c187e85a2e63146f7d8566618",
+      "group_id": "western:5d6047429eceb6ae42a6c606b017fa65389ca2400d09bc333a28255956177b56",
+      "valid_pixels": 213930,
+      "reserve": [
+        4052,
+        622,
+        2352
+      ],
+      "c1mm": [
+        268,
+        144,
+        6136
+      ],
+      "prithvi": [
+        48,
+        6244,
+        6356
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:da215ad8a0677b67229a8eb01e6de17ed9a930fa8d1314c4c5d977e183dac6b0",
+      "group_id": "western:be148cd2c115655512f16e81e6acf8a00f1946ffea10c9780973abe0fc563f89",
+      "valid_pixels": 216637,
+      "reserve": [
+        4388,
+        1386,
+        178
+      ],
+      "c1mm": [
+        824,
+        4101,
+        3742
+      ],
+      "prithvi": [
+        4362,
+        20650,
+        204
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:da6d59d3bb816228df5993db1fb18fa7921f92401564763d046e7beffb457939",
+      "group_id": "western:cf216bebbda57fd363a1a04bd37b2e75daac08ac2463738a38bfc7f56936d29c",
+      "valid_pixels": 188501,
+      "reserve": [
+        415,
+        2019,
+        1741
+      ],
+      "c1mm": [
+        1332,
+        456,
+        824
+      ],
+      "prithvi": [
+        0,
+        8734,
+        2156
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:e650c852b3f6a0d37d6cf4c978347e36c97ffaa2f14bfecd6b261708bbd11d04",
+      "group_id": "western:5d6047429eceb6ae42a6c606b017fa65389ca2400d09bc333a28255956177b56",
+      "valid_pixels": 183155,
+      "reserve": [
+        197,
+        4454,
+        0
+      ],
+      "c1mm": [
+        197,
+        394,
+        0
+      ],
+      "prithvi": [
+        197,
+        1137,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:ea2f7140a4e1c16b002c89f1c3cfa9eb1005e3d51292ff4dd2b93880ad525949",
+      "group_id": "western:2e89b4aefcef21ed01847fe36ac05d629e3f801ce9079744267f9831636051e0",
+      "valid_pixels": 199833,
+      "reserve": [
+        1341,
+        4266,
+        838
+      ],
+      "c1mm": [
+        742,
+        3310,
+        1437
+      ],
+      "prithvi": [
+        890,
+        29553,
+        1289
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:ea600cac54a32ff8f80a3fdc924c068840be04cc68078b0d237f1b32faf14e88",
+      "group_id": "western:f32385e0b91245407677cf9fccd7f17bd2961fe4cfec8cb7cbfdc0adb798db49",
+      "valid_pixels": 237985,
+      "reserve": [
+        73,
+        3400,
+        4
+      ],
+      "c1mm": [
+        77,
+        1921,
+        0
+      ],
+      "prithvi": [
+        4,
+        4146,
+        73
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:ee3ac2180ee3fe0853dda1f1dcf294e620132b163f402ee03bfaeeec201aaac5",
+      "group_id": "western:2e89b4aefcef21ed01847fe36ac05d629e3f801ce9079744267f9831636051e0",
+      "valid_pixels": 232663,
+      "reserve": [
+        8,
+        1371,
+        3913
+      ],
+      "c1mm": [
+        418,
+        73,
+        3503
+      ],
+      "prithvi": [
+        1322,
+        5911,
+        2599
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:f570aae7219db8f4cd75326c12d7755859a1dd5d36e4a3d5d267435b7fad07ae",
+      "group_id": "western:dd8ff121133e29eabe2a971fc10f38abd3e19a56ab2e24668abcdfe35f4c73d1",
+      "valid_pixels": 150442,
+      "reserve": [
+        0,
+        503,
+        291
+      ],
+      "c1mm": [
+        147,
+        1850,
+        144
+      ],
+      "prithvi": [
+        291,
+        13215,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:f91bfc5ae851d4100b795b378fe99685c4ceed388c4d3ad1d924dceace02df29",
+      "group_id": "western:cb8641c72cca40c40e93f5b5475982c5bf76449f729b333dc0be167132ddf393",
+      "valid_pixels": 204892,
+      "reserve": [
+        3029,
+        804,
+        2115
+      ],
+      "c1mm": [
+        4125,
+        4490,
+        1019
+      ],
+      "prithvi": [
+        3676,
+        5732,
+        1468
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:f9b6094d3bf7651903ee021824f766fd46a2cf00ae42187460b0e9d04a41d905",
+      "group_id": "western:9a44661aa13eeaa69dde7f18f428ea2b06ad1d6c2424b7cdda225ee79d0e3b78",
+      "valid_pixels": 184365,
+      "reserve": [
+        942,
+        1393,
+        1237
+      ],
+      "c1mm": [
+        1558,
+        3862,
+        621
+      ],
+      "prithvi": [
+        2146,
+        35135,
+        33
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:faadfc131c1ebae032e7e4b444bbab973cad1b6282a1cd98b5ec3281c0625ed3",
+      "group_id": "western:5f1f83824310b1e479f1faaa8d87c899ca9a344b23f038ba09f271170d1d22af",
+      "valid_pixels": 175514,
+      "reserve": [
+        142,
+        1253,
+        108
+      ],
+      "c1mm": [
+        160,
+        811,
+        90
+      ],
+      "prithvi": [
+        250,
+        9742,
+        0
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:fac0bf5f900e6360e2a3217a153766081fa3ffb62489a16bdbb03c43cbd4ee39",
+      "group_id": "western:6a66e01f3f0faa5ac8ffc3a1b89d13a2708debec99bf8f60a38e4e55b4786b69",
+      "valid_pixels": 250926,
+      "reserve": [
+        1047,
+        1163,
+        0
+      ],
+      "c1mm": [
+        1042,
+        441,
+        5
+      ],
+      "prithvi": [
+        1004,
+        758,
+        43
+      ],
+      "total_pixels": 262144
+    },
+    {
+      "sample_id": "western:ff529c9691ccfad475cbc8338bf56584f898969e3ec65c7a8ecfb43c6cc56394",
+      "group_id": "western:5d6047429eceb6ae42a6c606b017fa65389ca2400d09bc333a28255956177b56",
+      "valid_pixels": 219778,
+      "reserve": [
+        5829,
+        646,
+        1294
+      ],
+      "c1mm": [
+        5495,
+        1742,
+        1628
+      ],
+      "prithvi": [
+        4616,
+        1441,
+        2507
+      ],
+      "total_pixels": 262144
+    }
+  ],
+  "recipe_id": "0ffdcd295a60a5083b44a30886380f29f59d7eb578ffc2f42646e2bf1d28029c",
+  "manifest_sha256": "a5a01d9e3ca34c87914717e6c65a0f3e04bc2398c8b17db77403fc2c956f4bc3",
+  "selection_sha256": "89bba735a19cc2aad34666f6e5e3e92720113a82b5f5e96b98d571d6be1cd116",
+  "model_hashes": {
+    "control": [
+      "82e8a3d04f139935b8febc3795374a14cac2e8d8758857878d86f0dbc8b277fc",
+      "bbb8cc75dfc80be811f3966bf86bec100e2044c602cc51ee1187f5ecc7accdd5",
+      "8d68803d552dc25d2297bc7531659b96fbea8286bade734b945ee89e6ed6af26"
+    ],
+    "reserve": [
+      "93e3c9f225e486e204678cad950d83453d022587978872c285fe9dac9dada95e",
+      "460c2cce7677e0c774b632fd43e2dd01b7ad8f5af0a60d04ad06b56238974f6a",
+      "4b21d27e174da86726e5c930a19641301cb43392d7645d931c91b80d42810ad3"
+    ],
+    "c1mm": [
+      "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c",
+      "a0282b7c31c77d0941c1ed0d10981dd526c7345c5c7335cd2d8fb071ec40c0e0",
+      "48a3faa63c8814f793e2963f8db8ef2a42466d0f021463f84e58b5cdb834d61e",
+      "504141c858b50615e0a884dfa512f20360ceb2b86455967cb056279d2497ba8b",
+      "a48abe8b5c98883cf2f60a23eb457e39e5fea7584bafb4266d05eb7bcb16719f"
+    ]
+  },
+  "non_claims": [
+    "Independent geography, shared PANGAEA annotation method and spring2020 interval.",
+    "No field truth/summerSiberian/global ranking/severity/L2A useful-gain proof.",
+    "Spatial groups are not physical fire IDs; regional deployment needs a separate spec."
+  ]
+}

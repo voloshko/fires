@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-105",
+  "run_id": "SPEC-105-REPLAY-001",
+  "created_at": "2026-10-04T06:31:53.608410+00:00",
+  "status": "FAIL",
+  "evidence_class": "REPLAY",
+  "conclusion": "Geographic holdout completed, but superiority to C1-MM is inconclusive and candidate misses two more positive groups; no regional promotion.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/score_western_holdout.py --data-root data-store --manifest data-store/western-holdout-v1/manifest.json --runs research/russian-transfer-v1 --reference-root /home/mc/fires/research --prithvi-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --parent research/russian-transfer-v1-result.json --out research/western-holdout-v1-result.json'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_western_holdout.py tests/test_accuracy_contract.py tests/test_russian_windows.py tests/test_l2a_finetuning.py -q'",
+    "make gate"
+  ],
+  "acceptance": {
+    "data": {
+      "samples": 96,
+      "groups": 37,
+      "partitions": {
+        "calibration": 0,
+        "evaluation": 96,
+        "fit": 0
+      }
+    },
+    "failures": 0,
+    "storage_bytes": 949699940,
+    "comparisons": {
+      "c1mm": {
+        "samples": 96,
+        "groups": 37,
+        "candidate_iou": 0.2206281739341134,
+        "control_iou": 0.1838986395342188,
+        "delta": 0.0367295343998946,
+        "ci95": [
+          -0.08818149928669455,
+          0.12125385047665646
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      },
+      "prithvi": {
+        "samples": 96,
+        "groups": 37,
+        "candidate_iou": 0.2206281739341134,
+        "control_iou": 0.08466293357855248,
+        "delta": 0.13596524035556093,
+        "ci95": [
+          0.0884546897710376,
+          0.19740359294459717
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      }
+    },
+    "missed_positive_groups": {
+      "reserve": 2,
+      "c1mm": 0,
+      "prithvi": 2
+    },
+    "masked_fraction": 0.19190764427185059,
+    "recipe_id": "0ffdcd295a60a5083b44a30886380f29f59d7eb578ffc2f42646e2bf1d28029c",
+    "accepted": false,
+    "systemd_collector_exit": 0,
+    "systemd_score_exit": 0,
+    "result_sha256": "749699f3f6e01f0a0a6576afb496c891c4bc33c05ad1cca4087585ed5628cb2c",
+    "regression_tests_passed": 24,
+    "gate_negative_tests_passed": 14,
+    "local_bootstrap_exact": true
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/western-result.json",
+    "evidence/experiments/accuracy-next-20261003/western-manifest.json",
+    "evidence/experiments/accuracy-next-20261003/western-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/western-result-audit.json"
+  ],
+  "limitations": [
+    "Published PANGAEA contours and background coverage are satellite interpretation; background is not independently reviewed absence of fire.",
+    "37 spatial clusters, not 37 dated physical fire events.",
+    "Western holdout is now consumed; reuse after recipe changes is development.",
+    "Existing immutable scorer output rejects re-execution; a genuinely authorized successor must use a distinct output path."
+  ],
+  "non_claims": [
+    "Independent geography, shared PANGAEA annotation method and spring2020 interval.",
+    "No field truth/summerSiberian/global ranking/severity/L2A useful-gain proof.",
+    "Spatial groups are not physical fire IDs; regional deployment needs a separate spec.",
+    "No superiority to C1-MM, product routing, or completion of the four-direction goal."
+  ]
+}
