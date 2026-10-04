@@ -156,7 +156,8 @@
         "SPEC-110",
         "SPEC-111",
         "SPEC-112",
-        "SPEC-113"
+        "SPEC-113",
+        "SPEC-114"
       ]
     }
   },
@@ -1275,6 +1276,17 @@
         "SPEC-112"
       ],
       "status": "deferred"
+    },
+    "SPEC-114": {
+      "title": "Equal-cost background supervision for monotonic temporal additions",
+      "file": "specs/SPEC-114-equal-cost-temporal-additions.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-95",
+        "SPEC-111"
+      ],
+      "status": "active"
     }
   }
 }
