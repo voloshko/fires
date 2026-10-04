@@ -1,6 +1,6 @@
 # SPEC-102: Frozen post and paired fusion with unused Russian confirmation
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-91, SPEC-92, SPEC-95
 
@@ -53,3 +53,13 @@ singleconfirmation set, not usedfor tuning. No newtraining/alphasweep.
 - k8plus: `bash scripts/queues/queue_pair_fusion_confirmation.sh`.
 - Gate/review/synthetictests alone do notprove improvement. No winnerfrom
   pointestimate withoutconfirmationCI andallnamedcompetitors.
+
+## Resolution
+
+Rejected beforeconfirmation by frozeneligibilityrule; calibration61untouched.
+Mean:Russia0.350121 versusC1-MM0.326108 (+0.024013, CI[−0.019097,0.059354]);
+EMS+0.021424 andFLOGA+0.027877 with positiveCIs, but FLOGA missedgroups1>0.
+Maximum:Russia0.356746 (+0.030638), butFLOGA−0.055482 violates−0.01.
+Neithereligible; selected_recipe=null. Reportboth, no promotion/thresholdchange.
+CPU-only cachedprediction checks passed, parentcounts reproducedexactly.
+Do notconsume confirmation just to rescue a developmentfailure.

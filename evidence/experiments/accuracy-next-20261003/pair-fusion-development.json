@@ -1,0 +1,362 @@
+{
+  "spec_id": "SPEC-102",
+  "reports": {
+    "mean": {
+      "mediterranean": {
+        "ems": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.7808853324047491,
+          "control_iou": 0.7594609076850591,
+          "delta": 0.021424424719689972,
+          "ci95": [
+            0.009457268537900188,
+            0.03539792597406157
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better",
+          "candidate_missed_groups": 0,
+          "baseline_missed_groups": 0
+        },
+        "floga": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.7743362727223282,
+          "control_iou": 0.7464595747186571,
+          "delta": 0.027876698003671097,
+          "ci95": [
+            0.011425148577968345,
+            0.05380820011676018
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better",
+          "candidate_missed_groups": 1,
+          "baseline_missed_groups": 0
+        }
+      },
+      "russian_vs_c1mm": {
+        "samples": 77,
+        "groups": 24,
+        "candidate_iou": 0.3501208382561361,
+        "control_iou": 0.32610820993394857,
+        "delta": 0.024012628322187535,
+        "ci95": [
+          -0.01909729203415912,
+          0.059353866130918004
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      }
+    },
+    "maximum": {
+      "mediterranean": {
+        "ems": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.7796981077541821,
+          "control_iou": 0.7594609076850591,
+          "delta": 0.020237200069122996,
+          "ci95": [
+            0.0023406708387876647,
+            0.04929245002845842
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better",
+          "candidate_missed_groups": 0,
+          "baseline_missed_groups": 0
+        },
+        "floga": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.6909775395610005,
+          "control_iou": 0.7464595747186571,
+          "delta": -0.055482035157656595,
+          "ci95": [
+            -0.1548979680483877,
+            -0.00550704594281049
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "worse",
+          "candidate_missed_groups": 0,
+          "baseline_missed_groups": 0
+        }
+      },
+      "russian_vs_c1mm": {
+        "samples": 77,
+        "groups": 24,
+        "candidate_iou": 0.3567460804862297,
+        "control_iou": 0.32610820993394857,
+        "delta": 0.03063787055228112,
+        "ci95": [
+          -0.026684525473929063,
+          0.08038428296237293
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      }
+    }
+  },
+  "summaries": {
+    "russia": {
+      "windows": 77,
+      "groups": 24,
+      "valid_pixels": 16998039,
+      "true_pixels": 279844,
+      "known_background_pixels": 16718195,
+      "masked_fraction": 0.15789126111315444,
+      "models": {
+        "control": {
+          "tp": 108682,
+          "fp": 163198,
+          "fn": 171162,
+          "iou": 0.24530857119641028,
+          "fp_fraction_of_known_background": 0.00976169975287404,
+          "missed_positive_windows": [
+            "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+            "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+            "russia:14f0dd525739710be379cfd715214cb9a2ea3d1be7b92233c36a978419058ac6",
+            "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+            "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+            "russia:7d5c02e93557150a35157ab7bd82044d0d947bb7b881ceb6b0ede6eed816547f",
+            "russia:ee95a27c018bceef9647275e8d1d79f8d6e90bc4031ccea973ff1441187f337c",
+            "russia:f9e87c1fd4114fd816cd227727b501575ff4e2ed48cc6a8cf81b4942ec0fe94b"
+          ],
+          "missed_positive_groups": []
+        },
+        "reserve": {
+          "tp": 137000,
+          "fp": 144240,
+          "fn": 142844,
+          "iou": 0.3230492072325294,
+          "fp_fraction_of_known_background": 0.0086277256605752,
+          "missed_positive_windows": [
+            "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+            "russia:a9284f0f4e978443ff688f551b324d24b8ed32f4ff0d6fa5d4cb28e80d769c61",
+            "russia:ed2ebc53a846a5fc93be67230d7158c13c5243a2dfa2869a390e0ddb728abe5b"
+          ],
+          "missed_positive_groups": [
+            "russia:b7f146a952da624cc41efceba29b406ba17dffe1ac7320de1d957f36132f0966"
+          ]
+        },
+        "c1mm": {
+          "tp": 136760,
+          "fp": 139526,
+          "fn": 143084,
+          "iou": 0.32610820993394857,
+          "fp_fraction_of_known_background": 0.008345757421779086,
+          "missed_positive_windows": [
+            "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+            "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+            "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+            "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+            "russia:4da327137065846688f2541126436ee2a03736c3cfc4fa6b0039649750727ac9",
+            "russia:b5701f0dcce37c75536dd7fc32949eec39162f23161065af8208b5addc87f5ec",
+            "russia:e3e06929437e479127f79e729f6c20730baff6c626bdc79195dee7ef2b1df74c"
+          ],
+          "missed_positive_groups": [
+            "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+            "russia:e55982863745015bbe5d6fbbd959c065f60b7a1d44cd812d03224008dfd5ee86"
+          ]
+        },
+        "prithvi": {
+          "tp": 175323,
+          "fp": 570347,
+          "fn": 104521,
+          "iou": 0.20621601498957293,
+          "fp_fraction_of_known_background": 0.0341153455860516,
+          "missed_positive_windows": [
+            "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+            "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+            "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+            "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+            "russia:4da327137065846688f2541126436ee2a03736c3cfc4fa6b0039649750727ac9",
+            "russia:caecf663c87fd0605564a05517a94200bad23b14ca110ea9066f681558754a70",
+            "russia:e3e06929437e479127f79e729f6c20730baff6c626bdc79195dee7ef2b1df74c"
+          ],
+          "missed_positive_groups": [
+            "russia:9ea7d4bd40c51a8c41a527c790ca6141b55f280a1a0815df66a2bdbe10760fea",
+            "russia:e55982863745015bbe5d6fbbd959c065f60b7a1d44cd812d03224008dfd5ee86"
+          ]
+        },
+        "mean": {
+          "tp": 136614,
+          "fp": 110347,
+          "fn": 143230,
+          "iou": 0.3501208382561361,
+          "fp_fraction_of_known_background": 0.006600413501577174,
+          "missed_positive_windows": [
+            "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+            "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+            "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+            "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+            "russia:4da327137065846688f2541126436ee2a03736c3cfc4fa6b0039649750727ac9",
+            "russia:b5701f0dcce37c75536dd7fc32949eec39162f23161065af8208b5addc87f5ec"
+          ],
+          "missed_positive_groups": [
+            "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910"
+          ]
+        },
+        "maximum": {
+          "tp": 180079,
+          "fp": 224938,
+          "fn": 99765,
+          "iou": 0.3567460804862297,
+          "fp_fraction_of_known_background": 0.013454682159168499,
+          "missed_positive_windows": [
+            "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b"
+          ],
+          "missed_positive_groups": []
+        }
+      }
+    },
+    "ems": {
+      "windows": 60,
+      "groups": 44,
+      "valid_pixels": 7911569,
+      "true_pixels": 2412001,
+      "known_background_pixels": 5499568,
+      "masked_fraction": 0.49699598948160806,
+      "models": {
+        "control": {
+          "tp": 2086369,
+          "fp": 246121,
+          "fn": 325632,
+          "iou": 0.7849034017249773,
+          "fp_fraction_of_known_background": 0.044752787855337,
+          "missed_positive_windows": [
+            "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0",
+            "ems:ems_EMSR836_AOI04_HLS.S30.T34TCN.2025223T094051.v2.0"
+          ],
+          "missed_positive_groups": []
+        },
+        "reserve": {
+          "tp": 2137609,
+          "fp": 277154,
+          "fn": 274392,
+          "iou": 0.7948998849080845,
+          "fp_fraction_of_known_background": 0.050395594708529834,
+          "missed_positive_windows": [
+            "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0",
+            "ems:ems_EMSR836_AOI04_HLS.S30.T34TCN.2025223T094051.v2.0"
+          ],
+          "missed_positive_groups": []
+        },
+        "c1mm": {
+          "tp": 2113222,
+          "fp": 370528,
+          "fn": 298779,
+          "iou": 0.7594609076850591,
+          "fp_fraction_of_known_background": 0.06737401919568956,
+          "missed_positive_windows": [
+            "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0"
+          ],
+          "missed_positive_groups": []
+        },
+        "mean": {
+          "tp": 2134871,
+          "fp": 321910,
+          "fn": 277130,
+          "iou": 0.7808853324047491,
+          "fp_fraction_of_known_background": 0.058533688464257556,
+          "missed_positive_windows": [
+            "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0",
+            "ems:ems_EMSR836_AOI04_HLS.S30.T34TCN.2025223T094051.v2.0"
+          ],
+          "missed_positive_groups": []
+        },
+        "maximum": {
+          "tp": 2190494,
+          "fp": 397412,
+          "fn": 221507,
+          "iou": 0.7796981077541821,
+          "fp_fraction_of_known_background": 0.0722624031560297,
+          "missed_positive_windows": [
+            "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0"
+          ],
+          "missed_positive_groups": []
+        }
+      }
+    },
+    "floga": {
+      "windows": 81,
+      "groups": 81,
+      "valid_pixels": 20404778,
+      "true_pixels": 361062,
+      "known_background_pixels": 20043716,
+      "masked_fraction": 0.03903640935450425,
+      "models": {
+        "control": {
+          "tp": 317704,
+          "fp": 62827,
+          "fn": 43358,
+          "iou": 0.7494980997383749,
+          "fp_fraction_of_known_background": 0.0031344986129318536,
+          "missed_positive_windows": [
+            "floga:floga_2020_786775_HLS.S30.T34SDJ.2020259T092029.v2.0",
+            "floga:floga_2020_807048_HLS.S30.T34TGL.2021005T091351.v2.0"
+          ],
+          "missed_positive_groups": [
+            "floga:786775",
+            "floga:807048"
+          ]
+        },
+        "reserve": {
+          "tp": 321904,
+          "fp": 82590,
+          "fn": 39158,
+          "iou": 0.7255777050481008,
+          "fp_fraction_of_known_background": 0.004120493425470606,
+          "missed_positive_windows": [
+            "floga:floga_2020_786775_HLS.S30.T34SDJ.2020259T092029.v2.0"
+          ],
+          "missed_positive_groups": [
+            "floga:786775"
+          ]
+        },
+        "c1mm": {
+          "tp": 329594,
+          "fp": 80481,
+          "fn": 31468,
+          "iou": 0.7464595747186571,
+          "fp_fraction_of_known_background": 0.004015273415368687,
+          "missed_positive_windows": [],
+          "missed_positive_groups": []
+        },
+        "mean": {
+          "tp": 327449,
+          "fp": 61815,
+          "fn": 33613,
+          "iou": 0.7743362727223282,
+          "fp_fraction_of_known_background": 0.003084008973186409,
+          "missed_positive_windows": [
+            "floga:floga_2020_786775_HLS.S30.T34SDJ.2020259T092029.v2.0"
+          ],
+          "missed_positive_groups": [
+            "floga:786775"
+          ]
+        },
+        "maximum": {
+          "tp": 335699,
+          "fp": 124770,
+          "fn": 25363,
+          "iou": 0.6909775395610005,
+          "fp_fraction_of_known_background": 0.0062248936275089905,
+          "missed_positive_windows": [],
+          "missed_positive_groups": []
+        }
+      }
+    }
+  },
+  "selected_recipe": null,
+  "parent_result_sha256": "242acac3cf2ccd30728e5919997895e7cf1d83de223a8802b06f3c4daaaa296d",
+  "non_claims": [
+    "Choice uses already evaluated development cohorts, not independent superiority.",
+    "No prior registered calibration predictions; original split preserved, calibration consumed once as confirmation."
+  ]
+}
