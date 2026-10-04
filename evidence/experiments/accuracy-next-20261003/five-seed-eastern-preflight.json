@@ -1,0 +1,30 @@
+{
+  "spec_id": "SPEC-119",
+  "condition": "actual118 result absent while partial training live",
+  "exit_status": 1,
+  "output_created": false,
+  "fresh_images": 0,
+  "last_error": "FileNotFoundError: [Errno 2] No such file or directory: 'research/five-seed-additions-v1/development.json'",
+  "command": [
+    ".runtime/bin/python",
+    "scripts/collect_five_seed_eastern.py",
+    "--data-root",
+    "data-store",
+    "--selection",
+    "data-store/eastern-holdout-plan-v1/selection.json",
+    "--candidate",
+    "research/five-seed-additions-v1/development.json",
+    "--runs",
+    "research/five-seed-additions-v1",
+    "--reference-root",
+    "/home/mc/fires/research",
+    "--prithvi-root",
+    "/home/mc/fires/external/prithvi-eo2-300m-burnscars",
+    "--out",
+    "data-store/eastern-confirmation-v3"
+  ],
+  "positive_path": "NOT_RUN",
+  "non_claims": [
+    "Partial candidate rejection only, no eligible positive-path authentication/admission/quality"
+  ]
+}

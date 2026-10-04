@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-119",
+  "run_id": "SPEC-119-PREFLIGHT-001",
+  "created_at": "2026-10-04T12:42:08.747277+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Conditional actual118 ten-member successor implemented;14CPU tests pass, actual partial candidate rejected before output. Reviewed source queue waits118 fullscore; positive path unexecuted.",
+  "commands": [
+    "ssh k8plus: .runtime/bin/python -m pytest tests/test_five_seed_eastern_confirmation.py tests/test_equal_cost_eastern_confirmation.py -q",
+    "ssh k8plus: .runtime/bin/python scripts/collect_five_seed_eastern.py --data-root data-store --selection data-store/eastern-holdout-plan-v1/selection.json --candidate research/five-seed-additions-v1/development.json --runs research/five-seed-additions-v1 --reference-root /home/mc/fires/research --prithvi-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --out data-store/eastern-confirmation-v3",
+    "ssh k8plus: systemd-run --user fires-accuracy-five-seed-eastern-source-v1 CPU200/8G/OMP2",
+    "make gate"
+  ],
+  "acceptance": {
+    "unit_tests_passed": 14,
+    "partial_candidate_proof": {
+      "spec_id": "SPEC-119",
+      "condition": "actual118 result absent while partial training live",
+      "exit_status": 1,
+      "output_created": false,
+      "fresh_images": 0,
+      "last_error": "FileNotFoundError: [Errno 2] No such file or directory: 'research/five-seed-additions-v1/development.json'",
+      "command": [
+        ".runtime/bin/python",
+        "scripts/collect_five_seed_eastern.py",
+        "--data-root",
+        "data-store",
+        "--selection",
+        "data-store/eastern-holdout-plan-v1/selection.json",
+        "--candidate",
+        "research/five-seed-additions-v1/development.json",
+        "--runs",
+        "research/five-seed-additions-v1",
+        "--reference-root",
+        "/home/mc/fires/research",
+        "--prithvi-root",
+        "/home/mc/fires/external/prithvi-eo2-300m-burnscars",
+        "--out",
+        "data-store/eastern-confirmation-v3"
+      ],
+      "positive_path": "NOT_RUN",
+      "non_claims": [
+        "Partial candidate rejection only, no eligible positive-path authentication/admission/quality"
+      ]
+    },
+    "source_unit": "fires-accuracy-five-seed-eastern-source-v1.service",
+    "source_main_pid": 1404000,
+    "source_state": "active/waiting",
+    "review_code": "APPROVE",
+    "review_architecture": "WATCH",
+    "review_synthesis": "COMMENT",
+    "fresh_images": 0,
+    "positive_path": "NOT_RUN"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/five-seed-eastern-preflight.json",
+    "docs/SPEC-119-REVIEW.md"
+  ],
+  "limitations": [
+    "Parent exit0 means skip or child dispatch, not completed confirmation.",
+    "No successful eligible binding, source admission or fresh quality executed.",
+    "Source partials preserved; no resume without accounting for exact candidate/selection/storage."
+  ],
+  "non_claims": [
+    "No imagery/independent accuracy/model promotion or original four-direction goal completion.",
+    "Geography fresh only relative recorded campaign; shared annotation/spring2020 and spatial groups."
+  ]
+}
