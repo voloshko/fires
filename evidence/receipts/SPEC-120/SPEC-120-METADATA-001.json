@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-120",
+  "run_id": "SPEC-120-METADATA-001",
+  "predecessor_run_id": "SPEC-120-ANON-FAIL-001",
+  "created_at": "2026-10-04T13:22:52.244534+00:00",
+  "status": "PASS",
+  "evidence_class": "LIVE",
+  "conclusion": "Explicitly anonymous complete16public queries provide same-day/MGRS onlineL2A descriptors; no pixels/label survival/source admission evaluated.",
+  "commands": [
+    "ssh k8plus: .runtime/bin/python -m pytest tests/test_cdse_retention_metadata.py -q",
+    "ssh k8plus: audit_cdse_retention_metadata.py --manifest data-store/l2a-pc-v1/manifest.json --out research/cdse-retention-metadata-v2",
+    "ssh k8plus: raw SHA/count/descriptor/manifest replay",
+    "make gate"
+  ],
+  "acceptance": {
+    "summary": {
+      "windows": 16,
+      "complete_queries": 16,
+      "failed_queries": 0,
+      "complete_empty_queries": 0,
+      "online_windows": 16
+    },
+    "raw_replay": {
+      "spec_id": "SPEC-120",
+      "result_sha256": "4e4b2d9ebf021aa437f7dab264c7bfc0867a516a22df7917a267326442e410b6",
+      "16raw_queries_replayed_exact": true,
+      "original_manifest_hash_unchanged": true,
+      "storage_bytes_before_audit": 42389,
+      "non_claims": [
+        "Metadata replay only, no pixels/protectedlabelretention/admission"
+      ]
+    },
+    "unit_tests_passed": 5,
+    "anonymous_session_enforced": true,
+    "execution_exit": 0,
+    "seconds": 14.67,
+    "host_peak": "305.9 MiB",
+    "source_recipe": "430465fda0642465f6c47817ba6ea05c862dfe62863a733f8762159a7ba07fb8",
+    "local_source_parity": true,
+    "original_readiness_unchanged": true,
+    "review_code": "APPROVE",
+    "review_architecture": "CLEAR"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/cdse-retention-metadata-v2.json",
+    "evidence/experiments/accuracy-next-20261003/cdse-retention-metadata-v2-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/cdse-retention-metadata-v2-replay-audit.json",
+    "docs/SPEC-120-CDSE-METADATA.md"
+  ],
+  "limitations": [
+    "Online catalogue metadata does not prove cloudfree or complete label visibility.",
+    "First sourceversion had no enforced anonymous boundary and FAIL is retained; no actual exposure established.",
+    "Pixelrepair/tokenconfiguration remains a separate prerequisite; no data/source criteria changed."
+  ],
+  "non_claims": [
+    "Online metadata is not source pixels, cloud-free coverage or protected-label retention.",
+    "Query failure is unknown, not no product/fire. No credential access or image downloads.",
+    "No original admission change, L2A useful gain, model promotion or original goal completion."
+  ]
+}

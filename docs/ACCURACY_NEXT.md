@@ -761,3 +761,16 @@ reauthenticated. Newseed5 pair/post stillpending; no partialensemblequality.
 Train1397226/score1397250/source1191404000 remain live and data112unused.
 Allsealed118numeric sources immutable, preserve exact handles/outputnames,
 no observation-timeout retry. Fouroriginalgoals unfulfilled, no promotion.
+
+## SPEC-120 CDSE metadata implemented; pixelrepair notexecuted
+
+FinalPCmanifestSHA75d1... actual861/886 known,16lostwindows2784protectedpixels;
+initialqc-bound probe is not the source. PublicCDSE exactday/MGRS L2A metadata
+exists online for all16 under explicitanonymousSession.trust_envFalse.5tests/
+gate,raw16replay/sourcehash unchanged,14.670s/305.9MiB/42389bytes. CodeAPPROVE/
+architectureCLEAR afteranonymousboundaryfix; V1FAILretained, no actual
+credential access/exposure established. Source-onlyPASS; zero pixels downloaded,
+93/97ready stillfalse. Human optionalCDSEconfigpath question pending; no
+credentials/tokens supplied or read. Actual repair requiresseparate spec and
+sameprotectedpixel/source rules, no SCL relaxation or labels lost/replaced.
+118allnew4runs completed; full10mixednativeaudit and scoring nowlive.

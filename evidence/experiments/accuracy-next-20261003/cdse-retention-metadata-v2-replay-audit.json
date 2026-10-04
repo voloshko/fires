@@ -1,0 +1,10 @@
+{
+  "spec_id": "SPEC-120",
+  "result_sha256": "4e4b2d9ebf021aa437f7dab264c7bfc0867a516a22df7917a267326442e410b6",
+  "16raw_queries_replayed_exact": true,
+  "original_manifest_hash_unchanged": true,
+  "storage_bytes_before_audit": 42389,
+  "non_claims": [
+    "Metadata replay only, no pixels/protectedlabelretention/admission"
+  ]
+}

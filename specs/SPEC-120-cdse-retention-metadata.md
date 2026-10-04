@@ -1,6 +1,6 @@
 # SPEC-120: Public CDSE metadata audit for L2A protected-pixel losses
 
-Status: active
+Status: implemented
 Requirement: REQ-008
 Depends on: SPEC-93, SPEC-97
 
@@ -56,3 +56,15 @@ exposure established. ImmutableFAIL/sourceversion/firstrawresult preserved.
 ExplicitSessiontrust_envFalse and regression prevent environment authentication
 andproxylookup. Five tests pass; finalv2 uses a new immutable output/source seal.
 No pixel/sourceadmission claim from either metadata snapshot.
+
+## Resolution
+
+Implemented explicitanonymous metadata audit. Finalv2 all16queries complete,
+noerrors/emptyqueries, all16windows onlineL2A same-day/MGRS descriptors. Five
+tests/gate pass; rawSHA/count/descriptor replay exact, finalPCmanifest unchanged.
+Runtime14.670s/305.9MiB,42389bytes beforetinyreplayproof. No credential reads,
+authheaders/OAuth orimages/vector/pixel downloads under explicittrust_envFalse.
+NoSCL/GT/retention/admission changes; original93/97readiness staysfalse.
+V1unenforcedanonymous boundary FAIL retained; actual access/exposure notshown.
+Independent codeAPPROVE/architectureCLEAR afterrepair. PASS receipt covers
+metadata only, not visibility/label preservation/L2A accuracy or fullgoal.

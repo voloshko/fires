@@ -1,0 +1,602 @@
+{
+  "spec_id": "SPEC-120",
+  "recipe_id": "430465fda0642465f6c47817ba6ea05c862dfe62863a733f8762159a7ba07fb8",
+  "manifest_sha256": "75d1afa37b8dd51d98ea23c2d364b6f1f24e6c253e8ed354f7167d2dcfe3794b",
+  "records": [
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T10SGD.2021306.v1.4_merged.tif",
+      "lost_protected_pixels": 5,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T10SGD_') and ContentDate/Start ge 2021-11-02T00:00:00.000Z and ContentDate/Start lt 2021-11-03T00:00:00.000Z",
+      "tile": "T10SGD",
+      "acquisition_day": "2021-11-02",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T10SGD_%27%29+and+ContentDate%2FStart+ge+2021-11-02T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2021-11-03T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:28.915793+00:00",
+            "path": "research/cdse-retention-metadata-v2/window00-page0.json",
+            "sha256": "fd9f72fc12b74757ce44163dfc8ba72952cc1a09a85c0c9ce9667f4a30eb55c0"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "d667446c-c97f-5a7a-a8d1-eea6d7362b82",
+            "name": "S2A_MSIL2A_20211102T184531_N0500_R070_T10SGD_20230108T083334.SAFE",
+            "tile": "T10SGD",
+            "acquisition_day": "2021-11-02",
+            "publication_date": "2023-02-12T02:13:04.804640Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T10TGS.2018215.v1.4_merged.tif",
+      "lost_protected_pixels": 2,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T10TGS_') and ContentDate/Start ge 2018-08-03T00:00:00.000Z and ContentDate/Start lt 2018-08-04T00:00:00.000Z",
+      "tile": "T10TGS",
+      "acquisition_day": "2018-08-03",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T10TGS_%27%29+and+ContentDate%2FStart+ge+2018-08-03T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2018-08-04T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:30.170527+00:00",
+            "path": "research/cdse-retention-metadata-v2/window01-page0.json",
+            "sha256": "8bf9b8b7601eb9a73a2bfea345ac2c43de34922ad71efd1ff842cc0b01fd15c9"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "36dd6cef-77e1-402f-81af-65c66795f429",
+            "name": "S2A_MSIL2A_20180803T184921_N0500_R113_T10TGS_20230806T155110.SAFE",
+            "tile": "T10TGS",
+            "acquisition_day": "2018-08-03",
+            "publication_date": "2024-03-02T10:45:08.250631Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T11SKB.2020222.v1.4_merged.tif",
+      "lost_protected_pixels": 1948,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T11SKB_') and ContentDate/Start ge 2020-08-09T00:00:00.000Z and ContentDate/Start lt 2020-08-10T00:00:00.000Z",
+      "tile": "T11SKB",
+      "acquisition_day": "2020-08-09",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T11SKB_%27%29+and+ContentDate%2FStart+ge+2020-08-09T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2020-08-10T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:30.825491+00:00",
+            "path": "research/cdse-retention-metadata-v2/window02-page0.json",
+            "sha256": "d6c09bf18276bdd64c526f3aacf8ebda5abdbcc5fb533006ed650bbf0d44dfe3"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "9a38ad59-8433-4dd7-9460-bfc8cffa6dcc",
+            "name": "S2A_MSIL2A_20200809T183921_N0500_R070_T11SKB_20230421T133546.SAFE",
+            "tile": "T11SKB",
+            "acquisition_day": "2020-08-09",
+            "publication_date": "2023-08-26T03:29:54.206792Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T11SMT.2018249.v1.4_merged.tif",
+      "lost_protected_pixels": 1,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T11SMT_') and ContentDate/Start ge 2018-09-06T00:00:00.000Z and ContentDate/Start lt 2018-09-07T00:00:00.000Z",
+      "tile": "T11SMT",
+      "acquisition_day": "2018-09-06",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T11SMT_%27%29+and+ContentDate%2FStart+ge+2018-09-06T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2018-09-07T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:31.595378+00:00",
+            "path": "research/cdse-retention-metadata-v2/window03-page0.json",
+            "sha256": "c2a0802fefd99c304e342eb4c5baa44aadb749834e352ae7891901b53c47c947"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "d5512733-1e6a-4f9c-b446-98cc9c9f2bea",
+            "name": "S2A_MSIL2A_20180906T182911_N0500_R027_T11SMT_20230731T060422.SAFE",
+            "tile": "T11SMT",
+            "acquisition_day": "2018-09-06",
+            "publication_date": "2024-05-09T09:51:16.959087Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T11SNT.2018216.v1.4_merged.tif",
+      "lost_protected_pixels": 2,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T11SNT_') and ContentDate/Start ge 2018-08-04T00:00:00.000Z and ContentDate/Start lt 2018-08-05T00:00:00.000Z",
+      "tile": "T11SNT",
+      "acquisition_day": "2018-08-04",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T11SNT_%27%29+and+ContentDate%2FStart+ge+2018-08-04T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2018-08-05T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:32.483250+00:00",
+            "path": "research/cdse-retention-metadata-v2/window04-page0.json",
+            "sha256": "176f155f49c9d627b90c3d39e839df6cf782be894f95092f4afb7a5cab5513cf"
+          }
+        ],
+        "count": 2,
+        "products": [
+          {
+            "id": "397d3d7a-92a8-419b-b141-c18ac8ff5fea",
+            "name": "S2A_MSIL2A_20180804T181921_N0500_R127_T11SNT_20230807T063021.SAFE",
+            "tile": "T11SNT",
+            "acquisition_day": "2018-08-04",
+            "publication_date": "2024-03-02T18:40:30.646619Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          },
+          {
+            "id": "3a5aadf3-b91a-48a5-8c5c-508500c9f17e",
+            "name": "S2A_MSIL2A_20180804T181921_N0500_R127_T11SNT_20230625T004058.SAFE",
+            "tile": "T11SNT",
+            "acquisition_day": "2018-08-04",
+            "publication_date": "2024-02-22T09:57:35.522924Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T11SQC.2020241.v1.4_merged.tif",
+      "lost_protected_pixels": 4,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T11SQC_') and ContentDate/Start ge 2020-08-28T00:00:00.000Z and ContentDate/Start lt 2020-08-29T00:00:00.000Z",
+      "tile": "T11SQC",
+      "acquisition_day": "2020-08-28",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T11SQC_%27%29+and+ContentDate%2FStart+ge+2020-08-28T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2020-08-29T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:33.440932+00:00",
+            "path": "research/cdse-retention-metadata-v2/window05-page0.json",
+            "sha256": "14a0e0b3f81a4e808809622ffe9bb7780a0248d83516cb7be30868c1049d7ed2"
+          }
+        ],
+        "count": 2,
+        "products": [
+          {
+            "id": "c857dffb-b4b9-4c83-8a15-5d6d8c7d6486",
+            "name": "S2B_MSIL2A_20200828T181919_N0500_R127_T11SQC_20230522T191632.SAFE",
+            "tile": "T11SQC",
+            "acquisition_day": "2020-08-28",
+            "publication_date": "2023-09-01T05:37:15.474826Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          },
+          {
+            "id": "a4df1485-08de-4e6e-b877-920420c1435f",
+            "name": "S2B_MSIL2A_20200828T181919_N0500_R127_T11SQC_20230403T150257.SAFE",
+            "tile": "T11SQC",
+            "acquisition_day": "2020-08-28",
+            "publication_date": "2023-08-01T21:57:17.999138Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T11TNE.2018199.v1.4_merged.tif",
+      "lost_protected_pixels": 1,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T11TNE_') and ContentDate/Start ge 2018-07-18T00:00:00.000Z and ContentDate/Start lt 2018-07-19T00:00:00.000Z",
+      "tile": "T11TNE",
+      "acquisition_day": "2018-07-18",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T11TNE_%27%29+and+ContentDate%2FStart+ge+2018-07-18T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2018-07-19T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:34.946121+00:00",
+            "path": "research/cdse-retention-metadata-v2/window06-page0.json",
+            "sha256": "24113662949cdbd31a267b3ae6129323a32ee9ac3de5c7889ed9e19888e7b8f9"
+          }
+        ],
+        "count": 2,
+        "products": [
+          {
+            "id": "b2c4aa13-dd50-4d9e-b621-63c64fa12fdf",
+            "name": "S2A_MSIL2A_20180718T183121_N0500_R027_T11TNE_20230627T202303.SAFE",
+            "tile": "T11TNE",
+            "acquisition_day": "2018-07-18",
+            "publication_date": "2024-02-24T08:47:26.448202Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          },
+          {
+            "id": "4d99e1a3-fe5c-4b6d-aefc-f838b8f2a521",
+            "name": "S2A_MSIL2A_20180718T183121_N0500_R027_T11TNE_20230820T134914.SAFE",
+            "tile": "T11TNE",
+            "acquisition_day": "2018-07-18",
+            "publication_date": "2024-02-08T10:27:19.417627Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T11TPF.2018289.v1.4_merged.tif",
+      "lost_protected_pixels": 1,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T11TPF_') and ContentDate/Start ge 2018-10-16T00:00:00.000Z and ContentDate/Start lt 2018-10-17T00:00:00.000Z",
+      "tile": "T11TPF",
+      "acquisition_day": "2018-10-16",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T11TPF_%27%29+and+ContentDate%2FStart+ge+2018-10-16T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2018-10-17T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:35.429615+00:00",
+            "path": "research/cdse-retention-metadata-v2/window07-page0.json",
+            "sha256": "6c726bc0ec260ac525dfd0bd63cddc3a129918b99833f87dbd8294740f1f4d6f"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "58adf026-f9f8-4d8e-9a2d-283f3190f885",
+            "name": "S2A_MSIL2A_20181016T183341_N0500_R027_T11TPF_20230710T014047.SAFE",
+            "tile": "T11TPF",
+            "acquisition_day": "2018-10-16",
+            "publication_date": "2024-02-17T01:46:12.205781Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T12SVC.2020190.v1.4_merged.tif",
+      "lost_protected_pixels": 802,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T12SVC_') and ContentDate/Start ge 2020-07-08T00:00:00.000Z and ContentDate/Start lt 2020-07-09T00:00:00.000Z",
+      "tile": "T12SVC",
+      "acquisition_day": "2020-07-08",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T12SVC_%27%29+and+ContentDate%2FStart+ge+2020-07-08T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2020-07-09T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:35.954792+00:00",
+            "path": "research/cdse-retention-metadata-v2/window08-page0.json",
+            "sha256": "21d0e3841b331128281ad9c4562c5296de3ca0baaa17c89be6744a5c30d8f9a3"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "6a152e76-9807-4996-8b38-ec56a02600fd",
+            "name": "S2A_MSIL2A_20200708T175921_N0500_R041_T12SVC_20230322T055148.SAFE",
+            "tile": "T12SVC",
+            "acquisition_day": "2020-07-08",
+            "publication_date": "2023-07-24T18:06:32.355209Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T14RLV.2018043.v1.4_merged.tif",
+      "lost_protected_pixels": 1,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T14RLV_') and ContentDate/Start ge 2018-02-12T00:00:00.000Z and ContentDate/Start lt 2018-02-13T00:00:00.000Z",
+      "tile": "T14RLV",
+      "acquisition_day": "2018-02-12",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T14RLV_%27%29+and+ContentDate%2FStart+ge+2018-02-12T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2018-02-13T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:36.474452+00:00",
+            "path": "research/cdse-retention-metadata-v2/window09-page0.json",
+            "sha256": "8026f6e3dc1199d80f0555fda340b55553794d381d3061b8a2fcd7856e455151"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "0c8158ca-8840-4401-8c83-7e0377f5de37",
+            "name": "S2B_MSIL2A_20180212T172429_N0500_R012_T14RLV_20230803T100531.SAFE",
+            "tile": "T14RLV",
+            "acquisition_day": "2018-02-12",
+            "publication_date": "2024-03-28T00:35:18.732155Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T14SPH.2018095.v1.4_merged.tif",
+      "lost_protected_pixels": 1,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T14SPH_') and ContentDate/Start ge 2018-04-05T00:00:00.000Z and ContentDate/Start lt 2018-04-06T00:00:00.000Z",
+      "tile": "T14SPH",
+      "acquisition_day": "2018-04-05",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T14SPH_%27%29+and+ContentDate%2FStart+ge+2018-04-05T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2018-04-06T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:37.033848+00:00",
+            "path": "research/cdse-retention-metadata-v2/window10-page0.json",
+            "sha256": "63545a1a0173d068cc5345c4c3a30cc9a4e322a698c517bb99391d6bc65ab8d7"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "3163517f-7893-44e9-ad1a-33beacba1a22",
+            "name": "S2A_MSIL2A_20180405T170851_N0500_R112_T14SPH_20230823T103413.SAFE",
+            "tile": "T14SPH",
+            "acquisition_day": "2018-04-05",
+            "publication_date": "2024-02-21T21:43:35.456071Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T14SQF.2018125.v1.4_merged.tif",
+      "lost_protected_pixels": 4,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T14SQF_') and ContentDate/Start ge 2018-05-05T00:00:00.000Z and ContentDate/Start lt 2018-05-06T00:00:00.000Z",
+      "tile": "T14SQF",
+      "acquisition_day": "2018-05-05",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T14SQF_%27%29+and+ContentDate%2FStart+ge+2018-05-05T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2018-05-06T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:38.518573+00:00",
+            "path": "research/cdse-retention-metadata-v2/window11-page0.json",
+            "sha256": "fd17dbd9f1aeafeff937ba5fc060ddf9938798dad73999a432e3e98c2f57c411"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "d7b00012-1b49-4eee-8cfb-17954a36a656",
+            "name": "S2A_MSIL2A_20180505T170851_N0500_R112_T14SQF_20230905T001351.SAFE",
+            "tile": "T14SQF",
+            "acquisition_day": "2018-05-05",
+            "publication_date": "2024-02-21T16:53:11.529223Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T14TQT.2021112.v1.4_merged.tif",
+      "lost_protected_pixels": 8,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T14TQT_') and ContentDate/Start ge 2021-04-22T00:00:00.000Z and ContentDate/Start lt 2021-04-23T00:00:00.000Z",
+      "tile": "T14TQT",
+      "acquisition_day": "2021-04-22",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T14TQT_%27%29+and+ContentDate%2FStart+ge+2021-04-22T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2021-04-23T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:39.711097+00:00",
+            "path": "research/cdse-retention-metadata-v2/window12-page0.json",
+            "sha256": "5c9321343bad3e38211ce45133e83be5dcfc3c2bd15725ea144cdda6cc4fe1fa"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "d6832ca7-fcf6-491e-a13a-d07bb133fc17",
+            "name": "S2A_MSIL2A_20210422T171851_N0500_R012_T14TQT_20230613T033330.SAFE",
+            "tile": "T14TQT",
+            "acquisition_day": "2021-04-22",
+            "publication_date": "2023-07-11T18:42:57.384757Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T15SUB.2018127.v1.4_merged.tif",
+      "lost_protected_pixels": 2,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T15SUB_') and ContentDate/Start ge 2018-05-07T00:00:00.000Z and ContentDate/Start lt 2018-05-08T00:00:00.000Z",
+      "tile": "T15SUB",
+      "acquisition_day": "2018-05-07",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T15SUB_%27%29+and+ContentDate%2FStart+ge+2018-05-07T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2018-05-08T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:40.322812+00:00",
+            "path": "research/cdse-retention-metadata-v2/window13-page0.json",
+            "sha256": "a8c939656bd8259178476075a19f0bb365a4c8289be2f993fb45811a78c5ec92"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "f2066623-2fc9-44a6-9aa0-68a54b1c4507",
+            "name": "S2B_MSIL2A_20180507T165849_N0500_R069_T15SUB_20230829T171947.SAFE",
+            "tile": "T15SUB",
+            "acquisition_day": "2018-05-07",
+            "publication_date": "2024-03-17T17:37:17.050722Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T15SUC.2018127.v1.4_merged.tif",
+      "lost_protected_pixels": 1,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T15SUC_') and ContentDate/Start ge 2018-05-07T00:00:00.000Z and ContentDate/Start lt 2018-05-08T00:00:00.000Z",
+      "tile": "T15SUC",
+      "acquisition_day": "2018-05-07",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T15SUC_%27%29+and+ContentDate%2FStart+ge+2018-05-07T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2018-05-08T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:40.872158+00:00",
+            "path": "research/cdse-retention-metadata-v2/window14-page0.json",
+            "sha256": "8eca7e4bce65f653e187db12ed184bef0713481d6b40ce22611ebd1663abdf98"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "d21d62e1-87b8-4dd8-8f68-061224475511",
+            "name": "S2B_MSIL2A_20180507T165849_N0500_R069_T15SUC_20230829T171947.SAFE",
+            "tile": "T15SUC",
+            "acquisition_day": "2018-05-07",
+            "publication_date": "2024-03-17T17:24:28.083243Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "hls:subsetted_512x512_HLS.S30.T17SQD.2020094.v1.4_merged.tif",
+      "lost_protected_pixels": 1,
+      "filter": "Collection/Name eq 'SENTINEL-2' and contains(Name,'_MSIL2A_') and contains(Name,'_T17SQD_') and ContentDate/Start ge 2020-04-03T00:00:00.000Z and ContentDate/Start lt 2020-04-04T00:00:00.000Z",
+      "tile": "T17SQD",
+      "acquisition_day": "2020-04-03",
+      "catalogue": {
+        "complete": true,
+        "pages": [
+          {
+            "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+contains%28Name%2C%27_MSIL2A_%27%29+and+contains%28Name%2C%27_T17SQD_%27%29+and+ContentDate%2FStart+ge+2020-04-03T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2020-04-04T00%3A00%3A00.000Z&%24select=Id%2CName%2COnline%2CContentDate%2CPublicationDate&%24count=true&%24top=100&%24orderby=PublicationDate+desc",
+            "status": 200,
+            "captured_at": "2026-10-04T13:14:41.631086+00:00",
+            "path": "research/cdse-retention-metadata-v2/window15-page0.json",
+            "sha256": "e077a7f974681b5b2eefefd526fe464c52730a030596f87d8cdcbfe374793dc1"
+          }
+        ],
+        "count": 1,
+        "products": [
+          {
+            "id": "a41b3297-fde2-4c04-b423-9063d5e3847a",
+            "name": "S2A_MSIL2A_20200403T155901_N0500_R097_T17SQD_20230531T014702.SAFE",
+            "tile": "T17SQD",
+            "acquisition_day": "2020-04-03",
+            "publication_date": "2023-09-26T17:57:31.805572Z",
+            "processing_baseline_token": "N0500",
+            "processing_baseline_known": true,
+            "encoding_verified": false,
+            "online_state": "online",
+            "pixel_admission": "NOT_TESTED"
+          }
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "windows": 16,
+    "complete_queries": 16,
+    "failed_queries": 0,
+    "complete_empty_queries": 0,
+    "online_windows": 16
+  },
+  "source_admission": "NOT_TESTED",
+  "l2a_ready": false,
+  "original_readiness_unchanged": true,
+  "non_claims": [
+    "Online metadata is not source pixels, cloud-free coverage or protected-label retention.",
+    "Query failure is unknown, not no product/fire. No credential access or image downloads.",
+    "No original admission change, L2A useful gain, model promotion or original goal completion."
+  ]
+}
