@@ -680,3 +680,14 @@ scopedCOMMENT and metadata-onlyPASS. No images/GPU/datasplit or olddeletion.
 SPEC114 lastpost-s3 nownearend30epochs; score1342954waits, conditional116
 source1361531waits forfullqualityeligible. All114sources/criteria immutable;
 no neweastern imagery and no original four-direction goal completion.
+
+## SPEC-114 all six runs complete; scorer live
+
+Train1342930 terminal exit0 at14:57:11,3777.939seconds wall/18G peak/128KiBswap.
+All6 full30epoch/22860views native adapters audited; within/cross111 orders,
+exposures/base digests exact and fullfit/evaluation isolation validated. All
+six source/loss/base checkpoint identities valid. Scorer1379481 live under
+queue1342954, firstRF77 done14:58:51; all5populations375windows required.
+No quality result or promotion yet. Conditional116source1361531waits allfour
+eligibleguards; no neweastern images. Preserve sealed114sources/outputs and
+neverrestart merely because observation expires. Full four-goal objective active.

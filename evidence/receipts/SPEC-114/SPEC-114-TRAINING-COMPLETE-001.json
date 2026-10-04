@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-114",
+  "run_id": "SPEC-114-TRAINING-COMPLETE-001",
+  "predecessor_run_id": "SPEC-114-TRAINING-PROGRESS-003",
+  "created_at": "2026-10-04T12:00:40.105673+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Six full matched native runs completed and source/exposure/base/fit isolation audited; development scoring remains live.",
+  "commands": [
+    "ssh k8plus: full audit_models and cross-spec summary checks",
+    "ssh k8plus: systemctl --user show train-v1/score-v1",
+    "make gate"
+  ],
+  "acceptance": {
+    "audit": {
+      "spec_id": "SPEC-114",
+      "six_runs_completed": true,
+      "matched_within_and_cross_spec_order_exposure_base": true,
+      "fit_ids": 683,
+      "heldout_fit_disjoint": true,
+      "runs": [
+        {
+          "variant": "pair",
+          "seed": 1,
+          "epochs": 30,
+          "seconds": 596.0676758475602,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "8d022d364e907695d77369f04c9f07faf271a901aef3d854ce123611f30487cf",
+          "checkpoint_bytes": 428778
+        },
+        {
+          "variant": "pair",
+          "seed": 2,
+          "epochs": 30,
+          "seconds": 596.6295858304948,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "55ad02e60e0df2e4f4542ccbd16ef1e860a875fb6162e443e2936c6dd6bdb0d1",
+          "checkpoint_bytes": 428778
+        },
+        {
+          "variant": "pair",
+          "seed": 3,
+          "epochs": 30,
+          "seconds": 596.5150722172111,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "c90e4c6ffc7ec9f845c1783c764478360eef94fa33010b2f675202df336f40f3",
+          "checkpoint_bytes": 428778
+        },
+        {
+          "variant": "post",
+          "seed": 1,
+          "epochs": 30,
+          "seconds": 556.8976973276585,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "5ecbc72262a1e67deede3d6a5b300d538e1fc48d8c80950735e747704ac674ff",
+          "checkpoint_bytes": 428778
+        },
+        {
+          "variant": "post",
+          "seed": 2,
+          "epochs": 30,
+          "seconds": 554.5881486274302,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "a65c5a8a28ad4c9f722783f00b29ac297a74e6a19fd61dc630ef95d0de6b17e9",
+          "checkpoint_bytes": 428778
+        },
+        {
+          "variant": "post",
+          "seed": 3,
+          "epochs": 30,
+          "seconds": 554.5008813831955,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "1e90b19c99f7d1fb31cd33cee7a548c56005414c9931001ca5f1231aad4d4e58",
+          "checkpoint_bytes": 428778
+        }
+      ],
+      "non_claims": [
+        "Six-run mechanics only; full development accuracy/scoring pending. No promotion or original goal completion."
+      ]
+    },
+    "training_exit": 0,
+    "training_wall_seconds": 3777.939,
+    "training_host_peak": "18 GiB",
+    "training_swap_peak": "128 KiB",
+    "scoring": "LIVE",
+    "scorer_pid": 1379481,
+    "quality": "NOT_COMPLETE"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/equal-cost-six-run-audit.json"
+  ],
+  "limitations": [
+    "Full training is not a quality acceptance; scorer must finish all375 windows and unchanged guards."
+  ],
+  "non_claims": [
+    "Six-run mechanics only; full development accuracy/scoring pending. No promotion or original goal completion."
+  ]
+}
