@@ -397,3 +397,29 @@ independent accuracy comparison and does not close the four-direction goal.
 All probe units terminal; GPU unused, free disk about4.0 GiB. Next candidate
 must retain the strong single-date signal that the unconstrained paired model
 lost, rather than repeating date/threshold sweeps on these four examples.
+
+## SPEC-109 anchored correction: preflight passed, full experiment pending
+
+New spec committed before implementation. Frozen C1-MM with separately
+encoded pre/post features, rank8 projections and zero-initialized correction
+head. Pair versus capacity-matched post-only adapter; bounded logit delta
+[-2,+4]. Base BN stays eval and all base parameters frozen. Scoring must anchor
+original C1-MM5 probabilities, with mean3 learned corrections; do not substitute
+the three-seed backbone mean for the deployed five-seed reference.
+
+Five CPU regressions passed on k8plus. Real512 fit-window GPU preflight passed
+both variants: exact initial FP32/BF16 logits, finite/nonzero adapter gradients,
+frozen backbone/BN, native adapter-only round trip. Exit0, 5.288 seconds,
+1.6 GiB host peak. 105,689 trainable parameters and 428,778 bytes per checkpoint;
+no ~498MB backbone copy. Smoke result and recipe copied as compact JSON only.
+Smoke receipt INSUFFICIENT_EVIDENCE for full SPEC-109, no accuracy promotion.
+
+Remaining work: implement full trainer, six-run queue and scorer under the
+frozen SPEC-109 recipe. Fit374+Russian309, all683 every epoch, repeated original
+Med weights,30epochs/batch8/AdamW1e-3/cosine/BF16, locked initializer mean/std,
+same batches/augmentations for pair/post seeds1/2/3. Preserve original bases.
+Use disk floor3GiB and <=512MiB new outputs: only adapter weights and packed
+binary predictions/counts, not duplicate backbones or full floating caches for
+all old development populations. Full training has NOT started. All own units
+terminal, GPU free. Existing populations are consumed development; eligibility
+cannot become independent confirmation or a claim of achieving the full goal.
