@@ -1,6 +1,6 @@
 # SPEC-101: L2A adaptation with complete original supervision replay
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-93, SPEC-95, SPEC-96, SPEC-97
 
@@ -61,3 +61,16 @@ removing samples, unmasking clouds, or claiming SPEC93/97 passed.
 - non_claims: mixedsource adaptation, not SPEC93's L2A-only eventcoverage proof;
   published satellite-label agreement, not fieldtruth; development Mediterranean
   checks, not independent Siberian/globalcompetitor ranking. Fullgoal persists.
+
+## Resolution
+
+Rejected afterall6full30epochruns andmatchedsource comparison119windows/116groups.
+ReplayIoU0.674091, HLScontinuation0.671949 (+0.002142 CI[−0.002164,0.007027]),
+initialC1-MM0.673324 (+0.000766 CI[−0.003273,0.004937]). Bothprimary delta>=.01
+andCIlower>0 fail; no thresholdchange, productnotpromoted. FLOGA gains.017521
+overcontinuation butonly.003593 tooriginal (inconclusive); EMSnearunchanged.
+All929originalfitrecords retained, minimum15fulloriginalHLS exposures/sample
+perseed, matchedorder/common masks in3pairs,14250actualL2Aviews/replayseed.
+This proves realdirectL2Aweightupdates/fullpoolreplay execution, notbeneficial
+accuracy orSPEC93/97 L2A-onlyeventcoverage. Fullsource/model/normalization
+lineage, confusions/errors/checkpoints andFAILreceipt retained.

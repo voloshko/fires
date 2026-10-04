@@ -1,0 +1,2834 @@
+{
+  "overall": {
+    "continued_hls": {
+      "samples": 119,
+      "groups": 116,
+      "candidate_iou": 0.6740907631496681,
+      "control_iou": 0.6719492159924008,
+      "delta": 0.0021415471572673317,
+      "ci95": [
+        -0.0021643804295998297,
+        0.007027274892653743
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "inconclusive"
+    },
+    "initial_c1mm": {
+      "samples": 119,
+      "groups": 116,
+      "candidate_iou": 0.6740907631496681,
+      "control_iou": 0.6733244835942834,
+      "delta": 0.0007662795553846635,
+      "ci95": [
+        -0.0032731067664819396,
+        0.0049371803998259
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "inconclusive"
+    }
+  },
+  "by_dataset": {
+    "ems": {
+      "continued_hls": {
+        "samples": 32,
+        "groups": 29,
+        "candidate_iou": 0.6670535645767784,
+        "control_iou": 0.6675754846166264,
+        "delta": -0.0005219200398479673,
+        "ci95": [
+          -0.005431985573248715,
+          0.003701247871109796
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      },
+      "initial_c1mm": {
+        "samples": 32,
+        "groups": 29,
+        "candidate_iou": 0.6670535645767784,
+        "control_iou": 0.6667627514057197,
+        "delta": 0.0002908131710587236,
+        "ci95": [
+          -0.004061123671377789,
+          0.004920606761342583
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      }
+    },
+    "floga": {
+      "continued_hls": {
+        "samples": 87,
+        "groups": 87,
+        "candidate_iou": 0.7132888355998965,
+        "control_iou": 0.695767847670917,
+        "delta": 0.017520987928979492,
+        "ci95": [
+          0.007303582590782734,
+          0.03631326952732422
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      },
+      "initial_c1mm": {
+        "samples": 87,
+        "groups": 87,
+        "candidate_iou": 0.7132888355998965,
+        "control_iou": 0.7096954242267371,
+        "delta": 0.003593411373159383,
+        "ci95": [
+          -0.009889975829587108,
+          0.01641289422794794
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      }
+    }
+  },
+  "accepted": false,
+  "spec_id": "SPEC-101",
+  "recipe_id": "ccb8acdcbc6bbe65dd1a18074c1d555b7a4fe1916e746c97b5920c76690c95d7",
+  "data_manifest": "6d2dc454f31ce930acf6514335994c3f3d7996ad1d73607c6912724e099d66cc",
+  "per_window": [
+    {
+      "sample_id": "ems:ems_EMSR667_AOI01_HLS.S30.T30TTK.2023176T110619.v2.0",
+      "group_id": "ems:EMSR667",
+      "dataset": "ems",
+      "valid_pixels": 262144,
+      "total_pixels": 262144,
+      "control": [
+        109752,
+        7355,
+        685
+      ],
+      "replay": [
+        109695,
+        7073,
+        742
+      ],
+      "initial": [
+        109792,
+        7129,
+        645
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR671_AOI01_HLS.S30.T28RBS.2023223T120331.v2.0",
+      "group_id": "ems:EMSR671",
+      "dataset": "ems",
+      "valid_pixels": 155118,
+      "total_pixels": 262144,
+      "control": [
+        19111,
+        1919,
+        5765
+      ],
+      "replay": [
+        17531,
+        1703,
+        7345
+      ],
+      "initial": [
+        20134,
+        1893,
+        4742
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR673_AOI01_HLS.S30.T34SGH.2023195T090601.v2.0",
+      "group_id": "ems:EMSR673",
+      "dataset": "ems",
+      "valid_pixels": 243294,
+      "total_pixels": 262144,
+      "control": [
+        3776,
+        613,
+        115559
+      ],
+      "replay": [
+        3439,
+        562,
+        115896
+      ],
+      "initial": [
+        2072,
+        243,
+        117263
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR675_AOI01_HLS.S30.T35SNV.2023209T084601.v2.0",
+      "group_id": "ems:EMSR675",
+      "dataset": "ems",
+      "valid_pixels": 212748,
+      "total_pixels": 262144,
+      "control": [
+        110010,
+        7006,
+        441
+      ],
+      "replay": [
+        109954,
+        6927,
+        497
+      ],
+      "initial": [
+        109970,
+        7070,
+        481
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR677_AOI01_HLS.S30.T34TDK.2023231T093041.v2.0",
+      "group_id": "ems:EMSR677",
+      "dataset": "ems",
+      "valid_pixels": 133328,
+      "total_pixels": 262144,
+      "control": [
+        22757,
+        1232,
+        1459
+      ],
+      "replay": [
+        22356,
+        953,
+        1860
+      ],
+      "initial": [
+        22550,
+        1227,
+        1666
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR681_AOI01_HLS.S30.T29TPE.2023219T112119.v2.0",
+      "group_id": "ems:EMSR681",
+      "dataset": "ems",
+      "valid_pixels": 236625,
+      "total_pixels": 262144,
+      "control": [
+        60317,
+        4299,
+        213
+      ],
+      "replay": [
+        60260,
+        4054,
+        270
+      ],
+      "initial": [
+        60264,
+        4125,
+        266
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR686_AOI01_HLS.S30.T35TMF.2023240T090559.v2.0",
+      "group_id": "ems:EMSR686",
+      "dataset": "ems",
+      "valid_pixels": 262144,
+      "total_pixels": 262144,
+      "control": [
+        203992,
+        3968,
+        23338
+      ],
+      "replay": [
+        204069,
+        3844,
+        23261
+      ],
+      "initial": [
+        204365,
+        3697,
+        22965
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR746_AOI01_HLS.S30.T35SKC.2024220T090551.v2.0",
+      "group_id": "ems:EMSR746",
+      "dataset": "ems",
+      "valid_pixels": 133577,
+      "total_pixels": 262144,
+      "control": [
+        23,
+        1449,
+        83438
+      ],
+      "replay": [
+        22,
+        1436,
+        83439
+      ],
+      "initial": [
+        22,
+        1443,
+        83439
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR760_AOI01_HLS.S30.T29TNF.2024274T112119.v2.0",
+      "group_id": "ems:EMSR760",
+      "dataset": "ems",
+      "valid_pixels": 262144,
+      "total_pixels": 262144,
+      "control": [
+        164591,
+        50724,
+        979
+      ],
+      "replay": [
+        164605,
+        49649,
+        965
+      ],
+      "initial": [
+        164405,
+        47870,
+        1165
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR760_AOI02_HLS.S30.T29TNF.2024274T112119.v2.0",
+      "group_id": "ems:EMSR760",
+      "dataset": "ems",
+      "valid_pixels": 262144,
+      "total_pixels": 262144,
+      "control": [
+        94862,
+        9424,
+        3176
+      ],
+      "replay": [
+        94265,
+        8487,
+        3773
+      ],
+      "initial": [
+        94671,
+        9108,
+        3367
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR760_AOI04_HLS.S30.T29TNG.2024274T112119.v2.0",
+      "group_id": "ems:EMSR760",
+      "dataset": "ems",
+      "valid_pixels": 261817,
+      "total_pixels": 262144,
+      "control": [
+        35091,
+        5544,
+        2444
+      ],
+      "replay": [
+        34918,
+        5250,
+        2617
+      ],
+      "initial": [
+        35111,
+        4978,
+        2424
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR806_AOI01_HLS.S30.T35SMC.2025183T090411.v2.0",
+      "group_id": "ems:EMSR806",
+      "dataset": "ems",
+      "valid_pixels": 202242,
+      "total_pixels": 262144,
+      "control": [
+        52355,
+        17156,
+        591
+      ],
+      "replay": [
+        52174,
+        16516,
+        772
+      ],
+      "initial": [
+        52383,
+        17552,
+        563
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR809_AOI01_HLS.S30.T35SLU.2025201T085621.v2.0",
+      "group_id": "ems:EMSR809",
+      "dataset": "ems",
+      "valid_pixels": 145738,
+      "total_pixels": 262144,
+      "control": [
+        5165,
+        2495,
+        123
+      ],
+      "replay": [
+        5151,
+        2463,
+        137
+      ],
+      "initial": [
+        5160,
+        2476,
+        128
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR812_AOI01_HLS.S30.T31TBF.2025214T105051.v2.0",
+      "group_id": "ems:EMSR812",
+      "dataset": "ems",
+      "valid_pixels": 191681,
+      "total_pixels": 262144,
+      "control": [
+        21369,
+        6550,
+        1264
+      ],
+      "replay": [
+        21223,
+        6356,
+        1410
+      ],
+      "initial": [
+        21403,
+        6747,
+        1230
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR821_AOI01_HLS.S30.T34SEG.2025209T092231.v2.0",
+      "group_id": "ems:EMSR821",
+      "dataset": "ems",
+      "valid_pixels": 185502,
+      "total_pixels": 262144,
+      "control": [
+        7163,
+        1163,
+        78
+      ],
+      "replay": [
+        7158,
+        1161,
+        83
+      ],
+      "initial": [
+        7157,
+        1154,
+        84
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR823_AOI01_HLS.S30.T35SKV.2025234T090611.v2.0",
+      "group_id": "ems:EMSR823",
+      "dataset": "ems",
+      "valid_pixels": 139564,
+      "total_pixels": 262144,
+      "control": [
+        7803,
+        815,
+        68
+      ],
+      "replay": [
+        7794,
+        793,
+        77
+      ],
+      "initial": [
+        7790,
+        795,
+        81
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR824_AOI01_HLS.S30.T29TNF.2025208T112119.v2.0",
+      "group_id": "ems:EMSR824",
+      "dataset": "ems",
+      "valid_pixels": 257611,
+      "total_pixels": 262144,
+      "control": [
+        1136,
+        353,
+        75944
+      ],
+      "replay": [
+        685,
+        272,
+        76395
+      ],
+      "initial": [
+        158,
+        128,
+        76922
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR824_AOI02_HLS.S30.T29TNG.2025221T113319.v2.0",
+      "group_id": "ems:EMSR824",
+      "dataset": "ems",
+      "valid_pixels": 194295,
+      "total_pixels": 262144,
+      "control": [
+        74929,
+        5558,
+        1014
+      ],
+      "replay": [
+        74988,
+        5767,
+        955
+      ],
+      "initial": [
+        74957,
+        5633,
+        986
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR825_AOI01_HLS.S30.T34TFL.2025207T092051.v2.0",
+      "group_id": "ems:EMSR825",
+      "dataset": "ems",
+      "valid_pixels": 231311,
+      "total_pixels": 262144,
+      "control": [
+        3603,
+        2001,
+        5648
+      ],
+      "replay": [
+        5893,
+        5922,
+        3358
+      ],
+      "initial": [
+        1794,
+        1019,
+        7457
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR828_AOI01_HLS.S30.T35SKB.2025226T091031.v2.0",
+      "group_id": "ems:EMSR828",
+      "dataset": "ems",
+      "valid_pixels": 146065,
+      "total_pixels": 262144,
+      "control": [
+        17401,
+        9524,
+        182
+      ],
+      "replay": [
+        17394,
+        9603,
+        189
+      ],
+      "initial": [
+        17403,
+        9825,
+        180
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR835_AOI01_HLS.S30.T34SDJ.2025222T093051.v2.0",
+      "group_id": "ems:EMSR835",
+      "dataset": "ems",
+      "valid_pixels": 262125,
+      "total_pixels": 262144,
+      "control": [
+        616,
+        880,
+        37139
+      ],
+      "replay": [
+        4297,
+        2360,
+        33458
+      ],
+      "initial": [
+        116,
+        32,
+        37639
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR836_AOI01_HLS.S30.T34TCN.2025245T094041.v2.0",
+      "group_id": "ems:EMSR836",
+      "dataset": "ems",
+      "valid_pixels": 227147,
+      "total_pixels": 262144,
+      "control": [
+        37320,
+        9359,
+        30861
+      ],
+      "replay": [
+        30495,
+        5269,
+        37686
+      ],
+      "initial": [
+        34888,
+        7556,
+        33293
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR885_AOI01_HLS.S30.T31TBG.2026174T104619.v2.0",
+      "group_id": "ems:EMSR885",
+      "dataset": "ems",
+      "valid_pixels": 201597,
+      "total_pixels": 262144,
+      "control": [
+        1547,
+        714,
+        30396
+      ],
+      "replay": [
+        5134,
+        2902,
+        26809
+      ],
+      "initial": [
+        2876,
+        1946,
+        29067
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR889_AOI01_HLS.S30.T31TDH.2026188T103701.v2.0",
+      "group_id": "ems:EMSR889",
+      "dataset": "ems",
+      "valid_pixels": 236329,
+      "total_pixels": 262144,
+      "control": [
+        35878,
+        12426,
+        210
+      ],
+      "replay": [
+        35852,
+        11927,
+        236
+      ],
+      "initial": [
+        35861,
+        12694,
+        227
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR896_AOI01_HLS.S30.T30TXM.2026204T104619.v2.0",
+      "group_id": "ems:EMSR896",
+      "dataset": "ems",
+      "valid_pixels": 262144,
+      "total_pixels": 262144,
+      "control": [
+        126823,
+        29248,
+        680
+      ],
+      "replay": [
+        126733,
+        29053,
+        770
+      ],
+      "initial": [
+        126796,
+        29440,
+        707
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR898_AOI01_HLS.S30.T30TVL.2026202T105621.v2.0",
+      "group_id": "ems:EMSR898",
+      "dataset": "ems",
+      "valid_pixels": 256856,
+      "total_pixels": 262144,
+      "control": [
+        136948,
+        30647,
+        3389
+      ],
+      "replay": [
+        136355,
+        29555,
+        3982
+      ],
+      "initial": [
+        136694,
+        30146,
+        3643
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR902_AOI01_HLS.S30.T30TXQ.2026202T105621.v2.0",
+      "group_id": "ems:EMSR902",
+      "dataset": "ems",
+      "valid_pixels": 131884,
+      "total_pixels": 262144,
+      "control": [
+        2,
+        341,
+        29839
+      ],
+      "replay": [
+        0,
+        297,
+        29841
+      ],
+      "initial": [
+        0,
+        245,
+        29841
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR905_AOI01_HLS.S30.T31TBE.2026229T104621.v2.0",
+      "group_id": "ems:EMSR905",
+      "dataset": "ems",
+      "valid_pixels": 222790,
+      "total_pixels": 262144,
+      "control": [
+        80416,
+        16548,
+        1196
+      ],
+      "replay": [
+        80486,
+        17576,
+        1126
+      ],
+      "initial": [
+        80450,
+        17360,
+        1162
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR909_AOI01_HLS.S30.T34SFH.2026209T090601.v2.0",
+      "group_id": "ems:EMSR909",
+      "dataset": "ems",
+      "valid_pixels": 187826,
+      "total_pixels": 262144,
+      "control": [
+        0,
+        2770,
+        89275
+      ],
+      "replay": [
+        0,
+        2532,
+        89275
+      ],
+      "initial": [
+        0,
+        2840,
+        89275
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR913_AOI01_HLS.S30.T29SQB.2026227T110711.v2.0",
+      "group_id": "ems:EMSR913",
+      "dataset": "ems",
+      "valid_pixels": 262144,
+      "total_pixels": 262144,
+      "control": [
+        164213,
+        42181,
+        3459
+      ],
+      "replay": [
+        163972,
+        42070,
+        3700
+      ],
+      "initial": [
+        163933,
+        41731,
+        3739
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR921_AOI01_HLS.S30.T30TXN.2026231T104651.v2.0",
+      "group_id": "ems:EMSR921",
+      "dataset": "ems",
+      "valid_pixels": 262144,
+      "total_pixels": 262144,
+      "control": [
+        137127,
+        29937,
+        773
+      ],
+      "replay": [
+        137084,
+        30552,
+        816
+      ],
+      "initial": [
+        137080,
+        30277,
+        820
+      ]
+    },
+    {
+      "sample_id": "ems:ems_EMSR924_AOI01_HLS.S30.T33TUM.2026259T100701.v2.0",
+      "group_id": "ems:EMSR924",
+      "dataset": "ems",
+      "valid_pixels": 186715,
+      "total_pixels": 262144,
+      "control": [
+        4796,
+        1651,
+        1415
+      ],
+      "replay": [
+        4493,
+        1383,
+        1718
+      ],
+      "initial": [
+        4575,
+        1558,
+        1636
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_729978_HLS.S30.T35TMF.2020061T090901.v2.0",
+      "group_id": "floga:729978",
+      "dataset": "floga",
+      "valid_pixels": 262132,
+      "total_pixels": 262144,
+      "control": [
+        283,
+        2616,
+        23
+      ],
+      "replay": [
+        261,
+        1992,
+        45
+      ],
+      "initial": [
+        294,
+        3591,
+        12
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_742837_HLS.S30.T34SEG.2020129T092029.v2.0",
+      "group_id": "floga:742837",
+      "dataset": "floga",
+      "valid_pixels": 260693,
+      "total_pixels": 262144,
+      "control": [
+        399,
+        105,
+        10
+      ],
+      "replay": [
+        398,
+        102,
+        11
+      ],
+      "initial": [
+        399,
+        104,
+        10
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_758391_HLS.S30.T34SGH.2020181T090601.v2.0",
+      "group_id": "floga:758391",
+      "dataset": "floga",
+      "valid_pixels": 254665,
+      "total_pixels": 262144,
+      "control": [
+        566,
+        804,
+        3
+      ],
+      "replay": [
+        565,
+        754,
+        4
+      ],
+      "initial": [
+        565,
+        735,
+        4
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_758845_HLS.S30.T35TKE.2020186T090559.v2.0",
+      "group_id": "floga:758845",
+      "dataset": "floga",
+      "valid_pixels": 262073,
+      "total_pixels": 262144,
+      "control": [
+        451,
+        138,
+        0
+      ],
+      "replay": [
+        451,
+        129,
+        0
+      ],
+      "initial": [
+        451,
+        127,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_760637_HLS.S30.T34SFH.2020186T090559.v2.0",
+      "group_id": "floga:760637",
+      "dataset": "floga",
+      "valid_pixels": 261964,
+      "total_pixels": 262144,
+      "control": [
+        3294,
+        615,
+        22
+      ],
+      "replay": [
+        3292,
+        597,
+        24
+      ],
+      "initial": [
+        3290,
+        588,
+        26
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_766850_HLS.S30.T34SFG.2020211T090601.v2.0",
+      "group_id": "floga:766850",
+      "dataset": "floga",
+      "valid_pixels": 261521,
+      "total_pixels": 262144,
+      "control": [
+        32497,
+        3166,
+        1331
+      ],
+      "replay": [
+        32349,
+        2792,
+        1479
+      ],
+      "initial": [
+        32669,
+        3409,
+        1159
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_770245_HLS.S30.T35SMD.2020213T085559.v2.0",
+      "group_id": "floga:770245",
+      "dataset": "floga",
+      "valid_pixels": 261333,
+      "total_pixels": 262144,
+      "control": [
+        303,
+        2314,
+        0
+      ],
+      "replay": [
+        303,
+        1722,
+        0
+      ],
+      "initial": [
+        303,
+        2096,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_771135_HLS.S30.T34SEG.2020214T092031.v2.0",
+      "group_id": "floga:771135",
+      "dataset": "floga",
+      "valid_pixels": 262135,
+      "total_pixels": 262144,
+      "control": [
+        3087,
+        789,
+        36
+      ],
+      "replay": [
+        3074,
+        738,
+        49
+      ],
+      "initial": [
+        3081,
+        783,
+        42
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_771206_HLS.S30.T34SGG.2020211T090601.v2.0",
+      "group_id": "floga:771206",
+      "dataset": "floga",
+      "valid_pixels": 261452,
+      "total_pixels": 262144,
+      "control": [
+        623,
+        183,
+        1
+      ],
+      "replay": [
+        622,
+        149,
+        2
+      ],
+      "initial": [
+        622,
+        157,
+        2
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_771785_HLS.S30.T34SEG.2020214T092031.v2.0",
+      "group_id": "floga:771785",
+      "dataset": "floga",
+      "valid_pixels": 260052,
+      "total_pixels": 262144,
+      "control": [
+        675,
+        140,
+        13
+      ],
+      "replay": [
+        672,
+        133,
+        16
+      ],
+      "initial": [
+        671,
+        134,
+        17
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_772120_HLS.S30.T35SLV.2020213T085559.v2.0",
+      "group_id": "floga:772120",
+      "dataset": "floga",
+      "valid_pixels": 261709,
+      "total_pixels": 262144,
+      "control": [
+        561,
+        116,
+        1
+      ],
+      "replay": [
+        560,
+        123,
+        2
+      ],
+      "initial": [
+        560,
+        109,
+        2
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_773013_HLS.S30.T34SGH.2020211T090601.v2.0",
+      "group_id": "floga:773013",
+      "dataset": "floga",
+      "valid_pixels": 251045,
+      "total_pixels": 262144,
+      "control": [
+        2,
+        617,
+        397
+      ],
+      "replay": [
+        164,
+        527,
+        235
+      ],
+      "initial": [
+        0,
+        468,
+        399
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_773502_HLS.S30.T34SFH.2020224T092031.v2.0",
+      "group_id": "floga:773502",
+      "dataset": "floga",
+      "valid_pixels": 261966,
+      "total_pixels": 262144,
+      "control": [
+        331,
+        63,
+        11
+      ],
+      "replay": [
+        331,
+        65,
+        11
+      ],
+      "initial": [
+        330,
+        65,
+        12
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_774109_HLS.S30.T34TDK.2020217T093041.v2.0",
+      "group_id": "floga:774109",
+      "dataset": "floga",
+      "valid_pixels": 261904,
+      "total_pixels": 262144,
+      "control": [
+        5464,
+        1355,
+        51
+      ],
+      "replay": [
+        5431,
+        1310,
+        84
+      ],
+      "initial": [
+        5457,
+        1335,
+        58
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_774221_HLS.S30.T34SFG.2020216T090559.v2.0",
+      "group_id": "floga:774221",
+      "dataset": "floga",
+      "valid_pixels": 261578,
+      "total_pixels": 262144,
+      "control": [
+        729,
+        106,
+        2
+      ],
+      "replay": [
+        729,
+        98,
+        2
+      ],
+      "initial": [
+        729,
+        100,
+        2
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_775468_HLS.S30.T34SFH.2020239T092029.v2.0",
+      "group_id": "floga:775468",
+      "dataset": "floga",
+      "valid_pixels": 261724,
+      "total_pixels": 262144,
+      "control": [
+        474,
+        105,
+        2
+      ],
+      "replay": [
+        473,
+        109,
+        3
+      ],
+      "initial": [
+        473,
+        110,
+        3
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_777334_HLS.S30.T35SMC.2020243T085559.v2.0",
+      "group_id": "floga:777334",
+      "dataset": "floga",
+      "valid_pixels": 262005,
+      "total_pixels": 262144,
+      "control": [
+        304,
+        77,
+        0
+      ],
+      "replay": [
+        304,
+        73,
+        0
+      ],
+      "initial": [
+        304,
+        73,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_777338_HLS.S30.T34SGE.2020236T090559.v2.0",
+      "group_id": "floga:777338",
+      "dataset": "floga",
+      "valid_pixels": 261219,
+      "total_pixels": 262144,
+      "control": [
+        3437,
+        903,
+        23
+      ],
+      "replay": [
+        3436,
+        950,
+        24
+      ],
+      "initial": [
+        3435,
+        886,
+        25
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_777493_HLS.S30.T35SMB.2020228T085601.v2.0",
+      "group_id": "floga:777493",
+      "dataset": "floga",
+      "valid_pixels": 261661,
+      "total_pixels": 262144,
+      "control": [
+        303,
+        62,
+        3
+      ],
+      "replay": [
+        301,
+        56,
+        5
+      ],
+      "initial": [
+        303,
+        59,
+        3
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_777825_HLS.S30.T35SLB.2020246T090559.v2.0",
+      "group_id": "floga:777825",
+      "dataset": "floga",
+      "valid_pixels": 261611,
+      "total_pixels": 262144,
+      "control": [
+        1252,
+        242,
+        2
+      ],
+      "replay": [
+        1253,
+        239,
+        1
+      ],
+      "initial": [
+        1251,
+        228,
+        3
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_778632_HLS.S30.T35SMD.2020236T090559.v2.0",
+      "group_id": "floga:778632",
+      "dataset": "floga",
+      "valid_pixels": 262039,
+      "total_pixels": 262144,
+      "control": [
+        688,
+        230,
+        5
+      ],
+      "replay": [
+        687,
+        214,
+        6
+      ],
+      "initial": [
+        687,
+        218,
+        6
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_779965_HLS.S30.T34SFF.2020244T092031.v2.0",
+      "group_id": "floga:779965",
+      "dataset": "floga",
+      "valid_pixels": 262015,
+      "total_pixels": 262144,
+      "control": [
+        18786,
+        2128,
+        182
+      ],
+      "replay": [
+        18771,
+        2152,
+        197
+      ],
+      "initial": [
+        18777,
+        2107,
+        191
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_780038_HLS.S30.T34SFG.2020246T090559.v2.0",
+      "group_id": "floga:780038",
+      "dataset": "floga",
+      "valid_pixels": 262117,
+      "total_pixels": 262144,
+      "control": [
+        1024,
+        71,
+        28
+      ],
+      "replay": [
+        1017,
+        66,
+        35
+      ],
+      "initial": [
+        1015,
+        70,
+        37
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_782085_HLS.S30.T34SFG.2020251T090601.v2.0",
+      "group_id": "floga:782085",
+      "dataset": "floga",
+      "valid_pixels": 261520,
+      "total_pixels": 262144,
+      "control": [
+        1259,
+        191,
+        109
+      ],
+      "replay": [
+        1251,
+        182,
+        117
+      ],
+      "initial": [
+        1263,
+        197,
+        105
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_782088_HLS.S30.T35TMF.2020241T090601.v2.0",
+      "group_id": "floga:782088",
+      "dataset": "floga",
+      "valid_pixels": 259879,
+      "total_pixels": 262144,
+      "control": [
+        696,
+        127,
+        1697
+      ],
+      "replay": [
+        2105,
+        1699,
+        288
+      ],
+      "initial": [
+        926,
+        671,
+        1467
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_782102_HLS.S30.T35TMF.2020246T090559.v2.0",
+      "group_id": "floga:782102",
+      "dataset": "floga",
+      "valid_pixels": 258157,
+      "total_pixels": 262144,
+      "control": [
+        1324,
+        303,
+        16
+      ],
+      "replay": [
+        1322,
+        303,
+        18
+      ],
+      "initial": [
+        1325,
+        308,
+        15
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_782801_HLS.S30.T34SFJ.2020249T092029.v2.0",
+      "group_id": "floga:782801",
+      "dataset": "floga",
+      "valid_pixels": 262122,
+      "total_pixels": 262144,
+      "control": [
+        544,
+        195,
+        5
+      ],
+      "replay": [
+        544,
+        187,
+        5
+      ],
+      "initial": [
+        543,
+        183,
+        6
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_783384_HLS.S30.T34SFG.2020254T092031.v2.0",
+      "group_id": "floga:783384",
+      "dataset": "floga",
+      "valid_pixels": 262097,
+      "total_pixels": 262144,
+      "control": [
+        875,
+        63,
+        18
+      ],
+      "replay": [
+        876,
+        63,
+        17
+      ],
+      "initial": [
+        873,
+        61,
+        20
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_783502_HLS.S30.T34SDH.2020257T093041.v2.0",
+      "group_id": "floga:783502",
+      "dataset": "floga",
+      "valid_pixels": 260779,
+      "total_pixels": 262144,
+      "control": [
+        275,
+        80,
+        9
+      ],
+      "replay": [
+        271,
+        73,
+        13
+      ],
+      "initial": [
+        273,
+        78,
+        11
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_783508_HLS.S30.T34SFF.2020259T092029.v2.0",
+      "group_id": "floga:783508",
+      "dataset": "floga",
+      "valid_pixels": 262075,
+      "total_pixels": 262144,
+      "control": [
+        577,
+        210,
+        0
+      ],
+      "replay": [
+        577,
+        189,
+        0
+      ],
+      "initial": [
+        577,
+        197,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_786097_HLS.S30.T35TMF.2020261T090631.v2.0",
+      "group_id": "floga:786097",
+      "dataset": "floga",
+      "valid_pixels": 262020,
+      "total_pixels": 262144,
+      "control": [
+        1965,
+        495,
+        23
+      ],
+      "replay": [
+        1962,
+        509,
+        26
+      ],
+      "initial": [
+        1965,
+        530,
+        23
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_786466_HLS.S30.T34SEH.2020264T092031.v2.0",
+      "group_id": "floga:786466",
+      "dataset": "floga",
+      "valid_pixels": 255834,
+      "total_pixels": 262144,
+      "control": [
+        884,
+        814,
+        9
+      ],
+      "replay": [
+        879,
+        725,
+        14
+      ],
+      "initial": [
+        880,
+        815,
+        13
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_786481_HLS.S30.T34SFG.2020269T092029.v2.0",
+      "group_id": "floga:786481",
+      "dataset": "floga",
+      "valid_pixels": 252556,
+      "total_pixels": 262144,
+      "control": [
+        399,
+        685,
+        0
+      ],
+      "replay": [
+        399,
+        510,
+        0
+      ],
+      "initial": [
+        399,
+        584,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_786656_HLS.S30.T34SDH.2020259T092029.v2.0",
+      "group_id": "floga:786656",
+      "dataset": "floga",
+      "valid_pixels": 261030,
+      "total_pixels": 262144,
+      "control": [
+        327,
+        73,
+        5
+      ],
+      "replay": [
+        324,
+        71,
+        8
+      ],
+      "initial": [
+        327,
+        72,
+        5
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_786775_HLS.S30.T34SDJ.2020259T092029.v2.0",
+      "group_id": "floga:786775",
+      "dataset": "floga",
+      "valid_pixels": 261499,
+      "total_pixels": 262144,
+      "control": [
+        261,
+        751,
+        1121
+      ],
+      "replay": [
+        0,
+        0,
+        1382
+      ],
+      "initial": [
+        89,
+        413,
+        1293
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_787231_HLS.S30.T34SEH.2020269T092029.v2.0",
+      "group_id": "floga:787231",
+      "dataset": "floga",
+      "valid_pixels": 258387,
+      "total_pixels": 262144,
+      "control": [
+        759,
+        385,
+        8
+      ],
+      "replay": [
+        758,
+        383,
+        9
+      ],
+      "initial": [
+        760,
+        391,
+        7
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_787271_HLS.S30.T34SFF.2020259T092029.v2.0",
+      "group_id": "floga:787271",
+      "dataset": "floga",
+      "valid_pixels": 261064,
+      "total_pixels": 262144,
+      "control": [
+        466,
+        3415,
+        63
+      ],
+      "replay": [
+        484,
+        3897,
+        45
+      ],
+      "initial": [
+        394,
+        1791,
+        135
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_790723_HLS.S30.T35SLB.2020278T085831.v2.0",
+      "group_id": "floga:790723",
+      "dataset": "floga",
+      "valid_pixels": 261140,
+      "total_pixels": 262144,
+      "control": [
+        945,
+        405,
+        8
+      ],
+      "replay": [
+        944,
+        398,
+        9
+      ],
+      "initial": [
+        945,
+        405,
+        8
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_791065_HLS.S30.T35SLB.2020271T090731.v2.0",
+      "group_id": "floga:791065",
+      "dataset": "floga",
+      "valid_pixels": 257464,
+      "total_pixels": 262144,
+      "control": [
+        559,
+        4610,
+        204
+      ],
+      "replay": [
+        537,
+        3405,
+        226
+      ],
+      "initial": [
+        550,
+        4038,
+        213
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_792406_HLS.S30.T35TMF.2020278T085831.v2.0",
+      "group_id": "floga:792406",
+      "dataset": "floga",
+      "valid_pixels": 262120,
+      "total_pixels": 262144,
+      "control": [
+        5806,
+        504,
+        297
+      ],
+      "replay": [
+        5809,
+        508,
+        294
+      ],
+      "initial": [
+        5832,
+        515,
+        271
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_793098_HLS.S30.T34SEH.2020294T092031.v2.0",
+      "group_id": "floga:793098",
+      "dataset": "floga",
+      "valid_pixels": 254296,
+      "total_pixels": 262144,
+      "control": [
+        899,
+        1308,
+        5
+      ],
+      "replay": [
+        895,
+        745,
+        9
+      ],
+      "initial": [
+        894,
+        931,
+        10
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_793417_HLS.S30.T34SDG.2020297T093051.v2.0",
+      "group_id": "floga:793417",
+      "dataset": "floga",
+      "valid_pixels": 260982,
+      "total_pixels": 262144,
+      "control": [
+        1818,
+        252,
+        9
+      ],
+      "replay": [
+        1816,
+        264,
+        11
+      ],
+      "initial": [
+        1816,
+        251,
+        11
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_793905_HLS.S30.T34SEF.2020284T092031.v2.0",
+      "group_id": "floga:793905",
+      "dataset": "floga",
+      "valid_pixels": 253737,
+      "total_pixels": 262144,
+      "control": [
+        280,
+        82,
+        2
+      ],
+      "replay": [
+        280,
+        79,
+        2
+      ],
+      "initial": [
+        280,
+        79,
+        2
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_794018_HLS.S30.T35SMD.2020298T090041.v2.0",
+      "group_id": "floga:794018",
+      "dataset": "floga",
+      "valid_pixels": 261613,
+      "total_pixels": 262144,
+      "control": [
+        693,
+        1147,
+        6
+      ],
+      "replay": [
+        692,
+        907,
+        7
+      ],
+      "initial": [
+        693,
+        915,
+        6
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_804947_HLS.S30.T34TEK.2020332T093339.v2.0",
+      "group_id": "floga:804947",
+      "dataset": "floga",
+      "valid_pixels": 261637,
+      "total_pixels": 262144,
+      "control": [
+        1805,
+        8036,
+        0
+      ],
+      "replay": [
+        1800,
+        7975,
+        5
+      ],
+      "initial": [
+        1800,
+        5756,
+        5
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_807048_HLS.S30.T34TGL.2021005T091351.v2.0",
+      "group_id": "floga:807048",
+      "dataset": "floga",
+      "valid_pixels": 238728,
+      "total_pixels": 262144,
+      "control": [
+        1897,
+        5703,
+        3877
+      ],
+      "replay": [
+        1782,
+        5169,
+        3992
+      ],
+      "initial": [
+        1827,
+        5451,
+        3947
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2020_809191_HLS.S30.T34SGH.2021005T091351.v2.0",
+      "group_id": "floga:809191",
+      "dataset": "floga",
+      "valid_pixels": 257422,
+      "total_pixels": 262144,
+      "control": [
+        460,
+        383,
+        0
+      ],
+      "replay": [
+        460,
+        422,
+        0
+      ],
+      "initial": [
+        460,
+        342,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_833175_HLS.S30.T34TEK.2021063T092029.v2.0",
+      "group_id": "floga:833175",
+      "dataset": "floga",
+      "valid_pixels": 261379,
+      "total_pixels": 262144,
+      "control": [
+        331,
+        303,
+        25
+      ],
+      "replay": [
+        330,
+        164,
+        26
+      ],
+      "initial": [
+        331,
+        195,
+        25
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_842753_HLS.S30.T35SKB.2021110T090549.v2.0",
+      "group_id": "floga:842753",
+      "dataset": "floga",
+      "valid_pixels": 245525,
+      "total_pixels": 262144,
+      "control": [
+        7,
+        879,
+        2594
+      ],
+      "replay": [
+        85,
+        1161,
+        2516
+      ],
+      "initial": [
+        0,
+        621,
+        2601
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_844986_HLS.S30.T34TEL.2021126T093029.v2.0",
+      "group_id": "floga:844986",
+      "dataset": "floga",
+      "valid_pixels": 261461,
+      "total_pixels": 262144,
+      "control": [
+        584,
+        1702,
+        0
+      ],
+      "replay": [
+        584,
+        1502,
+        0
+      ],
+      "initial": [
+        584,
+        1592,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_854440_HLS.S30.T34SFH.2021145T090601.v2.0",
+      "group_id": "floga:854440",
+      "dataset": "floga",
+      "valid_pixels": 259533,
+      "total_pixels": 262144,
+      "control": [
+        53348,
+        7464,
+        3320
+      ],
+      "replay": [
+        53141,
+        6848,
+        3527
+      ],
+      "initial": [
+        53286,
+        7587,
+        3382
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_854571_HLS.S30.T34SFH.2021145T090601.v2.0",
+      "group_id": "floga:854571",
+      "dataset": "floga",
+      "valid_pixels": 261579,
+      "total_pixels": 262144,
+      "control": [
+        1236,
+        276,
+        17
+      ],
+      "replay": [
+        1236,
+        237,
+        17
+      ],
+      "initial": [
+        1238,
+        330,
+        15
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_855779_HLS.S30.T35SKB.2021155T090601.v2.0",
+      "group_id": "floga:855779",
+      "dataset": "floga",
+      "valid_pixels": 243538,
+      "total_pixels": 262144,
+      "control": [
+        1999,
+        220,
+        25
+      ],
+      "replay": [
+        1995,
+        207,
+        29
+      ],
+      "initial": [
+        1991,
+        205,
+        33
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_864865_HLS.S30.T34TFL.2021178T092031.v2.0",
+      "group_id": "floga:864865",
+      "dataset": "floga",
+      "valid_pixels": 258635,
+      "total_pixels": 262144,
+      "control": [
+        814,
+        362,
+        1
+      ],
+      "replay": [
+        814,
+        377,
+        1
+      ],
+      "initial": [
+        814,
+        349,
+        1
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_865564_HLS.S30.T34TFL.2021193T092029.v2.0",
+      "group_id": "floga:865564",
+      "dataset": "floga",
+      "valid_pixels": 261067,
+      "total_pixels": 262144,
+      "control": [
+        1472,
+        470,
+        0
+      ],
+      "replay": [
+        1472,
+        363,
+        0
+      ],
+      "initial": [
+        1472,
+        487,
+        0
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_867203_HLS.S30.T34SFJ.2021193T092029.v2.0",
+      "group_id": "floga:867203",
+      "dataset": "floga",
+      "valid_pixels": 261991,
+      "total_pixels": 262144,
+      "control": [
+        12187,
+        1327,
+        38
+      ],
+      "replay": [
+        12178,
+        1307,
+        47
+      ],
+      "initial": [
+        12180,
+        1357,
+        45
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_867256_HLS.S30.T34TFL.2021193T092029.v2.0",
+      "group_id": "floga:867256",
+      "dataset": "floga",
+      "valid_pixels": 261798,
+      "total_pixels": 262144,
+      "control": [
+        6685,
+        1009,
+        33
+      ],
+      "replay": [
+        6681,
+        948,
+        37
+      ],
+      "initial": [
+        6683,
+        979,
+        35
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_867610_HLS.S30.T34SDH.2021183T092029.v2.0",
+      "group_id": "floga:867610",
+      "dataset": "floga",
+      "valid_pixels": 258939,
+      "total_pixels": 262144,
+      "control": [
+        4,
+        1,
+        6802
+      ],
+      "replay": [
+        0,
+        0,
+        6806
+      ],
+      "initial": [
+        0,
+        0,
+        6806
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_867703_HLS.S30.T34TFL.2021203T092029.v2.0",
+      "group_id": "floga:867703",
+      "dataset": "floga",
+      "valid_pixels": 261978,
+      "total_pixels": 262144,
+      "control": [
+        375,
+        283,
+        3
+      ],
+      "replay": [
+        374,
+        229,
+        4
+      ],
+      "initial": [
+        376,
+        304,
+        2
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_868916_HLS.S30.T35SKV.2021187T085559.v2.0",
+      "group_id": "floga:868916",
+      "dataset": "floga",
+      "valid_pixels": 261885,
+      "total_pixels": 262144,
+      "control": [
+        0,
+        8478,
+        1973
+      ],
+      "replay": [
+        0,
+        7297,
+        1973
+      ],
+      "initial": [
+        0,
+        8400,
+        1973
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_869091_HLS.S30.T34SEJ.2021193T092029.v2.0",
+      "group_id": "floga:869091",
+      "dataset": "floga",
+      "valid_pixels": 262026,
+      "total_pixels": 262144,
+      "control": [
+        1437,
+        248,
+        251
+      ],
+      "replay": [
+        1178,
+        78,
+        510
+      ],
+      "initial": [
+        1255,
+        139,
+        433
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_869687_HLS.S30.T34SGH.2021210T090559.v2.0",
+      "group_id": "floga:869687",
+      "dataset": "floga",
+      "valid_pixels": 253353,
+      "total_pixels": 262144,
+      "control": [
+        1026,
+        721,
+        48
+      ],
+      "replay": [
+        1017,
+        589,
+        57
+      ],
+      "initial": [
+        1026,
+        701,
+        48
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_871351_HLS.S30.T35SMB.2021217T085559.v2.0",
+      "group_id": "floga:871351",
+      "dataset": "floga",
+      "valid_pixels": 261626,
+      "total_pixels": 262144,
+      "control": [
+        4084,
+        1470,
+        24
+      ],
+      "replay": [
+        4080,
+        1409,
+        28
+      ],
+      "initial": [
+        4076,
+        1323,
+        32
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_873612_HLS.S30.T35SLU.2021222T085601.v2.0",
+      "group_id": "floga:873612",
+      "dataset": "floga",
+      "valid_pixels": 249527,
+      "total_pixels": 262144,
+      "control": [
+        851,
+        212,
+        5
+      ],
+      "replay": [
+        849,
+        201,
+        7
+      ],
+      "initial": [
+        852,
+        211,
+        4
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_873797_HLS.S30.T34SFH.2021220T090559.v2.0",
+      "group_id": "floga:873797",
+      "dataset": "floga",
+      "valid_pixels": 261219,
+      "total_pixels": 262144,
+      "control": [
+        2311,
+        4974,
+        59
+      ],
+      "replay": [
+        2290,
+        1238,
+        80
+      ],
+      "initial": [
+        2300,
+        1434,
+        70
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_874304_HLS.S30.T34SFG.2021213T092029.v2.0",
+      "group_id": "floga:874304",
+      "dataset": "floga",
+      "valid_pixels": 261952,
+      "total_pixels": 262144,
+      "control": [
+        4159,
+        486,
+        18
+      ],
+      "replay": [
+        4156,
+        473,
+        21
+      ],
+      "initial": [
+        4155,
+        454,
+        22
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_874400_HLS.S30.T35SKC.2021210T090559.v2.0",
+      "group_id": "floga:874400",
+      "dataset": "floga",
+      "valid_pixels": 260224,
+      "total_pixels": 262144,
+      "control": [
+        684,
+        195,
+        1
+      ],
+      "replay": [
+        684,
+        169,
+        1
+      ],
+      "initial": [
+        684,
+        186,
+        1
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_874623_HLS.S30.T35SNA.2021224T084559.v2.0",
+      "group_id": "floga:874623",
+      "dataset": "floga",
+      "valid_pixels": 261394,
+      "total_pixels": 262144,
+      "control": [
+        10326,
+        2252,
+        483
+      ],
+      "replay": [
+        10259,
+        2198,
+        550
+      ],
+      "initial": [
+        10337,
+        2264,
+        472
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_874641_HLS.S30.T34SEH.2021223T092029.v2.0",
+      "group_id": "floga:874641",
+      "dataset": "floga",
+      "valid_pixels": 262052,
+      "total_pixels": 262144,
+      "control": [
+        2890,
+        1757,
+        99
+      ],
+      "replay": [
+        2886,
+        1704,
+        103
+      ],
+      "initial": [
+        2876,
+        1774,
+        113
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_874904_HLS.S30.T35SKC.2021210T090559.v2.0",
+      "group_id": "floga:874904",
+      "dataset": "floga",
+      "valid_pixels": 215492,
+      "total_pixels": 262144,
+      "control": [
+        383,
+        311,
+        3
+      ],
+      "replay": [
+        382,
+        292,
+        4
+      ],
+      "initial": [
+        383,
+        319,
+        3
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_875222_HLS.S30.T34SEG.2021213T092029.v2.0",
+      "group_id": "floga:875222",
+      "dataset": "floga",
+      "valid_pixels": 262135,
+      "total_pixels": 262144,
+      "control": [
+        2645,
+        590,
+        14
+      ],
+      "replay": [
+        2643,
+        544,
+        16
+      ],
+      "initial": [
+        2645,
+        685,
+        14
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_876936_HLS.S30.T35TMF.2021220T090559.v2.0",
+      "group_id": "floga:876936",
+      "dataset": "floga",
+      "valid_pixels": 260948,
+      "total_pixels": 262144,
+      "control": [
+        692,
+        241,
+        10
+      ],
+      "replay": [
+        691,
+        233,
+        11
+      ],
+      "initial": [
+        692,
+        247,
+        10
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_877372_HLS.S30.T34TEK.2021228T092031.v2.0",
+      "group_id": "floga:877372",
+      "dataset": "floga",
+      "valid_pixels": 250598,
+      "total_pixels": 262144,
+      "control": [
+        429,
+        83,
+        4
+      ],
+      "replay": [
+        429,
+        79,
+        4
+      ],
+      "initial": [
+        429,
+        83,
+        4
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_877500_HLS.S30.T34SGH.2021230T090559.v2.0",
+      "group_id": "floga:877500",
+      "dataset": "floga",
+      "valid_pixels": 261223,
+      "total_pixels": 262144,
+      "control": [
+        327,
+        80,
+        8
+      ],
+      "replay": [
+        327,
+        73,
+        8
+      ],
+      "initial": [
+        327,
+        83,
+        8
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_877532_HLS.S30.T34TEK.2021228T092031.v2.0",
+      "group_id": "floga:877532",
+      "dataset": "floga",
+      "valid_pixels": 261324,
+      "total_pixels": 262144,
+      "control": [
+        8577,
+        2231,
+        993
+      ],
+      "replay": [
+        8598,
+        2208,
+        972
+      ],
+      "initial": [
+        8539,
+        2166,
+        1031
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_878255_HLS.S30.T34SEG.2021238T092031.v2.0",
+      "group_id": "floga:878255",
+      "dataset": "floga",
+      "valid_pixels": 262089,
+      "total_pixels": 262144,
+      "control": [
+        95216,
+        5047,
+        16468
+      ],
+      "replay": [
+        95433,
+        4980,
+        16251
+      ],
+      "initial": [
+        95482,
+        5351,
+        16202
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_878803_HLS.S30.T34TDK.2021216T093039.v2.0",
+      "group_id": "floga:878803",
+      "dataset": "floga",
+      "valid_pixels": 262125,
+      "total_pixels": 262144,
+      "control": [
+        1253,
+        4959,
+        0
+      ],
+      "replay": [
+        1253,
+        4880,
+        0
+      ],
+      "initial": [
+        1252,
+        4000,
+        1
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_879291_HLS.S30.T34SFH.2021225T090601.v2.0",
+      "group_id": "floga:879291",
+      "dataset": "floga",
+      "valid_pixels": 262074,
+      "total_pixels": 262144,
+      "control": [
+        1739,
+        1072,
+        75
+      ],
+      "replay": [
+        1707,
+        1026,
+        107
+      ],
+      "initial": [
+        1738,
+        1092,
+        76
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_879409_HLS.S30.T34SDJ.2021221T093041.v2.0",
+      "group_id": "floga:879409",
+      "dataset": "floga",
+      "valid_pixels": 261542,
+      "total_pixels": 262144,
+      "control": [
+        1232,
+        508,
+        18
+      ],
+      "replay": [
+        1229,
+        561,
+        21
+      ],
+      "initial": [
+        1233,
+        505,
+        17
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_880766_HLS.S30.T34TFL.2021228T092031.v2.0",
+      "group_id": "floga:880766",
+      "dataset": "floga",
+      "valid_pixels": 258683,
+      "total_pixels": 262144,
+      "control": [
+        851,
+        190,
+        5
+      ],
+      "replay": [
+        850,
+        188,
+        6
+      ],
+      "initial": [
+        851,
+        192,
+        5
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_881961_HLS.S30.T34SGG.2021235T090601.v2.0",
+      "group_id": "floga:881961",
+      "dataset": "floga",
+      "valid_pixels": 262022,
+      "total_pixels": 262144,
+      "control": [
+        551,
+        547,
+        3
+      ],
+      "replay": [
+        550,
+        506,
+        4
+      ],
+      "initial": [
+        551,
+        530,
+        3
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_882005_HLS.S30.T34SGH.2021240T090549.v2.0",
+      "group_id": "floga:882005",
+      "dataset": "floga",
+      "valid_pixels": 252943,
+      "total_pixels": 262144,
+      "control": [
+        466,
+        1141,
+        2
+      ],
+      "replay": [
+        466,
+        1194,
+        2
+      ],
+      "initial": [
+        466,
+        944,
+        2
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_882957_HLS.S30.T34SFG.2021233T092029.v2.0",
+      "group_id": "floga:882957",
+      "dataset": "floga",
+      "valid_pixels": 260629,
+      "total_pixels": 262144,
+      "control": [
+        992,
+        2185,
+        28
+      ],
+      "replay": [
+        992,
+        1277,
+        28
+      ],
+      "initial": [
+        988,
+        2397,
+        32
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_885041_HLS.S30.T35SKC.2021240T090549.v2.0",
+      "group_id": "floga:885041",
+      "dataset": "floga",
+      "valid_pixels": 259345,
+      "total_pixels": 262144,
+      "control": [
+        710,
+        172,
+        15
+      ],
+      "replay": [
+        707,
+        163,
+        18
+      ],
+      "initial": [
+        710,
+        165,
+        15
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_885323_HLS.S30.T34SFH.2021240T090549.v2.0",
+      "group_id": "floga:885323",
+      "dataset": "floga",
+      "valid_pixels": 206904,
+      "total_pixels": 262144,
+      "control": [
+        3021,
+        267,
+        22
+      ],
+      "replay": [
+        3018,
+        253,
+        25
+      ],
+      "initial": [
+        3016,
+        256,
+        27
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_887929_HLS.S30.T34TGL.2021258T092031.v2.0",
+      "group_id": "floga:887929",
+      "dataset": "floga",
+      "valid_pixels": 262108,
+      "total_pixels": 262144,
+      "control": [
+        5358,
+        528,
+        46
+      ],
+      "replay": [
+        5354,
+        534,
+        50
+      ],
+      "initial": [
+        5359,
+        539,
+        45
+      ]
+    },
+    {
+      "sample_id": "floga:floga_2021_888273_HLS.S30.T35SMA.2021262T085631.v2.0",
+      "group_id": "floga:888273",
+      "dataset": "floga",
+      "valid_pixels": 261530,
+      "total_pixels": 262144,
+      "control": [
+        616,
+        87,
+        24
+      ],
+      "replay": [
+        611,
+        78,
+        29
+      ],
+      "initial": [
+        602,
+        67,
+        38
+      ]
+    }
+  ],
+  "errors": {
+    "windows": 119,
+    "groups": 116,
+    "valid_pixels": 29303959,
+    "true_pixels": 2668301,
+    "known_background_pixels": 26635658,
+    "masked_fraction": 0.06062409857741924,
+    "models": {
+      "control": {
+        "tp": 2074066,
+        "fp": 418340,
+        "fn": 594235,
+        "iou": 0.6719492159924008,
+        "fp_fraction_of_known_background": 0.01570601334496786,
+        "missed_positive_windows": [
+          "ems:ems_EMSR909_AOI01_HLS.S30.T34SFH.2026209T090601.v2.0",
+          "floga:floga_2021_868916_HLS.S30.T35SKV.2021187T085559.v2.0"
+        ],
+        "missed_positive_groups": [
+          "ems:EMSR909",
+          "floga:868916"
+        ]
+      },
+      "replay": {
+        "tp": 2072215,
+        "fp": 405788,
+        "fn": 596086,
+        "iou": 0.6740907631496681,
+        "fp_fraction_of_known_background": 0.015234765366036762,
+        "missed_positive_windows": [
+          "ems:ems_EMSR902_AOI01_HLS.S30.T30TXQ.2026202T105621.v2.0",
+          "ems:ems_EMSR909_AOI01_HLS.S30.T34SFH.2026209T090601.v2.0",
+          "floga:floga_2020_786775_HLS.S30.T34SDJ.2020259T092029.v2.0",
+          "floga:floga_2021_867610_HLS.S30.T34SDH.2021183T092029.v2.0",
+          "floga:floga_2021_868916_HLS.S30.T35SKV.2021187T085559.v2.0"
+        ],
+        "missed_positive_groups": [
+          "ems:EMSR902",
+          "ems:EMSR909",
+          "floga:786775",
+          "floga:867610",
+          "floga:868916"
+        ]
+      },
+      "initial": {
+        "tp": 2067966,
+        "fp": 402976,
+        "fn": 600335,
+        "iou": 0.6733244835942834,
+        "fp_fraction_of_known_background": 0.015129192603389036,
+        "missed_positive_windows": [
+          "ems:ems_EMSR902_AOI01_HLS.S30.T30TXQ.2026202T105621.v2.0",
+          "ems:ems_EMSR909_AOI01_HLS.S30.T34SFH.2026209T090601.v2.0",
+          "floga:floga_2020_773013_HLS.S30.T34SGH.2020211T090601.v2.0",
+          "floga:floga_2021_842753_HLS.S30.T35SKB.2021110T090549.v2.0",
+          "floga:floga_2021_867610_HLS.S30.T34SDH.2021183T092029.v2.0",
+          "floga:floga_2021_868916_HLS.S30.T35SKV.2021187T085559.v2.0"
+        ],
+        "missed_positive_groups": [
+          "ems:EMSR902",
+          "ems:EMSR909",
+          "floga:773013",
+          "floga:842753",
+          "floga:867610",
+          "floga:868916"
+        ]
+      }
+    }
+  },
+  "full_original_fit_count": 929,
+  "fit_l2a_twins": 889,
+  "source_exposure_per_seed": {
+    "1": {
+      "full_hls": 16290,
+      "l2a": 14250
+    },
+    "2": {
+      "full_hls": 16290,
+      "l2a": 14250
+    },
+    "3": {
+      "full_hls": 16290,
+      "l2a": 14250
+    }
+  },
+  "model_hashes": {
+    "control": [
+      "2c5c94269b9256ed7b0a4691aee81d54d27a999a29f196aec1dc82641ae8f00a",
+      "0795b743b436c4d59ce32554dc421db8f1c001f5d8b71befb99248f7986990e3",
+      "e231f2b080436712182c348dd273f34f9be6d898b3e09adcc05cfaf1c3ec1650"
+    ],
+    "replay": [
+      "49b6295d0cf0428ae1590695e72d09023da0467e0eb57bbc83674da07f1e78e9",
+      "dccfd692a779f23111c6465ce0adbfbe8b40060572ba0b808c3f38f3bf05cf3a",
+      "9b8442a637cbeec5b4b7a279b57f9e1686afd6435adec2f694dd018b3a4ba774"
+    ],
+    "initial": [
+      "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c",
+      "a0282b7c31c77d0941c1ed0d10981dd526c7345c5c7335cd2d8fb071ec40c0e0",
+      "48a3faa63c8814f793e2963f8db8ef2a42466d0f021463f84e58b5cdb834d61e",
+      "504141c858b50615e0a884dfa512f20360ceb2b86455967cb056279d2497ba8b",
+      "a48abe8b5c98883cf2f60a23eb457e39e5fea7584bafb4266d05eb7bcb16719f"
+    ]
+  },
+  "baseline_expected_hashes": [
+    "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c",
+    "a0282b7c31c77d0941c1ed0d10981dd526c7345c5c7335cd2d8fb071ec40c0e0",
+    "48a3faa63c8814f793e2963f8db8ef2a42466d0f021463f84e58b5cdb834d61e",
+    "504141c858b50615e0a884dfa512f20360ceb2b86455967cb056279d2497ba8b",
+    "a48abe8b5c98883cf2f60a23eb457e39e5fea7584bafb4266d05eb7bcb16719f"
+  ],
+  "non_claims": [
+    "Mixed-source adaptation preserves original supervision; not a SPEC93/97 L2A-only event-coverage PASS.",
+    "Mediterranean development evaluation, not independent Siberian/global competitor superiority.",
+    "Published satellite interpretation, not field truth."
+  ]
+}

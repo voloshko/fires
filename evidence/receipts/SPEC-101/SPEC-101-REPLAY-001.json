@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-101",
+  "run_id": "SPEC-101-REPLAY-001",
+  "created_at": "2026-10-04T05:23:48.306994+00:00",
+  "status": "FAIL",
+  "evidence_class": "REPLAY",
+  "conclusion": "Real full-pool directL2A adaptation completed; gain tooriginalC1-MM is .000766 withCI crossingzero, failing frozen .01 usefulgain.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && bash scripts/queues/queue_l2a_full_replay.sh'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/score_l2a_full_replay.py --data-root data-store --manifest data-store/l2a-full-replay-v1/manifest-v2.json --runs research/l2a-full-replay-v1 --reference-root /home/mc/fires/research --out research/l2a-full-replay-review-result.json'",
+    "make gate"
+  ],
+  "acceptance": {
+    "accepted": false,
+    "overall": {
+      "continued_hls": {
+        "samples": 119,
+        "groups": 116,
+        "candidate_iou": 0.6740907631496681,
+        "control_iou": 0.6719492159924008,
+        "delta": 0.0021415471572673317,
+        "ci95": [
+          -0.0021643804295998297,
+          0.007027274892653743
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      },
+      "initial_c1mm": {
+        "samples": 119,
+        "groups": 116,
+        "candidate_iou": 0.6740907631496681,
+        "control_iou": 0.6733244835942834,
+        "delta": 0.0007662795553846635,
+        "ci95": [
+          -0.0032731067664819396,
+          0.0049371803998259
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      }
+    },
+    "by_dataset": {
+      "ems": {
+        "continued_hls": {
+          "samples": 32,
+          "groups": 29,
+          "candidate_iou": 0.6670535645767784,
+          "control_iou": 0.6675754846166264,
+          "delta": -0.0005219200398479673,
+          "ci95": [
+            -0.005431985573248715,
+            0.003701247871109796
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "initial_c1mm": {
+          "samples": 32,
+          "groups": 29,
+          "candidate_iou": 0.6670535645767784,
+          "control_iou": 0.6667627514057197,
+          "delta": 0.0002908131710587236,
+          "ci95": [
+            -0.004061123671377789,
+            0.004920606761342583
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        }
+      },
+      "floga": {
+        "continued_hls": {
+          "samples": 87,
+          "groups": 87,
+          "candidate_iou": 0.7132888355998965,
+          "control_iou": 0.695767847670917,
+          "delta": 0.017520987928979492,
+          "ci95": [
+            0.007303582590782734,
+            0.03631326952732422
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        },
+        "initial_c1mm": {
+          "samples": 87,
+          "groups": 87,
+          "candidate_iou": 0.7132888355998965,
+          "control_iou": 0.7096954242267371,
+          "delta": 0.003593411373159383,
+          "ci95": [
+            -0.009889975829587108,
+            0.01641289422794794
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        }
+      }
+    },
+    "full_original_fit_count": 929,
+    "fit_l2a_twins": 889,
+    "source_exposure_per_seed": {
+      "1": {
+        "full_hls": 16290,
+        "l2a": 14250
+      },
+      "2": {
+        "full_hls": 16290,
+        "l2a": 14250
+      },
+      "3": {
+        "full_hls": 16290,
+        "l2a": 14250
+      }
+    }
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/l2a-full-replay-result.json"
+  ],
+  "recipe_id": "ccb8acdcbc6bbe65dd1a18074c1d555b7a4fe1916e746c97b5920c76690c95d7",
+  "data_manifest_sha256": "6d2dc454f31ce930acf6514335994c3f3d7996ad1d73607c6912724e099d66cc",
+  "limitations": [
+    "All6full models completed; sourceexposure is notaccuracy proof.",
+    "Originalrun/model directoriesimmutable; rescore to freshoutputpath."
+  ],
+  "non_claims": [
+    "Mixed-source adaptation preserves original supervision; not a SPEC93/97 L2A-only event-coverage PASS.",
+    "Mediterranean development evaluation, not independent Siberian/global competitor superiority.",
+    "Published satellite interpretation, not field truth."
+  ]
+}

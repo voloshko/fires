@@ -274,3 +274,16 @@ All6SPEC101models complete,929fitIDs each,min15fulloriginalviews,matching
 order/commonmasktraceforall3pairedseeds,14250actualL2Aviews perreplayseed.
 GPUscorer child1149805 active underqueue1106633; resultstillpending.
 Free5.4GiB; nonewimagerydownloads/duplicateweights.
+
+## All currentGPUjobs terminal; SPEC101 outcome
+
+101sixruns+score terminalexit0, rejected:replay0.674091/continuedHLS0.671949/
+originalC1-MM0.673324. Deltatooriginal+.000766 CI[−.003273,.004937], below.01.
+Full929retained/min15originalexposures,14250L2Aviews perseed/matchedordering
+and masks verified. Sourceadaption executed, no usefulaccuracygain established.
+Allmodels/results/FAILreceipt preserved; do not rerun oldimmutablequeue.
+104also rejecteddespite C1-MM/Prithviwins oncal61 becausepairedreservebetter.
+Cal61nowconsumed;futureuse isdevelopment, notunusedconfirmation.
+Originalusergoal stillnotproven across4directions, nevermarkcomplete onnegative
+experiments orsinglecompetitorwins. Free5.4GiB: newdatacollection must have
+a predeclared boundedstorage policy andkeep originals, not silentlydelete data.
