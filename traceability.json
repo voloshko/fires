@@ -154,7 +154,8 @@
         "SPEC-108",
         "SPEC-109",
         "SPEC-110",
-        "SPEC-111"
+        "SPEC-111",
+        "SPEC-112"
       ]
     }
   },
@@ -1247,6 +1248,18 @@
         "SPEC-90",
         "SPEC-95",
         "SPEC-109"
+      ],
+      "status": "active"
+    },
+    "SPEC-112": {
+      "title": "Preregister unused eastern geographic confirmation population",
+      "file": "specs/SPEC-112-preregister-unused-eastern-geographic-confirmation-populatio.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-95",
+        "SPEC-105",
+        "SPEC-111"
       ],
       "status": "active"
     }
