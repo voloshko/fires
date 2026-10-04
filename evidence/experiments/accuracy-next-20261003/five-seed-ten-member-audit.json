@@ -1,0 +1,122 @@
+{
+  "spec_id": "SPEC-118",
+  "full10_members_completed": true,
+  "mixed_family_identities_valid": true,
+  "fit_holdout_disjoint": true,
+  "matched_order_exposure_base_exact": true,
+  "runs": [
+    {
+      "seed": 1,
+      "variant": "pair",
+      "spec_id": "SPEC-114",
+      "epochs": 30,
+      "seconds": 596.0676758475602,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "8d022d364e907695d77369f04c9f07faf271a901aef3d854ce123611f30487cf"
+    },
+    {
+      "seed": 2,
+      "variant": "pair",
+      "spec_id": "SPEC-114",
+      "epochs": 30,
+      "seconds": 596.6295858304948,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "55ad02e60e0df2e4f4542ccbd16ef1e860a875fb6162e443e2936c6dd6bdb0d1"
+    },
+    {
+      "seed": 3,
+      "variant": "pair",
+      "spec_id": "SPEC-114",
+      "epochs": 30,
+      "seconds": 596.5150722172111,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "c90e4c6ffc7ec9f845c1783c764478360eef94fa33010b2f675202df336f40f3"
+    },
+    {
+      "seed": 4,
+      "variant": "pair",
+      "spec_id": "SPEC-118",
+      "epochs": 30,
+      "seconds": 594.854589741677,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "8932c673d8bac21a485952374efba7ce3e3a1070cc2f1e06e104bf00ad6c0af9"
+    },
+    {
+      "seed": 5,
+      "variant": "pair",
+      "spec_id": "SPEC-118",
+      "epochs": 30,
+      "seconds": 594.8042841460556,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "51bc17e7329345059738a898a7772332c5753b741c11a1258e881b507bab5f29"
+    },
+    {
+      "seed": 1,
+      "variant": "post",
+      "spec_id": "SPEC-114",
+      "epochs": 30,
+      "seconds": 556.8976973276585,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "5ecbc72262a1e67deede3d6a5b300d538e1fc48d8c80950735e747704ac674ff"
+    },
+    {
+      "seed": 2,
+      "variant": "post",
+      "spec_id": "SPEC-114",
+      "epochs": 30,
+      "seconds": 554.5881486274302,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "a65c5a8a28ad4c9f722783f00b29ac297a74e6a19fd61dc630ef95d0de6b17e9"
+    },
+    {
+      "seed": 3,
+      "variant": "post",
+      "spec_id": "SPEC-114",
+      "epochs": 30,
+      "seconds": 554.5008813831955,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "1e90b19c99f7d1fb31cd33cee7a548c56005414c9931001ca5f1231aad4d4e58"
+    },
+    {
+      "seed": 4,
+      "variant": "post",
+      "spec_id": "SPEC-118",
+      "epochs": 30,
+      "seconds": 554.5068305321038,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "173308c7cdd02a88ae3e51158588bf8b88d45e04c1b2be5463af77d418132aa4"
+    },
+    {
+      "seed": 5,
+      "variant": "post",
+      "spec_id": "SPEC-118",
+      "epochs": 30,
+      "seconds": 553.4141811784357,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "5d045133c2cd9b7ee2948595df1ea48242d6937a2f7269b293de70f4726f16b0"
+    }
+  ],
+  "non_claims": [
+    "Full10member mechanics only; development scoring/fresh confirmation still pending"
+  ]
+}

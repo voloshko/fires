@@ -774,3 +774,14 @@ credential access/exposure established. Source-onlyPASS; zero pixels downloaded,
 credentials/tokens supplied or read. Actual repair requiresseparate spec and
 sameprotectedpixel/source rules, no SCL relaxation or labels lost/replaced.
 118allnew4runs completed; full10mixednativeaudit and scoring nowlive.
+
+## SPEC-118 all10members ready; fullscorelive
+
+Fournew4/5pair/post runs completed30epochs, train1397226terminalexit0 at16:10:40
+(2530.030swall/12.9Gpeak). Parent114native1/2/3 andnew1184/5 identities/full
+fit/source/order/exposure/base state and375holdoutdisjointness audited exactly.
+All10members ready. Scorer1421447 underqueue1397250 live, RF77/cal61 done
+at16:13:24/16:15:17; western96/EMS60/FLOGA81stillneeded. Expected
+research/five-seed-additions-v1/development.json. Source1191404000stillwaits
+fulltrueeligible result; no neweastern images. Keepsealed118sources immutable,
+no restart onobservationtimeout, no originalfour-goalcompletion claim.
