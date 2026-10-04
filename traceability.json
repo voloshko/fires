@@ -1225,7 +1225,7 @@
         "SPEC-105",
         "SPEC-108"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-110": {
       "title": "MTBS legend and severity error attribution",

@@ -449,3 +449,21 @@ Lossless packed binary masks avoid full floating caches; <=512MiB new-output
 budget and3GiB free floor retained. All existing populations are development.
 Accuracy has NOT been measured yet. Goal active; SPEC-109 not implemented/
 verified from training losses or the partial queue. Do not restart live handles.
+
+## SPEC-109 completed: pooled win, full rejection
+
+All6 full models and scorer terminalexit0; exact matched batches/exposure/
+frozen base digest in all3seed pairs,683IDs each,30/60 exposures. Packed
+predictions reconstruct every candidate count and all CI/eligibility values.
+Total outputs28.5MB; no backbone copy or old-asset deletion, free~4.0GiB.
+Independent review codeAPPROVE/architectureWATCH, finalCOMMENT, recorded in
+docs/SPEC-109-REVIEW.md; no model-promotion approval from the review.
+
+Pooled Russia234/90:pair0.249756,post0.233591,C1-MM0.219247,Prithvi0.116043.
+PositiveCIs to all3:delta toC1+.030510 CI[.002114,.046720], tocontrol+.016165
+CI[.009942,.026590]. But calibration/Western degrade from oldreserve-.042548/
+-.022556, FLOGA-.018750 toC1-MM and1extra missedgroup. Full109rejected.
+Do not waive guards, promote a regional subset or claim independent superiority.
+Weights/caches/results/FAILreceipt preserved. All prior populations consumed.
+SPEC110 CPU raw-MTBS attribution also finished, pending receipt/report closure.
+No own GPU job remains; original four-direction goal active and unachieved.

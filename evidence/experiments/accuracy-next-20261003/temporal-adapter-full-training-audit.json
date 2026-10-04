@@ -1,0 +1,57 @@
+{
+  "spec_id": "SPEC-109",
+  "utc": "2026-10-04T08:56:50.538876+00:00",
+  "runs": [
+    {
+      "run": "pair-s1",
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "exposure_total": 22860,
+      "seconds": 595.6564079597592,
+      "adapter_bytes": 428778
+    },
+    {
+      "run": "post-s1",
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "exposure_total": 22860,
+      "seconds": 550.864354422316,
+      "adapter_bytes": 428778
+    },
+    {
+      "run": "pair-s2",
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "exposure_total": 22860,
+      "seconds": 599.3230712339282,
+      "adapter_bytes": 428778
+    },
+    {
+      "run": "post-s2",
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "exposure_total": 22860,
+      "seconds": 551.3870996478945,
+      "adapter_bytes": 428778
+    },
+    {
+      "run": "pair-s3",
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "exposure_total": 22860,
+      "seconds": 594.8495398405939,
+      "adapter_bytes": 428778
+    },
+    {
+      "run": "post-s3",
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "exposure_total": 22860,
+      "seconds": 551.242488509044,
+      "adapter_bytes": 428778
+    }
+  ],
+  "all_matched_pairs_exact": true,
+  "total_output_bytes": 19017601,
+  "free_bytes": 4284706816
+}

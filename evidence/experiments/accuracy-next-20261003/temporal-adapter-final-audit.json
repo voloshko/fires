@@ -1,0 +1,9 @@
+{
+  "spec_id": "SPEC-109",
+  "utc": "2026-10-04T09:07:46.865943+00:00",
+  "decision_and_bootstrap_exact": true,
+  "packed_counts_exact": true,
+  "result_sha256": "470547b899a5b564cf71506705105bfa7bc4acb9407063505f5a8cae8449c5f7",
+  "total_output_bytes": 28515015,
+  "free_bytes": 4273479680
+}

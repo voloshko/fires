@@ -1,6 +1,6 @@
 # SPEC-109: Post-anchored learned temporal correction
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-92, SPEC-95, SPEC-105, SPEC-108
 
@@ -73,3 +73,27 @@ fixed threshold fusion or inference-only dNBR rule is introduced.
 - non_claims: structural/smoke guarantees are not accuracy; all existing
   development populations consumed, PANGAEA background unreviewed, no physical
   fire IDs/field truth/severity/L2A useful-gain proof or original goal closure.
+
+## Resolution
+
+All six runs completed30epochs/683 unique fit IDs; every original view exposed
+30 times, Mediterranean60, total22,860 exposures per run. Pair/post epoch
+orders and frozen base digests matched in all three seeds. Training/scoring
+exit0, eleven tests passed. Checkpoints428,778 bytes each; all outputs28,515,015
+bytes, within512MiB, free disk4,273,479,680 bytes. Source-bound packed-mask
+reconstruction exactly reproduced counts, decisions and bootstrap intervals.
+
+Pooled Russia234windows/90groups: pair0.249756, post0.233591,
+C1-MM0.219247, Prithvi0.116043. Deltas +0.016165 to post
+CI[0.009942,0.026590], +0.030510 to C1-MM CI[0.002114,0.046720],
++0.133713 to Prithvi CI[0.063036,0.215316]. Temporal information is useful
+on this consumed development pool, but the full recipe is rejected.
+
+Russian calibration pair0.262026 versus original reserve0.304575
+(delta-0.042548); Western pair0.198072 versus reserve0.220628
+(delta-0.022556). Both exceed permitted0.01 degradation. FLOGA pair0.727710
+versus C1-MM0.746460 (delta-0.018750, CI[-0.083773,0.018611]); one
+additional missed positive group versus C1-MM0. Three guards fail. Retain
+FAIL, all outputs and original thresholds; no deployment or fresh-confirmation
+claim. Strong-reference detections were preserved but weak detections still
+can be lost, as independent architecture review predicted.

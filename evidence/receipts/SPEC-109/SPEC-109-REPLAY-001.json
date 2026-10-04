@@ -1,0 +1,407 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-109",
+  "run_id": "SPEC-109-REPLAY-001",
+  "created_at": "2026-10-04T09:07:46.865943+00:00",
+  "status": "FAIL",
+  "evidence_class": "REPLAY",
+  "conclusion": "Six full runs and development comparison completed. Pooled gain is positive, but regional non-degradation, Mediterranean and missed-group guards fail; no promotion.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && bash scripts/queues/queue_temporal_adapter.sh'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && bash scripts/queues/queue_score_temporal_adapter.sh'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_temporal_adapter.py tests/test_temporal_adapter_contract.py tests/test_temporal_adapter_evaluation.py -q'",
+    "make gate"
+  ],
+  "acceptance": {
+    "eligible": false,
+    "guards": {
+      "pooled_gain": true,
+      "regional_points": false,
+      "mediterranean": false,
+      "missed_groups": false
+    },
+    "pooled": {
+      "post": {
+        "samples": 234,
+        "groups": 90,
+        "candidate_iou": 0.2497564438904708,
+        "control_iou": 0.23359107261598266,
+        "delta": 0.01616537127448814,
+        "ci95": [
+          0.00994198419637572,
+          0.026589666315111865
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      },
+      "c1mm": {
+        "samples": 234,
+        "groups": 90,
+        "candidate_iou": 0.2497564438904708,
+        "control_iou": 0.2192468213093734,
+        "delta": 0.030509622581097406,
+        "ci95": [
+          0.0021139973733104245,
+          0.04671952787947815
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      },
+      "prithvi": {
+        "samples": 234,
+        "groups": 90,
+        "candidate_iou": 0.2497564438904708,
+        "control_iou": 0.11604312605925204,
+        "delta": 0.13371331783121876,
+        "ci95": [
+          0.063035927919091,
+          0.21531648918204752
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      }
+    },
+    "per_dataset": {
+      "russia_eval": {
+        "post": {
+          "samples": 77,
+          "groups": 24,
+          "candidate_iou": 0.377263107866962,
+          "control_iou": 0.35954876932120905,
+          "delta": 0.01771433854575294,
+          "ci95": [
+            0.007860791376569648,
+            0.022298451132587275
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        },
+        "reserve": {
+          "samples": 77,
+          "groups": 24,
+          "candidate_iou": 0.377263107866962,
+          "control_iou": 0.3230492072325294,
+          "delta": 0.0542139006344326,
+          "ci95": [
+            -0.1385282862978619,
+            0.11414571521084264
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 77,
+          "groups": 24,
+          "candidate_iou": 0.377263107866962,
+          "control_iou": 0.32610820993394857,
+          "delta": 0.05115489793301342,
+          "ci95": [
+            0.0021702261498869045,
+            0.06878571934866559
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        },
+        "prithvi": {
+          "samples": 77,
+          "groups": 24,
+          "candidate_iou": 0.377263107866962,
+          "control_iou": 0.20621601498957293,
+          "delta": 0.17104709287738906,
+          "ci95": [
+            0.12027030561245673,
+            0.23559375180548425
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        }
+      },
+      "russia_cal": {
+        "post": {
+          "samples": 61,
+          "groups": 29,
+          "candidate_iou": 0.26202617136567163,
+          "control_iou": 0.24874757527199123,
+          "delta": 0.0132785960936804,
+          "ci95": [
+            0.006683477530870141,
+            0.032499924002542084
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        },
+        "reserve": {
+          "samples": 61,
+          "groups": 29,
+          "candidate_iou": 0.26202617136567163,
+          "control_iou": 0.3045746193131945,
+          "delta": -0.04254844794752288,
+          "ci95": [
+            -0.11114653043040866,
+            0.0051080549977458155
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 61,
+          "groups": 29,
+          "candidate_iou": 0.26202617136567163,
+          "control_iou": 0.20591468859988143,
+          "delta": 0.0561114827657902,
+          "ci95": [
+            0.02127512315694789,
+            0.07463022174816715
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        },
+        "prithvi": {
+          "samples": 61,
+          "groups": 29,
+          "candidate_iou": 0.26202617136567163,
+          "control_iou": 0.1426591138734276,
+          "delta": 0.11936705749224402,
+          "ci95": [
+            0.07401646711189987,
+            0.21282132819994398
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        }
+      },
+      "western": {
+        "post": {
+          "samples": 96,
+          "groups": 37,
+          "candidate_iou": 0.19807192416375147,
+          "control_iou": 0.1821685292571687,
+          "delta": 0.01590339490658277,
+          "ci95": [
+            0.006676962872945233,
+            0.03338032319662908
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        },
+        "reserve": {
+          "samples": 96,
+          "groups": 37,
+          "candidate_iou": 0.19807192416375147,
+          "control_iou": 0.2206281739341134,
+          "delta": -0.02255624977036194,
+          "ci95": [
+            -0.09685210144329574,
+            0.0791994052815967
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 96,
+          "groups": 37,
+          "candidate_iou": 0.19807192416375147,
+          "control_iou": 0.1838986395342188,
+          "delta": 0.014173284629532656,
+          "ci95": [
+            -0.02686700560377412,
+            0.03138851896576094
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "prithvi": {
+          "samples": 96,
+          "groups": 37,
+          "candidate_iou": 0.19807192416375147,
+          "control_iou": 0.08466293357855248,
+          "delta": 0.11340899058519899,
+          "ci95": [
+            0.019689593518205407,
+            0.2542423957979207
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        }
+      },
+      "ems": {
+        "post": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.7644609201323289,
+          "control_iou": 0.7631644122587016,
+          "delta": 0.0012965078736273394,
+          "ci95": [
+            -0.0020144130642031854,
+            0.00661565931691884
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "reserve": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.7644609201323289,
+          "control_iou": 0.7948998849080845,
+          "delta": -0.030438964775755584,
+          "ci95": [
+            -0.05313111712741883,
+            -0.012152543882431808
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "worse"
+        },
+        "c1mm": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.7644609201323289,
+          "control_iou": 0.7594609076850591,
+          "delta": 0.005000012447269775,
+          "ci95": [
+            -0.0019779757172914665,
+            0.015223081374596681
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        }
+      },
+      "floga": {
+        "post": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.7277095912435018,
+          "control_iou": 0.7092474186719662,
+          "delta": 0.018462172571535596,
+          "ci95": [
+            0.004216335662060611,
+            0.0447993669861511
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        },
+        "reserve": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.7277095912435018,
+          "control_iou": 0.7255777050481008,
+          "delta": 0.002131886195400945,
+          "ci95": [
+            -0.034790625854422524,
+            0.046425091520801945
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.7277095912435018,
+          "control_iou": 0.7464595747186571,
+          "delta": -0.01874998347515533,
+          "ci95": [
+            -0.08377282070463776,
+            0.018610943691421657
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        }
+      }
+    },
+    "full_training": [
+      {
+        "run": "pair-s1",
+        "min_exposure": 30,
+        "max_exposure": 60,
+        "exposure_total": 22860,
+        "seconds": 595.6564079597592,
+        "adapter_bytes": 428778
+      },
+      {
+        "run": "post-s1",
+        "min_exposure": 30,
+        "max_exposure": 60,
+        "exposure_total": 22860,
+        "seconds": 550.864354422316,
+        "adapter_bytes": 428778
+      },
+      {
+        "run": "pair-s2",
+        "min_exposure": 30,
+        "max_exposure": 60,
+        "exposure_total": 22860,
+        "seconds": 599.3230712339282,
+        "adapter_bytes": 428778
+      },
+      {
+        "run": "post-s2",
+        "min_exposure": 30,
+        "max_exposure": 60,
+        "exposure_total": 22860,
+        "seconds": 551.3870996478945,
+        "adapter_bytes": 428778
+      },
+      {
+        "run": "pair-s3",
+        "min_exposure": 30,
+        "max_exposure": 60,
+        "exposure_total": 22860,
+        "seconds": 594.8495398405939,
+        "adapter_bytes": 428778
+      },
+      {
+        "run": "post-s3",
+        "min_exposure": 30,
+        "max_exposure": 60,
+        "exposure_total": 22860,
+        "seconds": 551.242488509044,
+        "adapter_bytes": 428778
+      }
+    ],
+    "all_matched_pairs_exact": true,
+    "decision_and_packed_counts_exact": true,
+    "result_sha256": "470547b899a5b564cf71506705105bfa7bc4acb9407063505f5a8cae8449c5f7",
+    "total_new_output_bytes": 28515015,
+    "free_bytes": 4273479680,
+    "unit_tests_passed": 11,
+    "training_exit": 0,
+    "scoring_exit": 0
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/temporal-adapter-development.json",
+    "evidence/experiments/accuracy-next-20261003/temporal-adapter-development-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/temporal-adapter-full-training-audit.json",
+    "evidence/experiments/accuracy-next-20261003/temporal-adapter-final-audit.json"
+  ],
+  "limitations": [
+    "Consumed development populations; positive pooled intervals are not independent confirmation.",
+    "FLOGA loss and regional degradation cannot be waived after outcomes.",
+    "Immutable run/cache outputs reject silent re-execution.",
+    "Independent architecture review WATCH: per-seed training differs from five-seed anchored inference; confidence bound does not preserve weak detections."
+  ],
+  "non_claims": [
+    "Consumed development populations; eligibility is not independent confirmation or promotion.",
+    "PANGAEA background is published coverage, not reviewed absence of fire; spatial groups are not dated fires.",
+    "No field truth, severity/L2A useful gain, global ranking or original goal completion."
+  ]
+}
