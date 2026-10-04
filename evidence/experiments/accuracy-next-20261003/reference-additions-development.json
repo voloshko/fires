@@ -1,0 +1,1374 @@
+{
+  "spec_id": "SPEC-104",
+  "development_eligible": true,
+  "comparisons": {
+    "russia": {
+      "samples": 77,
+      "groups": 24,
+      "candidate_iou": 0.35297361629921165,
+      "control_iou": 0.32610820993394857,
+      "delta": 0.026865406365263078,
+      "ci95": [
+        -0.000609338532186538,
+        0.046230512622392014
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "inconclusive",
+      "candidate_missed_groups": 2,
+      "baseline_missed_groups": 2
+    },
+    "ems": {
+      "samples": 60,
+      "groups": 44,
+      "candidate_iou": 0.7683337830055517,
+      "control_iou": 0.7594609076850591,
+      "delta": 0.008872875320492524,
+      "ci95": [
+        0.0015737393016135499,
+        0.02249633464336132
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "better",
+      "candidate_missed_groups": 0,
+      "baseline_missed_groups": 0
+    },
+    "floga": {
+      "samples": 81,
+      "groups": 81,
+      "candidate_iou": 0.7425270806852566,
+      "control_iou": 0.7464595747186571,
+      "delta": -0.003932494033400458,
+      "ci95": [
+        -0.014683030255495508,
+        -9.466609488764172e-05
+      ],
+      "n_boot": 2000,
+      "seed": 20261003,
+      "verdict": "worse",
+      "candidate_missed_groups": 0,
+      "baseline_missed_groups": 0
+    }
+  },
+  "summaries": {
+    "russia": {
+      "windows": 77,
+      "groups": 24,
+      "valid_pixels": 16998039,
+      "true_pixels": 279844,
+      "known_background_pixels": 16718195,
+      "masked_fraction": 0.15789126111315444,
+      "models": {
+        "control": {
+          "tp": 108682,
+          "fp": 163198,
+          "fn": 171162,
+          "iou": 0.24530857119641028,
+          "fp_fraction_of_known_background": 0.00976169975287404,
+          "missed_positive_windows": [
+            "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+            "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+            "russia:14f0dd525739710be379cfd715214cb9a2ea3d1be7b92233c36a978419058ac6",
+            "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+            "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+            "russia:7d5c02e93557150a35157ab7bd82044d0d947bb7b881ceb6b0ede6eed816547f",
+            "russia:ee95a27c018bceef9647275e8d1d79f8d6e90bc4031ccea973ff1441187f337c",
+            "russia:f9e87c1fd4114fd816cd227727b501575ff4e2ed48cc6a8cf81b4942ec0fe94b"
+          ],
+          "missed_positive_groups": []
+        },
+        "reserve": {
+          "tp": 137000,
+          "fp": 144240,
+          "fn": 142844,
+          "iou": 0.3230492072325294,
+          "fp_fraction_of_known_background": 0.0086277256605752,
+          "missed_positive_windows": [
+            "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+            "russia:a9284f0f4e978443ff688f551b324d24b8ed32f4ff0d6fa5d4cb28e80d769c61",
+            "russia:ed2ebc53a846a5fc93be67230d7158c13c5243a2dfa2869a390e0ddb728abe5b"
+          ],
+          "missed_positive_groups": [
+            "russia:b7f146a952da624cc41efceba29b406ba17dffe1ac7320de1d957f36132f0966"
+          ]
+        },
+        "c1mm": {
+          "tp": 136760,
+          "fp": 139526,
+          "fn": 143084,
+          "iou": 0.32610820993394857,
+          "fp_fraction_of_known_background": 0.008345757421779086,
+          "missed_positive_windows": [
+            "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+            "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+            "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+            "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+            "russia:4da327137065846688f2541126436ee2a03736c3cfc4fa6b0039649750727ac9",
+            "russia:b5701f0dcce37c75536dd7fc32949eec39162f23161065af8208b5addc87f5ec",
+            "russia:e3e06929437e479127f79e729f6c20730baff6c626bdc79195dee7ef2b1df74c"
+          ],
+          "missed_positive_groups": [
+            "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+            "russia:e55982863745015bbe5d6fbbd959c065f60b7a1d44cd812d03224008dfd5ee86"
+          ]
+        },
+        "prithvi": {
+          "tp": 175323,
+          "fp": 570347,
+          "fn": 104521,
+          "iou": 0.20621601498957293,
+          "fp_fraction_of_known_background": 0.0341153455860516,
+          "missed_positive_windows": [
+            "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+            "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+            "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+            "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+            "russia:4da327137065846688f2541126436ee2a03736c3cfc4fa6b0039649750727ac9",
+            "russia:caecf663c87fd0605564a05517a94200bad23b14ca110ea9066f681558754a70",
+            "russia:e3e06929437e479127f79e729f6c20730baff6c626bdc79195dee7ef2b1df74c"
+          ],
+          "missed_positive_groups": [
+            "russia:9ea7d4bd40c51a8c41a527c790ca6141b55f280a1a0815df66a2bdbe10760fea",
+            "russia:e55982863745015bbe5d6fbbd959c065f60b7a1d44cd812d03224008dfd5ee86"
+          ]
+        },
+        "rescue": {
+          "tp": 149772,
+          "fp": 144471,
+          "fn": 130072,
+          "iou": 0.35297361629921165,
+          "fp_fraction_of_known_background": 0.008641542941687185,
+          "missed_positive_windows": [
+            "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+            "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+            "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+            "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+            "russia:4da327137065846688f2541126436ee2a03736c3cfc4fa6b0039649750727ac9",
+            "russia:b5701f0dcce37c75536dd7fc32949eec39162f23161065af8208b5addc87f5ec",
+            "russia:e3e06929437e479127f79e729f6c20730baff6c626bdc79195dee7ef2b1df74c"
+          ],
+          "missed_positive_groups": [
+            "russia:bf9a88a81df09677f86c5355debc8ee92ed444c2582c5dd6e776ee6e06c21910",
+            "russia:e55982863745015bbe5d6fbbd959c065f60b7a1d44cd812d03224008dfd5ee86"
+          ]
+        }
+      }
+    },
+    "ems": {
+      "windows": 60,
+      "groups": 44,
+      "valid_pixels": 7911569,
+      "true_pixels": 2412001,
+      "known_background_pixels": 5499568,
+      "masked_fraction": 0.49699598948160806,
+      "models": {
+        "control": {
+          "tp": 2086369,
+          "fp": 246121,
+          "fn": 325632,
+          "iou": 0.7849034017249773,
+          "fp_fraction_of_known_background": 0.044752787855337,
+          "missed_positive_windows": [
+            "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0",
+            "ems:ems_EMSR836_AOI04_HLS.S30.T34TCN.2025223T094051.v2.0"
+          ],
+          "missed_positive_groups": []
+        },
+        "reserve": {
+          "tp": 2137609,
+          "fp": 277154,
+          "fn": 274392,
+          "iou": 0.7948998849080845,
+          "fp_fraction_of_known_background": 0.050395594708529834,
+          "missed_positive_windows": [
+            "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0",
+            "ems:ems_EMSR836_AOI04_HLS.S30.T34TCN.2025223T094051.v2.0"
+          ],
+          "missed_positive_groups": []
+        },
+        "c1mm": {
+          "tp": 2113222,
+          "fp": 370528,
+          "fn": 298779,
+          "iou": 0.7594609076850591,
+          "fp_fraction_of_known_background": 0.06737401919568956,
+          "missed_positive_windows": [
+            "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0"
+          ],
+          "missed_positive_groups": []
+        },
+        "rescue": {
+          "tp": 2138664,
+          "fp": 371508,
+          "fn": 273337,
+          "iou": 0.7683337830055517,
+          "fp_fraction_of_known_background": 0.06755221501034263,
+          "missed_positive_windows": [
+            "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0"
+          ],
+          "missed_positive_groups": []
+        }
+      }
+    },
+    "floga": {
+      "windows": 81,
+      "groups": 81,
+      "valid_pixels": 20404778,
+      "true_pixels": 361062,
+      "known_background_pixels": 20043716,
+      "masked_fraction": 0.03903640935450425,
+      "models": {
+        "control": {
+          "tp": 317704,
+          "fp": 62827,
+          "fn": 43358,
+          "iou": 0.7494980997383749,
+          "fp_fraction_of_known_background": 0.0031344986129318536,
+          "missed_positive_windows": [
+            "floga:floga_2020_786775_HLS.S30.T34SDJ.2020259T092029.v2.0",
+            "floga:floga_2020_807048_HLS.S30.T34TGL.2021005T091351.v2.0"
+          ],
+          "missed_positive_groups": [
+            "floga:786775",
+            "floga:807048"
+          ]
+        },
+        "reserve": {
+          "tp": 321904,
+          "fp": 82590,
+          "fn": 39158,
+          "iou": 0.7255777050481008,
+          "fp_fraction_of_known_background": 0.004120493425470606,
+          "missed_positive_windows": [
+            "floga:floga_2020_786775_HLS.S30.T34SDJ.2020259T092029.v2.0"
+          ],
+          "missed_positive_groups": [
+            "floga:786775"
+          ]
+        },
+        "c1mm": {
+          "tp": 329594,
+          "fp": 80481,
+          "fn": 31468,
+          "iou": 0.7464595747186571,
+          "fp_fraction_of_known_background": 0.004015273415368687,
+          "missed_positive_windows": [],
+          "missed_positive_groups": []
+        },
+        "rescue": {
+          "tp": 330057,
+          "fp": 83443,
+          "fn": 31005,
+          "iou": 0.7425270806852566,
+          "fp_fraction_of_known_background": 0.0041630504044260054,
+          "missed_positive_windows": [],
+          "missed_positive_groups": []
+        }
+      }
+    }
+  },
+  "restored": {
+    "russia": [
+      {
+        "sample_id": "russia:001148b39535deda9f07dc2878288294e532f989d11fa39c46c2e97c6b9e5733",
+        "added_pixels": 0,
+        "reference_pixels": 0
+      },
+      {
+        "sample_id": "russia:04ba9345bfd145e63fe98564bf6aa45a94fa5a5ce1a5ebdd1fbdef31c058ae76",
+        "added_pixels": 308,
+        "reference_pixels": 11699
+      },
+      {
+        "sample_id": "russia:050797d0bf91faa8215d94e490a13cb03a2f3296d757b7dbc8126d56f9c9ef5d",
+        "added_pixels": 1676,
+        "reference_pixels": 3009
+      },
+      {
+        "sample_id": "russia:091121198c867fe5f0266679c1498dc0cbb88ecb482d3c4391c71f90fd3da0ad",
+        "added_pixels": 73,
+        "reference_pixels": 3447
+      },
+      {
+        "sample_id": "russia:0e3360f82c1722e02a6c3b7d417270f70c950ecc8e5979024aef915e06a6ce59",
+        "added_pixels": 0,
+        "reference_pixels": 0
+      },
+      {
+        "sample_id": "russia:12dde8fe4da15dcd637a44b101c42c745075e7331edefdd890ff9387fdff4ef6",
+        "added_pixels": 0,
+        "reference_pixels": 6491
+      },
+      {
+        "sample_id": "russia:145ded358eaf5ef65bd91a8862de4667adc6e4ec7358e1f4c6774c3820d76b5b",
+        "added_pixels": 190,
+        "reference_pixels": 384
+      },
+      {
+        "sample_id": "russia:14f0dd525739710be379cfd715214cb9a2ea3d1be7b92233c36a978419058ac6",
+        "added_pixels": 0,
+        "reference_pixels": 3469
+      },
+      {
+        "sample_id": "russia:15bb3ab80b90696de3eddf3390f8af84612487fd410693b76d4ced2cb1683c92",
+        "added_pixels": 0,
+        "reference_pixels": 964
+      },
+      {
+        "sample_id": "russia:15c395e3dab77ec1a051d27e3eb7a51f70f933492848460835fd51f98ace8c3b",
+        "added_pixels": 1376,
+        "reference_pixels": 2063
+      },
+      {
+        "sample_id": "russia:1ffdcb60cdc531342565abc26ce2ca98ceba52dee6ca1acf73a3d58919eed5d6",
+        "added_pixels": 1047,
+        "reference_pixels": 5975
+      },
+      {
+        "sample_id": "russia:2265d35d223d0bd06d740966df3049548abd0cccc39cee63e178561b15a68200",
+        "added_pixels": 578,
+        "reference_pixels": 6199
+      },
+      {
+        "sample_id": "russia:22c7273ce4d58cf90bca2dfc10a185c89ff6a379d7373efebb0163fa8087ca17",
+        "added_pixels": 0,
+        "reference_pixels": 2655
+      },
+      {
+        "sample_id": "russia:279799f389bf63a3ff8f12446a25e0999bd4b3a292224d2aebfddbd4f2c2628b",
+        "added_pixels": 7,
+        "reference_pixels": 982
+      },
+      {
+        "sample_id": "russia:2bf6094e1e1dd2ae9ccfdcc25bb14d6f0291b056a6f759f56e20b1860da439d5",
+        "added_pixels": 511,
+        "reference_pixels": 6357
+      },
+      {
+        "sample_id": "russia:36a462181acdf2dd0cdfc086d856d15187534373ddd0a8e1f1dc5e8d730728fc",
+        "added_pixels": 25,
+        "reference_pixels": 1339
+      },
+      {
+        "sample_id": "russia:3c28eb0b94621c3c273e2f3e38c9221f5c7adb7de9bf75def24597fe31003241",
+        "added_pixels": 0,
+        "reference_pixels": 4887
+      },
+      {
+        "sample_id": "russia:3c39b54275b12dfb44bc589225216c8df11b077e4fb2aa942a3785b4e7a7a918",
+        "added_pixels": 0,
+        "reference_pixels": 968
+      },
+      {
+        "sample_id": "russia:3ebdcac091c2d074c6249d4fd7dcaf8c7e047dd5ea492d09d431f6e8469a5067",
+        "added_pixels": 566,
+        "reference_pixels": 17839
+      },
+      {
+        "sample_id": "russia:45d067d738754c06a97ddf1d2e25462bc42dc7f1bc74cdf11f9444428aec1763",
+        "added_pixels": 0,
+        "reference_pixels": 0
+      },
+      {
+        "sample_id": "russia:45e5ce10d9c5c92da1350196b1cdaa7064f60cc17ca16f317b871465e13e966b",
+        "added_pixels": 1,
+        "reference_pixels": 0
+      },
+      {
+        "sample_id": "russia:4da327137065846688f2541126436ee2a03736c3cfc4fa6b0039649750727ac9",
+        "added_pixels": 0,
+        "reference_pixels": 0
+      },
+      {
+        "sample_id": "russia:545aee5a73b1079d51b1c83931a1e8b218f46f230ccaa4f1731daf7a9128a38c",
+        "added_pixels": 0,
+        "reference_pixels": 1818
+      },
+      {
+        "sample_id": "russia:57cb76b717897e1c582a1d8eb36f08ec2fc577addfbef297dacdba15c73224c9",
+        "added_pixels": 178,
+        "reference_pixels": 4642
+      },
+      {
+        "sample_id": "russia:626718e83b2b71460b29b0e14bc68fea3d7d19dca345d13f8fe14e6ebb34903b",
+        "added_pixels": 476,
+        "reference_pixels": 12794
+      },
+      {
+        "sample_id": "russia:675b9d05ec8446b98877f64b39ab7690a4acda51229c4743378213c6020ee5f6",
+        "added_pixels": 2,
+        "reference_pixels": 1118
+      },
+      {
+        "sample_id": "russia:68a72334dca6db10d2322c6673ecbd89f8df4e0518fee9071dfcb19f635c2c03",
+        "added_pixels": 625,
+        "reference_pixels": 7621
+      },
+      {
+        "sample_id": "russia:6ca151f5b2e84bf40dc8f23afb766a914f9dfdf1740490871ddf784078ed820c",
+        "added_pixels": 351,
+        "reference_pixels": 3207
+      },
+      {
+        "sample_id": "russia:70876ab520b9a060cf985f362102631ac6bbf101fc13344fb0a69dfb13a6039b",
+        "added_pixels": 609,
+        "reference_pixels": 7838
+      },
+      {
+        "sample_id": "russia:7386ad528b3f5bbf8e9e23d3a2881ca28e4cc638d0a4bfd3ed03e29bca80384c",
+        "added_pixels": 3,
+        "reference_pixels": 1442
+      },
+      {
+        "sample_id": "russia:789e564aa585143a5256463e33984a5292668005bb41e57903a889c611ad7c28",
+        "added_pixels": 374,
+        "reference_pixels": 2319
+      },
+      {
+        "sample_id": "russia:7a87eac54950722c599a0f202f4f08eb46ef687070e368e17f0d473ee4a77269",
+        "added_pixels": 0,
+        "reference_pixels": 3501
+      },
+      {
+        "sample_id": "russia:7ae6637da5e9169a865bb6a282fe6bb0243747d082dc100bb97af95f22a19a8a",
+        "added_pixels": 82,
+        "reference_pixels": 810
+      },
+      {
+        "sample_id": "russia:7d5c02e93557150a35157ab7bd82044d0d947bb7b881ceb6b0ede6eed816547f",
+        "added_pixels": 0,
+        "reference_pixels": 5756
+      },
+      {
+        "sample_id": "russia:7db3f4f18d1c119dfa4d8a7b4607634a7c1a73c77a47729e87a8f20ba48b9b23",
+        "added_pixels": 7,
+        "reference_pixels": 1801
+      },
+      {
+        "sample_id": "russia:8196c22e5bb0f2281088e20430404527457618f194ab9776d713d64339687a86",
+        "added_pixels": 27,
+        "reference_pixels": 2848
+      },
+      {
+        "sample_id": "russia:8447239836771287a380d75543ad28442cb395f1aa2486178da35484cb115245",
+        "added_pixels": 50,
+        "reference_pixels": 293
+      },
+      {
+        "sample_id": "russia:8cb8676eec778d31e818eafc794cb56856708268d458f49f69c815fbcfe4afe9",
+        "added_pixels": 6,
+        "reference_pixels": 456
+      },
+      {
+        "sample_id": "russia:8da9c1fe2427dcaca561eb81686883a40ed7b97b234cca2fd1de6dd22666a478",
+        "added_pixels": 0,
+        "reference_pixels": 3673
+      },
+      {
+        "sample_id": "russia:8e6eef100f22a92beb37d80a06fb6f577f86fdf8cf0a47d0732320b3a1de2849",
+        "added_pixels": 0,
+        "reference_pixels": 2991
+      },
+      {
+        "sample_id": "russia:914ca85dae948f2a075a2fb25868a3b5c0d2d815b7687aeac441c29cb3cb55b6",
+        "added_pixels": 357,
+        "reference_pixels": 3196
+      },
+      {
+        "sample_id": "russia:91c39f443c13e3f0baa30dd2fe92ba7288b71fe55d2aaf17c4f8510b25a2cad4",
+        "added_pixels": 2,
+        "reference_pixels": 1454
+      },
+      {
+        "sample_id": "russia:9524e4ebedfcec6c66c7f39a91faf1f64cfda140d3c6148fab6cfc0154d0ba0e",
+        "added_pixels": 1250,
+        "reference_pixels": 6266
+      },
+      {
+        "sample_id": "russia:98b09fe4684c456adfab9ce075c8aa65a44cdbc0b566a90f0d6f514f4ed0fb89",
+        "added_pixels": 0,
+        "reference_pixels": 461
+      },
+      {
+        "sample_id": "russia:9b3a0e65e7a6b0a674683223a782ef7e1db27666e4bd951023a56cb4e9c5d216",
+        "added_pixels": 0,
+        "reference_pixels": 1361
+      },
+      {
+        "sample_id": "russia:9c70bb4060e6c3a589f9bfd2909a3aa4a157005d4c3ab53b7d6df9404c4cc33e",
+        "added_pixels": 1065,
+        "reference_pixels": 5555
+      },
+      {
+        "sample_id": "russia:9ee41e8c879c3399f1196961bf9660be7bc70135f535f56f5676ab9c76f47aeb",
+        "added_pixels": 0,
+        "reference_pixels": 5949
+      },
+      {
+        "sample_id": "russia:a0c00187b582caa84e14fd80b96e55f3dda42b623160d4155394586a38d0868c",
+        "added_pixels": 9,
+        "reference_pixels": 2170
+      },
+      {
+        "sample_id": "russia:a5c4d96f3d69a38cd74e74d541b22586a2d7f19991f4281b6c31f1d01ab834ad",
+        "added_pixels": 855,
+        "reference_pixels": 9828
+      },
+      {
+        "sample_id": "russia:a9284f0f4e978443ff688f551b324d24b8ed32f4ff0d6fa5d4cb28e80d769c61",
+        "added_pixels": 0,
+        "reference_pixels": 7950
+      },
+      {
+        "sample_id": "russia:b3ee58f010edf746a399027cba06f35ebb8e01bb28c5a31bc6fe3999182c156a",
+        "added_pixels": 3,
+        "reference_pixels": 2468
+      },
+      {
+        "sample_id": "russia:b5701f0dcce37c75536dd7fc32949eec39162f23161065af8208b5addc87f5ec",
+        "added_pixels": 0,
+        "reference_pixels": 0
+      },
+      {
+        "sample_id": "russia:bcf8a2422f520cbd700f63d04577b0ca213a469b524c7239171e54d3fc36a563",
+        "added_pixels": 0,
+        "reference_pixels": 2028
+      },
+      {
+        "sample_id": "russia:c0cf7fa0b5a7e63e67ce0492b0ecca54365774ba8e6d50a6194e47f146901a60",
+        "added_pixels": 578,
+        "reference_pixels": 5460
+      },
+      {
+        "sample_id": "russia:c2fd1af34397df33e21472314938035494d5c313a8df3300d33e65a62fe1b2e1",
+        "added_pixels": 0,
+        "reference_pixels": 1174
+      },
+      {
+        "sample_id": "russia:c481070229c61391c6acef554936185432534b173ac1e11197313bb4c6130cf8",
+        "added_pixels": 45,
+        "reference_pixels": 291
+      },
+      {
+        "sample_id": "russia:c735f336f02d88dd6fde97414636630d5585b6d6a11c883d6878df4df6529679",
+        "added_pixels": 157,
+        "reference_pixels": 1617
+      },
+      {
+        "sample_id": "russia:caecf663c87fd0605564a05517a94200bad23b14ca110ea9066f681558754a70",
+        "added_pixels": 53,
+        "reference_pixels": 3976
+      },
+      {
+        "sample_id": "russia:cbd368a89752f52e29bcd389eb3c8d2903a21eaa9c2086c4207648a8817143d9",
+        "added_pixels": 0,
+        "reference_pixels": 3162
+      },
+      {
+        "sample_id": "russia:cff1c5ec89a623e40a2044eb5fbee3b16337f03bb156a254cbc8dedda03da659",
+        "added_pixels": 20,
+        "reference_pixels": 1497
+      },
+      {
+        "sample_id": "russia:d7fd4390256f43693d2d90d6470c8d9b0a3082d642828826c906687c810b0503",
+        "added_pixels": 0,
+        "reference_pixels": 2436
+      },
+      {
+        "sample_id": "russia:d9b7d0f5fa14e16f4f797597935f71b3826bf1b7e751db1a92f0f2bb0398c5ba",
+        "added_pixels": 1828,
+        "reference_pixels": 2104
+      },
+      {
+        "sample_id": "russia:dc4ee356450197b07ee155cd84a91136405e8370bc44ebcbb9fb89023273954b",
+        "added_pixels": 10,
+        "reference_pixels": 3868
+      },
+      {
+        "sample_id": "russia:e3e06929437e479127f79e729f6c20730baff6c626bdc79195dee7ef2b1df74c",
+        "added_pixels": 0,
+        "reference_pixels": 2494
+      },
+      {
+        "sample_id": "russia:ea4ef0453998074f263aa7b6cbcdf5ce432a26e50c7f1d7bd8bbb7e480735a9c",
+        "added_pixels": 538,
+        "reference_pixels": 7345
+      },
+      {
+        "sample_id": "russia:ed2ebc53a846a5fc93be67230d7158c13c5243a2dfa2869a390e0ddb728abe5b",
+        "added_pixels": 0,
+        "reference_pixels": 5554
+      },
+      {
+        "sample_id": "russia:ee80f695150babd53eeb13b39c799ac5bfa40b4584be59109dcd9ba35d3e0071",
+        "added_pixels": 22,
+        "reference_pixels": 5213
+      },
+      {
+        "sample_id": "russia:ee95a27c018bceef9647275e8d1d79f8d6e90bc4031ccea973ff1441187f337c",
+        "added_pixels": 0,
+        "reference_pixels": 6252
+      },
+      {
+        "sample_id": "russia:f0d29fee5ef940dcb8655d77853ab592e1f23d530c059ed406bb821ae28f3543",
+        "added_pixels": 0,
+        "reference_pixels": 1265
+      },
+      {
+        "sample_id": "russia:f5e75617436bcd267442f562a2c39c432ff04d1165141f26b23f0b2cd6349c04",
+        "added_pixels": 1,
+        "reference_pixels": 2494
+      },
+      {
+        "sample_id": "russia:f68c84edfb7fa6919631095264f943626f4edeca768c036630d4875b3d89e4c0",
+        "added_pixels": 1039,
+        "reference_pixels": 4628
+      },
+      {
+        "sample_id": "russia:f979ea13b6b426895fe6f4479a1fd7acd4637596cfd6041276b44e318a324aa9",
+        "added_pixels": 245,
+        "reference_pixels": 2591
+      },
+      {
+        "sample_id": "russia:f9e87c1fd4114fd816cd227727b501575ff4e2ed48cc6a8cf81b4942ec0fe94b",
+        "added_pixels": 0,
+        "reference_pixels": 3981
+      },
+      {
+        "sample_id": "russia:fa6ebc7682e96aae706ab1b27a41adb49f104f7fb9639bbf96c2958fd2c19863",
+        "added_pixels": 574,
+        "reference_pixels": 7564
+      },
+      {
+        "sample_id": "russia:fd4d6197f8853d230e3876019194a8c77b7726ba9037fee25157d866c24b4fc5",
+        "added_pixels": 22,
+        "reference_pixels": 2441
+      },
+      {
+        "sample_id": "russia:ffafb61ba72cfeb22a11a8692d11f704e34b502a2d061a6b40338c324c747aee",
+        "added_pixels": 109,
+        "reference_pixels": 1768
+      },
+      {
+        "sample_id": "russia:ffe5bbee83528ac1491468420d637e7d079d36e6f0244ddb90a726d070853915",
+        "added_pixels": 27,
+        "reference_pixels": 4770
+      }
+    ],
+    "ems": [
+      {
+        "sample_id": "ems:ems_EMSR656_AOI01_HLS.S30.T30TYK.2023095T105031.v2.0",
+        "added_pixels": 20,
+        "reference_pixels": 53343
+      },
+      {
+        "sample_id": "ems:ems_EMSR667_AOI01_HLS.S30.T30TTK.2023176T110619.v2.0",
+        "added_pixels": 11,
+        "reference_pixels": 115692
+      },
+      {
+        "sample_id": "ems:ems_EMSR671_AOI01_HLS.S30.T28RBS.2023223T120331.v2.0",
+        "added_pixels": 911,
+        "reference_pixels": 22125
+      },
+      {
+        "sample_id": "ems:ems_EMSR674_AOI01_HLS.S30.T34SFH.2023215T090601.v2.0",
+        "added_pixels": 1,
+        "reference_pixels": 12040
+      },
+      {
+        "sample_id": "ems:ems_EMSR675_AOI01_HLS.S30.T35SNV.2023209T084601.v2.0",
+        "added_pixels": 19,
+        "reference_pixels": 115591
+      },
+      {
+        "sample_id": "ems:ems_EMSR677_AOI01_HLS.S30.T34TDK.2023231T093041.v2.0",
+        "added_pixels": 97,
+        "reference_pixels": 22180
+      },
+      {
+        "sample_id": "ems:ems_EMSR681_AOI01_HLS.S30.T29TPE.2023219T112119.v2.0",
+        "added_pixels": 9,
+        "reference_pixels": 61162
+      },
+      {
+        "sample_id": "ems:ems_EMSR686_AOI01_HLS.S30.T35TMF.2023240T090559.v2.0",
+        "added_pixels": 15,
+        "reference_pixels": 190188
+      },
+      {
+        "sample_id": "ems:ems_EMSR688_AOI01_HLS.S30.T34SGH.2023235T090601.v2.0",
+        "added_pixels": 2,
+        "reference_pixels": 6909
+      },
+      {
+        "sample_id": "ems:ems_EMSR689_AOI01_HLS.S30.T35TLF.2023240T090559.v2.0",
+        "added_pixels": 77,
+        "reference_pixels": 25995
+      },
+      {
+        "sample_id": "ems:ems_EMSR689_AOI02_HLS.S30.T35TLF.2023240T090559.v2.0",
+        "added_pixels": 2,
+        "reference_pixels": 5268
+      },
+      {
+        "sample_id": "ems:ems_EMSR704_AOI01_HLS.S30.T31SBD.2023325T105341.v2.0",
+        "added_pixels": 220,
+        "reference_pixels": 24788
+      },
+      {
+        "sample_id": "ems:ems_EMSR731_AOI01_HLS.S30.T34SEG.2024198T091559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1437
+      },
+      {
+        "sample_id": "ems:ems_EMSR733_AOI01_HLS.S30.T34SGH.2024210T090601.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 734
+      },
+      {
+        "sample_id": "ems:ems_EMSR733_AOI02_HLS.S30.T35SKC.2024205T090559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1611
+      },
+      {
+        "sample_id": "ems:ems_EMSR733_AOI03_HLS.S30.T35SKB.2024210T090601.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 5361
+      },
+      {
+        "sample_id": "ems:ems_EMSR735_AOI01_HLS.S30.T35SNA.2024212T085559.v2.0",
+        "added_pixels": 3,
+        "reference_pixels": 6179
+      },
+      {
+        "sample_id": "ems:ems_EMSR737_AOI01_HLS.S30.T34SFH.2024205T090559.v2.0",
+        "added_pixels": 1,
+        "reference_pixels": 6822
+      },
+      {
+        "sample_id": "ems:ems_EMSR739_AOI01_HLS.S30.T33TVL.2024220T095549.v2.0",
+        "added_pixels": 24,
+        "reference_pixels": 3
+      },
+      {
+        "sample_id": "ems:ems_EMSR743_AOI01_HLS.S30.T34SGH.2024230T090551.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 9054
+      },
+      {
+        "sample_id": "ems:ems_EMSR745_AOI01_HLS.S30.T35SKV.2024225T090559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 11788
+      },
+      {
+        "sample_id": "ems:ems_EMSR760_AOI01_HLS.S30.T29TNF.2024274T112119.v2.0",
+        "added_pixels": 3,
+        "reference_pixels": 197544
+      },
+      {
+        "sample_id": "ems:ems_EMSR760_AOI02_HLS.S30.T29TNF.2024274T112119.v2.0",
+        "added_pixels": 4190,
+        "reference_pixels": 85176
+      },
+      {
+        "sample_id": "ems:ems_EMSR760_AOI03_HLS.S30.T29TPE.2024259T112111.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1842
+      },
+      {
+        "sample_id": "ems:ems_EMSR760_AOI04_HLS.S30.T29TNG.2024274T112119.v2.0",
+        "added_pixels": 48,
+        "reference_pixels": 37701
+      },
+      {
+        "sample_id": "ems:ems_EMSR806_AOI01_HLS.S30.T35SMC.2025183T090411.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 70192
+      },
+      {
+        "sample_id": "ems:ems_EMSR806_AOI02_HLS.S30.T35SMC.2025174T090611.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1136
+      },
+      {
+        "sample_id": "ems:ems_EMSR807_AOI01_HLS.S30.T34SGG.2025204T090621.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 3289
+      },
+      {
+        "sample_id": "ems:ems_EMSR809_AOI01_HLS.S30.T35SLU.2025201T085621.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 4868
+      },
+      {
+        "sample_id": "ems:ems_EMSR812_AOI01_HLS.S30.T31TBF.2025214T105051.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 22818
+      },
+      {
+        "sample_id": "ems:ems_EMSR815_AOI01_HLS.S30.T34SFH.2025209T092231.v2.0",
+        "added_pixels": 235,
+        "reference_pixels": 9553
+      },
+      {
+        "sample_id": "ems:ems_EMSR821_AOI01_HLS.S30.T34SEG.2025209T092231.v2.0",
+        "added_pixels": 2,
+        "reference_pixels": 6565
+      },
+      {
+        "sample_id": "ems:ems_EMSR823_AOI01_HLS.S30.T35SKV.2025234T090611.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 8563
+      },
+      {
+        "sample_id": "ems:ems_EMSR824_AOI01_HLS.S30.T29TNF.2025208T112119.v2.0",
+        "added_pixels": 773,
+        "reference_pixels": 202
+      },
+      {
+        "sample_id": "ems:ems_EMSR824_AOI02_HLS.S30.T29TNG.2025221T113319.v2.0",
+        "added_pixels": 1,
+        "reference_pixels": 80982
+      },
+      {
+        "sample_id": "ems:ems_EMSR824_AOI03_HLS.S30.T29TNF.2025228T112119.v2.0",
+        "added_pixels": 202,
+        "reference_pixels": 48274
+      },
+      {
+        "sample_id": "ems:ems_EMSR826_AOI01_HLS.S30.T30TUK.2025222T110701.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 23576
+      },
+      {
+        "sample_id": "ems:ems_EMSR828_AOI01_HLS.S30.T35SKB.2025226T091031.v2.0",
+        "added_pixels": 1,
+        "reference_pixels": 26483
+      },
+      {
+        "sample_id": "ems:ems_EMSR830_AOI01_HLS.S30.T33TVF.2025231T095029.v2.0",
+        "added_pixels": 99,
+        "reference_pixels": 6098
+      },
+      {
+        "sample_id": "ems:ems_EMSR836_AOI01_HLS.S30.T34TCN.2025245T094041.v2.0",
+        "added_pixels": 15703,
+        "reference_pixels": 16261
+      },
+      {
+        "sample_id": "ems:ems_EMSR836_AOI02_HLS.S30.T34TCN.2025245T094041.v2.0",
+        "added_pixels": 5,
+        "reference_pixels": 8437
+      },
+      {
+        "sample_id": "ems:ems_EMSR836_AOI03_HLS.S30.T34TCM.2025245T093029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1579
+      },
+      {
+        "sample_id": "ems:ems_EMSR836_AOI04_HLS.S30.T34TCN.2025223T094051.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 190
+      },
+      {
+        "sample_id": "ems:ems_EMSR836_AOI05_HLS.S30.T34TCN.2025245T094041.v2.0",
+        "added_pixels": 75,
+        "reference_pixels": 12343
+      },
+      {
+        "sample_id": "ems:ems_EMSR836_AOI06_HLS.S30.T34TCM.2025245T093029.v2.0",
+        "added_pixels": 167,
+        "reference_pixels": 3825
+      },
+      {
+        "sample_id": "ems:ems_EMSR873_AOI01_HLS.S30.T32TPP.2026122T101019.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 6835
+      },
+      {
+        "sample_id": "ems:ems_EMSR889_AOI01_HLS.S30.T31TDH.2026188T103701.v2.0",
+        "added_pixels": 6,
+        "reference_pixels": 47048
+      },
+      {
+        "sample_id": "ems:ems_EMSR894_AOI01_HLS.S30.T31UDP.2026201T105051.v2.0",
+        "added_pixels": 1147,
+        "reference_pixels": 9354
+      },
+      {
+        "sample_id": "ems:ems_EMSR896_AOI01_HLS.S30.T30TXM.2026204T104619.v2.0",
+        "added_pixels": 30,
+        "reference_pixels": 154079
+      },
+      {
+        "sample_id": "ems:ems_EMSR898_AOI01_HLS.S30.T30TVL.2026202T105621.v2.0",
+        "added_pixels": 16,
+        "reference_pixels": 170732
+      },
+      {
+        "sample_id": "ems:ems_EMSR898_AOI02_HLS.S30.T30TWL.2026202T105621.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 10318
+      },
+      {
+        "sample_id": "ems:ems_EMSR899_AOI01_HLS.S30.T30TXQ.2026224T105651.v2.0",
+        "added_pixels": 362,
+        "reference_pixels": 219792
+      },
+      {
+        "sample_id": "ems:ems_EMSR905_AOI01_HLS.S30.T31TBE.2026229T104621.v2.0",
+        "added_pixels": 21,
+        "reference_pixels": 104238
+      },
+      {
+        "sample_id": "ems:ems_EMSR913_AOI01_HLS.S30.T29SQB.2026227T110711.v2.0",
+        "added_pixels": 1530,
+        "reference_pixels": 198570
+      },
+      {
+        "sample_id": "ems:ems_EMSR915_AOI01_HLS.S30.T34TCL.2026237T093151.v2.0",
+        "added_pixels": 3,
+        "reference_pixels": 2106
+      },
+      {
+        "sample_id": "ems:ems_EMSR917_AOI01_HLS.S30.T34TDM.2026240T093029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 3851
+      },
+      {
+        "sample_id": "ems:ems_EMSR917_AOI02_HLS.S30.T34TCM.2026240T093029.v2.0",
+        "added_pixels": 48,
+        "reference_pixels": 16
+      },
+      {
+        "sample_id": "ems:ems_EMSR921_AOI01_HLS.S30.T30TXN.2026231T104651.v2.0",
+        "added_pixels": 43,
+        "reference_pixels": 172136
+      },
+      {
+        "sample_id": "ems:ems_EMSR923_AOI01_HLS.S30.T34SGJ.2026254T090549.v2.0",
+        "added_pixels": 65,
+        "reference_pixels": 5939
+      },
+      {
+        "sample_id": "ems:ems_EMSR924_AOI01_HLS.S30.T33TUM.2026259T100701.v2.0",
+        "added_pixels": 235,
+        "reference_pixels": 2969
+      }
+    ],
+    "floga": [
+      {
+        "sample_id": "floga:floga_2020_729978_HLS.S30.T35TMF.2020061T090901.v2.0",
+        "added_pixels": 61,
+        "reference_pixels": 2894
+      },
+      {
+        "sample_id": "floga:floga_2020_742837_HLS.S30.T34SEG.2020129T092029.v2.0",
+        "added_pixels": 151,
+        "reference_pixels": 481
+      },
+      {
+        "sample_id": "floga:floga_2020_758391_HLS.S30.T34SGH.2020181T090601.v2.0",
+        "added_pixels": 13,
+        "reference_pixels": 1165
+      },
+      {
+        "sample_id": "floga:floga_2020_758845_HLS.S30.T35TKE.2020186T090559.v2.0",
+        "added_pixels": 1,
+        "reference_pixels": 539
+      },
+      {
+        "sample_id": "floga:floga_2020_760637_HLS.S30.T34SFH.2020186T090559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 3843
+      },
+      {
+        "sample_id": "floga:floga_2020_766850_HLS.S30.T34SFG.2020211T090601.v2.0",
+        "added_pixels": 404,
+        "reference_pixels": 36481
+      },
+      {
+        "sample_id": "floga:floga_2020_770245_HLS.S30.T35SMD.2020213T085559.v2.0",
+        "added_pixels": 3,
+        "reference_pixels": 1837
+      },
+      {
+        "sample_id": "floga:floga_2020_771135_HLS.S30.T34SEG.2020214T092031.v2.0",
+        "added_pixels": 1,
+        "reference_pixels": 3783
+      },
+      {
+        "sample_id": "floga:floga_2020_771206_HLS.S30.T34SGG.2020211T090601.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 758
+      },
+      {
+        "sample_id": "floga:floga_2020_771785_HLS.S30.T34SEG.2020214T092031.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 790
+      },
+      {
+        "sample_id": "floga:floga_2020_772120_HLS.S30.T35SLV.2020213T085559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 667
+      },
+      {
+        "sample_id": "floga:floga_2020_773502_HLS.S30.T34SFH.2020224T092031.v2.0",
+        "added_pixels": 62,
+        "reference_pixels": 380
+      },
+      {
+        "sample_id": "floga:floga_2020_774109_HLS.S30.T34TDK.2020217T093041.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 6700
+      },
+      {
+        "sample_id": "floga:floga_2020_774221_HLS.S30.T34SFG.2020216T090559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 818
+      },
+      {
+        "sample_id": "floga:floga_2020_775468_HLS.S30.T34SFH.2020239T092029.v2.0",
+        "added_pixels": 25,
+        "reference_pixels": 589
+      },
+      {
+        "sample_id": "floga:floga_2020_777334_HLS.S30.T35SMC.2020243T085559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 385
+      },
+      {
+        "sample_id": "floga:floga_2020_777338_HLS.S30.T34SGE.2020236T090559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 4290
+      },
+      {
+        "sample_id": "floga:floga_2020_777493_HLS.S30.T35SMB.2020228T085601.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 388
+      },
+      {
+        "sample_id": "floga:floga_2020_777825_HLS.S30.T35SLB.2020246T090559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1410
+      },
+      {
+        "sample_id": "floga:floga_2020_778632_HLS.S30.T35SMD.2020236T090559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 818
+      },
+      {
+        "sample_id": "floga:floga_2020_779965_HLS.S30.T34SFF.2020244T092031.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 21094
+      },
+      {
+        "sample_id": "floga:floga_2020_780038_HLS.S30.T34SFG.2020246T090559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1078
+      },
+      {
+        "sample_id": "floga:floga_2020_782085_HLS.S30.T34SFG.2020251T090601.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1497
+      },
+      {
+        "sample_id": "floga:floga_2020_782102_HLS.S30.T35TMF.2020246T090559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1587
+      },
+      {
+        "sample_id": "floga:floga_2020_782801_HLS.S30.T34SFJ.2020249T092029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 652
+      },
+      {
+        "sample_id": "floga:floga_2020_783384_HLS.S30.T34SFG.2020254T092031.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 902
+      },
+      {
+        "sample_id": "floga:floga_2020_783502_HLS.S30.T34SDH.2020257T093041.v2.0",
+        "added_pixels": 190,
+        "reference_pixels": 340
+      },
+      {
+        "sample_id": "floga:floga_2020_783508_HLS.S30.T34SFF.2020259T092029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 734
+      },
+      {
+        "sample_id": "floga:floga_2020_786097_HLS.S30.T35TMF.2020261T090631.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 2482
+      },
+      {
+        "sample_id": "floga:floga_2020_786466_HLS.S30.T34SEH.2020264T092031.v2.0",
+        "added_pixels": 15,
+        "reference_pixels": 1641
+      },
+      {
+        "sample_id": "floga:floga_2020_786481_HLS.S30.T34SFG.2020269T092029.v2.0",
+        "added_pixels": 4,
+        "reference_pixels": 544
+      },
+      {
+        "sample_id": "floga:floga_2020_786656_HLS.S30.T34SDH.2020259T092029.v2.0",
+        "added_pixels": 1,
+        "reference_pixels": 395
+      },
+      {
+        "sample_id": "floga:floga_2020_786775_HLS.S30.T34SDJ.2020259T092029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 114
+      },
+      {
+        "sample_id": "floga:floga_2020_787231_HLS.S30.T34SEH.2020269T092029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 777
+      },
+      {
+        "sample_id": "floga:floga_2020_790723_HLS.S30.T35SLB.2020278T085831.v2.0",
+        "added_pixels": 11,
+        "reference_pixels": 1379
+      },
+      {
+        "sample_id": "floga:floga_2020_791065_HLS.S30.T35SLB.2020271T090731.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 3289
+      },
+      {
+        "sample_id": "floga:floga_2020_792406_HLS.S30.T35TMF.2020278T085831.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 6960
+      },
+      {
+        "sample_id": "floga:floga_2020_793098_HLS.S30.T34SEH.2020294T092031.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1381
+      },
+      {
+        "sample_id": "floga:floga_2020_793417_HLS.S30.T34SDG.2020297T093051.v2.0",
+        "added_pixels": 3,
+        "reference_pixels": 2101
+      },
+      {
+        "sample_id": "floga:floga_2020_793905_HLS.S30.T34SEF.2020284T092031.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 345
+      },
+      {
+        "sample_id": "floga:floga_2020_794018_HLS.S30.T35SMD.2020298T090041.v2.0",
+        "added_pixels": 1880,
+        "reference_pixels": 1470
+      },
+      {
+        "sample_id": "floga:floga_2020_804947_HLS.S30.T34TEK.2020332T093339.v2.0",
+        "added_pixels": 7,
+        "reference_pixels": 7941
+      },
+      {
+        "sample_id": "floga:floga_2020_807048_HLS.S30.T34TGL.2021005T091351.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 7820
+      },
+      {
+        "sample_id": "floga:floga_2020_809191_HLS.S30.T34SGH.2021005T091351.v2.0",
+        "added_pixels": 3,
+        "reference_pixels": 953
+      },
+      {
+        "sample_id": "floga:floga_2021_833175_HLS.S30.T34TEK.2021063T092029.v2.0",
+        "added_pixels": 129,
+        "reference_pixels": 407
+      },
+      {
+        "sample_id": "floga:floga_2021_842753_HLS.S30.T35SKB.2021110T090549.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1619
+      },
+      {
+        "sample_id": "floga:floga_2021_844986_HLS.S30.T34TEL.2021126T093029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1786
+      },
+      {
+        "sample_id": "floga:floga_2021_854440_HLS.S30.T34SFH.2021145T090601.v2.0",
+        "added_pixels": 88,
+        "reference_pixels": 64798
+      },
+      {
+        "sample_id": "floga:floga_2021_854571_HLS.S30.T34SFH.2021145T090601.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1714
+      },
+      {
+        "sample_id": "floga:floga_2021_855779_HLS.S30.T35SKB.2021155T090601.v2.0",
+        "added_pixels": 19,
+        "reference_pixels": 1660
+      },
+      {
+        "sample_id": "floga:floga_2021_864865_HLS.S30.T34TFL.2021178T092031.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1164
+      },
+      {
+        "sample_id": "floga:floga_2021_865564_HLS.S30.T34TFL.2021193T092029.v2.0",
+        "added_pixels": 13,
+        "reference_pixels": 1831
+      },
+      {
+        "sample_id": "floga:floga_2021_867203_HLS.S30.T34SFJ.2021193T092029.v2.0",
+        "added_pixels": 1,
+        "reference_pixels": 13273
+      },
+      {
+        "sample_id": "floga:floga_2021_867256_HLS.S30.T34TFL.2021193T092029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 7373
+      },
+      {
+        "sample_id": "floga:floga_2021_867703_HLS.S30.T34TFL.2021203T092029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 502
+      },
+      {
+        "sample_id": "floga:floga_2021_869091_HLS.S30.T34SEJ.2021193T092029.v2.0",
+        "added_pixels": 31,
+        "reference_pixels": 63
+      },
+      {
+        "sample_id": "floga:floga_2021_869687_HLS.S30.T34SGH.2021210T090559.v2.0",
+        "added_pixels": 44,
+        "reference_pixels": 1293
+      },
+      {
+        "sample_id": "floga:floga_2021_871351_HLS.S30.T35SMB.2021217T085559.v2.0",
+        "added_pixels": 2,
+        "reference_pixels": 5282
+      },
+      {
+        "sample_id": "floga:floga_2021_873612_HLS.S30.T35SLU.2021222T085601.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1042
+      },
+      {
+        "sample_id": "floga:floga_2021_873797_HLS.S30.T34SFH.2021220T090559.v2.0",
+        "added_pixels": 13,
+        "reference_pixels": 2358
+      },
+      {
+        "sample_id": "floga:floga_2021_874304_HLS.S30.T34SFG.2021213T092029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 4607
+      },
+      {
+        "sample_id": "floga:floga_2021_874400_HLS.S30.T35SKC.2021210T090559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 853
+      },
+      {
+        "sample_id": "floga:floga_2021_874623_HLS.S30.T35SNA.2021224T084559.v2.0",
+        "added_pixels": 102,
+        "reference_pixels": 13334
+      },
+      {
+        "sample_id": "floga:floga_2021_874641_HLS.S30.T34SEH.2021223T092029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 4394
+      },
+      {
+        "sample_id": "floga:floga_2021_874904_HLS.S30.T35SKC.2021210T090559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 454
+      },
+      {
+        "sample_id": "floga:floga_2021_875222_HLS.S30.T34SEG.2021213T092029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 3612
+      },
+      {
+        "sample_id": "floga:floga_2021_876936_HLS.S30.T35TMF.2021220T090559.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 853
+      },
+      {
+        "sample_id": "floga:floga_2021_877372_HLS.S30.T34TEK.2021228T092031.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 495
+      },
+      {
+        "sample_id": "floga:floga_2021_877500_HLS.S30.T34SGH.2021230T090559.v2.0",
+        "added_pixels": 4,
+        "reference_pixels": 404
+      },
+      {
+        "sample_id": "floga:floga_2021_877532_HLS.S30.T34TEK.2021228T092031.v2.0",
+        "added_pixels": 23,
+        "reference_pixels": 10954
+      },
+      {
+        "sample_id": "floga:floga_2021_878255_HLS.S30.T34SEG.2021238T092031.v2.0",
+        "added_pixels": 85,
+        "reference_pixels": 104408
+      },
+      {
+        "sample_id": "floga:floga_2021_879291_HLS.S30.T34SFH.2021225T090601.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 3133
+      },
+      {
+        "sample_id": "floga:floga_2021_879409_HLS.S30.T34SDJ.2021221T093041.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1807
+      },
+      {
+        "sample_id": "floga:floga_2021_880766_HLS.S30.T34TFL.2021228T092031.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1033
+      },
+      {
+        "sample_id": "floga:floga_2021_881961_HLS.S30.T34SGG.2021235T090601.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1221
+      },
+      {
+        "sample_id": "floga:floga_2021_882005_HLS.S30.T34SGH.2021240T090549.v2.0",
+        "added_pixels": 5,
+        "reference_pixels": 1640
+      },
+      {
+        "sample_id": "floga:floga_2021_882957_HLS.S30.T34SFG.2021233T092029.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 1083
+      },
+      {
+        "sample_id": "floga:floga_2021_885041_HLS.S30.T35SKC.2021240T090549.v2.0",
+        "added_pixels": 20,
+        "reference_pixels": 887
+      },
+      {
+        "sample_id": "floga:floga_2021_885323_HLS.S30.T34SFH.2021240T090549.v2.0",
+        "added_pixels": 11,
+        "reference_pixels": 3196
+      },
+      {
+        "sample_id": "floga:floga_2021_887929_HLS.S30.T34TGL.2021258T092031.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 5934
+      },
+      {
+        "sample_id": "floga:floga_2021_888273_HLS.S30.T35SMA.2021262T085631.v2.0",
+        "added_pixels": 0,
+        "reference_pixels": 3116
+      }
+    ]
+  },
+  "parent_result_sha256": "242acac3cf2ccd30728e5919997895e7cf1d83de223a8802b06f3c4daaaa296d",
+  "non_claims": [
+    "Development cohorts already evaluated; no independent superiority.",
+    "Connected components are not physical fire IDs."
+  ]
+}
