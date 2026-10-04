@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-104",
+  "run_id": "SPEC-104-DEVELOPMENT-001",
+  "created_at": "2026-10-04T05:05:16.441613+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "evidence_class": "REPLAY",
+  "conclusion": "Development eligibility passes; fixed unused calibration confirmation queued, not yet evaluated.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/develop_reference_additions.py --data-root data-store --parent research/russian-transfer-v1-result.json --russian-manifest data-store/russia/manifest.json --base-manifest data-store/forest-pairs/manifest.json --runs research/russian-transfer-v1 --reference-root /home/mc/fires/research --prithvi-root /home/mc/fires/external/prithvi-eo2-300m-burnscars --out research/reference-additions-v1-development.json'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_reference_additions.py -q'",
+    "make gate"
+  ],
+  "acceptance": {
+    "development_eligible": true,
+    "comparisons": {
+      "russia": {
+        "samples": 77,
+        "groups": 24,
+        "candidate_iou": 0.35297361629921165,
+        "control_iou": 0.32610820993394857,
+        "delta": 0.026865406365263078,
+        "ci95": [
+          -0.000609338532186538,
+          0.046230512622392014
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive",
+        "candidate_missed_groups": 2,
+        "baseline_missed_groups": 2
+      },
+      "ems": {
+        "samples": 60,
+        "groups": 44,
+        "candidate_iou": 0.7683337830055517,
+        "control_iou": 0.7594609076850591,
+        "delta": 0.008872875320492524,
+        "ci95": [
+          0.0015737393016135499,
+          0.02249633464336132
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better",
+        "candidate_missed_groups": 0,
+        "baseline_missed_groups": 0
+      },
+      "floga": {
+        "samples": 81,
+        "groups": 81,
+        "candidate_iou": 0.7425270806852566,
+        "control_iou": 0.7464595747186571,
+        "delta": -0.003932494033400458,
+        "ci95": [
+          -0.014683030255495508,
+          -9.466609488764172e-05
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "worse",
+        "candidate_missed_groups": 0,
+        "baseline_missed_groups": 0
+      }
+    },
+    "tests_passed": 2,
+    "confirmation": "NOT_RUN"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/reference-additions-development.json",
+    "evidence/experiments/accuracy-next-20261003/reference-additions-plan.json"
+  ],
+  "limitations": [
+    "Reused development; superiority needs confirmationCI to both competitors.",
+    "Immutableoutputs; freshnamespace forreplay."
+  ],
+  "non_claims": [
+    "Development cohorts already evaluated; no independent superiority.",
+    "Connected components are not physical fire IDs.",
+    "Pixel reference preservation is not a physical detection/area proof."
+  ]
+}

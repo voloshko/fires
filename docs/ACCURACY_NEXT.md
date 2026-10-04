@@ -247,3 +247,19 @@ Fourfullmodels nowcomplete. Queue1106633 active; child1134639 control-s3
 unchangedf78ae585…; do notedit sealednumericalsources. About22seconds/epoch
 measured, ~25minutes forlast2models plusactualscoring, not aqualityguarantee.
 Russianconfirmation61 stillnotconsumed byrejected102/103.
+
+## SPEC104 eligible and confirmationqueued
+
+FLOGA786775:GT1382pixels, C1-MMTP5 maxp0.5806, pairmax0.3064, meanTP0.
+The5TP liein106pixelcomponent with24meanpositivepixels outsideGT;
+103small/fullyrejected-component condition neverapplies. No captuning.
+104keepsALL C1-MM>=.5 andadds pair>=.95, commonvalid/watermask.
+Developmenteligible:Russia0.352974(+.026865 CI[-.000609,.046231]), EMS+.008873,
+FLOGA-.003932 within-.01, noaddedmiss. 2testsPASS; scopedreviewnoHIGH.
+Notpromoted/PASS. Reservedcal61 nowfrozenfor oneconfirmation, no tuning.
+Queue fires-accuracy-reference-additions-confirmation-v1 PID1144797 active,
+waitingGPUflock. Main101queue1106633 child1141654 replay-s3 (6thrun),
+epoch12/30 lastverified. ~7minutestraining thenboth actualmeasurements.
+Do notedit frozen104plan/source or101numericcode whilelive. Results:
+research/reference-additions-v1-confirmation.json and
+research/l2a-full-replay-v1-result.json. Free6.3GiB; no imagerydownloads.

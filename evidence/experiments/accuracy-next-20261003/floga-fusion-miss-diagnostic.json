@@ -1,0 +1,18 @@
+{
+  "spec_id": "SPEC-103",
+  "sample_id": "floga:floga_2020_786775_HLS.S30.T34SDJ.2020259T092029.v2.0",
+  "valid_gt_pixels": 1382,
+  "reference_tp": 5,
+  "mean_tp": 0,
+  "reference_max_on_gt": 0.580618143081665,
+  "paired_max_on_gt": 0.3063878118991852,
+  "reference_component": {
+    "size": 106,
+    "mean_pixels": 24,
+    "gt_pixels": 5
+  },
+  "non_claims": [
+    "Cached-error diagnosis, not field truth.",
+    "No threshold or GT edits."
+  ]
+}
