@@ -1,0 +1,13 @@
+{
+  "spec_id": "SPEC-114",
+  "unit": "fires-accuracy-equal-cost-smoke-v1.service",
+  "status": "FAIL",
+  "failure": "systemd lacked WorkingDirectory; relative queue script not found",
+  "exit_status": 127,
+  "gpu_test_executed": false,
+  "output_exists": false,
+  "raw_journal": "Oct 04 13:52:42 k8 systemd[8199]: Started fires-accuracy-equal-cost-smoke-v1.service - [systemd-run] /usr/bin/bash scripts/queues/smoke_equal_cost_additions.sh.\nOct 04 13:52:42 k8 bash[1341965]: /usr/bin/bash: scripts/queues/smoke_equal_cost_additions.sh: No such file or directory\nOct 04 13:52:42 k8 systemd[8199]: fires-accuracy-equal-cost-smoke-v1.service: Main process exited, code=exited, status=127/n/a\nOct 04 13:52:42 k8 systemd[8199]: fires-accuracy-equal-cost-smoke-v1.service: Failed with result 'exit-code'.\n",
+  "non_claims": [
+    "Launcher failure only; no numerical test or accuracy evidence"
+  ]
+}

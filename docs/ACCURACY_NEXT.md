@@ -576,3 +576,24 @@ GPU train/score both terminal exit0, free disk4.0GiB. No restart or product
 promotion. Main remaining mechanism in111: additions yield FLOGA370TP/14028FP;
 next training hypothesis must address added background risk, retaining all
 competitor/region/CI safeguards rather than retuning the inference threshold.
+
+## SPEC-114 equal-cost training launched
+
+Spec6a4ceb6 before implementation5628a51. Sole numeric intervention CE[1,1]
+plus identical Dice, same frozen monotonic head/pool/exposures/batches/schedule.
+Source/model/loss identity seal a6e432e3f0eeb21ac550027e7b5278d67aa1639ed819ed40c4d53539484ab690
+matches local committed sources. Old111 files/results/FAIL unchanged.
+Nine tests and actual512 FP32/BF16 pair/post gradient/freezing/native-state
+checks pass. First launcher smoke-v1 failed127 before script due absent cwd;
+FAIL preserved. Separate corrected smoke-v2 exit0/5.316s/1.6GiB peak.
+Independent codeAPPROVE/architectureWATCH, finalCOMMENT in SPEC-114-REVIEW.md.
+
+Own systemd --user fires-accuracy-equal-cost-additions-train-v1 (18G/CPU400%)
+and score-v1 (12G/CPU400%) started with WorkingDirectory and absolute scripts.
+Six seed1/2/3 pair/post jobs, shared research/accuracy-gpu.lock per run/free22GB,
+source/output immutable. Scorer waits all6 complete; expected
+research/equal-cost-additions-v1/development.json. Rough prior timing~60min
+training+8min score, not a completion promise. Check current MainPID/journal.
+Do not edit sealed sources or restart because observation times out.
+No data download; SPEC112 eastern selection still unused,113deferred.
+All original guards and four-direction goal remain active, no promotion.

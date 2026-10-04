@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-114",
+  "run_id": "SPEC-114-PREFLIGHT-001",
+  "created_at": "2026-10-04T10:55:03.120234+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "conclusion": "Nine unit tests and real512 FP32/BF16 mechanical preflight passed. Sealed six-run training launched; quality unmeasured.",
+  "commands": [
+    "ssh k8plus: .runtime/bin/python -m pytest tests/test_equal_cost_additions.py tests/test_recall_expansion.py -q",
+    "ssh k8plus: fires-accuracy-equal-cost-smoke-v2 with WorkingDirectory and absolute queue script",
+    "ssh k8plus: train_equal_cost_additions.py --seal-only",
+    "ssh k8plus: fires-accuracy-equal-cost-additions-train-v1 / score-v1",
+    "make gate"
+  ],
+  "acceptance": {
+    "unit_tests_passed": 9,
+    "variants": [
+      {
+        "variant": "pair",
+        "probability_formula": {
+          "fp32": true,
+          "bf16": true
+        },
+        "reference_positives_preserved": true,
+        "gradients_finite_nonzero": true,
+        "backbone_bn_frozen": true,
+        "checkpoint_sha256": "1320f415aad95ce8bcab3e590fd57e28351a5f17fb7fe80bf3b8042ea33b5164",
+        "checkpoint_bytes": 428778,
+        "trainable_parameters": 105689
+      },
+      {
+        "variant": "post",
+        "probability_formula": {
+          "fp32": true,
+          "bf16": true
+        },
+        "reference_positives_preserved": true,
+        "gradients_finite_nonzero": true,
+        "backbone_bn_frozen": true,
+        "checkpoint_sha256": "399e3faf8dea72f22bfb037c8d15a0ac41a0def7a87b198352cc0fd0f693880b",
+        "checkpoint_bytes": 428778,
+        "trainable_parameters": 105689
+      }
+    ],
+    "smoke_exit": 0,
+    "smoke_seconds": 5.316,
+    "smoke_host_peak": "1.6 GiB",
+    "training_recipe": "a6e432e3f0eeb21ac550027e7b5278d67aa1639ed819ed40c4d53539484ab690",
+    "local_source_parity": true,
+    "review_code": "APPROVE",
+    "review_architecture": "WATCH",
+    "review_synthesis": "COMMENT",
+    "training": "LIVE",
+    "accuracy": "NOT_RUN"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/equal-cost-additions-smoke.json",
+    "evidence/experiments/accuracy-next-20261003/equal-cost-additions-smoke-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/equal-cost-additions-training-recipe.json"
+  ],
+  "limitations": [
+    "Equal CE changes relative class gradients and CE/Dice balance; no accuracy causality established.",
+    "Monotonic additions cannot remove pre-existing reference false positives.",
+    "All old populations consumed development."
+  ],
+  "non_claims": [
+    "Mechanical GPU/source/adapter check only, no full training or accuracy gain.",
+    "No new independent competitor comparison, severity/L2A useful gain or goal completion."
+  ]
+}
