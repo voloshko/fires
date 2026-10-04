@@ -2,7 +2,23 @@
 # SPEC-101: matched full-pool jobs; release GPU between jobs for other scoring.
 set -euo pipefail
 cd /home/mc/fires-accuracy-next
-while systemctl --user is-active --quiet fires-accuracy-full-replay-prepare-v1; do sleep 20; done
+while systemctl --user is-active --quiet fires-accuracy-full-replay-prepare-v2 || \
+      systemctl --user is-active --quiet fires-accuracy-full-replay-smoke-v2; do sleep 20; done
+.runtime/bin/python - <<'PY'
+import json
+from pathlib import Path
+summaries={}
+for variant in ("control","replay"):
+    path=Path(f"research/l2a-full-replay-smoke-{variant}-s1/summary.json")
+    x=json.load(path.open())
+    assert x["completed"] and x["smoke"] and x["epochs"]==2
+    assert len(x["full_hls_exposures"])==3 and min(x["full_hls_exposures"])>=1
+    summaries[variant]=x
+assert summaries["control"]["order_sha256"]==summaries["replay"]["order_sha256"]
+assert summaries["control"]["common_exposures"]==summaries["replay"]["common_exposures"]
+assert not any(summaries["control"]["l2a_exposures"])
+assert any(summaries["replay"]["l2a_exposures"])
+PY
 seal() {
 .runtime/bin/python - <<'PY'
 import json
