@@ -163,7 +163,8 @@
         "SPEC-117",
         "SPEC-118",
         "SPEC-119",
-        "SPEC-120"
+        "SPEC-120",
+        "SPEC-121"
       ]
     }
   },
@@ -1356,6 +1357,16 @@
         "SPEC-97"
       ],
       "status": "implemented"
+    },
+    "SPEC-121": {
+      "title": "Coupled member probabilities for frozen temporal ensemble",
+      "file": "specs/SPEC-121-coupled-member-inference.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-118",
+        "SPEC-119"
+      ],
+      "status": "active"
     }
   }
 }
