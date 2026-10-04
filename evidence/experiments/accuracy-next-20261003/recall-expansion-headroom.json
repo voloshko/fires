@@ -1,0 +1,50 @@
+{
+  "spec_id": "SPEC-111",
+  "utc": "2026-10-04T09:35:15.539448+00:00",
+  "definition": "Ideal recovery of all observed false negatives, zero extra false positives; reference false positives retained.",
+  "datasets": {
+    "russia_eval": {
+      "reference_iou": 0.32610820993394857,
+      "monotonic_iou_ceiling": 0.6672961823687913,
+      "old_reserve_iou": 0.3230492072325294,
+      "reference_tp": 136760,
+      "reference_fp": 139526,
+      "reference_fn": 143084
+    },
+    "russia_cal": {
+      "reference_iou": 0.20591468859988143,
+      "monotonic_iou_ceiling": 0.6765757618965427,
+      "old_reserve_iou": 0.3045746193131945,
+      "reference_tp": 109755,
+      "reference_fp": 172389,
+      "reference_fn": 250868
+    },
+    "western": {
+      "reference_iou": 0.1838986395342188,
+      "monotonic_iou_ceiling": 0.6733241654456877,
+      "old_reserve_iou": 0.2206281739341134,
+      "reference_tp": 196177,
+      "reference_fp": 348487,
+      "reference_fn": 522103
+    },
+    "ems": {
+      "reference_iou": 0.7594609076850591,
+      "monotonic_iou_ceiling": 0.8668376861481049,
+      "old_reserve_iou": 0.7948998849080845,
+      "reference_tp": 2113222,
+      "reference_fp": 370528,
+      "reference_fn": 298779
+    },
+    "floga": {
+      "reference_iou": 0.7464595747186571,
+      "monotonic_iou_ceiling": 0.8177278317174091,
+      "old_reserve_iou": 0.7255777050481008,
+      "reference_tp": 329594,
+      "reference_fp": 80481,
+      "reference_fn": 31468
+    }
+  },
+  "non_claims": [
+    "Theoretical ceiling is not achieved accuracy or independent confirmation."
+  ]
+}

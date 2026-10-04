@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-111",
+  "run_id": "SPEC-111-PREFLIGHT-001",
+  "created_at": "2026-10-04T09:37:22.505617+00:00",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "evidence_class": "REPLAY",
+  "conclusion": "Real512 mechanical probability/freezing/native-state preflight passed; full six-run training and accuracy still pending.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_recall_expansion.py tests/test_temporal_adapter_contract.py tests/test_temporal_adapter_evaluation.py -q'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && bash scripts/queues/smoke_recall_expansion.sh'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && bash scripts/queues/queue_recall_expansion.sh'",
+    "make gate"
+  ],
+  "acceptance": {
+    "unit_tests_passed": 11,
+    "variants": [
+      {
+        "variant": "pair",
+        "probability_formula": {
+          "fp32": true,
+          "bf16": true
+        },
+        "reference_positives_preserved": true,
+        "gradients_finite_nonzero": true,
+        "backbone_bn_frozen": true,
+        "checkpoint_sha256": "e190350d602dcf78756859510ac43715185b3868037b851ce73df78010dc98fe",
+        "checkpoint_bytes": 428778,
+        "trainable_parameters": 105689
+      },
+      {
+        "variant": "post",
+        "probability_formula": {
+          "fp32": true,
+          "bf16": true
+        },
+        "reference_positives_preserved": true,
+        "gradients_finite_nonzero": true,
+        "backbone_bn_frozen": true,
+        "checkpoint_sha256": "07082507a0ec73453df7261042b99751a5f5b8f8e1484880cb7a022c0bccd1a8",
+        "checkpoint_bytes": 428778,
+        "trainable_parameters": 105689
+      }
+    ],
+    "smoke_exit": 0,
+    "smoke_seconds": 5.522,
+    "smoke_host_peak": "1.6 GiB",
+    "training_recipe": "0f5769bd961f98a205947738aa650513d7c7ef24281ab614471902ad8ac9b6f5",
+    "training": "LIVE",
+    "accuracy": "NOT_RUN",
+    "review_code": "APPROVE",
+    "review_architecture": "WATCH"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/recall-expansion-smoke.json",
+    "evidence/experiments/accuracy-next-20261003/recall-expansion-smoke-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/recall-expansion-training-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/recall-expansion-headroom.json"
+  ],
+  "limitations": [
+    "Initial bias-4 is a small positive prior; it is not prediction-neutral.",
+    "Preserving reference positives also preserves reference false positives.",
+    "Training around one seed and scoring around the five-seed mean are different ensemble constructions.",
+    "All existing populations are consumed development; no promotion from smoke or future eligibility alone."
+  ],
+  "non_claims": [
+    "Mechanical GPU/source/adapter check only, no full training or accuracy gain.",
+    "No new independent competitor comparison, severity/L2A useful gain or goal completion."
+  ]
+}

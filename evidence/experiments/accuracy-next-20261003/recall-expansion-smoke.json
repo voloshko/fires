@@ -1,0 +1,39 @@
+{
+  "spec_id": "SPEC-111",
+  "recipe_id": "1dde5872753efe25ffa89109403e979fe66bda860e5c0546070759e3718af9f0",
+  "base_sha256": "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c",
+  "sample_id": "russia:002f1097a2aaf6f160b684cada5a0115349568f7f58b18a549c39557e3f1aa48",
+  "variants": [
+    {
+      "variant": "pair",
+      "probability_formula": {
+        "fp32": true,
+        "bf16": true
+      },
+      "reference_positives_preserved": true,
+      "gradients_finite_nonzero": true,
+      "backbone_bn_frozen": true,
+      "checkpoint_sha256": "e190350d602dcf78756859510ac43715185b3868037b851ce73df78010dc98fe",
+      "checkpoint_bytes": 428778,
+      "trainable_parameters": 105689
+    },
+    {
+      "variant": "post",
+      "probability_formula": {
+        "fp32": true,
+        "bf16": true
+      },
+      "reference_positives_preserved": true,
+      "gradients_finite_nonzero": true,
+      "backbone_bn_frozen": true,
+      "checkpoint_sha256": "07082507a0ec73453df7261042b99751a5f5b8f8e1484880cb7a022c0bccd1a8",
+      "checkpoint_bytes": 428778,
+      "trainable_parameters": 105689
+    }
+  ],
+  "completed": true,
+  "non_claims": [
+    "Mechanical GPU/source/adapter check only, no full training or accuracy gain.",
+    "No new independent competitor comparison, severity/L2A useful gain or goal completion."
+  ]
+}

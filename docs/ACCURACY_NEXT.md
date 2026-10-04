@@ -481,3 +481,31 @@ moderate remains worse than hybrid. Do not fix this by hiding unassessed
 pixels or interpreting class5 as reviewed negatives. Separate contour coverage
 from damage grading in further experiments. All jobs terminal, no GPU work
 running; no model promoted. Four-direction user objective remains active.
+
+## SPEC-111 learned monotonic expansion launched
+
+Spec6abc229 before code54d3913. New probability p_new=p_C1+(1-p_C1)*q;
+q is learned from paired/post features, bias-4 prior declared, no exact initial
+identity claim. Weak C1 positives now preserved on identical valid/water pixels;
+explicit scorer subset check. C1 false positives also preserved; IoU gain is
+not guaranteed. Same frozen encoders/BN, fit mean/std,683ID full pool/762views,
+30epochs/AdamW1e-3/cosine/BF16, three capacity-matched pair/post seed pairs.
+Original109 files/weights/results/seals unchanged. All old guards reused.
+
+Eleven tests and real512 GPU preflight passed both variants in FP32/BF16,
+finite/nonzero gradient and frozen base/BN, small native state round trip.
+Smoke exit0/5.522seconds/1.6GiB host peak;428,778-byte checkpoints.
+Independent review codeAPPROVE/architectureWATCH; finalCOMMENT in
+docs/SPEC-111-REVIEW.md. Structural invariant and theoretical ceiling are not
+quality acceptance. Each adapter's training base differs from scoring C1-MM5;
+post control uses the same declared construction.
+
+Full train unit fires-accuracy-recall-expansion-train-v1 PID1297082 active,
+child1297085 pair-s1 epoch2/30 at snapshot. Score unit
+fires-accuracy-recall-expansion-score-v1 PID1297106 waiting for all6 summaries.
+Training seal0f5769bd961f98a205947738aa650513d7c7ef24281ab614471902ad8ac9b6f5
+matches local committed source. Do not edit its numeric sources/queue whilelive
+or restart because observation times out. Expected result
+research/recall-expansion-v1/development.json. Free disk~4.0GiB, no new data,
+no original deletion, <=512MiB small weights/packed masks,3GiB free floor.
+SPEC111 active; candidate accuracy NOT measured. Full four-part goal active.
