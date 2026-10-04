@@ -1,6 +1,6 @@
 # SPEC-112: Preregister unused eastern geographic confirmation population
 
-Status: active
+Status: implemented
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-95, SPEC-105, SPEC-111
 
@@ -51,3 +51,19 @@ scoring require an eligible frozen candidate and a separate executable spec.
 - k8plus: `.runtime/bin/python -m pytest tests/test_eastern_confirmation_plan.py -q`.
 - k8plus: `.runtime/bin/python scripts/plan_eastern_confirmation.py --data-root data-store --out data-store/eastern-holdout-plan-v1`.
 - `make gate`.
+
+## Resolution
+
+CPU metadata selection finished exit0,27.065seconds,345MiB peak. Source
+14,522 valid contours yielded46 within-domain groups; whole-contour/frame
+exclusion removed3 groups. Immutable selection72windows/43groups is ready
+as metadata only. All four authenticated exclusion registries are complete;
+two tests and gate passed. No catalogue, raster/image or prediction was read.
+
+Independent code review APPROVE and architecture WATCH, finalCOMMENT.
+The plan is unused relative to recorded campaign histories, with within-region
+20km spatial groups, not physical ignition events. This structured spring2020
+population is not an unbiased all-fire estimate. No new independent accuracy
+or data-quality admission follows. Collection/scoring remain blocked by the
+deliberate workflow dependency: first an eligible frozen candidate, then a
+separate spec preserving this plan and enforcing50/20 after source QC.

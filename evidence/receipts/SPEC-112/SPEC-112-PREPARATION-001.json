@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-112",
+  "run_id": "SPEC-112-PREPARATION-001",
+  "created_at": "2026-10-04T09:52:54.508926+00:00",
+  "status": "PASS",
+  "evidence_class": "REPLAY",
+  "conclusion": "Immutable metadata-only eastern population selected with complete exclusions; no imagery/data/model admission claimed.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python -m pytest tests/test_eastern_confirmation_plan.py -q'",
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && .runtime/bin/python scripts/plan_eastern_confirmation.py --data-root data-store --out data-store/eastern-holdout-plan-v1'",
+    "make gate"
+  ],
+  "acceptance": {
+    "counts": {
+      "samples": 72,
+      "groups": 43,
+      "partitions": {
+        "calibration": 0,
+        "evaluation": 72,
+        "fit": 0
+      }
+    },
+    "bbox": [
+      115,
+      50,
+      150,
+      65
+    ],
+    "source_contours": 14522,
+    "original_groups": 46,
+    "eligible_groups": 43,
+    "exclusion_audit": {
+      "prior-footprints.json": {
+        "spec_id": "SPEC-96",
+        "records": 2658,
+        "sha256": "eb7bb1af7800c00e1837cca0634ffcad82792bf1dcd41cbd06fe112ea9aeecad"
+      },
+      "russia/manifest.json": {
+        "spec_id": "SPEC-92",
+        "records": 447,
+        "sha256": "1d487c711beb657a4c0ea0114379ddc51be2a31302891e47699942f95459f3db"
+      },
+      "severity-covered-v1/manifest.json": {
+        "spec_id": "SPEC-100",
+        "records": 173,
+        "sha256": "ed7903750216a4e341a394908dbe06f44fd195e0ade8f67034ec8497a83e79dc"
+      },
+      "western-holdout-v1/manifest.json": {
+        "spec_id": "SPEC-105",
+        "records": 96,
+        "sha256": "a5a01d9e3ca34c87914717e6c65a0f3e04bc2398c8b17db77403fc2c956f4bc3"
+      }
+    },
+    "selection_sha256": "0ab2edea7db92eca8e27da5b179ed5b373314d44f025f3019444be162cb74587",
+    "selection_bytes": 68708,
+    "tests_passed": 2,
+    "unit_exit": 0,
+    "elapsed_seconds": 27.065,
+    "peak_memory": "345 MiB",
+    "imagery_downloaded": false,
+    "prediction_read": false,
+    "review_code": "APPROVE",
+    "review_architecture": "WATCH"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/eastern-confirmation-selection.json",
+    "docs/SPEC-112-REVIEW.md"
+  ],
+  "limitations": [
+    "Unused relative to the recorded campaign footprints; grouping within the fixed region does not establish physical fire identities.",
+    "Metadata readiness is not imagery/common-validity/mapped-fire admission.",
+    "Deterministic area-balanced selected spring2020 geography is not an unbiased all-fire sample.",
+    "Collection and inference require an eligible frozen candidate and a separate spec."
+  ],
+  "non_claims": [
+    "Metadata-only unused geography; shared publisher/spring2020 and spatial groups, not dated fires.",
+    "No data admission, model comparison, imagery quality, field truth, promotion or goal completion."
+  ]
+}

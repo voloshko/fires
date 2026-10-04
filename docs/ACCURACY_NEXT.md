@@ -509,3 +509,21 @@ or restart because observation times out. Expected result
 research/recall-expansion-v1/development.json. Free disk~4.0GiB, no new data,
 no original deletion, <=512MiB small weights/packed masks,3GiB free floor.
 SPEC111 active; candidate accuracy NOT measured. Full four-part goal active.
+
+## SPEC-112 unused confirmation metadata ready
+
+Committed preregistration before code:fixed115–150E/50–65N, cap72/max4/group,
+50windows/20groups minimum, rawWKB/EPSG3576/20km within-region grouping.
+Four histories authenticated2658+447+173+96, WHOLE-group contour/frame-buffer
+purge.14,522 source contours/46groups,3purged, selected72windows/43groups.
+CPU exit0/27.065seconds/345MiB;2tests/gate pass. Compact selection and PASS
+receipt establish metadata preparation only. No imagery/catalogue/predictions.
+Independent codeAPPROVE/architectureWATCH, finalCOMMENT in docs/SPEC-112-REVIEW.md.
+
+Futurecollection requires an eligible frozen candidate and separate spec;
+same plan/sourceSCL/common-validity rules,50/20 actual admission,<=768MiB,
+freefloor3GiB. Do not alter region/caps/masks/selection after candidate results.
+Unused means relative to recorded campaign histories; spatial groups not
+physical fire IDs, same publisher/spring2020. SPEC111 training/score queues
+still live; do not edit sealed sources or restart current handles. No quality
+claim or original-goal completion from this metadata milestone.

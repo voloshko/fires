@@ -1,0 +1,2450 @@
+{
+  "spec_id": "SPEC-112",
+  "bbox": [
+    115,
+    50,
+    150,
+    65
+  ],
+  "source_zip_sha256": "5f1cfb843d5579d800a1e8359a017f8cd33c5658f6e0c0a6eda7ac534a1c6b3c",
+  "exclusion_audit": {
+    "prior-footprints.json": {
+      "spec_id": "SPEC-96",
+      "records": 2658,
+      "sha256": "eb7bb1af7800c00e1837cca0634ffcad82792bf1dcd41cbd06fe112ea9aeecad"
+    },
+    "russia/manifest.json": {
+      "spec_id": "SPEC-92",
+      "records": 447,
+      "sha256": "1d487c711beb657a4c0ea0114379ddc51be2a31302891e47699942f95459f3db"
+    },
+    "severity-covered-v1/manifest.json": {
+      "spec_id": "SPEC-100",
+      "records": 173,
+      "sha256": "ed7903750216a4e341a394908dbe06f44fd195e0ade8f67034ec8497a83e79dc"
+    },
+    "western-holdout-v1/manifest.json": {
+      "spec_id": "SPEC-105",
+      "records": 96,
+      "sha256": "a5a01d9e3ca34c87914717e6c65a0f3e04bc2398c8b17db77403fc2c956f4bc3"
+    }
+  },
+  "source_contours": 14522,
+  "original_groups": 46,
+  "excluded_groups": [
+    "eastern:1abbea10424fc7b8c7e910230f82aa2faf69d5df9d374cc82ac9f16054f7058e",
+    "eastern:c213157abb0e4975e2874f5d34b3db6e8866084c0d6040943a2474edd25a8435",
+    "eastern:cde7f0d214aa934f471ab255bf6951c951ae501391f2a9005001b7fe7157e873"
+  ],
+  "eligible_groups": 43,
+  "counts": {
+    "samples": 72,
+    "groups": 43,
+    "partitions": {
+      "calibration": 0,
+      "evaluation": 72,
+      "fit": 0
+    }
+  },
+  "records": [
+    {
+      "sample_id": "eastern:f07cb0372da891f9bb91a5f8facd8c940c0b2fe44f2cee38bc439d8318da2589",
+      "group_id": "eastern:cb98deb5442f86fbdd491f7336142e71560a28e7e554706d04ee2f8f97c33d96",
+      "cluster_id": "cb98deb5442f86fbdd491f7336142e71560a28e7e554706d04ee2f8f97c33d96",
+      "area_ha": 2.709599531231188,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        129.67044490252522,
+        52.4409775
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          537870.0,
+          0.0,
+          -30.0,
+          5817990.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        129.55626711513048,
+        52.37135201527377,
+        129.78431664669085,
+        52.51071331906159
+      ]
+    },
+    {
+      "sample_id": "eastern:0ccd7d1e65455e3dbe7cc7b2dffff9b034e5ed9fa93eb3719345ccb20c1e5265",
+      "group_id": "eastern:56b8113a0f687324100910b89327611b63b1be89f2e7b907505c448cb85f2cfb",
+      "cluster_id": "56b8113a0f687324100910b89327611b63b1be89f2e7b907505c448cb85f2cfb",
+      "area_ha": 23.91494973391415,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        136.4775280483813,
+        52.460716000000005
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          592680.0,
+          0.0,
+          -30.0,
+          5820990.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        136.36201933921237,
+        52.39024711564479,
+        136.59263565618178,
+        52.5311138406392
+      ]
+    },
+    {
+      "sample_id": "eastern:bc5305a6f3e3f4e373bd59e9a9acd8960940102ccdd433e8e2e1ea63bbc14d0f",
+      "group_id": "eastern:408a71146f7a283534cf512f82cc987375afc52748deca7a4a78fb764c0456de",
+      "cluster_id": "408a71146f7a283534cf512f82cc987375afc52748deca7a4a78fb764c0456de",
+      "area_ha": 9.820680581373237,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        135.11669362416728,
+        51.345107
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          500430.0,
+          0.0,
+          -30.0,
+          5695890.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        135.0061646702858,
+        51.275890342451056,
+        135.22705294072713,
+        51.41422561460569
+      ]
+    },
+    {
+      "sample_id": "eastern:6782d684a7159e407b1c6af8377d50b4aeb2baab60040bfaf445e5d01332d97f",
+      "group_id": "eastern:a0a333fd3fe78de36b70381e78bed3304c804542484a0d4b6d324fa2e7a9c552",
+      "cluster_id": "a0a333fd3fe78de36b70381e78bed3304c804542484a0d4b6d324fa2e7a9c552",
+      "area_ha": 41.854846822350574,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        126.90027102303588,
+        51.389392
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          346200.0,
+          0.0,
+          -30.0,
+          5702910.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        126.78625498613248,
+        51.31843514800086,
+        127.0131796899342,
+        51.46041256246909
+      ]
+    },
+    {
+      "sample_id": "eastern:96f9ac12156915d4ef180e41bd166105e0c8ab6a7793599a09880236cd2a85d6",
+      "group_id": "eastern:2adf81e418c4f9c138bd4790751f54703e4b3dcc7ba9b887909ddac18ae7ae25",
+      "cluster_id": "2adf81e418c4f9c138bd4790751f54703e4b3dcc7ba9b887909ddac18ae7ae25",
+      "area_ha": 118.29265814274426,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        120.50585979671717,
+        53.4654675
+      ],
+      "grid": {
+        "crs": "EPSG:32651",
+        "transform": [
+          30.0,
+          0.0,
+          326730.0,
+          0.0,
+          -30.0,
+          5934630.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        120.38562459897496,
+        53.39404244153225,
+        120.62486990994114,
+        53.536806492918195
+      ]
+    },
+    {
+      "sample_id": "eastern:6f7352e9a4d79291a3f7721828bd90aed4e3ec7cbc930e592d4e6220c111cec8",
+      "group_id": "eastern:f7318fac5e0c8f74b16a659a5443ab010b9b9b412a20b6f738bbcb27236b86a8",
+      "cluster_id": "f7318fac5e0c8f74b16a659a5443ab010b9b9b412a20b6f738bbcb27236b86a8",
+      "area_ha": 6.915485569098176,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        135.6622117669903,
+        51.275756
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          538500.0,
+          0.0,
+          -30.0,
+          5688390.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        135.55113281782855,
+        51.206128394910024,
+        135.7733101630528,
+        51.34548225690446
+      ]
+    },
+    {
+      "sample_id": "eastern:91d145eb9d6bc94a193158b98f392e7de1c7e7237af50856d9c17736c4917b69",
+      "group_id": "eastern:6a435bda6b50f33958da6c09ffb13bf439f6e9d74beec421f479f8118b4cc547",
+      "cluster_id": "6a435bda6b50f33958da6c09ffb13bf439f6e9d74beec421f479f8118b4cc547",
+      "area_ha": 106.95189815115323,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        118.62078326235232,
+        50.346008
+      ],
+      "grid": {
+        "crs": "EPSG:32650",
+        "transform": [
+          30.0,
+          0.0,
+          607620.0,
+          0.0,
+          -30.0,
+          5586060.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        118.5104444537237,
+        50.275611434239636,
+        118.73093730192666,
+        50.41670401253629
+      ]
+    },
+    {
+      "sample_id": "eastern:874179fd67e5987a8f806a742c0f79743be5b35adb3093b706bc6619b1bc1047",
+      "group_id": "eastern:fce7d5ff5471a818b2dde4080e8190724fa2b0dcdc092044966854ed31d940c5",
+      "cluster_id": "fce7d5ff5471a818b2dde4080e8190724fa2b0dcdc092044966854ed31d940c5",
+      "area_ha": 22.818350030410006,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        126.94664502740106,
+        51.097952500000005
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          348540.0,
+          0.0,
+          -30.0,
+          5670420.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        126.83370708094866,
+        51.02711436862685,
+        127.0590445290227,
+        51.16899938664613
+      ]
+    },
+    {
+      "sample_id": "eastern:937a559de56ee6277ce89a3aca45c1dad20a19073118fdb2f8f7758ed56f05fc",
+      "group_id": "eastern:705f17240c6a247dae35184389689f64e4e4f9e70381c1874654a79d32b87929",
+      "cluster_id": "705f17240c6a247dae35184389689f64e4e4f9e70381c1874654a79d32b87929",
+      "area_ha": 2.048064021891124,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        128.66798365271387,
+        52.91466
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          469980.0,
+          0.0,
+          -30.0,
+          5870520.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        128.55284719129654,
+        52.84534745420828,
+        128.78232753724927,
+        52.98406321261331
+      ]
+    },
+    {
+      "sample_id": "eastern:b543daaaf0acbc9baae5f9d3f1cfd1a9df0bd61a9fa1bacc4ed3615652cb7b24",
+      "group_id": "eastern:746a91cf807713d2cb6ccd67d266c36d2ebe56c7cb2b33e2360b727f6998a506",
+      "cluster_id": "746a91cf807713d2cb6ccd67d266c36d2ebe56c7cb2b33e2360b727f6998a506",
+      "area_ha": 11.750326187045765,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        134.5553254353166,
+        51.0972425
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          461160.0,
+          0.0,
+          -30.0,
+          5668440.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        134.44449665346238,
+        51.02795908422718,
+        134.6651744911337,
+        51.1669119810379
+      ]
+    },
+    {
+      "sample_id": "eastern:63ce282e2ef43d8e918cb0baf882d7b989b9f898b383f9f11c57626570efcf5c",
+      "group_id": "eastern:480b2b7c9a565b487dcc91da2e37a05a4558535b69fca60b0717601f2b860b8d",
+      "cluster_id": "480b2b7c9a565b487dcc91da2e37a05a4558535b69fca60b0717601f2b860b8d",
+      "area_ha": 24.87681439789439,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        127.93337180504307,
+        52.327346500000004
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          419610.0,
+          0.0,
+          -30.0,
+          5805690.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        127.81853443617558,
+        52.2574806810972,
+        128.04720849449643,
+        52.39758517588005
+      ]
+    },
+    {
+      "sample_id": "eastern:1b29fb627ce23992237d9cc4e987e34e7db876b6d0107b1b8566fb5f7b287c67",
+      "group_id": "eastern:467842362112589abd0410698712d589d4130ef6033adcf0bad762a4213bf068",
+      "cluster_id": "467842362112589abd0410698712d589d4130ef6033adcf0bad762a4213bf068",
+      "area_ha": 5.596175395449571,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        140.231868613823,
+        51.6972815
+      ],
+      "grid": {
+        "crs": "EPSG:32654",
+        "transform": [
+          30.0,
+          0.0,
+          439230.0,
+          0.0,
+          -30.0,
+          5735340.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        140.1193751746179,
+        51.62755345824725,
+        140.34394021348044,
+        51.76710207232459
+      ]
+    },
+    {
+      "sample_id": "eastern:ebeeac3d902c7e03c133bd88af8eb0e3fb772deb6a2fad8605fb1dc9005706ae",
+      "group_id": "eastern:a7f948379a80eeb0cc466975d82449f88a6c22a3a35f1586afd778fbef240ac3",
+      "cluster_id": "a7f948379a80eeb0cc466975d82449f88a6c22a3a35f1586afd778fbef240ac3",
+      "area_ha": 21.929804642095903,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        118.5560817461525,
+        53.998478
+      ],
+      "grid": {
+        "crs": "EPSG:32650",
+        "transform": [
+          30.0,
+          0.0,
+          594300.0,
+          0.0,
+          -30.0,
+          5992170.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        118.4362815315541,
+        53.928063423606126,
+        118.67566119526553,
+        54.06909895070384
+      ]
+    },
+    {
+      "sample_id": "eastern:e3f7fc3e8e2ee4331e3133141f4e2d50cff1f454f09f7926903aaba65732ea11",
+      "group_id": "eastern:e31738cba11bf53849faa17055dd1e69cd9e70d72ea09234ae22781b7a6273a5",
+      "cluster_id": "e31738cba11bf53849faa17055dd1e69cd9e70d72ea09234ae22781b7a6273a5",
+      "area_ha": 9.268550999184875,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        139.05686019963738,
+        51.435104499999994
+      ],
+      "grid": {
+        "crs": "EPSG:32654",
+        "transform": [
+          30.0,
+          0.0,
+          357240.0,
+          0.0,
+          -30.0,
+          5707710.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        138.94310669972597,
+        51.36444647049393,
+        139.16981162949605,
+        51.506143389162354
+      ]
+    },
+    {
+      "sample_id": "eastern:483047dce9d4c084ce833b2cae9111615499d1ffd59a77af6105211376746ba5",
+      "group_id": "eastern:56b74bbb5d5b5be3018c4b71dff075281b71537dd1bbd7269959b72e225b76f2",
+      "cluster_id": "56b74bbb5d5b5be3018c4b71dff075281b71537dd1bbd7269959b72e225b76f2",
+      "area_ha": 3.9488013999559213,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        127.13540683057896,
+        53.27037648103551
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          367950.0,
+          0.0,
+          -30.0,
+          5911680.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        127.01672057541475,
+        53.19978695916505,
+        127.25292593839848,
+        53.34138619494539
+      ]
+    },
+    {
+      "sample_id": "eastern:37446e8ea8225770cd978e8920c071b07365ff2b45ee0123f6f72d060d19132e",
+      "group_id": "eastern:d35bc20eda61f72e66f4e4c0beb2900e00891ec250d04903d728e3f141eed4e6",
+      "cluster_id": "d35bc20eda61f72e66f4e4c0beb2900e00891ec250d04903d728e3f141eed4e6",
+      "area_ha": 50.93876413898753,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        136.11366344515665,
+        52.172449
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          568470.0,
+          0.0,
+          -30.0,
+          5788500.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        135.99971347579356,
+        52.10245280717817,
+        136.22772587488782,
+        52.242643291728164
+      ]
+    },
+    {
+      "sample_id": "eastern:6e9889a8685d08bac27d8e776b501f7b5e31ce441ecf81f079df4e687250d69e",
+      "group_id": "eastern:a55beecde6dd8b3ac9d4454a2913732aad2bed8c724adbb7670330fd59c6406a",
+      "cluster_id": "a55beecde6dd8b3ac9d4454a2913732aad2bed8c724adbb7670330fd59c6406a",
+      "area_ha": 157.16321210272636,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        126.62837126572748,
+        54.0876155
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          337200.0,
+          0.0,
+          -30.0,
+          6003570.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        126.50690313537844,
+        54.016456734980885,
+        126.74939337270874,
+        54.159017386791234
+      ]
+    },
+    {
+      "sample_id": "eastern:671df89dbbf62d73592074a8a8b2db3464d15f4aa6ac4e1e9bc85091bb606c19",
+      "group_id": "eastern:50fc236477be9127941d0118254c3eebccccfff1f4638738d26469d7a5186830",
+      "cluster_id": "50fc236477be9127941d0118254c3eebccccfff1f4638738d26469d7a5186830",
+      "area_ha": 3.6369809921740344,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        131.0267349877382,
+        50.479818
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          636090.0,
+          0.0,
+          -30.0,
+          5601630.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        130.9154316690909,
+        50.408926989946124,
+        131.1376884460272,
+        50.550745400659956
+      ]
+    },
+    {
+      "sample_id": "eastern:2b1296eb97fec0ad19bbe0dfbf5b5c79dd9254b685eb3d5f24f07fed4c5ff93b",
+      "group_id": "eastern:a1bfb36950a23e9b73108fa6dc05b498beb0dbdfa951399f0e250de31a72de7e",
+      "cluster_id": "a1bfb36950a23e9b73108fa6dc05b498beb0dbdfa951399f0e250de31a72de7e",
+      "area_ha": 20.175909328378477,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        127.93446608310862,
+        53.2229035
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          421170.0,
+          0.0,
+          -30.0,
+          5905290.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        127.81737856371032,
+        53.15291262053065,
+        128.05083048755307,
+        53.29301780066434
+      ]
+    },
+    {
+      "sample_id": "eastern:a98232abbed8c8ceea348563d0aef884251466e0285efae4db92e6c8c89c38e8",
+      "group_id": "eastern:ac0e5cd46dbb132df35381d566ce644151cb439c144edd9df1ba41699f5767bf",
+      "cluster_id": "ac0e5cd46dbb132df35381d566ce644151cb439c144edd9df1ba41699f5767bf",
+      "area_ha": 215.98525535756,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        122.75555471454948,
+        55.705934
+      ],
+      "grid": {
+        "crs": "EPSG:32651",
+        "transform": [
+          30.0,
+          0.0,
+          476940.0,
+          0.0,
+          -30.0,
+          6181080.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        122.63239156386814,
+        55.636813816219835,
+        122.87768191306499,
+        55.77531469192734
+      ]
+    },
+    {
+      "sample_id": "eastern:b304a111e5f452e1922026abadd0065ac2d390c97f5d353f7bcd5c753625c676",
+      "group_id": "eastern:dc829f12b29c1ec9f75575ecd314d02c8f4a5c248d49f8a414d5fe20cf20f9ea",
+      "cluster_id": "dc829f12b29c1ec9f75575ecd314d02c8f4a5c248d49f8a414d5fe20cf20f9ea",
+      "area_ha": 11.447294768971776,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        133.303912628866,
+        50.549667
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          372150.0,
+          0.0,
+          -30.0,
+          5608830.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        133.19275266540788,
+        50.479257061649946,
+        133.41442097569114,
+        50.62048913535099
+      ]
+    },
+    {
+      "sample_id": "eastern:1ed0059d65257ff192a9911621f2d0a635a405f4a62a91d7bbb64290852050b3",
+      "group_id": "eastern:232b28f5d1723f6b89c633ec062c4de682e2cf02c5d5aaf64b3224e23a8fc2fa",
+      "cluster_id": "232b28f5d1723f6b89c633ec062c4de682e2cf02c5d5aaf64b3224e23a8fc2fa",
+      "area_ha": 2.144973155242083,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        118.3791745351689,
+        56.972770999999995
+      ],
+      "grid": {
+        "crs": "EPSG:32650",
+        "transform": [
+          30.0,
+          0.0,
+          576150.0,
+          0.0,
+          -30.0,
+          6322890.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        118.25040432439026,
+        56.90242772091336,
+        118.50809423303222,
+        57.043158591546714
+      ]
+    },
+    {
+      "sample_id": "eastern:37585f31da475a4966222030e1b5fb0303f678ab9be15409d97722c4f63ab3b1",
+      "group_id": "eastern:4c25299f854e36633fed2820348ccb8fcffe57c20c32801e18bd8c6984159e28",
+      "cluster_id": "4c25299f854e36633fed2820348ccb8fcffe57c20c32801e18bd8c6984159e28",
+      "area_ha": 975.2550458617454,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        120.97301755658832,
+        53.9662015
+      ],
+      "grid": {
+        "crs": "EPSG:32651",
+        "transform": [
+          30.0,
+          0.0,
+          359340.0,
+          0.0,
+          -30.0,
+          5989350.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        120.85227718045473,
+        53.89524455885192,
+        121.09296592759638,
+        54.03716215933351
+      ]
+    },
+    {
+      "sample_id": "eastern:288e843522c808785fe3a2da17f1300fcf970924ab0d61d904c1723201264a7e",
+      "group_id": "eastern:8cb5d3b633f15cfb12a82678f5218bc06b66a458b37c6bc06828d2ba4e550ec9",
+      "cluster_id": "8cb5d3b633f15cfb12a82678f5218bc06b66a458b37c6bc06828d2ba4e550ec9",
+      "area_ha": 2.0427108103694724,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        130.86088901773604,
+        52.4639015
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          618720.0,
+          0.0,
+          -30.0,
+          5821950.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        130.7448703170618,
+        52.39311590416071,
+        130.97665882368238,
+        52.53468823514924
+      ]
+    },
+    {
+      "sample_id": "eastern:8c04100c4bee113a23d5ca8a577942f4ed4451d78dcc042ebd50dbc431654ed1",
+      "group_id": "eastern:8f3f2d299549923bd3716d63eac0894b23538ccd98a02b6914a8d6f36589ab9b",
+      "cluster_id": "8f3f2d299549923bd3716d63eac0894b23538ccd98a02b6914a8d6f36589ab9b",
+      "area_ha": 530.0186380391452,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        140.2031970490002,
+        52.217222
+      ],
+      "grid": {
+        "crs": "EPSG:32654",
+        "transform": [
+          30.0,
+          0.0,
+          437880.0,
+          0.0,
+          -30.0,
+          5793180.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        140.08931366896365,
+        52.147388479898645,
+        140.31659544536188,
+        52.2869887648138
+      ]
+    },
+    {
+      "sample_id": "eastern:97924654c1cac851807feefe91db499153eb8a31356274128f66a2f71c752a24",
+      "group_id": "eastern:b6456048d1bd2c3ebf23194bf58614b9bcef0f93cff51c75dd91f631f29b5a7a",
+      "cluster_id": "b6456048d1bd2c3ebf23194bf58614b9bcef0f93cff51c75dd91f631f29b5a7a",
+      "area_ha": 3.9727660566848026,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        119.32162468749999,
+        50.114937
+      ],
+      "grid": {
+        "crs": "EPSG:32650",
+        "transform": [
+          30.0,
+          0.0,
+          658290.0,
+          0.0,
+          -30.0,
+          5561700.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        119.21099543848659,
+        50.043991959225,
+        119.43233510987498,
+        50.18631802847229
+      ]
+    },
+    {
+      "sample_id": "eastern:96c5dc6d7d4b7742bad068ec7bff5d7960be441e0f562d620b78eedf70e38fcd",
+      "group_id": "eastern:bce1381dfb9629a86582971e0cae2d05f6ff9081b4fbd9550986503d3b5f05cc",
+      "cluster_id": "bce1381dfb9629a86582971e0cae2d05f6ff9081b4fbd9550986503d3b5f05cc",
+      "area_ha": 13.068952564356964,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        136.9818106950605,
+        50.1411835
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          633900.0,
+          0.0,
+          -30.0,
+          5563890.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        136.87129157893304,
+        50.070292671061665,
+        137.09182292657974,
+        50.2120215115818
+      ]
+    },
+    {
+      "sample_id": "eastern:4493f44df413e7f88ab50d994da9ee8541cc6ef1cf7473c5e7e01de29dfb16a2",
+      "group_id": "eastern:09c5d3a55f71b3aeb2babcd4a6bd3ff68e92e19b487202434efb379eee3b822b",
+      "cluster_id": "09c5d3a55f71b3aeb2babcd4a6bd3ff68e92e19b487202434efb379eee3b822b",
+      "area_ha": 21.36632276209659,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        127.43650751136363,
+        54.358607
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          390720.0,
+          0.0,
+          -30.0,
+          6032250.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        127.3155333118278,
+        54.28821953736776,
+        127.55705069719788,
+        54.42927499043992
+      ]
+    },
+    {
+      "sample_id": "eastern:31f0b9faed9f3674c47029ce1e089eb63da3e8ceeae52e37da42ffbb1691cb15",
+      "group_id": "eastern:739630f6e5bb2800ef15bd75df68e5f1748fec1f80e3fb82495697cda1abfc3a",
+      "cluster_id": "739630f6e5bb2800ef15bd75df68e5f1748fec1f80e3fb82495697cda1abfc3a",
+      "area_ha": 61.61608575569128,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        136.64032336608864,
+        52.811478
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          602850.0,
+          0.0,
+          -30.0,
+          5860260.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        136.5236073060759,
+        52.74102326089109,
+        136.75659613107968,
+        52.882196534169054
+      ]
+    },
+    {
+      "sample_id": "eastern:f9102ad554e1248218a98f8cddabc5b0124880b2887ef6d94cb876d71039e100",
+      "group_id": "eastern:3399dce895ec66c6bb994be6358096e093fbd95802dd88db1f136c4ecadd4dee",
+      "cluster_id": "3399dce895ec66c6bb994be6358096e093fbd95802dd88db1f136c4ecadd4dee",
+      "area_ha": 11.428280424848927,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        134.07873141206028,
+        50.804389
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          427380.0,
+          0.0,
+          -30.0,
+          5636160.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        133.96789244907387,
+        50.73444699743123,
+        134.18856489487146,
+        50.874280150954405
+      ]
+    },
+    {
+      "sample_id": "eastern:9df1811f049ed77b59b08ddab9c72e5fef79dbef665f59b924a09e3af3f2bec7",
+      "group_id": "eastern:6bb7e561dc0dd339b97bc08822ad0bb2c0820fdcd69a4ff80e78cde3e1415104",
+      "cluster_id": "6bb7e561dc0dd339b97bc08822ad0bb2c0820fdcd69a4ff80e78cde3e1415104",
+      "area_ha": 1.385039663936983,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        136.52612623680636,
+        51.31718
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          598650.0,
+          0.0,
+          -30.0,
+          5693910.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        136.4135128816891,
+        51.246906593945255,
+        136.63842184332952,
+        51.387845450783566
+      ]
+    },
+    {
+      "sample_id": "eastern:ac32be6783d55221ea4474b6cc5db1577abaad469334b2dae795e321bc2e6d8e",
+      "group_id": "eastern:38286dddebbe3e5e241ea605032fd7428c5279f29302da3b4e3364356ae20a7a",
+      "cluster_id": "38286dddebbe3e5e241ea605032fd7428c5279f29302da3b4e3364356ae20a7a",
+      "area_ha": 22.386438443700907,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        116.73225388303341,
+        53.774485999999996
+      ],
+      "grid": {
+        "crs": "EPSG:32650",
+        "transform": [
+          30.0,
+          0.0,
+          474660.0,
+          0.0,
+          -30.0,
+          5966160.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        116.6148659103895,
+        53.70527819608455,
+        116.84881270214078,
+        53.843856908269295
+      ]
+    },
+    {
+      "sample_id": "eastern:584b81fd8ec02b401483a6fd82ec751596efbf8d376e37fb1588d44c62bc482c",
+      "group_id": "eastern:2fae0e197cef8ab6d08ac3c954168518fedc3dbe4e775d4dc137fe98a712938a",
+      "cluster_id": "2fae0e197cef8ab6d08ac3c954168518fedc3dbe4e775d4dc137fe98a712938a",
+      "area_ha": 16.01073822901787,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        132.2644995429355,
+        50.384142499999996
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          297840.0,
+          0.0,
+          -30.0,
+          5592630.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        132.1522430822722,
+        50.31283098269137,
+        132.37599261518395,
+        50.455891692549635
+      ]
+    },
+    {
+      "sample_id": "eastern:82e37a07ca9ddf1dba75184197e4cf9e7516f7b2aedb5a6a26b1455af71d4818",
+      "group_id": "eastern:12d58b080a4008cb83fc3f7e533a7073ce356ff844926963c0b593cad1b62fdb",
+      "cluster_id": "12d58b080a4008cb83fc3f7e533a7073ce356ff844926963c0b593cad1b62fdb",
+      "area_ha": 99.51458287365708,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        135.33640107142855,
+        50.997822
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          515910.0,
+          0.0,
+          -30.0,
+          5657340.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        135.22639228958826,
+        50.92860671045635,
+        135.44627594865938,
+        51.067358725021236
+      ]
+    },
+    {
+      "sample_id": "eastern:8c5c3aa8564c0b930d3638eafb4fca7a50346fe2cfe1005bd2a5760e741438f0",
+      "group_id": "eastern:495d0aa0f2dd58463e405025b8b0648ecb754618aafe2d594cdc92bcb9abe40b",
+      "cluster_id": "495d0aa0f2dd58463e405025b8b0648ecb754618aafe2d594cdc92bcb9abe40b",
+      "area_ha": 116.06654690353112,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        127.47042213351872,
+        55.040233
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          394560.0,
+          0.0,
+          -30.0,
+          6108030.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        127.34717823242612,
+        54.96978204634653,
+        127.5927114309568,
+        55.110783172125956
+      ]
+    },
+    {
+      "sample_id": "eastern:183f0b83248079722da3158aa6ab0e164f52f77654660ad344690293511a2424",
+      "group_id": "eastern:533246a6107d96e9cfc6945545e55693f6175abbcb863e5929f34f06d0c8dce6",
+      "cluster_id": "533246a6107d96e9cfc6945545e55693f6175abbcb863e5929f34f06d0c8dce6",
+      "area_ha": 10.972402813280587,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        129.54679319884332,
+        53.505837
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          528570.0,
+          0.0,
+          -30.0,
+          5936370.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        129.43007627378756,
+        53.436293559800774,
+        129.66343512717162,
+        53.57541165148165
+      ]
+    },
+    {
+      "sample_id": "eastern:ee9f59884df133f6f1711993bda6c578e01e6f7a0386f83fdbdbe19bd92b34d7",
+      "group_id": "eastern:b83ca3c7ee3f2d448f79b74779972291a6005ef56577fa4f9585827473c72bc8",
+      "cluster_id": "b83ca3c7ee3f2d448f79b74779972291a6005ef56577fa4f9585827473c72bc8",
+      "area_ha": 820.7769395485581,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        127.07886027436601,
+        55.467378499999995
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          370860.0,
+          0.0,
+          -30.0,
+          6156180.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        126.95374681401604,
+        55.39661849601367,
+        127.20327215187086,
+        55.53837336343719
+      ]
+    },
+    {
+      "sample_id": "eastern:cff6f7bca352cff78ae5fd55d8092521cd64c29298c27a84b2f26386cdb7790e",
+      "group_id": "eastern:95c3a4be3264fdd7b7e51c2673123d70364b4d371529d2f611426737571ce341",
+      "cluster_id": "95c3a4be3264fdd7b7e51c2673123d70364b4d371529d2f611426737571ce341",
+      "area_ha": 24.63318926420311,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        126.4158917848887,
+        54.5977515
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          325380.0,
+          0.0,
+          -30.0,
+          6060810.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        126.2924387482847,
+        54.52647614407652,
+        126.53868198149121,
+        54.66944923878548
+      ]
+    },
+    {
+      "sample_id": "eastern:be658a11755323a483e1d6c28617516961c4e8e772745361ba57cf1d35704c18",
+      "group_id": "eastern:d58f8913bd48dcb52808e9d876b2f3ab0361dfae556346c9b981c208ba0ae2c6",
+      "cluster_id": "d58f8913bd48dcb52808e9d876b2f3ab0361dfae556346c9b981c208ba0ae2c6",
+      "area_ha": 45.64063408985596,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        130.98563892459458,
+        51.954052000000004
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          628740.0,
+          0.0,
+          -30.0,
+          5765490.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        130.8706694967102,
+        51.883295887824474,
+        131.1001473723041,
+        52.02508246211923
+      ]
+    },
+    {
+      "sample_id": "eastern:c0448d517c993c656c7b37c59d047d1d314db9ebde275d6ccdccc89b9a100c06",
+      "group_id": "eastern:00c81e6918692d78d2944b5ea657024475d50e0c76079d0e2a2e66c7450acb67",
+      "cluster_id": "00c81e6918692d78d2944b5ea657024475d50e0c76079d0e2a2e66c7450acb67",
+      "area_ha": 27.62090731531721,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        130.0071005817073,
+        53.338561
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          559350.0,
+          0.0,
+          -30.0,
+          5918100.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        129.889947777207,
+        53.26863494484307,
+        130.12384983836782,
+        53.40862903383148
+      ]
+    },
+    {
+      "sample_id": "eastern:094fab49ba7b9ddcfb83968d159596374fd813102262e8fb30514c0049096f01",
+      "group_id": "eastern:9033556604a9eb29ec49f85ee5ed8775494215ce90b0ddadc3d8fe544212d7bb",
+      "cluster_id": "9033556604a9eb29ec49f85ee5ed8775494215ce90b0ddadc3d8fe544212d7bb",
+      "area_ha": 5.487156966052329,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        126.56872791065601,
+        52.107415
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          325800.0,
+          0.0,
+          -30.0,
+          5783460.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        126.4524107036382,
+        52.03611667963315,
+        126.68399757439592,
+        52.17871435867242
+      ]
+    },
+    {
+      "sample_id": "eastern:2de1a80d5aca6dfc8425c7fbfdc1d2eca6f911d2566b775924cf05995b138c73",
+      "group_id": "eastern:c60f0f9069ebebc005d969d92675c507805968cf598c7048f17e46ec7c69d6e8",
+      "cluster_id": "c60f0f9069ebebc005d969d92675c507805968cf598c7048f17e46ec7c69d6e8",
+      "area_ha": 9.79271951733725,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        132.63186280215618,
+        51.385066
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          327510.0,
+          0.0,
+          -30.0,
+          5703000.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        132.51745035644322,
+        51.31388486600342,
+        132.74512040669245,
+        51.45634211007116
+      ]
+    },
+    {
+      "sample_id": "eastern:21dcff284219fd1993730cdbfc16561afb6944992fee3b98c3422f62f283b385",
+      "group_id": "eastern:ec45453c42d81eed3ebf626c4606cdc621d28f31aa3d61a17239fe9c7aeb581f",
+      "cluster_id": "ec45453c42d81eed3ebf626c4606cdc621d28f31aa3d61a17239fe9c7aeb581f",
+      "area_ha": 9.211245622291253,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        128.47313375,
+        50.932415
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          455280.0,
+          0.0,
+          -30.0,
+          5650140.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        128.36266923659514,
+        50.86297750236201,
+        128.5828032238135,
+        51.002084386366626
+      ]
+    },
+    {
+      "sample_id": "eastern:a369897cf267eb36b92fb788870fa8580e403b30f229a2a07b9961d92eac73c5",
+      "group_id": "eastern:cb98deb5442f86fbdd491f7336142e71560a28e7e554706d04ee2f8f97c33d96",
+      "cluster_id": "cb98deb5442f86fbdd491f7336142e71560a28e7e554706d04ee2f8f97c33d96",
+      "area_ha": 74.9705844890846,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        129.67928213555274,
+        52.4190545
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          538500.0,
+          0.0,
+          -30.0,
+          5815560.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        129.56524177030957,
+        52.34944583809012,
+        129.79320518269458,
+        52.48882409008975
+      ]
+    },
+    {
+      "sample_id": "eastern:1f55ee3e37e9e6b1dcc7ab6785490281c2dc96ea9649bee5e7aaed77c9ceda57",
+      "group_id": "eastern:56b8113a0f687324100910b89327611b63b1be89f2e7b907505c448cb85f2cfb",
+      "cluster_id": "56b8113a0f687324100910b89327611b63b1be89f2e7b907505c448cb85f2cfb",
+      "area_ha": 97.29101881472835,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        136.4393957165441,
+        52.440351
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          590160.0,
+          0.0,
+          -30.0,
+          5818680.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        136.3243749862527,
+        52.369978424231846,
+        136.55476981756738,
+        52.51077507491367
+      ]
+    },
+    {
+      "sample_id": "eastern:4d979ffb5b05cc35a7dfe94dcefea7ac69e51818b68ca89ce958e88b2d12d60c",
+      "group_id": "eastern:408a71146f7a283534cf512f82cc987375afc52748deca7a4a78fb764c0456de",
+      "cluster_id": "408a71146f7a283534cf512f82cc987375afc52748deca7a4a78fb764c0456de",
+      "area_ha": 177.08200759492715,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        135.62607196241333,
+        51.643563
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          535620.0,
+          0.0,
+          -30.0,
+          5729280.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        135.51401044291885,
+        51.5740413232527,
+        135.73788278689128,
+        51.7133251868613
+      ]
+    },
+    {
+      "sample_id": "eastern:48849509cbc60cf356b6324969b847f7adfc850b3d4d1fe5ee62622140f5bc7a",
+      "group_id": "eastern:2adf81e418c4f9c138bd4790751f54703e4b3dcc7ba9b887909ddac18ae7ae25",
+      "cluster_id": "2adf81e418c4f9c138bd4790751f54703e4b3dcc7ba9b887909ddac18ae7ae25",
+      "area_ha": 79.83725509797964,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        120.58696159009324,
+        53.48825
+      ],
+      "grid": {
+        "crs": "EPSG:32651",
+        "transform": [
+          30.0,
+          0.0,
+          332220.0,
+          0.0,
+          -30.0,
+          5937000.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        120.46709891389192,
+        53.41709791471212,
+        120.70622588413129,
+        53.55971371557108
+      ]
+    },
+    {
+      "sample_id": "eastern:619fb299bba813cf65b0617d80b34817c920647bc6b193a03bf66590a4cc9255",
+      "group_id": "eastern:6a435bda6b50f33958da6c09ffb13bf439f6e9d74beec421f479f8118b4cc547",
+      "cluster_id": "6a435bda6b50f33958da6c09ffb13bf439f6e9d74beec421f479f8118b4cc547",
+      "area_ha": 90.01907375241214,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        118.6008761434829,
+        50.3178465
+      ],
+      "grid": {
+        "crs": "EPSG:32650",
+        "transform": [
+          30.0,
+          0.0,
+          606270.0,
+          0.0,
+          -30.0,
+          5582880.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        118.49061129261416,
+        50.24730405077315,
+        118.71091555227129,
+        50.38836047855378
+      ]
+    },
+    {
+      "sample_id": "eastern:6b2e9643de0f653e51be1d4eddaa3a83b3478ab87ef4f08c81fcc269dff9ba90",
+      "group_id": "eastern:fce7d5ff5471a818b2dde4080e8190724fa2b0dcdc092044966854ed31d940c5",
+      "cluster_id": "fce7d5ff5471a818b2dde4080e8190724fa2b0dcdc092044966854ed31d940c5",
+      "area_ha": 165.13552716827883,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        127.20586541666665,
+        51.045981
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          366540.0,
+          0.0,
+          -30.0,
+          5664150.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        127.09331645441411,
+        50.97522377893115,
+        127.31765958588623,
+        51.116642750372755
+      ]
+    },
+    {
+      "sample_id": "eastern:17c32262df1a3f13f2c22a136b0a89a83c018f2bc1d06e1b497176c73f945bde",
+      "group_id": "eastern:705f17240c6a247dae35184389689f64e4e4f9e70381c1874654a79d32b87929",
+      "cluster_id": "705f17240c6a247dae35184389689f64e4e4f9e70381c1874654a79d32b87929",
+      "area_ha": 80.8127429858915,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        128.63409095486816,
+        52.801801499999996
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          467640.0,
+          0.0,
+          -30.0,
+          5857980.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        128.51924426078583,
+        52.732484413767025,
+        128.74823503203214,
+        52.871266353726504
+      ]
+    },
+    {
+      "sample_id": "eastern:f883c95da0433d9c82862d87f7c63fdd32a7a00000f7edbb0dc129e6f147cbeb",
+      "group_id": "eastern:746a91cf807713d2cb6ccd67d266c36d2ebe56c7cb2b33e2360b727f6998a506",
+      "cluster_id": "746a91cf807713d2cb6ccd67d266c36d2ebe56c7cb2b33e2360b727f6998a506",
+      "area_ha": 29.653366574246455,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        134.5883704495643,
+        51.1036565
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          463500.0,
+          0.0,
+          -30.0,
+          5669130.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        134.4778925671099,
+        51.034316993018244,
+        134.69850218429448,
+        51.17320782280084
+      ]
+    },
+    {
+      "sample_id": "eastern:f09d2d0c7663de58af99efa860e1e3843db59a26db9bdbc4c8341816f38a08a6",
+      "group_id": "eastern:467842362112589abd0410698712d589d4130ef6033adcf0bad762a4213bf068",
+      "cluster_id": "467842362112589abd0410698712d589d4130ef6033adcf0bad762a4213bf068",
+      "area_ha": 39.452616545340604,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        140.24267472976476,
+        51.697147
+      ],
+      "grid": {
+        "crs": "EPSG:32654",
+        "transform": [
+          30.0,
+          0.0,
+          439950.0,
+          0.0,
+          -30.0,
+          5735310.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        140.12981265489123,
+        51.62736105182655,
+        140.35434550663638,
+        51.76689029027843
+      ]
+    },
+    {
+      "sample_id": "eastern:6dc83895867ed52d1716d94efa5fb3fcea2cf7fae0eb51bb0c81a7a52f820649",
+      "group_id": "eastern:e31738cba11bf53849faa17055dd1e69cd9e70d72ea09234ae22781b7a6273a5",
+      "cluster_id": "e31738cba11bf53849faa17055dd1e69cd9e70d72ea09234ae22781b7a6273a5",
+      "area_ha": 33.60792010642845,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        139.0620951271598,
+        51.446679
+      ],
+      "grid": {
+        "crs": "EPSG:32654",
+        "transform": [
+          30.0,
+          0.0,
+          357630.0,
+          0.0,
+          -30.0,
+          5708970.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        138.94821325477577,
+        51.37586696394371,
+        139.1749608515774,
+        51.5175549444465
+      ]
+    },
+    {
+      "sample_id": "eastern:b898f343753a8a2c5d789af39925fe5e77f4b7c3237da33088a71a3c1e90e065",
+      "group_id": "eastern:56b74bbb5d5b5be3018c4b71dff075281b71537dd1bbd7269959b72e225b76f2",
+      "cluster_id": "56b74bbb5d5b5be3018c4b71dff075281b71537dd1bbd7269959b72e225b76f2",
+      "area_ha": 244.84272199653728,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        123.61833244921851,
+        54.10272340674656
+      ],
+      "grid": {
+        "crs": "EPSG:32651",
+        "transform": [
+          30.0,
+          0.0,
+          532740.0,
+          0.0,
+          -30.0,
+          6002820.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        123.49988321688599,
+        54.03315489701655,
+        123.73682897019567,
+        54.172405128349375
+      ]
+    },
+    {
+      "sample_id": "eastern:b5aeb4d52e49b2f117b1d5a0435d222d732667bbd59ae8b9f53509a44af40149",
+      "group_id": "eastern:50fc236477be9127941d0118254c3eebccccfff1f4638738d26469d7a5186830",
+      "cluster_id": "50fc236477be9127941d0118254c3eebccccfff1f4638738d26469d7a5186830",
+      "area_ha": 25.12831232561795,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        131.02509956923637,
+        50.46025
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          636030.0,
+          0.0,
+          -30.0,
+          5599470.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        130.91380538707298,
+        50.38953007826005,
+        131.13596494177477,
+        50.531344942709836
+      ]
+    },
+    {
+      "sample_id": "eastern:ef806bf8797f61ba70c0c24c40698212841846cf08a89b91198a494d4d5b601d",
+      "group_id": "eastern:dc829f12b29c1ec9f75575ecd314d02c8f4a5c248d49f8a414d5fe20cf20f9ea",
+      "cluster_id": "dc829f12b29c1ec9f75575ecd314d02c8f4a5c248d49f8a414d5fe20cf20f9ea",
+      "area_ha": 4.875405395525117,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        133.39221435902618,
+        50.5778955
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          378480.0,
+          0.0,
+          -30.0,
+          5611830.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        133.2812042425834,
+        50.50757157305492,
+        133.50275829070907,
+        50.64864582991194
+      ]
+    },
+    {
+      "sample_id": "eastern:cd1c0c3b4242943edfc8019ce226415a8d37f43e416e7880e74fa9b7a6e0aa7e",
+      "group_id": "eastern:232b28f5d1723f6b89c633ec062c4de682e2cf02c5d5aaf64b3224e23a8fc2fa",
+      "cluster_id": "232b28f5d1723f6b89c633ec062c4de682e2cf02c5d5aaf64b3224e23a8fc2fa",
+      "area_ha": 38.415982790861925,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        118.33644010864418,
+        56.917249
+      ],
+      "grid": {
+        "crs": "EPSG:32650",
+        "transform": [
+          30.0,
+          0.0,
+          573660.0,
+          0.0,
+          -30.0,
+          6316650.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        118.2077196906343,
+        56.846872541502535,
+        118.46486925211713,
+        56.98751871394258
+      ]
+    },
+    {
+      "sample_id": "eastern:0497ed5e77d3cc8d16396687ea7dbf06ef59171050313a10a8fef9a934b70799",
+      "group_id": "eastern:8cb5d3b633f15cfb12a82678f5218bc06b66a458b37c6bc06828d2ba4e550ec9",
+      "cluster_id": "8cb5d3b633f15cfb12a82678f5218bc06b66a458b37c6bc06828d2ba4e550ec9",
+      "area_ha": 175.67090120719342,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        130.82667862374183,
+        52.4601675
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          616410.0,
+          0.0,
+          -30.0,
+          5821500.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        130.71077959387594,
+        52.38963340450756,
+        130.94244692138835,
+        52.531143070930476
+      ]
+    },
+    {
+      "sample_id": "eastern:d2f317c314cedacb9c3ecac14ca72cbb26b3ca69248095c7ebbdd34cc5190fb5",
+      "group_id": "eastern:b6456048d1bd2c3ebf23194bf58614b9bcef0f93cff51c75dd91f631f29b5a7a",
+      "cluster_id": "b6456048d1bd2c3ebf23194bf58614b9bcef0f93cff51c75dd91f631f29b5a7a",
+      "area_ha": 55.46132104893691,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        119.29254693631583,
+        50.085124
+      ],
+      "grid": {
+        "crs": "EPSG:32650",
+        "transform": [
+          30.0,
+          0.0,
+          656310.0,
+          0.0,
+          -30.0,
+          5558310.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        119.18197850196682,
+        50.014103355624236,
+        119.4030982226356,
+        50.15637729689605
+      ]
+    },
+    {
+      "sample_id": "eastern:defda63ec70b55af46b4f4c633cb7c4e46bf438b6d6bd3527523e8e7fac4e49a",
+      "group_id": "eastern:bce1381dfb9629a86582971e0cae2d05f6ff9081b4fbd9550986503d3b5f05cc",
+      "cluster_id": "bce1381dfb9629a86582971e0cae2d05f6ff9081b4fbd9550986503d3b5f05cc",
+      "area_ha": 217.42078028493017,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        137.02860782205363,
+        50.1287085
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          637290.0,
+          0.0,
+          -30.0,
+          5562600.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        136.91817732669463,
+        50.057837915094495,
+        137.13877941291358,
+        50.19964920882419
+      ]
+    },
+    {
+      "sample_id": "eastern:5c7baa81ebfbf15ec0371df77166a765a5134389645c031b2eb77887e874da37",
+      "group_id": "eastern:3399dce895ec66c6bb994be6358096e093fbd95802dd88db1f136c4ecadd4dee",
+      "cluster_id": "3399dce895ec66c6bb994be6358096e093fbd95802dd88db1f136c4ecadd4dee",
+      "area_ha": 90.66362227059521,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        133.9146735025198,
+        50.663159
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          415590.0,
+          0.0,
+          -30.0,
+          5620620.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        133.80393680370037,
+        50.59313193024007,
+        134.0244118165894,
+        50.73326394915455
+      ]
+    },
+    {
+      "sample_id": "eastern:41a3f06971d82f365f0e00acd1d90611cc2bab80c6c07d59fc789cc2b3b00a7c",
+      "group_id": "eastern:6bb7e561dc0dd339b97bc08822ad0bb2c0820fdcd69a4ff80e78cde3e1415104",
+      "cluster_id": "6bb7e561dc0dd339b97bc08822ad0bb2c0820fdcd69a4ff80e78cde3e1415104",
+      "area_ha": 54.248489519540385,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        136.6092932885973,
+        51.2317315
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          604650.0,
+          0.0,
+          -30.0,
+          5684520.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        136.49671465822934,
+        51.16127703001586,
+        136.72144079969837,
+        51.30236519027827
+      ]
+    },
+    {
+      "sample_id": "eastern:73f402e59ae2b1d277ed3bf0c146d6067f800327cce26f26a0519053a926a6bf",
+      "group_id": "eastern:38286dddebbe3e5e241ea605032fd7428c5279f29302da3b4e3364356ae20a7a",
+      "cluster_id": "38286dddebbe3e5e241ea605032fd7428c5279f29302da3b4e3364356ae20a7a",
+      "area_ha": 113.61222043740817,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        116.73322461163785,
+        53.761093
+      ],
+      "grid": {
+        "crs": "EPSG:32650",
+        "transform": [
+          30.0,
+          0.0,
+          474720.0,
+          0.0,
+          -30.0,
+          5964660.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        116.61590119401961,
+        53.691798848649654,
+        116.84976965808357,
+        53.830375860356924
+      ]
+    },
+    {
+      "sample_id": "eastern:6838b6e10522453136b8d5973905c35904f6ea9569601dcfd279f40a6ebfe6cc",
+      "group_id": "eastern:2fae0e197cef8ab6d08ac3c954168518fedc3dbe4e775d4dc137fe98a712938a",
+      "cluster_id": "2fae0e197cef8ab6d08ac3c954168518fedc3dbe4e775d4dc137fe98a712938a",
+      "area_ha": 41.83349186125326,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        132.29513552441813,
+        50.8542895
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          301920.0,
+          0.0,
+          -30.0,
+          5644800.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        132.18168796769754,
+        50.782831828105,
+        132.40764820203754,
+        50.92586168478029
+      ]
+    },
+    {
+      "sample_id": "eastern:100896eac97fda8bed83523380375de5c31ac4e4589ccc687fb67cbad70717ee",
+      "group_id": "eastern:533246a6107d96e9cfc6945545e55693f6175abbcb863e5929f34f06d0c8dce6",
+      "cluster_id": "533246a6107d96e9cfc6945545e55693f6175abbcb863e5929f34f06d0c8dce6",
+      "area_ha": 2.6028370928447746,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        129.41570736899072,
+        53.5494175
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          519840.0,
+          0.0,
+          -30.0,
+          5941170.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        129.29896520622341,
+        53.480092796109425,
+        129.53214270550336,
+        53.61895881928718
+      ]
+    },
+    {
+      "sample_id": "eastern:5084b812d2e26718c8514c93e44ec418c5087df07a0633057f5455afa3aa9c67",
+      "group_id": "eastern:9033556604a9eb29ec49f85ee5ed8775494215ce90b0ddadc3d8fe544212d7bb",
+      "cluster_id": "9033556604a9eb29ec49f85ee5ed8775494215ce90b0ddadc3d8fe544212d7bb",
+      "area_ha": 47.693086576850035,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        126.7196714599768,
+        52.0402305
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          335910.0,
+          0.0,
+          -30.0,
+          5775660.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        126.60388499082892,
+        51.969131998674115,
+        126.83467711283994,
+        52.11145521420785
+      ]
+    },
+    {
+      "sample_id": "eastern:2ebe5735ea0ce71e8ef627d2bd78670fc33ec222a44178bc50bafbfeac13a0aa",
+      "group_id": "eastern:c60f0f9069ebebc005d969d92675c507805968cf598c7048f17e46ec7c69d6e8",
+      "cluster_id": "c60f0f9069ebebc005d969d92675c507805968cf598c7048f17e46ec7c69d6e8",
+      "area_ha": 25.970904716952415,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        132.65829093170152,
+        51.390104
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          329370.0,
+          0.0,
+          -30.0,
+          5703510.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        132.54394769289513,
+        51.31902736378156,
+        132.771568218437,
+        51.46143760273511
+      ]
+    },
+    {
+      "sample_id": "eastern:51976436a661c829be96c33554f9a920d5e04851f97d9d9aabc9c58991b2800b",
+      "group_id": "eastern:ec45453c42d81eed3ebf626c4606cdc621d28f31aa3d61a17239fe9c7aeb581f",
+      "cluster_id": "ec45453c42d81eed3ebf626c4606cdc621d28f31aa3d61a17239fe9c7aeb581f",
+      "area_ha": 111.72064909139561,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        129.12354341822225,
+        50.027993
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          501150.0,
+          0.0,
+          -30.0,
+          5549460.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        129.01603287230515,
+        49.95902211923888,
+        129.23083647582445,
+        50.09739734347586
+      ]
+    },
+    {
+      "sample_id": "eastern:515163160af3bfec79d3dbad3284816ffe6ec012e535c60b720279424b305d15",
+      "group_id": "eastern:cb98deb5442f86fbdd491f7336142e71560a28e7e554706d04ee2f8f97c33d96",
+      "cluster_id": "cb98deb5442f86fbdd491f7336142e71560a28e7e554706d04ee2f8f97c33d96",
+      "area_ha": 383.30975444871274,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        129.58850229824708,
+        52.268446499999996
+      ],
+      "grid": {
+        "crs": "EPSG:32652",
+        "transform": [
+          30.0,
+          0.0,
+          532470.0,
+          0.0,
+          -30.0,
+          5798760.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        129.47509763630373,
+        52.19897531994752,
+        129.70200600066414,
+        52.33818411244204
+      ]
+    },
+    {
+      "sample_id": "eastern:937ecbe7b838898c956e359d75dbf99139a313065213f540d7c0ef77d195b544",
+      "group_id": "eastern:56b8113a0f687324100910b89327611b63b1be89f2e7b907505c448cb85f2cfb",
+      "cluster_id": "56b8113a0f687324100910b89327611b63b1be89f2e7b907505c448cb85f2cfb",
+      "area_ha": 375.5554781475255,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        136.37745903897707,
+        52.426683999999995
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          585960.0,
+          0.0,
+          -30.0,
+          5817090.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        136.2622897038129,
+        52.35648128117921,
+        136.49242472336013,
+        52.497162635985
+      ]
+    },
+    {
+      "sample_id": "eastern:567eabcf6e878aeadeddcda74f86f5831855576be2a7c6a41a2e1f0cff66f0c3",
+      "group_id": "eastern:408a71146f7a283534cf512f82cc987375afc52748deca7a4a78fb764c0456de",
+      "cluster_id": "408a71146f7a283534cf512f82cc987375afc52748deca7a4a78fb764c0456de",
+      "area_ha": 324.48357324639414,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        134.98433511672323,
+        51.388842999999994
+      ],
+      "grid": {
+        "crs": "EPSG:32653",
+        "transform": [
+          30.0,
+          0.0,
+          491220.0,
+          0.0,
+          -30.0,
+          5700750.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        134.87362674474048,
+        51.31974271710806,
+        135.0947080291858,
+        51.45792597651995
+      ]
+    },
+    {
+      "sample_id": "eastern:0365c3724f6683db06c379b4eb31384cc24692962186e4bbeb8bacffb109887b",
+      "group_id": "eastern:2adf81e418c4f9c138bd4790751f54703e4b3dcc7ba9b887909ddac18ae7ae25",
+      "cluster_id": "2adf81e418c4f9c138bd4790751f54703e4b3dcc7ba9b887909ddac18ae7ae25",
+      "area_ha": 118.25119968552931,
+      "partition": "evaluation",
+      "dataset": "russia",
+      "sampling_weight": 1,
+      "label_provenance": "participatory_perimeter",
+      "center": [
+        120.42749378929307,
+        53.441854500000005
+      ],
+      "grid": {
+        "crs": "EPSG:32651",
+        "transform": [
+          30.0,
+          0.0,
+          321450.0,
+          0.0,
+          -30.0,
+          5932200.0
+        ],
+        "width": 512,
+        "height": 512
+      },
+      "bbox_wgs84": [
+        120.30743758317792,
+        53.37046496174456,
+        120.54678746724286,
+        53.51337087290444
+      ]
+    }
+  ],
+  "ready_metadata_population": true,
+  "policy": "EPSG3576/20km/whole-group purge/72max/4pergroup/spec112 hash/area bins",
+  "source_hashes": {
+    "/home/mc/fires-accuracy-next/scripts/plan_eastern_confirmation.py": "802fcb4194a2daceb5149f70d8087558165740a7a646e2da9e7383c701c82c5d",
+    "src/comp/eastern_confirmation_plan.py": "6926107ce2a984245c9e0b851e4cd2a6cd3f7876dd917c96ef6630d3d0b54bc6",
+    "src/comp/western_holdout.py": "5cc09b1366b3ed1adcbbbd9d124e5d4bb298b115e5d3df69438c184839f585ba",
+    "scripts/build_russian_reserve.py": "9ee6680a9c043dbb62dd488bf5800889b02550ed77fd525718a10a404820ac0c",
+    "scripts/prepare_western_holdout.py": "1eddf19717bceb38fb33c43fe4f5a2ae53df9125fe694e6448e1c0bf2ac64cd5",
+    "src/comp/accuracy_contract.py": "6c71e49762838b1344355c10dceea1f6ced3d61fb6a9646ad8f0a37ec429e423"
+  },
+  "imagery_downloaded": false,
+  "prediction_read": false,
+  "future_collection_constraints": {
+    "max_bytes": 805306368,
+    "free_floor_bytes": 3221225472,
+    "minimum_windows": 50,
+    "minimum_groups": 20,
+    "requires_separate_spec_and_eligible_candidate": true
+  },
+  "non_claims": [
+    "Metadata-only unused geography; shared publisher/spring2020 and spatial groups, not dated fires.",
+    "No data admission, model comparison, imagery quality, field truth, promotion or goal completion."
+  ]
+}
