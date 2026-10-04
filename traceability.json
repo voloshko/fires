@@ -152,7 +152,8 @@
         "SPEC-106",
         "SPEC-107",
         "SPEC-108",
-        "SPEC-109"
+        "SPEC-109",
+        "SPEC-110"
       ]
     }
   },
@@ -1223,6 +1224,17 @@
         "SPEC-95",
         "SPEC-105",
         "SPEC-108"
+      ],
+      "status": "active"
+    },
+    "SPEC-110": {
+      "title": "MTBS legend and severity error attribution",
+      "file": "specs/SPEC-110-mtbs-legend-and-severity-error-attribution.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-94",
+        "SPEC-100",
+        "SPEC-107"
       ],
       "status": "active"
     }
