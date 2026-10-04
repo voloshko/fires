@@ -1,6 +1,6 @@
 # SPEC-118: Five-initializer matched equal-cost temporal additions
 
-Status: active
+Status: implemented
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-95, SPEC-114
 
@@ -63,3 +63,20 @@ retuning, selective seed/epoch choice or reinterpretation of114 FAIL.
   exact per-seed/ensemble probability equivalence, accuracy or causal proof.
   Shared publisher/spatialgroups, no field truth/severity/L2A/globalrank,
   product promotion or original four-direction goal completion.
+
+## Resolution
+
+Implemented full ten-member experiment, eligibility true/allfourguards true.
+Fournew full30epoch runs completed, sixparent114states reusedunchanged;
+all10native/source/fit/exposure/order/base and750packed confusion rows verified.
+Russia234/90 pair0.287230/post0.228190/C1-MM0.219247/Prithvi0.116043;
+postdelta+0.059040 CI[0.007709,0.098965], C1delta+0.067983
+CI[0.004652,0.116854], Prithvidelta+0.171187 CI[0.123718,0.229808].
+Regionalpoint/Med/missedgroup guards pass. FLOGA0.745200 vsC1.746460,
+allowedpoint-0.001259/lower-0.003997. No uniformimprovement claim.
+
+Train/score terminalexit0; immutablePASS supports consumeddevelopment eligibility
+only. Matchingfivemembership does not prove probabilityequivalence/extraevent
+samples or causalvariance explanation. Separatelypreregistered119collection
+nowauthenticated and live; its freshquality/sourceadmission notyetcomplete.
+No product/worldrank/fieldtruth/severity/L2A or originalgoalcompletion claim.

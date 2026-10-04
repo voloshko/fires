@@ -785,3 +785,21 @@ at16:13:24/16:15:17; western96/EMS60/FLOGA81stillneeded. Expected
 research/five-seed-additions-v1/development.json. Source1191404000stillwaits
 fulltrueeligible result; no neweastern images. Keepsealed118sources immutable,
 no restart onobservationtimeout, no originalfour-goalcompletion claim.
+
+## SPEC-118 eligible development;119freshsourcecollecting
+
+All10native/fullsummaries and750maskderivedcounts/decisions verified. Completed
+scoreexit0 at16:22:33,701.277sCPU/7Gpeak. Eligibilitytrue/allfourguards true.
+Russian234/90 pair0.287230/post0.228190/C1-MM0.219247/Prithvi0.116043;
+postCI[0.007709,0.098965], C1CI[0.004652,0.116854], PrithviCI[0.123718,0.229808].
+Regionalpoints/Med/misses pass; FLOGA-.001259 withinfixedallowance. PASS receipt
+and implemented118status mean consumeddevelopment eligibility only, no product
+or global/physical/severity/L2A claim. Parent114FAIL preserved.
+
+119source1404000 authenticatedactual118 and startedfixed72collection; child
+1428244 live, recentCOLLECTEDevents16:30:57. Data-size611MiB/free3.3GiB snapshot,
+768MiBsourcebudget/freefloor3GiB enforced; retain failures/partials. No newfit
+or reselection. Need finalactual>=50windows20groups admission, then separately
+resource/GPUleased childscore allfreshcomparators. Do not call source-parent
+exit0 completedquality; checkchild/result. All118/119sources now immutable.
+Originalfour-part goal stillactive/unproven; optionalCDSEconfigpath pending.

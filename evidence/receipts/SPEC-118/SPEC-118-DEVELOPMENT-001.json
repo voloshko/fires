@@ -1,0 +1,507 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-118",
+  "run_id": "SPEC-118-DEVELOPMENT-001",
+  "predecessor_run_id": "SPEC-118-TRAINING-COMPLETE-001",
+  "created_at": "2026-10-04T13:36:55.690957+00:00",
+  "status": "PASS",
+  "evidence_class": "REPLAY",
+  "conclusion": "Complete ten-member candidate passes unchanged development eligibility. Russia pooled positive CI versus matchedpost/C1-MM5/Prithvi, all regional/Med/missed-group safeguards pass; fresh119 confirmation remains pending.",
+  "commands": [
+    "ssh k8plus: queue_five_seed_additions.sh",
+    "ssh k8plus: queue_score_five_seed_additions.sh",
+    "ssh k8plus: CPU packed reconstruction750rows and exact decisions",
+    "make gate"
+  ],
+  "acceptance": {
+    "eligible": true,
+    "guards": {
+      "pooled_gain": true,
+      "regional_points": true,
+      "mediterranean": true,
+      "missed_groups": true
+    },
+    "pooled": {
+      "post": {
+        "samples": 234,
+        "groups": 90,
+        "candidate_iou": 0.28723030664185994,
+        "control_iou": 0.2281904793132746,
+        "delta": 0.05903982732858534,
+        "ci95": [
+          0.007708957657878141,
+          0.09896480968555746
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      },
+      "c1mm": {
+        "samples": 234,
+        "groups": 90,
+        "candidate_iou": 0.28723030664185994,
+        "control_iou": 0.2192468213093734,
+        "delta": 0.06798348533248655,
+        "ci95": [
+          0.004652369154551503,
+          0.11685374920270154
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      },
+      "prithvi": {
+        "samples": 234,
+        "groups": 90,
+        "candidate_iou": 0.28723030664185994,
+        "control_iou": 0.11604312605925204,
+        "delta": 0.1711871805826079,
+        "ci95": [
+          0.12371796038631336,
+          0.22980764367871798
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      }
+    },
+    "per_dataset": {
+      "russia_eval": {
+        "post": {
+          "samples": 77,
+          "groups": 24,
+          "candidate_iou": 0.35919980275554125,
+          "control_iou": 0.3334873515501341,
+          "delta": 0.02571245120540716,
+          "ci95": [
+            -0.008080186128245195,
+            0.07018155412389489
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "reserve": {
+          "samples": 77,
+          "groups": 24,
+          "candidate_iou": 0.35919980275554125,
+          "control_iou": 0.3230492072325294,
+          "delta": 0.036150595523011864,
+          "ci95": [
+            -0.08815939705906622,
+            0.07713107209177428
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 77,
+          "groups": 24,
+          "candidate_iou": 0.35919980275554125,
+          "control_iou": 0.32610820993394857,
+          "delta": 0.033091592821592686,
+          "ci95": [
+            -0.00897152707131043,
+            0.08058799195868617
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "prithvi": {
+          "samples": 77,
+          "groups": 24,
+          "candidate_iou": 0.35919980275554125,
+          "control_iou": 0.20621601498957293,
+          "delta": 0.15298378776596833,
+          "ci95": [
+            0.09601134170123626,
+            0.27515284509925686
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        }
+      },
+      "russia_cal": {
+        "post": {
+          "samples": 61,
+          "groups": 29,
+          "candidate_iou": 0.3562661735539703,
+          "control_iou": 0.23057448375670403,
+          "delta": 0.12569168979726625,
+          "ci95": [
+            0.035858524362064936,
+            0.19192410748353098
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        },
+        "reserve": {
+          "samples": 61,
+          "groups": 29,
+          "candidate_iou": 0.3562661735539703,
+          "control_iou": 0.3045746193131945,
+          "delta": 0.05169155424077576,
+          "ci95": [
+            -0.05737384127751344,
+            0.1108178365283163
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 61,
+          "groups": 29,
+          "candidate_iou": 0.3562661735539703,
+          "control_iou": 0.20591468859988143,
+          "delta": 0.15035148495408884,
+          "ci95": [
+            0.03852995933649733,
+            0.23159389663895533
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        },
+        "prithvi": {
+          "samples": 61,
+          "groups": 29,
+          "candidate_iou": 0.3562661735539703,
+          "control_iou": 0.1426591138734276,
+          "delta": 0.21360705968054267,
+          "ci95": [
+            0.11006298234790518,
+            0.3045248231041238
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        }
+      },
+      "western": {
+        "post": {
+          "samples": 96,
+          "groups": 37,
+          "candidate_iou": 0.2284035185912269,
+          "control_iou": 0.18704991956583544,
+          "delta": 0.04135359902539146,
+          "ci95": [
+            -0.02367368285268108,
+            0.08908143047124445
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "reserve": {
+          "samples": 96,
+          "groups": 37,
+          "candidate_iou": 0.2284035185912269,
+          "control_iou": 0.2206281739341134,
+          "delta": 0.007775344657113492,
+          "ci95": [
+            -0.025940308397591264,
+            0.0585405488518948
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 96,
+          "groups": 37,
+          "candidate_iou": 0.2284035185912269,
+          "control_iou": 0.1838986395342188,
+          "delta": 0.04450487905700809,
+          "ci95": [
+            -0.03741820352372201,
+            0.10205323489059193
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "prithvi": {
+          "samples": 96,
+          "groups": 37,
+          "candidate_iou": 0.2284035185912269,
+          "control_iou": 0.08466293357855248,
+          "delta": 0.14374058501267442,
+          "ci95": [
+            0.09063517594749071,
+            0.2370450225392591
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "better"
+        }
+      },
+      "ems": {
+        "post": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.75968337947033,
+          "control_iou": 0.7601593156011017,
+          "delta": -0.0004759361307716814,
+          "ci95": [
+            -0.0008371146581937855,
+            -0.00010211634883903754
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "worse"
+        },
+        "reserve": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.75968337947033,
+          "control_iou": 0.7948998849080845,
+          "delta": -0.03521650543775445,
+          "ci95": [
+            -0.06545267374120158,
+            -0.014213183697700344
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "worse"
+        },
+        "c1mm": {
+          "samples": 60,
+          "groups": 44,
+          "candidate_iou": 0.75968337947033,
+          "control_iou": 0.7594609076850591,
+          "delta": 0.00022247178527090572,
+          "ci95": [
+            -3.1872384209177815e-05,
+            0.0005078199608420622
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        }
+      },
+      "floga": {
+        "post": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.7452002522792162,
+          "control_iou": 0.7383041328532273,
+          "delta": 0.006896119425988889,
+          "ci95": [
+            -0.0008730132653965911,
+            0.028226068201172284
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "reserve": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.7452002522792162,
+          "control_iou": 0.7255777050481008,
+          "delta": 0.01962254723111534,
+          "ci95": [
+            -0.046577621535545316,
+            0.11943794602206347
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "inconclusive"
+        },
+        "c1mm": {
+          "samples": 81,
+          "groups": 81,
+          "candidate_iou": 0.7452002522792162,
+          "control_iou": 0.7464595747186571,
+          "delta": -0.0012593224394409352,
+          "ci95": [
+            -0.003996823116709172,
+            -3.944529089365e-05
+          ],
+          "n_boot": 2000,
+          "seed": 20261003,
+          "verdict": "worse"
+        }
+      }
+    },
+    "training": {
+      "spec_id": "SPEC-118",
+      "full10_members_completed": true,
+      "mixed_family_identities_valid": true,
+      "fit_holdout_disjoint": true,
+      "matched_order_exposure_base_exact": true,
+      "runs": [
+        {
+          "seed": 1,
+          "variant": "pair",
+          "spec_id": "SPEC-114",
+          "epochs": 30,
+          "seconds": 596.0676758475602,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "8d022d364e907695d77369f04c9f07faf271a901aef3d854ce123611f30487cf"
+        },
+        {
+          "seed": 2,
+          "variant": "pair",
+          "spec_id": "SPEC-114",
+          "epochs": 30,
+          "seconds": 596.6295858304948,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "55ad02e60e0df2e4f4542ccbd16ef1e860a875fb6162e443e2936c6dd6bdb0d1"
+        },
+        {
+          "seed": 3,
+          "variant": "pair",
+          "spec_id": "SPEC-114",
+          "epochs": 30,
+          "seconds": 596.5150722172111,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "c90e4c6ffc7ec9f845c1783c764478360eef94fa33010b2f675202df336f40f3"
+        },
+        {
+          "seed": 4,
+          "variant": "pair",
+          "spec_id": "SPEC-118",
+          "epochs": 30,
+          "seconds": 594.854589741677,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "8932c673d8bac21a485952374efba7ce3e3a1070cc2f1e06e104bf00ad6c0af9"
+        },
+        {
+          "seed": 5,
+          "variant": "pair",
+          "spec_id": "SPEC-118",
+          "epochs": 30,
+          "seconds": 594.8042841460556,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "51bc17e7329345059738a898a7772332c5753b741c11a1258e881b507bab5f29"
+        },
+        {
+          "seed": 1,
+          "variant": "post",
+          "spec_id": "SPEC-114",
+          "epochs": 30,
+          "seconds": 556.8976973276585,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "5ecbc72262a1e67deede3d6a5b300d538e1fc48d8c80950735e747704ac674ff"
+        },
+        {
+          "seed": 2,
+          "variant": "post",
+          "spec_id": "SPEC-114",
+          "epochs": 30,
+          "seconds": 554.5881486274302,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "a65c5a8a28ad4c9f722783f00b29ac297a74e6a19fd61dc630ef95d0de6b17e9"
+        },
+        {
+          "seed": 3,
+          "variant": "post",
+          "spec_id": "SPEC-114",
+          "epochs": 30,
+          "seconds": 554.5008813831955,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "1e90b19c99f7d1fb31cd33cee7a548c56005414c9931001ca5f1231aad4d4e58"
+        },
+        {
+          "seed": 4,
+          "variant": "post",
+          "spec_id": "SPEC-118",
+          "epochs": 30,
+          "seconds": 554.5068305321038,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "173308c7cdd02a88ae3e51158588bf8b88d45e04c1b2be5463af77d418132aa4"
+        },
+        {
+          "seed": 5,
+          "variant": "post",
+          "spec_id": "SPEC-118",
+          "epochs": 30,
+          "seconds": 553.4141811784357,
+          "exposure_total": 22860,
+          "min_exposure": 30,
+          "max_exposure": 60,
+          "checkpoint_sha256": "5d045133c2cd9b7ee2948595df1ea48242d6937a2f7269b293de70f4726f16b0"
+        }
+      ],
+      "non_claims": [
+        "Full10member mechanics only; development scoring/fresh confirmation still pending"
+      ]
+    },
+    "decision_audit": {
+      "spec_id": "SPEC-118",
+      "result_sha256": "fb6aa7f3fdd8a4f4d24dc4c04e8a9b33ebdd41117927ef24adff5288b907b851",
+      "windows": 375,
+      "candidate_counts_reconstructed": 750,
+      "all_decision_fields_recomputed": true,
+      "reference_tp_fn_preserved": true,
+      "eligible": true,
+      "guards": {
+        "pooled_gain": true,
+        "regional_points": true,
+        "mediterranean": true,
+        "missed_groups": true
+      },
+      "cache_hashes": {
+        "russia_eval-pair.packed.npy": "2573969d2f6fed7bb46a12896e49932a8690455019137b2f37b2b57669b0647a",
+        "russia_eval-post.packed.npy": "10a809e5a384b62281024e8da4eda1974d0a7fa4455cc1e49431d64d7487d9bb",
+        "russia_cal-pair.packed.npy": "ee05ca955c09acf31a398a067ce6279b9e3878290e3f55899a254328db0c2e4a",
+        "russia_cal-post.packed.npy": "2cb5de7a701523f79526369f5159b51efce56c8bc86a0a8d271a9c9ea1e31c61",
+        "western-pair.packed.npy": "d5b597be62ee39f2fcbaad58b01d9e71c5a803b249237cef5417bb6825facd03",
+        "western-post.packed.npy": "145c3c67f52907355d6fe6236b00ee2cc7de37b623cca14f017f4d4741cc1186",
+        "ems-pair.packed.npy": "94687db3d022e7c93cbb7a35b0f33e9d98d767cc036d3be6a8f4b4e9afb94b80",
+        "ems-post.packed.npy": "b0e8fb904580e6126bb4c268445ad3560c94a0e846fe7b8a3fc12eaaa69b022e",
+        "floga-pair.packed.npy": "87fc387bc490df3150e6d857d23c38d5b55f23b7ace856a8640b2f7b579f9b9f",
+        "floga-post.packed.npy": "8e7850a5673cc184cbaf043a9872b43f999e6d316aa6e9f3bc1a1324219b225e"
+      },
+      "non_claims": [
+        "Consumed development eligibility only; fresh119 confirmation/admission stillpending. No promotion or fullgoalcompletion"
+      ]
+    },
+    "new_training_exit": 0,
+    "scoring_exit": 0,
+    "scoring_cpu_seconds": 701.277,
+    "scoring_host_peak": "7 GiB",
+    "fresh_confirmation": "LIVE_SOURCE_COLLECTION_NOT_SCORED"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/five-seed-development.json",
+    "evidence/experiments/accuracy-next-20261003/five-seed-scoring-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/five-seed-ten-member-audit.json",
+    "evidence/experiments/accuracy-next-20261003/five-seed-result-audit.json"
+  ],
+  "limitations": [
+    "Consumed development after adaptive research; not independent competitor validation.",
+    "Relative C1 pooled point gain about31% is specific to Russian234/90 data, not original contest/worldrank.",
+    "FLOGA small negative difference vsC1 within original allowance; no claim uniform global improvement.",
+    "Future119 actualadmission/freshscore remains necessary and notyetknown."
+  ],
+  "non_claims": [
+    "Consumed development populations; eligibility is not independent confirmation or promotion.",
+    "PANGAEA background is published coverage, not reviewed absence of fire; spatial groups are not dated fires.",
+    "No field truth, severity/L2A useful gain, global ranking or original goal completion."
+  ]
+}

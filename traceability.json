@@ -1334,7 +1334,7 @@
         "SPEC-95",
         "SPEC-114"
       ],
-      "status": "active"
+      "status": "implemented"
     },
     "SPEC-119": {
       "title": "Frozen eastern confirmation for five-member temporal ensemble",

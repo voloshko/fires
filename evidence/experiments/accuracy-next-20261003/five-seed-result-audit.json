@@ -1,0 +1,30 @@
+{
+  "spec_id": "SPEC-118",
+  "result_sha256": "fb6aa7f3fdd8a4f4d24dc4c04e8a9b33ebdd41117927ef24adff5288b907b851",
+  "windows": 375,
+  "candidate_counts_reconstructed": 750,
+  "all_decision_fields_recomputed": true,
+  "reference_tp_fn_preserved": true,
+  "eligible": true,
+  "guards": {
+    "pooled_gain": true,
+    "regional_points": true,
+    "mediterranean": true,
+    "missed_groups": true
+  },
+  "cache_hashes": {
+    "russia_eval-pair.packed.npy": "2573969d2f6fed7bb46a12896e49932a8690455019137b2f37b2b57669b0647a",
+    "russia_eval-post.packed.npy": "10a809e5a384b62281024e8da4eda1974d0a7fa4455cc1e49431d64d7487d9bb",
+    "russia_cal-pair.packed.npy": "ee05ca955c09acf31a398a067ce6279b9e3878290e3f55899a254328db0c2e4a",
+    "russia_cal-post.packed.npy": "2cb5de7a701523f79526369f5159b51efce56c8bc86a0a8d271a9c9ea1e31c61",
+    "western-pair.packed.npy": "d5b597be62ee39f2fcbaad58b01d9e71c5a803b249237cef5417bb6825facd03",
+    "western-post.packed.npy": "145c3c67f52907355d6fe6236b00ee2cc7de37b623cca14f017f4d4741cc1186",
+    "ems-pair.packed.npy": "94687db3d022e7c93cbb7a35b0f33e9d98d767cc036d3be6a8f4b4e9afb94b80",
+    "ems-post.packed.npy": "b0e8fb904580e6126bb4c268445ad3560c94a0e846fe7b8a3fc12eaaa69b022e",
+    "floga-pair.packed.npy": "87fc387bc490df3150e6d857d23c38d5b55f23b7ace856a8640b2f7b579f9b9f",
+    "floga-post.packed.npy": "8e7850a5673cc184cbaf043a9872b43f999e6d316aa6e9f3bc1a1324219b225e"
+  },
+  "non_claims": [
+    "Consumed development eligibility only; fresh119 confirmation/admission stillpending. No promotion or fullgoalcompletion"
+  ]
+}
