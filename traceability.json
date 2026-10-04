@@ -144,7 +144,8 @@
         "SPEC-98",
         "SPEC-99",
         "SPEC-100",
-        "SPEC-101"
+        "SPEC-101",
+        "SPEC-102"
       ]
     }
   },
@@ -1117,6 +1118,18 @@
         "SPEC-95",
         "SPEC-96",
         "SPEC-97"
+      ],
+      "status": "active"
+    },
+    "SPEC-102": {
+      "title": "Frozen post and paired fusion with unused Russian confirmation",
+      "file": "specs/SPEC-102-frozen-pair-fusion.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-91",
+        "SPEC-92",
+        "SPEC-95"
       ],
       "status": "active"
     }
