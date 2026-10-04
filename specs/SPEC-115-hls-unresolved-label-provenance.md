@@ -42,8 +42,17 @@ fire date or a replacement of the original source-admission criteria.
 ## Verification
 
 - k8plus: `.runtime/bin/python -m pytest tests/test_hls_label_provenance.py -q`.
-- k8plus: `.runtime/bin/python scripts/audit_hls_label_provenance.py --source-root /home/mc/fires --registry data-store/hls-events.json --out research/hls-label-provenance-v1.json`.
+- k8plus: `.runtime/bin/python scripts/audit_hls_label_provenance.py --source-root /home/mc/fires --registry data-store/hls-events.json --out research/hls-label-provenance-v2.json`.
 - `make gate`.
 - non_claims: no publisher lookup/physical ignition inference, new label IDs,
   change to SPEC96/97/93 admission, new data/predictions, competitor improvement
   or original four-direction goal completion.
+
+## Execution notes
+
+CPU v1 failed on empty ignition filtering: an untyped empty pandas boolean
+Series used with [] selected columns and removed GeoDataFrame structure.
+Immutable recipe/journal retained in SPEC-115-AUDIT-FAIL-001. Explicit .loc
+with boolean dtype preserves geographic schema; regression tests cover empty,
+future and unknown-date candidates. Successor v2 uses a new output/recipe path
+and the identical source population; no old recipe or result overwritten.

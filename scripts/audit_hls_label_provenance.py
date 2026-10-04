@@ -38,6 +38,12 @@ def read_target(root, record):
         return target, valid, grid, metadata
 
 
+def filter_prior_candidates(candidates, acquisition):
+    selected = candidates.audit_day.map(lambda d: prior_ignition(d, acquisition)).astype(bool)
+    # An empty untyped Series used with [] selects columns and drops geometry.
+    return candidates.loc[selected].copy()
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for key in ('source-root', 'registry', 'out'):
@@ -90,7 +96,7 @@ def main():
         candidates = frame.iloc[frame.sindex.query(box(*record['bbox_wgs84']), predicate='intersects')].copy()
         unknown_dates = int(candidates.audit_ignition.isna().sum())
         candidates['audit_day'] = candidates.audit_ignition.map(lambda d: None if pd.isna(d) else d.date().isoformat())
-        candidates = candidates[candidates.audit_day.map(lambda d: prior_ignition(d, record['acquisition_day']))]
+        candidates = filter_prior_candidates(candidates, record['acquisition_day'])
         scores = []
         for event, group in candidates.to_crs(grid['crs']).groupby('event_id'):
             dates = sorted(set(group.audit_day))
