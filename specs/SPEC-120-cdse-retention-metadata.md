@@ -40,9 +40,19 @@ Metadata availability is not visibility, preserved labels or source admission.
 ## Verification
 
 - k8plus: `.runtime/bin/python -m pytest tests/test_cdse_retention_metadata.py -q`.
-- k8plus: `.runtime/bin/python scripts/audit_cdse_retention_metadata.py --manifest data-store/l2a-pc-v1/manifest.json --out research/cdse-retention-metadata-v1`.
+- k8plus: `.runtime/bin/python scripts/audit_cdse_retention_metadata.py --manifest data-store/l2a-pc-v1/manifest.json --out research/cdse-retention-metadata-v2`.
 - `make gate`.
 - Primary reference: [CDSE OData documentation](https://documentation.dataspace.copernicus.eu/APIs/OData.html).
 - non_claims: metadata/Online flag not pixels/cloudfree coverage/labelretention,
   no fieldtruth/fireabsence/L2Ausefulgain/competitorimprovement/promotion or
   completion of originalfour-directiongoal.
+
+## Execution notes
+
+V1 completed16completequeries/16online descriptor windows. Independent
+architecture review BLOCK: Requestsdefaulttrust_env permits .netrc/environment
+authentication, contrary to promised no credential reads. No actual access or
+exposure established. ImmutableFAIL/sourceversion/firstrawresult preserved.
+ExplicitSessiontrust_envFalse and regression prevent environment authentication
+andproxylookup. Five tests pass; finalv2 uses a new immutable output/source seal.
+No pixel/sourceadmission claim from either metadata snapshot.

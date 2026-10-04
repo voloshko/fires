@@ -1,0 +1,104 @@
+{
+  "spec_id": "SPEC-120",
+  "status": "FAIL",
+  "reason": "Initial source did not enforce anonymous Requests boundary (trust_env default); no actual credential access/exposure established",
+  "result_sha256": "7dfd90ee388b796bc06e97a612ddee9f93659f66d24be182980e3db441087a9b",
+  "metadata_summary": {
+    "windows": 16,
+    "complete_queries": 16,
+    "failed_queries": 0,
+    "complete_empty_queries": 0,
+    "online_windows": 16
+  },
+  "recipe": {
+    "source_hashes": {
+      "/home/mc/fires-accuracy-next/scripts/audit_cdse_retention_metadata.py": "ae2bd42d46e93429d2a883949e751caa66936a51e690bf8620a62aa61605a20c",
+      "scripts/train_unet.py": "3f7a8fe08d303cdd482033386118328f0db810f86db1c003d8c08c9d57dc7ee7",
+      "src/comp/accuracy_artifacts.py": "17e4e6d021fcf4a2d3c14a57aab626cf98b38ca599545f601f5ce0017652285c",
+      "src/comp/accuracy_contract.py": "6c71e49762838b1344355c10dceea1f6ced3d61fb6a9646ad8f0a37ec429e423",
+      "src/comp/cdse_retention_metadata.py": "d810110c96615241b54ccfb1a5c390b9e46ceefcc09968f241a19e32d08af231",
+      "src/comp/forest_pair.py": "a8923953ccefd160e5e0e952929e4691ca8f908493d404658aa6ff722d785949",
+      "src/comp/hls.py": "37daa4ec8e6223a10e161681b5dcaa090697af279aaf559d44d1e254a106290f"
+    },
+    "configuration": {
+      "manifest_sha256": "75d1afa37b8dd51d98ea23c2d364b6f1f24e6c253e8ed354f7167d2dcfe3794b",
+      "endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+      "losses": [
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T10SGD.2021306.v1.4_merged.tif",
+          "lost_protected_pixels": 5
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T10TGS.2018215.v1.4_merged.tif",
+          "lost_protected_pixels": 2
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T11SKB.2020222.v1.4_merged.tif",
+          "lost_protected_pixels": 1948
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T11SMT.2018249.v1.4_merged.tif",
+          "lost_protected_pixels": 1
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T11SNT.2018216.v1.4_merged.tif",
+          "lost_protected_pixels": 2
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T11SQC.2020241.v1.4_merged.tif",
+          "lost_protected_pixels": 4
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T11TNE.2018199.v1.4_merged.tif",
+          "lost_protected_pixels": 1
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T11TPF.2018289.v1.4_merged.tif",
+          "lost_protected_pixels": 1
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T12SVC.2020190.v1.4_merged.tif",
+          "lost_protected_pixels": 802
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T14RLV.2018043.v1.4_merged.tif",
+          "lost_protected_pixels": 1
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T14SPH.2018095.v1.4_merged.tif",
+          "lost_protected_pixels": 1
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T14SQF.2018125.v1.4_merged.tif",
+          "lost_protected_pixels": 4
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T14TQT.2021112.v1.4_merged.tif",
+          "lost_protected_pixels": 8
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T15SUB.2018127.v1.4_merged.tif",
+          "lost_protected_pixels": 2
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T15SUC.2018127.v1.4_merged.tif",
+          "lost_protected_pixels": 1
+        },
+        {
+          "sample_id": "hls:subsetted_512x512_HLS.S30.T17SQD.2020094.v1.4_merged.tif",
+          "lost_protected_pixels": 1
+        }
+      ],
+      "credential_access": false,
+      "pixel_download": false
+    },
+    "software": {
+      "torch": "2.14.0+cu130",
+      "numpy": "2.5.3"
+    },
+    "recipe_id": "0d5dba9c6935c14910872f79925510580c0e92cf1e6df4542b2b75711953fdcd"
+  },
+  "non_claims": [
+    "Does not establish credential nonaccess; metadata is not pixel admission or protected-label retention"
+  ]
+}

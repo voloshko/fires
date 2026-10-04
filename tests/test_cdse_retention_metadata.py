@@ -36,3 +36,16 @@ def test_probe_or_reduced_loss_population_cannot_replace_final_manifest():
     manifest=dict(spec_id='SPEC-93',qc_probe=True,ready_for_training=False,
         conservative_event_bound=dict(original_known_events=886,retained_known_events=4,lost_protected=[]))
     with pytest.raises(ValueError):lost_population(manifest)
+
+
+def test_anonymous_session_does_not_consult_environment_credentials(monkeypatch):
+    import requests
+    from scripts.audit_cdse_retention_metadata import anonymous_session
+    def forbidden_lookup(*args,**kwargs):
+        raise AssertionError('environment credentials consulted')
+    monkeypatch.setattr(requests.sessions,'get_netrc_auth',forbidden_lookup)
+    monkeypatch.setenv('HTTPS_PROXY','https://private.invalid')
+    with anonymous_session() as client:
+        prepared=client.prepare_request(requests.Request('GET','https://catalogue.dataspace.copernicus.eu/odata/v1/Products'))
+        assert 'Authorization' not in prepared.headers
+        assert client.merge_environment_settings(prepared.url,{},None,None,None)['proxies']=={}

@@ -17,6 +17,12 @@ from src.comp.cdse_retention_metadata import ENDPOINT, MANIFEST_SHA, descriptors
 BUDGET, FLOOR = 8*1024**2, 3*1024**3
 
 
+def anonymous_session():
+    client=requests.Session()
+    client.trust_env=False  # Disable .netrc, proxy authentication and environment configuration.
+    return client
+
+
 def write_once(root, path, value):
     used=sum(p.stat().st_size for p in root.rglob('*') if p.is_file())
     if used+len(value)>BUDGET or shutil.disk_usage(root).free-len(value)<FLOOR:
@@ -32,7 +38,7 @@ def fetch(root, index, plan, pages):
         if url in seen or len(seen)>=20 or urlsplit(url).netloc!=urlsplit(ENDPOINT).netloc:
             raise ValueError('invalid metadata pagination')
         seen.add(url)
-        with requests.get(url,params=params,timeout=30,stream=True) as response:
+        with anonymous_session() as client, client.get(url,params=params,timeout=30,stream=True) as response:
             chunks=[];size=0
             for part in response.iter_content(65536):
                 size+=len(part)
