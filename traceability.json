@@ -158,7 +158,8 @@
         "SPEC-112",
         "SPEC-113",
         "SPEC-114",
-        "SPEC-115"
+        "SPEC-115",
+        "SPEC-116"
       ]
     }
   },
@@ -1298,6 +1299,17 @@
         "SPEC-97"
       ],
       "status": "implemented"
+    },
+    "SPEC-116": {
+      "title": "Frozen eastern confirmation for equal-cost temporal candidate",
+      "file": "specs/SPEC-116-equal-cost-eastern-confirmation.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-112",
+        "SPEC-114",
+        "SPEC-113"
+      ],
+      "status": "active"
     }
   }
 }
