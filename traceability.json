@@ -162,7 +162,8 @@
         "SPEC-116",
         "SPEC-117",
         "SPEC-118",
-        "SPEC-119"
+        "SPEC-119",
+        "SPEC-120"
       ]
     }
   },
@@ -1343,6 +1344,16 @@
         "SPEC-112",
         "SPEC-118",
         "SPEC-116"
+      ],
+      "status": "active"
+    },
+    "SPEC-120": {
+      "title": "Public CDSE metadata audit for L2A protected-pixel losses",
+      "file": "specs/SPEC-120-cdse-retention-metadata.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-93",
+        "SPEC-97"
       ],
       "status": "active"
     }
