@@ -1,6 +1,6 @@
 # SPEC-115: Audit unresolved HLS publisher metadata and archival label reuse
 
-Status: active
+Status: implemented
 Requirement: REQ-008
 Depends on: SPEC-96, SPEC-97
 
@@ -63,3 +63,18 @@ of absent dates to NaN. Explicit non-string dates now remain unknown; tests
 pass4/4. Actual v2 intersecting candidates had zero missing ignitions, so this
 is defensive source-schema repair, not a changed event association. Preserve
 v2 and run final v3 in a fresh recipe/output under the repaired source.
+
+## Resolution
+
+Implemented bounded source audit: all540fit byte hashes,17unresolved records,
+vector components and publisher indices authenticated. Finalv3 exit0/51.479s,
+four tests/gate pass. Zero exact label/domain/grid reuse; three older95pct
+matches are ambiguous with recent candidates; three frames have no known-date
+archive candidate. All17 event_assignment fields remain null. No original
+registry/proof/input/label/readiness changed, no GPU/new imagery or model claim.
+
+V1 source/schema failure retained with FAIL; v2 successful diagnostics retained.
+Finalv3 source seal084767e6738f002d9756c75cf8bf83fd0518348967e84ba31dfb3f7fd3ebe772
+matches local committed sources and diagnostics equalv2. PASS receipt supports
+source audit only. SPEC93/96/97 event-retention issue remains unresolved.
+Independent code APPROVE/architecture CLEAR and targeted repair APPROVE.

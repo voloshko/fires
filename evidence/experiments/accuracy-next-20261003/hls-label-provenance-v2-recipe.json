@@ -1,0 +1,51 @@
+{
+  "source_hashes": {
+    "/home/mc/fires-accuracy-next/scripts/audit_hls_label_provenance.py": "bd5b8070eec84a4aca6fe86800e8f058eb1e8d1cf5567d54ff5f62650d969cc0",
+    "scripts/train_unet.py": "3f7a8fe08d303cdd482033386118328f0db810f86db1c003d8c08c9d57dc7ee7",
+    "src/comp/accuracy_artifacts.py": "17e4e6d021fcf4a2d3c14a57aab626cf98b38ca599545f601f5ce0017652285c",
+    "src/comp/accuracy_contract.py": "6c71e49762838b1344355c10dceea1f6ced3d61fb6a9646ad8f0a37ec429e423",
+    "src/comp/forest_pair.py": "a8923953ccefd160e5e0e952929e4691ca8f908493d404658aa6ff722d785949",
+    "src/comp/hls.py": "37daa4ec8e6223a10e161681b5dcaa090697af279aaf559d44d1e254a106290f",
+    "src/comp/hls_label_provenance.py": "459de676dd008e86041b04ceac35d7d6a46b147d01dc954c48a8d69203887e8a"
+  },
+  "configuration": {
+    "registry_sha256": "86f2210603e5921d384c62a52e90167ae64abbad3473bc1cce686ea7bbad3ed2",
+    "vector_hashes": {
+      "mtbs_perims_DD.cpg": "09fc313075748ce8ead962229ed89c919d5a9ff71974ee725a0b48bb87d975a2",
+      "mtbs_perims_DD.dbf": "4e9c37f14618a394030183a37f009f824d69ea5bcf3317fae4880750c23de0c1",
+      "mtbs_perims_DD.prj": "84cf5b9a3c1a444f83ac30ff76f8c5035990223027ba69b2f4d628388adcbd65",
+      "mtbs_perims_DD.shp": "145302d2985ec536a1fc2d8c2da3f4a73437d402082190c45e292e3f9aa08be2",
+      "mtbs_perims_DD.shx": "e8ed9fe593eeba35d134d7e3ea0c0cc35fc42ba6da96e1b7d4933d48b358b164"
+    },
+    "publisher_metadata_hashes": {
+      "external/hls_burn_scars/README.md": "faed1d086eefda6e19bc3060468fb44614e389f7e2b9f5a5aae71097294dce15",
+      "external/hls_burn_scars/training/training_index.csv": "49399c5290d829b027c074159d2c03ef6b092a67d486e5c0152e9f454b22bfc3",
+      "external/hls_burn_scars/validation/validation_index.csv": "fa947a3b835fe6430d3f4eebf941c22bd63bad0afc59fb7c8e1375affa723806"
+    },
+    "ordered_unresolved_ids": [
+      "hls:subsetted_512x512_HLS.S30.T11SKB.2020222.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T12SVC.2020190.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T14SPH.2018095.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T14SPJ.2018125.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T14SQF.2018125.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T14SQG.2018125.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T14TQT.2021112.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T15STC.2018125.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T15STD.2018125.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T15SUB.2018127.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T15SUC.2018127.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T16REV.2019080.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T16SEC.2021094.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T16TGQ.2019158.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T17RMJ.2018064.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T17SMV.2021096.v1.4_merged.tif",
+      "hls:subsetted_512x512_HLS.S30.T17SPS.2019094.v1.4_merged.tif"
+    ],
+    "scope": "fit-only; all prior ignitions; no event assignment"
+  },
+  "software": {
+    "torch": "2.14.0+cu130",
+    "numpy": "2.5.3"
+  },
+  "recipe_id": "c542525c9f86ef5da98dc2306dd8446dbf53e15d680b73ac63c4e468bc7fb882"
+}

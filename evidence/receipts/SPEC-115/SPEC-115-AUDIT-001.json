@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-115",
+  "run_id": "SPEC-115-AUDIT-001",
+  "predecessor_run_id": "SPEC-115-AUDIT-FAIL-001",
+  "created_at": "2026-10-04T11:10:51.245499+00:00",
+  "status": "PASS",
+  "evidence_class": "REPLAY",
+  "conclusion": "Complete bounded source audit540fit/17unresolved executed; no exact label/domain reuse, three older ambiguous95pct matches, three absent archive candidates. No event IDs assigned or L2A admission changed.",
+  "commands": [
+    "ssh k8plus: .runtime/bin/python -m pytest tests/test_hls_label_provenance.py -q",
+    "ssh k8plus: audit_hls_label_provenance.py --source-root /home/mc/fires --registry data-store/hls-events.json --out research/hls-label-provenance-v3.json",
+    "make gate"
+  ],
+  "acceptance": {
+    "summary": {
+      "unresolved": 17,
+      "exact_reuse_windows": 0,
+      "older_95pct_candidate_windows": 3,
+      "absent_prior_candidate_windows": 3
+    },
+    "result_sha256": "9aa5d9edc5eae1de9b5cb8774924373694862330986bd32a84f4f2230461fe28",
+    "source_recipe": "084767e6738f002d9756c75cf8bf83fd0518348967e84ba31dfb3f7fd3ebe772",
+    "indices": {
+      "training_index.csv": {
+        "rows": 540,
+        "columns": [
+          "image_filename",
+          "mask_filename"
+        ],
+        "publisher_event_id_available": false
+      },
+      "validation_index.csv": {
+        "rows": 264,
+        "columns": [
+          "image_filename",
+          "mask_filename"
+        ],
+        "publisher_event_id_available": false
+      }
+    },
+    "all17_event_assignments_null": true,
+    "unit_tests_passed": 4,
+    "execution_exit": 0,
+    "seconds": 51.479,
+    "host_memory_peak": "4.3 GiB",
+    "host_swap_peak": "381.9 MiB",
+    "source_parity": true,
+    "v2_v3_diagnostics_exact": true,
+    "review_code": "APPROVE",
+    "review_architecture": "CLEAR"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/hls-label-provenance-v2.json",
+    "evidence/experiments/accuracy-next-20261003/hls-label-provenance-v2-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/hls-label-provenance-v3.json",
+    "evidence/experiments/accuracy-next-20261003/hls-label-provenance-v3-recipe.json",
+    "docs/SPEC-115-LABEL-PROVENANCE.md"
+  ],
+  "limitations": [
+    "Reuse criteria require equal visibility; no exact match does not prove independent annotations.",
+    "Older overlap is not source attribution; no candidate is absence from current known-date archive, not absence of fire.",
+    "V1 failed and remains preserved; finalv3 binds repairs and reproducesv2 diagnostics."
+  ],
+  "non_claims": [
+    "No publisher lookup, new event assignment or physical ignition inference.",
+    "No change to SPEC96/97/93 source admission, protected pixel retention, model metrics or full goal completion."
+  ]
+}

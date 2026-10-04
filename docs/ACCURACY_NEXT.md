@@ -597,3 +597,15 @@ training+8min score, not a completion promise. Check current MainPID/journal.
 Do not edit sealed sources or restart because observation times out.
 No data download; SPEC112 eastern selection still unused,113deferred.
 All original guards and four-direction goal remain active, no promotion.
+
+## SPEC-115 source audit implemented; L2A admission still blocked
+
+540fit/17unresolved source audit completed finalv3 exit0/51.479s/4.3G peak.
+Four tests/gate pass; codeAPPROVE/architectureCLEAR, scoped finalAPPROVE.
+Zero exact target/domain/grid reuse, three older95pct overlaps ambiguous with
+recent events, three absent candidates in known-date archive. Index filenames
+and AREA_OR_POINT tags expose no source event IDs. No event assignments or
+original93/96/97 masks/criteria/ready state changed. PASS source audit receipt;
+this does not establish L2A transfer or original goal completion.
+V1 empty-schema FAIL preserved; v2 successful result preserved; v3 fixes null
+schema with identical diagnostics and new source recipe. No data download/GPU.
