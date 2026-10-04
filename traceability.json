@@ -148,7 +148,8 @@
         "SPEC-102",
         "SPEC-103",
         "SPEC-104",
-        "SPEC-105"
+        "SPEC-105",
+        "SPEC-106"
       ]
     }
   },
@@ -1173,6 +1174,18 @@
         "SPEC-104"
       ],
       "status": "rejected"
+    },
+    "SPEC-106": {
+      "title": "Frozen geographic failure attribution",
+      "file": "specs/SPEC-106-frozen-geographic-failure-attribution.md",
+      "requirement": "REQ-008",
+      "depends_on": [
+        "SPEC-90",
+        "SPEC-92",
+        "SPEC-95",
+        "SPEC-105"
+      ],
+      "status": "active"
     }
   }
 }
