@@ -54,6 +54,11 @@ Unlike rejected fixed fusion, additions are trained using fit labels only.
 
 - k8plus unit tests and real512 preflight commands recorded before launch.
 - Full trainer/queue/scorer commands recorded before execution.
+- k8plus: `.runtime/bin/python -m pytest tests/test_recall_expansion.py tests/test_temporal_adapter_contract.py tests/test_temporal_adapter_evaluation.py -q`.
+- k8plus: `bash scripts/queues/smoke_recall_expansion.sh` (GPU lease/22GB admission, real512 fit window).
+- k8plus: `.runtime/bin/python scripts/train_recall_expansion.py --data-root data-store --reference-root /home/mc/fires/research --runs research/recall-expansion-v1 --seal-only`.
+- k8plus: `bash scripts/queues/queue_recall_expansion.sh` and
+  `bash scripts/queues/queue_score_recall_expansion.sh` (score waits for six full runs).
 - `make gate`.
 - non_claims: structural reference preservation is not accuracy; additions
   cannot correct existing reference FP. PANGAEA background unreviewed,
