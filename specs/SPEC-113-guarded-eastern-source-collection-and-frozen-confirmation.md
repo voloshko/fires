@@ -1,6 +1,6 @@
 # SPEC-113: Guarded eastern source collection and frozen confirmation
 
-Status: active
+Status: deferred
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-95, SPEC-111, SPEC-112
 
@@ -62,3 +62,15 @@ This spec is not executed image/accuracy evidence merely because code exists.
 - non_claims: shared PANGAEA annotation/spring2020 and spatial groups, not
   physical ignition events/field truth; raw background not reviewed absence;
   no globalrank, product promotion, grade/L2A acceptance or full goal completion.
+
+## Resolution
+
+Deferred because completed SPEC111 candidate fails its unchanged eligibility:
+pooled confidence intervals and FLOGA non-degradation. Conditional code and
+five unit tests are delivered; actual ineligible SPEC109 and final SPEC111
+candidates both reject before catalogue/output creation. No eastern imagery
+collected; successful eligible admission and confirmation remain unexecuted.
+SPEC112 frozen72/43 selection remains unused. Preflight receipt is insufficient
+for full spec acceptance; do not interpret implementation/review as a PASS.
+Reactivation requires a separately specified eligible candidate, unchanged
+selection and source admission, with authenticated artifacts before collection.

@@ -566,3 +566,13 @@ pooled CI and Mediterranean guards fail. FLOGA0.724287 vs0.746460,
 370 recovered TP vs14,028 added FP; cannot call recall preservation safe IoU.
 Immutable FAIL receipt and rejected status; unchanged thresholds and no model
 promotion. SPEC112 unused geography untouched. All four goals remain unproven.
+
+## SPEC-113 deferred without consuming eastern selection
+
+Actual final111 result SHA0cff6f6ff99f60c21e033b0c1733f530f9dac9a0d12de3e94f8e83bb59471db1
+rejects before catalogue/output creation. Zero new images; positive path deferred.
+Keep selection112 fixed/unused for a separately specified eligible successor.
+GPU train/score both terminal exit0, free disk4.0GiB. No restart or product
+promotion. Main remaining mechanism in111: additions yield FLOGA370TP/14028FP;
+next training hypothesis must address added background risk, retaining all
+competitor/region/CI safeguards rather than retuning the inference threshold.
