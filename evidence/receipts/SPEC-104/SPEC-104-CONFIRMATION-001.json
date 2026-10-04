@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-104",
+  "run_id": "SPEC-104-CONFIRMATION-001",
+  "created_at": "2026-10-04T05:16:23.309869+00:00",
+  "status": "FAIL",
+  "evidence_class": "REPLAY",
+  "conclusion": "Independent reserved confirmation beatsC1-MM andPrithvi butfails predeclared no-regression-to-paired-reserve guard.",
+  "commands": [
+    "ssh k8plus 'cd /home/mc/fires-accuracy-next && bash scripts/queues/queue_reference_additions_confirmation.sh'",
+    "make gate"
+  ],
+  "acceptance": {
+    "accepted": false,
+    "comparisons": {
+      "reserve": {
+        "samples": 61,
+        "groups": 29,
+        "candidate_iou": 0.23195860327960818,
+        "control_iou": 0.3045746193131945,
+        "delta": -0.07261601603358633,
+        "ci95": [
+          -0.12764810987452876,
+          -0.017177437032637993
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "worse"
+      },
+      "c1mm": {
+        "samples": 61,
+        "groups": 29,
+        "candidate_iou": 0.23195860327960818,
+        "control_iou": 0.20591468859988143,
+        "delta": 0.02604391467972675,
+        "ci95": [
+          0.0062809925952376534,
+          0.04332057579425107
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      },
+      "prithvi": {
+        "samples": 61,
+        "groups": 29,
+        "candidate_iou": 0.23195860327960818,
+        "control_iou": 0.1426591138734276,
+        "delta": 0.08929948940618057,
+        "ci95": [
+          0.03529076999158123,
+          0.20704416836263745
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      }
+    },
+    "missed_positive_clusters": {
+      "reserve": 0,
+      "c1mm": 1,
+      "prithvi": 1,
+      "fusion": 1
+    }
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/reference-additions-confirmation.json"
+  ],
+  "recipe_id": "5c25fe2021f3de3e16b826fdc064f7b3d85e78e00f140b6c6ad8257a9419180b",
+  "plan_sha256": "422e2b69ffdf4bdc75795b79f35e4a38812a0ccb737d4a38af0b199d21e91b96",
+  "limitations": [
+    "Originalcalibration61 isnowconsumed; reuseonlyasdevelopment.",
+    "Immutableoriginaloutput cannot beoverwritten; replayrequiresfreshoutputpath."
+  ],
+  "non_claims": [
+    "Previously reserved calibration is consumed once for this fixed confirmation, no tuning on it.",
+    "Spring2020 published interval perimeters; spatial clusters/components are not physical fire IDs.",
+    "No field truth, global leaderboard or fresh Mediterranean superiority claim."
+  ]
+}

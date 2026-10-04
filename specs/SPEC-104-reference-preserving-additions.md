@@ -1,6 +1,6 @@
 # SPEC-104: Reference-preserving high-confidence paired additions
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-90, SPEC-92, SPEC-95, SPEC-102, SPEC-103
 
@@ -41,3 +41,15 @@ The addedthreshold isfixed BEFORE thisrecipe's results, no sweep/tuning.
 - non_claims:previouslyevaluateddevelopment, sourceGTagreementnotfieldtruth,
   Russianannualspring2020pairing; components/clustersnotphysicalfireIDs,
   no globalranking/prospectiveoruncomparedmodelclaims.
+
+## Resolution
+
+Rejected by originalno-degradation-to-reserve safeguard. Fixed61window/29cluster
+confirmation completedexit0, calibrationpopulation nowconsumed. FusionIoU0.231959,
+C1-MM0.205915 (+0.026044 CI[0.006281,0.043321]), Prithvi0.142659
+(+0.089299 CI[0.035291,0.207044]): bothnamedcompetitors beatenhere.
+But reservealone0.304575, fusiondelta−0.072616 CI[−0.127648,−0.017177],
+belowallowed−0.01. Cannotwaive thisfrozen criterion orpromote onpartialwins.
+Perwindowconfusions/rescuecounts/lineage/recipe preserved; no GT/thresholdedit.
+No longer claimcal61unused innewexperiments; anyreuse isdevelopment.
+Regionalpositive signal exists butnotglobal/fullrecipeacceptance.

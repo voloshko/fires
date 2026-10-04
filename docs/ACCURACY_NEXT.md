@@ -263,3 +263,14 @@ epoch12/30 lastverified. ~7minutestraining thenboth actualmeasurements.
 Do notedit frozen104plan/source or101numericcode whilelive. Results:
 research/reference-additions-v1-confirmation.json and
 research/l2a-full-replay-v1-result.json. Free6.3GiB; no imagerydownloads.
+
+## SPEC104 confirmation finished
+
+Terminalexit0, rejectedbyfullfrozencontract. Fusion0.231959 versusC1-MM0.205915
+andPrithvi0.142659, positiveCIs toboth; reservealone0.304575, fusion−0.072616
+violates−0.01. FAILreceipt; no promotion/thresholdchange. Cal61consumed,
+never again callitunused/independentconfirmation afterthischoice.
+All6SPEC101models complete,929fitIDs each,min15fulloriginalviews,matching
+order/commonmasktraceforall3pairedseeds,14250actualL2Aviews perreplayseed.
+GPUscorer child1149805 active underqueue1106633; resultstillpending.
+Free5.4GiB; nonewimagerydownloads/duplicateweights.
