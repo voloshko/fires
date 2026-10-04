@@ -1,6 +1,6 @@
 # SPEC-121: Coupled member probabilities for frozen temporal ensemble
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-118, SPEC-119
 
@@ -59,3 +59,19 @@ All375 original and69eastern windows are already consumed development.
 - non_claims: all444windows consumed; mathematical coupling is not guaranteed
  accuracy, independentconfirmation or probability equivalence across different
  TTAorders; no fieldtruth/worldrank/severity/L2Asuccess/promotion/fullgoalcompletion.
+
+## Resolution
+
+Rejected fullinference-only hypothesis, no changedcriteria. All444windows
+scored,888compressedmask confusionrows/allCIs/decisions replayed exactly.
+Per-population referenceanchorparity and positivepreservation pass. Old375
+eligibility remains true, but pooledparent118gain+0.000028621
+CI[-0.000358173,0.000308189] is negligible, below.005/nonpositive lower.
+ConsumedEastern69 pair0.248125 vsC1.219085/Prit.232015/post.230561;
+postCI[-.001245,.036277] andPrithviCI[-.034831,.090360] failunchangedguards.
+
+Scorerterminalexit0/1101.222swall/2.2Gpeak. Totalnewoutputs1072158bytes before
+smallfinalaudit, below16MiB; no sampledcohorts/olddeletion. ImmutableFAIL.
+Mathematicalcoupling validbutno usefulaccuracy; no source/label/threshold/model
+changes or promotion. Originalfour-part goal remains unproven; best118 and
+119freshC1gain evidence intact, metadata120pixelrepair stillunexecuted.

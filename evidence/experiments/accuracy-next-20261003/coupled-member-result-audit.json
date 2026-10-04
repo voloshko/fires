@@ -1,0 +1,27 @@
+{
+  "spec_id": "SPEC-121",
+  "result_sha256": "83af11567a49c5d4e9bb13b507e9d831ec6982c994e21667b3ae65f5a4624856",
+  "windows": 444,
+  "counts_reconstructed": 888,
+  "all_decisions_comparisons_ci_exact": true,
+  "reference_tp_fn_preserved": true,
+  "accepted": false,
+  "cache_hashes": {
+    "russia_eval-pair.packed.npz": "b0b2c464c703a08bdf88a852b719c45ae5c566c3665e232586677a4813405960",
+    "russia_eval-post.packed.npz": "305369f99059288ac0b8dd963aaf3c1918a78101a583e09d1c0eec879e607ba8",
+    "russia_cal-pair.packed.npz": "97ca3bfc6961a4a2f9ca6f6a3dcb1978372e6d38bf181303cfda706c98e1ef42",
+    "russia_cal-post.packed.npz": "6a77331b0bf94c66d4bceebd8f75f77bb8a885a1c1f5b98c6d5b2c660a2c3436",
+    "western-pair.packed.npz": "5f5a782610077175c202c264bf8bc12caca930eccdb97605cf55b4a68e13f54c",
+    "western-post.packed.npz": "fc89ddec623cba8bf8d5ff1b6471c11bfb77d0896387d16ca9a2ccca7c8cb839",
+    "ems-pair.packed.npz": "c780e7c3d43ff9a5bd44694e6d5a51ae5121e5ff0301c97f63802528d1fa3ab4",
+    "ems-post.packed.npz": "9ca5579a6a74a11026b906eb7c4a4ccacdf0fed1f931501f3cde3cc5b911fd9a",
+    "floga-pair.packed.npz": "080d03f227288b79d30771254e7a1e3e55f78b7680f2c669caff24830719dd0f",
+    "floga-post.packed.npz": "b60ec062d0a4edc5440f2a0617ccf4c8f6d59f5705cf7a0f9a6b5cfe8f56106c",
+    "eastern_consumed-pair.packed.npz": "6361aa38a4ded1a63ce52e3ccb886fce8edacda2679f6f1b815a9c0677b7d1b1",
+    "eastern_consumed-post.packed.npz": "a7f4209eea9edaf1eb004c8cab2753d78b1dccbfccf33c7f71bf2483cb473053"
+  },
+  "total_output_bytes": 1072158,
+  "non_claims": [
+    "All444alreadyconsumed development; no new independent quality or modelpromotion"
+  ]
+}

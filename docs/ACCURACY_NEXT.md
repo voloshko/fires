@@ -834,3 +834,21 @@ losslesspackedoutputs16MiB/free3GiB, no olddelete or samplingoncompression.
 Expectedresearch/coupled-member-v1/development.json. Allcurrent444consumed,
 no independentpromotion fromfuturePASS. Source/parents immutable, no retry
 because observationexpired. Originalfour-part goal active/unproven.
+
+## SPEC-121 coupled inference rejected
+
+All444scored/888mask-derivedcounts+decisions+CIs exact; anchorparity and
+referencepositivepreservation passed allcohorts. Parent118gain+.000028621
+CI[-.000358,.000308] negligiblevsfixed.005rule. Oldeligibilitytrue; consumed
+East69 IoU.248125 stillpostCI[-.001245,.036277] andPritCI[-.034831,.090360]
+inconclusive.121rejected/immutableFAIL; no thresholds/masks/parentrewrite.
+GPUunit1459783terminalexit0 at17:37:09,1101.222swall/2.2Gpeak,newoutputs~1.1MB
+losslesscompressed; no waivedspace/allcohortchecks. No ownGPUwork live.
+Best118developmentPASS and119freshC1gain+13%point retained, fullcompetitor
+confirmationnotachieved. All444nowconsumed; furtherindependentdata mustfresh.
+Pendinghumanquestions: CDSEconfigurationpath (none supplied/read) for16exact
+candidatepixelrepairs; explicitrootreserve5->2%approval for14.3GiBusabledata
+capacity (onlyread-onlyfstudy,tune2fs untouched). Currentrootavailable3.247GB,
+~25MBabove3GiBfloor: no meaningfulnewimagepopulationcanbeadmitted there.
+Preserveallolddata/weights/receipts/worktree/source arrays. Originalfour-goal
+stillactive; no global/field/severity/L2A/productpromotion or completionclaim.
