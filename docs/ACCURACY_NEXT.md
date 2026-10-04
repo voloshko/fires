@@ -803,3 +803,16 @@ or reselection. Need finalactual>=50windows20groups admission, then separately
 resource/GPUleased childscore allfreshcomparators. Do not call source-parent
 exit0 completedquality; checkchild/result. All118/119sources now immutable.
 Originalfour-part goal stillactive/unproven; optionalCDSEconfigpath pending.
+
+## SPEC-119 freshconfirmation finished, fullcriterionrejected
+
+Source/scorer bothterminalexit0; same72selected admitted69/41,3ValueError
+failures. Source688560655bytes/maskedfraction.151336. All138candidatecounts/
+comparisons/CIs/decisions exact. FreshpairIoU.247597/C1.219085/Prit.232015/
+post.230528/reserve.224195. C1delta+.028512 CI[.010246,.042939] confirmsgain
+on unusedrecordedhistorygeography. PostCI[-.001678,.035502] andPritCI
+[-.035064,.089592] fail samepositiveCIgate:119rejected/immutableFAIL.
+One missedgroup vsC1one andreservepointguardpassed. No promotion ororiginal
+four-goalclosure. 69newframes nowCONSUMED; neverfreshreuse. 118developmentPASS
+preserved. Data/caches/partials retained; free root3.1GiB near3GiBfloor.
+CDSEconfig question stillpending;120online16metadata isn'tpixelrepair.

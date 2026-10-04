@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "SPEC-119",
+  "run_id": "SPEC-119-CONFIRMATION-001",
+  "predecessor_run_id": "SPEC-119-PREFLIGHT-001",
+  "created_at": "2026-10-04T13:58:05.856826+00:00",
+  "status": "FAIL",
+  "evidence_class": "LIVE",
+  "conclusion": "Previously unused geography admitted69windows41groups and scored; C1-MM gain independently positive, but post/Prithvi confidence intervals cross zero so unchanged full confirmation fails.",
+  "commands": [
+    "ssh k8plus: queue_five_seed_eastern.sh",
+    "ssh k8plus: queue_score_five_seed_eastern.sh",
+    "ssh k8plus: packedmask138counts/allcomparisons/decisions replay",
+    "make gate"
+  ],
+  "acceptance": {
+    "source_counts": {
+      "samples": 69,
+      "groups": 41,
+      "partitions": {
+        "calibration": 0,
+        "evaluation": 69,
+        "fit": 0
+      }
+    },
+    "source_failures": [
+      {
+        "sample_id": "eastern:1b29fb627ce23992237d9cc4e987e34e7db876b6d0107b1b8566fb5f7b287c67",
+        "reason": "ValueError"
+      },
+      {
+        "sample_id": "eastern:8c04100c4bee113a23d5ca8a577942f4ed4451d78dcc042ebd50dbc431654ed1",
+        "reason": "ValueError"
+      },
+      {
+        "sample_id": "eastern:f09d2d0c7663de58af99efa860e1e3843db59a26db9bdbc4c8341816f38a08a6",
+        "reason": "ValueError"
+      }
+    ],
+    "source_bytes": 688560655,
+    "masked_fraction": 0.15133600649626355,
+    "accepted": false,
+    "comparisons": {
+      "post": {
+        "samples": 69,
+        "groups": 41,
+        "candidate_iou": 0.2475967387014279,
+        "control_iou": 0.23052822016940325,
+        "delta": 0.01706851853202465,
+        "ci95": [
+          -0.0016778212744743587,
+          0.035502313086075245
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      },
+      "c1mm": {
+        "samples": 69,
+        "groups": 41,
+        "candidate_iou": 0.2475967387014279,
+        "control_iou": 0.21908487246958216,
+        "delta": 0.028511866231845734,
+        "ci95": [
+          0.010246389155354158,
+          0.0429393578292512
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "better"
+      },
+      "reserve": {
+        "samples": 69,
+        "groups": 41,
+        "candidate_iou": 0.2475967387014279,
+        "control_iou": 0.22419451166371,
+        "delta": 0.02340222703771791,
+        "ci95": [
+          -0.046776105408956166,
+          0.12316200676042588
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      },
+      "prithvi": {
+        "samples": 69,
+        "groups": 41,
+        "candidate_iou": 0.2475967387014279,
+        "control_iou": 0.232014919053526,
+        "delta": 0.015581819647901896,
+        "ci95": [
+          -0.03506432616643486,
+          0.08959227761951344
+        ],
+        "n_boot": 2000,
+        "seed": 20261003,
+        "verdict": "inconclusive"
+      }
+    },
+    "missed_positive_groups": {
+      "pair": 1,
+      "post": 1,
+      "c1mm": 1,
+      "reserve": 0,
+      "prithvi": 3
+    },
+    "result_audit": {
+      "spec_id": "SPEC-119",
+      "result_sha256": "5b0d13886122636c4f7bfd88c14b1ed2b4406548a47adcd9b51ac315fe5d3c4b",
+      "source_manifest_sha256": "e6feffbccf7cb92e2ed2e62b6d369abd48ce738e331f598878cc1d4e53a3f291",
+      "windows": 69,
+      "groups": 41,
+      "candidate_counts_reconstructed": 138,
+      "all_decisions_counts_ci_exact": true,
+      "reference_tp_fn_preserved": true,
+      "accepted": false,
+      "cache_hashes": {
+        "pair.packed.npy": "eefa5e741183d10b37bbebe9c3b0b41dea44e114a3fa79adde401ea1386851fc",
+        "post.packed.npy": "91d0ffc1fe104d0ed77cf01900cba2a85fc1547c60cae8fbb2b27b2534395abf"
+      },
+      "non_claims": [
+        "Recorded-history-disjoint geography/sharedannotation/season; no complete superiority, modelpromotion or original goal completion"
+      ]
+    },
+    "source_exit": 0,
+    "scoring_exit": 0,
+    "scoring_wall_seconds": 346.443,
+    "scoring_host_peak": "4.3 GiB"
+  },
+  "outputs": [
+    "evidence/experiments/accuracy-next-20261003/five-seed-eastern-result.json",
+    "evidence/experiments/accuracy-next-20261003/five-seed-eastern-scoring-recipe.json",
+    "evidence/experiments/accuracy-next-20261003/five-seed-eastern-manifest.json",
+    "evidence/experiments/accuracy-next-20261003/five-seed-eastern-binding.json",
+    "evidence/experiments/accuracy-next-20261003/five-seed-eastern-result-audit.json",
+    "docs/SPEC-119-CONFIRMATION.md"
+  ],
+  "limitations": [
+    "Three selectedwindows failed with ValueError; exact failure category not stored, do not infer absence or cloud-only cause.",
+    "Shared PANGAEA annotation/spring2020 and spatialgroups remain; no independent annotation/physical ignition truth.",
+    "Fresh69 now consumed; never reuse as fresh test for another selected model.",
+    "Point gain13%overC1 applies this admittedgeography; overall competitor/temporal criterion notmet."
+  ],
+  "non_claims": [
+    "New recorded-history-disjoint selected geography, shared PANGAEA method/spring2020.",
+    "Spatial groups are not physical fire IDs; background not reviewed absence of fire.",
+    "No product promotion, field truth, global ranking, grade/L2A success or original goal completion."
+  ]
+}

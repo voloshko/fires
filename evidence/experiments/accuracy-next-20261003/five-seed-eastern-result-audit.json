@@ -1,0 +1,18 @@
+{
+  "spec_id": "SPEC-119",
+  "result_sha256": "5b0d13886122636c4f7bfd88c14b1ed2b4406548a47adcd9b51ac315fe5d3c4b",
+  "source_manifest_sha256": "e6feffbccf7cb92e2ed2e62b6d369abd48ce738e331f598878cc1d4e53a3f291",
+  "windows": 69,
+  "groups": 41,
+  "candidate_counts_reconstructed": 138,
+  "all_decisions_counts_ci_exact": true,
+  "reference_tp_fn_preserved": true,
+  "accepted": false,
+  "cache_hashes": {
+    "pair.packed.npy": "eefa5e741183d10b37bbebe9c3b0b41dea44e114a3fa79adde401ea1386851fc",
+    "post.packed.npy": "91d0ffc1fe104d0ed77cf01900cba2a85fc1547c60cae8fbb2b27b2534395abf"
+  },
+  "non_claims": [
+    "Recorded-history-disjoint geography/sharedannotation/season; no complete superiority, modelpromotion or original goal completion"
+  ]
+}

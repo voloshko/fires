@@ -1345,7 +1345,7 @@
         "SPEC-118",
         "SPEC-116"
       ],
-      "status": "active"
+      "status": "rejected"
     },
     "SPEC-120": {
       "title": "Public CDSE metadata audit for L2A protected-pixel losses",

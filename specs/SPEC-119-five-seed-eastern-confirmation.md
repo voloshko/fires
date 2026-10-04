@@ -1,6 +1,6 @@
 # SPEC-119: Frozen eastern confirmation for five-member temporal ensemble
 
-Status: active
+Status: rejected
 Requirement: REQ-008
 Depends on: SPEC-112, SPEC-118, SPEC-116
 
@@ -60,3 +60,21 @@ mixed-family native members and actual five-member caches are authenticated.
 - non_claims: unusedrecordedhistorygeography, sharedPANGAEA/spring2020; groups
   notphysicalfireIDs/backgroundnotreviewedabsence; no fieldtruth/worldrank,
   severity/L2Asuccess/productpromotion or fulloriginalfour-goalcompletion.
+
+## Resolution
+
+Rejected complete confirmation without changingcriteria. Fixed72selection
+admitted69windows41groups (3ValueError failures), source688560655bytes,
+maskedfraction0.151336. Allsource/model/native/binding/cache identitychecks
+passed; source/scorer terminalexit0 and138candidateconfusioncounts/CI/decisions
+reconstructedexactly. Candidate0.247597/post0.230528/C1-MM0.219085/
+Prithvi0.232015/reserve0.224195. C1delta+0.028512 CI[0.010246,0.042939]
+positive. Postdelta+0.017069 CI[-0.001678,0.035502] andPrithvi+0.015582
+CI[-0.035064,0.089592] inconclusive, bothfailpositiveCIgate. Recallguardpasses
+one missedgroup vsC1one; reservepointpasses. ImmutableFAILreceipt.
+
+Previously unusedrecordedgeography nowconsumed; no furtherfresh-test reuse.
+Allrawdata/failures/parent118developmentPASS preserved; no thresholds/labels/
+windowreplacement/deletion or modelpromotion. Positiveindependent C1gain is
+scoped tothis source-selectedgeography, notfull superiority/physicaltruth or
+originalfour-directiongoalclosure. PixelrepairCDSEmetadata remains separate.

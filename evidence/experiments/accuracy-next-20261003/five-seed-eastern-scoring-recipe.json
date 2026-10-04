@@ -1,0 +1,83 @@
+{
+  "source_hashes": {
+    "/home/mc/fires-accuracy-next/scripts/score_five_seed_eastern.py": "63aec8e814afca92a8af42b3a5b68c257ec2fce64d0528638f47d68d7512ba05",
+    "scripts/collect_five_seed_eastern.py": "84c5b828dec2d7101baece9346c972438a19645a65f463e3e97f5f1c737b6ab2",
+    "scripts/forest_pair_train.py": "199c020cd30fb3936bac76ce04d6982dbde459093430c02bc548d799779fae6e",
+    "scripts/queues/queue_five_seed_eastern.sh": "fbfbcbf2c05dc6b1005b04ed37aa8ee7cf61215ec0a6d81fa714b33b96020838",
+    "scripts/queues/queue_score_five_seed_eastern.sh": "7a2a6c17a905c458b4b25d1111f07625a039b751f9a1610d5ac1d95c0e0cafcf",
+    "scripts/score_five_seed_additions.py": "57dc66b6a2551ffbdb6f36132911349956d9bd174c38be5c8fd8aebfdee39745",
+    "scripts/score_russian_transfer.py": "87de555d9212b54d7bae737d8ebd6167091c95d8561974d5e0be5cfb557bef93",
+    "scripts/train_unet.py": "3f7a8fe08d303cdd482033386118328f0db810f86db1c003d8c08c9d57dc7ee7",
+    "src/comp/accuracy_artifacts.py": "17e4e6d021fcf4a2d3c14a57aab626cf98b38ca599545f601f5ce0017652285c",
+    "src/comp/accuracy_contract.py": "6c71e49762838b1344355c10dceea1f6ced3d61fb6a9646ad8f0a37ec429e423",
+    "src/comp/eastern_confirmation.py": "3338a762bcf2a4aaf71d02e5e0aed52abf725569d223058e8a4d1fe4c79bff01",
+    "src/comp/equal_cost_additions.py": "0aa7b50e706ad1790ae69a5a582e95fdd82d3a1469ce00410624f266bf805e35",
+    "src/comp/five_seed_additions.py": "60ddbb3b9918140e48999a1e60ca3b7cfac87c29345a7b0331174e9b0984f330",
+    "src/comp/five_seed_eastern.py": "c9d3188b68ec2ea1da5e0f104f185474b2703336d20d080a433b1bc52935d0ea",
+    "src/comp/forest_pair.py": "a8923953ccefd160e5e0e952929e4691ca8f908493d404658aa6ff722d785949",
+    "src/comp/hls.py": "37daa4ec8e6223a10e161681b5dcaa090697af279aaf559d44d1e254a106290f",
+    "src/comp/l2a_finetuning.py": "60e0979252822355fa62d896faba9ad2d1d97f3b8bdcbb31328fbaea677fc67c",
+    "src/comp/recall_expansion.py": "dd437e9ac97299bd1ed65b1e47f1fdc073281f9716f0022f4e88317aa448ea61",
+    "src/comp/severity_layers.py": "887bde7c5aeb5797b906507b7a211bc4e5865cd79451a77e34916d6d49817d4d",
+    "src/comp/terrain.py": "6ca6e9dc58be50888024c9d60e1142014c26e69b26e9a8f300833f226b1dbb38"
+  },
+  "configuration": {
+    "binding": {
+      "candidate_sha256": "fb6aa7f3fdd8a4f4d24dc4c04e8a9b33ebdd41117927ef24adff5288b907b851",
+      "selection_sha256": "0ab2edea7db92eca8e27da5b179ed5b373314d44f025f3019444be162cb74587",
+      "loss_id": "equal-ce-dice-v1",
+      "candidate_spec_id": "SPEC-118",
+      "members": 5,
+      "training_recipe": "ccf1df7dd1eb779f7b2d5d66019751eb675b1b48e916716c3171837692f550dc",
+      "scoring_recipe": "765834c5211daad2a053118d51c74879c31be0e81d32959964ebd20355e72e2a",
+      "adapters": {
+        "pair": [
+          "8d022d364e907695d77369f04c9f07faf271a901aef3d854ce123611f30487cf",
+          "55ad02e60e0df2e4f4542ccbd16ef1e860a875fb6162e443e2936c6dd6bdb0d1",
+          "c90e4c6ffc7ec9f845c1783c764478360eef94fa33010b2f675202df336f40f3",
+          "8932c673d8bac21a485952374efba7ce3e3a1070cc2f1e06e104bf00ad6c0af9",
+          "51bc17e7329345059738a898a7772332c5753b741c11a1258e881b507bab5f29"
+        ],
+        "post": [
+          "5ecbc72262a1e67deede3d6a5b300d538e1fc48d8c80950735e747704ac674ff",
+          "a65c5a8a28ad4c9f722783f00b29ac297a74e6a19fd61dc630ef95d0de6b17e9",
+          "1e90b19c99f7d1fb31cd33cee7a548c56005414c9931001ca5f1231aad4d4e58",
+          "173308c7cdd02a88ae3e51158588bf8b88d45e04c1b2be5463af77d418132aa4",
+          "5d045133c2cd9b7ee2948595df1ea48242d6937a2f7269b293de70f4726f16b0"
+        ]
+      },
+      "references": {
+        "control": [
+          "82e8a3d04f139935b8febc3795374a14cac2e8d8758857878d86f0dbc8b277fc",
+          "bbb8cc75dfc80be811f3966bf86bec100e2044c602cc51ee1187f5ecc7accdd5",
+          "8d68803d552dc25d2297bc7531659b96fbea8286bade734b945ee89e6ed6af26"
+        ],
+        "reserve": [
+          "93e3c9f225e486e204678cad950d83453d022587978872c285fe9dac9dada95e",
+          "460c2cce7677e0c774b632fd43e2dd01b7ad8f5af0a60d04ad06b56238974f6a",
+          "4b21d27e174da86726e5c930a19641301cb43392d7645d931c91b80d42810ad3"
+        ],
+        "c1mm": [
+          "03751038fbf6406d0db4e40727d2f6fb562cf26b570ccf880a32c945f6ece19c",
+          "a0282b7c31c77d0941c1ed0d10981dd526c7345c5c7335cd2d8fb071ec40c0e0",
+          "48a3faa63c8814f793e2963f8db8ef2a42466d0f021463f84e58b5cdb834d61e",
+          "504141c858b50615e0a884dfa512f20360ceb2b86455967cb056279d2497ba8b",
+          "a48abe8b5c98883cf2f60a23eb457e39e5fea7584bafb4266d05eb7bcb16719f"
+        ]
+      },
+      "prithvi_weights": "0c5f9334be9a75c9006387ab8f3dc05a55ea7fb5ef7956717316be57c62954d3",
+      "prithvi_config": "9b40e6d8c6369b863d29fb1d69b6185aa366f8ee4c2de955bbad28d3ee32f466",
+      "source_zip": "5f1cfb843d5579d800a1e8359a017f8cd33c5658f6e0c0a6eda7ac534a1c6b3c"
+    },
+    "source_manifest": "e6feffbccf7cb92e2ed2e62b6d369abd48ce738e331f598878cc1d4e53a3f291",
+    "threshold": 0.5,
+    "tta": 8,
+    "bootstrap": 2000,
+    "seed": 20261003
+  },
+  "software": {
+    "torch": "2.14.0+cu130",
+    "numpy": "2.5.3"
+  },
+  "recipe_id": "5b34585bf8419af3bf46ad078a97466b80997994435b37ac515bdb4ce4fbb816"
+}
