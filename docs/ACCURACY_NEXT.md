@@ -643,3 +643,16 @@ Pair/post-s1 bothcomplete30epochs/22860views (min30/max60 exposures);596.1/
 seed and cross111 fit/statistics/order/exposure/base digest; full6quality still
 pending, no partialensemble scoring or superiority claim. Pair-s2 live near
 end30epochs, post-s2/pair-s3/post-s3 follow. Sealed114 sources immutable.
+
+## SPEC-116 reviewed conditional queue live
+
+Own fires-accuracy-equal-cost-eastern-source-v1 MainPID1361531 active/waiting
+for114score1342954. No eastern-confirmation-v2 directory/images yet. Source
+unitCPU200/8G/OMP2; only trueeligible114 enters fullartifact/cachecountbinding
+then fixed72sourcecollection. Falseeligible ->SKIPPED_INELIGIBLE_SPEC114/noIO.
+Successful50/20collection dispatches separate fires-accuracy-equal-cost-eastern-score-v1
+(CPU400/12G/OMP4) via sharedGPUlock/free22GB. Queue sources are recipe-bound;
+codeAPPROVE/architectureCLEAR supplement. Parentexit0 is skip or dispatch,
+not quality completion; track child/result separately. Positive path NOT_RUN.
+Pair-s2 completed30epochs near latest snapshot, post-s2 then seed3 follow.
+All114 sources/seal/output contracts immutable. Overall four-goal objective active.

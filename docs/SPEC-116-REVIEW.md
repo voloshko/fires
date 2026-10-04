@@ -22,3 +22,14 @@ bootstrap minimum; correction supplies two groups and leaves the gate unchanged.
 Actual current114 result is absent while full training runs; collector exits
 before mkdir. No new images. Positive path remains NOT_RUN.
 Both reviewers were read-only, without GPU/network/queue edits.
+
+## Conditional resource wrapper supplement
+
+Wrapper spec11dc233 beforecode871d883. Independent codeAPPROVE and architecture
+CLEAR for queues: waits full114score, falseeligible skips beforeIO, otherwise
+fullcollector authentication then source admission before childdispatch. Source
+parentCPU200/8G/OMP2; scorer childCPU400/12G/OMP4/sharedGPUlease/free22GB.
+Wrapperbytes included in both source/sealed scoring recipes. No fullpath claim.
+Parent exit0 means skip OR childdispatch, never completed confirmation; inspect
+journal, child terminal status and actual result separately. Positive source
+path still NOT_RUN, original non-resume/storage cautions unchanged.
