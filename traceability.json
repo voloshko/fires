@@ -1253,7 +1253,7 @@
     },
     "SPEC-112": {
       "title": "Preregister unused eastern geographic confirmation population",
-      "file": "specs/SPEC-112-preregister-unused-eastern-geographic-confirmation-populatio.md",
+      "file": "specs/SPEC-112-preregister-unused-eastern-geographic-confirmation-population.md",
       "requirement": "REQ-008",
       "depends_on": [
         "SPEC-90",
