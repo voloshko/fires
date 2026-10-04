@@ -1,0 +1,55 @@
+{
+  "spec_id": "SPEC-114",
+  "completed_seed_pairs": 2,
+  "runs": [
+    {
+      "variant": "pair",
+      "seed": 1,
+      "completed": true,
+      "epochs": 30,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "8d022d364e907695d77369f04c9f07faf271a901aef3d854ce123611f30487cf",
+      "seconds": 596.0676758475602
+    },
+    {
+      "variant": "post",
+      "seed": 1,
+      "completed": true,
+      "epochs": 30,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "5ecbc72262a1e67deede3d6a5b300d538e1fc48d8c80950735e747704ac674ff",
+      "seconds": 556.8976973276585
+    },
+    {
+      "variant": "pair",
+      "seed": 2,
+      "completed": true,
+      "epochs": 30,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "55ad02e60e0df2e4f4542ccbd16ef1e860a875fb6162e443e2936c6dd6bdb0d1",
+      "seconds": 596.6295858304948
+    },
+    {
+      "variant": "post",
+      "seed": 2,
+      "completed": true,
+      "epochs": 30,
+      "exposure_total": 22860,
+      "min_exposure": 30,
+      "max_exposure": 60,
+      "checkpoint_sha256": "a65c5a8a28ad4c9f722783f00b29ac297a74e6a19fd61dc630ef95d0de6b17e9",
+      "seconds": 554.5881486274302
+    }
+  ],
+  "within_seed_orders_exposures_base_exact": true,
+  "cross_spec_native_metadata_order_exposure_base_exact": true,
+  "non_claims": [
+    "Seeds1/2 mechanics only; seed3 and six-run accuracy pending. No causal quality or superiority claim."
+  ]
+}
