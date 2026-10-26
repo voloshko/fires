@@ -202,3 +202,14 @@ receipts и `evidence/hypotheses.md`: `research/bs-confirm-siam-f?-{soft,sar40,s
 `bs-siam-final-sar-s57/58`, `hls-c1m-final-s*`, `hls-beat-final-s*`, `hls-beat-C?-inner`, `smoke6?`,
 `biome-*`, `prithvi-zero-v1`; `models/bs_unet_final_siam_sar_s57/58.pt`, `models/exp_prithvi*.pt`;
 `external/ems/zips` (окна собраны), архив контуров MTBS. Продукт v22 и C1-MM не затронуты.
+
+### Слияние веток Codex и архив на k8plus (2026-10-26)
+- `codex/fire-accuracy-next` (SPEC-90…121, 172 коммита) влита в main перемоткой (8b68fcb);
+  `codex/fire-model-hypotheses` уже была в main. Оба worktree и обе локальные ветки удалены.
+- На k8plus рабочие копии `~/fires-accuracy-next` (41 ГБ), `~/fires-hypotheses` (22 ГБ) и
+  `~/fires-hypotheses-qa-dcb1e32` перенесены в `~/fires/archive/` (README там). Код из них
+  удалён после сверки с git: каждая отличавшаяся версия файла найдена в истории git.
+  Данные и результаты сохранены целиком; на старых путях — символические ссылки, потому что
+  скрипты и receipts ссылаются на них абсолютно.
+- Блокеры работы SPEC-90…121 (место на k8plus и доступ к Copernicus Data Space) — в
+  `docs/ACCURACY_GOAL_AUDIT.md`.
